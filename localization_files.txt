@@ -4,6 +4,7 @@
 // if you add a new localization file, please make sure that the encoding for that file is "UTF-16 LE with BOM"
 localization/base
 localization/sdk
+localization/arenas
 localization/legal/eula
 
 localization/character/bangalore
