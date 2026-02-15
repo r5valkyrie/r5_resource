@@ -321,7 +321,7 @@ Scheme
 		HybridButton.DisabledColor					Disabled
 		HybridButton.FocusDisabledColor				Disabled
 		HybridButton.Font							Default_28
-		HybridButton.SymbolFont						MarlettLarge
+		HybridButton.SymbolFonHybridButton.RuiFontt						MarlettLarge
 		HybridButton.TextInsetX						0
 		HybridButton.TextInsetY						16
 		HybridButton.AllCaps						0
@@ -333,7 +333,7 @@ Scheme
 		// Special case properties for only a few menus
 		HybridButton.LockedColor					Disabled
 		HybridButton.BorderColor 					"0 0 0 255"
-		HybridButton.RuiFont 						MetronicProRegularFont
+		HybridButton.RuiFont 						DefaultRegularFont
 		HybridButton.RuiFontHeight 					25
 
 		RuiLabel.CursorPriority						-1
@@ -415,8 +415,8 @@ Scheme
 
 		RuiFooterButton.Style						0
 		RuiFooterButton.CursorHeight				36
-		RuiFooterButton.TextInsetX					12 // ?
-		RuiFooterButton.TextInsetY					4 // ?
+		RuiFooterButton.TextInsetX					0
+		RuiFooterButton.TextInsetY					0
 		RuiFooterButton.TextColor                   Blank
 		RuiFooterButton.LockedColor                 Blank
 		RuiFooterButton.FocusColor					Blank
@@ -3040,6 +3040,23 @@ Scheme
             cursorVelocityModifier  0.7
         }
 
+        SwitchButtonClubInvite
+        {
+            font                    Default_28
+            wide					414
+            tall					50
+            zpos					3
+            ypos                    2
+            visible					1
+            enabled					1
+            style					DialogListButton
+            rui						"ui/settings_compact_button.rpak"
+            clipRui					0
+            labelText               "Test"
+            nonDefaultColor	"244 213 166 255"
+            cursorVelocityModifier  0.7
+        }
+
 		SliderControl
 		{
 			wide					1040
@@ -3077,34 +3094,7 @@ Scheme
             textAlignment			"center"
             ruiFont                 TitleRegularFont
             ruiFontHeight           22
-            ruiMinFontHeight        10
-            keyboardTitle			"#ENTER_YOUR_EMAIL"
-            keyboardDescription		"#ENTER_YOUR_EMAIL_DESC"
-            allowRightClickMenu		0
-            allowSpecialCharacters	0
-            unicode					0
-            showConVarAsFloat		1
-            selectOnFocus           1
-            cursorVelocityModifier  0.7
-		}
-		
-		SliderControlTextEntrySmall
-		{
-            xpos                    -4
-            zpos					100 // This works around input weirdness when the control is constructed by code instead of VGUI blackbox.
-            ypos					2 // meh
-			wide					60
-            tall					44
-            visible					1
-            enabled					1
-            textHidden				0
-            editable				1
-            maxchars				10
-            NumericInputOnly		1
-            textAlignment			"center"
-            ruiFont                 TitleRegularFont
-            ruiFontHeight           10
-            ruiMinFontHeight        10
+            ruiMinFontHeight        16
             keyboardTitle			"#ENTER_YOUR_EMAIL"
             keyboardDescription		"#ENTER_YOUR_EMAIL_DESC"
             allowRightClickMenu		0
@@ -3397,10 +3387,8 @@ Scheme
 		TabButtonClubLobby
         {
             classname				TabButtonClass
-            wide					260
-            wide_nx_handheld		280			[$NX]
-            tall					40
-            tall_nx_handheld		65			[$NX]
+            wide					250
+            tall					60
             polyShape               "0.0 0.0 0.831 0.0 1.0 1.0 0.169 1.0" // height / width to determine offsets
             visible					1
             enabled					1
@@ -3425,6 +3413,21 @@ Scheme
 			sound_focus             "UI_Menu_Focus"
             sound_accept            "UI_Menu_InviteFriend_Open"
 		}
+
+		StoryButton
+        {
+            wide					148
+            tall					148
+            rui                     "ui/story_button.rpak"
+            labelText               ""
+            visible					1
+            cursorVelocityModifier  0.7
+
+            proportionalToParent    1
+
+            sound_focus             "UI_Menu_Focus"
+            sound_accept            "UI_Menu_InviteFriend_Open"
+        }
 
 		CornerButton
 		{
@@ -3669,6 +3672,7 @@ Scheme
 			labelText 				""
 			rui						"ui/survival_inventory_grid_button_v2.rpak"
 			rightClickEvents		1
+			middleClickEvents       1
 
 			cursorVelocityModifier  0.6
 
@@ -4010,7 +4014,7 @@ Scheme
 		{
 			classname               UserInfo
 			rui                     "ui/userinfo.rpak"
-			wide                    394
+			wide                    200
 			tall                    84
 			visible                 1
 			sound_focus             ""
@@ -4094,7 +4098,9 @@ Scheme
 		{
             classname               CharacterButtonClass
 			wide					194
+			wide_nx_handheld		295 		[$NX]
 			tall					126
+			tall_nx_handheld		192 		[$NX]
 			visible					0
 			enabled					1
             rui						"ui/lobby_character_button.rpak"
@@ -4144,6 +4150,7 @@ Scheme
 			style					RuiButton
 			polyShape               "0.375 0.0 1.0 0.0 0.625 1.0 0.0 1.0"
 			rightClickEvents		1
+			enterClickEvents		0
 			sound_focus             "UI_Menu_Focus_LegendSelectScreen"
 			sound_accept			""
             cursorVelocityModifier  0.7
@@ -4354,6 +4361,16 @@ Scheme
             controlSettingsFile		"resource/ui/menus/panels/dialog_footer_buttons.res"
         }
 
+        DialogFooterButtonsHighPriority
+        {
+            xpos					-211
+            ypos                    -32
+            wide					f0
+            tall					60
+            visible					1
+            controlSettingsFile		"resource/ui/menus/panels/dialog_footer_buttons_highpriority.res"
+        }
+
         PromoFooterButtons
         {
             xpos					-211
@@ -4540,7 +4557,7 @@ Scheme
 			wide					450
 			tall					67
 			visible					0
-			controlSettingsFile		"resource/ui/menus/button_locked_tooltip.res"
+			controlSettingsFile		"resource/UI/menus/button_locked_tooltip.res"
 		}
 
 		LobbyFriendlyBackground
@@ -5738,6 +5755,263 @@ Scheme
             }
 		}
 
+		MultiChoiceButtonWideAlways
+        {
+            FULL
+            {
+                ControlName         RuiPanel
+                InheritProperties   FullSizer
+                zpos                -1
+            }
+
+            RightButton
+            {
+                ControlName				RuiButton
+                rui						"ui/settings_change_button.rpak"
+                ruiArgs
+                {
+                    isRightOption       1
+                }
+                wide					60
+                tall					60
+                tall_nx_handheld		80 		[$NX]
+                visible					1
+                enabled					1
+                style					DefaultButton
+                zpos                    4
+
+                sound_accept			""
+
+                command                 "DialogListNext"
+
+                pin_corner_to_sibling	RIGHT
+                pin_to_sibling			FULL
+                pin_to_sibling_corner	RIGHT
+
+                cursorVelocityModifier  0.7
+            }
+
+            LeftButton
+            {
+                ControlName				RuiButton
+                rui						"ui/settings_change_button.rpak"
+                wide					60
+                tall					60
+                tall_nx_handheld		80		[$NX]
+                visible					1
+                enabled					1
+                style					DefaultButton
+                zpos                    4
+                xpos                    4
+
+                sound_accept			""
+
+                command                 "DialogListPrev"
+
+                pin_corner_to_sibling	TOP_RIGHT
+                pin_to_sibling			ValueButton
+                pin_to_sibling_corner	TOP_LEFT
+
+                cursorVelocityModifier  0.7
+            }
+
+            ValueButton
+            {
+                ControlName				RuiPanel
+                rui						"ui/settings_multichoice_value.rpak"
+                ruiArgs
+                {
+                    showWiderText           1
+                }
+
+                xpos                    4
+                wide					400
+                wide_nx_handheld		420  	[$NX]
+                tall					60
+                tall_nx_handheld		80 		[$NX]
+                visible					1
+                enabled					1
+                style					DefaultButton
+                zpos                    4
+
+                pin_corner_to_sibling	TOP_RIGHT
+                pin_to_sibling			RightButton
+                pin_to_sibling_corner	TOP_LEFT
+            }
+        }
+
+        MultiChoiceButtonClubsInviteSelectorAlways
+        {
+            FULL
+            {
+                ControlName         RuiPanel
+                InheritProperties   FullSizer
+                zpos                -1
+            }
+
+            LeftButton
+            {
+                ControlName				RuiButton
+                rui						"ui/settings_change_button.rpak"
+                wide					60
+                tall					60
+                tall_nx_handheld		80		[$NX]
+                visible					1
+                enabled					1
+                style					DefaultButton
+                zpos                    4
+                xpos                    8
+
+                sound_accept			""
+
+                command                 "DialogListPrev"
+
+                pin_corner_to_sibling	LEFT
+                pin_to_sibling			FULL
+                pin_to_sibling_corner	LEFT
+
+                cursorVelocityModifier  0.7
+            }
+
+            RightButton
+            {
+                ControlName				RuiButton
+                rui						"ui/settings_change_button.rpak"
+                ruiArgs
+                {
+                    isRightOption       1
+                }
+                wide					60
+                tall					60
+                tall_nx_handheld		80 		[$NX]
+                visible					1
+                enabled					1
+                style					DefaultButton
+                zpos                    4
+
+                sound_accept			""
+
+                command                 "DialogListNext"
+
+                pin_corner_to_sibling	TOP_LEFT
+                pin_to_sibling			ValueButton
+                pin_to_sibling_corner	TOP_RIGHT
+
+                cursorVelocityModifier  0.7
+            }
+
+            ValueButton
+            {
+                ControlName				RuiPanel
+                rui						"ui/settings_multichoice_value.rpak"
+                ruiArgs
+                {
+                    showWiderText           1
+                }
+
+                wide					280
+                wide_nx_handheld		345  	[$NX]
+                tall					60
+                tall_nx_handheld		80 		[$NX]
+                visible					1
+                enabled					1
+                style					DefaultButton
+                xpos                    0
+                zpos                    4
+
+                pin_corner_to_sibling	TOP_LEFT
+                pin_to_sibling			LeftButton
+                pin_to_sibling_corner	TOP_RIGHT
+            }
+        }
+
+		MultiChoiceButtonExtraWideAlways
+        {
+            FULL
+            {
+                ControlName         RuiPanel
+                InheritProperties   FullSizer
+                zpos                -1
+            }
+
+            RightButton
+            {
+                ControlName				RuiButton
+                rui						"ui/settings_change_button.rpak"
+                ruiArgs
+                {
+                    isRightOption       1
+                }
+                wide					60
+                wide_nx_handheld		90  	[$NX]
+                tall					60
+                tall_nx_handheld		80 		[$NX]
+                visible					1
+                enabled					1
+                style					DefaultButton
+                zpos                    4
+
+                sound_accept			""
+
+                command                 "DialogListNext"
+
+                pin_corner_to_sibling	RIGHT
+                pin_to_sibling			FULL
+                pin_to_sibling_corner	RIGHT
+
+                cursorVelocityModifier  0.7
+            }
+
+            LeftButton
+            {
+                ControlName				RuiButton
+                rui						"ui/settings_change_button.rpak"
+                wide					60
+                wide_nx_handheld		90		[$NX]
+                tall					60
+                tall_nx_handheld		80		[$NX]
+                visible					1
+                enabled					1
+                style					DefaultButton
+                zpos                    4
+                xpos                    4
+
+                sound_accept			""
+
+                command                 "DialogListPrev"
+
+                pin_corner_to_sibling	TOP_RIGHT
+                pin_to_sibling			ValueButton
+                pin_to_sibling_corner	TOP_LEFT
+
+                cursorVelocityModifier  0.7
+            }
+
+            ValueButton
+            {
+                ControlName				RuiPanel
+                rui						"ui/settings_multichoice_value.rpak"
+                ruiArgs
+                {
+                    showWiderText           1
+                }
+
+                xpos                    4
+                wide					400
+                wide_nx_handheld		475  	[$NX]
+                tall					60
+                tall_nx_handheld		80 		[$NX]
+                visible					1
+                enabled					1
+                style					DefaultButton
+                zpos                    4
+
+                pin_corner_to_sibling	TOP_RIGHT
+                pin_to_sibling			RightButton
+                pin_to_sibling_corner	TOP_LEFT
+            }
+        }
+		
 		SliderControlAlways
 		{
             BtnDropButton
