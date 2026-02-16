@@ -268,7 +268,7 @@ resource/ui/menus/survival_ground_list.menu
 			ControlName				ImagePanel
 			xpos					12
 			ypos					0
-            wide					550
+            wide					595
             tall					36
 			visible					1
 			enabled 				1

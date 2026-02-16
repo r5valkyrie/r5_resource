@@ -109,7 +109,7 @@ scripts/resource/ui/menus/survival_quick_swap.menu
             ControlName				CNestedPanel
             zpos                    3
             xpos					8
-            ypos                    24
+            ypos                    15
             wide					800
             tall					200
             visible					0
