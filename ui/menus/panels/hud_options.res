@@ -181,7 +181,7 @@
         InheritProperties		SwitchButton
         style					DialogListButton
         navUp					SwitchWeaponAutoCycle
-        navDown					SwitchPilotDamageIndicators
+        navDown					SwitchStickySprintForward
         ConVar					"player_setting_autosprint"
         list
         {
@@ -194,13 +194,61 @@
         pin_to_sibling_corner	BOTTOM_LEFT
         childGroupAlways        ChoiceButtonAlways
     }
+    SwitchStickySprintForward
+    {
+        ControlName             RuiButton
+        InheritProperties       SwitchButton
+        style                   DialogListButton
+        navUp                   SwitchAutoSprint
+            
+        navDown                 SwitchJetpackControl
+     
+                                                           
+      
+        ConVar                  "player_setting_stickysprintforward"
+        list
+        {
+            "#SETTING_OFF"  0
+            "#SETTING_ON"   1
+        }
+
+        pin_to_sibling          SwitchAutoSprint
+        pin_corner_to_sibling   TOP_LEFT
+        pin_to_sibling_corner   BOTTOM_LEFT
+        childGroupAlways        ChoiceButtonAlways
+    }
+            
+    SwitchJetpackControl
+    {
+        ControlName             RuiButton
+        InheritProperties       SwitchButton
+        style                   DialogListButton
+        navUp                   SwitchStickySprintForward
+        navDown                 SwitchPilotDamageIndicators
+        ConVar                  "toggle_on_jump_to_deactivate"
+        list
+        {
+            "#SETTING_JETPACK_HOLD"   0
+            "#SETTING_JETPACK_TOGGLE"  1
+        }
+
+        pin_to_sibling          SwitchStickySprintForward
+        pin_corner_to_sibling   TOP_LEFT
+        pin_to_sibling_corner   BOTTOM_LEFT
+        childGroupAlways        ChoiceButtonAlways
+    }
+      
     SwitchPilotDamageIndicators
     {
         ControlName				RuiButton
         InheritProperties		SwitchButton
         style					DialogListButton
-        navUp					SwitchAutoSprint
-        navDown					SwitchStreamerMode
+            
+        navUp                   SwitchJetpackControl
+     
+                                  
+      
+        navDown					SwitchDamageClosesMenu
         ConVar					"damage_indicator_style_pilot"
         list
         {
@@ -208,22 +256,24 @@
             "#SETTING_INDICATOR_3D_ONLY"	2
             "#SETTING_INDICATOR_BOTH"	    1
         }
-
-        pin_to_sibling			SwitchAutoSprint
+            
+        pin_to_sibling			SwitchJetpackControl
+     
+                                                         
+      
         pin_corner_to_sibling	TOP_LEFT
         pin_to_sibling_corner	BOTTOM_LEFT
         childGroupAlways        MultiChoiceButtonAlways
     }
-	SwitchDamageClosesMenu
-	{
+    SwitchDamageClosesMenu
+    {
         ControlName				RuiButton
         InheritProperties		SwitchButton
         style					DialogListButton
         navUp					SwitchPilotDamageIndicators
-        navDown					SwitchShowHealthbars
+        navDown					SwitchHopupPopup
         ConVar					"player_setting_damage_closes_deathbox_menu"
-        
-		list
+        list
         {
             "#SETTING_OFF"	0
             "#SETTING_ON"	1
@@ -232,18 +282,17 @@
         pin_to_sibling			SwitchPilotDamageIndicators
         pin_corner_to_sibling	TOP_LEFT
         pin_to_sibling_corner	BOTTOM_LEFT
-        childGroupAlways        MultiChoiceButtonAlways
-	}
-	SwitchShowHealthbars
-	{
+        childGroupAlways        ChoiceButtonAlways
+    }
+    SwitchHopupPopup
+    {
         ControlName				RuiButton
         InheritProperties		SwitchButton
         style					DialogListButton
         navUp					SwitchDamageClosesMenu
         navDown					SwitchStreamerMode
-        ConVar					"enable_healthbar"
-        
-		list
+        ConVar					"hud_setting_showHopUpPopUp"
+        list
         {
             "#SETTING_OFF"	0
             "#SETTING_ON"	1
@@ -252,15 +301,15 @@
         pin_to_sibling			SwitchDamageClosesMenu
         pin_corner_to_sibling	TOP_LEFT
         pin_to_sibling_corner	BOTTOM_LEFT
-        childGroupAlways        MultiChoiceButtonAlways
-	}
+        childGroupAlways        ChoiceButtonAlways
+    }
     SwitchStreamerMode
     {
         ControlName				RuiButton
         InheritProperties		SwitchButton
         style					DialogListButton
-        navUp					SwitchPilotDamageIndicators
-        navDown					SwitchAnalytics
+        navUp					SwitchHopupPopup
+        navDown					SwitchAnonymousMode
         ConVar					"hud_setting_streamerMode"
         visible                 1
         list
@@ -270,19 +319,39 @@
             "#SETTING_ALL"	    2
         }
 
-        pin_to_sibling			SwitchShowHealthbars
+        pin_to_sibling			SwitchHopupPopup
         pin_corner_to_sibling	TOP_LEFT
         pin_to_sibling_corner	BOTTOM_LEFT
         childGroupAlways        MultiChoiceButtonAlways
+    }
+    SwitchAnonymousMode
+    {
+        ControlName				RuiButton
+        InheritProperties		SwitchButton
+        style					DialogListButton
+        navUp					SwitchStreamerMode
+        navDown					SwitchAnalytics
+        ConVar					"hud_setting_anonymousMode"
+        visible                 1
+        list
+        {
+            "#SETTING_DISABLED"	    0
+            "#SETTING_ENABLED"	    1
+        }
+
+        pin_to_sibling			SwitchStreamerMode
+        pin_corner_to_sibling	TOP_LEFT
+        pin_to_sibling_corner	BOTTOM_LEFT
+        childGroupAlways        ChoiceButtonAlways
     }
     SwitchAnalytics
     {
         ControlName				RuiButton
         InheritProperties		SwitchButton
         style					DialogListButton
-        navUp					SwitchStreamerMode
-        navDown					SwchColorBlindMode
-        pin_to_sibling			SwitchStreamerMode
+        navUp					SwitchAnonymousMode
+        navDown					SwitchCrossplay
+        pin_to_sibling			SwitchAnonymousMode
         pin_corner_to_sibling	TOP_LEFT
         pin_to_sibling_corner	BOTTOM_LEFT
 
@@ -296,19 +365,89 @@
         childGroupAlways        ChoiceButtonAlways
     }
 
+    SwitchCrossplay
+    {
+        ControlName				RuiButton
+        InheritProperties		SwitchButton
+        style					DialogListButton
+        navUp					SwitchAnalytics
+        navDown					SwitchNetGraph [!$NX]
+		navDown					SwitchClubInvites  [$NX]
+        pin_to_sibling			SwitchAnalytics
+        pin_corner_to_sibling	TOP_LEFT
+        pin_to_sibling_corner	BOTTOM_LEFT
+
+        ConVar					"CrossPlay_user_optin"
+        list
+        {
+            "#SETTING_DISABLED"	0
+            "#SETTING_ENABLED"	1
+        }
+        clipRui             1
+        childGroupAlways        ChoiceButtonAlways
+    }
+
+	SwitchNetGraph
+    {
+        ControlName				RuiButton
+        InheritProperties		SwitchButton
+        style					DialogListButton
+        navUp					SwitchCrossplay
+        navDown					SwitchClubInvites
+        ConVar					"net_netGraph2"
+        visible                 1 [!$NX]
+		visible					0 [$NX]
+        list
+        {
+            "#SETTING_OFF"	    0
+            "#SETTING_ON"	    1
+        }
+
+        pin_to_sibling			SwitchCrossplay
+        pin_corner_to_sibling	TOP_LEFT
+        pin_to_sibling_corner	BOTTOM_LEFT
+        childGroupAlways        ChoiceButtonAlways
+    }
+
+    SwitchClubInvites
+    {
+        ControlName				RuiButton
+        InheritProperties		SwitchButton
+        style					DialogListButton
+        navUp					SwitchNetGraph  [!$NX]
+        navUp					SwitchCrossplay  [$NX]
+        navDown					SwchColorBlindMode
+        ConVar					"clubs_showInvites"
+        visible                 1
+        list
+        {
+            "#SETTING_DISABLED"	        0
+            "#SETTING_ENABLED"	        1
+        }
+
+        pin_to_sibling			SwitchNetGraph  [!$NX]
+        pin_to_sibling			SwitchCrossplay  [$NX]
+        pin_corner_to_sibling	TOP_LEFT
+        pin_to_sibling_corner	BOTTOM_LEFT
+
+        childGroupAlways        ChoiceButtonAlways
+    }
+
     AccessibilityHeader
     {
         ControlName				ImagePanel
         InheritProperties		SubheaderBackgroundWide
         xpos					0
         ypos					6
-        pin_to_sibling			SwitchAnalytics
+        pin_to_sibling			SwitchClubInvites [!$NX]
+        pin_to_sibling			SwitchClubInvites [$NX]
         pin_corner_to_sibling	TOP_LEFT
         pin_to_sibling_corner	BOTTOM_LEFT
 
         visible                 1 [$ENGLISH]
         visible                 0 [!$ENGLISH]
     }
+
     AccessibilityHeaderText
     {
         ControlName				Label
@@ -331,7 +470,7 @@
         pin_to_sibling			AccessibilityHeader
         pin_corner_to_sibling	TOP_LEFT
         pin_to_sibling_corner	BOTTOM_LEFT
-        navUp					SwitchAnalytics
+        navUp					SwitchClubInvites
         navDown					SwchSubtitles
         // list is populated by code
         childGroupAlways        MultiChoiceButtonAlways
@@ -411,8 +550,8 @@
         {
             "#SETTING_OFF"              0
             "#SETTING_VISUAL"           1
-            "#SETTING_AUDIO"            2
-            "#SETTING_VISUAL_AUDIO"     3
+            "#SETTING_AUDIO"            2 [!$NX]
+            "#SETTING_VISUAL_AUDIO"     3 [!$NX]
         }
 
         childGroupAlways        MultiChoiceButtonAlways
@@ -424,8 +563,7 @@
         InheritProperties       SwitchButton
         style                   DialogListButton
         navUp                   SwchAccessibility
-        navDown                 SwitchChatMessages 	[!$GAMECONSOLE]
-		navDown                 SwitchShowMotd 		[$GAMECONSOLE]
+        navDown                 SwitchChatMessages
 
         pin_to_sibling          SwchAccessibility
         pin_corner_to_sibling   TOP_LEFT
@@ -455,7 +593,7 @@
         InheritProperties		SwitchButton
         style					DialogListButton
         navUp					SwchChatSpeechToText
-		navDown					SwitchShowMotd
+        navDown                 SwitchShowHealthbars
         ConVar					"hudchat_play_text_to_speech"
         list
         {
@@ -471,14 +609,36 @@
         pin_to_sibling_corner	BOTTOM_LEFT
         childGroupAlways        ChoiceButtonAlways
     }
+    
+	SwitchShowHealthbars
+	{
+        ControlName				RuiButton
+        InheritProperties		SwitchButton
+        style					DialogListButton
+        navUp					SwitchChatMessages
+        navDown                 SwitchShowMotd
+        
+        ConVar					"enable_healthbar"
+        
+		list
+        {
+            "#SETTING_OFF"	0
+            "#SETTING_ON"	1
+        }
+
+        pin_to_sibling			SwitchChatMessages
+        pin_corner_to_sibling	TOP_LEFT
+        pin_to_sibling_corner	BOTTOM_LEFT
+        childGroupAlways        MultiChoiceButtonAlways
+	}
+	
 	
 	SwitchShowMotd
     {
         ControlName				RuiButton
         InheritProperties		SwitchButton
         style					DialogListButton
-        navUp					SwitchChatMessages [!$GAMECONSOLE]
-		navUp					SwchChatSpeechToText [$GAMECONSOLE]
+        navUp					SwitchShowHealthbars [!$GAMECONSOLE]
         ConVar					"motd_enable"
         list
         {
@@ -488,8 +648,7 @@
 
         visible                 1
 
-        pin_to_sibling			SwitchChatMessages [!$GAMECONSOLE]
-		pin_to_sibling			SwchChatSpeechToText [$GAMECONSOLE]
+        pin_to_sibling			SwitchShowHealthbars [!$GAMECONSOLE]
         pin_corner_to_sibling	TOP_LEFT
         pin_to_sibling_corner	BOTTOM_LEFT
         childGroupAlways        ChoiceButtonAlways
@@ -506,7 +665,8 @@
 		visible					1
 		enabled 				0
 
-        pin_to_sibling			SwitchShowMotd
+        pin_to_sibling			SwchChatSpeechToText [$GAMECONSOLE]
+        pin_to_sibling			SwitchChatMessages [!$GAMECONSOLE]
         pin_corner_to_sibling	TOP_LEFT
         pin_to_sibling_corner	TOP_LEFT
 	}
