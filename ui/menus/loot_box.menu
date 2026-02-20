@@ -126,7 +126,7 @@ scripts/resource/ui/menus/loot_box.menu
         {
             ControlName             RuiButton
             classname               "MenuButton"
-            wide                    600
+            wide                    376
             tall                    112
             xpos                    0
             ypos                    -48
@@ -350,17 +350,16 @@ scripts/resource/ui/menus/loot_box.menu
         {
             ControlName				RuiButton
             classname               "MenuButton"
-            wide					285
+            wide					284
             tall					60
             xpos                    0
             ypos                    0
             zpos                    50
-            rui                     "ui/generic_button.rpak"
+            rui                     "ui/generic_left_icon_button.rpak"
             labelText               ""
             visible					1
             enabled					1
             cursorVelocityModifier  0.7
-			textAlignment			left
 
             pin_to_sibling			SafeArea
             pin_corner_to_sibling	BOTTOM_RIGHT

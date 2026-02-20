@@ -151,6 +151,7 @@ Scheme
 		RichText.SelectedBgColor			LightBlue
 		RichText.InsetX						20
 		RichText.InsetY						0
+		RichText.JoystickDeadZone		    0.15
 
 		Chat.FriendlyFontColor				"55 233 255 255"
 		Chat.EnemyFontColor					"230 83 14 255"
@@ -3701,9 +3702,9 @@ Scheme
 			cursorVelocityModifier  0.6
 		}
 
-		NEW_SurvivalGroundListCategoryHeader
+		SurvivalGroundListCategoryHeader
 		{
-			rui						"ui/new_survival_ground_list_category_header.rpak"
+			rui						"ui/survival_ground_list_category_header.rpak"
 			xpos					0
 			ypos					0
 			wide                    0
@@ -3715,9 +3716,9 @@ Scheme
 			cursorVelocityModifier  0.6
 		}
 
-		NEW_SurvivalGroundListItemButton
+		SurvivalGroundListItemButton
 		{
-			rui						"ui/new_survival_ground_list_item_button.rpak"
+			rui						"ui/survival_ground_list_item_button.rpak"
 			xpos					0
 			ypos					0
 			wide                    0
