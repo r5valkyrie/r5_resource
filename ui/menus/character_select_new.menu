@@ -22,6 +22,12 @@ scripts/resource/ui/menus/character_select_new.menu
             InheritProperties       MenuVignette
         }
 
+        ToolTip
+        {
+            ControlName				RuiPanel
+            InheritProperties       ToolTip
+        }
+
         WhiteFlash
         {
             ControlName             ImagePanel

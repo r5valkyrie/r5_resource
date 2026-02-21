@@ -35,6 +35,20 @@ resource/ui/menus/arenas_ranked_info.menu
 			image					"vgui/HUD/white"
             drawColor				"0 0 0 220"
         }
+        PanelFrame
+        {
+            ControlName				Label
+            xpos					0
+            ypos					0
+            wide					1920
+            tall					%100
+            labelText				""
+            visible				    1
+
+            pin_to_sibling          ScreenFrame
+            pin_corner_to_sibling   CENTER
+            pin_to_sibling_corner   CENTER
+        }
 
 		MenuFrame
 		{
@@ -62,7 +76,7 @@ resource/ui/menus/arenas_ranked_info.menu
 
             proportionalToParent    1
 
-            pin_to_sibling			ScreenFrame
+            pin_to_sibling			PanelFrame
             pin_corner_to_sibling	CENTER
             pin_to_sibling_corner	CENTER
         }
@@ -80,13 +94,12 @@ resource/ui/menus/arenas_ranked_info.menu
 			cursorVelocityModifier  0.7
 			proportionalToParent	1
 			sound_accept            "UI_Menu_BattlePass_AboutInfo"
-			pin_to_sibling			ScreenFrame
+			pin_to_sibling			PanelFrame
 			pin_corner_to_sibling	TOP_LEFT
 			pin_to_sibling_corner	TOP_LEFT
 
 			ruiArgs
 			{
-				textHeight          "22.0"
 				buttonText			"#ARENAS_RANKED_LEARN_MORE"
 			}
 		}
@@ -112,7 +125,7 @@ resource/ui/menus/arenas_ranked_info.menu
 			controlSettingsFile		"resource/ui/menus/panels/arenas_ranked_rewards.res"
 			zpos                    2
 
-            pin_to_sibling			ScreenFrame
+            pin_to_sibling			PanelFrame
             pin_corner_to_sibling	BOTTOM
             pin_to_sibling_corner	BOTTOM
         }
@@ -135,7 +148,7 @@ resource/ui/menus/arenas_ranked_info.menu
 
             proportionalToParent    1
 
-            pin_to_sibling			ScreenFrame
+            pin_to_sibling			PanelFrame
             pin_corner_to_sibling	TOP
             pin_to_sibling_corner	TOP
         }
@@ -143,8 +156,8 @@ resource/ui/menus/arenas_ranked_info.menu
 		MoreInfoPanel
 		{
             ControlName				RuiPanel
-            wide					%100
-            tall					%100
+            wide					1920
+            tall					1080
             ypos                    0
             xpos                    0
             zpos                    100

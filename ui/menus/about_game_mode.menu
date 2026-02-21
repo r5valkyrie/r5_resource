@@ -76,6 +76,29 @@ scripts/resource/ui/menus/about_game_mode.menu
             pin_to_sibling_corner	CENTER
         }
 
+		AboutText
+		{
+			ControlName				RichText
+			ypos					-310
+			xpos					-320
+			wide					645
+			wide_nx_handheld			690	[$NX || $NX_UI_PC]
+			tall					420
+			visible					1
+			font 					DefaultRegularFont
+			scrollbar				0
+			scrollbar_nx_handheld			1	[$NX || $NX_UI_PC]
+			fontHeight				32
+			fontHeight_nx_handheld			45	[$NX || $NX_UI_PC]
+			bgcolor_override			"0 0 0 192"
+			paintbackground				0
+			text					"test"
+			maxchars				-1
+			pin_to_sibling				ScreenFrame
+			pin_corner_to_sibling			TOP_RIGHT
+			pin_to_sibling_corner			TOP_RIGHT
+		}
+
         Logo
         {
             ControlName				RuiPanel

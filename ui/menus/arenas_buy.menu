@@ -78,6 +78,26 @@ resource/ui/menus/arenas_buy.menu
             zpos                    999
         }
 
+        NarratorImage
+        {
+            ControlName				RuiPanel
+
+            xpos					-50
+            ypos				    150
+            wide					651
+            tall					805
+            zpos					0
+            visible					1
+            enabled 				1
+            scaleImage				1
+            rui                     "ui/rampart_takeover_narrator_image.rpak"
+            drawColor				"255 255 255 255"
+
+            pin_to_sibling		    Weapon_Tab_2
+            pin_corner_to_sibling	TOP_LEFT
+            pin_to_sibling_corner	TOP_RIGHT
+        }
+
         ArenasTotalMaterials
         {
             ControlName				RuiPanel
