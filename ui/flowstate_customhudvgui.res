@@ -283,57 +283,6 @@ Resource/UI/flowstate_customhudvgui.res
 		pin_corner_to_sibling	TOP
 		pin_to_sibling_corner	TOP
 	}		
-	//for title
-	ScreenBlur1
-		{
-			ControlName				RuiPanel
-			wide					260
-			tall					100	
-			xpos					-50
-			ypos					-52
-			zpos 					0
-			visible					0
-			enabled					0
-			rui 					"ui/tabs_background.rpak"
-			
-			pin_to_sibling          Screen
-			pin_corner_to_sibling   TOP_LEFT
-			pin_to_sibling_corner   TOP_LEFT
-		}
-		
-	ScreenBlur2
-		{
-			ControlName				RuiPanel
-			wide					260
-			tall					300	
-			xpos					0
-			ypos					-88
-			zpos 					0
-			visible					0
-			enabled					0
-			rui 					"ui/tabs_background.rpak"
-			
-			pin_to_sibling          ScreenBlur1
-			pin_corner_to_sibling   TOP_LEFT
-			pin_to_sibling_corner   TOP_LEFT
-		}
-				
-	ScreenBlur3 //for timer
-		{
-			ControlName				RuiPanel
-			wide					260
-			tall					60	
-			xpos					0
-			ypos					-298
-			zpos 					10
-			visible					0
-			enabled					0
-			rui 					"ui/tabs_background.rpak"
-			
-			pin_to_sibling          ScreenBlur2
-			pin_corner_to_sibling   TOP_LEFT
-			pin_to_sibling_corner   TOP_LEFT
-		}
 				
 	PropControlsTitle
 		{
@@ -1329,40 +1278,6 @@ Resource/UI/flowstate_customhudvgui.res
 		pin_corner_to_sibling	BOTTOM
 		pin_to_sibling_corner	BOTTOM
 	}
-	//for title
-	BombStateScreenBlur1
-		{
-			ControlName				RuiPanel
-			wide					290
-			tall					100	
-			xpos					-38
-			ypos					-335
-			zpos 					0
-			visible					0
-			rui 					"ui/tabs_background.rpak"
-			
-			pin_to_sibling          Screen
-			pin_corner_to_sibling   TOP_LEFT
-			pin_to_sibling_corner   TOP_LEFT
-		}
-		
-	BombStateScreenBlur2
-		{
-			ControlName				RuiPanel
-			wide					290
-			tall					60	
-			xpos					0
-			ypos					-98
-			zpos 					1
-			visible					0
-			enabled					0
-			rui 					"ui/tabs_background.rpak"
-			
-			pin_to_sibling          BombStateScreenBlur1
-			pin_corner_to_sibling   TOP_LEFT
-			pin_to_sibling_corner   TOP_LEFT
-		}
-
 	BombStateText_New
 		{
 			ControlName				Label
@@ -1805,22 +1720,6 @@ Resource/UI/flowstate_customhudvgui.res
 		pin_to_sibling_corner	RIGHT
 	}
 	
-	BuyMenuBottomFrame
-		{
-			ControlName				RuiPanel
-			wide					f0
-			tall					165
-			xpos					0
-			ypos					0
-			zpos 					1
-			visible					0
-			enabled					0
-			rui 					"ui/tabs_background.rpak"
-			
-			pin_to_sibling          Screen
-			pin_corner_to_sibling   TOP
-			pin_to_sibling_corner   TOP
-		}
 		
 	BuyMenuBottomFrameBorder
 	{

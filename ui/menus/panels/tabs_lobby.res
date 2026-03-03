@@ -14,21 +14,6 @@ scripts/resource/ui/menus/panels/tabs_lobby.res
         enabled					0
     }
 
-    Background
-    {
-        ControlName				RuiPanel
-		wide					%300
-		tall					84
-        visible					1
-        enabled					1
-        proportionalToParent    1
-        rui 					"ui/tabs_background.rpak"
-
-		pin_to_sibling			Anchor
-		pin_corner_to_sibling	TOP
-		pin_to_sibling_corner	TOP
-    }
-
 	LeftNavButton
 	{
 		ControlName				RuiPanel

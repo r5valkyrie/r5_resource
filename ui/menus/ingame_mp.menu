@@ -1,4 +1,3 @@
-#base "combo_buttons.res"
 resource/ui/menus/ingame_mp.menu
 {
 	menu

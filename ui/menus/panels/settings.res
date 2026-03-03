@@ -20,16 +20,36 @@
         ControlName     Label
         labelText       ""
     }
+	TabsBackground
+    {
+        ControlName				RuiPanel
+	    InheritProperties		TabsBackgroundTall
 
+		zpos					2
+
+        visible					1
+        enabled					1
+        proportionalToParent    1
+
+         pin_to_sibling			PanelFrame
+        pin_corner_to_sibling	TOP
+        pin_to_sibling_corner	TOP
+
+        ruiArgs
+        {
+            tallerSides 1
+        }
+    }
     TabsCommon
     {
         ControlName				CNestedPanel
         classname				"TabsCommonClass"
-        zpos					1
+        zpos					2
+        xpos                    0
         wide					f0
         tall					84
         visible					1
-        controlSettingsFile		"resource/ui/menus/panels/tabs_settings.res"
+        controlSettingsFile		"resource/ui/menus/panels/common_tabs_tall.res"
 
         pin_to_sibling			PanelFrame
         pin_corner_to_sibling	TOP
@@ -120,7 +140,7 @@
         {
             ControlName				CNestedPanel
             InheritProperties       SettingsContentPanel
-            tall                    1040
+            tall                    1100
             tabPosition             1
 
             controlSettingsFile		"resource/ui/menus/panels/controls.res"
@@ -200,7 +220,7 @@
             ControlName				CNestedPanel
             InheritProperties       SettingsContentPanel
             //tall                    952 [$WINDOWS]
-            tall                    882 [$WINDOWS]
+            tall                    820 [$WINDOWS]
             tabPosition             1
 
             controlSettingsFile		"resource/ui/menus/panels/audio.res" [$WINDOWS]
@@ -239,12 +259,85 @@
         {
             ControlName				CNestedPanel
             InheritProperties       SettingsContentPanel
-            tall                    1408 [$WINDOWS]
-            tall                    1212 [$GAMECONSOLE]
+            tall                    1780 [$WINDOWS]
+            tall                    1900 [$GAMECONSOLE]
 
             tabPosition             1
 
             controlSettingsFile		"resource/ui/menus/panels/hud_options.res"
         }
     }
+
+//// LEFT FOOTER ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	LeftRuiFooterButton0 [$NX || $NX_UI_PC]
+	{
+		ControlName				RuiButton
+        InheritProperties		LeftRuiFooterButton
+        
+        font                    Default_28
+        labelText				"DEFAULT"
+		scriptID				0
+
+        pin_to_sibling          PanelFrame
+        pin_to_sibling_corner   BOTTOM_LEFT
+        pin_corner_to_sibling	BOTTOM_LEFT
+
+        xpos					-48
+	}
+    LeftRuiFooterButton1 [$NX || $NX_UI_PC]
+	{
+		ControlName				RuiButton
+        InheritProperties		LeftRuiFooterButton
+        
+        font                    Default_28
+        labelText				"DEFAULT"
+		scriptID				1
+
+        pin_to_sibling          LeftRuiFooterButton0
+        pin_to_sibling_corner   BOTTOM_RIGHT
+        pin_corner_to_sibling	BOTTOM_LEFT
+	}
+    LeftRuiFooterButton2 [$NX || $NX_UI_PC]
+	{
+		ControlName				RuiButton
+        InheritProperties		LeftRuiFooterButton
+        
+        font                    Default_28
+        labelText				"DEFAULT"
+		scriptID				2
+
+        pin_to_sibling          LeftRuiFooterButton1
+        pin_to_sibling_corner   BOTTOM_RIGHT
+        pin_corner_to_sibling	BOTTOM_LEFT
+	}
+
+//// RIGHT FOOTER //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    RightRuiFooterButton0 [$NX || $NX_UI_PC]
+	{
+		ControlName				RuiButton
+        InheritProperties		RightRuiFooterButton
+        
+        font                    Default_28
+        labelText				"DEFAULT"
+		scriptID				0
+
+        pin_to_sibling          PanelFrame
+        pin_to_sibling_corner   BOTTOM_RIGHT
+        pin_corner_to_sibling	BOTTOM_RIGHT
+	}
+    RightRuiFooterButton1 [$NX || $NX_UI_PC]
+	{
+		ControlName				RuiButton
+        InheritProperties		RightRuiFooterButton
+        
+        font                    Default_28
+        labelText				"DEFAULT"
+		scriptID				1
+
+        pin_to_sibling          RightRuiFooterButton0
+        pin_to_sibling_corner   BOTTOM_LEFT
+        pin_corner_to_sibling	BOTTOM_RIGHT
+	}
 }

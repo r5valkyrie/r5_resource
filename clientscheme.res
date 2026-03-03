@@ -371,17 +371,6 @@ Scheme
 			}
 		}
 
-		GameUIButtons
-		{
-			1
-			{
-				bitmap		1
-				name		"ControllerButtons"
-				scalex		0.843
-				scaley		0.843
-			}
-		}
-
 		HUDPrompt
 		{
 			1

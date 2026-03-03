@@ -14,18 +14,6 @@ resource/ui/menus/panels/tabs_season.res
         proportionalToParent    1
     }
 
-    Background
-    {
-        ControlName				RuiPanel
-		wide					%200
-		tall					%100
-		xpos                    -512
-        visible					0
-        enabled					1
-        proportionalToParent    1
-        visible                 1
-        rui 					"ui/tabs_background.rpak"
-    }
 
 	TabDivider0
 	{

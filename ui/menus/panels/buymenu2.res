@@ -482,16 +482,6 @@ scripts/resource/ui/menus/panels/buymenu2.res
             fillColor		"30 30 30 220"
             drawColor		"30 30 30 220"
 		}
-		ScreenBlur
-		{
-			ControlName				RuiPanel
-			wide					%25
-			tall					%24
-			zpos 25
-			rui                     "ui/tabs_background.rpak"
-			visible					0
-			drawColor				"0 0 0 50"
-		}	
         SMGLootFrame2
 		{
             ControlName		ImagePanel

@@ -12,17 +12,6 @@ scripts/resource/ui/menus/panels/tabs_settings.res
         paintbackground         1
     }
 
-    Background
-    {
-        ControlName				RuiPanel
-		wide					%100
-		tall					%100
-        visible					1
-        enabled					1
-        proportionalToParent    1
-        rui 					"ui/tabs_background.rpak"
-    }
-
 	LeftNavButton
 	{
 		ControlName				RuiPanel

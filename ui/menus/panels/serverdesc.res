@@ -118,24 +118,6 @@
 		pin_to_sibling_corner	CENTER
 	}
 
-	DescPanel
-	{
-		ControlName RuiPanel
-		wide 300
-		tall 50
-		xpos 0
-		ypos -25
-
-		rui "ui/control_options_description.rpak"
-
-		visible 1
-		zpos 70
-
-		pin_to_sibling			PanelBG
-		pin_corner_to_sibling	BOTTOM
-		pin_to_sibling_corner	BOTTOM
-	}
-
 	BtnSaveDesc
 	{
 		ControlName RuiButton

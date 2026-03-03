@@ -4,7 +4,6 @@
 #base "HudDeathRecap.res"
 #base "DebugOverlays.res"
 #base "flowstate_customhudvgui.res"
-
 Resource/UI/HudScripted_mp.res
 {
 	Screen
@@ -234,7 +233,7 @@ Resource/UI/HudScripted_mp.res
         ControlName             RuiPanel
         classname               "MenuButton"
         ypos                    12
-        xpos                    -75
+        xpos                    -10
         wide                    500
         tall                    40
         visible                 0
