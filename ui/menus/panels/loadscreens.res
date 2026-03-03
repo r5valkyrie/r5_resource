@@ -83,17 +83,40 @@
         pin_to_sibling_corner	TOP_LEFT
 	}
 
-    DescriptionText
+    DescriptionTextOld
     {
         ControlName				RuiPanel
         ypos					0
         wide					1022
         tall					160
-		visible				    1
+		visible				    0
         rui					    "ui/loadscreen_preview_text.rpak"
 
         pin_to_sibling			LoadscreenImage
         pin_corner_to_sibling	TOP
         pin_to_sibling_corner	BOTTOM
     }
+
+    DescriptionText
+	{
+		ControlName				RichText
+        ypos					0
+        wide					1022
+		wide_nx_handheld		1010		[$NX || $NX_UI_PC]
+        tall					160
+        visible					1
+		font 					DefaultRegularFont
+		fontHeight				32
+		fontHeight_nx_handheld	45		[$NX || $NX_UI_PC]
+		bgcolor_override		"0 0 0 192"
+		paintbackground			1
+		text					""
+		maxchars				-1
+		tabPosition				1
+		isproportional			0
+
+        pin_to_sibling			LoadscreenImage
+        pin_corner_to_sibling	TOP
+        pin_to_sibling_corner	BOTTOM
+	}
 }

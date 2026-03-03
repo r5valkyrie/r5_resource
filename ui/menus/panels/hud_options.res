@@ -21,6 +21,7 @@
 		ypos					0
         ControlName				RuiButton
         InheritProperties		SwitchButton
+        className               "SettingScrollSizer"
         style					DialogListButton
         navDown					SwitchShotButtonHints
         ConVar					"hud_setting_showMedals"
@@ -39,6 +40,7 @@
     {
         ControlName				RuiButton
         InheritProperties		SwitchButton
+        className               "SettingScrollSizer"
         style					DialogListButton
         navUp					SwitchLootPromptStyle
         navDown					SwitchDamageIndicatorStyle
@@ -59,6 +61,7 @@
     {
         ControlName				RuiButton
         InheritProperties		SwitchButton
+        className               "SettingScrollSizer"
         style					DialogListButton
         navUp					SwitchShotButtonHints
         navDown					SwitchDamageTextStyle
@@ -80,6 +83,7 @@
     {
         ControlName				RuiButton
         InheritProperties		SwitchButton
+        className               "SettingScrollSizer"
         style					DialogListButton
         navUp					SwitchDamageIndicatorStyle
         navDown					SwitchPingOpacity
@@ -102,6 +106,7 @@
     {
         ControlName				RuiButton
         InheritProperties		SwitchButton
+        className               "SettingScrollSizer"
         style					DialogListButton
         navUp					SwitchDamageTextStyle
         navDown					SwitchShowObituary
@@ -122,6 +127,7 @@
     {
         ControlName				RuiButton
         InheritProperties		SwitchButton
+        className               "SettingScrollSizer"
         style					DialogListButton
         navUp					SwitchPingOpacity
         navDown					SwitchRotateMinimap
@@ -141,6 +147,7 @@
     {
         ControlName				RuiButton
         InheritProperties		SwitchButton
+        className               "SettingScrollSizer"
         style					DialogListButton
         navUp					SwitchShowObituary
         navDown					SwitchWeaponAutoCycle
@@ -160,6 +167,7 @@
     {
         ControlName				RuiButton
         InheritProperties		SwitchButton
+        className               "SettingScrollSizer"
         style					DialogListButton
         navUp					SwitchRotateMinimap
         navDown					SwitchAutoSprint
@@ -179,6 +187,7 @@
     {
         ControlName				RuiButton
         InheritProperties		SwitchButton
+        className               "SettingScrollSizer"
         style					DialogListButton
         navUp					SwitchWeaponAutoCycle
         navDown					SwitchStickySprintForward
@@ -198,13 +207,10 @@
     {
         ControlName             RuiButton
         InheritProperties       SwitchButton
+        className               "SettingScrollSizer"
         style                   DialogListButton
         navUp                   SwitchAutoSprint
-            
         navDown                 SwitchJetpackControl
-     
-                                                           
-      
         ConVar                  "player_setting_stickysprintforward"
         list
         {
@@ -217,11 +223,11 @@
         pin_to_sibling_corner   BOTTOM_LEFT
         childGroupAlways        ChoiceButtonAlways
     }
-            
     SwitchJetpackControl
     {
         ControlName             RuiButton
         InheritProperties       SwitchButton
+        className               "SettingScrollSizer"
         style                   DialogListButton
         navUp                   SwitchStickySprintForward
         navDown                 SwitchPilotDamageIndicators
@@ -237,18 +243,14 @@
         pin_to_sibling_corner   BOTTOM_LEFT
         childGroupAlways        ChoiceButtonAlways
     }
-      
     SwitchPilotDamageIndicators
     {
         ControlName				RuiButton
         InheritProperties		SwitchButton
+        className               "SettingScrollSizer"
         style					DialogListButton
-            
         navUp                   SwitchJetpackControl
-     
-                                  
-      
-        navDown					SwitchDamageClosesMenu
+        navDown					SwitchDamageClosesDeathBoxMenu
         ConVar					"damage_indicator_style_pilot"
         list
         {
@@ -256,19 +258,16 @@
             "#SETTING_INDICATOR_3D_ONLY"	2
             "#SETTING_INDICATOR_BOTH"	    1
         }
-            
         pin_to_sibling			SwitchJetpackControl
-     
-                                                         
-      
         pin_corner_to_sibling	TOP_LEFT
         pin_to_sibling_corner	BOTTOM_LEFT
         childGroupAlways        MultiChoiceButtonAlways
     }
-    SwitchDamageClosesMenu
+    SwitchDamageClosesDeathBoxMenu
     {
         ControlName				RuiButton
         InheritProperties		SwitchButton
+        className               "SettingScrollSizer"
         style					DialogListButton
         navUp					SwitchPilotDamageIndicators
         navDown					SwitchHopupPopup
@@ -288,8 +287,9 @@
     {
         ControlName				RuiButton
         InheritProperties		SwitchButton
+        className               "SettingScrollSizer"
         style					DialogListButton
-        navUp					SwitchDamageClosesMenu
+        navUp					SwitchDamageClosesDeathBoxMenu
         navDown					SwitchStreamerMode
         ConVar					"hud_setting_showHopUpPopUp"
         list
@@ -298,7 +298,7 @@
             "#SETTING_ON"	1
         }
 
-        pin_to_sibling			SwitchDamageClosesMenu
+        pin_to_sibling			SwitchDamageClosesDeathBoxMenu
         pin_corner_to_sibling	TOP_LEFT
         pin_to_sibling_corner	BOTTOM_LEFT
         childGroupAlways        ChoiceButtonAlways
@@ -307,6 +307,7 @@
     {
         ControlName				RuiButton
         InheritProperties		SwitchButton
+        className               "SettingScrollSizer"
         style					DialogListButton
         navUp					SwitchHopupPopup
         navDown					SwitchAnonymousMode
@@ -328,6 +329,7 @@
     {
         ControlName				RuiButton
         InheritProperties		SwitchButton
+        className               "SettingScrollSizer"
         style					DialogListButton
         navUp					SwitchStreamerMode
         navDown					SwitchAnalytics
@@ -348,9 +350,11 @@
     {
         ControlName				RuiButton
         InheritProperties		SwitchButton
+        className               "SettingScrollSizer"
         style					DialogListButton
         navUp					SwitchAnonymousMode
-        navDown					SwitchCrossplay
+        navDown					SwitchCrossplay [!$PC || $NX_UI_PC]
+        navDown					SwitchNetGraph  [$PC && !$NX_UI_PC]
         pin_to_sibling			SwitchAnonymousMode
         pin_corner_to_sibling	TOP_LEFT
         pin_to_sibling_corner	BOTTOM_LEFT
@@ -364,15 +368,15 @@
         clipRui             1
         childGroupAlways        ChoiceButtonAlways
     }
-
     SwitchCrossplay
     {
         ControlName				RuiButton
         InheritProperties		SwitchButton
+        className               "SettingScrollSizer"
         style					DialogListButton
         navUp					SwitchAnalytics
-        navDown					SwitchNetGraph [!$NX]
-		navDown					SwitchClubInvites  [$NX]
+        navDown					SwitchNetGraph [!$NX && !$NX_UI_PC]
+		navDown					SwitchClubInvites  [$NX || $NX_UI_PC]
         pin_to_sibling			SwitchAnalytics
         pin_corner_to_sibling	TOP_LEFT
         pin_to_sibling_corner	BOTTOM_LEFT
@@ -386,17 +390,18 @@
         clipRui             1
         childGroupAlways        ChoiceButtonAlways
     }
-
 	SwitchNetGraph
     {
         ControlName				RuiButton
         InheritProperties		SwitchButton
+        className               "SettingScrollSizer"
         style					DialogListButton
-        navUp					SwitchCrossplay
+        navUp					SwitchCrossplay [!$PC || $NX_UI_PC]
+        navUp					SwitchAnalytics [$PC && !$NX_UI_PC]
         navDown					SwitchClubInvites
         ConVar					"net_netGraph2"
-        visible                 1 [!$NX]
-		visible					0 [$NX]
+        visible                 1 [!$NX && !$NX_UI_PC]
+		visible					0 [$NX || $NX_UI_PC]
         list
         {
             "#SETTING_OFF"	    0
@@ -408,15 +413,15 @@
         pin_to_sibling_corner	BOTTOM_LEFT
         childGroupAlways        ChoiceButtonAlways
     }
-
     SwitchClubInvites
     {
         ControlName				RuiButton
         InheritProperties		SwitchButton
+        className               "SettingScrollSizer"
         style					DialogListButton
-        navUp					SwitchNetGraph  [!$NX]
-        navUp					SwitchCrossplay  [$NX]
-        navDown					SwchColorBlindMode
+        navUp					SwitchNetGraph  [!$NX && !$NX_UI_PC]
+        navUp					SwitchCrossplay  [$NX || $NX_UI_PC]
+        navDown					SwitchCommsFilter
         ConVar					"clubs_showInvites"
         visible                 1
         list
@@ -425,29 +430,99 @@
             "#SETTING_ENABLED"	        1
         }
 
-        pin_to_sibling			SwitchNetGraph  [!$NX]
-        pin_to_sibling			SwitchCrossplay  [$NX]
+        pin_to_sibling			SwitchNetGraph  [!$NX && !$NX_UI_PC]
+        pin_to_sibling			SwitchCrossplay  [$NX || $NX_UI_PC]
         pin_corner_to_sibling	TOP_LEFT
         pin_to_sibling_corner	BOTTOM_LEFT
 
         childGroupAlways        ChoiceButtonAlways
     }
+    SwitchCommsFilter
+    {
+        ControlName				RuiButton
+        InheritProperties		SwitchButton
+        className               "SettingScrollSizer"
+        style					DialogListButton
+        navUp					SwitchClubInvites
+        navDown					SwitchFirstPersonReticleOptions
+        ConVar					"cl_comms_filter"
+        visible                 1
+        list
+        {
+            "#SETTING_CHATFILTER_EVERYONE"      -1
+            "#SETTING_CHATFILTER_FRIENDS"       1
+            //"#SETTING_CHATFILTER_PARTYMEMBERS"  2
+            "#SETTING_CHATFILTER_NOBODY"        0
+        }
 
+        pin_to_sibling		SwitchClubInvites
+        pin_corner_to_sibling	TOP_LEFT
+        pin_to_sibling_corner	BOTTOM_LEFT
+
+        childGroupAlways        MultiChoiceButtonAlways
+    }
+	SwitchFirstPersonReticleOptions
+    {
+        ControlName             RuiButton
+        InheritProperties       SwitchButton
+        className               "SettingScrollSizer"
+        style                   DialogListButton
+        navUp                   SwitchCommsFilter
+        navDown                 SwchColorBlindMode
+        visible                 1
+        //ConVar                  "closecaption"
+        list
+        {
+            "#SETTING_DEFAULT"      0
+            "#SETTING_CUSTOMIZE"    1
+        }
+
+        pin_to_sibling          SwitchCommsFilter
+        pin_corner_to_sibling   TOP_LEFT
+        pin_to_sibling_corner   BOTTOM_LEFT
+
+        childGroupAlways        ChoiceButtonAlways
+    }
+                         
+	LaserSightOptions
+    {
+        ControlName             RuiButton
+        InheritProperties       SwitchButton
+        className               "SettingScrollSizer"
+        style                   DialogListButton
+        navUp                   SwitchFirstPersonReticleOptions
+        navDown                 SwchColorBlindMode
+        visible                 1
+        ConVar					"laserSightColorCustomized"
+        
+        list
+        {
+            "#SETTING_DEFAULT"      0
+            "#SETTING_CUSTOMIZE"    1
+        }
+
+        pin_to_sibling          SwitchFirstPersonReticleOptions
+        pin_corner_to_sibling   TOP_LEFT
+        pin_to_sibling_corner   BOTTOM_LEFT
+
+        childGroupAlways        ChoiceButtonAlways
+    }
+      
     AccessibilityHeader
     {
         ControlName				ImagePanel
         InheritProperties		SubheaderBackgroundWide
+        className               "SettingScrollSizer"
         xpos					0
         ypos					6
-        pin_to_sibling			SwitchClubInvites [!$NX]
-        pin_to_sibling			SwitchClubInvites [$NX]
+        pin_to_sibling			SwitchFirstPersonReticleOptions [!$NX && !$NX_UI_PC]
+        pin_to_sibling			SwitchFirstPersonReticleOptions [$NX || $NX_UI_PC]
         pin_corner_to_sibling	TOP_LEFT
         pin_to_sibling_corner	BOTTOM_LEFT
 
         visible                 1 [$ENGLISH]
         visible                 0 [!$ENGLISH]
     }
-
     AccessibilityHeaderText
     {
         ControlName				Label
@@ -465,12 +540,13 @@
     {
         ControlName				RuiButton
         InheritProperties		SwitchButton
-        classname				"AdvancedVideoButtonClass"
+        className               "SettingScrollSizer"
+
         style					DialogListButton
         pin_to_sibling			AccessibilityHeader
         pin_corner_to_sibling	TOP_LEFT
         pin_to_sibling_corner	BOTTOM_LEFT
-        navUp					SwitchClubInvites
+        navUp					SwitchFirstPersonReticleOptions
         navDown					SwchSubtitles
         // list is populated by code
         childGroupAlways        MultiChoiceButtonAlways
@@ -489,6 +565,7 @@
     {
         ControlName             RuiButton
         InheritProperties       SwitchButton
+        className               "SettingScrollSizer"
         style                   DialogListButton
         navUp                   SwchColorBlindMode
         navDown                 SwchSubtitlesSize
@@ -512,7 +589,7 @@
     {
         ControlName				RuiButton
         InheritProperties		SwitchButton
-        classname				"AdvancedVideoButtonClass"
+        classname				"SettingScrollSizer"
         style					DialogListButton
         pin_to_sibling			SwchSubtitles
         pin_corner_to_sibling	TOP_LEFT
@@ -534,9 +611,11 @@
     {
         ControlName             RuiButton
         InheritProperties       SwitchButton
+        className               "SettingScrollSizer"
         style                   DialogListButton
         navUp                   SwchSubtitlesSize
-        navDown                 SwchChatSpeechToText
+        navDown                 SwchChatSpeechToText [$PC && !$NX_UI_PC]
+        navDown                 SwchMuteVoiceChat [!$PC || $NX_UI_PC]
 
         pin_to_sibling          SwchSubtitlesSize
         pin_corner_to_sibling   TOP_LEFT
@@ -550,22 +629,48 @@
         {
             "#SETTING_OFF"              0
             "#SETTING_VISUAL"           1
-            "#SETTING_AUDIO"            2 [!$NX]
-            "#SETTING_VISUAL_AUDIO"     3 [!$NX]
+            "#SETTING_AUDIO"            2
+            "#SETTING_VISUAL_AUDIO"     3
         }
 
         childGroupAlways        MultiChoiceButtonAlways
+    }
+
+    SwchMuteVoiceChat [$GAMECONSOLE || $NX_UI_PC]
+    {
+        ControlName             RuiButton
+        InheritProperties       SwitchButton
+        className               "SettingScrollSizer"
+        style                   DialogListButton
+        navUp                   SwchAccessibility
+        navDown                 SwchChatSpeechToText [$ENGLISH]
+
+        pin_to_sibling          SwchAccessibility
+        pin_corner_to_sibling   TOP_LEFT
+        pin_to_sibling_corner   BOTTOM_LEFT
+
+        ConVar                  "voice_enabled"
+        list
+        {
+            "#SETTING_OFF"  1
+            "#SETTING_ON"   0
+        }
+
+        childGroupAlways        ChoiceButtonAlways
     }
 
     SwchChatSpeechToText
     {
         ControlName             RuiButton
         InheritProperties       SwitchButton
+        className               "SettingScrollSizer"
         style                   DialogListButton
-        navUp                   SwchAccessibility
-        navDown                 SwitchChatMessages
+        navUp                   SwchMuteVoiceChat  [$GAMECONSOLE]
+        navUp                   SwchAccessibility  [!$GAMECONSOLE]
+        navDown                 SwchChatTextToSpeech
 
-        pin_to_sibling          SwchAccessibility
+        pin_to_sibling          SwchAccessibility [$PC && !$NX_UI_PC]
+        pin_to_sibling          SwchMuteVoiceChat [!$PC || $NX_UI_PC]
         pin_corner_to_sibling   TOP_LEFT
         pin_to_sibling_corner   BOTTOM_LEFT
 
@@ -587,18 +692,21 @@
         childGroupAlways        ChoiceButtonAlways
     }
 
-    SwitchChatMessages [!$GAMECONSOLE]
+    SwchChatTextToSpeech
     {
         ControlName				RuiButton
         InheritProperties		SwitchButton
+        className               "SettingScrollSizer"
         style					DialogListButton
         navUp					SwchChatSpeechToText
-        navDown                 SwitchShowHealthbars
         ConVar					"hudchat_play_text_to_speech"
         list
         {
-            "#SETTING_OFF"	0
-            "#SETTING_ON"	1
+            "#SETTING_SYSTEM_DEFAULT" 0  [$PS4 || $PS5]
+            "#SETTING_CONSOLE_DEFAULT" 0 [$DURANGO || $XB5]
+            "#SETTING_OFF"  0            [!$DURANGO && !$XB5 && !$PS4 && !$PS5]
+            "#SETTING_ON"   1
+            "#SETTING_OFF"  2            [$DURANGO || $XB5 || $PS4 || $PS5]
         }
 
         visible                 1 [$ENGLISH]
@@ -607,51 +715,8 @@
         pin_to_sibling			SwchChatSpeechToText
         pin_corner_to_sibling	TOP_LEFT
         pin_to_sibling_corner	BOTTOM_LEFT
-        childGroupAlways        ChoiceButtonAlways
-    }
-    
-	SwitchShowHealthbars
-	{
-        ControlName				RuiButton
-        InheritProperties		SwitchButton
-        style					DialogListButton
-        navUp					SwitchChatMessages
-        navDown                 SwitchShowMotd
-        
-        ConVar					"enable_healthbar"
-        
-		list
-        {
-            "#SETTING_OFF"	0
-            "#SETTING_ON"	1
-        }
-
-        pin_to_sibling			SwitchChatMessages
-        pin_corner_to_sibling	TOP_LEFT
-        pin_to_sibling_corner	BOTTOM_LEFT
-        childGroupAlways        MultiChoiceButtonAlways
-	}
-	
-	
-	SwitchShowMotd
-    {
-        ControlName				RuiButton
-        InheritProperties		SwitchButton
-        style					DialogListButton
-        navUp					SwitchShowHealthbars [!$GAMECONSOLE]
-        ConVar					"motd_enable"
-        list
-        {
-            "#SETTING_OFF"	0
-            "#SETTING_ON"	1
-        }
-
-        visible                 1
-
-        pin_to_sibling			SwitchShowHealthbars [!$GAMECONSOLE]
-        pin_corner_to_sibling	TOP_LEFT
-        pin_to_sibling_corner	BOTTOM_LEFT
-        childGroupAlways        ChoiceButtonAlways
+        childGroupAlways        MultiChoiceButtonAlways [$DURANGO || $XB5 || $PS4 || $PS5]
+        childGroupAlways        ChoiceButtonAlways [!$DURANGO && !$XB5 && !$PS4 && !$PS5]
     }
 
 	PanelBottom
@@ -665,8 +730,7 @@
 		visible					1
 		enabled 				0
 
-        pin_to_sibling			SwchChatSpeechToText [$GAMECONSOLE]
-        pin_to_sibling			SwitchChatMessages [!$GAMECONSOLE]
+        pin_to_sibling			SwchChatTextToSpeech
         pin_corner_to_sibling	TOP_LEFT
         pin_to_sibling_corner	TOP_LEFT
 	}
