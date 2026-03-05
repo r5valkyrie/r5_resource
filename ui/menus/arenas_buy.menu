@@ -131,7 +131,7 @@ resource/ui/menus/arenas_buy.menu
             visible					1
             enabled 				1
             scaleImage				1
-			rui                     "ui/arenas_airdrop_preview.rpak"
+			//rui                     "ui/arenas_airdrop_preview.rpak"
 			drawColor				"255 255 255 255"
 
 			pin_to_sibling			Weapon_3_2
@@ -155,7 +155,7 @@ resource/ui/menus/arenas_buy.menu
 			visible					1
 			enabled 				1
 			scaleImage				1
-			rui             		"ui/arenas_player_loadout.rpak"
+			//rui             		"ui/arenas_player_loadout.rpak"
 			drawColor				"255 255 255 255"
 
 			pin_to_sibling			Blur
@@ -176,7 +176,7 @@ resource/ui/menus/arenas_buy.menu
 			visible			1
 			enabled 		1
 			scaleImage		1
-			rui             "ui/arenas_player_loadout.rpak"
+			//rui             "ui/arenas_player_loadout.rpak"
 			drawColor		"255 255 255 255"
 
 			pin_to_sibling			Player_Loadout
@@ -197,7 +197,7 @@ resource/ui/menus/arenas_buy.menu
 			visible			1
 			enabled 		1
 			scaleImage		1
-			rui             "ui/arenas_player_loadout.rpak"
+			//rui             "ui/arenas_player_loadout.rpak"
 			drawColor		"255 255 255 255"
 
 			pin_to_sibling			SquadMate_Loadout_0
@@ -322,7 +322,7 @@ resource/ui/menus/arenas_buy.menu
 
 			drawColor	"255 255 255 255"
 			visible     1
-			rui         "ui/arenas_basic_image.rpak"
+			//rui         "ui/arenas_basic_image.rpak"
 
 			ruiArgs
 			{
@@ -348,7 +348,7 @@ resource/ui/menus/arenas_buy.menu
 
             drawColor	"255 255 255 255"
             visible     1
-            rui         "ui/arenas_basic_image.rpak"
+            //rui         "ui/arenas_basic_image.rpak"
 
             ruiArgs
             {

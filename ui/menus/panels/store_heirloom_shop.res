@@ -104,21 +104,7 @@
 
 	MoreInfoButton
 	{
-		ControlName				RuiButton
-        classname               "MenuButton"
 
-        pin_to_sibling			HeirloomList
-        pin_corner_to_sibling	TOP_RIGHT
-        pin_to_sibling_corner	BOTTOM_RIGHT
-        xpos					0
-        ypos					36
-        wide					200
-        wide_nx_handheld		400		[$NX]
-        tall					42
-        tall_nx_handheld		84		[$NX]
-
-        visible                 1
-        rui					    "ui/collection_event_about_button.rpak"
 	}
 
 	OfferButton1

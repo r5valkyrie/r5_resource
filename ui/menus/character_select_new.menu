@@ -52,6 +52,34 @@ scripts/resource/ui/menus/character_select_new.menu
             visible					0
         }
 
+                     
+		    TabsBackground
+		    {
+		       ControlName           RuiPanel
+		       InheritProperties     TabsBackgroundIcon
+
+		       zpos                  999
+
+		       pin_to_sibling           Screen
+		       pin_corner_to_sibling    TOP
+		       pin_to_sibling_corner    TOP
+		    }
+		    TabsCommon
+		    {
+		       ControlName           CNestedPanel
+		       classname             "TabsCommonClass"
+		       zpos                  1000
+		       ypos                  0
+		       wide                  %100
+		       tall                  60
+		       visible               1
+		       controlSettingsFile   "resource/ui/menus/panels/common_tabs_icon.res"
+
+		       pin_to_sibling         Screen
+		       pin_corner_to_sibling    TOP
+		       pin_to_sibling_corner    TOP
+		    }
+        
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         PortraitsPanel
@@ -73,15 +101,15 @@ scripts/resource/ui/menus/character_select_new.menu
             proportionalToParent    1
         }
 
-        DetailsRuiPanel
+		calloutRuiPanel
         {
             ControlName             RuiPanel
-            rui                     "ui/character_details_panel.rpak"
+            rui                     "ui/character_select_callout.rpak"
             wide			        %100
             tall			        %100
             xpos                    0
             ypos                    0
-            zpos                    500
+            zpos                    50
             visible                 0
             enabled                 1
         }
@@ -90,15 +118,29 @@ scripts/resource/ui/menus/character_select_new.menu
         {
             ControlName             RuiPanel
             rui                     "ui/character_select_button_hints.rpak"
-            wide			        %100
+            wide			        1920
             tall			        %100
             xpos                    0
             ypos                    0
             zpos                    501
             visible                 1
             enabled                 1
-        }
 
+            pin_to_sibling			Screen
+            pin_corner_to_sibling	CENTER
+            pin_to_sibling_corner	CENTER
+        }
+		RespawnStatus
+        {
+            ControlName				CNestedPanel
+            classname		        RespawnStatusRui
+            xpos					0
+            ypos					-15
+            wide					f0
+            tall					f0
+            visible					1
+            controlSettingsFile		"resource/ui/menus/panels/respawn_status.res"
+        }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -134,7 +176,7 @@ scripts/resource/ui/menus/character_select_new.menu
             zpos                    1000
 
             //wide                    432
-            //tall                    140
+            tall                    200
         }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

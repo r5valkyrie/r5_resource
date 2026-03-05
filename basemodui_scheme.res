@@ -269,7 +269,6 @@ Scheme
 		Dialog.PinFromLeft					75	[$GAMECONSOLE && (!$GAMECONSOLEWIDE || $ANAMORPHIC)]
 		Dialog.PinFromLeft					100	[!$GAMECONSOLE && $WIN32WIDE]
 		Dialog.PinFromLeft					75	[!$GAMECONSOLE && !$WIN32WIDE]
-		Dialog.ButtonFont					GameUIButtonsMini
 
 		// Other properties defined in SliderControl.res
 		SliderControl.InsetX				-68
@@ -1754,6 +1753,16 @@ Scheme
             rui                     "ui/settings_details.rpak"
         }
 
+        SettingsDetailsFiringRangePanel
+        {
+            xpos				    564//-1568
+            ypos					-128//-64
+            wide					548
+            tall					836//740
+            visible					1
+            rui                     "ui/settings_details_firing_range.rpak"
+        }
+
 		WideButton
 		{
 			wide					1040
@@ -1926,6 +1935,32 @@ Scheme
             cursorVelocityModifier  0.7
             sound_accept            "UI_Menu_LegendTab_Select"
         }
+        TabButtonIcon
+        {
+            classname				TabButtonClass
+            wide					220
+            wide_nx_handheld		280			[$NX || $NX_UI_PC]
+            tall					60
+            tall_nx_handheld		60			[$NX || $NX_UI_PC]
+            visible					1
+            enabled					1
+            style					RuiButton
+            rui						"ui/tab_button_icon.rpak"
+            labelText				""
+            cursorVelocityModifier  0.7
+            sound_accept            "UI_Menu_LegendTab_Select"
+        }
+		TabsBackgroundIcon
+	    {
+	        zpos					0
+	        wide					f0
+	        tall					60
+	        visible					1
+	        enabled					1
+	        proportionalToParent    1
+	        rui 					"ui/icon_tabs_background.rpak"
+	    }
+
 
 		TabsBackgroundShort
 	    {
@@ -1991,6 +2026,21 @@ Scheme
 			sound_accept            "UI_Menu_ArmoryTab_Select"
 		}
 
+		//chat tabs
+		TabButtonClubLobby
+        {
+            classname				TabButtonClass
+            wide					250
+            tall					60
+            polyShape               "0.0 0.0 0.831 0.0 1.0 1.0 0.169 1.0" // height / width to determine offsets
+            visible					1
+            enabled					1
+            style					RuiButton
+            rui						"ui/club_lobby_tab_button.rpak"
+            labelText				""
+            cursorVelocityModifier  0.7
+            sound_accept            "UI_Menu_LegendTab_Select"
+        }
 
 		InviteButton
 		{
@@ -2358,8 +2408,8 @@ Scheme
 		LobbyCharacterButton
 		{
             classname               CharacterButtonClass
-			wide					194
-			tall					126
+			wide					174
+			tall					113
 			visible					0
 			enabled					1
             rui						"ui/lobby_character_button.rpak"
@@ -2376,19 +2426,66 @@ Scheme
             pin_to_sibling_corner	TOP_LEFT
 		}
 
+		LobbyCharacterAssaultButton
+        {
+			InheritProperties		LobbyCharacterButton
+			classname               AssaultCharacterRoleButtonClass
+			xpos                    -108.5
+			pin_corner_to_sibling	TOP_LEFT
+            pin_to_sibling_corner	TOP_LEFT
+        }
+
+        LobbyCharacterSkirmisherButton
+        {
+            InheritProperties		LobbyCharacterButton
+            classname               SkirmisherCharacterRoleButtonClass
+            xpos                    -108.5
+            pin_corner_to_sibling	TOP_LEFT
+            pin_to_sibling_corner	TOP_LEFT
+        }
+
+        LobbyCharacterReconButton
+        {
+            InheritProperties		LobbyCharacterButton
+            classname               ReconCharacterRoleButtonClass
+            xpos                    -108.5
+            pin_corner_to_sibling	TOP_LEFT
+            pin_to_sibling_corner	TOP_LEFT
+        }
+
+        LobbyCharacterDefenseButton
+        {
+            InheritProperties		LobbyCharacterButton
+            classname               DefenseCharacterRoleButtonClass
+            xpos                    -108.5
+            pin_corner_to_sibling	TOP_LEFT
+            pin_to_sibling_corner	TOP_LEFT
+        }
+
+        LobbyCharacterSupportButton
+        {
+            InheritProperties		LobbyCharacterButton
+            classname               SupportCharacterRoleButtonClass
+            xpos                    -108.5
+            pin_corner_to_sibling	TOP_LEFT
+            pin_to_sibling_corner	TOP_LEFT
+        }
+
+
 		MatchCharacterButton
 		{
             zpos					10
-			wide					194
-			tall					126
+            wide					77//174
+            tall					88//113
 			visible					0
 			enabled					1
-            rui						"ui/character_select_class_button_new.rpak"
+            rui						"ui/character_select_class_button.rpak"
 			labelText				""
 			style					RuiButton
-			polyShape               "0.375 0.0 1.0 0.0 0.625 1.0 0.0 1.0"
+			//polyShape               "0.375 0.0 1.0 0.0 0.625 1.0 0.0 1.0"
 			rightClickEvents		1
 			enterClickEvents		0
+			middleClickEvents       1
 			sound_focus             "UI_Menu_Focus_LegendSelectScreen"
 			sound_accept			""
             cursorVelocityModifier  0.7
@@ -2396,6 +2493,46 @@ Scheme
             pin_corner_to_sibling	TOP_LEFT
             pin_to_sibling_corner	TOP_LEFT
 		}
+
+		MatchCharacterAssaultButton
+        {
+            InheritProperties		MatchCharacterButton
+            classname               AssaultCharacterRoleButtonClass
+            pin_corner_to_sibling	BOTTOM
+            pin_to_sibling_corner	CENTER
+        }
+
+        MatchCharacterSkirmisherButton
+        {
+            InheritProperties		MatchCharacterButton
+            classname               SkirmisherCharacterRoleButtonClass
+            pin_corner_to_sibling	BOTTOM
+            pin_to_sibling_corner	CENTER
+        }
+
+        MatchCharacterReconButton
+        {
+            InheritProperties		MatchCharacterButton
+            classname               ReconCharacterRoleButtonClass
+            pin_corner_to_sibling	BOTTOM
+            pin_to_sibling_corner	CENTER
+        }
+
+        MatchCharacterDefenseButton
+        {
+            InheritProperties		MatchCharacterButton
+            classname               DefenseCharacterRoleButtonClass
+            pin_corner_to_sibling	BOTTOM
+            pin_to_sibling_corner	CENTER
+        }
+
+        MatchCharacterSupportButton
+        {
+            InheritProperties		MatchCharacterButton
+            classname               SupportCharacterRoleButtonClass
+            pin_corner_to_sibling	BOTTOM
+            pin_to_sibling_corner	CENTER
+        }
 
 		StoreCharacterButton
 		{
@@ -2548,7 +2685,7 @@ Scheme
 
 		SubheaderBackgroundWide
 		{
-            wide 					%60
+            wide					1040
 			tall					45
 			visible					1
 			image 					"ui/menu/common/menu_header_bar_wide"
@@ -2793,6 +2930,7 @@ Scheme
                 pin_corner_to_sibling	RIGHT
                 pin_to_sibling			FULL
                 pin_to_sibling_corner	RIGHT
+                use_pin_locale_direction	1
             }
 
             LeftButton
@@ -2814,6 +2952,7 @@ Scheme
                 pin_corner_to_sibling	TOP_RIGHT
                 pin_to_sibling			RightButton
                 pin_to_sibling_corner	TOP_LEFT
+                use_pin_locale_direction	1
             }
 
             ValueButton
@@ -2830,6 +2969,7 @@ Scheme
                 pin_corner_to_sibling	TOP_RIGHT
                 pin_to_sibling			LeftButton
                 pin_to_sibling_corner	TOP_LEFT
+                use_pin_locale_direction	1
             }
 		}
 
@@ -2864,6 +3004,7 @@ Scheme
                 pin_corner_to_sibling	RIGHT
                 pin_to_sibling			FULL
                 pin_to_sibling_corner	RIGHT
+                use_pin_locale_direction	1
 
                 cursorVelocityModifier  0.7
             }
@@ -2887,6 +3028,7 @@ Scheme
                 pin_corner_to_sibling	TOP_RIGHT
                 pin_to_sibling			ValueButton
                 pin_to_sibling_corner	TOP_LEFT
+                use_pin_locale_direction	1
 
                 cursorVelocityModifier  0.7
             }
@@ -2906,6 +3048,7 @@ Scheme
                 pin_corner_to_sibling	TOP_RIGHT
                 pin_to_sibling			RightButton
                 pin_to_sibling_corner	TOP_LEFT
+                use_pin_locale_direction	1
             }
 		}
 

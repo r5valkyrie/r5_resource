@@ -32,6 +32,7 @@ Resource/UI/SliderControl.res
 		pin_to_sibling          BtnDropButton
 		pin_corner_to_sibling	RIGHT
 		pin_to_sibling_corner	RIGHT
+		use_pin_locale_direction	1
 	}
 
 	PrgValue

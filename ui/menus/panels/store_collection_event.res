@@ -48,24 +48,7 @@
 
 	AboutButton
 	{
-	    ControlName			    RuiButton
-	    classname               "MenuButton"
 
-	    pin_corner_to_sibling	TOP_LEFT
-	    pin_to_sibling			BigInfoBox
-	    pin_to_sibling_corner	TOP_LEFT
-	    xpos				    -50
-	    ypos				    -360
-	    wide				    530
-	    tall				    50
-
-	    visible                 1
-	    rui					    "ui/collection_event_about_button.rpak"
-	    cursorVelocityModifier  0.7
-	    sound_focus             "UI_Menu_Focus_Large"
-	    navDown                 Purchase1PackButton
-	    navRight                OpenPackButton
-        tabPosition				1
 	}
 
 	Purchase1PackButton

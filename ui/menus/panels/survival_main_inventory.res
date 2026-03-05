@@ -1,16 +1,17 @@
-scripts/resource/ui/menus/panels/survival_main_inventory.res
+Resource/UI/menus/panels/survival_main_inventory.res
 {
     PanelFrame
     {
-		ControlName				ImagePanel
-		wide					f0
-		tall					f0
-		visible				    0
+        ControlName				ImagePanel
+        xpos					0
+        ypos					0
+        wide					%100
+        tall					%100
+        visible					1
+        enabled 				1
         scaleImage				1
         image					"vgui/HUD/white"
-        drawColor				"255 255 255 15"
-
-        proportionalToParent    1
+        drawColor				"0 0 0 150"
     }
 
     Helmet
@@ -22,7 +23,9 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
         scriptID                "helmet"
 
         wide                    94
+        wide_nx_handheld        119			[$NX || $NX_UI_PC]
         tall                    120
+        tall_nx_handheld        152			[$NX || $NX_UI_PC]
 
         rightClickEvents        1
 
@@ -46,7 +49,9 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
         scriptID                "armor"
 
         wide                    94
+        wide_nx_handheld        119			[$NX || $NX_UI_PC]
         tall                    120
+        tall_nx_handheld        152			[$NX || $NX_UI_PC]
 
         rightClickEvents        1
 
@@ -71,13 +76,17 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
         scriptID                "incapshield"
         visible                 1
 
+
         wide                    94
+        wide_nx_handheld        119			[$NX || $NX_UI_PC]
         tall                    120
+        tall_nx_handheld        152			[$NX || $NX_UI_PC]
 
         rightClickEvents        1
 
         xpos                    8
         ypos                    25
+        ypos_nx_handheld        0			[$NX || $NX_UI_PC]
 
         navUp                   GridButton1x3
         navLeft                 Armor
@@ -87,7 +96,6 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
         pin_corner_to_sibling   TOP
         pin_to_sibling_corner   BOTTOM
     }
-
     BackPack
     {
         ControlName             RuiButton
@@ -97,7 +105,9 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
         scriptID                "backpack"
 
         wide                    94
+        wide_nx_handheld        119			[$NX || $NX_UI_PC]
         tall                    120
+        tall_nx_handheld        152			[$NX || $NX_UI_PC]
 
         rightClickEvents        1
 
@@ -106,13 +116,46 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
 
         navUp                   GridButton1x4
         navLeft                 IncapShield
-                   
         navRight                GadgetSlot
+                  
+                                         
+      
+
+                            
+                                                   
+      
 
         pin_to_sibling          IncapShield
         pin_corner_to_sibling   LEFT
         pin_to_sibling_corner   RIGHT
     }
+
+                  
+             
+     
+                                         
+                                                       
+
+                                                   
+                                           
+
+                                  
+                                                        
+                                          
+
+                                 
+
+                                 
+                                 
+
+                                             
+                                        
+
+                                        
+                                    
+                                     
+     
+      
 
     GadgetSlot
     {
@@ -123,14 +166,16 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
         scriptID                "gadgetslot"
 
         wide                    94
-        wide_nx_handheld        119			[$NX]
+        wide_nx_handheld        119			[$NX || $NX_UI_PC]
         tall                    120
-        tall_nx_handheld        152			[$NX]
+        tall_nx_handheld        152			[$NX || $NX_UI_PC]
 
         rightClickEvents        1
-
+                                    
+                                   
+              
         xpos                    100
-        xpos_nx_handheld        38			[$NX]
+        xpos_nx_handheld        38			[$NX || $NX_UI_PC]
         ypos                    0
 
         navUp                   GridButton1x5
@@ -140,13 +185,44 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
         pin_corner_to_sibling   LEFT
         pin_to_sibling_corner   RIGHT
     }
+                            
+                       
+     
+                                         
+                                                       
+
+                                                   
+                                                 
+
+                                  
+                                                        
+                                   
+                                                        
+                                          
+
+                                 
+
+                                  
+                                 
+
+                                             
+                                        
+
+                                        
+                                    
+                                     
+     
+      
+
     MainWeapon0
     {
         ControlName             RuiButton
         InheritProperties       SurvivalWeaponButtonWide
 
         wide					510
+        wide_nx_handheld		640			[$NX || $NX_UI_PC]
         tall					310
+        tall_nx_handheld		390			[$NX || $NX_UI_PC]
 
         classname               "SurvivalEquipment"
         scriptID                "main_weapon0"
@@ -158,7 +234,9 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
         rightClickEvents        1
 
         xpos                    -40
+        xpos_nx_handheld        -20			[$NX || $NX_UI_PC]
         ypos                    -80
+        ypos_nx_handheld        -45			[$NX || $NX_UI_PC]
         zpos                    1
 
         pin_to_sibling          PanelFrame
@@ -191,25 +269,28 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
     MainWeaponChargeUp0
     {
         ControlName             RuiButton
-        InheritProperties       SurvivalWeaponButtonWide
+        InheritProperties       SurvivalAttachmentButton
         rui						"ui/survival_weapon_chargeup_ping_button.rpak"
 
-        wide					280
-        tall					32
+        wide					84
+        tall					84
 
 		classname               "RequestButton"
         scriptID                "main_weapon0"
 
-        xpos                    0
-        ypos                    30
-        zpos                    0
+        xpos                    -12
+        ypos                    -40
+        zpos                    3
         visible                 0
         cursorPriority          1
 
+        navDown                 MainWeapon0
+
         pin_to_sibling          MainWeapon0
-        pin_corner_to_sibling   TOP_RIGHT
-        pin_to_sibling_corner   TOP_RIGHT
+        pin_corner_to_sibling   TOP_LEFT
+        pin_to_sibling_corner   TOP_LEFT
     }
+
     MainWeapon0_Name
     {
         ControlName				Label
@@ -409,13 +490,16 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
         pin_corner_to_sibling   TOP_LEFT
         pin_to_sibling_corner   TOP_RIGHT
     }
+
     MainWeapon1
     {
         ControlName             RuiButton
         InheritProperties       SurvivalWeaponButtonWide
 
         wide					510
+        wide_nx_handheld		640			[$NX || $NX_UI_PC]
         tall					310
+        tall_nx_handheld		390			[$NX || $NX_UI_PC]
 
         classname               "SurvivalEquipment"
         scriptID                "main_weapon1"
@@ -427,7 +511,9 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
         navLeft                 MainWeapon0
 
         xpos                    40
+        xpos_nx_handheld        20			[$NX || $NX_UI_PC]
         ypos                    -80
+        ypos_nx_handheld        -45			[$NX|| $NX_UI_PC]
         zpos                    1
 
         pin_to_sibling          PanelFrame
@@ -463,22 +549,23 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
         InheritProperties       SurvivalWeaponButtonWide
         rui						"ui/survival_weapon_chargeup_ping_button.rpak"
 
-        wide					280
-        tall					32
+        wide					84
+        tall					84
 
 		classname               "RequestButton"
         scriptID                "main_weapon1"
 
-        xpos                    0
-        ypos                    30
-        zpos                    0
+        xpos                    -12
+        ypos                    -40
+        zpos                    3
         visible                 0
         cursorPriority          1
 
         pin_to_sibling          MainWeapon1
-        pin_corner_to_sibling   TOP_RIGHT
-        pin_to_sibling_corner   TOP_RIGHT
+        pin_corner_to_sibling   TOP_LEFT
+        pin_to_sibling_corner   TOP_LEFT
     }
+
     MainWeapon1_Barrel
     {
         ControlName             RuiButton
@@ -678,15 +765,32 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
                                               
 
                                  
+
+                                  
+                                                       
+                                 
+                                 
+
+                                           
+                                    
+                                     
+     
+      
+
 	BackpackGrid
 	{
 		ControlName				CNestedPanel
-        wide					1000
+        ypos_nx_handheld		20			[$NX || $NX_UI_PC]
+        xpos_nx_handheld		50			[$NX || $NX_UI_PC]
+
+		wide					1000
+        wide_nx_handheld		1143		[$NX || $NX_UI_PC]
 		tall					220
+		tall_nx_handheld		280			[$NX || $NX_UI_PC]
 		visible					1
 		enabled                 1
 		tabPosition				1
-		controlSettingsFile		"resource/ui/menus/panels/survival_quick_inventory_grid.res"
+		controlSettingsFile		"Resource/UI/menus/panels/survival_quick_inventory_grid.res"
 
         xpos                    0
         ypos                    50
@@ -697,6 +801,7 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
         pin_corner_to_sibling   TOP
         pin_to_sibling_corner   CENTER
 	}
+
 
     StowedWeaponAnchor
     {
@@ -739,7 +844,9 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
         ControlName             RuiButton
 
         wide					840
+        wide_nx_handheld		914			[$NX || $NX_UI_PC]
 		tall					230
+		tall_nx_handheld		280			[$NX || $NX_UI_PC]
 
         classname               "DropSlot"
         scriptID                "inventory"
@@ -762,12 +869,15 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
         ControlName             RuiPanel
 
         wide					13
+        wide_nx_handheld		17			[$NX || $NX_UI_PC]
 		tall					240
+		tall_nx_handheld		280			[$NX || $NX_UI_PC]
 
         rui                     "ui/basic_image.rpak"
 
         xpos                    10
         ypos                    -13
+        ypos_nx_handheld        -26			[$NX || $NX_UI_PC]
         zpos                    0
 
         visible                 1
@@ -784,12 +894,15 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
         ControlName             RuiPanel
 
         wide					13
+        wide_nx_handheld		17			[$NX || $NX_UI_PC]
 		tall					240
+		tall_nx_handheld		280			[$NX || $NX_UI_PC]
 
         rui                     "ui/basic_image.rpak"
 
         xpos                    10
         ypos                    -13
+        ypos_nx_handheld        -26			[$NX || $NX_UI_PC]
         zpos                    0
 
         visible                 1
@@ -806,12 +919,15 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
         ControlName             RuiPanel
 
         wide					816
+        wide_nx_handheld		930			[$NX || $NX_UI_PC]
 		tall					220
+		tall_nx_handheld		280			[$NX || $NX_UI_PC]
 
         rui                     "ui/basic_image.rpak"
 
         xpos                    0
         ypos                    -13
+        ypos_nx_handheld		-26			[$NX || $NX_UI_PC]
         zpos                    0
 
         visible                 1
@@ -828,7 +944,9 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
         ControlName             RuiPanel
 
         wide					440
+        wide_nx_handheld		914			[$NX || $NX_UI_PC]
 		tall					220
+		tall_nx_handheld		280			[$NX || $NX_UI_PC]
 
         rui                     "ui/basic_masked_image.rpak"
 
@@ -850,7 +968,9 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
         ControlName             RuiPanel
 
         wide					440
+        wide_nx_handheld		914			[$NX || $NX_UI_PC]
 		tall					220
+		tall_nx_handheld		280			[$NX || $NX_UI_PC]
 
         rui                     "ui/basic_masked_image.rpak"
 
@@ -872,7 +992,9 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
         ControlName             RuiButton
 
         wide					522
+        wide_nx_handheld		663			[$NX || $NX_UI_PC]
         tall					302
+        tall_nx_handheld		384			[$NX|| $NX_UI_PC]
 
         classname               "DropSlot"
         scriptID                "main_weapon0"
@@ -895,7 +1017,9 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
         ControlName             RuiButton
 
         wide					522
+        wide_nx_handheld		663			[$NX || $NX_UI_PC]
         tall					302
+        tall_nx_handheld		384			[$NX || $NX_UI_PC]
 
         classname               "DropSlot"
         scriptID                "main_weapon1"
@@ -912,6 +1036,31 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
         pin_corner_to_sibling   TOP_LEFT
         pin_to_sibling_corner   TOP_LEFT
     }
+
+                 
+                        
+     
+                                         
+
+                    
+                    
+
+                                          
+                                              
+                                                             
+
+                                 
+                                 
+                                   
+
+                                 
+                                 
+
+                                           
+                                        
+                                        
+     
+      
 
     MouseDropGroundLeft
     {
@@ -959,13 +1108,12 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
         pin_to_sibling_corner   TOP_RIGHT
     }
 
-
-
     PlayerInfo
     {
 	    ControlName				RuiPanel
         ypos                    28
-        xpos                    50
+        ypos_nx_handheld        -20			[$NX || $NX_UI_PC]
+		xpos                    50
         wide					468
         tall					91
         visible					1
@@ -974,8 +1122,8 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
         rui                     "ui/inventory_player_info.rpak"
         zpos                    20
 
-        pin_to_sibling			BackpackGrid
-        pin_corner_to_sibling	TOP_RIGHT
+        pin_to_sibling						BackpackGrid
+        pin_corner_to_sibling				TOP_RIGHT
         pin_to_sibling_corner				BOTTOM_LEFT
     }
 
@@ -986,9 +1134,13 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
 	    scriptID                1
 
         ypos                    50
+        ypos_nx_handheld        35			[$NX || $NX_UI_PC]
         xpos                    0
+        xpos_nx_handheld        100			[$NX || $NX_UI_PC]
         wide					440
+        wide_nx_handheld		704			[$NX || $NX_UI_PC]
         tall					50
+        tall_nx_handheld		80			[$NX || $NX_UI_PC]
         visible					1
         enabled 				1
         scaleImage				1
@@ -1007,9 +1159,12 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
 	    scriptID                0
 
         ypos                    10
+        ypos_nx_handheld        35			[$NX || $NX_UI_PC]
         xpos                    0
         wide					440
+        wide_nx_handheld		704			[$NX|| $NX_UI_PC]
         tall					50
+        tall_nx_handheld		80			[$NX|| $NX_UI_PC]
         visible					1
         enabled 				1
         scaleImage				1
@@ -1023,9 +1178,14 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
 
     PlayerUltimate
     {
-	    ControlName				RuiPanel
+                              
+			ControlName				RuiButton
+       
+                            
+                                    
 
         ypos                    17
+        ypos_nx_handheld        40		[$NX || $NX_UI_PC]
         xpos                    80
         wide					130
         tall					109
@@ -1045,7 +1205,9 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
         ControlName             RuiPanel
 
         wide					13
+        wide_nx_handheld		17			[$NX || $NX_UI_PC]
 		tall					110
+		tall_nx_handheld		140			[$NX || $NX_UI_PC ]
 
         rui                     "ui/basic_image.rpak"
 
@@ -1067,7 +1229,9 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
         ControlName             RuiPanel
 
         wide					13
+        wide_nx_handheld		17			[$NX || $NX_UI_PC]
 		tall					110
+		tall_nx_handheld		140			[$NX|| $NX_UI_PC]
 
         rui                     "ui/basic_image.rpak"
 
@@ -1079,7 +1243,11 @@ scripts/resource/ui/menus/panels/survival_main_inventory.res
         enabled                 0
         scaleImage              1
 
-        pin_to_sibling          BackPack
+                  
+                                         
+     
+		pin_to_sibling			BackPack
+      
         pin_corner_to_sibling   LEFT
         pin_to_sibling_corner   RIGHT
     }
