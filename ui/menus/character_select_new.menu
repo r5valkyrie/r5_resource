@@ -1,4 +1,4 @@
-scripts/resource/ui/menus/character_select_new.menu
+resource/ui/menus/character_select_new.menu
 {
 	menu
 	{
