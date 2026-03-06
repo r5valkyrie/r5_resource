@@ -1,19 +1,15 @@
 resource/ui/menus/panels/survival_quick_inventory.res
 {
 	PanelFrame
-	{
-		ControlName				ImagePanel
-
-		zpos                    0
-		wide					%100
-		tall					%100
-		visible					0
-		enabled 				1
-		scaleImage				1
-		image					"vgui/HUD/white"
-		drawColor				"0 0 0 200"
-	}
-
+    {
+            ControlName				Label
+            xpos					0
+            ypos					0
+            wide					%100
+            tall					%100
+            labelText				""
+            visible				    1
+    }
 	BUSYBLOCKER
 	{
 		ControlName				ImagePanel

@@ -2,16 +2,13 @@ Resource/UI/menus/panels/survival_main_inventory.res
 {
     PanelFrame
     {
-        ControlName				ImagePanel
-        xpos					0
-        ypos					0
-        wide					%100
-        tall					%100
-        visible					1
-        enabled 				1
-        scaleImage				1
-        image					"vgui/HUD/white"
-        drawColor				"0 0 0 150"
+	    ControlName				Label
+	    xpos					0
+	    ypos					0
+	    wide					%100
+	    tall					%100
+	    labelText				""
+	    visible				    1
     }
 
     Helmet
@@ -1127,11 +1124,11 @@ Resource/UI/menus/panels/survival_main_inventory.res
         pin_to_sibling_corner				BOTTOM_LEFT
     }
 
-    TeammateInfo1
+    TeammateInfo0
     {
 	    ControlName				RuiPanel
 
-	    scriptID                1
+	    scriptID                0
 
         ypos                    50
         ypos_nx_handheld        35			[$NX || $NX_UI_PC]
@@ -1152,11 +1149,11 @@ Resource/UI/menus/panels/survival_main_inventory.res
         pin_to_sibling_corner	TOP_LEFT
     }
 
-    TeammateInfo0
+    TeammateInfo1
     {
 	    ControlName				RuiPanel
 
-	    scriptID                0
+	    scriptID                1
 
         ypos                    10
         ypos_nx_handheld        35			[$NX || $NX_UI_PC]
@@ -1171,7 +1168,7 @@ Resource/UI/menus/panels/survival_main_inventory.res
         rui                     "ui/unitframe_survival_inventory.rpak"
         zpos                    20
 
-        pin_to_sibling			TeammateInfo1
+        pin_to_sibling			TeammateInfo0
         pin_corner_to_sibling	BOTTOM_LEFT
         pin_to_sibling_corner	TOP_LEFT
     }
