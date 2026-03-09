@@ -5,8 +5,9 @@
     {
         ControlName             SliderControl
         InheritProperties       SliderControl
+        className               "SettingScrollSizer"
         tabPosition             1
-        navDown                 SwchAudioLanguage
+        navDown                 SwchOutputDevice
         conCommand              "sound_volume"
         minValue                0.0
         maxValue                1.0
@@ -15,47 +16,79 @@
         showLabel               3
         ypos                    0
     }
+    SwchOutputDevice
+    {
+        ControlName				RuiButton
+        InheritProperties		SwitchButton
+        className               "SettingScrollSizer"
+        style					DialogListButton
+        navUp					SldMasterVolume
+        navDown					SwchSpeakerConfig
+        ConVar                  "miles_output_device"
+        // list is populated by code
+        
+        pin_to_sibling			SldMasterVolume
+        pin_corner_to_sibling	TOP_LEFT
+        pin_to_sibling_corner	BOTTOM_LEFT
+
+        childGroupAlways        MultiChoiceButtonAlways
+    }
+    SwchSpeakerConfig
+    {
+        ControlName             RuiButton
+        InheritProperties       SwitchButton
+        className               "SettingScrollSizer"
+        style                   DialogListButton
+        navUp                   SwchOutputDevice
+        navDown                 SwchAudioLanguage
+        ConVar                  "miles_channels"
+        // list is populated by code
+
+        pin_to_sibling	        SwchOutputDevice
+        pin_corner_to_sibling   TOP_LEFT
+        pin_to_sibling_corner   BOTTOM_LEFT
+
+        childGroupAlways        MultiChoiceButtonAlways
+    }
+
+
     SwchAudioLanguage
     {
         ControlName             RuiButton
         InheritProperties       SwitchButton
+        className               "SettingScrollSizer"
         style                   DialogListButton
         navUp                   SwchSpeakerConfig
+        navDown                 SwchInputDevice
         ConVar                  "miles_language"
         list
         {
-            //"#SETTING_DEFAULT"          ""
+            "#SETTING_DEFAULT"          ""
             "#GAMEUI_LANGUAGE_ENGLISH"  "english"
-            "#GAMEUI_LANGUAGE_FRENCH"  "french"
-            "#GAMEUI_LANGUAGE_GERMAN"  "german"
-            "#GAMEUI_LANGUAGE_ITALIAN"  "italian"
-            "#GAMEUI_LANGUAGE_JAPANESE"  "japanese"
-            "#GAMEUI_LANGUAGE_KOREAN"  "korean"
-            "Chinese"  "mandarin"
-            "#GAMEUI_LANGUAGE_POLISH"  "polish"
-            "#GAMEUI_LANGUAGE_RUSSIAN"  "russian"
-            "#GAMEUI_LANGUAGE_SPANISH"  "spanish"
         }
 
         pin_to_sibling          SwchSpeakerConfig
         pin_corner_to_sibling   TOP_LEFT
         pin_to_sibling_corner   BOTTOM_LEFT
 
-        visible                 1
+        visible                 0 //[$ENGLISH || $PORTUGUESE || $TCHINESE]
+        //visible                 1 [!$ENGLISH && !$PORTUGUESE && !$TCHINESE]
 
-        childGroupAlways        MultiChoiceButtonAlways
+        childGroupAlways        ChoiceButtonAlways
     }
 
     VoiceChatHeader
     {
         ControlName				ImagePanel
         InheritProperties		SubheaderBackgroundWide
+        className               "SettingScrollSizer"
         xpos					0
         ypos					6
-        pin_to_sibling			SldMasterVolume //[$ENGLISH || $PORTUGUESE || $TCHINESE]
+        pin_to_sibling			SwchSpeakerConfig //[$ENGLISH || $PORTUGUESE || $TCHINESE]
         //pin_to_sibling			SwchAudioLanguage [!$ENGLISH && !$PORTUGUESE && !$TCHINESE]
         pin_corner_to_sibling	TOP_LEFT
         pin_to_sibling_corner	BOTTOM_LEFT
+        use_pin_locale_direction    1
     }
     VoiceChatHeaderText
     {
@@ -64,15 +97,34 @@
         pin_to_sibling			VoiceChatHeader
         pin_corner_to_sibling	LEFT
         pin_to_sibling_corner	LEFT
+        use_pin_locale_direction    1
         labelText				"#MENU_VOICE_CHAT"
     }
+    SwchInputDevice
+    {
+        ControlName				RuiButton
+        InheritProperties		SwitchButton
+        className               "SettingScrollSizer"
+        style					DialogListButton
+        navUp					SwchAudioLanguage
+        navDown					SwchPushToTalk
+        ConVar                  "voice_input_device"
+        // list is populated by code
+        
+        pin_to_sibling			VoiceChatHeader
+        pin_corner_to_sibling	TOP_LEFT
+        pin_to_sibling_corner	BOTTOM_LEFT
+        use_pin_locale_direction    1
 
+        childGroupAlways        MultiChoiceButtonAlways
+    }
     SwchPushToTalk
     {
         ControlName             RuiButton
         InheritProperties       SwitchButton
+        className               "SettingScrollSizer"
         style                   DialogListButton
-        navUp                   SwchAudioLanguage
+        navUp                   SwchInputDevice
         navDown                 SldOpenMicSensitivity
         ConVar                  "TalkIsStream"
         list
@@ -81,7 +133,7 @@
             "#SETTING_OPENMIC"  1
         }
 
-        pin_to_sibling          VoiceChatHeader
+        pin_to_sibling          SwchInputDevice
         pin_corner_to_sibling   TOP_LEFT
         pin_to_sibling_corner   BOTTOM_LEFT
 
@@ -91,6 +143,7 @@
     {
         ControlName             SliderControl
         InheritProperties       SliderControl
+        className               "SettingScrollSizer"
         navUp                   SwchPushToTalk
         navDown                 SldVoiceChatVolume
         conCommand              "speex_quiet_threshold"
@@ -99,7 +152,8 @@
         stepSize                50
         inverseFill             0
         showLabel               1
-
+		tall_nx_handheld		80 [$NX]
+		
         pin_to_sibling          SwchPushToTalk
         pin_corner_to_sibling   TOP_LEFT
         pin_to_sibling_corner   BOTTOM_LEFT
@@ -108,9 +162,11 @@
         {
             ControlName				RuiPanel
             fieldName				PrgValue
+            xpos                    50
             zpos					5
             wide					280
             tall					60
+            tall_nx_handheld		80 [$NX]
             visible					1
             enabled					1
             tabPosition				0
@@ -121,6 +177,7 @@
     {
         ControlName             SliderControl
         InheritProperties       SliderControl
+        className               "SettingScrollSizer"
         navUp                   SldOpenMicSensitivity
         navDown                 SldSFXVolume
         conCommand              "sound_volume_voice"
@@ -139,11 +196,13 @@
     {
         ControlName				ImagePanel
         InheritProperties		SubheaderBackgroundWide
+        className               "SettingScrollSizer"
         xpos					0
         ypos					6
         pin_to_sibling			SldVoiceChatVolume
         pin_corner_to_sibling	TOP_LEFT
         pin_to_sibling_corner	BOTTOM_LEFT
+        use_pin_locale_direction    1
     }
     AdvancedHeaderText
     {
@@ -152,6 +211,7 @@
         pin_to_sibling			AdvancedHeader
         pin_corner_to_sibling	LEFT
         pin_to_sibling_corner	LEFT
+        use_pin_locale_direction    1
         labelText				"#MENU_ADVANCED"
     }
 
@@ -159,6 +219,7 @@
     {
         ControlName             SliderControl
         InheritProperties       SliderControl
+        className               "SettingScrollSizer"
         navUp                   SldVoiceChatVolume
         navDown                 SldDialogueVolume
         conCommand              "sound_volume_sfx"
@@ -171,11 +232,13 @@
         pin_to_sibling          AdvancedHeader
         pin_corner_to_sibling   TOP_LEFT
         pin_to_sibling_corner   BOTTOM_LEFT
+        use_pin_locale_direction    1
     }
     SldDialogueVolume
     {
         ControlName             SliderControl
         InheritProperties       SliderControl
+        className               "SettingScrollSizer"
         navUp                   SldSFXVolume
         navDown                 SldMusicVolume
         conCommand              "sound_volume_dialogue"
@@ -193,6 +256,7 @@
     {
         ControlName             SliderControl
         InheritProperties       SliderControl
+        className               "SettingScrollSizer"
         navUp                   SldDialogueVolume
         navDown                 SldLobbyMusicVolume
         conCommand              "sound_volume_music_game"
@@ -210,6 +274,7 @@
     {
         ControlName             SliderControl
         InheritProperties       SliderControl
+        className               "SettingScrollSizer"
         navUp                   SldMusicVolume
         navDown                 SwchSoundWithoutFocus
         conCommand              "sound_volume_music_lobby"
@@ -224,13 +289,14 @@
         pin_corner_to_sibling   TOP_LEFT
         pin_to_sibling_corner   BOTTOM_LEFT
     }
+
     SwchSoundWithoutFocus
     {
         ControlName             RuiButton
         InheritProperties       SwitchButton
+        className               "SettingScrollSizer"
         style                   DialogListButton
         navUp                   SldLobbyMusicVolume
-        navDown                 SwchChatTextToSpeech
         ConVar                  "sound_without_focus"
         list
         {
@@ -242,104 +308,5 @@
         pin_corner_to_sibling   TOP_LEFT
         pin_to_sibling_corner   BOTTOM_LEFT
         childGroupAlways        ChoiceButtonAlways
-    }
-
-    SwchChatTextToSpeech
-    {
-        ControlName             RuiButton
-        InheritProperties       SwitchButton
-        style                   DialogListButton
-        navUp                   SwchSoundWithoutFocus
-        navDown                 SwchChatSpeechToText
-
-        pin_to_sibling          SwchSoundWithoutFocus
-        pin_corner_to_sibling   TOP_LEFT
-        pin_to_sibling_corner   BOTTOM_LEFT
-
-        ConVar                  "hudchat_play_text_to_speech"
-        list
-        {
-            "#SETTING_OFF"  0
-            "#SETTING_ON"   1
-        }
-
-        visible                 1 [$ENGLISH]
-        visible                 0 [!$ENGLISH]
-
-        ruiArgs
-        {
-            buttonText      "#MENU_CHAT_TEXT_TO_SPEECH"
-        }
-        clipRui                 1
-        childGroupAlways        ChoiceButtonAlways
-    }
-
-    SwchChatSpeechToText
-    {
-        ControlName             RuiButton
-        InheritProperties       SwitchButton
-        style                   DialogListButton
-        navUp                   SwchChatTextToSpeech
-        navDown                 SwchSpeakerConfig
-
-        pin_to_sibling          SwchChatTextToSpeech
-        pin_corner_to_sibling   TOP_LEFT
-        pin_to_sibling_corner   BOTTOM_LEFT
-
-        visible                 1 [$ENGLISH]
-        visible                 0 [!$ENGLISH]
-
-        ConVar                  "speechtotext_enabled"
-        list
-        {
-            "#SETTING_OFF"  0
-            "#SETTING_ON"   1
-        }
-
-        ruiArgs
-        {
-            buttonText      "#MENU_CHAT_SPEECH_TO_TEXT"
-        }
-        clipRui                 1
-        childGroupAlways        ChoiceButtonAlways
-    }
-
-    SwchSpeakerConfig
-    {
-        ControlName             RuiButton
-        InheritProperties       SwitchButton
-        style                   DialogListButton
-        navUp                   SwchChatSpeechToText
-        ypos                    40
-        ConVar                  "miles_channels"
-        visible                 1
-        enabled                 0
-        list
-        {
-            "#SETTING_ONE_CHANNEL"      1
-            "#SETTING_TWO_CHANNEL"      2
-            "#SETTING_FOUR_CHANNEL"     4
-            "#SETTING_SIX_CHANNEL"      6
-            "#SETTING_SEVEN_CHANNEL"    7
-            "#SETTING_EIGHT_CHANNEL"    8
-            "#SETTING_NINE_CHANNEL"     9
-        }
-
-        pin_to_sibling          SwchChatSpeechToText [$ENGLISH]
-        pin_to_sibling			SwchSoundWithoutFocus [!$ENGLISH]
-        pin_corner_to_sibling   TOP_LEFT
-        pin_to_sibling_corner   BOTTOM_LEFT
-    }
-    InputBlocker
-    {
-        ControlName             Label
-        zpos                    10
-        wide                    1088
-        tall                    40
-        labelText               ""
-
-        pin_to_sibling          SwchSpeakerConfig
-        pin_corner_to_sibling   TOP_LEFT
-        pin_to_sibling_corner   TOP_LEFT
     }
 }

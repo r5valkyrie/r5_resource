@@ -110,7 +110,7 @@ resource/ui/menus/clubs_manage_users.menu
 
             columns                  1
             rows                     10
-            rows_nx_handheld         6			[$NX]
+            rows_nx_handheld         6			[$NX || $NX_UI_PC]
             buttonSpacing            5
             scrollbarSpacing         0
             scrollbarOnLeft          0
@@ -123,7 +123,7 @@ resource/ui/menus/clubs_manage_users.menu
                 clipRui                  1
                 wide                     480
                 tall                     77
-                tall_nx_handheld         110			[$NX]
+                tall_nx_handheld         110			[$NX || $NX_UI_PC]
                 cursorVelocityModifier   0.7
                 //rightClickEvents         1
                 //doubleClickEvents      1

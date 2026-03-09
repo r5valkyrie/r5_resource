@@ -14,15 +14,28 @@
 		proportionalToParent    1
 	}
 
-	ToolTip
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	TeamFrame
     {
         ControlName				RuiPanel
-        InheritProperties       ToolTip
-        zpos                    999
+        classname               "TeamFrameTiny"
+        xpos					0
+        ypos                    0
+        zpos                    6
+        wide				    322
+        tall					196
+
+        visible					1
+        enabled 				1
+        scaleImage				1
+        rui                     "ui/teams_scoreboard_frame_tiny.rpak"
+        zpos                    00
+
+
+        pin_to_sibling				PanelFrame
+        pin_corner_to_sibling		TOP_LEFT
+        pin_to_sibling_corner		TOP_LEFT
     }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     TeamHeader
     {
         ControlName             RuiButton
@@ -33,7 +46,7 @@
 
         wide                    322
         tall                    48
-        rui                     "ui/private_match_game_status_header.rpak"
+        rui                     "ui/teams_score_header_tiny.rpak"
         rightClickEvents        1
         doubleClickEvents       1
 

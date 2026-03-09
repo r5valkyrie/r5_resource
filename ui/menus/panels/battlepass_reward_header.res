@@ -26,7 +26,7 @@
 		visible					0
         rui					    "ui/battle_pass_reward_box.rpak"
 
-        cursorPriority          -1
+        cursorPriority          0
 
         proportionalToParent    1
         sound_focus             ""
@@ -45,7 +45,7 @@
 		visible					0
         rui					    "ui/battle_pass_reward_box.rpak"
 
-        cursorPriority          -1
+        cursorPriority          0
 
         proportionalToParent    1
         sound_focus             ""
@@ -64,7 +64,7 @@
 		visible					0
         rui					    "ui/battle_pass_reward_box.rpak"
 
-        cursorPriority          -1
+        cursorPriority          0
 
         proportionalToParent    1
         sound_focus             ""
@@ -83,7 +83,7 @@
 		visible					0
         rui					    "ui/battle_pass_reward_box.rpak"
 
-        cursorPriority          -1
+        cursorPriority          0
 
         proportionalToParent    1
         sound_focus             ""
@@ -102,7 +102,7 @@
 		visible					0
         rui					    "ui/battle_pass_reward_box.rpak"
 
-        cursorPriority          -1
+        cursorPriority          0
 
         proportionalToParent    1
         sound_focus             ""
@@ -121,7 +121,7 @@
 		visible					0
         rui					    "ui/battle_pass_reward_box.rpak"
 
-        cursorPriority          -1
+        cursorPriority          0
 
         proportionalToParent    1
         sound_focus             ""
@@ -140,7 +140,7 @@
 		visible					0
         rui					    "ui/battle_pass_reward_box.rpak"
 
-        cursorPriority          -1
+        cursorPriority          0
 
         proportionalToParent    1
         sound_focus             ""
@@ -159,7 +159,7 @@
 		visible					0
         rui					    "ui/battle_pass_reward_box.rpak"
 
-        cursorPriority          -1
+        cursorPriority          0
 
         proportionalToParent    1
         sound_focus             ""
@@ -178,7 +178,7 @@
 		visible					0
         rui					    "ui/battle_pass_reward_box.rpak"
 
-        cursorPriority          -1
+        cursorPriority          0
 
         proportionalToParent    1
         sound_focus             ""
@@ -197,7 +197,7 @@
 		visible					0
         rui					    "ui/battle_pass_reward_box.rpak"
 
-        cursorPriority          -1
+        cursorPriority          0
 
         proportionalToParent    1
         sound_focus             ""
@@ -216,7 +216,7 @@
 		visible					0
         rui					    "ui/battle_pass_reward_box.rpak"
 
-        cursorPriority          -1
+        cursorPriority          0
 
         proportionalToParent    1
         sound_focus             ""
@@ -235,7 +235,7 @@
 		visible					0
         rui					    "ui/battle_pass_reward_box.rpak"
 
-        cursorPriority          -1
+        cursorPriority          0
 
         proportionalToParent    1
         sound_focus             ""
@@ -254,7 +254,7 @@
 		visible					0
         rui					    "ui/battle_pass_reward_box.rpak"
 
-        cursorPriority          -1
+        cursorPriority          0
 
         proportionalToParent    1
         sound_focus             ""
@@ -273,7 +273,7 @@
 		visible					0
         rui					    "ui/battle_pass_reward_box.rpak"
 
-        cursorPriority          -1
+        cursorPriority          0
 
         proportionalToParent    1
         sound_focus             ""
@@ -292,7 +292,7 @@
 		visible					0
         rui					    "ui/battle_pass_reward_box.rpak"
 
-        cursorPriority          -1
+        cursorPriority          0
 
         proportionalToParent    1
         sound_focus             ""
@@ -305,6 +305,7 @@
         wide					1
         tall					1
         visible					1
+        cursorPriority          -1
         rui					    "ui/blank_button.rpak"
     }
 
@@ -976,6 +977,7 @@
         wide					1
         tall					1
         visible					1
+        cursorPriority          -1
         rui					    "ui/blank_button.rpak"
     }
 }

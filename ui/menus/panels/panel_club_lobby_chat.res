@@ -46,6 +46,21 @@
         proportionalToParent    1
     }
 
+	CommBlockWarning
+    {
+        ControlName				RuiPanel
+    	rui                     "ui/club_comm_block_warning.rpak"
+    	xpos					80
+    	ypos					0
+    	wide					500
+    	tall					0
+		clipRui                  1
+
+		pin_to_sibling          TextEntryChat
+        pin_corner_to_sibling   BOTTOM
+        pin_to_sibling_corner   TOP
+     }
+
 	ChatGrid
     {
         ControlName             GridButtonListPanel
@@ -53,13 +68,13 @@
         xpos                    0
         ypos                    0
 
-        pin_to_sibling          PanelFrame
-        pin_corner_to_sibling   TOP
+        pin_to_sibling          CommBlockWarning
+        pin_corner_to_sibling   BOTTOM
         pin_to_sibling_corner   TOP
 
         columns                  1
         rows                     11
-        rows_nx_handheld         5			[$NX]
+        rows_nx_handheld         5			[$NX || $NX_UI_PC]
         buttonSpacing            0
         scrollbarSpacing         0
         scrollbarOnLeft          0
@@ -73,7 +88,7 @@
             clipRui                  1
             wide                     480
             tall                     58
-            tall_nx_handheld         140		[$NX]
+            tall_nx_handheld         140		[$NX || $NX_UI_PC]
             cursorVelocityModifier   0.7
             cursorPriority           20
             //rightClickEvents         1
@@ -121,7 +136,7 @@
         textAlignment			west
         ruiAsianFont            DefaultAsianFont
         ruiFont                 TitleRegularFont
-        ruiFontHeight           36
+        ruiFontHeight           28
         //ruiMinFontHeight        48
         keyboardTitle			""
         keyboardDescription		""
@@ -151,6 +166,7 @@
         rui                     "ui/generic_button.rpak"
         visible					1
         cursorVelocityModifier  0.7
+        cursorPriority          25
 
 
         proportionalToParent    1

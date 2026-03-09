@@ -1,4 +1,4 @@
-scripts/resource/ui/menus/controls_ads_pc.menu
+resource/ui/menus/controls_ads_pc.menu
 {
 	menu
 	{
@@ -145,16 +145,6 @@ scripts/resource/ui/menus/controls_ads_pc.menu
         }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        Logo
-        {
-            ControlName				RuiPanel
-			InheritProperties       Logo
-
-            pin_to_sibling			ScreenFrame
-            pin_corner_to_sibling	TOP_LEFT
-            pin_to_sibling_corner	TOP_LEFT
-        }
 
 		ButtonTooltip
 		{

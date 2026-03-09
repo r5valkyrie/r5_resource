@@ -54,7 +54,7 @@
 
         columns                  1
         rows                     9
-        rows_nx_handheld         5		[$NX]
+        rows_nx_handheld         5		[$NX || $NX_UI_PC]
         buttonSpacing            0
         scrollbarSpacing         0
         scrollbarOnLeft          0
@@ -68,7 +68,7 @@
             clipRui                  1
             wide                     480
             tall                     77
-            tall_nx_handheld         140		[$NX]
+            tall_nx_handheld         140		[$NX || $NX_UI_PC]
             cursorVelocityModifier   0.7
             //rightClickEvents         1
             //doubleClickEvents      1

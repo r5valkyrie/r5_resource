@@ -30,9 +30,9 @@
         xpos					0
         ypos					0
         wide					380
-        wide_nx_handheld		430		[$NX]
+        wide_nx_handheld		430		[$NX || $NX_UI_PC]
         tall					48
-        tall_nx_handheld		60		[$NX]
+        tall_nx_handheld		60		[$NX || $NX_UI_PC]
         labelText				""
         visible				    1
         bgcolor_override        "64 64 64 255"
@@ -49,9 +49,9 @@
     {
         ControlName				RuiPanel
         wide					380
-        wide_nx_handheld		430		[$NX]
+        wide_nx_handheld		430		[$NX || $NX_UI_PC]
         tall					48
-        tall_nx_handheld		60		[$NX]
+        tall_nx_handheld		60		[$NX || $NX_UI_PC]
         visible				    1
         rui                     "ui/club_setting_frame.rpak"
 
@@ -75,9 +75,9 @@
         xpos                    -32
         ypos                    -32
         wide					380
-        wide_nx_handheld		430		[$NX]
+        wide_nx_handheld		430		[$NX || $NX_UI_PC]
         tall					48
-        tall_nx_handheld		60		[$NX]
+        tall_nx_handheld		60		[$NX || $NX_UI_PC]
         visible					1
         enabled					1
         textHidden				0
@@ -93,6 +93,7 @@
         allowRightClickMenu		0
         allowSpecialCharacters	0
         allowAdditionalSpecialCharacters	0
+        allowUnnecessarySpaces  0
         unicode					1
         selectOnFocus           1
         cursorVelocityModifier  0.7
@@ -114,9 +115,9 @@
         xpos					0
         ypos					0
         wide					96
-        wide_nx_handheld		165		[$NX]
+        wide_nx_handheld		165		[$NX || $NX_UI_PC]
         tall					48
-        tall_nx_handheld		60		[$NX]
+        tall_nx_handheld		60		[$NX || $NX_UI_PC]
         labelText				""
         visible				    1
         bgcolor_override        "64 64 64 255"
@@ -133,9 +134,9 @@
     {
         ControlName				RuiPanel
         wide					96
-        wide_nx_handheld		165		[$NX]
+        wide_nx_handheld		165		[$NX || $NX_UI_PC]
         tall					48
-        tall_nx_handheld		60		[$NX]
+        tall_nx_handheld		60		[$NX || $NX_UI_PC]
         visible				    1
         rui                     "ui/club_setting_frame.rpak"
 
@@ -157,12 +158,12 @@
         ControlName				TextEntry
         zpos					100 // This works around input weirdness when the control is constructed by code instead of VGUI blackbox.
         xpos                    48
-        xpos_nx_handheld        38		[$NX]
+        xpos_nx_handheld        38		[$NX || $NX_UI_PC]
         ypos                    0
         wide					96
-        wide_nx_handheld		165		[$NX]
+        wide_nx_handheld		165		[$NX || $NX_UI_PC]
         tall					48
-        tall_nx_handheld		60		[$NX]
+        tall_nx_handheld		60		[$NX || $NX_UI_PC]
         visible					1
         enabled					1
         textHidden				0
@@ -177,10 +178,12 @@
         allowRightClickMenu		0
         allowSpecialCharacters	0
 		allowAdditionalSpecialCharacters	0
+        charBlackList           " "
         unicode					0
         selectOnFocus           1
         cursorVelocityModifier  0.7
         cursorPriority          20
+		makeTextUpperCase       1
 
         navLeft                 ClubNameTextEntry
         navDown                 ClubPrivacySwitch
@@ -221,7 +224,7 @@
     {
         ControlName				Label
         xpos					0
-        xpos_nx_handheld		175		[$NX]
+        xpos_nx_handheld		175		[$NX || $NX_UI_PC]
         ypos					45
         wide					%100
         tall					%50
@@ -263,9 +266,9 @@
         style                   DialogListButton
 
         wide                    526
-        wide_nx_handheld        726		[$NX]
+        wide_nx_handheld        726		[$NX || $NX_UI_PC]
         xpos                    4
-        xpos_nx_handheld        -82		[$NX]
+        xpos_nx_handheld        -82		[$NX || $NX_UI_PC]
 
         navUp                   ClubNameTextEntry
         navDown                 ClubLvlReqSwitch
@@ -317,9 +320,9 @@
         style                   DialogListButton
 
         wide                    526
-        wide_nx_handheld        726		[$NX]
+        wide_nx_handheld        726		[$NX || $NX_UI_PC]
         xpos                    4
-        xpos_nx_handheld        -82		[$NX]
+        xpos_nx_handheld        -82		[$NX || $NX_UI_PC]
 		
         navUp                   ClubPrivacySwitch
         navDown                 ClubRankReqSwitch
@@ -375,16 +378,16 @@
         style                   DialogListButton
 
         wide                    526
-        wide_nx_handheld        726		[$NX]
+        wide_nx_handheld        726		[$NX || $NX_UI_PC]
         xpos                    4
-        xpos_nx_handheld        -82		[$NX]
+        xpos_nx_handheld        -82		[$NX || $NX_UI_PC]
 		
         navUp                   ClubLvlReqSwitch
         //navDown                 SldOpenMicSensitivity
 		cursorPriority          -1
 
         list
-        {
+        {			
             "#CLUB_CREATION_RANKREQ_BRONZE"     0
             "#CLUB_CREATION_RANKREQ_SILVER"     1
             "#CLUB_CREATION_RANKREQ_GOLD"       2

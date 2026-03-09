@@ -46,6 +46,7 @@ resource/ui/menus/dialog_code_redemption.menu
             ControlName				Label
             wide					%100
             tall					360
+            tall_nx_handheld				550		[$NX || $NX_UI_PC]
             labelText				""
             bgcolor_override		"0 0 0 255"
             visible					0
@@ -62,6 +63,7 @@ resource/ui/menus/dialog_code_redemption.menu
             classname               "MenuButton"
             wide					%100
             tall					400
+            tall_nx_handheld				600		[$NX || $NX_UI_PC]
             visible				    1
             rui                     "ui/code_redemption_content.rpak"
 
@@ -132,7 +134,7 @@ resource/ui/menus/dialog_code_redemption.menu
 			ControlName				CNestedPanel
 			InheritProperties       DialogFooterButtons
 			ypos                    0
-            xpos_nx_handheld		-310		[$NX]
+            xpos_nx_handheld		-310		[$NX || $NX_UI_PC]
             wide					422 // width of 2 buttons including space in between
 
 			pin_to_sibling			DialogFrame

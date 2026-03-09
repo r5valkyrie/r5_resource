@@ -32,7 +32,7 @@
         xpos                        0
         ypos                        0
 
-        wide                        %100
+        wide                        1920
         tall                        %100
         proportionalToParent        1
 
@@ -51,7 +51,7 @@
         xpos                        0
         ypos                        0
 
-        wide                        %100
+        wide                        1920
         tall                        %100
         proportionalToParent        1
 
@@ -82,78 +82,6 @@
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    //ChatroomPanel
-    //{
-    //    ControlName				CNestedPanel
-    //    ypos					0
-    //    wide					%100
-    //    tall					308
-    //    visible					1
-    //    controlSettingsFile		"resource/ui/menus/panels/chatroom.res"
-    //    proportionalToParent    1
-    //    pin_to_sibling          PanelFrame
-    //    pin_corner_to_sibling	BOTTOM_RIGHT
-    //    pin_to_sibling_corner	BOTTOM_RIGHT
-    //}
-
-    //OpenInvitePanel
-    //{
-    //    ControlName				CNestedPanel
-    //    xpos					c-300
-    //    ypos					r670
-    //    zpos					10
-    //    wide					552
-    //    tall					440
-    //    visible					0
-    //    controlSettingsFile		"resource/ui/menus/panels/community_openinvites.res"
-    //}
-
-    //InviteNetworkButton
-    //{
-    //    ControlName				RuiButton
-    //    wide					320
-    //    tall					80
-    //    ypos                    16
-    //    zpos                    3
-    //    rui                     "ui/prototype_generic_button.rpak"
-    //    labelText               ""
-    //    visible					1
-	//
-    //    proportionalToParent    1
-	//
-    //    pin_to_sibling			InviteFriendsButton0
-    //    pin_corner_to_sibling	TOP
-    //    pin_to_sibling_corner	BOTTOM
-    //}
-
-    UserInfo
-    {
-        ControlName				CNestedPanel
-
-        xpos                    0
-        ypos                    0
-        tall					500
-
-        zpos					5
-        wide					%28
-        visible					0
-        controlSettingsFile		"resource/ui/menus/panels/user_info.res"
-        pin_to_sibling          PanelFrame
-        pin_corner_to_sibling	BOTTOM_RIGHT
-        pin_to_sibling_corner	BOTTOM_RIGHT
-    }
-
-    MatchDetails
-    {
-        ControlName				CNestedPanel
-        xpos					650
-        ypos					180
-        wide					780
-        tall					470
-        visible					0
-        controlSettingsFile		"resource/ui/menus/panels/match_info.res"
-    }
 
     PopupMessage
     {

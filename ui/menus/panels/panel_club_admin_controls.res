@@ -29,7 +29,7 @@
         ControlName				RuiButton
         classname               "MenuButton"
         wide					277
-        wide_nx_handheld		240		[$NX]
+        wide_nx_handheld		240		[$NX || $NX_UI_PC]
         tall					48
         xpos                    0
         ypos                    0
@@ -56,10 +56,10 @@
         ControlName				RuiButton
         classname               "MenuButton"
         wide					277
-        wide_nx_handheld		330		[$NX]
+        wide_nx_handheld		330		[$NX || $NX_UI_PC]
         tall					48
         xpos                    22
-        xpos_nx_handheld        12		[$NX]
+        xpos_nx_handheld        12		[$NX || $NX_UI_PC]
         rui                     "ui/generic_button.rpak"
         labelText               ""
         visible					0
@@ -84,10 +84,10 @@
         ControlName				RuiButton
         classname               "MenuButton"
         wide					277
-        wide_nx_handheld		340		[$NX]
+        wide_nx_handheld		340		[$NX || $NX_UI_PC]
         tall					48
         xpos                    22
-        xpos_nx_handheld        12		[$NX]
+        xpos_nx_handheld        12		[$NX || $NX_UI_PC]
         rui                     "ui/generic_button.rpak"
         labelText               ""
         visible					0

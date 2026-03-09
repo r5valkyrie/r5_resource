@@ -36,7 +36,7 @@ resource/ui/menus/dialog_clubs_participation.menu
 			ControlName				RuiPanel
 			wide					%100
 			tall					500
-			tall_nx_handheld		570		[$NX]
+			tall_nx_handheld		570		[$NX || $NX_UI_PC]
 			rui                     "ui/basic_image.rpak"
 			visible					1
 
@@ -50,7 +50,7 @@ resource/ui/menus/dialog_clubs_participation.menu
             ControlName				RuiPanel
             wide					%100
             tall					500
-			tall_nx_handheld		570		[$NX]
+			tall_nx_handheld		570		[$NX || $NX_UI_PC]
             labelText               ""
             visible					1
             rui                     "ui/club_announcement_content.rpak"
@@ -74,13 +74,13 @@ resource/ui/menus/dialog_clubs_participation.menu
 
             xpos                    0
             ypos                    -112
-            ypos_nx_handheld        -75			[$NX]
+            ypos_nx_handheld        -75			[$NX || $NX_UI_PC]
             zpos                    0
 
             wide                    875
-			wide_nx_handheld        919			[$NX]
+			wide_nx_handheld        919			[$NX || $NX_UI_PC]
             tall                    284
-			tall_nx_handheld        352			[$NX]
+			tall_nx_handheld        352			[$NX || $NX_UI_PC]
 
             visible					1
             controlSettingsFile		"resource/ui/menus/panels/panel_club_details_participation.res"
@@ -95,7 +95,7 @@ resource/ui/menus/dialog_clubs_participation.menu
 			ControlName				Label
 	        xpos					0
 	        ypos					32
-            ypos_nx_handheld        -22			[$NX]
+            ypos_nx_handheld        -22			[$NX || $NX_UI_PC]
 	        wide					%100
 	        tall					%100
 	        labelText				"#CLUBS_PARTICIPATION_WARNING_CROSSPLAY"

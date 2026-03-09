@@ -1,4 +1,4 @@
-scripts/resource/ui/menus/collection_event_about.menu
+resource/ui/menus/collection_event_about.menu
 {
 	menu
 	{
@@ -61,6 +61,7 @@ scripts/resource/ui/menus/collection_event_about.menu
             ControlName				RuiPanel
             classname               "MenuButton"
             wide					1920
+            wide_nx_handheld				1500		[$NX || $NX_UI_PC]
             tall					1080
             visible				    1
             rui                     "ui/about_collection_event.rpak"

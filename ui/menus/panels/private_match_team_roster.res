@@ -37,12 +37,6 @@
         rightClickEvents        1
         doubleClickEvents       1
 
-        ruiArgs
-        {
-            teamNumber          0
-            showTeamNumber      true
-            teamName            "Team X"
-        }
 
         pin_to_sibling          PanelFrame
         pin_corner_to_sibling   TOP_LEFT

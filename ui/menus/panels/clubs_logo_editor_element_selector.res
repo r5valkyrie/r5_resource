@@ -27,9 +27,9 @@
 	     zpos                       10
 
 	     wide					    512
-	     wide_nx_handheld		    701			[$NX]
+	     wide_nx_handheld		    701			[$NX || $NX_UI_PC]
 	     tall					    200
-	     tall_nx_handheld		    274			[$NX]
+	     tall_nx_handheld		    274			[$NX || $NX_UI_PC]
 	     rui                        "ui/clubs_logo_element_selector.rpak"
 	     visible					1
 	     cursorVelocityModifier     0.7
@@ -55,9 +55,9 @@
 	    zpos                     10
 
 	    wide					 32
-	    wide_nx_handheld		 64			[$NX]
+	    wide_nx_handheld		 64			[$NX || $NX_UI_PC]
 	    tall					 128
-	    tall_nx_handheld		 256		[$NX]
+	    tall_nx_handheld		 256		[$NX || $NX_UI_PC]
 	    rui                      "ui/club_logo_selector_arrow_button.rpak"
 	    visible					1
 	    cursorVelocityModifier   0.7
@@ -82,9 +82,9 @@
 	    zpos                     10
 
 	    wide					 32
-	    wide_nx_handheld		 64			[$NX]
+	    wide_nx_handheld		 64			[$NX || $NX_UI_PC]
 	    tall					 128
-	    tall_nx_handheld		 256		[$NX]
+	    tall_nx_handheld		 256		[$NX || $NX_UI_PC]
 	    rui                      "ui/club_logo_selector_arrow_button.rpak"
 	    visible					1
 	    cursorVelocityModifier   0.7

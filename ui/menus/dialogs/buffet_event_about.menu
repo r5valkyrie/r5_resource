@@ -179,62 +179,65 @@ resource/ui/menus/dialogs/buffet_event_about.menu
         {
             ControlName				RuiButton
             rui                     "ui/buffet_event_badge.rpak"
-            xpos                    -1126
-            ypos                    -473
+            xpos                    225
+            ypos                    -8
             zpos                    6
             wide					118
             tall					118
 			sound_focus             ""
 			sound_accept            ""
 
-            pin_corner_to_sibling	TOP_LEFT
+            pin_corner_to_sibling	CENTER
             pin_to_sibling			MainLayer
-            pin_to_sibling_corner	TOP_LEFT
+            pin_to_sibling_corner	CENTER
         }
         BadgeButton02
         {
             ControlName				RuiButton
             rui                     "ui/buffet_event_badge.rpak"
-            xpos                    75
+            xpos                    418
+            ypos                    -8
             zpos                    6
             wide					118
             tall					118
 			sound_focus             ""
 			sound_accept            ""
 
-            pin_corner_to_sibling	BOTTOM_LEFT
-            pin_to_sibling			BadgeButton01
-            pin_to_sibling_corner	BOTTOM_RIGHT
+            pin_corner_to_sibling	CENTER
+            pin_to_sibling			MainLayer
+            pin_to_sibling_corner	CENTER
         }
         BadgeButton03
         {
             ControlName				RuiButton
             rui                     "ui/buffet_event_badge.rpak"
-            xpos                    76 //75
+            xpos                    612
+            ypos                    -8
             zpos                    6
             wide					118
             tall					118
 			sound_focus             ""
 			sound_accept            ""
 
-            pin_corner_to_sibling	BOTTOM_LEFT
-            pin_to_sibling			BadgeButton02
-            pin_to_sibling_corner	BOTTOM_RIGHT
+            pin_corner_to_sibling	CENTER
+            pin_to_sibling			MainLayer
+            pin_to_sibling_corner	CENTER
         }
         BadgeButton04
         {
             ControlName				RuiButton
             rui                     "ui/buffet_event_badge.rpak"
-            xpos                    75
+            xpos                    805
+            ypos                    -8
             zpos                    6
             wide					118
             tall					118
 			sound_focus             ""
 			sound_accept            ""
 
-            pin_corner_to_sibling	BOTTOM_LEFT
-            pin_to_sibling			BadgeButton03
-            pin_to_sibling_corner	BOTTOM_RIGHT
+            pin_corner_to_sibling	CENTER
+            pin_to_sibling			MainLayer
+            pin_to_sibling_corner	CENTER
         }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -71,10 +71,10 @@ resource/ui/menus/dialog_clubs_search_tag_selection.menu
 			ControlName				Label
 			xpos					-368
 			ypos                    -40
-			ypos_nx_handheld        30 		[$NX]
-			auto_wide_tocontents	1		[!$NX]
-			auto_wide_tocontents	0 		[$NX]
-			wide					f0 		[$NX]
+			ypos_nx_handheld        30 		[$NX || $NX_UI_PC]
+			auto_wide_tocontents	1		[!$NX && !$NX_UI_PC]
+			auto_wide_tocontents	0 		[$NX || $NX_UI_PC]
+			wide					f0 		[$NX || $NX_UI_PC]
 			tall					41
 			visible					1
 			labelText				""
@@ -84,11 +84,11 @@ resource/ui/menus/dialog_clubs_search_tag_selection.menu
 
 
 			pin_to_sibling						DialogFrame
-			pin_to_sibling_nx_handheld			GridButtonListPanel [$NX]
+			pin_to_sibling_nx_handheld			GridButtonListPanel [$NX || $NX_UI_PC]
 			pin_corner_to_sibling				TOP_LEFT
-			pin_corner_to_sibling_nx_handheld	BOTTOM_LEFT 		[$NX]
+			pin_corner_to_sibling_nx_handheld	BOTTOM_LEFT 		[$NX || $NX_UI_PC]
 			pin_to_sibling_corner				TOP
-			pin_to_sibling_corner_nx_handheld	TOP_LEFT 			[$NX]
+			pin_to_sibling_corner_nx_handheld	TOP_LEFT 			[$NX || $NX_UI_PC]
 		}
 
 		SearchTagGrid
@@ -104,7 +104,7 @@ resource/ui/menus/dialog_clubs_search_tag_selection.menu
 
             columns                  2
             rows                     8
-            rows_nx_handheld         5		[$NX]
+            rows_nx_handheld         5		[$NX || $NX_UI_PC]
             buttonSpacing            5
             scrollbarSpacing         10
             scrollbarOnLeft          0
@@ -116,9 +116,9 @@ resource/ui/menus/dialog_clubs_search_tag_selection.menu
                 rui                      "ui/club_search_tag_button.rpak"
                 clipRui                  1
                 wide                     352
-                wide_nx_handheld         528		[$NX]
+                wide_nx_handheld         528		[$NX || $NX_UI_PC]
                 tall                     48
-                tall_nx_handheld         72			[$NX]
+                tall_nx_handheld         72			[$NX || $NX_UI_PC]
                 cursorVelocityModifier   0.7
                 cursorPriority           20
                 //rightClickEvents       1
@@ -135,9 +135,9 @@ resource/ui/menus/dialog_clubs_search_tag_selection.menu
             ControlName				RuiButton
             classname               "MenuButton"
             wide					256
-            wide_nx_handheld		384		[$NX]
+            wide_nx_handheld		384		[$NX || $NX_UI_PC]
             tall					48
-            tall_nx_handheld		72		[$NX]
+            tall_nx_handheld		72		[$NX || $NX_UI_PC]
             xpos                    0
             ypos                    28
             rui                     "ui/generic_button.rpak"

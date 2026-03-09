@@ -2,19 +2,20 @@
 {
 	menu
 	{
-		ControlName				Frame
-		xpos					0
-		ypos					0
-		zpos					3
-		wide					f0
-		tall					f0
-		autoResize				0
-		pinCorner				0
-		visible					1
-		enabled					1
-		PaintBackgroundType		1
-		infocus_bgcolor_override	"32 32 32 64"
-		outoffocus_bgcolor_override	"64 64 64 64"
+			ControlName				Frame
+        xpos					0
+        ypos					0
+        zpos					3
+        wide					f0
+        tall					f0
+        autoResize				0
+        pinCorner				0
+        visible					1
+        enabled					1
+        PaintBackgroundType		0
+        infocus_bgcolor_override	"0 0 0 0"
+        outoffocus_bgcolor_override	"0 0 0 0"
+
 
 		ScreenFrame
 		{
@@ -29,17 +30,33 @@
 			paintbackground         0
 		}
 
-		ScreenBlur
-		{
-			ControlName				Label
-			labelText               ""
-		}
+		PanelFrame
+        {
+            ControlName				Label
+            xpos					0
+            ypos					0
+            wide					1920
+            tall					%100
+            labelText				""
+            visible				    0
+            bgcolor_override        "0 0 0 160"
+            paintbackground         0
+            pin_to_sibling			ScreenFrame
+            pin_corner_to_sibling	TOP
+            pin_to_sibling_corner	TOP
+        }
 
-		Vignette
-		{
-			ControlName             ImagePanel
-			InheritProperties       MenuVignette
-		}
+        ScreenBlur
+        {
+            ControlName				RuiPanel
+            visible					1
+        }
+
+        Vignette
+        {
+            ControlName             ImagePanel
+            InheritProperties       MenuVignette
+        }
 
         WhiteFlash
         {
@@ -56,29 +73,44 @@
             zpos                    100
         }
 
-		Logo
-		{
-			ControlName				RuiPanel
-			InheritProperties       Logo
-
-			pin_to_sibling			ScreenFrame
-			pin_corner_to_sibling	TOP_LEFT
-			pin_to_sibling_corner	TOP_LEFT
-		}
-
 		MenuHeader
 		{
 			ControlName				RuiPanel
-			ypos					-70
+			ypos					-40
 			wide					1800
 			tall					208
 			visible				    1
 			rui                     "ui/generic_menu_header.rpak"
 
+			ruiArgs
+			{
+				useAnimation 1
+			}
 			pin_to_sibling			ScreenFrame
 			pin_corner_to_sibling	TOP
 			pin_to_sibling_corner	TOP
 		}
+
+		PrivateMatchScoreboardPanel
+        {
+            ControlName				CNestedPanel
+            wide			        1920
+            tall			        1080
+            xpos                    0
+            ypos                    35
+            zpos                    1
+            visible                 0
+            enabled                 1
+            controlSettingsFile		"resource/ui/menus/panels/teams_scoreboard.res"
+
+
+            xcounterscroll			0.0
+            ycounterscroll			0.0
+
+            pin_to_sibling			ScreenFrame
+            pin_corner_to_sibling	CENTER
+            pin_to_sibling_corner	CENTER
+        }
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -91,8 +123,8 @@
 			ControlName                 CNestedPanel
 			controlSettingsFile         "resource/ui/menus/panels/private_match_spec_char_select_roster.res"
 
-			xpos                        50
-			ypos                        150
+			xpos                        -115
+			ypos                        -150
 
 			wide                        322
 			tall                        192
@@ -101,7 +133,7 @@
 			pin_corner_to_sibling       TOP_LEFT
 			pin_to_sibling_corner       TOP_LEFT
 
-			visible                     1
+			visible                     0
 		}
 
 		Team01
@@ -109,7 +141,7 @@
 			ControlName                 CNestedPanel
 			controlSettingsFile         "resource/ui/menus/panels/private_match_spec_char_select_roster.res"
 
-			xpos                        48
+			xpos                        20
 			ypos                        0
 
 			wide                        322
@@ -119,7 +151,7 @@
 			pin_corner_to_sibling       TOP_LEFT
 			pin_to_sibling_corner       TOP_RIGHT
 
-			visible                     1
+			visible                     0
 		}
 
 		Team02
@@ -127,7 +159,7 @@
 			ControlName                 CNestedPanel
 			controlSettingsFile         "resource/ui/menus/panels/private_match_spec_char_select_roster.res"
 
-			xpos                        48
+			xpos                        20
 			ypos                        0
 
 			wide                        322
@@ -137,7 +169,7 @@
 			pin_corner_to_sibling       TOP_LEFT
 			pin_to_sibling_corner       TOP_RIGHT
 
-			visible                     1
+			visible                     0
 		}
 
 		Team03
@@ -145,7 +177,7 @@
 			ControlName                 CNestedPanel
 			controlSettingsFile         "resource/ui/menus/panels/private_match_spec_char_select_roster.res"
 
-			xpos                        48
+			xpos                        20
 			ypos                        0
 
 			wide                        322
@@ -155,7 +187,7 @@
 			pin_corner_to_sibling       TOP_LEFT
 			pin_to_sibling_corner       TOP_RIGHT
 
-			visible                     1
+			visible                     0
 		}
 
 		Team04
@@ -163,7 +195,7 @@
 			ControlName                 CNestedPanel
 			controlSettingsFile         "resource/ui/menus/panels/private_match_spec_char_select_roster.res"
 
-			xpos                        48
+			xpos                        20
 			ypos                        0
 
 			wide                        322
@@ -173,7 +205,7 @@
 			pin_corner_to_sibling       TOP_LEFT
 			pin_to_sibling_corner       TOP_RIGHT
 
-			visible                     1
+			visible                     0
 		}
 
 		///////////////////////////////
@@ -186,7 +218,7 @@
 			controlSettingsFile         "resource/ui/menus/panels/private_match_spec_char_select_roster.res"
 
 			xpos                        0
-			ypos                        12
+			ypos                        20
 
 			wide                        322
 			tall                        192
@@ -195,7 +227,7 @@
 			pin_corner_to_sibling       TOP_LEFT
 			pin_to_sibling_corner       BOTTOM_LEFT
 
-			visible                     1
+			visible                     0
 		}
 
 		Team06
@@ -203,7 +235,7 @@
 			ControlName                 CNestedPanel
 			controlSettingsFile         "resource/ui/menus/panels/private_match_spec_char_select_roster.res"
 
-			xpos                        48
+			xpos                        20
 			ypos                        0
 
 			wide                        322
@@ -213,7 +245,7 @@
 			pin_corner_to_sibling       TOP_LEFT
 			pin_to_sibling_corner       TOP_RIGHT
 
-			visible                     1
+			visible                     0
 		}
 
 		Team07
@@ -221,7 +253,7 @@
 			ControlName                 CNestedPanel
 			controlSettingsFile         "resource/ui/menus/panels/private_match_spec_char_select_roster.res"
 
-			xpos                        48
+			xpos                        20
 			ypos                        0
 
 			wide                        322
@@ -231,7 +263,7 @@
 			pin_corner_to_sibling       TOP_LEFT
 			pin_to_sibling_corner       TOP_RIGHT
 
-			visible                     1
+			visible                     0
 		}
 
 		Team08
@@ -239,7 +271,7 @@
 			ControlName                 CNestedPanel
 			controlSettingsFile         "resource/ui/menus/panels/private_match_spec_char_select_roster.res"
 
-			xpos                        48
+			xpos                        20
 			ypos                        0
 
 			wide                        322
@@ -249,7 +281,7 @@
 			pin_corner_to_sibling       TOP_LEFT
 			pin_to_sibling_corner       TOP_RIGHT
 
-			visible                     1
+			visible                     0
 		}
 
 		Team09
@@ -257,7 +289,7 @@
 			ControlName                 CNestedPanel
 			controlSettingsFile         "resource/ui/menus/panels/private_match_spec_char_select_roster.res"
 
-			xpos                        48
+			xpos                        20
 			ypos                        0
 
 			wide                        322
@@ -267,7 +299,7 @@
 			pin_corner_to_sibling       TOP_LEFT
 			pin_to_sibling_corner       TOP_RIGHT
 
-			visible                     1
+			visible                     0
 		}
 
 		///////////////////////////////
@@ -280,7 +312,7 @@
 			controlSettingsFile         "resource/ui/menus/panels/private_match_spec_char_select_roster.res"
 
 			xpos                        0
-			ypos                        12
+			ypos                        20
 
 			wide                        322
 			tall                        192
@@ -289,7 +321,7 @@
 			pin_corner_to_sibling       TOP_LEFT
 			pin_to_sibling_corner       BOTTOM_LEFT
 
-			visible                     1
+			visible                     0
 		}
 
 		Team11
@@ -297,7 +329,7 @@
 			ControlName                 CNestedPanel
 			controlSettingsFile         "resource/ui/menus/panels/private_match_spec_char_select_roster.res"
 
-			xpos                        48
+			xpos                        20
 			ypos                        0
 
 			wide                        322
@@ -307,7 +339,7 @@
 			pin_corner_to_sibling       TOP_LEFT
 			pin_to_sibling_corner       TOP_RIGHT
 
-			visible                     1
+			visible                     0
 		}
 
 		Team12
@@ -315,7 +347,7 @@
 			ControlName                 CNestedPanel
 			controlSettingsFile         "resource/ui/menus/panels/private_match_spec_char_select_roster.res"
 
-			xpos                        48
+			xpos                        20
 			ypos                        0
 
 			wide                        322
@@ -325,7 +357,7 @@
 			pin_corner_to_sibling       TOP_LEFT
 			pin_to_sibling_corner       TOP_RIGHT
 
-			visible                     1
+			visible                     0
 		}
 
 		Team13
@@ -333,7 +365,7 @@
 			ControlName                 CNestedPanel
 			controlSettingsFile         "resource/ui/menus/panels/private_match_spec_char_select_roster.res"
 
-			xpos                        48
+			xpos                        20
 			ypos                        0
 
 			wide                        322
@@ -343,7 +375,7 @@
 			pin_corner_to_sibling       TOP_LEFT
 			pin_to_sibling_corner       TOP_RIGHT
 
-			visible                     1
+			visible                     0
 		}
 
 		Team14
@@ -351,7 +383,7 @@
 			ControlName                 CNestedPanel
 			controlSettingsFile         "resource/ui/menus/panels/private_match_spec_char_select_roster.res"
 
-			xpos                        48
+			xpos                        20
 			ypos                        0
 
 			wide                        322
@@ -361,7 +393,7 @@
 			pin_corner_to_sibling       TOP_LEFT
 			pin_to_sibling_corner       TOP_RIGHT
 
-			visible                     1
+			visible                     0
 		}
 
 		///////////////////////////////
@@ -374,7 +406,7 @@
 			controlSettingsFile         "resource/ui/menus/panels/private_match_spec_char_select_roster.res"
 
 			xpos                        0
-			ypos                        12
+			ypos                        20
 
 			wide                        322
 			tall                        192
@@ -383,7 +415,7 @@
 			pin_corner_to_sibling       TOP_LEFT
 			pin_to_sibling_corner       BOTTOM_LEFT
 
-			visible                     1
+			visible                     0
 		}
 
 		Team16
@@ -391,7 +423,7 @@
 			ControlName                 CNestedPanel
 			controlSettingsFile         "resource/ui/menus/panels/private_match_spec_char_select_roster.res"
 
-			xpos                        48
+			xpos                        20
 			ypos                        0
 
 			wide                        322
@@ -401,7 +433,7 @@
 			pin_corner_to_sibling       TOP_LEFT
 			pin_to_sibling_corner       TOP_RIGHT
 
-			visible                     1
+			visible                     0
 		}
 
 		Team17
@@ -409,7 +441,7 @@
 			ControlName                 CNestedPanel
 			controlSettingsFile         "resource/ui/menus/panels/private_match_spec_char_select_roster.res"
 
-			xpos                        48
+			xpos                        20
 			ypos                        0
 
 			wide                        322
@@ -419,7 +451,7 @@
 			pin_corner_to_sibling       TOP_LEFT
 			pin_to_sibling_corner       TOP_RIGHT
 
-			visible                     1
+			visible                     0
 		}
 
 		Team18
@@ -427,7 +459,7 @@
 			ControlName                 CNestedPanel
 			controlSettingsFile         "resource/ui/menus/panels/private_match_spec_char_select_roster.res"
 
-			xpos                        48
+			xpos                        20
 			ypos                        0
 
 			wide                        322
@@ -437,7 +469,7 @@
 			pin_corner_to_sibling       TOP_LEFT
 			pin_to_sibling_corner       TOP_RIGHT
 
-			visible                     1
+			visible                     0
 		}
 
 		Team19
@@ -445,7 +477,7 @@
 			ControlName                 CNestedPanel
 			controlSettingsFile         "resource/ui/menus/panels/private_match_spec_char_select_roster.res"
 
-			xpos                        48
+			xpos                        20
 			ypos                        0
 
 			wide                        322
@@ -455,7 +487,7 @@
 			pin_corner_to_sibling       TOP_LEFT
 			pin_to_sibling_corner       TOP_RIGHT
 
-			visible                     1
+			visible                     0
 		}
 	}
 }

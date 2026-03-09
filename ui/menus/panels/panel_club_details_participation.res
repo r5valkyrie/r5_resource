@@ -32,9 +32,9 @@
         visible                 1
 
         wide                    875
-        wide_nx_handheld        919			[$NX]
+        wide_nx_handheld        919			[$NX || $NX_UI_PC]
         tall                    248
-        tall_nx_handheld        352			[$NX]
+        tall_nx_handheld        352			[$NX || $NX_UI_PC]
 
         xpos                    32
         ypos                    -32
@@ -84,14 +84,14 @@
         visible                 1
 
         wide                    290
-        wide_nx_handheld        350		[$NX]
+        wide_nx_handheld        350		[$NX || $NX_UI_PC]
         tall                    290
-        tall_nx_handheld        350		[$NX]
+        tall_nx_handheld        350		[$NX || $NX_UI_PC]
 
         xpos                    32
-        xpos_nx_handheld        325		[$NX]
+        xpos_nx_handheld        325		[$NX || $NX_UI_PC]
         ypos                    48
-        ypos_nx_handheld        28		[$NX]
+        ypos_nx_handheld        28		[$NX || $NX_UI_PC]
         zpos                    5
 
         proportionalToParent    1

@@ -24,8 +24,22 @@ resource/ui/menus/clubs_search.menu
             //visible				    1
             //bgcolor_override        "255 255 0 100"
             //paintbackground         1
-        }
 
+        }
+        PanelFrame
+        {
+            ControlName				Label
+            xpos					0
+            ypos					0
+            wide					1920
+            tall					%100
+            labelText				""
+            visible				    1
+
+            pin_to_sibling          ScreenFrame
+            pin_corner_to_sibling   CENTER
+            pin_to_sibling_corner   CENTER
+        }
         ScreenBlur
         {
             ControlName				Label
@@ -69,19 +83,19 @@ resource/ui/menus/clubs_search.menu
 
             xpos                    -48
             ypos                    -84
-            ypos_nx_handheld        -34		[$NX]
+            ypos_nx_handheld        -34		[$NX || $NX_UI_PC]
             zpos                    0
 
             wide                    577
             tall                    883
-            tall_nx_handheld        945		[$NX]
+            tall_nx_handheld        945		[$NX || $NX_UI_PC]
 
             visible					1
             controlSettingsFile		"resource/ui/menus/panels/panel_club_search_settings.res"
 
             proportionalToParent    1
 
-            pin_to_sibling          ScreenFrame
+            pin_to_sibling          PanelFrame
             pin_corner_to_sibling   TOP_LEFT
             pin_to_sibling_corner   TOP_LEFT
         }
@@ -93,7 +107,7 @@ resource/ui/menus/clubs_search.menu
             tall					883
             xpos                    -48
             ypos                    -84
-            ypos_nx_handheld        -24		[$NX]
+            ypos_nx_handheld        -24		[$NX || $NX_UI_PC]
             zpos                    0
             labelText               ""
             textAlignment           "north"
@@ -102,7 +116,7 @@ resource/ui/menus/clubs_search.menu
             bgcolor_override        "0 0 0 128"
             paintbackground         0
 
-            pin_to_sibling          ScreenFrame
+            pin_to_sibling          PanelFrame
             pin_corner_to_sibling   TOP_RIGHT
             pin_to_sibling_corner   TOP_RIGHT
         }
@@ -125,19 +139,20 @@ resource/ui/menus/clubs_search.menu
         {
             ControlName				Label
             wide					768
-            wide_nx_handheld		1280	[$NX]
+            wide_nx_handheld		1200	[$NX || $NX_UI_PC]
             tall					20
-            tall_nx_handheld		40		[$NX]
+            tall_nx_handheld		90		[$NX || $NX_UI_PC]
             xpos                    0
             ypos                    -128
             zpos                    0
             labelText               ""
             textAlignment           center
-            wrap                    0
+            wrap                    0			[!$NX && !$NX_UI_PC]
+            wrap                    1			[$NX || $NX_UI_PC]
             visible					1
             bgcolor_override        "0 0 0 128"
             paintbackground         0
-			fontHeight_nx_handheld	50		[$NX]
+			fontHeight_nx_handheld	50		[$NX || $NX_UI_PC]
 
             pin_to_sibling          MenuHeader
             pin_corner_to_sibling   TOP
@@ -150,7 +165,7 @@ resource/ui/menus/clubs_search.menu
 
             xpos                    0
             ypos                    8
-            ypos_nx_handheld        15		[$NX]
+            ypos_nx_handheld        15		[$NX || $NX_UI_PC]
 
             pin_to_sibling          SearchResultsLabel
             pin_corner_to_sibling   TOP
@@ -158,7 +173,7 @@ resource/ui/menus/clubs_search.menu
 
             columns                  2
             rows                     5
-            rows_nx_handheld         4		[$NX]
+            rows_nx_handheld         4		[$NX || $NX_UI_PC]
             buttonSpacing            12
             scrollbarSpacing         2
             scrollbarOnLeft          0
@@ -169,10 +184,10 @@ resource/ui/menus/clubs_search.menu
             {
                 rui                      "ui/club_search_result_button.rpak"
                 clipRui                  1
-                wide                     425
-                wide_nx_handheld         574		[$NX]
+                wide                     425 
+                wide_nx_handheld         574		[$NX || $NX_UI_PC]
                 tall                     139
-                tall_nx_handheld         188		[$NX]
+                tall_nx_handheld         188		[$NX || $NX_UI_PC]
                 cursorVelocityModifier   0.7
                 rightClickEvents         1
                 //doubleClickEvents      1
@@ -189,14 +204,14 @@ resource/ui/menus/clubs_search.menu
             classname               "MenuButton"
 
             xpos                    -144
-            xpos_nx_handheld        0		[$NX]
+            xpos_nx_handheld        0		[$NX || $NX_UI_PC]
             ypos                    0
-            ypos_nx_handheld        125		[$NX]
+            ypos_nx_handheld        125		[$NX || $NX_UI_PC]
 
             wide					32
-            wide_nx_handheld		55		[$NX]
+            wide_nx_handheld		55		[$NX || $NX_UI_PC]
             tall					32
-            tall_nx_handheld		55		[$NX]
+            tall_nx_handheld		55		[$NX || $NX_UI_PC]
             rui                     "ui/clubs_search_result_page_button.rpak"
             visible					0
             cursorVelocityModifier  0.7
@@ -221,9 +236,9 @@ resource/ui/menus/clubs_search.menu
             ypos                    0
 
             wide					32
-            wide_nx_handheld		55		[$NX]
+            wide_nx_handheld		55		[$NX || $NX_UI_PC]
             tall					32
-            tall_nx_handheld		55		[$NX]
+            tall_nx_handheld		55		[$NX || $NX_UI_PC]
             rui                     "ui/clubs_search_result_page_button.rpak"
             visible					0
             cursorVelocityModifier  0.7
@@ -249,9 +264,9 @@ resource/ui/menus/clubs_search.menu
             ypos                    0
 
             wide					32
-            wide_nx_handheld		55		[$NX]
+            wide_nx_handheld		55		[$NX || $NX_UI_PC]
             tall					32
-            tall_nx_handheld		55		[$NX]
+            tall_nx_handheld		55		[$NX || $NX_UI_PC]
             rui                     "ui/clubs_search_result_page_button.rpak"
             visible					0
             cursorVelocityModifier  0.7
@@ -277,9 +292,9 @@ resource/ui/menus/clubs_search.menu
             ypos                    0
 
             wide					32
-            wide_nx_handheld		55		[$NX]
+            wide_nx_handheld		55		[$NX || $NX_UI_PC]
             tall					32
-            tall_nx_handheld		55		[$NX]
+            tall_nx_handheld		55		[$NX || $NX_UI_PC]
             rui                     "ui/clubs_search_result_page_button.rpak"
             visible					0
             cursorVelocityModifier  0.7
@@ -305,9 +320,9 @@ resource/ui/menus/clubs_search.menu
             ypos                    0
 
             wide					32
-            wide_nx_handheld		55		[$NX]
+            wide_nx_handheld		55		[$NX || $NX_UI_PC]
             tall					32
-            tall_nx_handheld		55		[$NX]
+            tall_nx_handheld		55		[$NX || $NX_UI_PC]
             rui                     "ui/clubs_search_result_page_button.rpak"
             visible					0
             cursorVelocityModifier  0.7

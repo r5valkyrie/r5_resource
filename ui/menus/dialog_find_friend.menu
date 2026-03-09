@@ -45,9 +45,9 @@ resource/ui/menus/dialog_find_friend.menu
         {
             ControlName				Label
             wide					%100
-            wide_nx_handheld		%150	[$NX]
+            wide_nx_handheld		%150	[$NX || $NX_UI_PC]
             tall					480
-            tall_nx_handheld		720		[$NX]
+            tall_nx_handheld		720		[$NX || $NX_UI_PC]
             labelText				""
             bgcolor_override		"0 0 0 255"
             visible					0
@@ -63,9 +63,9 @@ resource/ui/menus/dialog_find_friend.menu
             ControlName				RuiPanel
             classname               "MenuButton"
             wide					%100
-            wide_nx_handheld		%150	[$NX]
+            wide_nx_handheld		%150	[$NX || $NX_UI_PC]
             tall					480
-            tall_nx_handheld		720		[$NX]
+            tall_nx_handheld		720		[$NX || $NX_UI_PC]
             visible				    1
             rui                     "ui/find_friend_content.rpak"
 
@@ -84,9 +84,9 @@ resource/ui/menus/dialog_find_friend.menu
 		{
 			ControlName				RuiPanel
 			wide					680
-			wide_nx_handheld		1020		[$NX]
+			wide_nx_handheld		1020		[$NX || $NX_UI_PC]
 			tall					48
-			tall_nx_handheld		72			[$NX]
+			tall_nx_handheld		72			[$NX || $NX_UI_PC]
 			visible				    1
 			rui                     "ui/basic_image.rpak"
 
@@ -106,11 +106,11 @@ resource/ui/menus/dialog_find_friend.menu
 			zpos					100 // This works around input weirdness when the control is constructed by code instead of VGUI blackbox.
 			xpos                    0
 			ypos                    -80
-			ypos_nx_handheld        -135		[$NX]
+			ypos_nx_handheld        -135		[$NX || $NX_UI_PC]
 			wide					680
-			wide_nx_handheld		1020		[$NX]
+			wide_nx_handheld		1020		[$NX || $NX_UI_PC]
 			tall					48
-			tall_nx_handheld		72			[$NX]
+			tall_nx_handheld		72			[$NX || $NX_UI_PC]
 			visible					1
 			enabled					1
 			textHidden				0
@@ -119,9 +119,9 @@ resource/ui/menus/dialog_find_friend.menu
 			textAlignment			"center"
 			ruiFont                 TitleRegularFont
 			ruiFontHeight           36
-			ruiFontHeight_nx_handheld           40			[$NX]
+			ruiFontHeight_nx_handheld           40			[$NX || $NX_UI_PC]
 			ruiMinFontHeight        36
-			ruiMinFontHeight_nx_handheld        40			[$NX]
+			ruiMinFontHeight_nx_handheld        40			[$NX || $NX_UI_PC]
 			ruiAsianFont            DefaultAsianFont
 			keyboardTitle			""
 			keyboardDescription		""
@@ -143,9 +143,9 @@ resource/ui/menus/dialog_find_friend.menu
 			xpos					0
 			ypos					0
 			wide					680
-			wide_nx_handheld		1020		[$NX]
+			wide_nx_handheld		1020		[$NX || $NX_UI_PC]
 			tall					192
-			tall_nx_handheld		280			[$NX]
+			tall_nx_handheld		280			[$NX || $NX_UI_PC]
 			visible				    1
 			rui                     "ui/results_background.rpak"
 
@@ -159,7 +159,7 @@ resource/ui/menus/dialog_find_friend.menu
 			ControlName				GridButtonListPanel
 			xpos                    10
 			ypos                    -160
-			ypos_nx_handheld		-230			[$NX]
+			ypos_nx_handheld		-230			[$NX || $NX_UI_PC]
 			columns                 1
 			rows                    3
 			buttonSpacing           6
@@ -178,9 +178,9 @@ resource/ui/menus/dialog_find_friend.menu
 				rui                     "ui/generic_button.rpak"
 				clipRui                 1
 				wide					680
-				wide_nx_handheld		1020		[$NX]
+				wide_nx_handheld		1020		[$NX || $NX_UI_PC]
 				tall					60
-				tall_nx_handheld		90			[$NX]
+				tall_nx_handheld		90			[$NX || $NX_UI_PC]
 				cursorVelocityModifier  0.7
 				rightClickEvents		1
 				doubleClickEvents       1
@@ -197,7 +197,7 @@ resource/ui/menus/dialog_find_friend.menu
 		{
 			ControlName				CNestedPanel
 			InheritProperties       DialogFooterButtons
-            xpos_nx_handheld		-310		[$NX]
+            xpos_nx_handheld		-310		[$NX || $NX_UI_PC]
             wide					422 // width of 2 buttons including space in between
 
 			pin_to_sibling			DialogFrame

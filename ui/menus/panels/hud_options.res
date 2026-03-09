@@ -290,7 +290,6 @@
         className               "SettingScrollSizer"
         style					DialogListButton
         navUp					SwitchDamageClosesDeathBoxMenu
-        navDown					SwitchStreamerMode
         ConVar					"hud_setting_showHopUpPopUp"
         list
         {
@@ -298,19 +297,43 @@
             "#SETTING_ON"	1
         }
 
+        
+                                  
+      
+        navDown					SwitchStreamerMode
+       
+
         pin_to_sibling			SwitchDamageClosesDeathBoxMenu
         pin_corner_to_sibling	TOP_LEFT
         pin_to_sibling_corner	BOTTOM_LEFT
         childGroupAlways        ChoiceButtonAlways
     }
+           
+                        
+     
+                                             
+                                             
+                                                    
+                                 
+                                                
+                                                  
+                                                       
+                                   
+                                   
+                                    
+                                 
+                                 
+                                         
+                                      
+                                         
+     
+          
     SwitchStreamerMode
     {
         ControlName				RuiButton
         InheritProperties		SwitchButton
         className               "SettingScrollSizer"
         style					DialogListButton
-        navUp					SwitchHopupPopup
-        navDown					SwitchAnonymousMode
         ConVar					"hud_setting_streamerMode"
         visible                 1
         list
@@ -320,7 +343,15 @@
             "#SETTING_ALL"	    2
         }
 
-        pin_to_sibling			SwitchHopupPopup
+        
+                                       
+                                
+      
+		pin_to_sibling			SwitchHopupPopup
+        navUp					SwitchHopupPopup
+       
+
+        navDown					SwitchAnonymousMode
         pin_corner_to_sibling	TOP_LEFT
         pin_to_sibling_corner	BOTTOM_LEFT
         childGroupAlways        MultiChoiceButtonAlways
@@ -483,7 +514,6 @@
 
         childGroupAlways        ChoiceButtonAlways
     }
-                         
 	LaserSightOptions
     {
         ControlName             RuiButton
@@ -491,10 +521,10 @@
         className               "SettingScrollSizer"
         style                   DialogListButton
         navUp                   SwitchFirstPersonReticleOptions
-        navDown                 SwchColorBlindMode
+        navDown                 LobbyThemeColorSlider
         visible                 1
         ConVar					"laserSightColorCustomized"
-        
+
         list
         {
             "#SETTING_DEFAULT"      0
@@ -507,7 +537,46 @@
 
         childGroupAlways        ChoiceButtonAlways
     }
-      
+    LobbyThemeColorSlider
+    {
+        ControlName				SliderControl
+        InheritProperties		ColorSlider
+        className               "SettingScrollSizer"
+
+        zpos                    100
+
+        selectOnFocus           1
+        cursorVelocityModifier  0.7
+        cursorPriority          20
+
+        navUp                   LaserSightOptions
+        navDown                 SwchColorBlindMode
+
+        minValue				0.0
+        maxValue				0.99
+        stepSize				0.001
+        inverseFill             0
+        showLabel               1
+
+        pin_to_sibling			LaserSightOptions
+        pin_corner_to_sibling	TOP_LEFT
+        pin_to_sibling_corner	BOTTOM_LEFT
+    }
+    LobbyThemeColorPreview
+    {
+        ControlName				RuiPanel
+        xpos					8
+        ypos					0
+        wide					60
+        tall					60
+        zpos                    101
+        visible					1
+        rui                     "ui/reticle_palette.rpak"
+
+        pin_to_sibling			LobbyThemeColorSlider
+        pin_corner_to_sibling	LEFT
+        pin_to_sibling_corner	RIGHT
+    }
     AccessibilityHeader
     {
         ControlName				ImagePanel
@@ -515,13 +584,10 @@
         className               "SettingScrollSizer"
         xpos					0
         ypos					6
-        pin_to_sibling			SwitchFirstPersonReticleOptions [!$NX && !$NX_UI_PC]
-        pin_to_sibling			SwitchFirstPersonReticleOptions [$NX || $NX_UI_PC]
+        pin_to_sibling			LobbyThemeColorSlider
         pin_corner_to_sibling	TOP_LEFT
         pin_to_sibling_corner	BOTTOM_LEFT
-
-        visible                 1 [$ENGLISH]
-        visible                 0 [!$ENGLISH]
+        use_pin_locale_direction    1
     }
     AccessibilityHeaderText
     {
@@ -530,10 +596,8 @@
         pin_to_sibling			AccessibilityHeader
         pin_corner_to_sibling	LEFT
         pin_to_sibling_corner	LEFT
+        use_pin_locale_direction    1
         labelText				"#MENU_ACCESSIBILITY"
-
-        visible                 1 [$ENGLISH]
-        visible                 0 [!$ENGLISH]
     }
 
     SwchColorBlindMode
@@ -546,6 +610,7 @@
         pin_to_sibling			AccessibilityHeader
         pin_corner_to_sibling	TOP_LEFT
         pin_to_sibling_corner	BOTTOM_LEFT
+        use_pin_locale_direction    1
         navUp					SwitchFirstPersonReticleOptions
         navDown					SwchSubtitles
         // list is populated by code
@@ -642,10 +707,13 @@
         InheritProperties       SwitchButton
         className               "SettingScrollSizer"
         style                   DialogListButton
-        navUp                   SwchAccessibility
+        navUp                   SwchSubtitlesSize [!$ENGLISH]
+        navUp                   SwchAccessibility [$ENGLISH]
         navDown                 SwchChatSpeechToText [$ENGLISH]
 
-        pin_to_sibling          SwchAccessibility
+        pin_to_sibling          SwchAccessibility [$ENGLISH]
+        pin_to_sibling          SwchSubtitlesSize [!$ENGLISH]
+
         pin_corner_to_sibling   TOP_LEFT
         pin_to_sibling_corner   BOTTOM_LEFT
 

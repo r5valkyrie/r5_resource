@@ -64,7 +64,23 @@ resource/ui/menus/survival_inventory.menu
             pin_corner_to_sibling	CENTER
             pin_to_sibling_corner	CENTER
         }
+		Darken
+	    {
+	        ControlName				ImagePanel
+	        xpos					0
+	        ypos					0
+	        wide					%100
+	        tall					%100
+	        visible					1
+	        enabled 				1
+	        scaleImage				1
+	        image					"vgui/HUD/white"
+	        drawColor				"0 0 0 150"
 
+	        pin_to_sibling			Cover
+	        pin_corner_to_sibling	TOP
+	        pin_to_sibling_corner	TOP
+	    }
         ToolTip
         {
             ControlName				RuiPanel
@@ -78,6 +94,7 @@ resource/ui/menus/survival_inventory.menu
 
             ypos                    0
             xpos                    0
+            xpos_nx_handheld        20		[$NX || $NX_UI_PC]
             wide					474
             tall					54
             zpos                    20
@@ -145,27 +162,27 @@ resource/ui/menus/survival_inventory.menu
         }
 
 		CharacterDetailsPanel
-		{
-            ControlName				CNestedPanel
-            wide			        %100
-            tall			        %100
-            xpos                    0
-            ypos                    0
-            zpos                    1
-            visible                 0
-            enabled                 1
-            controlSettingsFile		"resource/ui/menus/panels/legend.res"
+       {
+          ControlName           CNestedPanel
+          wide			          1920
+          tall			          %100
+          xpos_nx_handheld		  -160 	[$NX || $NX_UI_PC]
+          visible                 1
+          tabPosition             1
+          controlSettingsFile     "resource/ui/menus/panels/character_abilities.res"
 
-
-            xcounterscroll			0.0
-            ycounterscroll			0.0
-		}
+		  xcounterscroll			0.0
+		  ycounterscroll			0.0
+		  pin_to_sibling			Cover
+          pin_corner_to_sibling	CENTER
+          pin_to_sibling_corner	CENTER
+       }
 
 		GenericScoreboardPanel
         {
             ControlName				CNestedPanel
             wide			        1920
-            tall			        %100
+            tall			        1080
             xpos                    0
             ypos                    0
             zpos                    1
@@ -181,6 +198,24 @@ resource/ui/menus/survival_inventory.menu
             pin_corner_to_sibling	CENTER
             pin_to_sibling_corner	CENTER
         }
+                                 
+        FiringRangeSettingsPanel
+        {
+            ControlName				CNestedPanel
+			wide					%100
+            tall			        %100
+            xpos                    0
+            ypos                    0
+            zpos                    1
+            visible                 1
+            enabled                 1
+            controlSettingsFile		"resource/ui/menus/panels/firing_range_settings.res"
+
+            xcounterscroll			0.0
+            ycounterscroll			0.0
+
+        }
+              
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		SurvivalQuickInventoryPanel
@@ -252,6 +287,7 @@ resource/ui/menus/survival_inventory.menu
 			wide					f0
 			tall					24
 			ypos 					-25
+			ypos_nx_handheld		-30		[$NX || $NX_UI_PC]
 			visible					1
 			controlSettingsFile		"resource/ui/menus/panels/footer_buttons.res"
 

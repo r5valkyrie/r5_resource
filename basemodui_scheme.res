@@ -97,7 +97,8 @@ Scheme
 		GraphPanel.FgColor					White
 		GraphPanel.BgColor					TransparentBlack
 
-		GridButtonListPanel.MaxScrollVel			1000.0
+		GridButtonListPanel.MaxScrollVel			1000.0 [!$PS5 && !$XB5]
+		GridButtonListPanel.MaxScrollVel			2000.0 [$PS5 || $XB5]
 		GridButtonListPanel.JoystickDeadZone		0.15
 
 		Label.TextDullColor					Black
@@ -150,8 +151,10 @@ Scheme
 		RichText.SelectedTextColor			OffWhite
 		RichText.SelectedBgColor			LightBlue
 		RichText.InsetX						20
-		RichText.InsetY						0
+		RichText.InsetY						0		[!$NX && !$NX_UI_PC]
+		RichText.InsetY						15		[$NX || $NX_UI_PC]
 		RichText.JoystickDeadZone		    0.15
+
 
 		Chat.FriendlyFontColor				"55 233 255 255"
 		Chat.EnemyFontColor					"230 83 14 255"
@@ -366,7 +369,8 @@ Scheme
 		//MainMenuButton.Style						1   // BUTTON_MAINMENU - Obsolete
 
 		SliderButton.Style					    	2   // BUTTON_LEFTINDIALOG - inside a dialog, left aligned, optional RHS component anchored to right edge. Used primarily in slider controls
-		SliderButton.CursorHeight			    	60
+		SliderButton.CursorHeight			    	60		[!$NX && !$NX_UI_PC]
+		SliderButton.CursorHeight			    	80 		[$NX || $NX_UI_PC]
 		SliderButton.TextInsetX				    	12
 		SliderButton.TextInsetY					    4
         SliderButton.CursorPriority                 1
@@ -1645,6 +1649,7 @@ Scheme
 		{
 			wide					500
 			tall					60
+			tall_nx_handheld		80		[$NX || $NX_UI_PC]
 			zpos					3
 			visible					1
 			enabled					1
@@ -1767,6 +1772,7 @@ Scheme
 		{
 			wide					1040
 			tall					60
+			tall_nx_handheld		80 		[$NX || $NX_UI_PC]
 			visible					1
 			enabled					1
 			style					SmallButton
@@ -1794,6 +1800,7 @@ Scheme
 			font                    Default_28
 			wide					1040
 			tall					60
+			tall_nx_handheld		80 		[$NX || $NX_UI_PC]
 			zpos					3
 			ypos                    2
 			visible					1
@@ -1811,6 +1818,7 @@ Scheme
 			font                    Default_28
 			wide					1040
 			tall					60
+			tall_nx_handheld		80 		[$NX || $NX_UI_PC]
 			zpos					3
 			ypos                    2
 			visible					1
@@ -1828,6 +1836,7 @@ Scheme
             font                    Default_28
             wide					512
             tall					60
+            tall_nx_handheld		80 		[$NX || $NX_UI_PC]
             zpos					3
             ypos                    2
             visible					1
@@ -1845,6 +1854,7 @@ Scheme
             font                    Default_28
             wide					414
             tall					50
+            tall_nx_handheld		80 		[$NX || $NX_UI_PC]
             zpos					3
             ypos                    2
             visible					1
@@ -1860,7 +1870,8 @@ Scheme
 		SliderControl
 		{
 			wide					1040
-			tall					60
+            tall					60
+            tall_nx_handheld		80 		[$NX || $NX_UI_PC]
 			zpos					3 // Needed or clicking on the background can hide this
 			ypos                    2
 			visible					1
@@ -1887,6 +1898,7 @@ Scheme
             zpos					100 // This works around input weirdness when the control is constructed by code instead of VGUI blackbox.
             wide					48
             tall					48
+            tall_nx_handheld		68 		[$NX || $NX_UI_PC]
             visible					1
             enabled					1
             textHidden				0
@@ -1925,8 +1937,9 @@ Scheme
         {
             classname				TabButtonClass
             wide					220
+            wide_nx_handheld		280			[$NX || $NX_UI_PC]
             tall					48
-
+            tall_nx_handheld		65			[$NX || $NX_UI_PC]
             visible					1
             enabled					1
             style					RuiButton
@@ -1967,6 +1980,7 @@ Scheme
 	        zpos					0
 	        wide					f0
 	        tall					48
+			tall_nx_handheld		65			[$NX || $NX_UI_PC]
 	        visible					1
 	        enabled					1
 	        proportionalToParent    1
@@ -2000,7 +2014,9 @@ Scheme
 		{
 			classname				TabButtonClass
 			wide					260
+			wide_nx_handheld		280			[$NX || $NX_UI_PC]
 			tall					44
+			tall_nx_handheld		65			[$NX || $NX_UI_PC]
 			polyShape               "0.0 0.0 0.831 0.0 1.0 1.0 0.169 1.0" // height / width to determine offsets
 			visible					1
 			enabled					1
@@ -2015,7 +2031,9 @@ Scheme
 		{
 			classname				TabButtonClass
 			wide					260
+			wide_nx_handheld		280			[$NX || $NX_UI_PC]
 			tall					44
+			tall_nx_handheld		65			[$NX || $NX_UI_PC]
 			polyShape               "0.0 0.0 0.831 0.0 1.0 1.0 0.169 1.0" // height / width to determine offsets
 			visible					1
 			enabled					1
@@ -2076,7 +2094,9 @@ Scheme
 		{
 			classname               MenuButton
             wide					60
+			wide_nx_handheld		100 	[$NX || $NX_UI_PC]
             tall					60
+            tall_nx_handheld		100 	[$NX || $NX_UI_PC]
             rui                     "ui/generic_icon_button.rpak"
             labelText               ""
             visible					1
@@ -2263,14 +2283,15 @@ Scheme
             visible					1
         }
 
-
 		FriendGridButton
 		{
 			xpos					0
 			ypos					0
 			zpos					2
 			wide					400
+			wide_nx_handheld		400			[$NX || $NX_UI_PC]
 			tall					80
+			tall_nx_handheld		86			[$NX || $NX_UI_PC]
 			visible					1
 			enabled					1
 			style					RuiButton
@@ -2408,8 +2429,17 @@ Scheme
 		LobbyCharacterButton
 		{
             classname               CharacterButtonClass
+                   
 			wide					174
 			tall					113
+			wide_nx_handheld			174		    [$NX || $NX_UI_PC]
+			tall_nx_handheld			113 		[$NX || $NX_UI_PC]
+     
+               
+               
+                                                
+                                             
+      
 			visible					0
 			enabled					1
             rui						"ui/lobby_character_button.rpak"
@@ -2475,11 +2505,25 @@ Scheme
 		MatchCharacterButton
 		{
             zpos					10
+                   
             wide					77//174
             tall					88//113
+			
+            wide_nx_handheld				77		[$NX || $NX_UI_PC]
+            tall_nx_handheld				88		[$NX || $NX_UI_PC]
+     
+                        
+                        
+      
+			wide_nx_handheld		245	        [$NX || $NX_UI_PC]
+			tall_nx_handheld		158		    [$NX || $NX_UI_PC]
 			visible					0
 			enabled					1
-            rui						"ui/character_select_class_button.rpak"
+                   
+			rui						"ui/character_select_class_button.rpak"
+     
+                                                                
+      
 			labelText				""
 			style					RuiButton
 			//polyShape               "0.375 0.0 1.0 0.0 0.625 1.0 0.0 1.0"
@@ -2534,11 +2578,14 @@ Scheme
             pin_to_sibling_corner	CENTER
         }
 
+
 		StoreCharacterButton
 		{
 			classname               CharacterButtonClass
 			wide					194
+			wide_nx_handheld		319 		[$NX || $NX_UI_PC]
 			tall					126
+			tall_nx_handheld		211 		[$NX || $NX_UI_PC]
 			visible					0
 			enabled					1
             rui						"ui/store_character_button.rpak"
@@ -2555,7 +2602,9 @@ Scheme
 		WeaponCategoryButton
 		{
             wide					457
+			wide_nx_handheld		550 		[$NX || $NX_UI_PC]
             tall					220
+            tall_nx_handheld		264	 		[$NX || $NX_UI_PC]
 			visible					1
 			enabled					1
             rui						"ui/weapon_category_button.rpak"
@@ -2687,6 +2736,7 @@ Scheme
 		{
             wide					1040
 			tall					45
+			tall_nx_handheld		65 		[$NX || $NX_UI_PC]
 			visible					1
 			image 					"ui/menu/common/menu_header_bar_wide"
 			visible					1
@@ -2697,9 +2747,11 @@ Scheme
 			zpos					3 // Needed or clicking on the background can hide this
 			auto_wide_tocontents 	1
 			tall					40
+			tall_nx_handheld		60 		[$NX || $NX_UI_PC]
 			visible					1
 			font					DefaultBoldFont
 			fontHeight 				30
+			fontHeight_nx_handheld	45 		[$NX || $NX_UI_PC]
 			allcaps					1
 			fgcolor_override		"245 245 245 255"
 		}
@@ -2736,7 +2788,7 @@ Scheme
             ruiDefaultHeight        36
             fontHeight              32
 		}
-
+		
 		RightRuiFooterButton
 		{
 		    classname				RightRuiFooterButtonClass
@@ -2753,7 +2805,7 @@ Scheme
             ruiDefaultHeight        36
             fontHeight              32
 		}
-
+		
 		MouseFooterButton
 		{
 			classname				MouseFooterButtonClass
@@ -2801,7 +2853,9 @@ Scheme
         {
             classname		        MatchmakingStatusRui
             wide                    560
+            wide_nx_handheld        644		[$NX || $NX_UI_PC]
             tall                    82
+            tall_nx_handheld        94		[$NX || $NX_UI_PC]
             visible			        1
             rui                     "ui/matchmaking_status.rpak"
         }
@@ -2810,6 +2864,7 @@ Scheme
 		{
 			wide					540
 			tall					55
+			tall_nx_handheld        33      [$NX || $NX_UI_PC]
 			rui                     "ui/death_recap_damage_block.rpak"
 			xpos                    0
 			ypos                    3
@@ -2917,7 +2972,9 @@ Scheme
                     isRightOption       1
                 }
                 wide					178
+                wide_nx_handheld		238 		[$NX || $NX_UI_PC]
                 tall					60
+                tall_nx_handheld		80 			[$NX || $NX_UI_PC]
                 visible					1
                 enabled					1
                 style					DefaultButton
@@ -2939,7 +2996,9 @@ Scheme
                 rui						"ui/settings_choice_button.rpak"
                 xpos                    4
                 wide					178
+                wide_nx_handheld		238 	[$NX || $NX_UI_PC]
                 tall					60
+                tall_nx_handheld		80 		[$NX || $NX_UI_PC]
                 visible					1
                 enabled					1
                 style					DefaultButton
@@ -2991,7 +3050,9 @@ Scheme
                     isRightOption       1
                 }
                 wide					60
+                wide_nx_handheld		90  	[$NX || $NX_UI_PC]
                 tall					60
+                tall_nx_handheld		80 		[$NX || $NX_UI_PC]
                 visible					1
                 enabled					1
                 style					DefaultButton
@@ -2999,7 +3060,8 @@ Scheme
 
                 sound_accept			""
 
-                command                 "DialogListNext"
+                command                 "DialogListNext"	[!$RTL]
+                command                 "DialogListPrev"	[$RTL]
 
                 pin_corner_to_sibling	RIGHT
                 pin_to_sibling			FULL
@@ -3014,7 +3076,9 @@ Scheme
                 ControlName				RuiButton
                 rui						"ui/settings_change_button.rpak"
                 wide					60
+                wide_nx_handheld		90		[$NX || $NX_UI_PC]
                 tall					60
+                tall_nx_handheld		80		[$NX || $NX_UI_PC]
                 visible					1
                 enabled					1
                 style					DefaultButton
@@ -3023,7 +3087,8 @@ Scheme
 
                 sound_accept			""
 
-                command                 "DialogListPrev"
+                command                 "DialogListPrev"	[!$RTL]
+                command                 "DialogListNext"	[$RTL]
 
                 pin_corner_to_sibling	TOP_RIGHT
                 pin_to_sibling			ValueButton
@@ -3039,7 +3104,9 @@ Scheme
                 rui						"ui/settings_multichoice_value.rpak"
                 xpos                    4
                 wide					232
+                wide_nx_handheld		292  	[$NX || $NX_UI_PC]
                 tall					60
+                tall_nx_handheld		80 		[$NX || $NX_UI_PC]
                 visible					1
                 enabled					1
                 style					DefaultButton
@@ -3071,6 +3138,7 @@ Scheme
                 }
                 wide					60
                 tall					60
+                tall_nx_handheld		80 		[$NX || $NX_UI_PC]
                 visible					1
                 enabled					1
                 style					DefaultButton
@@ -3093,6 +3161,7 @@ Scheme
                 rui						"ui/settings_change_button.rpak"
                 wide					60
                 tall					60
+                tall_nx_handheld		80		[$NX || $NX_UI_PC]
                 visible					1
                 enabled					1
                 style					DefaultButton
@@ -3121,7 +3190,9 @@ Scheme
 
                 xpos                    4
                 wide					400
+                wide_nx_handheld		420  	[$NX || $NX_UI_PC]
                 tall					60
+                tall_nx_handheld		80 		[$NX || $NX_UI_PC]
                 visible					1
                 enabled					1
                 style					DefaultButton
@@ -3148,6 +3219,7 @@ Scheme
                 rui						"ui/settings_change_button.rpak"
                 wide					60
                 tall					60
+                tall_nx_handheld		80		[$NX || $NX_UI_PC]
                 visible					1
                 enabled					1
                 style					DefaultButton
@@ -3175,6 +3247,7 @@ Scheme
                 }
                 wide					60
                 tall					60
+                tall_nx_handheld		80 		[$NX || $NX_UI_PC]
                 visible					1
                 enabled					1
                 style					DefaultButton
@@ -3201,7 +3274,9 @@ Scheme
                 }
 
                 wide					280
+                wide_nx_handheld		345  	[$NX || $NX_UI_PC]
                 tall					60
+                tall_nx_handheld		80 		[$NX || $NX_UI_PC]
                 visible					1
                 enabled					1
                 style					DefaultButton

@@ -21,6 +21,7 @@
 
         wide                    770
         tall                    48
+        tall_nx_handheld        64			[$NX || $NX_UI_PC]
         clipRui                 1
 
         rui                     "ui/custom_match_settings_sub_header.rpak"
@@ -39,7 +40,7 @@
         ControlName             GridButtonListPanel
 
 		xpos					0
-		ypos                    10
+		ypos                    0
         wide                    680
 
         pin_to_sibling          SelectMapSubHeader

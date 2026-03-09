@@ -68,9 +68,9 @@
         ControlName				RuiButton
         classname               "MenuButton"
         wide					340
-        wide_nx_handheld		455		[$NX]
+        wide_nx_handheld		455		[$NX || $NX_UI_PC]
         tall					55
-        tall_nx_handheld		75		[$NX]
+        tall_nx_handheld		75		[$NX || $NX_UI_PC]
         xpos                    0
         ypos                    16
         rui                     "ui/generic_button.rpak"
@@ -95,7 +95,7 @@
         xpos                    18
         ypos					32
         wide					340
-        wide_nx_handheld		455		[$NX]
+        wide_nx_handheld		455		[$NX || $NX_UI_PC]
         tall					60
         rui                     "ui/club_search_panel_header.rpak"
 
@@ -120,7 +120,7 @@
         ControlName             RuiButton
         InheritProperties       SwitchButtonCompact
         xpos                    144
-        xpos_nx_handheld        28		[$NX]
+        xpos_nx_handheld        28		[$NX || $NX_UI_PC]
         ypos                    -12
         style                   DialogListButton
         navUp                   KickUserButton
@@ -147,13 +147,13 @@
     {
         ControlName             RuiPanel
         xpos                    -96
-        xpos_nx_handheld        -208		[$NX]
+        xpos_nx_handheld        -208		[$NX || $NX_UI_PC]
         ypos                    24
-        ypos_nx_handheld        0			[$NX]
+        ypos_nx_handheld        0			[$NX || $NX_UI_PC]
         zpos                    4
         wide                    344
         tall                    55
-        tall_nx_handheld		75			[$NX]
+        tall_nx_handheld		75			[$NX || $NX_UI_PC]
         rui                     "ui/club_user_mgmt_rank_description.rpak"
 
         pin_to_sibling			UserRankSetting
@@ -166,7 +166,7 @@
         ControlName				RuiPanel
         xpos                    18
         ypos					64
-        ypos_nx_handheld		60		[$NX]
+        ypos_nx_handheld		60		[$NX || $NX_UI_PC]
         wide					384
         tall					60
         rui                     "ui/club_search_panel_header.rpak"
@@ -193,9 +193,9 @@
         ControlName				RuiButton
         classname               "MenuButton"
         wide					340
-        wide_nx_handheld		455		[$NX]
+        wide_nx_handheld		455		[$NX || $NX_UI_PC]
         tall					55
-        tall_nx_handheld		75		[$NX]
+        tall_nx_handheld		75		[$NX || $NX_UI_PC]
         xpos                    -18
         ypos                    0
         rui                     "ui/generic_button.rpak"
@@ -219,9 +219,9 @@
         ControlName				RuiButton
         classname               "MenuButton"
         wide					340
-        wide_nx_handheld		455		[$NX]
+        wide_nx_handheld		455		[$NX || $NX_UI_PC]
         tall					55
-        tall_nx_handheld		75		[$NX]
+        tall_nx_handheld		75		[$NX || $NX_UI_PC] 
         xpos                    0
         ypos                    16
         rui                     "ui/generic_button.rpak"

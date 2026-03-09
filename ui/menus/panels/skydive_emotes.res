@@ -23,6 +23,7 @@
         ypos                    0
         columns                 3
         rows                    3
+        columns_nx_handheld     2			[$NX || $NX_UI_PC]
         rows_nx_handheld        3			[$NX || $NX_UI_PC]
         buttonSpacing           6
         scrollbarSpacing        10
@@ -52,7 +53,7 @@
     {
         ControlName             RuiPanel
         xpos					573 //576
-        xpos_nx_handheld		447   [$NX || $NX_UI_PC]
+        xpos_nx_handheld		607   [$NX || $NX_UI_PC]
         ypos					-21 //71
         ypos_nx_handheld		60    [$NX || $NX_UI_PC]
         wide                    818 //1022

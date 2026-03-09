@@ -1,4 +1,4 @@
-scripts/resource/ui/menus/loot_box.menu
+resource/ui/menus/loot_box.menu
 {
 	menu
 	{
@@ -24,29 +24,6 @@ scripts/resource/ui/menus/loot_box.menu
             labelText				""
             visible					0
         }
-
-        "SimText"
-		{
-			"ControlName"			"Label"
-			"xpos"                  "0"
-			"ypos"					"-20"
-            zpos                    20
-			"auto_wide_tocontents"	"1"
-			"tall"					"60"
-			"visible"				"1"
-			"wrap"					"0"
-			"fontHeight"			"40"
-			"zpos"					"5"
-			"textAlignment"			"north-west"
-			"labelText"				"APEX PACK SIMULATOR"
-			"font"					"TitleFont"
-			"allcaps"				"1"
-			"fgcolor_override"		"255 255 255 255"
-
-			pin_to_sibling			Screen
-            pin_corner_to_sibling	TOP
-            pin_to_sibling_corner	TOP
-		}
 
         ScreenBlur
         {
@@ -127,7 +104,9 @@ scripts/resource/ui/menus/loot_box.menu
             ControlName             RuiButton
             classname               "MenuButton"
             wide                    376
+            wide_nx_handheld        451    [$NX || $NX_UI_PC]
             tall                    112
+            tall_nx_handheld        123    [$NX || $NX_UI_PC]
             xpos                    0
             ypos                    -48
             zpos                    5
@@ -226,8 +205,11 @@ scripts/resource/ui/menus/loot_box.menu
         {
             ControlName				RuiPanel
             wide					536
+            wide_nx_handheld		660			[$NX || $NX_UI_PC]
             tall					%100
+            tall_nx_handheld		%120		[$NX || $NX_UI_PC]
             xpos					-300
+            xpos_nx_handheld		-100		[$NX || $NX_UI_PC]
             ypos					0
             zpos					3
             rui						"ui/loot_inspect_bar.rpak"
@@ -245,7 +227,9 @@ scripts/resource/ui/menus/loot_box.menu
             ControlName				RuiButton
             classname               "MenuButton"
             wide					400
+            wide_nx_handheld		640		[$NX || $NX_UI_PC]
             tall					112
+            tall_nx_handheld		164		[$NX || $NX_UI_PC]
             xpos					0
             ypos					200
             zpos					5
@@ -253,12 +237,36 @@ scripts/resource/ui/menus/loot_box.menu
             labelText				""
             visible					0
             enabled					0
-            tabPosition             1
 
             pin_to_sibling			InspectBar
             pin_corner_to_sibling	CENTER
             pin_to_sibling_corner	CENTER
 
+            navDown                 TrackChallengeButton
+        }
+
+		TrackChallengeButton
+        {
+            ControlName				RuiButton
+            classname               "MenuButton"
+            wide					400
+            wide_nx_handheld		640		[$NX || $NX_UI_PC]
+            tall					112
+            tall_nx_handheld		164		[$NX || $NX_UI_PC]
+            xpos					0
+            ypos					10
+            zpos					5
+            rui						"ui/generic_challenge_track_button.rpak"
+            labelText				""
+            visible					1
+            enabled					1
+            tabPosition             1
+
+            pin_to_sibling			InspectEquipButton
+            pin_corner_to_sibling	TOP
+            pin_to_sibling_corner	BOTTOM
+
+            navUp                   InspectEquipButton
             navDown                 InspectEquipToWheelButton
         }
 
@@ -267,7 +275,9 @@ scripts/resource/ui/menus/loot_box.menu
             ControlName				RuiButton
             classname               "MenuButton"
             wide					400
+            wide_nx_handheld		640		[$NX || $NX_UI_PC]
             tall					112
+            tall_nx_handheld		164		[$NX || $NX_UI_PC]
             xpos					0
             ypos					10
             zpos					5
@@ -281,7 +291,7 @@ scripts/resource/ui/menus/loot_box.menu
             pin_corner_to_sibling	TOP
             pin_to_sibling_corner	BOTTOM
 
-            navUp                   InspectEquipButton
+            navUp                   TrackChallengeButton
         }
 
         InspectPurchaseButton
@@ -289,7 +299,9 @@ scripts/resource/ui/menus/loot_box.menu
             ControlName				RuiButton
             classname               "MenuButton"
             wide					400
+            wide_nx_handheld		640		[$NX || $NX_UI_PC]
             tall					112
+            tall_nx_handheld		164		[$NX || $NX_UI_PC]
             xpos					0
             ypos					200
             zpos					6
@@ -302,6 +314,28 @@ scripts/resource/ui/menus/loot_box.menu
             pin_to_sibling			InspectBar
             pin_corner_to_sibling	CENTER
             pin_to_sibling_corner	CENTER
+        }
+
+        InspectBattlePassPurchaseButton
+        {
+            ControlName				RuiButton
+            classname               "MenuButton"
+            wide					400
+            wide_nx_handheld		640		[$NX || $NX_UI_PC]
+            tall					112
+            tall_nx_handheld		164		[$NX || $NX_UI_PC]
+            xpos					0
+            ypos					20
+            zpos					6
+            rui						"ui/generic_bar_desc_button.rpak"
+            labelText				""
+            visible					0
+            enabled					0
+            tabPosition             1
+
+            pin_to_sibling			InspectPurchaseButton
+            pin_corner_to_sibling	TOP_LEFT
+            pin_to_sibling_corner	BOTTOM_LEFT
         }
 
         ModelRotateMouseCapture
@@ -351,7 +385,9 @@ scripts/resource/ui/menus/loot_box.menu
             ControlName				RuiButton
             classname               "MenuButton"
             wide					284
+			wide_nx_handheld		426    [$NX || $NX_UI_PC]
             tall					60
+			tall_nx_handheld		90     [$NX || $NX_UI_PC]
             xpos                    0
             ypos                    0
             zpos                    50

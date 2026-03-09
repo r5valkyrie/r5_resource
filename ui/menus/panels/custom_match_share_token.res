@@ -44,7 +44,7 @@
         wide					200
         tall					48
         visible					1
-        enabled					1
+        enabled					0 [!$PC]
         textHidden				1
         editable				0
         maxchars				8
@@ -59,7 +59,8 @@
         unicode					0
         selectOnFocus           0
         cursorVelocityModifier  0.7
-        cursorPriority          20
+        cursorPriority          1
+        disabledFgColor_override       "232 232 232 255"
 
         pin_to_sibling			ShareTokenPanelFrame
         pin_corner_to_sibling	TOP_LEFT

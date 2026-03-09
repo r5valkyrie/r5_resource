@@ -30,6 +30,7 @@
 
         xpos                0
         ypos                0
+        ypos_nx_handheld    13   [$NX || $NX_UI_PC]
 
         wide                1700
         tall                850

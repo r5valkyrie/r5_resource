@@ -25,7 +25,20 @@ resource/ui/menus/clubs_logo_editor.menu
             bgcolor_override        "0 0 0 191"
             paintbackground         1
         }
+		PanelFrame
+        {
+            ControlName				Label
+            xpos					0
+            ypos					0
+            wide					1920
+            tall					%100
+            labelText				""
+            visible				    1
 
+            pin_to_sibling          ScreenFrame
+            pin_corner_to_sibling   CENTER
+            pin_to_sibling_corner   CENTER
+        }
         ScreenBlur
         {
             ControlName				Label
@@ -59,7 +72,7 @@ resource/ui/menus/clubs_logo_editor.menu
         {
             ControlName				RuiPanel
 			ypos					-48
-			ypos_nx_handheld		-28		[$NX]
+			ypos_nx_handheld		-28		[$NX || $NX_UI_PC]
             wide					1800
             tall					208
             visible				    1
@@ -92,7 +105,7 @@ resource/ui/menus/clubs_logo_editor.menu
             visible					1
             controlSettingsFile		"resource/ui/menus/panels/clubs_logo_editor_canvas.res"
 
-            pin_to_sibling          ScreenFrame
+            pin_to_sibling          PanelFrame
             pin_corner_to_sibling   RIGHT
             pin_to_sibling_corner   RIGHT
         }
@@ -103,17 +116,17 @@ resource/ui/menus/clubs_logo_editor.menu
 
             xpos                    -415
             ypos                    %-25
-            ypos_nx_handheld        %-28	[$NX]
+            ypos_nx_handheld        %-28	[$NX || $NX_UI_PC]
             zpos                    10
 
             wide                    640
-            wide_nx_handheld        940		[$NX]
+            wide_nx_handheld        940		[$NX || $NX_UI_PC]
             tall                    200
 
             visible					1
             controlSettingsFile		"resource/ui/menus/panels/clubs_logo_editor_element_selector.res"
 
-            pin_to_sibling          ScreenFrame
+            pin_to_sibling          PanelFrame
             pin_corner_to_sibling   CENTER
             pin_to_sibling_corner   CENTER
         }
@@ -123,12 +136,12 @@ resource/ui/menus/clubs_logo_editor.menu
             ControlName				CNestedPanel
 
             xpos                    0
-            ypos                    %5
-            ypos_nx_handheld        %9		[$NX]
+            ypos                    52
+            ypos_nx_handheld        92		[$NX || $NX_UI_PC]
             zpos                    10
 
             wide                    640
-            wide_nx_handheld        740		[$NX]
+            wide_nx_handheld        740		[$NX || $NX_UI_PC]
             tall                    200
 
             visible					1
@@ -144,12 +157,12 @@ resource/ui/menus/clubs_logo_editor.menu
             ControlName				CNestedPanel
 
             xpos                    0
-            ypos                    %5
-            ypos_nx_handheld        %9		[$NX]
+            ypos                    52
+            ypos_nx_handheld        92		[$NX || $NX_UI_PC]
             zpos                    10
 
             wide                    640
-            wide_nx_handheld        740		[$NX]
+            wide_nx_handheld        740		[$NX || $NX_UI_PC]
             tall                    200
 
             visible					1
@@ -167,7 +180,7 @@ resource/ui/menus/clubs_logo_editor.menu
 
             xpos                    -288
             ypos                    276
-            ypos_nx_handheld        316		[$NX]
+            ypos_nx_handheld        316		[$NX || $NX_UI_PC]
             zpos                    15
 
             wide					512
@@ -179,7 +192,7 @@ resource/ui/menus/clubs_logo_editor.menu
 
             proportionalToParent    1
 
-            pin_to_sibling          ScreenFrame
+            pin_to_sibling          PanelFrame
             pin_corner_to_sibling   RIGHT
             pin_to_sibling_corner   RIGHT
 

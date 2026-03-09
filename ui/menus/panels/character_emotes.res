@@ -12,7 +12,44 @@
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	TabsFrame
+    {
+		ControlName				Label
+		wide					1920
+		tall					%100
+		labelText				""
+        bgcolor_override        "0 0 0 0"
+		visible				    0
+        paintbackground         1
+        pin_corner_to_sibling    TOP
+        pin_to_sibling_corner    TOP
+    }
+    TabsBackground
+    {
+        ControlName				RuiPanel
+		InheritProperties		TabsBackgroundShort
 
+        zpos					999
+
+        pin_to_sibling           TabsFrame
+	    pin_corner_to_sibling    TOP
+	    pin_to_sibling_corner    TOP
+    }
+	TabsCommon
+    {
+          ControlName           CNestedPanel
+		  classname				"TabsCommonClass"
+          zpos                  1000
+          ypos                  0
+          wide                  %100
+          tall                  48
+          visible               1
+          controlSettingsFile   "resource/ui/menus/panels/common_tabs_short.res"
+
+          pin_to_sibling         TabsFrame
+          pin_corner_to_sibling    TOP
+          pin_to_sibling_corner    TOP
+    }
     Header
     {
         ControlName             RuiPanel
@@ -23,239 +60,162 @@
         tall                    33
         rui                     "ui/character_items_header.rpak"
     }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	SectionButton0
+    LinePanel
+    {
+        ControlName				CNestedPanel
+        xpos					289
+        xpos_nx_handheld		36			[$NX || $NX_UI_PC]
+        ypos					116
+        ypos_nx_handheld		80			[$NX || $NX_UI_PC]
+        wide					550
+		wide_nx_handheld		800			[$NX || $NX_UI_PC]
+        tall					840
+        visible					0
+        tabPosition             1
+        controlSettingsFile		"resource/ui/menus/panels/quips.res"
+        zpos                    100
+		
+        pin_to_sibling_nx_handheld			SectionButton0		[$NX || $NX_UI_PC]
+        pin_corner_to_sibling_nx_handheld	TOP_LEFT			[$NX || $NX_UI_PC]
+        pin_to_sibling_corner_nx_handheld	TOP_RIGHT			[$NX || $NX_UI_PC]
+    }
+
+    EmotesPanel
+    {
+        ControlName				CNestedPanel
+        xpos					289
+        xpos_nx_handheld		36			[$NX || $NX_UI_PC]
+        ypos					116
+        ypos_nx_handheld		80			[$NX || $NX_UI_PC]
+        wide					550
+		wide_nx_handheld		800			[$NX || $NX_UI_PC]
+        tall					840
+        visible					0
+        tabPosition             1
+        controlSettingsFile		"resource/ui/menus/panels/emotes.res"
+        zpos                    100
+		
+        pin_to_sibling_nx_handheld			SectionButton0		[$NX || $NX_UI_PC]
+        pin_corner_to_sibling_nx_handheld	TOP_LEFT			[$NX || $NX_UI_PC]
+        pin_to_sibling_corner_nx_handheld	TOP_RIGHT			[$NX || $NX_UI_PC]
+    }
+
+    HoloSpraysPanel
+    {
+        ControlName				CNestedPanel
+        xpos					289
+        xpos_nx_handheld		36			[$NX || $NX_UI_PC]
+        ypos					116
+        ypos_nx_handheld		80			[$NX || $NX_UI_PC]
+        wide					550
+        wide_nx_handheld		800			[$NX || $NX_UI_PC]
+        tall					840
+        visible					0
+        tabPosition             1
+        controlSettingsFile		"resource/ui/menus/panels/emotes.res"
+        zpos                    100
+
+        pin_to_sibling_nx_handheld			SectionButton0		[$NX || $NX_UI_PC]
+        pin_corner_to_sibling_nx_handheld	TOP_LEFT			[$NX || $NX_UI_PC]
+        pin_to_sibling_corner_nx_handheld	TOP_RIGHT			[$NX || $NX_UI_PC]
+    }
+
+	SkydiveEmotesPanel
 	{
-		ControlName			RuiButton
-        xpos					651
-        ypos					96
-		zpos			    3
-		wide			    492
-		tall			    56
-		visible			    0
-		labelText           ""
-        rui					"ui/character_section_button.rpak"
-
-
-        ruiArgs
-        {
-            textBreakWidth 400.0
-        }
+        ControlName				CNestedPanel
+        xpos					289
+        xpos_nx_handheld		36			[$NX || $NX_UI_PC]
+        ypos					116
+        ypos_nx_handheld		80			[$NX || $NX_UI_PC]
+        wide					750
+		wide_nx_handheld		800			[$NX || $NX_UI_PC]
+        tall					840
+        visible					0
+        tabPosition             1
+        controlSettingsFile		"resource/ui/menus/panels/skydive_emotes.res"
+        zpos                    100
+		ruiClip                 0
+        pin_to_sibling_nx_handheld			SectionButton0		[$NX || $NX_UI_PC]
+        pin_corner_to_sibling_nx_handheld	TOP_LEFT			[$NX || $NX_UI_PC]
+        pin_to_sibling_corner_nx_handheld	TOP_RIGHT			[$NX || $NX_UI_PC]
 	}
+    SkinBlurb
+    {
+        ControlName             RuiPanel
+        xpos                    -96
+        ypos                    -650
+        zpos                    0
+        wide                    308
+        wide_nx_handheld        380		[$NX || $NX_UI_PC]
+        tall                    308
+        tall_nx_handheld        380		[$NX || $NX_UI_PC]
+        rui                     "ui/character_skin_blurb.rpak"
+        visible                 0
 
-	SectionButton1
-	{
-		ControlName			RuiButton
-		xpos			    0
-		ypos			    3
-		zpos			    3
-		wide			    492
-		tall			    56
-		visible			    0
-		labelText           ""
-        rui					"ui/character_section_button.rpak"
+        pin_to_sibling			PanelFrame
+        pin_corner_to_sibling	TOP_RIGHT
+        pin_to_sibling_corner	TOP_RIGHT
+    }
+    ModelRotateMouseCapture
+    {
+        ControlName				CMouseMovementCapturePanel
+        xpos                    700
+        ypos                    0
+        wide                    1340
+        tall                    %100
+    }
 
-
-        ruiArgs
-        {
-            textBreakWidth 400.0
-        }
-
-        pin_to_sibling			SectionButton0
-        pin_corner_to_sibling	TOP_LEFT
-        pin_to_sibling_corner	BOTTOM_LEFT
-	}
-
-	SectionButton2
-	{
-		ControlName			RuiButton
-		xpos			    0
-		ypos			    3
-		zpos			    3
-		wide			    492
-		tall			    56
-		visible			    0
-		labelText           ""
-        rui					"ui/character_section_button.rpak"
-
-
-        ruiArgs
-        {
-            textBreakWidth 400.0
-        }
-
-        pin_to_sibling			SectionButton1
-        pin_corner_to_sibling	TOP_LEFT
-        pin_to_sibling_corner	BOTTOM_LEFT
-	}
-
-	SectionButton3
-	{
-		ControlName			RuiButton
-		xpos			    0
-		ypos			    3
-		zpos			    3
-		wide			    492
-		tall			    56
-		visible			    0
-		labelText           ""
-        rui					"ui/character_section_button.rpak"
-
-
-        ruiArgs
-        {
-            textBreakWidth 400.0
-        }
-
-        pin_to_sibling			SectionButton2
-        pin_corner_to_sibling	TOP_LEFT
-        pin_to_sibling_corner	BOTTOM_LEFT
-	}
-
-	SectionButton4
-	{
-		ControlName			RuiButton
-		xpos			    0
-		ypos			    3
-		zpos			    3
-		wide			    492
-		tall			    56
-		visible			    0
-		labelText           ""
-        rui					"ui/character_section_button.rpak"
-
-
-        ruiArgs
-        {
-            textBreakWidth 400.0
-        }
-
-        pin_to_sibling			SectionButton3
-        pin_corner_to_sibling	TOP_LEFT
-        pin_to_sibling_corner	BOTTOM_LEFT
-	}
-
-	SectionButton5
-	{
-		ControlName			RuiButton
-		xpos			    0
-		ypos			    3
-		zpos			    3
-		wide			    492
-		tall			    56
-		visible			    0
-		labelText           ""
-        rui					"ui/character_section_button.rpak"
-
-
-        ruiArgs
-        {
-            textBreakWidth 400.0
-        }
-
-        pin_to_sibling			SectionButton4
-        pin_corner_to_sibling	TOP_LEFT
-        pin_to_sibling_corner	BOTTOM_LEFT
-	}
-
-	SectionButton6
-	{
-		ControlName			RuiButton
-		xpos			    0
-		ypos			    3
-		zpos			    3
-		wide			    492
-		tall			    56
-		visible			    0
-		labelText           ""
-        rui					"ui/character_section_button.rpak"
-
-
-        ruiArgs
-        {
-            textBreakWidth 400.0
-        }
-
-        pin_to_sibling			SectionButton5
-        pin_corner_to_sibling	TOP_LEFT
-        pin_to_sibling_corner	BOTTOM_LEFT
-	}
-
-	SectionButton7
-	{
-		ControlName			RuiButton
-		xpos			    0
-		ypos			    3
-		zpos			    3
-		wide			    492
-		tall			    56
-		visible			    0
-		labelText           ""
-        rui					"ui/character_section_button.rpak"
-
-
-        ruiArgs
-        {
-            textBreakWidth 400.0
-        }
-
-        pin_to_sibling			SectionButton6
-        pin_corner_to_sibling	TOP_LEFT
-        pin_to_sibling_corner	BOTTOM_LEFT
-	}
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	HintGamepad
 	{
-		ControlName			RuiPanel
-        ypos					632
-        xpos					651
-		zpos			    3
-		wide			    492
-		tall			    196
-		visible			    1
-		labelText           ""
-        rui					"ui/character_section_button.rpak"
+		ControlName			    RuiPanel
+        ypos				    -650
+        xpos				    -312
+		xpos_nx_handheld		-790		[$NX || $NX_UI_PC]
+		zpos			        3
+		wide			        492
+		tall			        196
+		tall_nx_handheld        296			[$NX || $NX_UI_PC]
+		visible			        1
+		labelText               ""
+        rui					    "ui/character_section_button.rpak"
         activeInputExclusivePaint	gamepad
 
         ruiArgs
         {
             textBreakWidth 400.0
         }
-	}
 
+        pin_to_sibling			TabsFrame
+        pin_corner_to_sibling	TOP_LEFT
+        pin_to_sibling_corner	TOP_LEFT
+	}
 
 	HintMKB
 	{
-		ControlName			RuiPanel
-        ypos					632
-        xpos					651
-		zpos			    3
-		wide			    492
-		tall			    196
-		visible			    1
-		labelText           ""
-        rui					"ui/character_section_button.rpak"
+		ControlName			    RuiPanel
+        ypos				    -650
+        xpos				    -312
+		xpos_nx_handheld		-790		[$NX || $NX_UI_PC]
+		zpos			        3
+		wide			        492
+		tall			        196
+		tall_nx_handheld        296			[$NX || $NX_UI_PC]
+		visible			        1
+		labelText               ""
+        rui					    "ui/character_section_button.rpak"
 		activeInputExclusivePaint		keyboard
 
 		ruiArgs
 		{
 		    textBreakWidth 400.0
         }
+
+        pin_to_sibling			TabsFrame
+        pin_corner_to_sibling	TOP_LEFT
+        pin_to_sibling_corner	TOP_LEFT
 	}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    QuipsPanel
-    {
-        ControlName				CNestedPanel
-		xpos			    158
-		ypos			    96
-        wide					550
-        tall					840
-        visible					1
-        tabPosition             1
-        controlSettingsFile		"resource/ui/menus/panels/quips.res"
-    }
-
 }

@@ -1,6 +1,6 @@
 Resource/UI/menus/panels/survival_main_inventory.res
 {
-    PanelFrame
+	PanelFrame
     {
 	    ControlName				Label
 	    xpos					0
@@ -763,14 +763,14 @@ Resource/UI/menus/panels/survival_main_inventory.res
 
                                  
 
-                                  
+                                    
                                                        
-                                 
+                                  
                                  
 
                                            
-                                    
-                                     
+                                        
+                                            
      
       
 

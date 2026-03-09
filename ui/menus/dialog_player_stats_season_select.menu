@@ -1,4 +1,4 @@
-scripts/resource/ui/menus/dialog_player_stats_season_select.menu
+resource/ui/menus/dialog_player_stats_season_select.menu
 {
 	menu
 	{
@@ -45,8 +45,8 @@ scripts/resource/ui/menus/dialog_player_stats_season_select.menu
         SelectSeasonPopup
         {
             ControlName				CNestedPanel
-            wide					100
-            tall					100
+            wide					100 // not used; set dynamically
+            tall					100 // not used; set dynamically
             controlSettingsFile		"resource/ui/menus/panels/player_stats_select_season_popup.res"
             labelText               ""
             visible					1

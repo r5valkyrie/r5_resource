@@ -283,6 +283,57 @@ Resource/UI/flowstate_customhudvgui.res
 		pin_corner_to_sibling	TOP
 		pin_to_sibling_corner	TOP
 	}		
+	//for title
+	ScreenBlur1
+		{
+			ControlName				RuiPanel
+			wide					260
+			tall					100	
+			xpos					-50
+			ypos					-52
+			zpos 					0
+			visible					0
+			enabled					0
+			rui 					"ui/tabs_background.rpak"
+			
+			pin_to_sibling          Screen
+			pin_corner_to_sibling   TOP_LEFT
+			pin_to_sibling_corner   TOP_LEFT
+		}
+		
+	ScreenBlur2
+		{
+			ControlName				RuiPanel
+			wide					260
+			tall					300	
+			xpos					0
+			ypos					-88
+			zpos 					0
+			visible					0
+			enabled					0
+			rui 					"ui/tabs_background.rpak"
+			
+			pin_to_sibling          ScreenBlur1
+			pin_corner_to_sibling   TOP_LEFT
+			pin_to_sibling_corner   TOP_LEFT
+		}
+				
+	ScreenBlur3 //for timer
+		{
+			ControlName				RuiPanel
+			wide					260
+			tall					60	
+			xpos					0
+			ypos					-298
+			zpos 					10
+			visible					0
+			enabled					0
+			rui 					"ui/tabs_background.rpak"
+			
+			pin_to_sibling          ScreenBlur2
+			pin_corner_to_sibling   TOP_LEFT
+			pin_to_sibling_corner   TOP_LEFT
+		}
 				
 	PropControlsTitle
 		{
@@ -1278,6 +1329,40 @@ Resource/UI/flowstate_customhudvgui.res
 		pin_corner_to_sibling	BOTTOM
 		pin_to_sibling_corner	BOTTOM
 	}
+	//for title
+	BombStateScreenBlur1
+		{
+			ControlName				RuiPanel
+			wide					290
+			tall					100	
+			xpos					-38
+			ypos					-335
+			zpos 					0
+			visible					0
+			rui 					"ui/tabs_background.rpak"
+			
+			pin_to_sibling          Screen
+			pin_corner_to_sibling   TOP_LEFT
+			pin_to_sibling_corner   TOP_LEFT
+		}
+		
+	BombStateScreenBlur2
+		{
+			ControlName				RuiPanel
+			wide					290
+			tall					60	
+			xpos					0
+			ypos					-98
+			zpos 					1
+			visible					0
+			enabled					0
+			rui 					"ui/tabs_background.rpak"
+			
+			pin_to_sibling          BombStateScreenBlur1
+			pin_corner_to_sibling   TOP_LEFT
+			pin_to_sibling_corner   TOP_LEFT
+		}
+
 	BombStateText_New
 		{
 			ControlName				Label
@@ -1720,6 +1805,22 @@ Resource/UI/flowstate_customhudvgui.res
 		pin_to_sibling_corner	RIGHT
 	}
 	
+	BuyMenuBottomFrame
+		{
+			ControlName				RuiPanel
+			wide					f0
+			tall					165
+			xpos					0
+			ypos					0
+			zpos 					1
+			visible					0
+			enabled					0
+			rui 					"ui/tabs_background.rpak"
+			
+			pin_to_sibling          Screen
+			pin_corner_to_sibling   TOP
+			pin_to_sibling_corner   TOP
+		}
 		
 	BuyMenuBottomFrameBorder
 	{
@@ -2897,10 +2998,10 @@ Resource/UI/flowstate_customhudvgui.res
 	"FS_DMCountDown_Frame"
 	{
 		ControlName				RuiPanel
-		wide					286
-		tall					54
-		ypos 					-300
-		xpos 					-32
+		wide					248
+		tall					103
+		ypos 					-310
+		xpos 					-45
 		zpos 					0
 		visible					0
 		rui                     "ui/basic_image.rpak"
@@ -2921,8 +3022,8 @@ Resource/UI/flowstate_customhudvgui.res
 		fontHeight				30
 		font					"DefaultBold_62_DropShadow" // "TitleBoldFont" //"DefaultBold_62_DropShadow"
 		fgcolor_override		"255 255 255 255"
-		ypos                    4
-		xpos					-60
+		ypos                    12
+		xpos					-125
 		textAlignment			west
 		allcaps					0
 		pin_to_sibling          FS_DMCountDown_Frame
@@ -3240,7 +3341,7 @@ Resource/UI/flowstate_customhudvgui.res
 		labelText				"r5r_ColombiaFPS"
 		font					"TitleBoldFont"
 		allcaps					0
-		fgcolor_override		"255 120 32 255"
+		fgcolor_override		"228 202 111 255"
 		textAlignment			center
 		pin_to_sibling			FS_1v1_UI_BG
 		pin_corner_to_sibling	LEFT
@@ -3249,8 +3350,8 @@ Resource/UI/flowstate_customhudvgui.res
 	FS_1v1_UI_EnemyKills
 	{
 		ControlName				Label
-		xpos                    -23
-		ypos					37
+		xpos                    -41
+		ypos					29
 		zpos 10
 		//auto_wide_tocontents	1
 		tall					30
@@ -3260,7 +3361,7 @@ Resource/UI/flowstate_customhudvgui.res
 		labelText				"0"
 		font					"TitleBoldFont"
 		allcaps					1
-		fgcolor_override		"255 120 32 255"
+		fgcolor_override		"228 202 111 255"
 		textAlignment			center
 		pin_to_sibling			FS_1v1_UI_BG
 		pin_corner_to_sibling	LEFT
@@ -3269,8 +3370,8 @@ Resource/UI/flowstate_customhudvgui.res
 	FS_1v1_UI_EnemyDeaths
 	{
 		ControlName				Label
-		xpos                    -75
-		ypos					37
+		xpos                    -100
+		ypos					29
 		zpos 10
 		//auto_wide_tocontents	1
 		tall					30
@@ -3280,7 +3381,7 @@ Resource/UI/flowstate_customhudvgui.res
 		labelText				"0"
 		font					"TitleBoldFont"
 		allcaps					1
-		fgcolor_override		"255 120 32 255"
+		fgcolor_override		"228 202 111 255"
 		textAlignment			center
 		pin_to_sibling			FS_1v1_UI_BG
 		pin_corner_to_sibling	LEFT
@@ -3290,7 +3391,7 @@ Resource/UI/flowstate_customhudvgui.res
 	{
 		ControlName				Label
 		xpos                  	-135
-		ypos					37
+		ypos					29
 		zpos 10
 		//auto_wide_tocontents	1
 		tall					30
@@ -3300,7 +3401,7 @@ Resource/UI/flowstate_customhudvgui.res
 		labelText				"0"
 		font					"TitleBoldFont"
 		allcaps					1
-		fgcolor_override		"255 120 32 255"
+		fgcolor_override		"228 202 111 255"
 		textAlignment			center
 		pin_to_sibling			FS_1v1_UI_BG
 		pin_corner_to_sibling	LEFT
@@ -3309,8 +3410,8 @@ Resource/UI/flowstate_customhudvgui.res
 	FS_1v1_UI_EnemyLatency
 	{
 		ControlName				Label
-		xpos                    -245
-		ypos					37
+		xpos                    -215
+		ypos					29
 		zpos 10
 		//auto_wide_tocontents	1
 		tall					30
@@ -3320,7 +3421,7 @@ Resource/UI/flowstate_customhudvgui.res
 		labelText				"0"
 		font					"TitleBoldFont"
 		allcaps					1
-		fgcolor_override		"255 120 32 255"
+		fgcolor_override		"228 202 111 255"
 		textAlignment			center
 		pin_to_sibling			FS_1v1_UI_BG
 		pin_corner_to_sibling	LEFT
@@ -3330,8 +3431,8 @@ Resource/UI/flowstate_customhudvgui.res
 	FS_1v1_UI_EnemyPosition
 	{
 		ControlName				Label
-		xpos                    -30
-		ypos					-33
+		xpos                    -37
+		ypos					-31
 		zpos 10
 		//auto_wide_tocontents	1
 		tall					30
@@ -3341,7 +3442,7 @@ Resource/UI/flowstate_customhudvgui.res
 		labelText				"0"
 		font					"TitleBoldFont"
 		allcaps					1
-		fgcolor_override		"255 120 32 255"
+		fgcolor_override		"228 202 111 255"
 		textAlignment			center
 		pin_to_sibling			FS_1v1_UI_BG
 		pin_corner_to_sibling	LEFT
@@ -3371,8 +3472,8 @@ Resource/UI/flowstate_customhudvgui.res
 	FS_1v1_UI_Kills
 	{
 		ControlName				Label
-		xpos                    -255
-		ypos					37
+		xpos                    -232
+		ypos					29
 		zpos 10
 		//auto_wide_tocontents	1
 		tall					30	
@@ -3391,8 +3492,8 @@ Resource/UI/flowstate_customhudvgui.res
 	FS_1v1_UI_Deaths
 	{
 		ControlName				Label
-		xpos                    -200
-		ypos					37
+		xpos                    -173
+		ypos					29
 		zpos 10
 		//auto_wide_tocontents	1
 		tall					30
@@ -3412,7 +3513,7 @@ Resource/UI/flowstate_customhudvgui.res
 	{
 		ControlName				Label
 		xpos                    -90
-		ypos					37
+		ypos					29
 		zpos 10
 		//auto_wide_tocontents	1
 		tall					30
@@ -3431,8 +3532,8 @@ Resource/UI/flowstate_customhudvgui.res
 	FS_1v1_UI_Latency
 	{
 		ControlName				Label
-		xpos                    -28
-		ypos					37
+		xpos                    -55
+		ypos					29
 		zpos 10
 		//auto_wide_tocontents	1
 		tall					30
@@ -3452,8 +3553,8 @@ Resource/UI/flowstate_customhudvgui.res
 	FS_1v1_UI_Position
 	{
 		ControlName				Label
-		xpos                    -30
-		ypos					-33
+		xpos                    -37
+		ypos					-31
 		zpos 10
 		//auto_wide_tocontents	1
 		tall					30

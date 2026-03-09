@@ -14,12 +14,6 @@
 		proportionalToParent    1
 	}
 
-	ToolTip
-    {
-        ControlName				RuiPanel
-        InheritProperties       ToolTip
-        zpos                    999
-    }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -50,7 +44,7 @@
         ControlName                 CNestedPanel
         controlSettingsFile         "resource/ui/menus/panels/private_match_game_status_roster.res"
 
-        xpos                        48
+        xpos                        20
         ypos                        0
 
         wide                        322
@@ -68,7 +62,7 @@
         ControlName                 CNestedPanel
         controlSettingsFile         "resource/ui/menus/panels/private_match_game_status_roster.res"
 
-        xpos                        48
+        xpos                        20
         ypos                        0
 
         wide                        322
@@ -86,7 +80,7 @@
         ControlName                 CNestedPanel
         controlSettingsFile         "resource/ui/menus/panels/private_match_game_status_roster.res"
 
-        xpos                        48
+        xpos                        20
         ypos                        0
 
         wide                        322
@@ -104,7 +98,7 @@
         ControlName                 CNestedPanel
         controlSettingsFile         "resource/ui/menus/panels/private_match_game_status_roster.res"
 
-        xpos                        48
+        xpos                        20
         ypos                        0
 
         wide                        322
@@ -127,7 +121,7 @@
         controlSettingsFile         "resource/ui/menus/panels/private_match_game_status_roster.res"
 
         xpos                        0
-        ypos                        12
+        ypos                        20
 
         wide                        322
         tall                        192
@@ -144,7 +138,7 @@
         ControlName                 CNestedPanel
         controlSettingsFile         "resource/ui/menus/panels/private_match_game_status_roster.res"
 
-        xpos                        48
+        xpos                        20
         ypos                        0
 
         wide                        322
@@ -162,7 +156,7 @@
         ControlName                 CNestedPanel
         controlSettingsFile         "resource/ui/menus/panels/private_match_game_status_roster.res"
 
-        xpos                        48
+        xpos                        20
         ypos                        0
 
         wide                        322
@@ -180,7 +174,7 @@
         ControlName                 CNestedPanel
         controlSettingsFile         "resource/ui/menus/panels/private_match_game_status_roster.res"
 
-        xpos                        48
+        xpos                        20
         ypos                        0
 
         wide                        322
@@ -198,7 +192,7 @@
         ControlName                 CNestedPanel
         controlSettingsFile         "resource/ui/menus/panels/private_match_game_status_roster.res"
 
-        xpos                        48
+        xpos                        20
         ypos                        0
 
         wide                        322
@@ -221,7 +215,7 @@
         controlSettingsFile         "resource/ui/menus/panels/private_match_game_status_roster.res"
 
         xpos                        0
-        ypos                        12
+        ypos                        20
 
         wide                        322
         tall                        192
@@ -238,7 +232,7 @@
         ControlName                 CNestedPanel
         controlSettingsFile         "resource/ui/menus/panels/private_match_game_status_roster.res"
 
-        xpos                        48
+        xpos                        20
         ypos                        0
 
         wide                        322
@@ -256,7 +250,7 @@
         ControlName                 CNestedPanel
         controlSettingsFile         "resource/ui/menus/panels/private_match_game_status_roster.res"
 
-        xpos                        48
+        xpos                        20
         ypos                        0
 
         wide                        322
@@ -274,7 +268,7 @@
         ControlName                 CNestedPanel
         controlSettingsFile         "resource/ui/menus/panels/private_match_game_status_roster.res"
 
-        xpos                        48
+        xpos                        20
         ypos                        0
 
         wide                        322
@@ -292,7 +286,7 @@
         ControlName                 CNestedPanel
         controlSettingsFile         "resource/ui/menus/panels/private_match_game_status_roster.res"
 
-        xpos                        48
+        xpos                        20
         ypos                        0
 
         wide                        322
@@ -315,7 +309,7 @@
         controlSettingsFile         "resource/ui/menus/panels/private_match_game_status_roster.res"
 
         xpos                        0
-        ypos                        12
+        ypos                        20
 
         wide                        322
         tall                        192
@@ -332,7 +326,7 @@
         ControlName                 CNestedPanel
         controlSettingsFile         "resource/ui/menus/panels/private_match_game_status_roster.res"
 
-        xpos                        48
+        xpos                        20
         ypos                        0
 
         wide                        322
@@ -350,7 +344,7 @@
         ControlName                 CNestedPanel
         controlSettingsFile         "resource/ui/menus/panels/private_match_game_status_roster.res"
 
-        xpos                        48
+        xpos                        20
         ypos                        0
 
         wide                        322
@@ -368,7 +362,7 @@
         ControlName                 CNestedPanel
         controlSettingsFile         "resource/ui/menus/panels/private_match_game_status_roster.res"
 
-        xpos                        48
+        xpos                        20
         ypos                        0
 
         wide                        322
@@ -386,7 +380,7 @@
         ControlName                 CNestedPanel
         controlSettingsFile         "resource/ui/menus/panels/private_match_game_status_roster.res"
 
-        xpos                        48
+        xpos                        20
         ypos                        0
 
         wide                        322

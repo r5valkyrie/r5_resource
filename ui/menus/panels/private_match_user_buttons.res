@@ -28,7 +28,7 @@
         classname               "MenuButton"
         wide					288
         tall					112
-        rui                     "ui/generic_button.rpak"
+        rui                     "ui/generic_desc_button.rpak"
         labelText               ""
         visible					1
         cursorVelocityModifier  0.7
@@ -110,6 +110,30 @@
         zpos                    5
 
         pin_to_sibling			PrivateMatchTeamRenameToggleButton
+        pin_corner_to_sibling	BOTTOM_RIGHT
+        pin_to_sibling_corner	BOTTOM_LEFT
+    }
+
+    PrivateMatchAimAssistToggleButton
+    {
+        ControlName             RuiButton
+        InheritProperties       CornerButton
+        xpos                    16
+        zpos                    5
+
+        pin_to_sibling          PrivateMatchAdminOnlyChatToggleButton
+        pin_corner_to_sibling	BOTTOM_RIGHT
+        pin_to_sibling_corner	BOTTOM_LEFT
+    }
+
+    PrivateMatchAnonymousModeToggleButton
+    {
+        ControlName             RuiButton
+        InheritProperties       CornerButton
+        xpos                    16
+        zpos                    5
+
+        pin_to_sibling          PrivateMatchAimAssistToggleButton
         pin_corner_to_sibling	BOTTOM_RIGHT
         pin_to_sibling_corner	BOTTOM_LEFT
     }

@@ -14,6 +14,17 @@
 		proportionalToParent    1
 	}
 
+	TabsBackground
+    {
+        ControlName				RuiPanel
+		InheritProperties		TabsBackgroundShort
+
+
+        pin_to_sibling           PanelFrame
+	    pin_corner_to_sibling    TOP
+	    pin_to_sibling_corner    TOP
+    }
+
     TabsCommon
     {
         ControlName				CNestedPanel
@@ -22,7 +33,7 @@
         wide					f0
         tall					60
         visible					1
-        controlSettingsFile		"resource/ui/menus/panels/tabs_store.res"
+        controlSettingsFile		"resource/ui/menus/panels/common_tabs_short.res"
 
         pin_to_sibling			PanelFrame
         pin_corner_to_sibling	TOP
@@ -44,20 +55,20 @@
         pin_to_sibling_corner	TOP
     }
 
-    CollectionEventPanel
+    CoinsPopUpButton
     {
-        ControlName				CNestedPanel
-        ypos					-64
-        wide					%100
-        tall					864
-        visible					0
-        tabPosition             1
-        controlSettingsFile		"resource/ui/menus/panels/store_collection_event.res"
-		proportionalToParent    1
+        ControlName			RuiButton
+        zpos			    4
+        wide			    200
+        tall			    60
+        ypos                0
+        visible			    1
+        enabled             1
+        rui					"ui/store_button_vc_pop_up.rpak"
 
-        pin_to_sibling			PanelFrame
-        pin_corner_to_sibling	TOP
-        pin_to_sibling_corner	TOP
+        pin_to_sibling						PanelFrame
+        pin_corner_to_sibling				TOP_RIGHT
+        pin_to_sibling_corner				TOP_RIGHT
     }
 
     //SpecialCurrencyShopPanel
@@ -76,16 +87,32 @@
     //    pin_to_sibling_corner	TOP
     //}
 
-	ThemedShopPanel
+    HeirloomShopPanel
+    {
+        ControlName				CNestedPanel
+        ypos					-60
+        wide					%100
+        tall					%100
+        visible					0
+        tabPosition             1
+        controlSettingsFile		"resource/ui/menus/panels/store_heirloom_shop.res"
+    	proportionalToParent    1
+
+        pin_to_sibling			PanelFrame
+        pin_corner_to_sibling	TOP
+        pin_to_sibling_corner	TOP
+    }
+
+    SpecialsPanel
     {
         ControlName				CNestedPanel
         ypos					-64
-        wide					%100
-        tall					904
+        wide					1728
+        tall					964
         visible					0
-        tabPosition             1
-        controlSettingsFile		"resource/ui/menus/panels/store_themed_shop_event.res"
-		proportionalToParent    1
+        tabPosition             2
+        controlSettingsFile		"resource/ui/menus/panels/store_ec.res"
+        proportionalToParent    1
 
         pin_to_sibling			PanelFrame
         pin_corner_to_sibling	TOP
@@ -97,11 +124,27 @@
         ControlName				CNestedPanel
         ypos					-64
         wide					1728
-        tall					864
+        tall					964
         visible					0
-        tabPosition             1
+        tabPosition             2
         controlSettingsFile		"resource/ui/menus/panels/store_ec.res"
 		proportionalToParent    1
+
+        pin_to_sibling			PanelFrame
+        pin_corner_to_sibling	TOP
+        pin_to_sibling_corner	TOP
+    }
+
+    SeasonalPanel
+    {
+        ControlName				CNestedPanel
+        ypos					-64
+        wide					1728
+        tall					964
+        visible					0
+        tabPosition             3
+        controlSettingsFile		"resource/ui/menus/panels/store_ec.res"
+        proportionalToParent    1
 
         pin_to_sibling			PanelFrame
         pin_corner_to_sibling	TOP
@@ -117,23 +160,12 @@
         visible					0
         tabPosition             1
         proportionalToParent    1
-        controlSettingsFile		"resource/ui/menus/panels/store_loot.res"
-		proportionalToParent    1
-
-        pin_to_sibling			PanelFrame
-        pin_corner_to_sibling	TOP
-        pin_to_sibling_corner	TOP
-    }
-
-    CharacterPanel
-    {
-        ControlName				CNestedPanel
-        ypos					-64
-        wide					1728
-        tall					%100
-        visible					0
-        tabPosition             1
-        controlSettingsFile		"resource/ui/menus/panels/store_characters.res"
+                    
+                                                                      
+     
+		//todo (cmottram): remove after feature flag not needed
+        controlSettingsFile     "resource/ui/menus/panels/store_loot_old.res"
+      
 		proportionalToParent    1
 
         pin_to_sibling			PanelFrame
@@ -155,5 +187,21 @@
         pin_to_sibling			PanelFrame
         pin_corner_to_sibling	TOP
         pin_to_sibling_corner	TOP
+    }
+
+    EventStoreButton
+    {
+        ControlName         RuiButton
+        ypos                -112
+        xpos                -30
+        wide                530
+        tall                80
+        visible             0
+        enabled             0
+        rui                 "ui/store_button_event_store.rpak"
+
+		pin_to_sibling			    PanelFrame
+        pin_corner_to_sibling	    BOTTOM_RIGHT
+        pin_to_sibling_corner	    BOTTOM_RIGHT
     }
 }

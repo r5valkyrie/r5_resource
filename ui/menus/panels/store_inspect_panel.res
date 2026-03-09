@@ -51,11 +51,12 @@
 
         xpos					0
         ypos					0
+		ypos_nx_handheld		80		[$NX || $NX_UI_PC] 
         zpos                    5
         wide					600
-        wide_nx_handheld		750		[$NX]
+        wide_nx_handheld		750		[$NX || $NX_UI_PC] 
         tall					400
-        tall_nx_handheld		500		[$NX]
+        tall_nx_handheld		500		[$NX || $NX_UI_PC]
 
         visible					1
         controlSettingsFile		"resource/ui/menus/panels/store_inspect_grid.res"
@@ -68,18 +69,70 @@
     DiscountInfo
     {
         ControlName				RuiPanel
-        ypos					-225
+               
+        ypos					-310
+     
+               
+      
         xpos                    -65
         wide					600
         tall					60
         visible				    1
-        rui                     "ui/store_inspect_discount_info.rpak"
+               
+        rui                     "ui/store_inspect_discount_info_v2.rpak"
+     
+                                                                
+      
 
         pin_to_sibling			PanelFrame
         pin_corner_to_sibling	BOTTOM_LEFT
         pin_to_sibling_corner	BOTTOM_LEFT
     }
+               
+    GiftablePurchaseOfferButton
+    {
+        ControlName			    RuiButton
+        classname               "MenuButton"
 
+        xpos				    0
+        ypos				    16
+        wide				    293
+        tall				    100
+        cursorVelocityModifier  0.7
+        visible                 0
+        tabPosition             1
+
+        rui					    "ui/store_inspect_purchase_button.rpak"
+        sound_focus             "UI_Menu_Focus_Large"
+
+        pin_to_sibling			DiscountInfo
+        pin_corner_to_sibling	TOP_RIGHT
+        pin_to_sibling_corner	BOTTOM_RIGHT
+        navLeft                 GiftOfferButton
+    }
+
+    GiftOfferButton
+	{
+        ControlName			    RuiButton
+        classname               "MenuButton"
+
+        xpos				    0
+        ypos				    16
+        wide				    293
+        tall				    100
+        cursorVelocityModifier  0.7
+        visible                 0
+        tabPosition             1
+
+        rui					    "ui/store_inspect_purchase_button.rpak"
+        sound_focus             "UI_Menu_Focus_Large"
+
+        pin_to_sibling			DiscountInfo
+        pin_corner_to_sibling	TOP_LEFT
+        pin_to_sibling_corner	BOTTOM_LEFT
+        navRight 				GiftablePurchaseOfferButton
+    }
+      
     PurchaseOfferButton
     {
         ControlName			    RuiButton
@@ -87,6 +140,7 @@
 
         xpos				    0
         ypos				    16
+        zpos                    40
         wide				    600
         tall				    100
         cursorVelocityModifier  0.7
@@ -121,9 +175,9 @@
         xpos                    -75
         ypos					-75
         wide					500
-        wide_nx_handheld		625		[$NX]
+        wide_nx_handheld		625		[$NX || $NX_UI_PC]
         tall					300
-        tall_nx_handheld		375		[$NX]
+        tall_nx_handheld		375		[$NX || $NX_UI_PC]
         visible				    1
         rui                     "ui/store_inspect_individual_item_info.rpak"
 

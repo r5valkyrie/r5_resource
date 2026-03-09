@@ -1,4 +1,4 @@
-scripts/resource/ui/menus/panels/death_screen_spectate.res
+resource/ui/menus/panels/death_screen_spectate.res
 {
     ScreenFrame
     {
@@ -34,9 +34,11 @@ scripts/resource/ui/menus/panels/death_screen_spectate.res
 		pin_to_sibling_corner	LEFT
 
 		xpos					-50
-		ypos					100
+		xpos_nx_handheld        -400 [$NX || $NX_UI_PC]
+		ypos					72
+		ypos_nx_handheld        -250 [$NX || $NX_UI_PC]
 		zpos                    200
 
-		tall 					125
+		tall 					200
 	}
 }

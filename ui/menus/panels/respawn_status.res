@@ -17,7 +17,7 @@
 		wide			1920
 		tall			1080
 		visible			1
-		rui             "ui/respawn_status_overlay.rpak"
+		rui             "ui/respawn_round_timer.rpak"
 
 		pin_to_sibling			Screen
 		pin_corner_to_sibling	TOP

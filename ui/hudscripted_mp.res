@@ -4,6 +4,7 @@
 #base "HudDeathRecap.res"
 #base "DebugOverlays.res"
 #base "flowstate_customhudvgui.res"
+
 Resource/UI/HudScripted_mp.res
 {
 	Screen
@@ -301,5 +302,4 @@ Resource/UI/HudScripted_mp.res
 		pin_corner_to_sibling		BOTTOM
 		pin_to_sibling_corner		BOTTOM
     }
- 
 }

@@ -81,6 +81,7 @@ resource/ui/menus/dialogs/two_factor_information_dialog.menu
         	xpos                    0
         	ypos                    -30
             wide					440 // width of 2 buttons including space in between
+            tall					70
 
         	pin_to_sibling			InfoPanel
         	pin_corner_to_sibling	BOTTOM
