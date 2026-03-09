@@ -31,7 +31,7 @@ resource/ui/menus/custom_match_dashboard.menu
         {
             ControlName				Label
             labelText               ""
-            visible                 0
+            visible                 1
         }
 
 	    DashboardPanel
@@ -151,6 +151,41 @@ resource/ui/menus/custom_match_dashboard.menu
             pin_to_sibling_corner	TOP_RIGHT
 
             controlSettingsFile     "resource/ui/menus/panels/custom_match_share_token.res"
+        }
+
+         AutoCloseLobbyLabel
+        {
+            ControlName				Label
+            wide					300
+            tall					48
+            xpos                    -60
+            ypos                    -20
+            zpos                    120
+            labelText				"#CUSTOMMATCH_LOBBY_AUTO_CLOSING"
+            font                    Default_48
+            textAlignment	        east
+            visible				    0
+
+            pin_to_sibling			ScreenFrame
+            pin_corner_to_sibling   TOP_RIGHT
+            pin_to_sibling_corner	TOP_RIGHT
+        }
+
+        AutoCloseLobbyTimer
+        {
+            ControlName				Label
+            wide					50
+            tall					48
+            xpos                    0
+            ypos                    0
+            zpos                    120
+            labelText				""
+            font                    Default_48
+            visible				    0
+
+            pin_to_sibling			AutoCloseLobbyLabel
+            pin_corner_to_sibling   TOP_LEFT
+            pin_to_sibling_corner	TOP_RIGHT
         }
 
 	    MatchmakingStatus

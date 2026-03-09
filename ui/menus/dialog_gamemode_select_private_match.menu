@@ -67,6 +67,29 @@ resource/ui/menus/dialog_gamemode_select_private_match.menu
             visible                 1
             sound_accept            "UI_Menu_SelectMode_Close"
         }
+
+        GameModeSelectPanel
+        {
+            ControlName				RuiButton
+            wide					1540 // 48 + 160 + 48 + 340 + 48 + 340 + 48 + 340 + 48
+            wide_nx_handheld		1161		[$NX || $NX_UI_PC]
+            tall					832 // 80 + 340 + 24 + 340 + 48
+            tall_nx_handheld		936		[$NX || $NX_UI_PC]
+            xpos                    -48
+            xpos_nx_handheld        -28		[$NX || $NX_UI_PC]
+            ypos                    -110
+            zpos                    5
+            rui                     "ui/gamemode_select_private_bg_panel.rpak"
+            labelText               ""
+            visible					1
+            enabled                 1
+            sound_accept            ""
+
+            pin_to_sibling			CloseButton
+            pin_corner_to_sibling	BOTTOM_LEFT
+            pin_to_sibling_corner	BOTTOM_LEFT
+        }
+
 		GameModeSelectAnchor
 		{
 			ControlName				Label
@@ -75,8 +98,10 @@ resource/ui/menus/dialog_gamemode_select_private_match.menu
             wide					0
             tall					0
             xpos                    0
+            xpos_nx_handheld        -48		[$NX || $NX_UI_PC]
             ypos                    -80
 
+            pin_to_sibling			GameModeSelectPanel
             pin_corner_to_sibling	TOP_LEFT
             pin_to_sibling_corner	TOP_LEFT
 		}
@@ -86,11 +111,11 @@ resource/ui/menus/dialog_gamemode_select_private_match.menu
             ControlName				CNestedPanel
 
             wide					340
-            wide_nx_handheld		450		[$NX]
+            wide_nx_handheld		450		[$NX || $NX_UI_PC]
             tall					704
-            tall_nx_handheld		838		[$NX]
+            tall_nx_handheld		838		[$NX || $NX_UI_PC]
             xpos                    -36
-            xpos_nx_handheld        18		[$NX]
+            xpos_nx_handheld        18		[$NX || $NX_UI_PC]
             ypos                    0
             zpos                    10
 
@@ -111,11 +136,11 @@ resource/ui/menus/dialog_gamemode_select_private_match.menu
             ControlName				CNestedPanel
 
             wide					340
-            wide_nx_handheld		450		[$NX]
+            wide_nx_handheld		450		[$NX || $NX_UI_PC]
             tall					704
-            tall_nx_handheld		838		[$NX]
+            tall_nx_handheld		838		[$NX || $NX_UI_PC]
             xpos                    36
-            xpos_nx_handheld        18		[$NX]
+            xpos_nx_handheld        -100		[$NX || $NX_UI_PC]
             ypos                    0
             zpos                    10
 
@@ -136,11 +161,11 @@ resource/ui/menus/dialog_gamemode_select_private_match.menu
             ControlName				CNestedPanel
 
             wide					340
-            wide_nx_handheld		450		[$NX]
+            wide_nx_handheld		450		[$NX || $NX_UI_PC]
             tall					704
-            tall_nx_handheld		838		[$NX]
+            tall_nx_handheld		838		[$NX || $NX_UI_PC]
             xpos                    36
-            xpos_nx_handheld        18		[$NX]
+            xpos_nx_handheld        -100		[$NX || $NX_UI_PC]
             ypos                    0
             zpos                    10
 
@@ -161,11 +186,11 @@ resource/ui/menus/dialog_gamemode_select_private_match.menu
             ControlName				CNestedPanel
 
             wide					340
-            wide_nx_handheld		450		[$NX]
+            wide_nx_handheld		450		[$NX || $NX_UI_PC]
             tall					704
-            tall_nx_handheld		838		[$NX]
+            tall_nx_handheld		838		[$NX || $NX_UI_PC]
             xpos                    36
-            xpos_nx_handheld        18		[$NX]
+            xpos_nx_handheld        -100		[$NX || $NX_UI_PC]
             ypos                    0
             zpos                    10
 
@@ -192,7 +217,7 @@ resource/ui/menus/dialog_gamemode_select_private_match.menu
         //    xpos                    48
         //    xpos_nx_handheld        18		[$NX]
         //    zpos                    10
-        //    rui                     "ui/gamemode_select_button.rpak"
+        //    rui                     "ui/gamemode_select_v3_button.rpak"
         //    labelText               ""
         //    visible					1
         //    tabPosition             1

@@ -29,6 +29,7 @@
 
         xpos                    0
         ypos                    0
+        zpos                    1
 
         wide                    272
         tall                    48
@@ -38,9 +39,7 @@
 
         ruiArgs
         {
-            teamNumber          0
-            showTeamNumber      1
-            teamName            "Spectator"
+
         }
 
         pin_to_sibling          PanelFrame

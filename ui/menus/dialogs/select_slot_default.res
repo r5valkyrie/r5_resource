@@ -30,7 +30,7 @@ resource/ui/menus/dialogs/select_slot_default.res
         pin_to_sibling			DarkenBackground
         pin_to_sibling_corner	TOP_LEFT
         wide					384
-        wide_nx_handheld		700			[$NX]
+        wide_nx_handheld		700			[$NX || $NX_UI_PC]
 
         rightClickEvents		1
         tall					96
@@ -53,9 +53,9 @@ resource/ui/menus/dialogs/select_slot_default.res
         xpos					0
         ypos					0
         wide					64
-        wide_nx_handheld		84		[$NX]
+        wide_nx_handheld		84		[$NX || $NX_UI_PC]
         tall					64
-        tall_nx_handheld		84		[$NX]
+        tall_nx_handheld		84		[$NX || $NX_UI_PC]
         visible					1
 
 
@@ -77,7 +77,7 @@ resource/ui/menus/dialogs/select_slot_default.res
         pin_to_sibling			DarkenBackground
         pin_to_sibling_corner	TOP_LEFT
         wide					384
-        wide_nx_handheld		700			[$NX]
+        wide_nx_handheld		700			[$NX || $NX_UI_PC]
         rightClickEvents		1
         tall					96
         ypos                    8
@@ -107,7 +107,7 @@ resource/ui/menus/dialogs/select_slot_default.res
 
         rightClickEvents		1
         wide					384
-        wide_nx_handheld		700			[$NX]
+        wide_nx_handheld		700			[$NX || $NX_UI_PC]
         tall					96
         ypos                    8
         zpos                    100
@@ -137,7 +137,7 @@ resource/ui/menus/dialogs/select_slot_default.res
 
         rightClickEvents		1
         wide					384
-        wide_nx_handheld		700			[$NX]
+        wide_nx_handheld		700			[$NX || $NX_UI_PC]
         tall					96
         ypos                    8
         zpos                    100
@@ -167,7 +167,7 @@ resource/ui/menus/dialogs/select_slot_default.res
 
         rightClickEvents		1
         wide					384
-        wide_nx_handheld		700			[$NX]
+        wide_nx_handheld		700			[$NX || $NX_UI_PC]
         tall					96
         ypos                    8
         zpos                    100
@@ -197,7 +197,7 @@ resource/ui/menus/dialogs/select_slot_default.res
 
         rightClickEvents		1
         wide					384
-        wide_nx_handheld		700			[$NX]
+        wide_nx_handheld		700			[$NX || $NX_UI_PC]
         tall					96
         ypos                    8
         zpos                    100
@@ -227,7 +227,7 @@ resource/ui/menus/dialogs/select_slot_default.res
 
         rightClickEvents		1
         wide					384
-        wide_nx_handheld		700			[$NX]
+        wide_nx_handheld		700			[$NX || $NX_UI_PC]
         tall					96
         ypos                    8
         zpos                    100
@@ -258,7 +258,7 @@ resource/ui/menus/dialogs/select_slot_default.res
 
         rightClickEvents		1
         wide					384
-        wide_nx_handheld		700			[$NX]
+        wide_nx_handheld		700			[$NX || $NX_UI_PC]
         tall					96
         ypos                    8
         zpos                    100
@@ -290,7 +290,7 @@ resource/ui/menus/dialogs/select_slot_default.res
 
         rightClickEvents		1
         wide					384
-        wide_nx_handheld		700			[$NX]
+        wide_nx_handheld		700			[$NX || $NX_UI_PC]
         tall					96
         ypos                    8
         zpos                    100

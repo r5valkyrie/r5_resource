@@ -57,6 +57,7 @@
     {
         ControlName				RuiPanel
         ypos					-56
+        ypos_nx_handheld        -100			[$NX || $NX_UI_PC]
         wide					912
         tall					207
         visible				    1
@@ -71,9 +72,10 @@
 	{
 		ControlName				CNestedPanel
 		xpos				    -8
-		ypos					-180
+		ypos					-220
 		wide					597//854 //long term size, missing functionality right now
-		tall					432//618
+		wide_nx_handheld		645			[$NX || $NX_UI_PC]
+		tall					450//618
 		visible					1
 		controlSettingsFile		"resource/ui/menus/panels/tournament_connect_box.res"
 		zpos                    2
@@ -87,9 +89,10 @@
     {
         ControlName				CNestedPanel
         xpos					8
-        ypos					-180
+        ypos					-220
 		wide					597//854
-		tall					432//618
+		wide_nx_handheld		645			[$NX || $NX_UI_PC]
+		tall					450//618
         visible					1
         controlSettingsFile		"resource/ui/menus/panels/tournament_connect_box.res"
         zpos                    2

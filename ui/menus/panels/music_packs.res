@@ -19,6 +19,7 @@
     {
         ControlName             RuiPanel
         xpos                    194
+        xpos_nx_handheld		34   	[$NX || $NX_UI_PC]
         ypos                    50
         zpos                    4
         wide                    550
@@ -31,9 +32,12 @@
     {
         ControlName				GridButtonListPanel
         xpos                    194
+        xpos_nx_handheld		8		[$NX || $NX_UI_PC]
         ypos                    96
-        columns                 1
+        ypos_nx_handheld		50		[$NX || $NX_UI_PC]
+		columns                 1
         rows                    12
+        rows_nx_handheld        8		[$NX || $NX_UI_PC]
         buttonSpacing           6
         scrollbarSpacing        6
         scrollbarOnLeft         0
@@ -46,10 +50,13 @@
             rui                     "ui/generic_item_button.rpak"
             clipRui                 1
             wide					350
+            wide_nx_handheld		630		[$NX || $NX_UI_PC]
             tall					50
+            tall_nx_handheld		85		[$NX || $NX_UI_PC]
             cursorVelocityModifier  0.7
             rightClickEvents		1
 			doubleClickEvents       1
+            middleClickEvents       1
             sound_focus             "UI_Menu_Focus_Small"
             sound_accept            ""
             sound_deny              ""
@@ -60,9 +67,13 @@
     {
         ControlName             RuiPanel
         xpos					760
+        xpos_nx_handheld		700				[$NX || $NX_UI_PC]
         ypos					200
+        ypos_nx_handheld		50				[$NX || $NX_UI_PC]
         wide                    624//780
+        wide_nx_handheld        1022			[$NX || $NX_UI_PC]
         tall                    332//416
+        tall_nx_handheld        544				[$NX || $NX_UI_PC]
         visible                 1
         rui                     "ui/loot_reward_intro_quip.rpak"
     }

@@ -35,12 +35,6 @@
         tall                    48
         rui                     "ui/private_match_team_roster_header.rpak"
 
-        ruiArgs
-        {
-            teamNumber          0
-            showTeamNumber      1
-            teamName            "Unassigned"
-        }
 
         pin_to_sibling          PanelFrame
         pin_corner_to_sibling   TOP_LEFT

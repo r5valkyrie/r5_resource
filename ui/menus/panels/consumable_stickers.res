@@ -30,7 +30,7 @@
     {
         ControlName             RuiPanel
         xpos                    -48
-        ypos                    -143
+        ypos                    -607
         zpos                    0
         wide                    308
         wide_nx_handheld        380		[$NX || $NX_UI_PC]

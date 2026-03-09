@@ -1,4 +1,4 @@
-resource/ui/menus/panels/friend_list_panel.menu
+resource/ui/menus/panels/friend_list_panel.res
 {
 	menu
 	{
@@ -50,7 +50,7 @@ resource/ui/menus/panels/friend_list_panel.menu
             wide                    1300
             tall                    660
             visible					1
-            xpos_nx_handheld		58			[$NX]
+            xpos_nx_handheld		58			[$NX || $NX_UI_PC]
 
             pin_to_sibling			FriendGrid
             pin_corner_to_sibling	TOP_RIGHT

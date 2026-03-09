@@ -86,9 +86,9 @@ resource/ui/menus/clubs_logo_editor_color_selection.menu
             zpos                    10
 
             wide                    128
-            wide_nx_handheld        175		[$NX]
+            wide_nx_handheld        175		[$NX || $NX_UI_PC]
             tall                    200
-            tall_nx_handheld        275		[$NX]
+            tall_nx_handheld        275		[$NX || $NX_UI_PC]
 
             visible                 1
 
@@ -104,9 +104,9 @@ resource/ui/menus/clubs_logo_editor_color_selection.menu
              ypos					-55
              zpos                   20
              wide					330
-             wide_nx_handheld		770		[$NX]
+             wide_nx_handheld		770		[$NX || $NX_UI_PC]
              tall					170
-             tall_nx_handheld		640		[$NX]
+             tall_nx_handheld		640		[$NX || $NX_UI_PC]
              labelText				""
 
              //pin_to_sibling          LayerElement
@@ -122,9 +122,9 @@ resource/ui/menus/clubs_logo_editor_color_selection.menu
             visible                 1
 
             wide                    325
-            wide_nx_handheld        770		[$NX]
+            wide_nx_handheld        770		[$NX || $NX_UI_PC]
             tall                    280
-            tall_nx_handheld        640		[$NX]
+            tall_nx_handheld        640		[$NX || $NX_UI_PC]
 
             xpos                    0
             ypos                    0
@@ -161,9 +161,9 @@ resource/ui/menus/clubs_logo_editor_color_selection.menu
                 rui                      "ui/clubs_logo_editor_color_swatch_button.rpak"
                 clipRui                  1
                 wide                     24
-                wide_nx_handheld         60			[$NX]
+                wide_nx_handheld         60			[$NX || $NX_UI_PC]
                 tall                     24
-                tall_nx_handheld         60			[$NX]
+                tall_nx_handheld         60			[$NX || $NX_UI_PC]
                 cursorVelocityModifier   0.7
                 cursorPriority           20
                 //rightClickEvents       1

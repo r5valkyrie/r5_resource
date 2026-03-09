@@ -20,9 +20,8 @@
         ControlName				GridButtonListPanel
         xpos                    0
         ypos                    0
-        tall                    60
         columns                 1
-        rows                    12
+        rows                    12 //not used; this is actually set on the fly
         buttonSpacing           0
         scrollbarSpacing        6
         scrollbarOnLeft         0

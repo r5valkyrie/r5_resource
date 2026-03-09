@@ -1,4 +1,4 @@
-scripts/resource/ui/menus/post_game_ranked.menu
+resource/ui/menus/post_game_ranked.menu
 {
 	menu
 	{
@@ -127,10 +127,12 @@ scripts/resource/ui/menus/post_game_ranked.menu
         XPEarned1
         {
             ControlName				RuiPanel
-            rui                     "ui/xp_earned_box.rpak"
+            rui                     "ui/ranked_xp_earned_box.rpak"
             xpos                    0
+            xpos_nx_handheld		30		[$NX || $NX_UI_PC]
             ypos                    -90
             wide                    380
+            wide_nx_handheld        750		[$NX || $NX_UI_PC]
             tall                    280
             visible					1
 
@@ -150,7 +152,6 @@ scripts/resource/ui/menus/post_game_ranked.menu
             ControlName				RuiPanel
             rui                     "ui/ranked_score_adjustment.rpak"
             xpos                    0
-            ypos                    -80
             wide					300
             tall					100
             visible					1
@@ -168,8 +169,11 @@ scripts/resource/ui/menus/post_game_ranked.menu
             rui                     "ui/ranked_progress_bar.rpak"
             xpos                    -20
             ypos                    30
+            ypos_nx_handheld		-8			[$NX || $NX_UI_PC]
             wide					625
+            wide_nx_handheld		688			[$NX || $NX_UI_PC]
             tall					125
+            tall_nx_handheld		138			[$NX || $NX_UI_PC]
             visible					1
 
             zpos                    500
@@ -178,6 +182,26 @@ scripts/resource/ui/menus/post_game_ranked.menu
             pin_corner_to_sibling   TOP
             pin_to_sibling_corner   BOTTOM_LEFT
         }
+
+       RankedDemotionProtection
+       {
+           ControlName			RuiPanel
+           rui                     "ui/ranked_demotion_protection.rpak"
+           xpos                    -20
+           ypos                    30
+           ypos_nx_handheld		-8			[$NX || $NX_UI_PC]
+           wide					625
+           wide_nx_handheld		688			[$NX || $NX_UI_PC]
+           tall					125
+           tall_nx_handheld		138			[$NX || $NX_UI_PC]
+           visible					1
+
+           zpos                    500
+
+           pin_to_sibling          RankedScoreAdjustment
+           pin_corner_to_sibling   TOP
+           pin_to_sibling_corner   BOTTOM_LEFT
+       }
 
         ContinueButton
         {
@@ -230,6 +254,21 @@ scripts/resource/ui/menus/post_game_ranked.menu
             pin_to_sibling_corner   CENTER
         }
         
+        BlackOut
+        {
+			ControlName				ImagePanel
+			xpos					0
+			ypos					0
+			zpos					600
+			wide					%100
+			tall					%100
+			visible					1
+			enabled 				1
+			scaleImage				1
+			image                   "vgui/HUD/white"
+			drawColor				"0 0 0 255"
+		}
+
 // FOOTER //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		FooterButtons

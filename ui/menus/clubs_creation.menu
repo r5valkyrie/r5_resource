@@ -25,7 +25,20 @@ resource/ui/menus/clubs_creation.menu
             //bgcolor_override        "255 255 0 100"
             //paintbackground         1
         }
+		PanelFrame
+        {
+            ControlName				Label
+            xpos					0
+            ypos					0
+            wide					1920
+            tall					%100
+            labelText				""
+            visible				    1
 
+            pin_to_sibling          ScreenFrame
+            pin_corner_to_sibling   CENTER
+            pin_to_sibling_corner   CENTER
+        }
         DarkenBackground
         {
             ControlName				RuiPanel
@@ -115,18 +128,18 @@ resource/ui/menus/clubs_creation.menu
             ControlName				CNestedPanel
 
             xpos                    -48
-            xpos_nx_handheld        150		[$NX]
+            xpos_nx_handheld        150		[$NX || $NX_UI_PC]
             ypos                    48
             zpos                    0
 
             wide                    %30
-            wide_nx_handheld        %50		[$NX]
+            wide_nx_handheld        %50		[$NX || $NX_UI_PC]
             tall                    %70
 
             visible					1
             controlSettingsFile		"resource/ui/menus/panels/panel_club_creation_logo.res"
 
-            pin_to_sibling          ScreenFrame
+            pin_to_sibling          PanelFrame
             pin_corner_to_sibling   LEFT
             pin_to_sibling_corner   LEFT
         }
@@ -136,18 +149,18 @@ resource/ui/menus/clubs_creation.menu
             ControlName				CNestedPanel
 
             xpos                    0
-            xpos_nx_handheld        200		[$NX]
+            xpos_nx_handheld        200		[$NX || $NX_UI_PC]
             ypos                    48
             zpos                    0
 
-            wide                    %30
-            wide_nx_handheld        %50		[$NX]
-            tall                    %70
+            wide                    576
+            wide_nx_handheld        %50		[$NX || $NX_UI_PC]
+            tall                    756
 
             visible					1
             controlSettingsFile		"resource/ui/menus/panels/panel_club_creation_settings.res"
 
-            pin_to_sibling          ScreenFrame
+            pin_to_sibling          PanelFrame
             pin_corner_to_sibling   CENTER
             pin_to_sibling_corner   CENTER
         }
@@ -157,18 +170,18 @@ resource/ui/menus/clubs_creation.menu
             ControlName				CNestedPanel
 
             xpos                    -48
-            xpos_nx_handheld        18		[$NX]
+            xpos_nx_handheld        18		[$NX || $NX_UI_PC]
             ypos                    48
-            ypos_nx_handheld        27		[$NX]
+            ypos_nx_handheld        27		[$NX || $NX_UI_PC]
             zpos                    0
 
-            wide                    %30
-            tall                    %70
+            wide                    576
+            tall                    756
 
             visible					1
             controlSettingsFile		"resource/ui/menus/panels/panel_club_creation_search_tags.res"
 
-            pin_to_sibling          ScreenFrame
+            pin_to_sibling          PanelFrame
             pin_corner_to_sibling   RIGHT
             pin_to_sibling_corner   RIGHT
         }

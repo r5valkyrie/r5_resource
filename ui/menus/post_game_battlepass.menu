@@ -1,4 +1,4 @@
-scripts/resource/ui/menus/post_game_battlepass.menu
+resource/ui/menus/post_game_battlepass.menu
 {
 	menu
 	{
@@ -99,7 +99,7 @@ scripts/resource/ui/menus/post_game_battlepass.menu
 			ControlName				Label
 			xpos					0
 			ypos					c-420
-			ypos_nx_handheld		c-380		[$NX]
+			ypos_nx_handheld		c-380		[$NX || $NX_UI_PC]
 			wide					%100
 			tall					906
 			labelText				""
@@ -112,9 +112,9 @@ scripts/resource/ui/menus/post_game_battlepass.menu
 		{
 			ControlName				RuiPanel
 			xpos					0
-			ypos					-80
+			ypos					-90
 			wide					1520
-			wide_nx_handheld		1820		[$NX]
+			wide_nx_handheld		1820		[$NX || $NX_UI_PC]
 			tall					700
 			visible				    1
 			rui                     "ui/match_summary_bg.rpak"
@@ -128,7 +128,7 @@ scripts/resource/ui/menus/post_game_battlepass.menu
 	    {
 	        ControlName				GridButtonListPanel
 	        xpos                    -80
-	        xpos_nx_handheld        -90		[$NX]
+	        xpos_nx_handheld        -90		[$NX || $NX_UI_PC]
 	        ypos                    -25
 	        columns                 1
 	        rows                    8
@@ -149,7 +149,7 @@ scripts/resource/ui/menus/post_game_battlepass.menu
 
 				clipRui                 1
 				wide					655
-				wide_nx_handheld		955		[$NX]
+				wide_nx_handheld		955		[$NX || $NX_UI_PC]
 				tall					76
 				cursorVelocityModifier  0.7
 				enabled					0
@@ -441,7 +441,7 @@ scripts/resource/ui/menus/post_game_battlepass.menu
         {
             ControlName				RuiButton
             classname               "MenuButton"
-            ypos_nx_handheld		-40		[$NX]
+            ypos_nx_handheld		-40		[$NX || $NX_UI_PC]
             wide					384
             tall					66
             rui                     "ui/generic_button.rpak"

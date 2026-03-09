@@ -1,4 +1,4 @@
-scripts/resource/ui/menus/confirm_dialog.menu
+resource/ui/menus/confirm_dialog.menu
 {
 	menu
 	{
@@ -39,6 +39,18 @@ scripts/resource/ui/menus/confirm_dialog.menu
                 basicImageColor     "0 0 0"
                 basicImageAlpha     0.65
             }
+		}
+
+		UserInfo
+		{
+			ControlName             RuiButton
+			InheritProperties       UserInfo
+	        xpos                    "%-2.5"
+	        zpos                    4
+
+	        pin_to_sibling			DarkenBackground
+			pin_corner_to_sibling	TOP_RIGHT
+			pin_to_sibling_corner	TOP_RIGHT
 		}
 
         DialogFrame
@@ -96,6 +108,7 @@ scripts/resource/ui/menus/confirm_dialog.menu
             ControlName				GridButtonListPanel
             xpos                    0
             ypos                    20
+            zpos                    100 // shouldn't necessary, but on subsequent openings, was rendering BEHIND background
             columns                 5
             rows                    2
             buttonSpacing           8
@@ -144,11 +157,11 @@ scripts/resource/ui/menus/confirm_dialog.menu
 
             tabPosition 1
             //navUp RewardList
-            //navLeft DecButton
-            //navRight IncButton
+            //navLeft Dec1Button
+            //navRight Inc1Button
         }
 
-        IncButton
+        Inc1Button
         {
             ControlName				RuiButton
             classname               "MenuButton"
@@ -157,7 +170,7 @@ scripts/resource/ui/menus/confirm_dialog.menu
             tall					62
             xpos                    8
             font                    Default_28
-            labelText				"+"
+            labelText				""
             enabled					1
             visible					1
 
@@ -167,11 +180,32 @@ scripts/resource/ui/menus/confirm_dialog.menu
 
             sound_accept            "UI_Menu_BattlePass_LevelIncreaseTab"
 
-            //tabPosition 1
             navLeft PurchaseButton // (dw): hahaha
         }
 
-        DecButton
+        Inc5Button
+        {
+            ControlName				RuiButton
+            classname               "MenuButton"
+            rui						"ui/battle_pass_level_purchase_increase.rpak"
+            wide                    90
+            tall					62
+            xpos                    8
+            font                    Default_28
+            labelText				""
+            enabled					1
+            visible					1
+
+            pin_to_sibling			Inc1Button
+            pin_corner_to_sibling	LEFT
+            pin_to_sibling_corner	RIGHT
+
+            sound_accept            "UI_Menu_BattlePass_LevelIncreaseTab"
+
+            navLeft PurchaseButton // (dw): hahaha
+        }
+
+        Dec1Button
         {
             ControlName				RuiButton
             classname               "MenuButton"
@@ -180,7 +214,7 @@ scripts/resource/ui/menus/confirm_dialog.menu
             tall					62
             xpos                    8
             font                    Default_28
-            labelText				"-"
+            labelText				""
             enabled					1
             visible					1
 
@@ -190,7 +224,28 @@ scripts/resource/ui/menus/confirm_dialog.menu
 
             sound_accept            "UI_Menu_BattlePass_LevelIncreaseTab"
 
-            //tabPosition 1
+            navRight PurchaseButton // (dw): hahaha
+        }
+
+        Dec5Button
+        {
+            ControlName				RuiButton
+            classname               "MenuButton"
+            rui						"ui/battle_pass_level_purchase_decrease.rpak"
+            wide                    90
+            tall					62
+            xpos                    8
+            font                    Default_28
+            labelText				""
+            enabled					1
+            visible					1
+
+            pin_to_sibling			Dec1Button
+            pin_corner_to_sibling	RIGHT
+            pin_to_sibling_corner	LEFT
+
+            sound_accept            "UI_Menu_BattlePass_LevelIncreaseTab"
+
             navRight PurchaseButton // (dw): hahaha
         }
 	}

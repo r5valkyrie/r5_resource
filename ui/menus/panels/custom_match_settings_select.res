@@ -98,6 +98,7 @@
                 ypos					0
                 wide                    770
                 tall					434
+                tall_nx_handheld			584			[$NX || $NX_UI_PC]
                 visible					1
                 enabled 				1
 
@@ -152,6 +153,7 @@
         xpos                    10
         wide					290
         tall					80
+        visible					0
 
 
         pin_to_sibling          SubmitButton
@@ -161,7 +163,7 @@
         rui                     "ui/generic_button.rpak"
         ruiArgs
         {
-            buttonText          "#MENU_RETICLE_REVERT"
+            buttonText          "#CUSTOMMATCH_UNDO_BUTTON"
         }
     }
 }

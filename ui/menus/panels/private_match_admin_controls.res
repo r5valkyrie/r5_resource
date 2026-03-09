@@ -14,20 +14,16 @@
 		proportionalToParent    1
 	}
 
-	ToolTip
-    {
-        ControlName				RuiPanel
-        InheritProperties       ToolTip
-        zpos                    999
-    }
-	
-	AdminChatWindow [$WINDOWS]
+	AdminChatWindow
 	{
 		ControlName				CBaseHudChat
 		InheritProperties		ChatBox
 
 		destination				"match"
+        interactive				1
+        chatBorderThickness		1
 		messageModeAlwaysOn		1
+        hideInputBox			1 [!$WIN32]
 		defaultAdminOnly		1
 
 		pin_to_sibling			PanelFrame
@@ -40,8 +36,19 @@
 		
 		tall                    400
 	}
+
+	AdminChatBoxIcon
+    {
+        ControlName				Label
+        pin_to_sibling			AdminChatWindow
+        pin_corner_to_sibling   BOTTOM_LEFT
+        pin_to_sibling_corner   BOTTOM_RIGHT
+
+        labelText               " %[R_TRIGGER|]%"
+        visible                 1
+    }
 	
-	AdminChatModeButton [$WINDOWS]
+	AdminChatModeButton
     {
         ControlName				RuiButton
         classname               "MenuButton"
@@ -62,7 +69,7 @@
         sound_focus             "UI_Menu_Focus_Large"
     }
 	
-	SpectatorChatCheckBox [$WINDOWS]
+	SpectatorChatCheckBox
 	{
 		ControlName				RuiButton
 		ypos					0
@@ -78,7 +85,7 @@
         pin_to_sibling_corner	TOP_RIGHT
 	}
 
-	AdminChatTarget [$WINDOWS]
+	AdminChatTarget
 	{
 		ControlName				RuiPanel
 		rui						"ui/private_match_chat_target_text.rpak"

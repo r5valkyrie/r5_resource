@@ -38,6 +38,23 @@ resource/ui/menus/promoUM.menu
 			labelText               ""
 		}
 
+		TabsBackground
+        {
+            ControlName				RuiPanel
+            InheritProperties		TabsBackgroundTall
+
+        	zpos					98
+        	wide					f0
+            tall					84
+            visible					1
+            enabled					1
+            proportionalToParent    1
+            rui 					"ui/tall_tabs_background.rpak"
+
+        	pin_to_sibling			DarkenBackground
+        	pin_corner_to_sibling	TOP
+        	pin_to_sibling_corner	TOP
+        }
 		TabsCommon
 		{
 		    ControlName				CNestedPanel
@@ -67,7 +84,7 @@ resource/ui/menus/promoUM.menu
             pin_corner_to_sibling	CENTER
             pin_to_sibling_corner	CENTER
         }
-
+               
         InboxPanel
         {
             ControlName				CNestedPanel
@@ -82,37 +99,13 @@ resource/ui/menus/promoUM.menu
             pin_corner_to_sibling	CENTER
             pin_to_sibling_corner	CENTER
         }
-
-        FooterButton1
+      
+        // FOOTER //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        FooterButtons
         {
-        	ControlName				RuiButton
-            InheritProperties		LeftRuiFooterButton
-
-            labelText				"#B_BUTTON_BACK"
-
-            xpos					-48
-            ypos                    -48
-            zpos                    15
-
-            pin_to_sibling          DarkenBackground
-            pin_to_sibling_corner   BOTTOM_LEFT
-            pin_corner_to_sibling	BOTTOM_LEFT
-
-        }
-
-        FooterButton2
-        {
-        	ControlName				RuiButton
-            InheritProperties		LeftRuiFooterButton
-
-            labelText				"#GIFT_INFO_TITLE"
-
+            ControlName				CNestedPanel
+            InheritProperties       FooterButtons
             zpos                    16
-
-            pin_to_sibling          FooterButton1
-            pin_to_sibling_corner   RIGHT
-            pin_corner_to_sibling	LEFT
-
         }
 	}
 }

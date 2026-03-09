@@ -164,10 +164,10 @@ resource/ui/menus/dialogs/dialog_clubs_announcement.menu
         {
             ControlName				RuiPanel
             wide					650
-            wide_nx_handheld		1230		[$NX]
+            wide_nx_handheld		1230		[$NX || $NX_UI_PC]
             //wide					450 [$WINDOWS] //Apparently, this only works for [$NX]
             tall					48
-            tall_nx_handheld		60			[$NX]
+            tall_nx_handheld		60			[$NX|| $NX_UI_PC]
             visible				    1
             rui                     "ui/basic_image.rpak"
 
@@ -187,12 +187,12 @@ resource/ui/menus/dialogs/dialog_clubs_announcement.menu
             zpos					100 // This works around input weirdness when the control is constructed by code instead of VGUI blackbox.
             xpos                    0
             ypos                    -65
-            ypos_nx_handheld        0			[$NX]
+            ypos_nx_handheld        0			[$NX || $NX_UI_PC]
             wide					650
-            wide_nx_handheld		1230		[$NX]
+            wide_nx_handheld		1230		[$NX || $NX_UI_PC]
             //wide					450 [$WINDOWS] //Apparently, this only works for [$NX]
             tall					48
-            tall_nx_handheld		60			[$NX]
+            tall_nx_handheld		60			[$NX || $NX_UI_PC]
             visible					1
             enabled					1
             textHidden				0
@@ -202,7 +202,7 @@ resource/ui/menus/dialogs/dialog_clubs_announcement.menu
             ruiAsianFont            DefaultAsianFont
             ruiFont                 TitleRegularFont
             ruiFontHeight           32
-            ruiFontHeight_nx_handheld			48			[$NX]
+            ruiFontHeight_nx_handheld			48			[$NX || $NX_UI_PC]
             //ruiMinFontHeight        48
             keyboardTitle			""
             keyboardDescription		""
@@ -370,7 +370,7 @@ resource/ui/menus/dialogs/dialog_clubs_announcement.menu
             InheritProperties       DialogFooterButtonsHighPriority
 			xpos                    0
             wide                    422
-            wide_nx_handheld        618		[$NX]
+            wide_nx_handheld        618		[$NX || $NX_UI_PC]
 
             //cursorPriority          20
 

@@ -32,6 +32,37 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    LobbyRosterButton00
+    {
+        ControlName             RuiButton
+        rui                     "ui/custom_match_roster_tab_button.rpak"
+
+        wide                    %50
+        tall                    48
+		proportionalToParent    1
+
+        pin_to_sibling          PanelFrame
+        pin_corner_to_sibling   TOP_LEFT
+        pin_to_sibling_corner   TOP_LEFT
+
+		scriptId                0
+    }
+
+    LobbyRosterButton01
+    {
+        ControlName             RuiButton
+        rui                     "ui/custom_match_roster_tab_button.rpak"
+
+        wide                    %50
+        tall                    48
+		proportionalToParent    1
+
+        pin_to_sibling          PanelFrame
+        pin_corner_to_sibling   TOP_RIGHT
+        pin_to_sibling_corner   TOP_RIGHT
+
+		scriptId                1
+    }
 
     LobbyRoster00
     {

@@ -1,4 +1,4 @@
-scripts/resource/ui/menus/confirm_dialog.menu
+resource/ui/menus/confirm_dialog.menu
 {
 	menu
 	{
@@ -45,7 +45,7 @@ scripts/resource/ui/menus/confirm_dialog.menu
         {
             ControlName				Label
             wide					%100
-            tall					515
+            tall					480
             labelText				""
             bgcolor_override		"0 0 0 255"
             visible					0
@@ -61,7 +61,7 @@ scripts/resource/ui/menus/confirm_dialog.menu
             ControlName				RuiPanel
             classname               "MenuButton"
             wide					%100
-            tall					515
+            tall					480
             visible				    1
             rui                     "ui/dialog_content.rpak"
 
@@ -70,34 +70,35 @@ scripts/resource/ui/menus/confirm_dialog.menu
 			pin_to_sibling_corner	TOP
         }
 
+        ServerID
+        {
+            ControlName		            Label
+            xpos			            -30
+            ypos			            -10
+            tall			            60
+            font					    Default_59
+            visible			            1
+            labelText		            ""
+            textAlignment	            east
+            auto_wide_tocontents	    1
+
+            pin_to_sibling				DialogFrame
+            pin_corner_to_sibling		BOTTOM_RIGHT
+            pin_to_sibling_corner		BOTTOM_RIGHT
+
+            zpos			100
+        }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		OID
-		{
-			ControlName				Label
-			labelText				"OID"
-			auto_wide_tocontents 1
-			tall 30
-			ypos 33
-			xpos 0
-			fontHeight 25
-			zpos 10
-			visible 0
-			interactive 		false
-			textAlignment		center
 
-
-			pin_to_sibling			FooterButtons
-			pin_corner_to_sibling	TOP
-			pin_to_sibling_corner	TOP
-		}
-		
 		FooterButtons
 		{
 			ControlName				CNestedPanel
 			InheritProperties       DialogFooterButtons
 			xpos                    0
             wide					200
-			ypos					-23
+            wide_nx_handheld		300		[$NX || $NX_UI_PC]
+
 			pin_to_sibling			DialogFrame
 			pin_corner_to_sibling	BOTTOM
 			pin_to_sibling_corner	BOTTOM

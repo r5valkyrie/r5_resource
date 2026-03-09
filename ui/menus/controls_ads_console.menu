@@ -1,4 +1,4 @@
-scripts/resource/ui/menus/controls_ads_console.menu
+resource/ui/menus/controls_ads_console.menu
 {
 	menu
 	{
@@ -118,7 +118,8 @@ scripts/resource/ui/menus/controls_ads_console.menu
                 ControlName				CNestedPanel
                 InheritProperties       SettingsContentPanel
                 tabPosition             1
-
+                tall					800
+                tall_nx_handheld        960    [$NX || $NX_UI_PC]
                 controlSettingsFile		"resource/ui/menus/panels/ads_controls_gamepad.res"
             }
 
@@ -145,16 +146,6 @@ scripts/resource/ui/menus/controls_ads_console.menu
         }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        Logo
-        {
-            ControlName				RuiPanel
-			InheritProperties       Logo
-
-            pin_to_sibling			ScreenFrame
-            pin_corner_to_sibling	TOP_LEFT
-            pin_to_sibling_corner	TOP_LEFT
-        }
 
 		ButtonTooltip
 		{

@@ -55,7 +55,7 @@ resource/ui/menus/dialogs/gift_friend_dialog.menu
        DialogContent
        {
            ControlName				RuiPanel
-           xpos                     -240
+           xpos                     -64
            wide					    625
            tall					    %100
            labelText                ""
@@ -111,7 +111,7 @@ resource/ui/menus/dialogs/gift_friend_dialog.menu
         {
             ControlName			RuiButton
             clipRui             0
-            xpos                15
+            xpos                12
             ypos                20
             zpos			    10
             wide			    285
@@ -165,7 +165,7 @@ resource/ui/menus/dialogs/gift_friend_dialog.menu
 		{
 			ControlName				CNestedPanel
 			InheritProperties       FooterButtons
-			xpos                    250
+			xpos                    90
 			ypos                    -25
 
 			pin_to_sibling			DarkenBackground

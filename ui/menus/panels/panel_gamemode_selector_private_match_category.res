@@ -58,7 +58,7 @@
         scrollbarSpacing         2
         scrollbarOnLeft          0
         //tabPosition            1
-        selectOnDpadNav          1
+        selectOnDpadNav          0
 
         ButtonSettings
         {

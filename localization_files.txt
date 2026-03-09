@@ -4,7 +4,6 @@
 // if you add a new localization file, please make sure that the encoding for that file is "UTF-16 LE with BOM"
 localization/base
 localization/sdk
-localization/arenas
 localization/legal/eula
 
 localization/character/bangalore
@@ -26,9 +25,6 @@ localization/character/rampart
 localization/character/horizon
 localization/character/fuse
 localization/character/valkyrie
-localization/character/seer
-localization/character/ash
-localization/character/madmaggie
 
 localization/weapon/r301
 localization/weapon/flatline
@@ -58,7 +54,6 @@ localization/weapon/eva
 localization/weapon/dmr
 localization/weapon/pdw
 localization/weapon/car
-localization/weapon/nemesis
 
 localization/feature/battlepass
 localization/feature/challenges

@@ -54,10 +54,10 @@ resource/ui/menus/dialogs/custom_match_settings.res
         ControlName             RuiPanel
 
         wide                    500
-        wide_nx_handheld        330			[$NX || $NX_UI_PC]
+        wide_nx_handheld        530			[$NX || $NX_UI_PC]
         tall                    48
         tall_nx_handheld        32			[$NX || $NX_UI_PC]
-        ypos_nx_handheld        -10			[$NX || $NX_UI_PC]
+        ypos_nx_handheld        30			[$NX || $NX_UI_PC]
         clipRui                 1
 
         rui                     "ui/custom_match_settings_header.rpak"
@@ -96,10 +96,10 @@ resource/ui/menus/dialogs/custom_match_settings.res
         ControlName             RuiPanel
 
         wide                    500
-        wide_nx_handheld        330			[$NX || $NX_UI_PC]
+        wide_nx_handheld        530			[$NX || $NX_UI_PC]
         tall                    48
         tall_nx_handheld        32			[$NX || $NX_UI_PC]
-        ypos_nx_handheld        -10			[$NX || $NX_UI_PC]
+        ypos_nx_handheld        30			[$NX || $NX_UI_PC]
         clipRui                 1
 
         rui                     "ui/custom_match_settings_header.rpak"

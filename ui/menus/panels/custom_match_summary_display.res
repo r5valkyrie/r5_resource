@@ -24,6 +24,7 @@
 		wide					    %100
 		tall					    %100
 		proportionalToParent        1
+		visible                     0
 
         pin_to_sibling              PanelFrame
         pin_corner_to_sibling       TOP_LEFT
@@ -38,12 +39,43 @@
 		wide					    %100
 		tall					    %100
 		proportionalToParent        1
+		visible                     0
 
         pin_to_sibling              PanelFrame
         pin_corner_to_sibling       TOP_LEFT
         pin_to_sibling_corner       TOP_LEFT
     }
 
+
+    SurvivalDuosSummary00
+    {
+        ControlName                 CNestedPanel
+        controlSettingsFile         "resource/ui/menus/panels/custom_match_summary_survival_duos.res"
+
+		wide					    %100
+		tall					    %100
+		proportionalToParent        1
+		visible                     0
+
+        pin_to_sibling              PanelFrame
+        pin_corner_to_sibling       TOP_LEFT
+        pin_to_sibling_corner       TOP_LEFT
+    }
+
+    SurvivalDuosSummary01
+    {
+        ControlName                 CNestedPanel
+        controlSettingsFile         "resource/ui/menus/panels/custom_match_summary_survival_duos_progress.res"
+
+		wide					    %100
+		tall					    %100
+		proportionalToParent        1
+		visible                     0
+
+        pin_to_sibling              PanelFrame
+        pin_corner_to_sibling       TOP_LEFT
+        pin_to_sibling_corner       TOP_LEFT
+    }
     ArenasSummary00
     {
         ControlName                 CNestedPanel
@@ -52,6 +84,7 @@
 		wide					    %100
 		tall					    %100
 		proportionalToParent        1
+		visible                     0
 
         pin_to_sibling              PanelFrame
         pin_corner_to_sibling       TOP_LEFT
@@ -66,6 +99,7 @@
 		wide					    %100
 		tall					    %100
 		proportionalToParent        1
+		visible                     0
 
         pin_to_sibling              PanelFrame
         pin_corner_to_sibling       TOP_LEFT

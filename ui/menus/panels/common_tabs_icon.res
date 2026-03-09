@@ -1,4 +1,4 @@
-scripts/resource/ui/menus/panels/common_tabs_short.res
+resource/ui/menus/panels/common_tabs_short.res
 {
     Anchor
     {

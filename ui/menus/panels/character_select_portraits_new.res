@@ -21,7 +21,16 @@
 
         labelText               ""
         xpos                    1400
+        xpos_nx_handheld        1220		[$NX || $NX_UI_PC]
+                   
         ypos                    230
+        ypos_nx_handheld        230			[$NX || $NX_UI_PC]
+		
+     
+                             
+                                                  
+      
+        
         wide					50
         tall                    50
         //bgcolor_override		"0 255 0 100"

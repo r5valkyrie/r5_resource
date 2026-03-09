@@ -117,15 +117,15 @@
         ControlName			RuiPanel
 
         xpos                   0
-        xpos_nx_handheld       -118   [$NX]
+        xpos_nx_handheld       -118   [$NX || $NX_UI_PC]
         ypos                   0
-        ypos_nx_handheld       120    [$NX]
+        ypos_nx_handheld       120    [$NX || $NX_UI_PC]
         zpos                    2
 
         wide					850//800
-        wide_nx_handheld		895//845    [$NX]
+        wide_nx_handheld		895//845    [$NX || $NX_UI_PC]
         tall					850//800
-        tall_nx_handheld		940//890    [$NX]
+        tall_nx_handheld		940//890    [$NX || $NX_UI_PC]
         rui                    "ui/combined_card.rpak"
         visible					1
 

@@ -29,18 +29,18 @@
         ControlName             Label
 
         xpos                    -16
-        xpos_nx_handheld        -160		[$NX]
+        xpos_nx_handheld        -160		[$NX || $NX_UI_PC]
         ypos                    0
         wide                    %100
         tall                    36
-        tall_nx_handheld        67		[$NX]
+        tall_nx_handheld        67		[$NX || $NX_UI_PC]
 
         pin_to_sibling          PanelFrame
         pin_corner_to_sibling   TOP_LEFT
         pin_to_sibling_corner   TOP_LEFT
 
         labelText               "#CLUBTAG_LABEL_NAME"
-		fontHeight_nx_handheld	45		[$NX]
+		fontHeight_nx_handheld	45		[$NX || $NX_UI_PC]
     }
 
     SearchTagsGrid
@@ -48,9 +48,9 @@
         ControlName             GridButtonListPanel
 
         xpos                    0
-        xpos_nx_handheld        140		[$NX]
+        xpos_nx_handheld        140		[$NX || $NX_UI_PC]
         ypos                    0
-        ypos_nx_handheld        -12		[$NX]
+        ypos_nx_handheld        -12		[$NX|| $NX_UI_PC]
 
         pin_to_sibling          PanelTitle
         pin_corner_to_sibling   TOP_LEFT
@@ -70,7 +70,7 @@
             clipRui                  1
             wide                     512
             tall                     48
-            tall_nx_handheld         60		[$NX]
+            tall_nx_handheld         60		[$NX || $NX_UI_PC]
             cursorVelocityModifier   0.7
             //rightClickEvents         1
             //doubleClickEvents      1

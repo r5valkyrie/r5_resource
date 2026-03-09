@@ -1,4 +1,4 @@
-scripts/resource/ui/menus/about_game_mode.menu
+resource/ui/menus/about_game_mode.menu
 {
 	menu
 	{
@@ -75,7 +75,23 @@ scripts/resource/ui/menus/about_game_mode.menu
             pin_corner_to_sibling	CENTER
             pin_to_sibling_corner	CENTER
         }
+		TextFrame
+        {
+            ControlName				ImagePanel
+            xpos					0
+            ypos					0
+            wide					1920
+            tall					1080
+            visible					0
+            enabled 				1
+			scaleImage				1
+			image					"vgui/HUD/white"
+            drawColor				"0 0 0 0"
 
+			pin_to_sibling				ScreenFrame
+			pin_corner_to_sibling			CENTER
+			pin_to_sibling_corner			CENTER
+        }
 		AboutText
 		{
 			ControlName				RichText
@@ -94,7 +110,7 @@ scripts/resource/ui/menus/about_game_mode.menu
 			paintbackground				0
 			text					"test"
 			maxchars				-1
-			pin_to_sibling				ScreenFrame
+			pin_to_sibling				TextFrame
 			pin_corner_to_sibling			TOP_RIGHT
 			pin_to_sibling_corner			TOP_RIGHT
 		}

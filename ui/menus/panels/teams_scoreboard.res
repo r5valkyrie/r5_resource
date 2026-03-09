@@ -11,14 +11,25 @@
 		visible					1
         enabled 				1
         scaleImage				1
-        image					"vgui/HUD/white"
-        drawColor				"0 0 0 150"
 	}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	ScoreboardTitle
+    {
+        ControlName				RuiPanel
+        xpos					0
+        ypos					-190
+        visible				    1
+        enabled 				1
+        rui                     "ui/scoreboard_title.rpak"
+
+        pin_to_sibling			PanelFrame
+        pin_corner_to_sibling	TOP
+        pin_to_sibling_corner	TOP
+    }
 
     //Frames
-	TeamFrame0
+	TeamFrame00
 	{
         ControlName				RuiPanel
         classname               "TeamFrameGeneric"
@@ -38,7 +49,7 @@
         pin_corner_to_sibling		TOP_LEFT
         pin_to_sibling_corner		TOP_LEFT
 	}
-	TeamFrame1
+	TeamFrame01
     {
         ControlName				RuiPanel
         classname               "TeamFrameGeneric"
@@ -53,7 +64,7 @@
         rui                     "ui/teams_scoreboard_frame_generic.rpak"
         zpos                    200
     }
-    TeamFrame2
+    TeamFrame02
     {
         ControlName				RuiPanel
         classname               "TeamFrameGeneric"
@@ -68,7 +79,7 @@
         rui                     "ui/teams_scoreboard_frame_generic.rpak"
         zpos                    200
     }
-    TeamFrame3
+    TeamFrame03
     {
         ControlName				RuiPanel
         classname               "TeamFrameGeneric"
@@ -83,7 +94,7 @@
         rui                     "ui/teams_scoreboard_frame_generic.rpak"
         zpos                    200
     }
-	TeamFrame4
+	TeamFrame04
     {
         ControlName				RuiPanel
         classname               "TeamFrameGeneric"
@@ -98,7 +109,7 @@
         rui                     "ui/teams_scoreboard_frame_generic.rpak"
         zpos                    200
     }
-    TeamFrame5
+    TeamFrame05
     {
         ControlName				RuiPanel
         classname               "TeamFrameGeneric"
@@ -113,7 +124,7 @@
         rui                     "ui/teams_scoreboard_frame_generic.rpak"
         zpos                    200
     }
-    TeamFrame6
+    TeamFrame06
     {
         ControlName				RuiPanel
         classname               "TeamFrameGeneric"
@@ -128,7 +139,7 @@
         rui                     "ui/teams_scoreboard_frame_generic.rpak"
         zpos                    200
     }
-    TeamFrame7
+    TeamFrame07
     {
         ControlName				RuiPanel
         classname               "TeamFrameGeneric"
@@ -143,7 +154,7 @@
         rui                     "ui/teams_scoreboard_frame_generic.rpak"
         zpos                    200
     }
-    TeamFrame8
+    TeamFrame08
     {
 	     ControlName				RuiPanel
 	     classname               "TeamFrameGeneric"
@@ -158,7 +169,7 @@
 	     rui                     "ui/teams_scoreboard_frame_generic.rpak"
 	     zpos                    200
 	}
-	TeamFrame9
+	TeamFrame09
     {
          ControlName				RuiPanel
          classname               "TeamFrameGeneric"
@@ -188,7 +199,7 @@
          rui                     "ui/teams_scoreboard_frame_generic.rpak"
          zpos                    200
     }
-    TinyTeamFrame0
+    TinyTeamFrame00
     {
         ControlName				RuiPanel
         classname               "TeamFrameTiny"
@@ -208,7 +219,7 @@
         pin_corner_to_sibling		TOP_LEFT
         pin_to_sibling_corner		TOP_LEFT
     }
-    TinyTeamFrame1
+    TinyTeamFrame01
     {
         ControlName				RuiPanel
         classname               "TeamFrameTiny"
@@ -223,7 +234,7 @@
         rui                     "ui/teams_scoreboard_frame_tiny.rpak"
         zpos                    200
     }
-    TinyTeamFrame2
+    TinyTeamFrame02
     {
         ControlName				RuiPanel
         classname               "TeamFrameTiny"
@@ -238,7 +249,7 @@
         rui                     "ui/teams_scoreboard_frame_tiny.rpak"
         zpos                    200
     }
-    TinyTeamFrame3
+    TinyTeamFrame03
     {
         ControlName				RuiPanel
         classname               "TeamFrameTiny"
@@ -253,7 +264,7 @@
         rui                     "ui/teams_scoreboard_frame_tiny.rpak"
         zpos                    200
     }
-    TinyTeamFrame4
+    TinyTeamFrame04
     {
         ControlName				RuiPanel
         classname               "TeamFrameTiny"
@@ -268,7 +279,7 @@
         rui                     "ui/teams_scoreboard_frame_tiny.rpak"
         zpos                    200
     }
-    TinyTeamFrame5
+    TinyTeamFrame05
     {
         ControlName				RuiPanel
         classname               "TeamFrameTiny"
@@ -283,7 +294,7 @@
         rui                     "ui/teams_scoreboard_frame_tiny.rpak"
         zpos                    200
     }
-    TinyTeamFrame6
+    TinyTeamFrame06
     {
         ControlName				RuiPanel
         classname               "TeamFrameTiny"
@@ -298,7 +309,7 @@
         rui                     "ui/teams_scoreboard_frame_tiny.rpak"
         zpos                    200
     }
-    TinyTeamFrame7
+    TinyTeamFrame07
     {
         ControlName				RuiPanel
         classname               "TeamFrameTiny"
@@ -313,7 +324,7 @@
         rui                     "ui/teams_scoreboard_frame_tiny.rpak"
         zpos                    200
     }
-    TinyTeamFrame8
+    TinyTeamFrame08
     {
         ControlName				RuiPanel
         classname               "TeamFrameTiny"
@@ -328,7 +339,7 @@
         rui                     "ui/teams_scoreboard_frame_tiny.rpak"
         zpos                    200
     }
-    TinyTeamFrame9
+    TinyTeamFrame09
     {
         ControlName				RuiPanel
         classname               "TeamFrameTiny"
@@ -659,7 +670,7 @@
         zpos                    200
     }
 	//Arenas Headers
-	ArenaHeader0
+	ArenaHeader00
     {
         ControlName				RuiPanel
         classname               "ArenaHeader"
@@ -679,7 +690,7 @@
         pin_corner_to_sibling		TOP_LEFT
         pin_to_sibling_corner		TOP_LEFT
     }
-    ArenaHeader1
+    ArenaHeader01
     {
         ControlName				RuiPanel
         classname               "ArenaHeader"
@@ -694,7 +705,7 @@
         rui                     "ui/teams_score_header_arenas.rpak"
         zpos                    125
     }
-    ArenaHeader2
+    ArenaHeader02
     {
         ControlName				RuiPanel
         classname               "ArenaHeader"
@@ -709,7 +720,7 @@
         rui                     "ui/teams_score_header_arenas.rpak"
         zpos                    125
     }
-    ArenaHeader2
+    ArenaHeader02
     {
         ControlName				RuiPanel
         classname               "ArenaHeader"
@@ -726,7 +737,7 @@
     }
 
     //Control Headers
-	ControlHeader0
+	ControlHeader00
 	{
         ControlName				RuiPanel
         classname               "ControlHeader"
@@ -746,7 +757,7 @@
 		pin_corner_to_sibling		TOP_LEFT
 		pin_to_sibling_corner		TOP_LEFT
 	}
-	ControlHeader1
+	ControlHeader01
     {
         ControlName				RuiPanel
         classname               "ControlHeader"
@@ -761,7 +772,7 @@
         rui                     "ui/teams_score_header_control.rpak"
         zpos                    125
     }
-    ControlHeader2
+    ControlHeader02
 	{
 	    ControlName				RuiPanel
 	    classname               "ControlHeader"
@@ -776,7 +787,7 @@
 	    rui                     "ui/teams_score_header_control.rpak"
 	    zpos                    125
 	}
-	ControlHeader3
+	ControlHeader03
     {
         ControlName				RuiPanel
         classname               "ControlHeader"
@@ -793,7 +804,7 @@
     }
                             
     //gungame
-    GunGameHeader0
+    GunGameHeader00
 	{
 	    ControlName				RuiPanel
 	    classname               "GunGameHeader"
@@ -813,7 +824,7 @@
 	    pin_corner_to_sibling		TOP_LEFT
 	    pin_to_sibling_corner		TOP_LEFT
 	}
-	GunGameHeader1
+	GunGameHeader01
     {
         ControlName				RuiPanel
         classname               "GunGameHeader"
@@ -828,7 +839,7 @@
         rui                     "ui/teams_score_header_gungame.rpak"
         zpos                    125
     }
-    GunGameHeader2
+    GunGameHeader02
     {
         ControlName				RuiPanel
         classname               "GunGameHeader"
@@ -843,7 +854,7 @@
         rui                     "ui/teams_score_header_gungame.rpak"
         zpos                    125
     }
-    GunGameHeader3
+    GunGameHeader03
     {
         ControlName				RuiPanel
         classname               "GunGameHeader"
@@ -858,7 +869,7 @@
         rui                     "ui/teams_score_header_gungame.rpak"
         zpos                    125
     }
-    GunGameHeader4
+    GunGameHeader04
     {
         ControlName				RuiPanel
         classname               "GunGameHeader"
@@ -873,7 +884,7 @@
         rui                     "ui/teams_score_header_gungame.rpak"
         zpos                    125
     }
-    GunGameHeader5
+    GunGameHeader05
     {
         ControlName				RuiPanel
         classname               "GunGameHeader"
@@ -890,7 +901,7 @@
     }
        
                        
-    WinteExpressHeader0
+    WinteExpressHeader00
     {
         ControlName				RuiPanel
         classname               "WinterExpressHeader"
@@ -910,7 +921,7 @@
         pin_corner_to_sibling		TOP_LEFT
         pin_to_sibling_corner		TOP_LEFT
     }
-    WinteExpressHeader1
+    WinteExpressHeader01
     {
         ControlName				RuiPanel
         classname               "WinterExpressHeader"
@@ -925,7 +936,7 @@
         rui                     "ui/teams_score_header_winter_express.rpak"
         zpos                    125
     }
-    WinteExpressHeader2
+    WinteExpressHeader02
     {
         ControlName				RuiPanel
         classname               "WinterExpressHeader"
@@ -941,8 +952,72 @@
         zpos                    125
     }
           
+                        
+	TDMHeader00
+	{
+        ControlName				RuiPanel
+        classname               "TDMHeader"
+        xpos					0
+        ypos                    -100
+        wide					780
+        tall					180
+
+        visible					1
+        enabled 				1
+        scaleImage				1
+        rui                     "ui/teams_score_header_tdm.rpak"
+        zpos                    125
+
+
+		pin_to_sibling				PanelFrame
+		pin_corner_to_sibling		TOP_LEFT
+		pin_to_sibling_corner		TOP_LEFT
+	}
+    TDMHeader01
+    {
+        ControlName				RuiPanel
+        classname               "TDMHeader"
+        xpos					0
+        ypos					0
+        wide					780
+        tall					180
+
+        visible					1
+        enabled 				1
+        scaleImage				1
+        rui                     "ui/teams_score_header_tdm.rpak"
+    }
+    TDMHeader02
+    {
+        ControlName				RuiPanel
+        classname               "TDMHeader"
+        xpos					0
+        ypos					0
+        wide					780
+        tall					180
+
+        visible					1
+        enabled 				1
+        scaleImage				1
+        rui                     "ui/teams_score_header_tdm.rpak"
+    }
+    TDMHeader03
+    {
+        ControlName				RuiPanel
+        classname               "TDMHeader"
+        xpos					0
+        ypos					0
+        wide					780
+        tall					180
+
+        visible					1
+        enabled 				1
+        scaleImage				1
+        rui                     "ui/teams_score_header_tdm.rpak"
+    }
+          
 	//Generic Headers
-	TeamHeader0
+	TeamHeader00
 	{
         ControlName				RuiPanel
         classname               "TeamHeader"
@@ -962,7 +1037,7 @@
 		pin_corner_to_sibling		TOP_LEFT
 		pin_to_sibling_corner		TOP_LEFT
 	}
-    TeamHeader1
+    TeamHeader01
     {
         ControlName				RuiPanel
         classname               "TeamHeader"
@@ -976,7 +1051,7 @@
         scaleImage				1
         rui                     "ui/teams_score_header.rpak"
     }
-    TeamHeader2
+    TeamHeader02
     {
         ControlName				RuiPanel
         classname               "TeamHeader"
@@ -990,7 +1065,7 @@
         scaleImage				1
         rui                     "ui/teams_score_header.rpak"
     }
-	TeamHeader3
+	TeamHeader03
     {
         ControlName				RuiPanel
         classname               "TeamHeader"
@@ -1004,7 +1079,7 @@
         scaleImage				1
         rui                     "ui/teams_score_header.rpak"
     }
-	TeamHeader4
+	TeamHeader04
     {
         ControlName				RuiPanel
         classname               "TeamHeader"
@@ -1018,7 +1093,7 @@
         scaleImage				1
         rui                     "ui/teams_score_header.rpak"
     }
-    TeamHeader5
+    TeamHeader05
     {
         ControlName				RuiPanel
         classname               "TeamHeader"
@@ -1032,7 +1107,7 @@
         scaleImage				1
         rui                     "ui/teams_score_header.rpak"
     }
-    TeamHeader6
+    TeamHeader06
     {
         ControlName				RuiPanel
         classname               "TeamHeader"
@@ -1046,7 +1121,7 @@
         scaleImage				1
         rui                     "ui/teams_score_header.rpak"
     }
-    TeamHeader7
+    TeamHeader07
     {
         ControlName				RuiPanel
         classname               "TeamHeader"
@@ -1060,7 +1135,7 @@
         scaleImage				1
         rui                     "ui/teams_score_header.rpak"
     }
-    TeamHeader8
+    TeamHeader08
     {
         ControlName				RuiPanel
         classname               "TeamHeader"
@@ -1074,7 +1149,7 @@
         scaleImage				1
         rui                     "ui/teams_score_header.rpak"
     }
-    TeamHeader9
+    TeamHeader09
     {
         ControlName				RuiPanel
         classname               "TeamHeader"
@@ -1103,9 +1178,10 @@
         rui                     "ui/teams_score_header.rpak"
     }
     //Tiny Headers
-	TinyHeader0
+    //This need to be buttons for private matches
+	TinyHeader00
 	{
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1117,15 +1193,16 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
 
 
 		pin_to_sibling				PanelFrame
 		pin_corner_to_sibling		TOP_LEFT
 		pin_to_sibling_corner		TOP_LEFT
 	}
-	TinyHeader1
+	TinyHeader01
 	{
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1137,10 +1214,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
 	}
-	TinyHeader2
+	TinyHeader02
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1152,10 +1230,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
-	TinyHeader3
+	TinyHeader03
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1167,10 +1246,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
-    TinyHeader4
+    TinyHeader04
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1182,10 +1262,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
-    TinyHeader5
+    TinyHeader05
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1197,10 +1278,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
-    TinyHeader6
+    TinyHeader06
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1212,10 +1294,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
-	TinyHeader7
+	TinyHeader07
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1227,10 +1310,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
-    TinyHeader8
+    TinyHeader08
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1242,10 +1326,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
-    TinyHeader9
+    TinyHeader09
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1257,10 +1342,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
     TinyHeader10
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1272,10 +1358,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
     TinyHeader11
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1287,10 +1374,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
     TinyHeader12
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1302,10 +1390,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
     TinyHeader13
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1317,10 +1406,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
     TinyHeader14
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1332,10 +1422,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
     TinyHeader15
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1347,10 +1438,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
     TinyHeader16
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1362,10 +1454,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
     TinyHeader17
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1377,10 +1470,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
     TinyHeader18
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1392,10 +1486,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
     TinyHeader19
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1407,10 +1502,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
     TinyHeader20
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1422,10 +1518,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
     TinyHeader21
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1437,10 +1534,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
     TinyHeader22
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1452,10 +1550,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
     TinyHeader23
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1467,10 +1566,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
     TinyHeader24
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1482,10 +1582,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
     TinyHeader25
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1497,10 +1598,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
     TinyHeader26
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1515,7 +1617,7 @@
     }
     TinyHeader27
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1527,10 +1629,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
     TinyHeader28
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1542,10 +1645,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
     TinyHeader29
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1557,10 +1661,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
     TinyHeader30
     {
-        ControlName				RuiPanel
+        ControlName				RuiButton
         classname               "TinyHeader"
         xpos					0
         ypos                    -100
@@ -1572,10 +1677,11 @@
         scaleImage				1
         rui                     "ui/teams_score_header_tiny.rpak"
         zpos                    125
+        rightClickEvents        1
     }
 
 	//Players
-	TeamPlayer0
+	TeamPlayer00
 	{
         ControlName				RuiButton
         classname               "TeamPlayer"
@@ -1590,7 +1696,7 @@
         rui                     "ui/teams_scoreboard_player_row.rpak"
         drawColor				"0 0 0 220"
 	}
-	TeamPlayer1
+	TeamPlayer01
     {
         ControlName				RuiButton
         classname               "TeamPlayer"
@@ -1605,7 +1711,7 @@
         rui                     "ui/teams_scoreboard_player_row.rpak"
         drawColor				"0 0 0 220"
     }
-	TeamPlayer2
+	TeamPlayer02
     {
         ControlName				RuiButton
         classname               "TeamPlayer"
@@ -1620,7 +1726,7 @@
         rui                     "ui/teams_scoreboard_player_row.rpak"
         drawColor				"0 0 0 220"
     }
-    TeamPlayer3
+    TeamPlayer03
     {
         ControlName				RuiButton
         classname               "TeamPlayer"
@@ -1635,7 +1741,7 @@
         rui                     "ui/teams_scoreboard_player_row.rpak"
         drawColor				"0 0 0 220"
     }
-    TeamPlayer4
+    TeamPlayer04
     {
         ControlName				RuiButton
         classname               "TeamPlayer"
@@ -1650,7 +1756,7 @@
         rui                     "ui/teams_scoreboard_player_row.rpak"
         drawColor				"0 0 0 220"
     }
-    TeamPlayer5
+    TeamPlayer05
     {
         ControlName				RuiButton
         classname               "TeamPlayer"
@@ -1665,7 +1771,7 @@
         rui                     "ui/teams_scoreboard_player_row.rpak"
         drawColor				"0 0 0 220"
     }
-    TeamPlayer6
+    TeamPlayer06
     {
         ControlName				RuiButton
         classname               "TeamPlayer"
@@ -1680,7 +1786,7 @@
         rui                     "ui/teams_scoreboard_player_row.rpak"
         drawColor				"0 0 0 220"
     }
-    TeamPlayer7
+    TeamPlayer07
     {
         ControlName				RuiButton
         classname               "TeamPlayer"
@@ -1695,7 +1801,7 @@
         rui                     "ui/teams_scoreboard_player_row.rpak"
         drawColor				"0 0 0 220"
     }
-    TeamPlayer8
+    TeamPlayer08
     {
         ControlName				RuiButton
         classname               "TeamPlayer"
@@ -1710,7 +1816,7 @@
         rui                     "ui/teams_scoreboard_player_row.rpak"
         drawColor				"0 0 0 220"
     }
-    TeamPlayer9
+    TeamPlayer09
     {
         ControlName				RuiButton
         classname               "TeamPlayer"

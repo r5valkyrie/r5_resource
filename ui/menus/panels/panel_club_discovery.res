@@ -31,7 +31,7 @@
         ypos					-58
         wide					1074
         tall					235
-        tall_nx_handheld		300			[$NX]
+        tall_nx_handheld		300			[$NX || $NX_UI_PC]
 
         rui                     "ui/clubs_panel_blur.rpak"
         ruiArgs
@@ -55,7 +55,7 @@
         ypos                    -5
         wide					1074
         tall					192
-        tall_nx_handheld		300			[$NX]
+        tall_nx_handheld		300			[$NX || $NX_UI_PC]
         visible				    1
         rui                     "ui/clubs_discovery_blurb.rpak"
 
@@ -75,6 +75,7 @@
         ControlName				Label
         wide					1074
         tall					160
+        tall_nx_handheld        100 [$NX || $NX_UI_PC]
         xpos                    0
         ypos                    10
         zpos                    0
@@ -94,6 +95,7 @@
         classname               "MenuButton"
         wide					518
         tall					160
+        tall_nx_handheld        100 [$NX || $NX_UI_PC]
         xpos                    0
         rui                     "ui/generic_desc_button.rpak"
         labelText               ""
@@ -118,6 +120,7 @@
         classname               "MenuButton"
         wide					518
         tall					160
+        tall_nx_handheld        100 [$NX || $NX_UI_PC]
         xpos                    0
         rui                     "ui/generic_desc_button.rpak"
         labelText               ""
@@ -160,7 +163,7 @@
         tall					%5
         xpos                    0
         ypos                    12
-        ypos_nx_handheld        10		[$NX]
+        ypos_nx_handheld        10		[$NX || $NX_UI_PC] 
         zpos                    0
         labelText               ""
         visible					1
@@ -177,7 +180,7 @@
         ControlName				RuiButton
         classname               "MenuButton"
         wide					256
-        wide_nx_handheld		350		[$NX]
+        wide_nx_handheld		350		[$NX || $NX_UI_PC]
         tall					48
         xpos                    0
         rui                     "ui/generic_button.rpak"
@@ -203,7 +206,7 @@
         ControlName				RuiButton
         classname               "MenuButton"
         wide					256
-        wide_nx_handheld		350		[$NX]
+        wide_nx_handheld		350		[$NX || $NX_UI_PC]
         tall					48
         xpos                    16
         rui                     "ui/generic_button.rpak"
@@ -230,7 +233,7 @@
         tall					366
         xpos                    0
         ypos                    2
-        ypos_nx_handheld        8		[$NX]
+        ypos_nx_handheld        8		[$NX || $NX_UI_PC]
         zpos                    0
         labelText               ""
         visible					1
@@ -254,13 +257,13 @@
         pin_to_sibling_corner   TOP_LEFT
 
         columns                  		3
-        columns_nx_handheld      		2			[$NX]
+        columns_nx_handheld      		2			[$NX || $NX_UI_PC]
         rows                     		3
-        rows_nx_handheld         		2			[$NX]
+        rows_nx_handheld         		2			[$NX || $NX_UI_PC]
         buttonSpacing            		12
-        buttonSpacing_nx_handheld   	18			[$NX]
+        buttonSpacing_nx_handheld   	18			[$NX || $NX_UI_PC]
         scrollbarSpacing         		2	
-        scrollbarSpacing_nx_handheld    6			[$NX]
+        scrollbarSpacing_nx_handheld    6			[$NX || $NX_UI_PC]
         scrollbarOnLeft          		0
         //tabPosition            		1
         //selectOnDpadNav          		1
@@ -270,9 +273,9 @@
             rui                      "ui/club_search_result_button.rpak"
             clipRui                  1
             wide                     350
-            wide_nx_handheld         518		[$NX]
+            wide_nx_handheld         518		[$NX || $NX_UI_PC]
             tall                     114
-            tall_nx_handheld		 169		[$NX]
+            tall_nx_handheld		 169		[$NX || $NX_UI_PC]
             cursorVelocityModifier   0.7
             cursorPriority           -1
             rightClickEvents         1

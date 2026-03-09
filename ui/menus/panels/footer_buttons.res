@@ -96,10 +96,7 @@
 		pin_to_sibling_corner	TOP_RIGHT
 		xpos 					22
 	}
-
-
-
-
+///////////////////////////////////////////////////////////////////////
 	RightRuiFooterButton0
 	{
 		ControlName				RuiButton
@@ -112,7 +109,7 @@
 		bgcolor_override		"0 255 0 255"
       	paintbackground			1
 	}
-	RightRuiFooterButton1
+	RightRuiFooterButton1		//READ USER AGREEMENT & PRIVACY & COOKIE POLICY
 	{
 		ControlName				RuiButton
 		InheritProperties		RightRuiFooterButton

@@ -38,7 +38,7 @@
         pin_to_sibling			CenterFrame
         pin_to_sibling_corner	TOP_LEFT
         xpos					-48
-        ypos					-12
+        ypos					32//-24
         wide					1056
 		tall					822
 
@@ -49,17 +49,18 @@
 	{
 		ControlName				RuiButton
         classname               "MenuButton"
-
-        pin_corner_to_sibling	TOP_LEFT
-        pin_to_sibling			ItemGroup1
-        pin_to_sibling_corner	TOP_LEFT
+        rui					    "ui/themed_shop_item_button.rpak"
 		xpos					-24
 		ypos                    -78
 		wide					498
 		tall					408
-
         visible                 0
-        rui					    "ui/themed_shop_item_button.rpak"
+        rightClickEvents		1
+
+        pin_corner_to_sibling	TOP_LEFT
+        pin_to_sibling			ItemGroup1
+        pin_to_sibling_corner	TOP_LEFT
+
         navRight                OfferButton2
         navDown                 OfferButton3
 	}
@@ -68,17 +69,18 @@
 	{
 		ControlName				RuiButton
         classname               "MenuButton"
-
-        pin_corner_to_sibling	TOP_RIGHT
-        pin_to_sibling			ItemGroup1
-        pin_to_sibling_corner	TOP_RIGHT
+        rui					    "ui/themed_shop_item_button.rpak"
 		xpos					-24
 		ypos                    -78
 		wide					498
 		tall					408
-
         visible                 0
-        rui					    "ui/themed_shop_item_button.rpak"
+        rightClickEvents		1
+
+        pin_corner_to_sibling	TOP_RIGHT
+        pin_to_sibling			ItemGroup1
+        pin_to_sibling_corner	TOP_RIGHT
+
         navLeft                 OfferButton1
         navRight                OfferButton5
         navDown                 OfferButton4
@@ -88,16 +90,17 @@
 	{
 		ControlName				RuiButton
         classname               "MenuButton"
+        rui					    "ui/themed_shop_item_button.rpak"
+		ypos                    12
+		wide					498
+		tall					312
+        visible                 0
+        rightClickEvents		1
 
         pin_corner_to_sibling	TOP_LEFT
         pin_to_sibling			OfferButton1
         pin_to_sibling_corner	BOTTOM_LEFT
-		ypos                    12
-		wide					498
-		tall					312
 
-        visible                 0
-        rui					    "ui/themed_shop_item_button.rpak"
         navUp                   OfferButton1
         navRight                OfferButton4
 	}
@@ -106,16 +109,17 @@
 	{
 		ControlName				RuiButton
         classname               "MenuButton"
+        rui					    "ui/themed_shop_item_button.rpak"
+		ypos                    12
+		wide					498
+		tall					312
+        visible                 0
+        rightClickEvents		1
 
         pin_corner_to_sibling	TOP_RIGHT
         pin_to_sibling			OfferButton2
         pin_to_sibling_corner	BOTTOM_RIGHT
-		ypos                    12
-		wide					498
-		tall					312
 
-        visible                 0
-        rui					    "ui/themed_shop_item_button.rpak"
         navLeft                 OfferButton3
         navRight                OfferButton5
         navUp                   OfferButton2
@@ -131,7 +135,7 @@
         pin_to_sibling			CenterFrame
         pin_to_sibling_corner	TOP_RIGHT
         xpos					-48
-        ypos					-12
+        ypos					32//-24
         wide					732
 		tall					822
 
@@ -142,17 +146,18 @@
 	{
 		ControlName				RuiButton
         classname               "MenuButton"
-
-        pin_corner_to_sibling	TOP_LEFT
-        pin_to_sibling			ItemGroup2
-        pin_to_sibling_corner	TOP_LEFT
+        rui					    "ui/themed_shop_item_button.rpak"
 		xpos					-24
 		ypos                    -78
 		wide					336
 		tall					732
-
         visible                 0
-        rui					    "ui/themed_shop_item_button.rpak"
+        rightClickEvents		1
+
+        pin_corner_to_sibling	TOP_LEFT
+        pin_to_sibling			ItemGroup2
+        pin_to_sibling_corner	TOP_LEFT
+
         navLeft                 OfferButton2
         navRight                OfferButton6
 	}
@@ -161,17 +166,18 @@
 	{
 		ControlName				RuiButton
         classname               "MenuButton"
-
-        pin_corner_to_sibling	TOP_RIGHT
-        pin_to_sibling			ItemGroup2
-        pin_to_sibling_corner	TOP_RIGHT
+        rui					    "ui/themed_shop_item_button.rpak"
 		xpos					-24
 		ypos                    -78
 		wide					336
 		tall					360
-
         visible                 0
-        rui					    "ui/themed_shop_item_button.rpak"
+        rightClickEvents		1
+
+        pin_corner_to_sibling	TOP_RIGHT
+        pin_to_sibling			ItemGroup2
+        pin_to_sibling_corner	TOP_RIGHT
+
         navLeft                 OfferButton5
         navDown                 OfferButton7
 	}
@@ -180,16 +186,17 @@
 	{
 		ControlName				RuiButton
         classname               "MenuButton"
+        rui					    "ui/themed_shop_item_button.rpak"
+		ypos                    12
+		wide					336
+		tall					360
+        visible                 0
+        rightClickEvents		1
 
         pin_corner_to_sibling	TOP_RIGHT
         pin_to_sibling			OfferButton6
         pin_to_sibling_corner	BOTTOM_RIGHT
-		ypos                    12
-		wide					336
-		tall					360
 
-        visible                 0
-        rui					    "ui/themed_shop_item_button.rpak"
         navLeft                 OfferButton5
         navUp                   OfferButton7
 	}

@@ -56,7 +56,7 @@
 
         wide                    875
         tall                    250
-        tall_nx_handheld        450		[$NX]
+        tall_nx_handheld        450		[$NX || $NX_UI_PC]
 
         visible					1
         controlSettingsFile		"resource/ui/menus/panels/panel_club_details.res"
@@ -131,13 +131,13 @@
         ControlName				CNestedPanel
 
         xpos                    -48
-        xpos_nx_handheld        -10		[$NX]
-		ypos                    0		[!$NX]
-		ypos			        -325	[$NX]
+        xpos_nx_handheld        -10		[$NX || $NX_UI_PC]
+		ypos                    0		[!$NX && !$NX_UI_PC]
+		ypos			        -325	[$NX || $NX_UI_PC]
         zpos                    0
 
         wide                    875
-        wide_nx_handheld		935		[$NX]
+        wide_nx_handheld		935		[$NX || $NX_UI_PC]
         tall                    480
 
         visible					1
@@ -198,11 +198,13 @@
         ControlName             RuiButton
 
         wide                    385
-        wide_nx_handheld        450		[$NX]
+        wide_nx_handheld        450		[$NX || $NX_UI_PC]
+        tall                    60
+        tall_nx_handheld        60      [$NX || $NX_UI_PC]
         xpos                    0
-        xpos_nx_handheld        28		[$NX]
+        xpos_nx_handheld        28		[$NX || $NX_UI_PC]
         ypos                    4
-        ypos_nx_handheld        30		[$NX]
+        ypos_nx_handheld        -10		[$NX || $NX_UI_PC]
 
         InheritProperties       SwitchButtonClubInvite
         style                   DialogListButton
@@ -232,11 +234,12 @@
         ControlName				RuiButton
         classname               "MenuButton"
         wide					385
-        wide_nx_handheld		450		[$NX]
+        wide_nx_handheld		450		[$NX || $NX_UI_PC]
         tall					50
-        tall_nx_handheld		58		[$NX]
+        tall_nx_handheld		58		[$NX || $NX_UI_PC]
         xpos                    0
         ypos                    8
+        ypos_nx_handheld		4	[$NX || $NX_UI_PC]
         zpos                    10
         rui                     "ui/club_invite_all_to_party_button.rpak"
         labelText               ""
@@ -303,9 +306,9 @@
     {
         ControlName				CNestedPanel
         classname				"TabsCommonClass"
-        xpos                    -230
+        xpos                    0
         ypos                    0
-        ypos_nx_handheld        60           [$NX]
+        ypos_nx_handheld        60           [$NX || $NX_UI_PC]
         zpos					1
         wide					f0
         tall					60
@@ -324,12 +327,12 @@
 
         xpos                    0
         ypos                    -60
-        ypos_nx_handheld        0           [$NX]
+        ypos_nx_handheld        0           [$NX || $NX_UI_PC]
         zpos                    0
 
         wide                    500
         tall                    688
-        tall_nx_handheld        750         [$NX]
+        tall_nx_handheld        750         [$NX || $NX_UI_PC]
 
         visible					1
         controlSettingsFile		"resource/ui/menus/panels/panel_club_lobby_event_timeline.res"
@@ -346,12 +349,12 @@
 
         xpos                    0
         ypos                    -60
-        ypos_nx_handheld        0           [$NX]
+        ypos_nx_handheld        0           [$NX || $NX_UI_PC]
         zpos                    0
 
         wide                    500
         tall                    688
-        tall_nx_handheld        750         [$NX]
+        tall_nx_handheld        750         [$NX || $NX_UI_PC]
 
         visible					1
         controlSettingsFile		"resource/ui/menus/panels/panel_club_lobby_chat.res"

@@ -21,6 +21,7 @@
 
         wide                    770
         tall                    48
+        tall_nx_handheld        64			[$NX || $NX_UI_PC]
         clipRui                 1
 
 		className               "SettingScrollSizer"

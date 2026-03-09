@@ -120,6 +120,7 @@
         allowRightClickMenu		0
         allowSpecialCharacters	0
         allowAdditionalSpecialCharacters 0
+        allowUnnecessarySpaces  0
         unicode					1
         selectOnFocus           0
         cursorVelocityModifier  0.7
@@ -175,10 +176,13 @@
         keyboardDescription		""
         allowRightClickMenu		0
         allowSpecialCharacters	0
+        allowAdditionalSpecialCharacters 0
+        charBlackList           " "
         unicode					0
         selectOnFocus           0
         cursorVelocityModifier  0.7
         cursorPriority          20
+		makeTextUpperCase       1
 
         navLeft                 ClubNameTextEntry
         navDown                 ClubPrivacySwitch
@@ -194,7 +198,7 @@
         ControlName				RuiPanel
         xpos                    0
         ypos					-192
-        ypos_nx_handheld		-220		[$NX]
+        ypos_nx_handheld		-220		[$NX || $NX_UI_PC]
         wide					%100
         tall					40
         rui                     "ui/club_search_panel_header.rpak"
@@ -258,9 +262,9 @@
         ControlName             RuiButton
 
 		wide                    526
-        wide_nx_handheld        726		[$NX]
+        wide_nx_handheld        726		[$NX || $NX_UI_PC]
         xpos                    4
-        xpos_nx_handheld        -80		[$NX]
+        xpos_nx_handheld        -80		[$NX || $NX_UI_PC]
 
         InheritProperties       SwitchButtonCompact
         style                   DialogListButton
@@ -290,7 +294,7 @@
         wide					512
         tall					60
         ypos                    32
-        ypos_nx_handheld        45		[$NX]
+        ypos_nx_handheld        45		[$NX || $NX_UI_PC]
         visible				    1
         rui                     "ui/club_setting_frame.rpak"
 
@@ -309,9 +313,9 @@
     ClubLvlReqSwitch
     {
         wide                    526
-        wide_nx_handheld        726		[$NX]
+        wide_nx_handheld        726		[$NX || $NX_UI_PC]
         xpos                    4
-        xpos_nx_handheld        -80		[$NX]
+        xpos_nx_handheld        -80		[$NX || $NX_UI_PC]
 
         ControlName             RuiButton
         InheritProperties       SwitchButtonCompact
@@ -375,7 +379,7 @@
         //navDown                 SldOpenMicSensitivity
         //ConVar                  "TalkIsStream"
         list
-        {
+        {            
             "#CLUB_CREATION_RANKREQ_BRONZE"     0
             "#CLUB_CREATION_RANKREQ_SILVER"     1
             "#CLUB_CREATION_RANKREQ_GOLD"       2

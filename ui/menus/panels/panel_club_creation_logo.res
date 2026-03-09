@@ -49,9 +49,9 @@
         ControlName				RuiButton
         classname               "MenuButton"
         ypos                    64
-        xpos_nx_handheld        50		[$NX]
+        xpos_nx_handheld        50		[$NX || $NX_UI_PC]
         wide					192
-        wide_nx_handheld		285		[$NX]
+        wide_nx_handheld		285		[$NX || $NX_UI_PC]
         tall					48
         rui                     "ui/generic_button.rpak"
         labelText               "Logo Editor"

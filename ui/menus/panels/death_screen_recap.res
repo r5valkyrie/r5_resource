@@ -1,4 +1,4 @@
-scripts/resource/ui/menus/panels/death_screen_recap.res
+resource/ui/menus/panels/death_screen_recap.res
 {
 	ScreenFrame
 	{
@@ -17,6 +17,7 @@ scripts/resource/ui/menus/panels/death_screen_recap.res
 		ControlName             RuiPanel
 		xpos					0
 		ypos					0
+		ypos_nx_handheld			-40		[$NX || $NX_UI_PC]
 		wide 					%100
 		tall					%100
 		rui 					"ui/death_recap.rpak"
@@ -33,6 +34,7 @@ scripts/resource/ui/menus/panels/death_screen_recap.res
 		ControlName				ImagePanel
 		xpos					-20
 		ypos					-180
+		ypos_nx_handheld			-300		[$NX || $NX_UI_PC]
 		wide					540
 		tall					730
 		visible					0
@@ -51,8 +53,9 @@ scripts/resource/ui/menus/panels/death_screen_recap.res
 		ControlName             RuiButton
         InheritProperties       DeathScreenRecapBlock
 		scriptID                9
-
+		xpos_nx_handheld		30		[$NX || $NX_UI_PC]
 		ypos					0
+		ypos_nx_handheld			-20		[$NX || $NX_UI_PC]
 		pin_to_sibling          DamageBlockAnchor
 		pin_corner_to_sibling   BOTTOM
 		pin_to_sibling_corner   BOTTOM
@@ -63,6 +66,8 @@ scripts/resource/ui/menus/panels/death_screen_recap.res
 		ControlName             RuiButton
         InheritProperties       DeathScreenRecapBlock
 		scriptID                8
+		ypos_nx_handheld		35		[$NX || $NX_UI_PC]
+		
 		pin_to_sibling          Block9
 	}
 
@@ -71,6 +76,8 @@ scripts/resource/ui/menus/panels/death_screen_recap.res
 		ControlName             RuiButton
         InheritProperties       DeathScreenRecapBlock
 		scriptID                7
+		ypos_nx_handheld		35		[$NX || $NX_UI_PC]
+		
 		pin_to_sibling          Block8
 	}
 
@@ -78,6 +85,8 @@ scripts/resource/ui/menus/panels/death_screen_recap.res
 	{
 		ControlName             RuiButton
         InheritProperties       DeathScreenRecapBlock
+		ypos_nx_handheld		35		[$NX || $NX_UI_PC]
+
 		scriptID                6
 		pin_to_sibling          Block7
 	}
@@ -87,6 +96,8 @@ scripts/resource/ui/menus/panels/death_screen_recap.res
 		ControlName             RuiButton
         InheritProperties       DeathScreenRecapBlock
 		scriptID                5
+		ypos_nx_handheld		35		[$NX || $NX_UI_PC]
+
 		pin_to_sibling          Block6
 	}
 
@@ -95,6 +106,8 @@ scripts/resource/ui/menus/panels/death_screen_recap.res
 		ControlName             RuiButton
         InheritProperties       DeathScreenRecapBlock
 		scriptID                4
+		ypos_nx_handheld		35		[$NX || $NX_UI_PC]
+
 		pin_to_sibling          Block5
 	}
 
@@ -103,6 +116,8 @@ scripts/resource/ui/menus/panels/death_screen_recap.res
 		ControlName             RuiButton
         InheritProperties       DeathScreenRecapBlock
 		scriptID                3
+		ypos_nx_handheld		35		[$NX || $NX_UI_PC]
+
 		pin_to_sibling          Block4
 	}
 
@@ -111,6 +126,8 @@ scripts/resource/ui/menus/panels/death_screen_recap.res
 		ControlName             RuiButton
         InheritProperties       DeathScreenRecapBlock
 		scriptID                2
+		ypos_nx_handheld		35		[$NX || $NX_UI_PC]
+
 		pin_to_sibling          Block3
 	}
 
@@ -119,6 +136,8 @@ scripts/resource/ui/menus/panels/death_screen_recap.res
 		ControlName             RuiButton
         InheritProperties       DeathScreenRecapBlock
 		scriptID                1
+		ypos_nx_handheld		35		[$NX || $NX_UI_PC]
+
 		pin_to_sibling          Block2
 	}
 
@@ -127,6 +146,7 @@ scripts/resource/ui/menus/panels/death_screen_recap.res
 		ControlName             RuiButton
 		wide					540
 		tall					155
+		ypos_nx_handheld		55		[$NX || $NX_UI_PC]
 		scriptID                0
 		rui                     "ui/death_recap_damage_block_main.rpak"
 		xpos                    0
@@ -159,14 +179,19 @@ scripts/resource/ui/menus/panels/death_screen_recap.res
 		menuModeWithFade           1
 
 		pin_to_sibling			ScreenFrame
-		pin_corner_to_sibling	TOP_RIGHT
-		pin_to_sibling_corner	TOP_RIGHT
+		pin_corner_to_sibling	TOP_RIGHT	[!$NX && !$NX_UI_PC]
+		pin_to_sibling_corner	TOP_RIGHT	[!$NX && !$NX_UI_PC]
+		
+		pin_corner_to_sibling	BOTTOM_LEFT	[$NX || $NX_UI_PC]
+		pin_to_sibling_corner	BOTTOM_LEFT	[$NX || $NX_UI_PC]
 
 		xpos					-100
+		xpos_nx_handheld        -30 [$NX || $NX_UI_PC]
 		ypos					-90
+		ypos_nx_handheld        -30 [$NX || $NX_UI_PC]
 		zpos                    200
 
 		wide					463
-		tall 					95
+		tall 					170
 	}
 }

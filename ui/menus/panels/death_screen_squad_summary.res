@@ -1,4 +1,4 @@
-scripts/resource/ui/menus/panels/death_screen_squad_summary.res
+resource/ui/menus/panels/death_screen_squad_summary.res
 {
     ScreenFrame
     {
@@ -226,38 +226,12 @@ scripts/resource/ui/menus/panels/death_screen_squad_summary.res
 		cursorVelocityModifier  0.6
 
 		navLeft                 TeammateReport2
-		navRight                TeammateMuteChat1
+		navRight                TeammateReport1
+		cursorPriority          10
 
 		pin_to_sibling          GCard1
 		pin_corner_to_sibling   BOTTOM_LEFT
 		pin_to_sibling_corner   BOTTOM_LEFT
-	}
-
-	TeammateMuteChat1
-	{
-		ControlName             RuiButton
-
-		wide					64
-		tall					64
-
-		scriptID                1
-
-		rui                     "ui/mute_button.rpak"
-
-		xpos                    5
-		ypos                    0
-		zpos                    110
-
-		visible                 0
-		enabled                 1
-		cursorVelocityModifier  0.6
-
-		navLeft                 TeammateMute1
-		navRight                TeammateReport1
-
-		pin_to_sibling          TeammateMute1
-		pin_corner_to_sibling   BOTTOM_LEFT
-		pin_to_sibling_corner   BOTTOM_RIGHT
 	}
 
 	TeammateReport1
@@ -278,13 +252,43 @@ scripts/resource/ui/menus/panels/death_screen_squad_summary.res
 		visible                 0
 		enabled                 1
 		cursorVelocityModifier  0.6
+		cursorPriority          10
 
-		navLeft                 TeammateMuteChat1
+		navLeft                 TeammateMute1
+		navRight                TeammateBlock1
 
-		pin_to_sibling          TeammateMuteChat1
+		pin_to_sibling          TeammateMute1
 		pin_corner_to_sibling   BOTTOM_LEFT
 		pin_to_sibling_corner   BOTTOM_RIGHT
 	}
+
+	TeammateBlock1
+	{
+		ControlName             RuiButton
+
+		wide					64
+		tall					64
+
+		scriptID                1
+
+		rui                     "ui/mute_button.rpak"
+
+		xpos                    5
+		ypos                    0
+		zpos                    110
+
+		visible                 0
+		enabled                 1
+		cursorVelocityModifier  0.6
+		cursorPriority          10
+
+		navLeft                 TeammateReport1
+
+		pin_to_sibling          TeammateReport1
+		pin_corner_to_sibling   BOTTOM_LEFT
+		pin_to_sibling_corner   BOTTOM_RIGHT
+	}
+
 
 	TeammateInvite1
 	{
@@ -304,8 +308,9 @@ scripts/resource/ui/menus/panels/death_screen_squad_summary.res
 		visible                 0
 		enabled                 1
 		cursorVelocityModifier  0.6
+		cursorPriority          10
 
-		navLeft                 TeammateReport1
+		navLeft                 TeammateBlock1
 
 		pin_to_sibling          GCard1
 		pin_corner_to_sibling   CENTER
@@ -336,6 +341,7 @@ scripts/resource/ui/menus/panels/death_screen_squad_summary.res
 		visible                 0
 		enabled                 1
 		cursorVelocityModifier  0.6
+		cursorPriority          10
 
 		pin_to_sibling          TeammateMute1
 		pin_corner_to_sibling   LEFT
@@ -360,39 +366,13 @@ scripts/resource/ui/menus/panels/death_screen_squad_summary.res
 		visible                 0
 		enabled                 1
 		cursorVelocityModifier  0.6
+		cursorPriority          10
 
-		navRight                TeammateMuteChat2
+		navRight                TeammateReport2
 
 		pin_to_sibling          GCard2
 		pin_corner_to_sibling   BOTTOM_LEFT
 		pin_to_sibling_corner   BOTTOM_LEFT
-	}
-
-	TeammateMuteChat2
-	{
-		ControlName             RuiButton
-
-		wide					64
-		tall					64
-
-		scriptID                2
-
-		rui                     "ui/mute_button.rpak"
-
-		xpos                    5
-		ypos                    0
-		zpos                    110
-
-		visible                 0
-		enabled                 1
-		cursorVelocityModifier  0.6
-
-		navRight                TeammateReport2
-		navLeft                 TeammateMute2
-
-		pin_to_sibling          TeammateMute2
-		pin_corner_to_sibling   BOTTOM_LEFT
-		pin_to_sibling_corner   BOTTOM_RIGHT
 	}
 
 	TeammateReport2
@@ -413,11 +393,40 @@ scripts/resource/ui/menus/panels/death_screen_squad_summary.res
 		visible                 0
 		enabled                 1
 		cursorVelocityModifier  0.6
+		cursorPriority          10
 
-		navLeft                 TeammateMuteChat2
+		navLeft                 TeammateMute2
+		navRight                TeammateReport2
+
+		pin_to_sibling          TeammateMute2
+		pin_corner_to_sibling   BOTTOM_LEFT
+		pin_to_sibling_corner   BOTTOM_RIGHT
+	}
+
+	TeammateBlock2
+	{
+		ControlName             RuiButton
+
+		wide					64
+		tall					64
+
+		scriptID                2
+
+		rui                     "ui/mute_button.rpak"
+
+		xpos                    5
+		ypos                    0
+		zpos                    110
+
+		visible                 0
+		enabled                 1
+		cursorVelocityModifier  0.6
+		cursorPriority          10
+
+		navLeft                 TeammateReport2
 		navRight                TeammateInvite2
 
-		pin_to_sibling          TeammateMuteChat2
+		pin_to_sibling          TeammateReport2
 		pin_corner_to_sibling   BOTTOM_LEFT
 		pin_to_sibling_corner   BOTTOM_RIGHT
 	}
@@ -440,6 +449,7 @@ scripts/resource/ui/menus/panels/death_screen_squad_summary.res
 		visible                 0
 		enabled                 1
 		cursorVelocityModifier  0.6
+		cursorPriority          10
 
 		navRight                TeammateMute1
 		navLeft                 TeammateReport2
@@ -473,11 +483,50 @@ scripts/resource/ui/menus/panels/death_screen_squad_summary.res
 		visible                 0
 		enabled                 1
 		cursorVelocityModifier  0.6
+		cursorPriority          10
 
 		pin_to_sibling          TeammateMute2
 		pin_corner_to_sibling   LEFT
 		pin_to_sibling_corner   LEFT
 	}
+
+	TeammateObfuscatedID1
+    {
+        ControlName	    	Label
+        xpos		        0
+        ypos		        25
+		zpos                    110
+        tall			30		[$PS5 || $XB5]
+        visible		        0
+
+        textAlignment		west
+        labelText	        ""
+
+		auto_wide_tocontents 	1
+
+        pin_to_sibling          TeammateMute1
+        pin_corner_to_sibling   TOP_LEFT
+        pin_to_sibling_corner   BOTTOM_LEFT
+    }
+
+    TeammateObfuscatedID2
+    {
+        ControlName	    	Label
+        xpos		        0
+        ypos		        25
+		zpos                110
+        tall			30		[$PS5 || $XB5]	
+        visible		        0
+
+        textAlignment		west
+        labelText	        ""
+
+		auto_wide_tocontents 	1
+
+        pin_to_sibling          TeammateMute2
+        pin_corner_to_sibling   TOP_LEFT
+        pin_to_sibling_corner   BOTTOM_LEFT
+    }
 
 	LobbyChatBox
 	{
@@ -497,15 +546,20 @@ scripts/resource/ui/menus/panels/death_screen_squad_summary.res
 		menuModeWithFade           1
 
 		pin_to_sibling			ScreenFrame
-		pin_corner_to_sibling	TOP_LEFT
-		pin_to_sibling_corner	TOP_LEFT
+		pin_corner_to_sibling	TOP_LEFT	[!$NX && !$NX_UI_PC]
+		pin_to_sibling_corner	TOP_LEFT	[!$NX && !$NX_UI_PC]
+		
+		pin_corner_to_sibling	BOTTOM_LEFT	[$NX || $NX_UI_PC]
+		pin_to_sibling_corner	BOTTOM_LEFT	[$NX || $NX_UI_PC]
 
 		xpos					-100
+		xpos_nx_handheld        -30 [$NX || $NX_UI_PC]
 		ypos					-96
+		ypos_nx_handheld        -30 [$NX || $NX_UI_PC]
 		zpos                    200
 
 		wide					500
-		tall 					150
+		tall 					180
 	}
 
 

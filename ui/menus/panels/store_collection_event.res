@@ -38,65 +38,194 @@
 	    pin_to_sibling			CenterFrame
 	    pin_to_sibling_corner	TOP_LEFT
 	    xpos					0
-	    ypos					-15
+	    ypos					0
 	    wide					690
 	    tall					540
 
 	    visible					1
-	    rui					    "ui/collection_event_big_info_box.rpak"
+                    
+                                                        
+     
+	    rui                     "ui/collection_event_big_info_box_old.rpak"
+      
 	}
 
-	AboutButton
+                    
+
+               
+     
+                                 
+                                    
+                   
+                     
+                   
+                     
+                   
+                       
+                       
+                     
+                     
+                        
+                                  
+                              
+     
+
+            
+  
+                                
+                                            
+                                       
+                                   
+                                       
+                                    
+                                    
+                        
+                         
+                         
+                           
+                                 
+                                              
+                                
+                                                  
+                                                
+                                           
+                        
+  
+
+                    
+      
+                                    
+                                             
+
+                                       
+                                      
+                                          
+                      
+                       
+                        
+                                                     
+                       
+
+                                  
+                                                            
+                                    
+                                                      
+                                            
+                                                     
+                                                    
+      
+
+                         
+      
+                                    
+                                             
+
+                                       
+                                             
+                                        
+                       
+                                                    
+                      
+                        
+                                                     
+                       
+
+                                  
+                                                            
+                                    
+                                                      
+                                            
+                                                    
+                                                    
+                                               
+      
+
+     
+    AboutButton
+    {
+        ControlName			    RuiButton
+        classname               "MenuButton"
+
+        pin_corner_to_sibling	TOP_LEFT
+        pin_to_sibling			BigInfoBox
+        pin_to_sibling_corner	TOP_LEFT
+        xpos				    -50
+        xpos_nx_handheld	    -15		[$NX || $NX_UI_PC]
+        ypos				    -337
+        wide				    530
+        wide_nx_handheld	    670		[$NX || $NX_UI_PC]
+        tall				    50
+
+        visible                 1
+        rui					    "ui/heirloom_about_button.rpak"
+        cursorVelocityModifier  0.7
+        sound_focus             "UI_Menu_Focus_Large"
+        navDown                 Purchase1PackButton
+        navRight                OpenPackButton
+        tabPosition				1
+    }
+
+    Purchase1PackButton
+    {
+        ControlName			    RuiButton
+        classname               "MenuButton"
+
+        pin_corner_to_sibling	TOP_LEFT
+        pin_to_sibling			AboutButton
+        pin_to_sibling_corner	BOTTOM_LEFT
+        xpos				    0
+        ypos				    24
+        wide				    252
+        wide_nx_handheld	    326		[$NX || $NX_UI_PC]
+        tall				    90
+
+        visible                 1
+        rui					    "ui/collection_event_buy_packs_button.rpak"
+        cursorVelocityModifier  0.7
+        sound_focus             "UI_Menu_Focus_Large"
+        navUp                   AboutButton
+        navRight                PurchaseNPacksButton
+        navDown                 CompletionRewardBox
+    }
+
+    PurchaseNPacksButton
+    {
+        ControlName			    RuiButton
+        classname               "MenuButton"
+
+        pin_corner_to_sibling	TOP_LEFT
+        pin_to_sibling			Purchase1PackButton
+        pin_to_sibling_corner	TOP_RIGHT
+        xpos				    26
+        xpos_nx_handheld	    18		[$NX || $NX_UI_PC]
+        ypos				    0
+        wide				    252
+        wide_nx_handheld	    326		[$NX || $NX_UI_PC]
+        tall				    90
+
+        visible                 1
+        rui					    "ui/collection_event_buy_packs_button.rpak"
+        cursorVelocityModifier  0.7
+        sound_focus             "UI_Menu_Focus_Large"
+        navUp                   AboutButton
+        navLeft                 Purchase1PackButton
+        navDown                 CompletionRewardBox
+        navRight                OpenPackButton
+    }
+      
+
+	ButtonAnchor
 	{
-
-	}
-
-	Purchase1PackButton
-	{
-	    ControlName			    RuiButton
-	    classname               "MenuButton"
-
+	    ControlName			ImagePanel
 	    pin_corner_to_sibling	TOP_LEFT
-	    pin_to_sibling			AboutButton
-	    pin_to_sibling_corner	BOTTOM_LEFT
-	    xpos				    0
-	    ypos				    16
-	    wide				    252
-	    tall				    90
-
-	    visible                 1
-	    rui					    "ui/collection_event_buy_packs_button.rpak"
-	    cursorVelocityModifier  0.7
-	    sound_focus             "UI_Menu_Focus_Large"
-	    navUp                   AboutButton
-	    navRight                PurchaseNPacksButton
-	    navDown                 HeirloomBox
+	    pin_to_sibling			BigInfoBox
+	    pin_to_sibling_corner	TOP_LEFT
+	    xpos				    -50
+	    xpos_nx_handheld	    -15		[$NX || $NX_UI_PC]
+	    ypos				    -337
 	}
 
-	PurchaseNPacksButton
-	{
-	    ControlName			    RuiButton
-	    classname               "MenuButton"
-
-	    pin_corner_to_sibling	TOP_LEFT
-	    pin_to_sibling			Purchase1PackButton
-	    pin_to_sibling_corner	TOP_RIGHT
-	    xpos				    26
-	    ypos				    0
-	    wide				    252
-	    tall				    90
-
-	    visible                 1
-	    rui					    "ui/collection_event_buy_packs_button.rpak"
-	    cursorVelocityModifier  0.7
-	    sound_focus             "UI_Menu_Focus_Large"
-	    navUp                   AboutButton
-	    navLeft                 Purchase1PackButton
-	    navDown                 HeirloomBox
-	    navRight                OpenPackButton
-	}
-
-	HeirloomBox
+	CompletionRewardBox
 	{
 		ControlName				RuiButton
 
@@ -104,7 +233,7 @@
 	    pin_to_sibling			BigInfoBox
 	    pin_to_sibling_corner	BOTTOM_LEFT
 	    xpos                    0
-	    ypos                    25
+	    ypos                    0
 	    wide                    620
 	    tall                    240
 
@@ -118,9 +247,10 @@
 	    ControlName				CNestedPanel
 
 	    pin_corner_to_sibling	TOP_LEFT
-	    pin_to_sibling			HeirloomBox
+	    pin_to_sibling			CompletionRewardBox
 	    pin_to_sibling_corner	TOP_RIGHT
 	    xpos					52
+	    xpos_nx_handheld		110		[$NX || $NX_UI_PC]
 	    ypos					0
 	    wide					1150
 	    tall					350
@@ -133,7 +263,9 @@
 	{
 		ControlName				RuiPanel
 	    xpos					-200
+	    xpos_nx_handheld		-140		[$NX || $NX_UI_PC]
 	    ypos					-185
+	    ypos_nx_handheld		-48			[$NX || $NX_UI_PC]
 		wide					400
 		tall					200
 	    rui					    "ui/collection_event_item_details.rpak"
@@ -143,6 +275,7 @@
 	    pin_to_sibling			CenterFrame
 	    pin_to_sibling_corner	TOP_RIGHT
 	}
+
 	OpenPackButton
 	{
 	    ControlName             RuiButton
@@ -152,9 +285,13 @@
 	    pin_to_sibling          ItemDetailsBox
 	    pin_to_sibling_corner   BOTTOM_LEFT
 	    xpos                    -30
-	    ypos                    33
+	    xpos_nx_handheld         -15	[$NX || $NX_UI_PC]
+	    ypos                    42
+	    ypos_nx_handheld        280		[$NX || $NX_UI_PC]
 	    wide                    308
+	    wide_nx_handheld        500		[$NX || $NX_UI_PC]
 	    tall                    88
+	    tall_nx_handheld        143		[$NX || $NX_UI_PC]
 	    proportionalToParent    1
 
 	    visible                 0
@@ -165,5 +302,87 @@
 	    navLeft                 AboutButton
 	    navDown                 RewardButton01x01
 	}
+
+	MythicIndicatorButton0
+    {
+        ControlName             RuiButton
+
+        pin_corner_to_sibling   BOTTOM_LEFT
+        pin_to_sibling          ItemDetailsBox
+        pin_to_sibling_corner   BOTTOM_LEFT
+
+        xpos                    -30
+        xpos_nx_handheld         -15	[$NX || $NX_UI_PC]
+        ypos                    110
+        ypos_nx_handheld        320		[$NX || $NX_UI_PC]
+        wide                    100
+        wide_nx_handheld        120		[$NX || $NX_UI_PC]
+        tall                    100
+        tall_nx_handheld        143		[$NX || $NX_UI_PC]
+        visible                 0
+        rui                     "ui/mythic_skin_indicator.rpak"
+        zpos                    100
+
+        cursorVelocityModifier  0.7
+        sound_focus             "UI_Menu_Focus_Small"
+        navLeft                 AboutButton
+        navRight                MythicIndicatorButton1
+        navDown                 RewardButton01x01
+
+        scriptID                0
+    }
+
+    MythicIndicatorButton1
+    {
+        ControlName             RuiButton
+
+        pin_corner_to_sibling   TOP_LEFT
+        pin_to_sibling          MythicIndicatorButton0
+        pin_to_sibling_corner   TOP_RIGHT
+
+        xpos                    10
+        xpos_nx_handheld         -15	[$NX || $NX_UI_PC]
+        wide                    100
+        wide_nx_handheld        120		[$NX || $NX_UI_PC]
+        tall                    100
+        tall_nx_handheld        143		[$NX || $NX_UI_PC]
+        visible                 0
+        rui                     "ui/mythic_skin_indicator.rpak"
+        zpos                    100
+
+        cursorVelocityModifier  0.7
+        sound_focus             "UI_Menu_Focus_Small"
+        navLeft                 MythicIndicatorButton0
+        navRight                MythicIndicatorButton2
+        navDown                 RewardButton01x01
+
+        scriptID                1
+    }
+
+    MythicIndicatorButton2
+    {
+        ControlName             RuiButton
+
+        pin_corner_to_sibling   TOP_LEFT
+        pin_to_sibling          MythicIndicatorButton1
+        pin_to_sibling_corner   TOP_RIGHT
+
+        xpos                    10
+        xpos_nx_handheld         -15	[$NX || $NX_UI_PC]
+        wide                    100
+        wide_nx_handheld        120		[$NX || $NX_UI_PC]
+        tall                    100
+        tall_nx_handheld        143		[$NX || $NX_UI_PC]
+        visible                 0
+        rui                     "ui/mythic_skin_indicator.rpak"
+        zpos                    100
+
+        cursorVelocityModifier  0.7
+        sound_focus             "UI_Menu_Focus_Small"
+        navLeft                 MythicIndicatorButton1
+        navDown                 RewardButton01x01
+
+        scriptID                2
+    }
 }
 

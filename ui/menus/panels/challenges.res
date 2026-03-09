@@ -24,12 +24,12 @@ resource/ui/menus/panels/challenges.res
     {
         ControlName				RuiButton
         xpos                    c-700
-        xpos_nx_handheld        c-910		[$NX]
+        xpos_nx_handheld        c-910		[$NX || $NX_UI_PC]
         ypos                    24
 		wide					374
-        wide_nx_handheld		540			[$NX]
+        wide_nx_handheld		540			[$NX || $NX_UI_PC]
         tall					80
-        tall_nx_handheld		140			[$NX]
+        tall_nx_handheld		140			[$NX || $NX_UI_PC]
         zpos					2 // Needed or clicking on the background can hide this
         visible					1
         enabled					1
@@ -54,11 +54,11 @@ resource/ui/menus/panels/challenges.res
         ControlName				RuiButton
         xpos                    0
         ypos                    10
-        ypos_nx_handheld        15		[$NX]
+        ypos_nx_handheld        15		[$NX || $NX_UI_PC]
         wide					374
-        wide_nx_handheld		540		[$NX]
+        wide_nx_handheld		540		[$NX || $NX_UI_PC]
         tall					80
-        tall_nx_handheld		140		[$NX]
+        tall_nx_handheld		140		[$NX || $NX_UI_PC]
         zpos					2 // Needed or clicking on the background can hide this
         visible					1
         enabled					1
@@ -87,11 +87,11 @@ resource/ui/menus/panels/challenges.res
         ControlName				RuiButton
         xpos                    0
         ypos                    10
-        ypos_nx_handheld        15		[$NX]
+        ypos_nx_handheld        15		[$NX || $NX_UI_PC]
         wide					374
-        wide_nx_handheld		540		[$NX]
+        wide_nx_handheld		540		[$NX || $NX_UI_PC]
         tall					80
-        tall_nx_handheld		140		[$NX]
+        tall_nx_handheld		140		[$NX || $NX_UI_PC]
         zpos					2 // Needed or clicking on the background can hide this
         visible					1
         enabled					1
@@ -120,11 +120,11 @@ resource/ui/menus/panels/challenges.res
         ControlName				RuiButton
         xpos                    0
         ypos                    10
-        ypos_nx_handheld        15		[$NX]
+        ypos_nx_handheld        15		[$NX || $NX_UI_PC]
         wide					374
-        wide_nx_handheld		540		[$NX]
+        wide_nx_handheld		540		[$NX || $NX_UI_PC]
         tall					80
-        tall_nx_handheld		140		[$NX]
+        tall_nx_handheld		140		[$NX || $NX_UI_PC]
         zpos					2 // Needed or clicking on the background can hide this
         visible					1
         enabled					1
@@ -153,11 +153,11 @@ resource/ui/menus/panels/challenges.res
 	    ControlName				RuiButton
 	    xpos                    0
 	    ypos                    10
-	    ypos_nx_handheld        15		[$NX]
+	    ypos_nx_handheld        15		[$NX || $NX_UI_PC]
 	    wide					374
-	    wide_nx_handheld		540		[$NX]
+	    wide_nx_handheld		540		[$NX || $NX_UI_PC]
 	    tall					80
-	    tall_nx_handheld		140		[$NX]
+	    tall_nx_handheld		140		[$NX || $NX_UI_PC]
 	    zpos					2 // Needed or clicking on the background can hide this
 	    visible					1
 	    enabled					1
@@ -186,7 +186,7 @@ resource/ui/menus/panels/challenges.res
         ControlName				GridButtonListPanel
         xpos                    0
         ypos                    10
-        ypos_nx_handheld        15		[$NX]
+        ypos_nx_handheld        15		[$NX || $NX_UI_PC]
         columns                 1
         rows                    1
         buttonSpacing           6
@@ -203,9 +203,9 @@ resource/ui/menus/panels/challenges.res
             rui                     "ui/challenge_category_button.rpak"
             clipRui                 1
             wide					350
-            wide_nx_handheld		525		[$NX]
+            wide_nx_handheld		525		[$NX || $NX_UI_PC]
             tall					50
-            tall_nx_handheld		90		[$NX]
+            tall_nx_handheld		90		[$NX || $NX_UI_PC]
             cursorVelocityModifier  0.7
             rightClickEvents		1
             doubleClickEvents       1
@@ -219,12 +219,12 @@ resource/ui/menus/panels/challenges.res
     {
         ControlName				RuiButton
         xpos                    c-300
-        xpos_nx_handheld        c-340		[$NX]
+        xpos_nx_handheld        c-340		[$NX || $NX_UI_PC]
         ypos                    24
         wide					990
-        wide_nx_handheld		1250	[$NX]
+        wide_nx_handheld		1250	[$NX || $NX_UI_PC]
         tall					70
-        tall_nx_handheld		95		[$NX]
+        tall_nx_handheld		95		[$NX || $NX_UI_PC]
         zpos					2 // Needed or clicking on the background can hide this
         visible					1
         enabled					1
@@ -247,9 +247,9 @@ resource/ui/menus/panels/challenges.res
         xpos					0
         ypos                    16
         wide					990
-        wide_nx_handheld		1250	[$NX]
+        wide_nx_handheld		1250	[$NX || $NX_UI_PC]
         tall					70
-        tall_nx_handheld		95		[$NX]
+        tall_nx_handheld		95		[$NX || $NX_UI_PC]
         zpos					2 // Needed or clicking on the background can hide this
         visible					1
         enabled					1
@@ -278,9 +278,9 @@ resource/ui/menus/panels/challenges.res
         xpos					0
         ypos                    16
         wide					990
-        wide_nx_handheld		1250		[$NX]
+        wide_nx_handheld		1250		[$NX || $NX_UI_PC]
         tall					3
-        tall_nx_handheld		8			[$NX]
+        tall_nx_handheld		8			[$NX || $NX_UI_PC]
         visible					1
         ruiArgs
         {
@@ -313,9 +313,9 @@ resource/ui/menus/panels/challenges.res
             rui                     ui/challenge_row.rpak
             clipRui                 1
             wide					990
-            wide_nx_handheld		1250		[$NX]
+            wide_nx_handheld		1250		[$NX || $NX_UI_PC]
             tall					65
-            tall_nx_handheld		95			[$NX]
+            tall_nx_handheld		90			[$NX || $NX_UI_PC]
             cursorVelocityModifier  0.7
             rightClickEvents		1
             doubleClickEvents       1

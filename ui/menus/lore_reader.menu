@@ -55,7 +55,18 @@ resource/ui/menus/lore_reader.menu
             pin_corner_to_sibling	CENTER
             pin_to_sibling_corner	CENTER
         }
-
+		BlackBackground
+        {
+            ControlName             ImagePanel
+            xpos					0
+            ypos					0
+            wide					%100
+            tall					%100
+            visible					1
+            scaleImage				1
+            image 					"vgui/white"
+            drawColor				"0 0 0 242"
+        }
 	    LoreReaderScreen
 		{
             ControlName             RuiPanel

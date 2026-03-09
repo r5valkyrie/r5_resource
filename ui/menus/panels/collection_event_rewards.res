@@ -41,7 +41,7 @@
         sound_focus             "UI_Menu_BattlePass_Level_Focus"
         sound_accept            ""
 
-        navLeft                 HeirloomBox
+        navLeft                 CompletionRewardBox
         navRight                RewardButton02x01
         navUp                   OpenPackButton
         navDown                 RewardButton01x02
@@ -340,7 +340,7 @@
         sound_focus             "UI_Menu_BattlePass_Level_Focus"
         sound_accept            ""
 
-        navLeft                 HeirloomBox
+        navLeft                 CompletionRewardBox
         navRight                RewardButton02x02
         navUp                   RewardButton01x01
 
