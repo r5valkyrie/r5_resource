@@ -1,4 +1,4 @@
-"resource/ui/menus/R5R/privatematch.menu"
+"resource/ui/menus/panels/create_match.res"
 {
 		"DarkenBackground"
 		{
@@ -185,6 +185,23 @@
 			pin_to_sibling_corner CENTER
 		}
 
+		StartGamePanel
+		{
+			ControlName				ImagePanel
+			"classname"				"CreateServerUI"
+			wide 680
+			tall 50
+			xpos 0
+			ypos 10
+			fillColor				"40 40 40 200"
+			drawColor				"40 40 40 200"
+			visible 1
+			zpos 0
+
+			pin_to_sibling			ServerMapImg
+			pin_corner_to_sibling	BOTTOM_LEFT
+			pin_to_sibling_corner	TOP_LEFT
+		}
 
 		BtnStartGame
 		{
@@ -333,6 +350,24 @@
 			pin_to_sibling_corner		RIGHT
 		}
 
+		ServerNamePanel
+		{
+			ControlName				ImagePanel
+			"classname"				"CreateServerUI"
+			wide 480
+			tall 50
+			xpos 0
+			ypos -5
+			fillColor				"40 40 40 200"
+			drawColor				"40 40 40 200"
+			visible 1
+			zpos 0
+
+			pin_to_sibling			CreateServerBG
+			pin_corner_to_sibling	TOP
+			pin_to_sibling_corner	TOP
+		}
+
 		BtnServerName
 		{
 			ControlName RuiButton
@@ -370,6 +405,23 @@
 			pin_to_sibling_corner CENTER
 		}
 
+		ServerDescPanel
+		{
+			ControlName				ImagePanel
+			"classname"				"CreateServerUI"
+			wide 480
+			tall 50
+			xpos 0
+			ypos 5
+			fillColor				"40 40 40 200"
+			drawColor				"40 40 40 200"
+			visible 1
+			zpos 0
+
+			pin_to_sibling			ServerNamePanel
+			pin_corner_to_sibling	TOP
+			pin_to_sibling_corner	BOTTOM
+		}
 
 		BtnServerDesc
 		{
@@ -406,6 +458,24 @@
 			pin_to_sibling ServerDescPanel
 			pin_corner_to_sibling CENTER
 			pin_to_sibling_corner CENTER
+		}
+
+		PlaylistPanel
+		{
+			ControlName				ImagePanel
+			"classname"				"CreateServerUI"
+			wide 480
+			tall 50
+			xpos 0
+			ypos 5
+			fillColor				"40 40 40 200"
+			drawColor				"40 40 40 200"
+			visible 1
+			zpos 0
+
+			pin_to_sibling			ServerDescPanel
+			pin_corner_to_sibling	TOP
+			pin_to_sibling_corner	BOTTOM
 		}
 
 		BtnPlaylist
@@ -445,6 +515,24 @@
 			pin_to_sibling_corner CENTER
 		}
 
+		MapPanel
+		{
+			ControlName				ImagePanel
+			"classname"				"CreateServerUI"
+			wide 480
+			tall 50
+			xpos 0
+			ypos 5
+			fillColor				"40 40 40 200"
+			drawColor				"40 40 40 200"
+			visible 1
+			zpos 0
+
+			pin_to_sibling			PlaylistPanel
+			pin_corner_to_sibling	TOP
+			pin_to_sibling_corner	BOTTOM
+		}
+
 		BtnMap
 		{
 			ControlName RuiButton
@@ -480,6 +568,24 @@
 			pin_to_sibling MapPanel
 			pin_corner_to_sibling CENTER
 			pin_to_sibling_corner CENTER
+		}
+
+		VisPanel
+		{
+			ControlName				ImagePanel
+			"classname"				"CreateServerUI"
+			wide 480
+			tall 50
+			xpos 0
+			ypos 5
+			fillColor				"40 40 40 200"
+			drawColor				"40 40 40 200"
+			visible 1
+			zpos 0
+
+			pin_to_sibling			MapPanel
+			pin_corner_to_sibling	TOP
+			pin_to_sibling_corner	BOTTOM
 		}
 
 		BtnVis
