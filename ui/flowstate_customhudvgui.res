@@ -294,7 +294,7 @@ Resource/UI/flowstate_customhudvgui.res
 			zpos 					0
 			visible					0
 			enabled					0
-			rui 					"ui/tabs_background.rpak"
+			rui 					"ui/tall_tabs_background.rpak"
 			
 			pin_to_sibling          Screen
 			pin_corner_to_sibling   TOP_LEFT
@@ -311,7 +311,7 @@ Resource/UI/flowstate_customhudvgui.res
 			zpos 					0
 			visible					0
 			enabled					0
-			rui 					"ui/tabs_background.rpak"
+			rui 					"ui/tall_tabs_background.rpak"
 			
 			pin_to_sibling          ScreenBlur1
 			pin_corner_to_sibling   TOP_LEFT
@@ -328,7 +328,7 @@ Resource/UI/flowstate_customhudvgui.res
 			zpos 					10
 			visible					0
 			enabled					0
-			rui 					"ui/tabs_background.rpak"
+			rui 					"ui/tall_tabs_background.rpak"
 			
 			pin_to_sibling          ScreenBlur2
 			pin_corner_to_sibling   TOP_LEFT
@@ -1339,7 +1339,7 @@ Resource/UI/flowstate_customhudvgui.res
 			ypos					-335
 			zpos 					0
 			visible					0
-			rui 					"ui/tabs_background.rpak"
+			rui 					"ui/tall_tabs_background.rpak"
 			
 			pin_to_sibling          Screen
 			pin_corner_to_sibling   TOP_LEFT
@@ -1356,7 +1356,7 @@ Resource/UI/flowstate_customhudvgui.res
 			zpos 					1
 			visible					0
 			enabled					0
-			rui 					"ui/tabs_background.rpak"
+			rui 					"ui/tall_tabs_background.rpak"
 			
 			pin_to_sibling          BombStateScreenBlur1
 			pin_corner_to_sibling   TOP_LEFT
@@ -1431,7 +1431,7 @@ Resource/UI/flowstate_customhudvgui.res
 			// "xpos"					"0"
 			// "ypos"					"50"
 			// "zpos"					"4"
-			// rui 					"ui/tabs_background.rpak"
+			// rui 					"ui/tall_tabs_background.rpak"
 			// visible					1
 			// //drawColor				"0 0 0 200"
 			
@@ -1815,7 +1815,7 @@ Resource/UI/flowstate_customhudvgui.res
 			zpos 					1
 			visible					0
 			enabled					0
-			rui 					"ui/tabs_background.rpak"
+			rui 					"ui/tall_tabs_background.rpak"
 			
 			pin_to_sibling          Screen
 			pin_corner_to_sibling   TOP
@@ -1898,7 +1898,7 @@ Resource/UI/flowstate_customhudvgui.res
 			// zpos 					1
 			// visible					0
 			// enabled					0
-			// rui 					"ui/tabs_background.rpak"
+			// rui 					"ui/tall_tabs_background.rpak"
 			
 			// pin_to_sibling          Screen
 			// pin_corner_to_sibling   TOP
@@ -2152,7 +2152,7 @@ Resource/UI/flowstate_customhudvgui.res
 		// xpos					0
 		// visible					1
 		// proportionalToParent    1
-		// rui 					"ui/tabs_background.rpak"
+		// rui 					"ui/tall_tabs_background.rpak"
 		
 		// "pin_to_sibling"			"DarkenBackground"
 		// "pin_corner_to_sibling"		"BOTTOM_LEFT"
@@ -4358,7 +4358,7 @@ Resource/UI/flowstate_customhudvgui.res
 		xpos 					-50
 		zpos 					0
 		visible					0
-		rui 					"ui/screen_blur.rpak"//"ui/tabs_background.rpak"
+		rui 					"ui/screen_blur.rpak"//"ui/tall_tabs_background.rpak"
 		visible					0
 		drawColor				"0 0 0 50"
 		
@@ -4398,7 +4398,7 @@ Resource/UI/flowstate_customhudvgui.res
 		xpos 					-50
 		zpos 					0
 		visible					0
-		rui 					"ui/screen_blur.rpak"//"ui/tabs_background.rpak"
+		rui 					"ui/screen_blur.rpak"//"ui/tall_tabs_background.rpak"
 		drawColor				"0 0 0 10"
 		
 		pin_to_sibling          Screen
@@ -4482,7 +4482,7 @@ Resource/UI/flowstate_customhudvgui.res
 		xpos 					-50
 		zpos 					0
 		visible					0
-		rui 					"ui/screen_blur.rpak"//"ui/tabs_background.rpak"
+		rui 					"ui/screen_blur.rpak"//"ui/tall_tabs_background.rpak"
 		drawColor				"0 0 0 10"
 		
 		pin_to_sibling          Screen
