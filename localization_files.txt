@@ -58,6 +58,7 @@ localization/character/horizon
 localization/character/fuse
 localization/character/seer
 localization/character/ash
+localization/character/catalyst
 localization/character/sharedcharacter
 localization/character/madmaggie
 localization/character/wattson
