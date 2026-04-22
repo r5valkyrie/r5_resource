@@ -40,8 +40,10 @@ localization/weapon/throwingknife
 localization/weapon/nemesis
 
 localization/character/bangalore
+localization/character/ballistic
 localization/character/bloodhound
 localization/character/caustic
+localization/character/catalyst
 localization/character/gibraltar
 localization/character/lifeline
 localization/character/mirage
@@ -58,11 +60,14 @@ localization/character/horizon
 localization/character/fuse
 localization/character/seer
 localization/character/ash
-localization/character/catalyst
 localization/character/sharedcharacter
 localization/character/madmaggie
+localization/character/newcastle
 localization/character/wattson
 localization/character/valkyrie
+localization/character/vantage
+
+localization/feature/lore
 localization/feature/battlepass
 localization/feature/challenges
 localization/feature/beasthunter
