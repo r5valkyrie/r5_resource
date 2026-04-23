@@ -1,0 +1,173 @@
+panel SlidingListInspectPanel
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+	inputListener: true
+
+	var blockListAnchor @this/BlockListAnchor
+	var blockListContent @this/BlockListAnchor/Content
+	var itemListAnchor @this/ItemListAnchor
+	var itemListContent @this/ItemListAnchor/Content
+	var itemDetailAnchor @this/ItemDetailAnchor
+
+
+	behavior SlidingListInspect
+	{
+		blockListPanel: @panel/BlockListAnchor/Content
+		itemListPanel: @panel/ItemListAnchor/Content
+		itemDetailPanel: @panel/ItemDetailAnchor
+		animatorBehavior: @panel:Animator
+
+		offscreenPosition: -1050
+		leftAnchorPosition: -848
+		rightAnchorPosition: -88
+	}
+
+	behavior Animator
+	{
+		tweenAnimations: [
+			{
+				name: "BlockListToItemList"
+				tweens: [
+					{
+						property: @panel/BlockListAnchor:RenderGroup.alpha
+						duration: 0.15
+						startValue: 1
+						endValue: 0
+						curve: EASE_OUT_EXPO
+					},
+					{
+						property: @panel/BlockListAnchor.positionX
+						duration: 0.25
+						startValue: -848
+						endValue: -1050
+						curve: EASE_OUT_CUBIC
+					},
+					{
+						property: @panel/ItemListAnchor.positionX
+						duration: 0.25
+						startValue: -88
+						endValue: -848
+						curve: EASE_OUT_CUBIC
+					},
+					{
+						property: @panel/ItemDetailAnchor:RenderGroup.alpha
+						duration: 0.25
+						startValue: 0
+						endValue: 1
+						curve: EASE_OUT_CUBIC
+					}
+				]
+			},
+			{
+				name: "ItemListToBlockList"
+				tweens: [
+					{
+						property: @panel/BlockListAnchor:RenderGroup.alpha
+						duration: 0.15
+						delay: 0.1
+						startValue: 0
+						endValue: 1
+						curve: EASE_IN_CUBIC
+					},
+					{
+						property: @panel/BlockListAnchor.positionX
+						duration: 0.25
+						startValue: -1050
+						endValue: -848
+						curve: EASE_OUT_CUBIC
+					},
+					{
+						property: @panel/ItemListAnchor.positionX
+						duration: 0.25
+						startValue: -848
+						endValue: -88
+						curve: EASE_OUT_CUBIC
+					},
+					{
+						property: @panel/ItemDetailAnchor:RenderGroup.alpha
+						duration: 0.25
+						startValue: 1
+						endValue: 0
+						curve: EASE_OUT_CUBIC
+					}
+				]
+			}
+		]
+	}
+
+	panel BlockListAnchor
+	{
+		anchor: TOP
+		position: <-848, 212>
+		pivot: <0.0, 0.0>
+
+		constrainInput: false
+
+		behavior RenderGroup
+
+		behavior VerticalContainer
+		{
+			fitContentWidth: true
+			fitContentHeight: true
+		}
+
+		panel Content
+		{
+			anchor: TOP_LEFT
+			pivot: <0.0, 0.0>
+
+			behavior VerticalContainer
+			{
+				fitContentWidth: true
+				fitContentHeight: true
+			}
+		}
+	}
+
+	panel ItemListAnchor
+	{
+		anchor: TOP
+		position: <-88, 212>
+		pivot: <0.0, 0.0>
+
+		constrainInput: false
+
+//		behavior RenderGroup
+
+		behavior VerticalContainer
+		{
+			fitContentWidth: true
+			fitContentHeight: true
+		}
+
+		panel Content
+		{
+			anchor: TOP_LEFT
+			pivot: <0.0, 0.0>
+
+			behavior VerticalContainer
+			{
+				fitContentWidth: true
+				fitContentHeight: true
+			}
+		}
+	}
+
+	panel ItemDetailAnchor
+	{
+		anchor: TOP
+		position: <200, 380>
+		pivot: <0.0, 0.0>
+		size: <500, 500>
+
+		constrainInput: false
+
+		behavior RenderGroup
+		{
+			alpha: 0
+		}
+	}
+}

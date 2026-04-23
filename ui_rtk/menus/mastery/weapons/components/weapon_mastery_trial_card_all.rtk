@@ -1,0 +1,304 @@
+//Expected type: MasteryWeapon_TrialQueryResult
+panel MasteryTrialCard
+{
+	bind root
+
+	size: <460, 560>
+
+	behavior Animator
+	{
+		tweenAnimations: [
+			{
+				name: "AnimateIn"
+				tweens: [
+					//Container
+					{
+						property: @panel/Container:Image.alpha
+						startValue: 0.0
+						endValue: 1.0
+						duration: 0.25
+			            curve: EASE_OUT_QUART
+					},
+					{
+						property: @panel/Container.positionY
+						startValue: 600
+						endValue: 0
+						duration: 0.25
+			            curve: EASE_OUT_QUART
+					},
+					//Completed
+					{
+						property: @panel/Container/CompletedArt/CompletedTopLeft:Image.alpha
+						startValue: 0.0
+						endValue: 1.0
+						duration: 0.25
+			            curve: EASE_OUT_QUART
+					},
+					{
+						property: @panel/Container/CompletedArt/CompletedBottomRight:Image.alpha
+						startValue: 0.0
+						endValue: 1.0
+						duration: 0.25
+			            curve: EASE_OUT_QUART
+					},
+					{
+						property: @panel/Container/CompletedArt/CompletedGradient:Image.alpha
+						startValue: 0.0
+						endValue: 1.0
+						duration: 0.25
+			            curve: EASE_OUT_QUART
+					},
+					{
+						property: @panel/Container/CompletedArt/CompletedOutline:Image.alpha
+						startValue: 0.0
+						endValue: 1.0
+						duration: 0.25
+			            curve: EASE_OUT_QUART
+					},
+					//Unlocked
+					{
+						property: @panel/Container/Unlocked/Top/MasteryTrialIcon:Image.alpha
+						startValue: 0
+						endValue: 1.0
+						duration: 0.25
+			            curve: EASE_OUT_QUART
+					},
+					{
+						property: @panel/Container/Unlocked/Top/Title/TitleUnlocked:Label.alpha
+						startValue: 0
+						endValue: 1.0
+						duration: 0.25
+			            curve: EASE_OUT_QUART
+					},
+					{
+						property: @panel/Container/Unlocked/Description:Label.alpha
+						startValue: 0
+						endValue: 1.0
+						duration: 0.25
+			            curve: EASE_OUT_QUART
+					},
+					{
+						property: @panel/Container/Unlocked/Count:FormatLabel.alpha
+						startValue: 0
+						endValue: 1.0
+						duration: 0.25
+			            curve: EASE_OUT_QUART
+					}
+//					,
+//					{
+//						property: @panel:Sound.play
+//						startValue: false
+//						endValue: true
+//						duration: 0.01
+//						curve: EASE_LINEAR
+//					}
+				]
+			}
+		]
+	}
+
+//	behavior Sound
+//	{
+//		sound: "UI_Menu_WeaponMastery_Trial_Cards"
+//	}
+
+	panel Container
+	{
+		anchor: CENTER
+		size: <460, 560>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/mastery/mastery_trial_box_unlocked.rpak"
+			useLocaleDirection: true
+		}
+
+		panel CompletedArt
+		{
+			bind *.isCompleted -> @this.visible
+
+			size: <460, 560>
+			anchor: CENTER
+
+			panel CompletedTopLeft
+			{
+				size: <212, 44>
+				anchor: TOP_LEFT
+				pivot: <0.0, 0.0>
+				position: <-2,-3>
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/menu/mastery/mastery_trialitem_topleft_base.rpak"
+					colorRGB: <0.1254, 0.3215, 0.2078>
+				}
+			}
+
+			panel CompletedBottomRight
+			{
+				size: <306, 18>
+				anchor: BOTTOM_RIGHT
+				pivot: <1.0, 1.0>
+				position: <4, 2>
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/menu/mastery/mastery_trial_box_bottom_right_base.rpak"
+					colorRGB: <0.1254, 0.3215, 0.2078>
+				}
+			}
+
+			panel CompletedGradient
+			{
+				anchor: BOTTOM
+				pivot: <0.5, 1.0>
+				size: <464, 118>
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/menu/mastery/mastery_trial_box_completed_gradient.rpak"
+					assetMaskPath: $"ui_image/rui/menu/mastery/mastery_trialitem_complete_gradient.rpak"
+					colorRGB: <0.1254, 0.3215, 0.2078>
+					alpha: 0.3
+				}
+			}
+
+			panel CompletedOutline
+			{
+				size: <464, 570>
+				anchor: CENTER
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/menu/mastery/mastery_trial_box_frame.rpak"
+					colorRGB: <0.1254, 0.3215, 0.2078>
+				}
+			}
+		}
+
+		panel Unlocked
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			size: <460, 560>
+			offsets: <0, 0, 0, 0>
+			offsetsTB: <65, 0>
+
+			panel Top
+			{
+				anchor: TOP_STRETCH_WIDTH
+				pivot: < 0.5, 0.0>
+				offsets: <0, 0, 0, 0>
+				positionY: -12
+
+		        behavior VerticalContainer
+		        {
+		            spacing: 20
+		            alignment: TOP
+		            fitContentHeight: true
+		        }
+
+				panel MasteryTrialIcon
+				{
+					bind root
+					size: <198, 172>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/menu/mastery/weaponmastery_trial_master_icon_large.rpak"
+					}
+				}
+
+				panel Title
+				{
+					anchor: CENTER_STRETCH_WIDTH
+					offsetsLR: <40, 40>
+
+					panel TitleUnlocked
+					{
+						anchor: CENTER_STRETCH_WIDTH
+						offsets: <0, 0, 0, 0>
+
+						behavior Label
+						{
+							text: "#MASTERY_WEAPON_MASTER"
+							pixelHeight: 40
+							textAlignHorizontal: CENTER
+							allCaps: true
+							face: "DefaultBoldFont"
+						}
+					}
+				}
+			}
+
+			panel Description
+			{
+				anchor: BOTTOM_STRETCH_WIDTH
+				size: <400, 25>
+				offsetsLR: <40, 40>
+				positionY: -250
+				pivot: <0.5, 0.0>
+
+				behavior Label
+				{
+					text: "#MASTERY_REACH_LEVEL_100_ALL"
+					textAlignHorizontal: CENTER
+					textAlignVertical: TOP
+					verticalMode: AUTOSIZE_TO_TEXT
+					pixelHeight: 28
+					margin: <0, 10, 0, 10>
+					colorRGB: <0.55, 0.55, 0.55>
+				}
+			}
+
+			panel Count
+			{
+				anchor: BOTTOM_STRETCH_WIDTH
+				size: <400, 25>
+				offsetsLR: <40, 40>
+				positionY: -200
+				pivot: <0.5, 0.0>
+
+				behavior FormatLabel
+				{
+					bind *.curVal -> @this.arg1
+					bind *.goalVal -> @this.arg2
+
+					format: "#X/Y"
+					face: "DefaultBoldFont"
+					textAlignHorizontal: CENTER
+					textAlignVertical: TOP
+					verticalMode: AUTOSIZE_TO_TEXT
+					pixelHeight: 65
+					margin: <0, 10, 0, 10>
+					colorRGB: <0.95, 0.95, 0.95>
+					arg1: ""
+					arg2: ""
+				}
+			}
+
+		    panel RewardsContainer
+			{
+				anchor: BOTTOM_STRETCH_WIDTH
+				offsets: <0, 0, 0, 0>
+				pivot: <0.5, 1.0>
+				offsetRight: 10
+				offsetLeft: 10
+				positionY: -8
+
+				behavior HorizontalContainer
+				{
+					fitContentHeight: true
+					spacing: 12
+					alignment: BOTTOM_RIGHT
+					useLocaleDirection: true
+				}
+
+				behavior ListBinder
+				{
+					bindingPath: "*.rewards"
+					prefab: $"ui_rtk/common/buttons/battlepass_reward_button_small.rpak"
+				}
+			}
+	    }
+	}
+}

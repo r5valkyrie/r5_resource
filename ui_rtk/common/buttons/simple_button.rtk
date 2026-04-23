@@ -1,0 +1,119 @@
+panel SimpleButton
+{
+	bind root
+
+	var labelText @this/Content/Text:Label.text
+	var labelColor @this/Content/Text:Label.colorRGB
+	var labelPixelHeight @this/Content/Text:Label.pixelHeight
+	var backgroundColor @this/Background:Image.colorRGB
+	var outlineColor @this/Outline:Image.colorRGB
+	var outlineHoverColor @this/Outline:Image.colorRGB
+	var iconImage @this/Content/Icon:Image.assetPath
+	var iconColor @this/Content/Icon:Image.colorRGB
+	var iconSize @this/Content/Icon.size
+	var contentPivot @this/Content.pivot
+
+	anchor: CENTER
+	size: <574, 70>
+	inputListener: true
+
+	behavior Button
+	{
+		soundHighlighted: "ui_menu_focus"
+		soundPressedEnabled: "ui_menu_accept"
+		transitions: [
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Outline:Image.alpha
+				value: 1.0
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Outline:Image.alpha
+				value: 0.6
+			}
+		]
+	}
+
+	panel Background
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			colorRGB: #000000
+			alpha: 0.6
+			assetPath: $"ui_image/rui/borders/border_jclb2_mask.rpak"
+		}
+	}
+
+	panel Content
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <20, 20, 20, 20>
+
+		behavior HorizontalContainer
+		{
+			fitContentHeight: true
+			alignment: LEFT
+		}
+
+		panel Icon
+		{
+			anchor: CENTER
+			size: <34, 34>
+
+			behavior Image
+		}
+
+		panel Text
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <20, 20, 0, 0>
+
+			behavior Label
+			{
+				face: "DefaultBoldFont"
+				text: "Label"
+				textAlignHorizontal: LEFT
+				textAlignVertical: CENTER
+				horizontalMode: SQUISH_TO_CONTAINER
+				pixelHeight: 22
+				color: <1, 1, 1, 1>
+				allCaps: true
+				margin: <10, 0, 0, 0>
+			}
+
+			behavior LabelAltStyle
+			{
+				face: "DefaultBoldFont"
+				pixelHeight: 24
+				color: <1, 1, 1, 1>
+			}
+
+			behavior LabelAltStyle
+			{
+				face: "DefaultBoldFont"
+				pixelHeight: 24
+				color: <1, 1, 1, 1>
+			}
+		}
+	}
+
+	panel Outline
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			colorRGB: <0.7, 0.7, 0.7>
+			assetPath: $"ui_image/rui/borders/border_jclb2.rpak"
+		}
+	}
+}

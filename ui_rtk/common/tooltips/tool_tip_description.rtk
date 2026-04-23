@@ -1,0 +1,32 @@
+panel TipDescription
+{
+	bind root
+	offsets: <0, 0, 0, 0>
+	behavior Label
+	{
+		bind * -> @this.text
+		text: "ToolTip Description"
+		pixelHeight: 28
+		color: <0.79, 0.79, 0.79, 1>
+		horizontalMode: AUTOSIZE_TO_TEXT
+		verticalMode: AUTOSIZE_TO_TEXT
+	}
+
+	behavior NxOverrides
+	{
+		overrides: [
+		{
+			propertyRef: @panel:Label.pixelHeight
+			nxValue: 45
+		},
+		{
+			propertyRef: @panel:Label.face
+			nxValue: "DefaultBoldFont"
+		},
+		{
+			propertyRef: @panel:Label.leading
+			nxValue:  -7
+		}
+		]
+	}
+}

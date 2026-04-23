@@ -1,0 +1,37 @@
+panel CutCornerTile
+{
+	var bgColor @this/Background:Image.color
+	var borderAlpha @this/BorderOutline:Image.alpha
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	panel Background
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			flipVertical: true
+			flipHorizontal: true
+			alpha: 0.96
+			colorRGB: <0.1, 0.1, 0.1>
+			assetPath: $"ui_image/rui/death_recap/death_recap_bg.rpak"
+		}
+	}
+
+	panel BorderOutline
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			alpha: 0.8
+			flipVertical: true
+			flipHorizontal: true
+			assetPath: $"ui_image/rui/death_recap/death_recap_border.rpak"
+		}
+	}
+}

@@ -214,19 +214,6 @@ resource/ui/menus/lobby_private_match.menu
 
             visible 1
         }
-
-        MouseDragIcon
-        {
-            ControlName				RuiPanel
-
-            wide                    288
-            tall                    48
-            visible					0
-            enabled 				1
-            scaleImage				1
-            rui                     "ui/private_match_team_roster_player.rpak"
-            zpos                    20
-        }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         //PostGameButton

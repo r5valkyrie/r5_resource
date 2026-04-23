@@ -1,0 +1,33 @@
+panel CrossProgressionProfilesDialog
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	panel Content
+	{
+		anchor: CENTER_STRETCH_WIDTH
+		offsetsLR: <98, 98>
+		positionY: 56
+
+		behavior VerticalContainer
+		{
+			alignment: CENTER
+			fitContentHeight: true
+			spacing: 30
+		}
+
+		instance $"ui_rtk/menus/cross_progression/components/cross_progression_info.rpak" Info
+		{
+			override bind root "*"
+		}
+
+		instance $"ui_rtk/common/buttons/base_button.rpak" ContinueButton
+		{
+			override @var(labelText) "#A_BUTTON_CONTINUE"
+			override @var(size) <480, 64>
+			override @var(labelPixelHeight) 24
+		}
+	}
+}

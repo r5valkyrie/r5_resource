@@ -1,0 +1,13 @@
+instance $"ui_rtk/common/components/checkbox.rpak" StoreOfferPip
+{
+	bind root
+
+	override @var(bgImage) $"ui_image/white.rpak"
+	override @var(bgColor) #737373
+	override @var(bgAlpha) 1.0
+	override @var(checkImage) $"ui_image/white.rpak"
+	override @var(checkColor) #FF4C1A
+	override @var(outlineAlpha) 0
+
+	bind *.active -> @var(checked)
+}

@@ -1,0 +1,39 @@
+panel CrossProgression
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	behavior CrossProgressionPanel
+	{
+		migrateButton: @panel/IsHere/Content/ContinueButton:Button
+		faqButton: @panel/Profiles/Content/Info/InfoLeft/Bottom/FAQ:Button
+		continueButton: @panel/Profiles/Content/ContinueButton:Button
+	}
+
+	instance $"ui_rtk/menus/cross_progression/cross_progression_is_here_dialog.rpak" IsHere
+	{
+		override bind root "*"
+
+		bind *.flow.state -> IntEqual( 0 ) -> @this.visible
+		bind *.flow.state -> IntEqual( 0 ) -> @this.active
+	}
+
+	instance $"ui_rtk/menus/cross_progression/cross_progression_migrating_dialog.rpak" Migrating
+	{
+		override bind root "*"
+
+		bind *.flow.state -> IntEqual( 1 ) -> @this.visible
+		bind *.flow.state -> IntEqual( 1 ) -> @this.active
+	}
+
+	instance $"ui_rtk/menus/cross_progression/cross_progression_profiles_dialog.rpak" Profiles
+	{
+		override bind root "*"
+
+		bind *.flow.state -> IntEqual( 2 ) -> @this.visible
+		bind *.flow.state -> IntEqual( 2 ) -> @this.active
+	}
+}
+

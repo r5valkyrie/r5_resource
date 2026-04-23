@@ -1,0 +1,83 @@
+panel CupInfoTiers
+{
+	anchor: CENTER
+	size: <1720, 462>
+	position: <0, 65>
+
+	behavior CupInfoTiers
+
+    behavior HorizontalContainer
+	{
+		alignment: TOP_LEFT
+		spacing: 30
+		useLocaleDirection: true
+	}
+
+	panel AboutText
+	{
+        anchor: TOP_LEFT
+        offsetsLR: <0, 0>
+        pivot: <0.0, 0.0>
+        width: 350
+
+        behavior VerticalContainer
+		{
+			alignment: TOP_LEFT
+			fitContentHeight: true
+			expandChildWidth: true
+			useLocaleDirection: true
+		}
+
+		panel Title
+		{
+            behavior Label
+			{
+				verticalMode: AUTOSIZE_TO_TEXT
+				horizontalMode: WRAP
+				useLocaleDirection: true
+				face: "TitleRegularFont"
+				margin: <0, 0, 15, 0>
+				pixelHeight: 30
+				allCaps: true
+				text: "#CUPS_HOW_TIERS_WORK"
+			}
+		}
+
+        panel Text
+        {
+			behavior Label
+			{
+				verticalMode: AUTOSIZE_TO_TEXT
+				HorizontalMode: WRAP
+				textAlignHorizontal: LEFT
+				useLocaleDirection: true
+				pixelHeight: 28
+				face: "TitleRegularFont"
+				margin: <0, 0, 20, 0>
+				color: #929396
+				text: "#CUPS_TIERS_DESC"
+			}
+        }
+    }
+
+    panel TiersPanel
+    {
+	    size: <1340, 462>
+	    pivot: <0.5, 0.5>
+
+	    behavior HorizontalContainer
+		{
+			alignment: TOP_LEFT
+			expandChildHeight: true
+			reverseOrder: true
+			spacing: 11
+			useLocaleDirection: true
+		}
+
+	    behavior ListBinder
+		{
+			bindingPath: "&menus.apexCupsDialog.tierList"
+			prefab: $"ui_rtk/menus/game_modes/apex_cups/components/cards/cup_tier_cards.rpak"
+		}
+    }
+}

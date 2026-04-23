@@ -1,0 +1,237 @@
+panel ArmoryTopWeapons
+{
+	anchor: TOP_RIGHT
+    pivot: <1.0, 0.0>
+    position: <-50, 250>
+    size: <238, 460 >
+
+	behavior ArmoryTopWeapons
+	{
+		topLevel: [
+			@panel/PaddingContainer/ContentView/HorizontalContent/TopLevel/WeaponStack/TopLevel1,
+			@panel/PaddingContainer/ContentView/HorizontalContent/TopLevel/WeaponStack/TopLevel2,
+			@panel/PaddingContainer/ContentView/HorizontalContent/TopLevel/WeaponStack/TopLevel3
+		]
+
+		topProgress: [
+			@panel/PaddingContainer/ContentView/HorizontalContent/TopProgress/WeaponStack/TopProgress1,
+			@panel/PaddingContainer/ContentView/HorizontalContent/TopProgress/WeaponStack/TopProgress2,
+			@panel/PaddingContainer/ContentView/HorizontalContent/TopProgress/WeaponStack/TopProgress3
+		]
+
+		pagination: @panel:Pagination
+	}
+
+	panel CursorZone
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		inputListener: true
+
+		behavior CursorInteract
+		{
+			mouseEnabled: true
+			controllerEnabled: true
+		}
+	}
+
+	behavior Pagination
+    {
+		container: @panel/PaddingContainer
+		content: @panel/PaddingContainer/ContentView/HorizontalContent
+        nextButton: @panel/PaddingContainer/PaginationNav/RightButton:Button
+        prevButton: @panel/PaddingContainer/PaginationNav/LeftButton:Button
+        paginationButtons: @panel/PaddingContainer/PaginationNav/PaginationPips
+        hintAnimator: @panel/PaddingContainer/Hint:Animator
+        animator: @panel:Animator
+
+		cursorInteract1Area: @panel/CursorZone:CursorInteract
+
+		vertical: false
+		autoPagesByContainerContent: true
+    }
+
+    behavior Animator
+    {
+        tweenAnimations: [
+            {
+                name: "NextPage"
+                tweens: [
+                    {
+                        property: @panel/PaddingContainer/ContentView/HorizontalContent.positionX
+                        duration: 0.25
+                        startValue: 0
+                        endValue: 1
+                        curve: EASE_IN_CUBIC
+                    }
+                ]
+            }
+        ]
+    }
+
+	panel PaddingContainer
+	{
+		anchor: TOP
+        pivot: <0.5, 0.0>
+        size: <138, 382>
+		constrainInput: false
+
+	    behavior Image
+	    {
+	        assetPath: $"ui_image/rui/menu/mastery/mastery_overview_top3_base.rpak"
+	    }
+
+	    panel ContentView
+	    {
+	        anchor: TOP_LEFT
+	        pivot: <0.0, 0.0>
+	        size: <138, 382>
+	        offsets: <0, 0, 0, 0>
+
+	        behavior RenderGroup
+
+	        panel HorizontalContent
+	        {
+	            anchor: TOP_LEFT
+	            offsets: <0, 0, 0, 0>
+		        pivot: <0.0, 0.0>
+		        size: <138, 382>
+
+				behavior HorizontalContainer
+		        {
+		            spacing: 0
+		            alignment: TOP_LEFT
+		            fitContentWidth: true
+					useLocaleDirection: true
+		        }
+
+		        panel TopLevel
+		        {
+			        size: <138, 382>
+		            offsets: <0, 0, 0, 0>
+
+					panel Title
+					{
+						anchor: TOP_STRETCH_WIDTH
+						height: 100
+						offsetsLR: <5, 5>
+						pivot: < 0.5, 0 >
+
+						behavior FormatLabel
+						{
+							format: "#MASTERY_TOP_3"
+							face: "TitleFont"
+							pixelHeight: 26
+							outlineColorInnerRGB: <0, 0, 0>
+							outlineColorOuterRGB: <0, 0, 0>
+							colorRGB: <0.7, 0.7, 0.7>
+							textAlignHorizontal: CENTER
+							textAlignVertical: CENTER
+							allCaps: true
+						}
+
+						behavior LabelAltStyle
+						{
+							face: "TitleBoldFont"
+							pixelHeight: 22
+						}
+					}
+
+					panel WeaponStack
+					{
+						anchor: TOP
+				        pivot: <0.5, 0.0>
+				        positionY: 100
+
+				        behavior VerticalContainer
+				        {
+				            spacing: 10
+				            alignment: TOP
+				            fitContentHeight: true
+				        }
+
+				        instance $"ui_rtk/menus/mastery/weapons/components/top/mastery_top_weapon_level.rpak" TopLevel1
+		                instance $"ui_rtk/menus/mastery/weapons/components/top/mastery_top_weapon_level.rpak" TopLevel2
+		                instance $"ui_rtk/menus/mastery/weapons/components/top/mastery_top_weapon_level.rpak" TopLevel3
+				    }
+		        }
+
+		        panel TopProgress
+		        {
+			        size: <138, 382>
+		            offsets: <0, 0, 0, 0>
+
+					panel Title
+					{
+						anchor: TOP_STRETCH_WIDTH
+						height: 100
+						offsetsLR: <5, 5>
+						pivot: < 0.5, 0 >
+
+						behavior FormatLabel
+						{
+							format: "#MASTERY_NEXT_3"
+							face: "TitleFont"
+							pixelHeight: 26
+							outlineColorInnerRGB: <0, 0, 0>
+							outlineColorOuterRGB: <0, 0, 0>
+							colorRGB: <0.7, 0.7, 0.7>
+							textAlignHorizontal: CENTER
+							textAlignVertical: CENTER
+							allCaps: true
+						}
+
+						behavior LabelAltStyle
+						{
+							face: "TitleBoldFont"
+							pixelHeight: 22
+						}
+					}
+
+					panel WeaponStack
+					{
+						anchor: TOP
+				        pivot: <0.5, 0.0>
+				        positionY: 100
+
+				        behavior VerticalContainer
+				        {
+				            spacing: 10
+				            alignment: TOP
+				            fitContentHeight: true
+				        }
+
+				        instance $"ui_rtk/menus/mastery/weapons/components/top/mastery_top_weapon_progress.rpak" TopProgress1
+				        instance $"ui_rtk/menus/mastery/weapons/components/top/mastery_top_weapon_progress.rpak" TopProgress2
+		                instance $"ui_rtk/menus/mastery/weapons/components/top/mastery_top_weapon_progress.rpak" TopProgress3
+				    }
+		        }
+		    }
+	    }
+
+	    instance $"ui_rtk/common/pagination_nav_horizontal.rpak" PaginationNav
+	    {
+	        override @var(leftButtonSize) <34, 34>
+	        override @var(rightButtonSize) <34, 34>
+	        override @var(buttonSpacing) 4
+			override @var(pipsContainerSize) <60, 16>
+			override @var(pipsSpacing) 8
+			override @var(pipsExpanded) true
+			override @var(pipsFitContentWidth) false
+			override @var(pipsFitContentHeight) false
+			override @var(pipsExpandChildHeight) true
+			override @var(pipsExpandToFillEvenly) true
+
+		    anchor: BOTTOM
+            positionY: 5
+	        offsets: <0 ,0, 0, 0>
+	    }
+
+		instance $"ui_rtk/common/pagination_hint.rpak" Hint
+	    {
+	        anchor: BOTTOM
+	        pivot: <0.5, 0.0>
+	        positionY: 40
+	    }
+	}
+}

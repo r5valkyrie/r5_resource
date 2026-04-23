@@ -1,0 +1,48 @@
+panel DoubleSlantedDecorationLine
+{
+	anchor: TOP_LEFT
+	var width @this/Rectangle.width
+	var height @this/Rectangle.height
+	var color @this/Rectangle:Image.colorRGB
+	var alpha @this/Rectangle:Image.alpha
+	size: <300, 5>
+
+	behavior HorizontalContainer
+	{
+		fitContentWidth: true
+	}
+
+	panel LeftTriangle
+	{
+		bind @parent/Rectangle.height -> @this.height
+		bind @parent/Rectangle.height -> @this.width
+		bind @parent/Rectangle:Image.colorRGB -> @this:Image.colorRGB
+		bind @parent/Rectangle:Image.alpha -> @this:Image.alpha
+
+		behavior Image
+		{
+			flipVertical: true
+			assetPath: $"ui_image/rui/triangle_tr.rpak"
+		}
+	}
+
+	panel Rectangle
+	{
+		size: <300, 5>
+		behavior Image
+	}
+
+	panel RightTriangle
+	{
+		bind @parent/Rectangle.height -> @this.height
+		bind @parent/Rectangle.height -> @this.width
+		bind @parent/Rectangle:Image.colorRGB -> @this:Image.colorRGB
+		bind @parent/Rectangle:Image.alpha -> @this:Image.alpha
+		behavior Image
+		{
+			flipVertical: true
+			flipHorizontal: true
+			assetPath: $"ui_image/rui/triangle_tr.rpak"
+		}
+	}
+}

@@ -1,0 +1,36 @@
+panel CurrencyDisplay
+{
+	var currencyIcon @this/CurrencyIcon:Image.assetPath
+	var currencyIconSize @this/CurrencyIcon.size
+	var currencyValue @this/CurrencyAmountText:Label.text
+	var currencyValueHeight @this/CurrencyAmountText.height
+	var currencyValuePixelHeight @this/CurrencyAmountText:Label.pixelHeight
+	var spacing @this:HorizontalContainer.spacing
+
+	behavior HorizontalContainer
+	{
+		fitContentHeight: true
+		fitContentWidth: true
+		spacing: 5
+	}
+
+	panel CurrencyIcon
+	{
+		size: <24, 24>
+
+		behavior Image
+	}
+
+	panel CurrencyAmountText
+	{
+		height: 22
+
+		behavior Label
+		{
+			horizontalMode: AUTOSIZE_TO_TEXT
+			textAlignVertical: BOTTOM
+			face: #FONT_TITLE_BOLD
+			pixelHeight: 20
+		}
+	}
+}

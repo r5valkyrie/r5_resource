@@ -1,0 +1,16 @@
+panel
+{
+	bind root
+
+	bind *.badgeRuiAsset -> @this:Badge.badgeRuiAsset
+	bind *.tier -> @this:Badge.tier
+
+	anchor: CENTER
+	size: <118, 118>
+
+	behavior Badge
+	{
+		badgeRuiAsset: $"ui/gcard_badge_account_p1.rpak"
+		tier: 20
+	}
+}

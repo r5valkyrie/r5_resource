@@ -1,0 +1,158 @@
+panel EventsPanelTitle
+{
+	var leftCornerHeaderBgBlur @this/BackgroundBlur.visible
+	var leftCornerHeaderBlurImage @this/BackgroundBlur:Image.assetPath
+	var leftCornerHeaderBGDarkening @this/BackgroundBlurDarken:Image.alpha
+	var leftCornerHeaderBg @this/ThemeBackground:Image.assetPath
+	var leftCornerEventNameColor @this/Content/TextGroup/EventTitle:Label.colorRGB
+	var leftCornerTitleColor @this/Content/TextGroup/PageTitle:Label.colorRGB
+	var mainIconDividerVisible @this/Content/Divider.visible
+	var mainIconVisible @this/Content/Logo.visible
+	var mainIcon @this/Content/Logo:Image.assetPath
+	var eventTitleText @this/Content/TextGroup/EventTitle:Label.text
+	var currentPageTitle @this/Content/TextGroup/PageTitle:Label.text
+	var titleEndTimestamp @this/Content/TextGroup:Timer.endTime
+	var titleEndTimestamp2 @this/Content/TextGroup/TimeRemaining:Timer.endTime
+	var titleCounterLocalizationString @this/Content/TextGroup/TimeRemaining/TimerString:FormatLabel.format
+	var titleCounterColor @this/Content/TextGroup/TimeRemaining/TimerString:FormatLabel.colorRGB
+	var titleCounterColor2 @this/Content/TextGroup/TimeRemaining/TimerIcon:FormatLabel.colorRGB
+
+	anchor: TOP_LEFT
+	pivot: <0, 0>
+	size: <530, 140>
+	position: <0, 0>
+
+	panel BackgroundBlur
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		size: <530, 140>
+		pivot: <0, 0>
+
+		behavior Image
+		{
+			imageBlur: ASSETMASK
+		}
+	}
+
+	panel BackgroundBlurDarken
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		size: <530, 140>
+		pivot: <0, 0>
+
+		behavior Image
+		{
+			colorRGB: <0, 0, 0>
+		}
+	}
+
+	panel ThemeBackground
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		size: <530, 140>
+		pivot: <0, 0>
+
+		behavior Image
+	}
+
+	panel Content
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		size: <530, 140>
+
+		behavior HorizontalContainer
+		{
+			alignment: LEFT
+			fitContentHeight: true
+			padding: <25, 0, 0, 0>
+			spacing: 15
+			useLocaleDirection: true
+		}
+
+		panel Logo
+		{
+			size: <112, 112>
+			behavior Image
+		}
+
+		panel Divider
+		{
+			size: <3, 90>
+			behavior Image
+			{
+				color: <1, 1, 1, 0.3>
+				assetPath: $"ui_image/rui/menu/events/event_shop/panel_left_divider.rpak"
+			}
+		}
+
+		panel TextGroup
+		{
+			behavior VerticalContainer
+			{
+				alignment: LEFT
+				padding: <0, 0, 0, 0>
+				fitContentHeight: true
+				fitContentWidth: true
+				spacing: 5
+				useLocaleDirection: true
+			}
+
+			panel EventTitle
+			{
+				//Long binding to set the size of the text group in relation to the bounds of the background.
+				bind @root/Content.width -> Subtract(@root/Content/Logo.width) -> Subtract(@root/Content:HorizontalContainer.paddingLeft) -> Subtract(@root/Content:HorizontalContainer.paddingLeft) -> Subtract(@root/Content:HorizontalContainer.spacing) ->  Subtract(@root/Content/Divider.width) -> @this.width
+				bind @this:Label.pixelHeight -> @this.height
+				behavior Label
+				{
+					face: "TitleBoldFont"
+					pixelHeight: 30
+					colorRGB: <1, 1, 1>
+					text: "#EVENTS_EVENT_SHOP"
+					textAlignHorizontal: LEFT
+					textAlignVertical: CENTER
+					horizontalMode: SQUISH_TO_CONTAINER
+					useLocaleDirection: true
+					allCaps: true
+					shadowAlpha: 0.6
+					shadowBlur: 6.0
+					shadowOffset: <0, 0>
+				}
+			}
+
+			panel PageTitle
+			{
+				bind @this.parent/EventTitle.width -> @this.width
+				bind @this:Label.pixelHeight -> @this.height
+				behavior Label
+				{
+					face: "DefaultRegularFont"
+					pixelHeight: 24
+					colorRGB: <1, 1, 1>
+					text: ""
+					textAlignHorizontal: LEFT
+					textAlignVertical: CENTER
+					horizontalMode: SQUISH_TO_CONTAINER
+					useLocaleDirection: true
+					allCaps: true
+				}
+			}
+
+			behavior Timer
+
+			instance $"ui_rtk/common/components/timer_component.rpak" TimeRemaining
+			{
+				bind @this.parent/EventTitle.width -> @this.width
+				bind @this/TimerString.height -> @this.height
+				override @var(width) 310
+				override @var(containerFitContentWidth) false
+				override @var(containerAlignment) LEFT
+				override @var(labelAnchor) TOP_STRETCH_WIDTH
+				override @var(fontHeight) 28
+				override @var(padding) <-5, 0, 0, 0>
+				override @var(iconPath)   "%$rui/menu/store/feature_timer%"
+				override @var(labelHorizontalMode) SQUISH_TO_CONTAINER
+			}
+		}
+	}
+}
+

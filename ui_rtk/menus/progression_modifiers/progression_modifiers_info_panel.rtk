@@ -1,0 +1,121 @@
+panel ProgressionModifiersInfoPanel
+{
+	bind root
+
+	anchor: CENTER_STRETCH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	panel TopContent
+	{
+		anchor: TOP
+		pivot: <0.5,0.0>
+		offsets: <0, 0, 0, 0>
+		position: <0,135>
+
+		behavior VerticalContainer
+		{
+			fitContentHeight: true
+			fitContentWidth: true
+			alignment: TOP
+			spacing: 5
+		}
+
+		panel Title
+		{
+			size: <410, 42>
+			panel TitleText
+			{
+				anchor: CENTER
+				pivot: <0.5,0.5>
+				behavior Label
+				{
+					text: "#PROGRESSION_MODIFIERS_INFO_TITLE"
+					allCaps: true
+					face: "TitleBoldFont"
+	                pixelHeight: 38
+	                colorRGB: <1, 1, 1>
+	                outlineColorInner: <0, 0, 0, 0>
+	                outlineColorOuter: <0, 0, 0, 0>
+	                textAlignHorizontal: LEFT
+	                textAlignVertical: CENTER
+
+	                horizontalMode: AUTOSIZE_TO_TEXT
+	                verticalMode: AUTOSIZE_TO_TEXT
+
+					shadowAlpha: 0.6
+					shadowBlur: 6.0
+					shadowOffset: <0, 0>
+				}
+			}
+		}
+
+		panel TitleDesc
+		{
+			size: <410, 68>
+			behavior Label
+			{
+				text: "#PROGRESSION_MODIFIERS_INFO_TITLE_DESC"
+	            face: "DefaultRegularFont"
+	            pixelHeight: 34
+	            colorRGB: #808080
+	            outlineColorInner: <0, 0, 0, 0>
+	            outlineColorOuter: <0, 0, 0, 0>
+	            textAlignHorizontal: CENTER
+	            textAlignVertical: TOP
+
+	            textAlignHorizontal: CENTER
+	            textAlignVertical: CENTER
+
+	            horizontalMode: AUTOSIZE_TO_TEXT
+	            verticalMode: AUTOSIZE_TO_TEXT
+
+				shadowAlpha: 0.6
+				shadowBlur: 6.0
+				shadowOffset: <0, 0>
+			}
+		}
+	}
+
+	panel Banners
+	{
+		anchor: CENTER
+		pivot: <0.5, 0.5>
+		offsets: <0, 0, 0, 0>
+		size: <1540, 550>
+
+		behavior HorizontalContainer
+		{
+			spacing: 50
+		}
+
+		instance $"ui_rtk/menus/progression_modifiers/components/progression_modifiers_card.rpak" MasteryBoost
+		{
+			anchor: CENTER
+			pivot: <0.5, 0.5>
+			override @var(title) "#PROGRESSION_MODIFIERS_MASTERY"
+			override @var(description) "#PROGRESSION_MODIFIERS_MASTERY_DESC"
+			override @var(iconPath) $"ui_image/rui/menu/xp_boost/BoostMastery_lrg.rpak"
+			override @var(color) #db292b
+		}
+
+		instance $"ui_rtk/menus/progression_modifiers/components/progression_modifiers_card.rpak" AccountBoost
+		{
+			anchor: CENTER
+			pivot: <0.5, 0.5>
+			override @var(title) "#PROGRESSION_MODIFIERS_LEVEL"
+			override @var(description) "#PROGRESSION_MODIFIERS_LEVEL_DESC"
+			override @var(iconPath) $"ui_image/rui/menu/xp_boost/BoostXP_lrg.rpak"
+			override @var(color) #f6a323
+		}
+
+		instance $"ui_rtk/menus/progression_modifiers/components/progression_modifiers_card.rpak" BattlepassBoost
+		{
+			anchor: CENTER
+			pivot: <0.5, 0.5>
+			override @var(title) "#PROGRESSION_MODIFIERS_BATTLEPASS"
+			override @var(description) "#PROGRESSION_MODIFIERS_BATTLEPASS_DESC"
+			override @var(iconPath) $"ui_image/rui/menu/xp_boost/BoostBP_lrg.rpak"
+			override @var(color) #09b5b7
+		}
+	}
+}

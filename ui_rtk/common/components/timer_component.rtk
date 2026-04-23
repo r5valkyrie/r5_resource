@@ -1,0 +1,77 @@
+panel TimerComponent
+{
+	bind root
+
+	var anchor @this.anchor
+	var width @this.width
+	var containerFitContentWidth @this:HorizontalContainer.fitContentWidth
+	var containerAlignment @this:HorizontalContainer.alignment
+	var iconPath @this/TimerIcon:FormatLabel.format
+	var iconColor @this/TimerIcon:FormatLabel.colorRGB
+	var iconHeight @this/TimerIcon:FormatLabel.pixelHeight
+	var iconAlpha @this/TimerIcon:FormatLabel.alpha
+	var fontColor @this/TimerString:FormatLabel.colorRGB
+	var fontHeight @this/TimerString:FormatLabel.pixelHeight
+	var fontAlpha @this/TimerString:FormatLabel.alpha
+	var additionalFormat @this/TimerString:FormatLabel.format
+	var padding @this:HorizontalContainer.padding
+	var labelAnchor @this/TimerString.anchor
+	var labelHorizontalMode @this/TimerString:FormatLabel.horizontalMode
+	var fitContentHeight @this:HorizontalContainer.fitContentHeight
+	var endTime @root:Timer.endTime
+
+	anchor: CENTER
+	height: 50
+
+	behavior HorizontalContainer
+	{
+		alignment: CENTER
+		fitContentWidth: true
+		useLocaleDirection: true
+	}
+
+	behavior Timer
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+	panel TimerIcon
+	{
+		anchor: CENTER
+
+		behavior FormatLabel
+		{
+			bind @this.format -> LocalizeString -> @this.arg1
+
+			format: " | %$rui/menu/store/feature_timer% "
+			textAlignHorizontal:  CENTER
+			textAlignVertical: CENTER
+			horizontalMode: AUTOSIZE_TO_TEXT
+			verticalMode: AUTOSIZE_TO_TEXT
+			pixelHeight: 30
+			face: "DefaultRegularFont"
+			colorRGB: <0.8, 0.64, 0.2>
+
+			arg1: ""
+		}
+	}
+
+	panel TimerString
+	{
+		anchor: CENTER
+
+		behavior FormatLabel
+		{
+			bind @panel.parent:Timer.remainingTime -> FormatTimeProperty -> @this.arg1
+            format: "#STORE_TIME_PREFORMATTED"
+			textAlignHorizontal:  LEFT
+			textAlignVertical: CENTER
+			horizontalMode: AUTOSIZE_TO_TEXT
+			verticalMode: AUTOSIZE_TO_TEXT
+			useLocaleDirection: true
+			pixelHeight: 30
+			face: "DefaultRegularFont"
+			colorRGB: <0.8, 0.64, 0.2>
+		}
+	}
+
+}

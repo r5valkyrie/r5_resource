@@ -1,0 +1,153 @@
+panel ApexCupsTierProgress
+{
+    bind root
+
+	anchor: CENTER_STRETCH_WIDTH
+	pivot: <0.5, 0.5>
+	offsets: <0, 0, 0, 0>
+	height: 168
+
+	behavior HorizontalContainer
+	{
+		alignment: CENTER
+		fitContentWidth: true
+		fitContentHeight: true
+		spacing: 25
+	}
+
+	instance $"ui_rtk/menus/game_modes/apex_cups/components/apex_cup_tier_emblem.rpak" TierEmblem
+	{
+		bind &menus.apexCups.tierInfo.currentPoints -> GreaterThan(0) -> @this.visible
+		bind &menus.apexCups.apexCup -> ApexCupCurrentTierIcon -> @var( emblemIcon )
+		bind &menus.apexCups.apexCup -> ApexCupCurrentTierText -> @var( emblemText )
+
+		size: <154, 154>
+		pivot: <0.5, 0.5>
+	}
+
+	panel TierData
+	{
+		bind &menus.apexCups.tierInfo.isTop100 -> PickVectorFromTwo( <600, 62>, <200, 62> ) -> @this.size
+
+		anchor: CENTER
+		size: <600, 62>
+
+		behavior VerticalContainer
+		{
+			alignment: CENTER
+			spaceEvenly: true
+		}
+
+		panel TotalTierPoints
+		{
+			bind &menus.apexCups.tierInfo.isTop100 -> PickVectorFromTwo( <600, 26>, <200, 26> ) -> @this.size
+
+			anchor: CENTER
+			size: <600, 26>
+
+			behavior HorizontalContainer
+			{
+				alignment: CENTER
+				expandToFillEvenly: true
+				useLocaleDirection: true
+			}
+
+			panel LeftText
+			{
+				behavior Label
+				{
+					bind &menus.apexCups.tierInfo.isTop100 -> PickStringFromTwo( "#CUPS_MATCHHISTORY_CURRENT_TIER" , "#CUPS_MATCHHISTORY_TOTAL_POINTS" ) -> @this.text
+
+					face: "DefaultBoldFont"
+					pixelHeight: 32
+					colorRGB: #COLOR_GREY_2
+					shadowAlpha: 0.6
+					shadowBlur: 6.0
+					textAlignHorizontal: LEFT
+					textAlignVertical: CENTER
+					horizontalMode: SQUISH_TO_CONTAINER
+					useLocaleDirection: true
+					allCaps: true
+					text: "#CUPS_MATCHHISTORY_CURRENT_TIER"
+				}
+			}
+
+			panel RightText
+			{
+				bind &menus.apexCups.tierInfo.isTop100 -> NOT -> @this.visible
+
+				behavior FormatLabel
+				{
+					bind &menus.apexCups.tierInfo.currentPoints -> IntEqual(-1) -> PickStringFromTwo( "#CUPS_POSTGAME_TOTAL_TIER_PTS" , "#CUPS_LEADERBOARD_EMPTY_DATA" ) -> IfTrueSwapString( &menus.apexCups.tierInfo.isTop100, "#CUPS_POSTGAME_TOP_SCORERS_PTS" ) -> @this.format
+					bind &menus.apexCups.tierInfo.currentPoints -> IntToFloat -> FormatAndLocalizeNumber( "1", true ) -> @this.arg1
+					bind &menus.apexCups.tierInfo.targetPoints -> IntToFloat -> FormatAndLocalizeNumber( "1", true ) -> @this.arg2
+
+					face: "DefaultRegularFont"
+					pixelHeight: 30
+					colorRGB: <0.56, 0.56, 0.56>
+					shadowAlpha: 0.6
+					shadowBlur: 6.0
+					textAlignHorizontal: RIGHT
+					textAlignVertical: CENTER
+					horizontalMode: SQUISH_TO_CONTAINER
+					useLocaleDirection: true
+					format: ""
+					arg1: "-1"
+					arg2: "-1"
+				}
+				behavior LabelAltStyle AltStyle1
+				{
+					colorRGB: <1.0, 1.0, 1.0>
+				}
+			}
+		}
+
+		panel Progress
+		{
+			bind &menus.apexCups.tierInfo.isTop100 -> NOT -> @this.visible
+
+			anchor: CENTER
+			size: <600, 26>
+
+			behavior AngledProgressBar
+			{
+				bind &menus.apexCups.tierInfo.currentPoints -> Subtract( &menus.apexCups.tierInfo.lowerBounds ) -> @this.current
+                bind &menus.apexCups.tierInfo.targetPoints -> Subtract(  &menus.apexCups.tierInfo.lowerBounds ) -> @this.max
+
+				progressBarColor: #F5A523
+				progressBarAlpha: 1.0
+				progressBgColor: <0.2, 0.2, 0.2>
+				progressBgAlpha: 1.0
+				angle: 45
+			}
+		}
+
+		panel ProgressTop100
+		{
+			bind &menus.apexCups.tierInfo.isTop100 -> @this.visible
+
+			anchor: CENTER
+			size: <200, 26>
+
+			behavior FormatLabel
+			{
+				bind &menus.apexCups.tierInfo.currentPoints -> IntToFloat -> FormatAndLocalizeNumber( "1", true ) -> @this.arg1
+				bind &menus.apexCups.tierInfo.targetPoints -> IntToFloat -> FormatAndLocalizeNumber( "1", true ) -> @this.arg2
+
+				face: "DefaultBoldFont"
+				pixelHeight: 48
+				colorRGB: <1.0, 1.0, 1.0>
+				shadowAlpha: 0.6
+				shadowBlur: 6.0
+				textAlignHorizontal: LEFT
+				textAlignVertical: CENTER
+				horizontalMode: SQUISH_TO_CONTAINER
+				useLocaleDirection: true
+				format: "#CUPS_POSTGAME_TOP_SCORERS_PTS"
+				arg1: "-1"
+				arg2: "-1"
+			}
+		}
+	}
+
+}

@@ -1,0 +1,269 @@
+panel
+{
+	bind root
+
+	anchor: CENTER
+	size: <420, 200>
+
+	panel
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0,0,0,0>
+
+		behavior HorizontalContainer
+		{
+			alignment: CENTER
+			spaceEvenly: true
+		}
+
+		panel Badge1Container
+		{
+			bind *.isDoubleBadges -> @this/Split1Text.active
+			bind *.isDoubleBadges -> @this/Split1Text.visible
+
+			anchor: CENTER
+			size: <145, 160>
+
+			behavior VerticalContainer
+			{
+				alignment: BOTTOM
+				spacing: -20
+			}
+
+			panel Badge1
+			{
+				anchor: CENTER
+				size: <145, 145>
+
+				behavior RankedBadge
+				{
+					bind *.badge1.badgeRuiAsset -> @this.badgeRuiAsset
+					bind *.badge1.rankedIcon -> @this.rankedIcon
+					bind *.badge1.isPlacementMode -> @this.isPlacementMode
+					bind *.badge1.completedMatches -> @this.completedMatches
+					bind *.badge1.maxMatches -> @this.maxMatches
+					bind *.badge1.useDynamicPips -> @this.useDynamicPips
+					bind *.badge1.isPromotional -> @this.isPromotional
+					bind *.badge1.startPip -> @this.startPip
+					bind *.badge1.wonMatches -> @this.wonMatches
+					bind *.badge1.emblemText -> @this.emblemText
+					bind *.badge1.emblemDisplayMode -> @this.emblemDisplayMode
+					bind *.badge1.ladderPosition -> @this.ladderPosition
+					bind *.badge1.rankScore -> @this.rankScore
+
+					badgeRuiAsset: $"ui/ranked_badge_basic.rpak"
+					rankedIcon: $"ui_image/rui/menu/ranked/rank_emblem_bronze.rpak"
+					emblemText: ""
+					emblemDisplayMode: 0
+					ladderPosition: 0
+					rankScore: 0
+				}
+
+				panel Badge1Text
+				{
+					bind *.badge1.emblemDisplayMode -> PickIntFrom( [ 33, 40, 42, 33 ] ) -> @this.positionY
+
+					anchor: CENTER
+					position: <0, 33>
+					size: <100, 24>
+
+					behavior Label
+					{
+						bind *.badge1.badgeLabel -> @this.text
+						bind *.badge1.emblemDisplayMode -> PickIntFrom( [ 22, 12, 13, 22 ] ) -> @this.pixelHeight
+
+						text: ""
+						face: "TitleBoldFont"
+						color: <1.0, 1.0, 1.0, 1>
+						pixelHeight: 22
+						textAlignHorizontal: CENTER
+						textAlignVertical: CENTER
+						verticalMode: CLIP
+					}
+
+					behavior LabelAltStyle
+					{
+						bind *.badge1.emblemDisplayMode -> PickIntFrom( [ 24, 13, 14, 24 ] ) -> @this.pixelHeight
+
+						face: "TitleBoldFont"
+						color: <0.55, 0.55, 0.55, 1>
+						pixelHeight: 24
+					}
+
+					behavior NxOverrides
+					{
+						overrides: [
+							{
+								propertyRef: @panel:Label.pixelHeight
+								nxValue: 23
+							},
+							{
+								propertyRef: @panel:Label.kerning
+								nxValue: -0.05
+							},
+							{
+								propertyRef: @panel.position
+								nxValue: <2, 34>
+							}
+						]
+					}
+				}
+			}
+
+
+			panel Split1Text
+			{
+				anchor: CENTER
+				position: <0, 72>
+				size: <100, 25>
+
+				behavior Label
+				{
+					bind *.badge1.splitLabel -> @this.text
+
+					text: ""
+					face: "DefaultRegularFont"
+					color: <0.58, 0.58, 0.58, 1>
+					pixelHeight: 23
+					textAlignHorizontal: CENTER
+					textAlignVertical: CENTER
+					verticalMode: CLIP
+				}
+
+				behavior NxOverrides
+				{
+					overrides: [
+						{
+							propertyRef: @panel:Label.pixelHeight
+							nxValue: 23
+						},
+						{
+							propertyRef: @panel.position
+							nxValue: <0, 34>
+						}
+					]
+				}
+			}
+		}
+
+		panel Badge2Container
+		{
+			bind *.isDoubleBadges -> @this.active
+			bind *.isDoubleBadges -> @this.visible
+
+			anchor: CENTER
+			size: <145, 160>
+
+			behavior VerticalContainer
+			{
+				alignment: BOTTOM
+				spacing: -20
+			}
+
+			panel Badge2
+			{
+				anchor: CENTER
+				position: <0, 33>
+				size: <145, 145>
+
+				behavior RankedBadge
+				{
+					bind *.badge2.badgeRuiAsset -> @this.badgeRuiAsset
+					bind *.badge2.rankedIcon -> @this.rankedIcon
+					bind *.badge2.isPlacementMode -> @this.isPlacementMode
+					bind *.badge2.completedMatches -> @this.completedMatches
+					bind *.badge2.maxMatches -> @this.maxMatches
+					bind *.badge2.startPip -> @this.startPip
+					bind *.badge2.wonMatches -> @this.wonMatches
+
+					badgeRuiAsset: $"ui/ranked_badge_basic.rpak"
+					rankedIcon: $"ui_image/rui/menu/ranked/rank_emblem_bronze.rpak"
+				}
+
+				panel Badge2Text
+				{
+					bind *.badge2.emblemDisplayMode -> PickIntFrom( [ 33, 40, 42, 33 ] ) -> @this.positionY
+
+					anchor: CENTER
+					position: <0, 33>
+					size: <100, 24>
+
+					behavior Label
+					{
+						bind *.badge2.badgeLabel -> @this.text
+						bind *.badge2.emblemDisplayMode -> PickIntFrom( [ 22, 12, 13, 22 ] ) -> @this.pixelHeight
+
+						text: ""
+						face: "TitleBoldFont"
+						color: <1.0, 1.0, 1.0, 1>
+						pixelHeight: 22
+						textAlignHorizontal: CENTER
+						textAlignVertical: CENTER
+						verticalMode: CLIP
+					}
+
+					behavior LabelAltStyle
+					{
+						bind *.badge2.emblemDisplayMode -> PickIntFrom( [ 24, 13, 14, 24 ] ) -> @this.pixelHeight
+
+						face: "TitleBoldFont"
+						color: <0.55, 0.55, 0.55, 1>
+						pixelHeight: 24
+					}
+
+					behavior NxOverrides
+					{
+						overrides: [
+							{
+								propertyRef: @panel:Label.pixelHeight
+								nxValue: 32
+							},
+							{
+								propertyRef: @panel:Label.kerning
+								nxValue: -0.05
+							},
+							{
+								propertyRef: @panel.position
+								nxValue: <2, 25>
+							}
+						]
+					}
+				}
+			}
+
+			panel Split2Text
+			{
+				anchor: CENTER
+				position: <0, 72>
+				size: <100, 25>
+
+				behavior Label
+				{
+					bind *.badge2.splitLabel -> @this.text
+
+					text: ""
+					face: "DefaultRegularFont"
+					color: <0.58, 0.58, 0.58, 1>
+					pixelHeight: 23
+					textAlignHorizontal: CENTER
+					textAlignVertical: CENTER
+					verticalMode: CLIP
+				}
+
+				behavior NxOverrides
+				{
+					overrides: [
+						{
+							propertyRef: @panel:Label.pixelHeight
+							nxValue: 32
+						},
+						{
+							propertyRef: @panel.position
+							nxValue: <0, 67>
+						}
+					]
+				}
+			}
+		}
+	}
+}

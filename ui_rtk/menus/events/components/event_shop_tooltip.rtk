@@ -1,0 +1,174 @@
+panel EventShopTooltip
+{
+	bind &menus.eventShop.tooltipInfo.isRecurring -> PickFloatFromTwo( 442, 342 ) -> @this.width
+
+	anchor: CENTER
+	offsets: <0, 0, 0, 0>
+	size: <342, 136>
+
+	behavior Animator
+	{
+		tweenAnimations: [
+			{
+				name: "FadeIn"
+				tweens: [
+					{
+						property: @owner.panel/Content:RenderGroup.alpha
+						startValue: 0.0
+						endValue: 1.0
+						duration: 0.2
+					}
+				]
+			}
+		]
+	}
+
+	panel Content
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior RenderGroup
+		{
+			alpha: 0.0
+		}
+
+		panel Blur
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				imageBlur: ASSET
+			}
+		}
+
+		panel Background
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				color: <0.0, 0.0, 0.0, 0.6>
+			}
+		}
+
+		panel TooltipContent
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <18, 18, 18, 18>
+
+			behavior VerticalContainer
+			{
+				alignment: TOP
+				fitContentWidth: true
+				fitContentHeight: true
+				spacing: 10
+			}
+
+			panel TipDescription
+			{
+				anchor: TOP_STRETCH_WIDTH
+				pivot: <0, 0>
+				offsets: <0, 0, 0, 0>
+
+				behavior Label
+				{
+					bind &menus.eventShop.offers[7].quality -> QualityColor( false ) -> @this.colorRGB
+
+					margin: <0, 26, 0, 0>
+					face: "DefaultBoldFont"
+					text: "Test"
+					pixelHeight: 20
+					colorRGB: <1.0, 1.0, 1.0>
+					textAlignHorizontal: LEFT
+					verticalMode: AUTOSIZE_TO_TEXT
+					allCaps: true
+				}
+			}
+
+			panel BodyText
+			{
+				anchor: TOP_STRETCH_WIDTH
+				pivot: <0, 0>
+				offsets: <0, 0, 0, 0>
+				height: 46
+
+				behavior Label
+				{
+					bind &menus.eventShop.tooltipInfo.bodyText -> @this.text
+
+					face: "TitleRegularFont"
+					pixelHeight: 20
+					colorRGB: <0.7, 0.7, 0.7>
+					text: ""
+					textAlignHorizontal: LEFT
+					verticalMode: AUTOSIZE_TO_TEXT
+				}
+
+				behavior LabelAltStyle
+				{
+					pixelHeight: 20
+					colorRGB: <1, 1, 1>
+				}
+			}
+
+			panel ActionText
+			{
+				bind &menus.eventShop.tooltipInfo.showActionText -> @this.visible
+
+				anchor: TOP_STRETCH_WIDTH
+				pivot: <0, 0>
+				offsets: <0, 0, 0, 0>
+				height: 46
+
+				behavior Label
+				{
+					face: "TitleRegularFont"
+					pixelHeight: 20
+					colorRGB: <0.7, 0.7, 0.7>
+					text: "#EVENTS_EVENT_SHOP_VIEW_REWARDS"
+					textAlignHorizontal: LEFT
+					verticalMode: AUTOSIZE_TO_TEXT
+				}
+
+				behavior LabelAltStyle
+				{
+					pixelHeight: 22
+					colorRGB: <1, 1, 1>
+				}
+			}
+		}
+
+		panel Outline
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				color: <1, 1, 1, 0.4>
+				assetPath: $"ui_image/rui/borders/border_outline_2px.rpak"
+				imageBlur: NONE
+			}
+		}
+
+		panel Icon
+		{
+			bind &menus.eventShop.tooltipInfo.showIcon -> @this.visible
+
+			anchor: TOP_RIGHT
+			pivot: <1, 0>
+			size: <26, 26>
+			position: <-18, 18>
+
+			behavior Image
+			{
+				bind &menus.eventShop.tooltipInfo.isRecurring -> PickAssetFromTwo( $"ui_image/rui/menu/buttons/checked.rpak", $"ui_image/rui/menu/events/event_shop/repeatable.rpak" ) -> @this.assetPath
+				bind &menus.eventShop.offers[7].quality -> QualityColor( false ) -> @this.colorRGB
+			}
+		}
+	}
+}

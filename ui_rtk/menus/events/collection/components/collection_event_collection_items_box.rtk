@@ -1,0 +1,180 @@
+panel CollectionEventItemsBox
+{
+	var backgroundBlur @this/BackgroundBlur.visible
+	var backgroundBlurDarken @this/BackgroundBlurDarken:Image.alpha
+	var backgroundAssetPath @this/Background:Image.assetPath
+	var size @this.size
+	var size2 @this/ItemsContainer/RenderGroupContent/PaginatedContainer/ItemsList.size
+	var itemSize @this/ItemsContainer/RenderGroupContent/PaginatedContainer/ItemsList/ListBinder.varOverrides.size
+	var itemSize2 @this/ItemsContainer/RenderGroupContent/PaginatedContainer/ItemsList/GridContainer.defaultSlotSize
+	var bindingPath @this/ItemsContainer/RenderGroupContent/PaginatedContainer/ItemsList/ListBinder.bindingPath
+	var itemsList @this/ItemsContainer/RenderGroupContent/PaginatedContainer/ItemsList
+
+	anchor: TOP_LEFT
+	size: <535, 354>
+	position: <2, 0>
+	inputListener: true
+
+	panel BackgroundBlur
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+		behavior Image
+		{
+			imageBlur: ASSET
+		}
+	}
+
+	panel BackgroundBlurDarken
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+		behavior Image
+		{
+			colorRGB: <0, 0, 0>
+		}
+	}
+
+	panel Background
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <-2, -2, -2, -2>
+
+		behavior Image
+	}
+
+	panel ItemsContainer
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		pivot: <0, 0>
+		position: <0, 0>
+
+		behavior Pagination Pagination
+		{
+			container: @panel/RenderGroupContent/PaginatedContainer
+			content: @panel/RenderGroupContent/PaginatedContainer/ItemsList
+
+			nextButton: @panel/PaginationNavContainer/PaginationNav/RightButton:Button
+			paginationButtons: @panel/PaginationNavContainer/PaginationNav/PaginationPips
+			prevButton: @panel/PaginationNavContainer/PaginationNav/LeftButton:Button
+
+			hintAnimator: @panel/PaginationNavContainer/Hint:Animator
+			animator: @panel/RenderGroupContent/PaginatedContainer:Animator
+
+			cursorInteract1Area: @panel/CursorZone:CursorInteract
+			useContentSizeAsTotalSize: true
+
+			vertical: false
+			autoPagesByContainerContent: true
+			panelsAlwaysStartNewPages: false
+			containerSizeOffset: 15
+		}
+
+		panel CursorZone
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+			inputListener: true
+
+			behavior CursorInteract CursorInteract
+			{
+				mouseEnabled: false
+				controllerEnabled: true
+				absorbOnKeyCodePressed: false
+			}
+		}
+
+		panel RenderGroupContent
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			pivot: <0.0, 0.0>
+			offsets: <0, 0, 0, 0>
+
+			behavior RenderGroup RenderGroup
+
+			panel PaginatedContainer
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <0, 0, 0, 0>
+				pivot: <0, 0>
+				position: <1, 0>
+				constrainInput: false
+
+				behavior Animator Animator
+				{
+					tweenAnimations: [
+					{
+						name: "NextPage"
+						tweens: [
+						{
+							property: @panel/ItemsList.positionX
+							duration: 0.25
+							startValue: 0
+							endValue: 1
+							curve: EASE_IN_CUBIC
+						}
+						]
+					}
+					]
+				}
+
+				panel ItemsList
+				{
+					anchor: TOP_LEFT
+					size: <535, 354>
+					pivot: <0.0, 0.0>
+					position: <0, 0>
+
+					behavior GridContainer GridContainer
+					{
+						defaultSlotSize: <84, 84>
+						wrapAfterSlot: 6
+						gridSlotAnchor: TOP_LEFT
+						fillDirection: ROW_FIRST
+						gridSlotAutosize: NONE
+						slotSpacing: <5, 5>
+						fitToContentWidth: true
+						fitToContentHeight: true
+					}
+
+					behavior ListBinder ListBinder
+					{
+						bindingPath: "*.collectedItemsModel"
+						prefab: $"ui_rtk/menus/events/collection/components/collection_event_collection_item.rpak"
+						varOverrides: {
+							size: <84, 84>
+						}
+					}
+				}
+			}
+		}
+
+		panel PaginationNavContainer
+		{
+			inputListener: true
+			anchor: BOTTOM_STRETCH_WIDTH
+			pivot: <0.5, 0.0>
+			offsets: <0, 0, 0, 0>
+			position: <1, -110>
+
+			instance $"ui_rtk/common/pagination_nav_horizontal.rpak" PaginationNav
+			{
+				inputListener: true
+				anchor: TOP_STRETCH_WIDTH
+			}
+
+			instance $"ui_rtk/common/pagination_hint.rpak" Hint
+			{
+				behavior ShowByInputMode
+				{
+					showIfMKB: false
+					showIfController: true
+				}
+				anchor: TOP
+				pivot: <0.5, 0.0>
+				size: <30, 30>
+				positionY: 45
+			}
+		}
+	}
+}

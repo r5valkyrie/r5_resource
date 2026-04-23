@@ -1,0 +1,206 @@
+panel MilestoneEventBigCollectionItem
+{
+	bind root
+
+	anchor: TOP_LEFT
+	size: <877, 155>
+	inputListener: true
+
+	behavior Button
+	{
+		bind *.quality -> QualityTextColor -> @this.transitions[2].value
+		bind *.state -> AlphaFromShopItemState( 0.2, 1.0 ) -> @this.transitions[4].value
+
+		soundHighlighted: "ui_menu_focus"
+		soundPressedEnabled: "ui_menu_accept"
+		transitions: [
+		{
+			fromState: ANY
+			toState: IDLE
+			type: TRANSITION_PROPERTY_SET
+			property: @owner.panel/BackgroundOutline:Image.assetPath
+			value: $"ui_image/rui/events/s19me01/featured_chase_item_button.rpak"
+		},
+		{
+			fromState: ANY
+			toState: HIGHLIGHTED
+			type: TRANSITION_PROPERTY_SET
+			property: @owner.panel/BackgroundOutline:Image.assetPath
+			value: $"ui_image/rui/events/s19me01/featured_chase_item_frame.rpak"
+		},
+		{
+			fromState: ANY
+			toState: IDLE
+			type: TRANSITION_PROPERTY_SET
+			property: @owner.panel/BackgroundOutline:Image.colorRGB
+			value: <1, 1, 1>
+		},
+		{
+			fromState: ANY
+			toState: HIGHLIGHTED
+			type: TRANSITION_PROPERTY_SET
+			property: @owner.panel/BackgroundOutline:Image.colorRGB
+			value: <1, 0.3058, 0.1137>
+		},
+		{
+			fromState: ANY
+			toState: IDLE
+			type: TRANSITION_PROPERTY_SET
+			property: @owner.panel/BackgroundOutline:Image.alpha
+			value: 1.0
+		},
+		{
+			fromState: ANY
+			toState: HIGHLIGHTED
+			type: TRANSITION_PROPERTY_SET
+			property: @owner.panel/BackgroundOutline:Image.alpha
+			value: 1.0
+		}
+		]
+
+	}
+
+	behavior ToolTip Tooltip
+	{
+		bind *.tooltipInfo.titleText -> @this.varOverrides.titleText
+		bind *.quality -> QualityName -> @this.varOverrides.subtitleText
+		bind *.quality -> QualityTextColor -> @this.varOverrides.subtitleColor
+
+		prefab: $"ui_rtk/common/tooltips/base_tooltip.rpak"
+		offset: <32, -68>
+		delay: 0
+
+		varOverrides: {
+			// defaults
+			titleText: ""
+			subtitleText: ""
+			bodyText: ""
+			additionalText: ""
+			icon: $""
+			isIconVisible: false
+			isAdditionalTextVisible: false
+			titleColor: #ffffff
+			subtitleColor: #ffffff
+			additionalTextAltColor: #ffffff
+			iconColor: #ffffff
+
+			// overrides
+			actionText: "#A_BUTTON_INSPECT"
+			isSubtitleVisible: true
+		}
+	}
+
+	panel BackgroundOutline
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			bind *.quality -> QualityTextColor -> @this.colorRGB
+			bind *.state -> AlphaFromShopItemState( 0.2, 1.0 ) -> @this.alpha
+
+			color: <1, 1, 1, 1>
+			assetPath: $"ui_image/rui/events/s19me01/featured_chase_item_frame.rpak"
+		}
+	}
+
+	panel ItemImage
+	{
+		position: <10, -6>
+		anchor: BOTTOM_LEFT
+		pivot: <0, 1>
+		size: <190, 170>
+
+		behavior Image
+		{
+			bind *.icon -> @this.assetPath
+		}
+	}
+
+	panel ItemInfo
+	{
+		position: <200, 35>
+		anchor: TOP_LEFT
+		pivot: <0, 0>
+
+		behavior VerticalContainer
+		{
+			alignment: LEFT
+			fitContentWidth: true
+			fitContentHeight: false
+			useLocaleDirection: true
+			spacing: 5
+		}
+
+		panel ItemName
+		{
+			bind @this:Label.pixelHeight -> @this.height
+
+			behavior Label
+			{
+				bind *.quality -> QualityTextColor -> @this.colorRGB
+				bind *.name -> @this.text
+
+				text: ""
+				face: "TitleBoldFont"
+				pixelHeight: 34
+				colorRGB: <1, 1, 1>
+				outlineColorInner: <0, 0, 0, 0>
+				outlineColorOuter: <0, 0, 0, 0>
+				textAlignHorizontal: LEFT
+				textAlignVertical: TOP
+				horizontalMode: AUTOSIZE_TO_TEXT
+				allcaps: true
+				useLocaleDirection: true
+
+				shadowAlpha: 0.6
+				shadowBlur: 6.0
+				shadowOffset: <0, 0>
+			}
+		}
+
+		panel UnlockDescription
+		{
+			width: 580
+
+			behavior Label
+			{
+				bind *.description -> @this.text
+
+				text: ""
+				face: "DefaultBoldFont"
+				pixelHeight: 30
+				color: <0.75, 0.75, 0.75, 1>
+				outlineColorInner: <0, 0, 0, 0>
+				outlineColorOuter: <0, 0, 0, 0>
+				textAlignHorizontal: LEFT
+				textAlignVertical: TOP
+				horizontalMode: WRAP
+				verticalMode: AUTOSIZE_TO_TEXT
+				useLocaleDirection: true
+
+				shadowAlpha: 0.6
+				shadowBlur: 6.0
+				shadowOffset: <0, 0>
+			}
+		}
+	}
+
+	panel OwnedFlag
+	{
+		bind *.isOwned -> @this.visible
+
+		anchor: TOP_RIGHT
+		pivot: <1, 0>
+		size: <40, 40>
+		position: <-2, 1.5>
+
+		behavior Image
+		{
+			color: <1, 1, 1, 1>
+			assetPath: $"ui_image/rui/menu/events/event_shop/shop_item_owned.rpak"
+		}
+	}
+
+}

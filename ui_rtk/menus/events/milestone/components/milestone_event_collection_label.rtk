@@ -1,0 +1,42 @@
+panel BackgroundLabel
+{
+	bind root
+	anchor: TOP_LEFT
+	pivot: <0, 0>
+	behavior HorizontalContainer
+	{
+		fitContentWidth: true
+		fitContentHeight: true
+		padding: <5, 5, 1, 1>
+	}
+
+	panel Text
+	{
+		anchor: TOP_LEFT
+		pivot: <0, 0>
+		bind @this:FormatLabel.pixelHeight -> @this.height
+		offsets: <0, 0, 0, 0>
+
+		behavior FormatLabel
+		{
+			bind *.quantity -> @this.arg1
+			bind *.maxQuantity -> @this.arg2
+			bind *.quality -> QualityName -> @this.arg3
+			bind *.quality -> QualityTextColor -> @this.colorRGB
+
+			text: "DEFAULT TEXT"
+			format: "#MILESTONE_EVENT_COLLECTION_CATEGORY_COUNT"
+			pixelHeight: 20
+			textAlignHorizontal: CENTER
+			textAlignVertical: CENTER
+			horizontalMode: AUTOSIZE_TO_TEXT
+			face: "TitleRegularFont"
+			color: <0,0,0,1>
+			arg1: 0
+			arg2: 0
+			arg3: ""
+			allcaps: true
+
+		}
+	}
+}

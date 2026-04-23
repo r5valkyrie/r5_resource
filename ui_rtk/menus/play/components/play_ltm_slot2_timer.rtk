@@ -1,0 +1,6 @@
+instance $"ui_rtk/menus/play/components/play_ltm_timer.rpak" PlayLTMSlotTwoTimer
+{
+	bind &menus.play.takeoverSlot2.endTime -> @var(endTime)
+	bind &menus.play.takeoverSlot2.endTime -> GreaterThan( 0 ) -> @this.visible
+	bind &menus.play.takeoverSlot2.endTime -> GreaterThan( 0 ) -> @var(visible)
+}

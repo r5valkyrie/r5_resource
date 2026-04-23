@@ -1,0 +1,72 @@
+panel IntroHero
+{
+	bind root
+
+	anchor: TOP_STRETCH_WIDTH
+	pivot: <0.5, 0>
+	height: 256
+
+	panel Logo
+	{
+		anchor: CENTER
+		size: <256, 256>
+
+		behavior Image
+		{
+			bind &common.activeEvents.events[0].mainIcon -> @this.assetPath
+		}
+	}
+
+	panel TextWrapper
+	{
+		anchor: CENTER
+		positionY: 128
+
+		behavior VerticalContainer
+		{
+			alignment: CENTER
+			fitContentHeight: true
+			fitContentWidth: true
+			spacing: 5
+		}
+
+		panel Title
+		{
+			anchor: CENTER
+			size: <920, 60>
+
+			behavior Label
+			{
+				bind &common.activeEvents.events[0].name -> @this.text
+
+				face: "TitleBoldFont"
+				pixelHeight: 60
+				colorRGB: #FFFFFF
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				allCaps: true
+			}
+		}
+
+		panel TimeRemaining
+		{
+			anchor: CENTER
+			size: <920, 22>
+			height: 22
+
+			behavior Label
+			{
+				bind &common.activeEvents.events[0].remainingDays -> @this.text
+
+				face: "TitleBoldFont"
+				pixelHeight: 22
+				colorRGB: #Gray
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				allCaps: true
+			}
+		}
+	}
+
+}
+

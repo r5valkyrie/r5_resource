@@ -1,0 +1,43 @@
+instance $"ui_rtk/menus/mastery/components/mastery_trial_icon.rpak"
+{
+	override @this/Status:DataBinder.bindingPath ""
+	override @this/Status:Image.alpha 0
+	override @this/Status.scale <0.85, 0.85>
+
+    behavior Animator
+    {
+        tweenAnimations: [
+            {
+                name: "FadeIn"
+                tweens: [
+                    {
+                        property: @panel/Status:Image.alpha
+                        startValue: 0.0
+                        endValue: 1.0
+                        duration: 0.2
+                        curve: EASE_IN_QUART
+                    },
+                    {
+                        property: @panel/Status.scale
+                        startValue: <1.8, 1.8>
+                        endValue: <1.0, 1.0>
+                        duration: 0.2
+                        curve: EASE_IN_QUART
+                    }
+                ]
+            },
+            {
+                name: "FadeOut"
+                tweens: [
+                    {
+                        property: @panel/Status:Image.alpha
+                        startValue: 1.0
+                        endValue: 0.0
+                        duration: 0.25
+                        curve: EASE_OUT_CUBIC
+                    }
+                ]
+            }
+        ]
+    }
+}

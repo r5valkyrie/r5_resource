@@ -1,0 +1,126 @@
+panel MilestoneEventCollectionPanel
+{
+	bind root
+	anchor: CENTER
+	size: <1920, 1080>
+	pivot: <0.5, 0.5>
+	offsets: <0, 0, 0, 0>
+
+	behavior MilestoneEventCollectionPanel
+	{
+		offersGrid: @panel/CollectionBox/ContentBox/EventCollectionBox/RenderGroupContent/PaginatedContainer/ItemsList
+		chaseButton: @panel/CollectionBox/ContentBox/EventChaseItemButton:Button
+		gridPagination: @panel/CollectionBox/ContentBox/EventCollectionBox:Pagination
+		contentArea: @panel/CollectionBox/ContentBox:CursorInteract
+		viewMilestoneProgressButton: @panel/CarouselContainer/MilestoneProgressButton:Button
+	}
+
+	panel CollectionBox
+	{
+		pivot: <0, 0>
+		position: <65, 180>
+
+		behavior VerticalContainer
+		{
+			fitContentWidth: true
+			fitContentHeight: true
+			spacing: 0
+		}
+
+		instance $"ui_rtk/menus/events/milestone/components/milestone_event_collection_header.rpak" EventCollectionHeader
+		{
+			override bind root "*"
+		}
+
+		panel ContentBox
+		{
+			inputListener: true
+
+			behavior CursorInteract
+			{
+				mouseEnabled: true
+				controllerEnabled: true
+				absorbOnKeyCodePressed: false
+				absorbOnMouseWheeled: false
+			}
+
+			behavior VerticalContainer
+			{
+				fitContentWidth: true
+				fitContentHeight: true
+				spacing: 12
+				padding: <25, 25, 25, -10>
+			}
+
+			panel BackgroundImage
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <-2, -2, -3, -2> // texture has empty space for slicing R5DEV-567037
+
+				behavior Image
+				{
+					bind *.collectionBoxBGImage -> @this.assetPath
+				}
+
+				behavior ContainerElement
+				{
+					ignoreLayout: true
+				}
+			}
+
+			instance $"ui_rtk/menus/events/milestone/components/milestone_event_collection_big_item.rpak" EventChaseItemButton
+			{
+				override bind root "*.chaseItemModel"
+			}
+
+			instance $"ui_rtk/menus/events/milestone/components/milestone_event_collection_items_box.rpak" EventCollectionBox
+			{
+				override bind root "*"
+
+				behavior ContainerElement
+				{
+					preferredSize: <870, 470>
+				}
+
+				context @this/PaginationNavContainer
+				{
+					positionY: -15
+				}
+			}
+		}
+	}
+
+	panel CarouselContainer
+	{
+		anchor: RIGHT
+		position: <-60, 10>
+		pivot: <1, 0.5>
+		size: <300, 460>
+
+		behavior VerticalContainer
+		{
+			fitContentWidth: true
+			alignment: BOTTOM_LEFT
+			spacing: 10
+			useLocaleDirection: true
+		}
+
+		instance $"ui_rtk/menus/events/milestone/components/milestone_event_carousel_info.rpak" CarouselBox
+		{
+			override bind root "*.carouselInfo"
+			override @this:HorizontalContainer.paddingLeft -10
+			anchor: LEFT
+			position: <0, 0>
+			pivot: <0, 0.5>
+		}
+
+		instance $"ui_rtk/common/buttons/base_button.rpak" MilestoneProgressButton
+		{
+			anchor: BOTTOM_LEFT
+			pivot: <0, 1>
+			override @var(size) <315, 74>
+			override @var(labelText) "#MILESTONE_EVENT_TRACKING_PAGE_VIEW_MILESTONE"
+		}
+	}
+}
+

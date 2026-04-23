@@ -1,0 +1,185 @@
+panel InfoButton
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+	inputListener: true
+
+	behavior DeepLinkButton
+	{
+		bind *.miscText1 -> @this.linkType
+		bind *.miscText2 -> @this.link
+		bind *.telemetryId -> @this.fromPageId
+
+		buttonBehavior: @panel:Button
+	}
+
+	behavior Button
+	{
+		soundHighlighted: "ui_menu_focus"
+	    soundPressedEnabled: "ui_menu_accept"
+
+		transitions: [
+		{
+			fromState: ANY
+			toState: IDLE
+			type: TRANSITION_PROPERTY_SET
+			property: @panel/HighlightBorder.visible
+			value: false
+		},
+		{
+			fromState: ANY
+			toState: IDLE
+			type: TRANSITION_PROPERTY_SET
+			property: @panel/HighlightBorder:AnimatorAutoPlay.active
+			value: false
+		},
+		{
+			fromState: ANY
+			toState: HIGHLIGHTED
+			type: TRANSITION_PROPERTY_SET
+			property: @panel/HighlightBorder.visible
+			value: true
+		},
+		{
+			fromState: ANY
+			toState: HIGHLIGHTED
+			type: TRANSITION_PROPERTY_SET
+			property: @panel/HighlightBorder:AnimatorAutoPlay.active
+			value: true
+		},
+		{
+			fromState: ANY
+			toState: HIGHLIGHTED
+			type: TRANSITION_TWEEN
+			animName: "onAnyToHighlighted"
+		}
+		]
+	}
+
+	behavior Animator
+	{
+		tweenAnimations: [
+			{
+				name: "onAnyToHighlighted"
+				tweens: [
+					{
+						property: @panel/HighlightBorder.offsets
+						startValue: <-4, -4, -4, -4>
+						endValue: <-8, -8, -8, -8>
+						duration: 0.15
+					}
+				]
+			}
+		]
+	}
+
+	behavior Image
+	{
+		bind *.mainImage -> @this.assetPath
+	}
+
+	panel BottomGradient
+	{
+		anchor: BOTTOM_STRETCH_WIDTH
+		pivot: <0.5, 1.0>
+		offsetsLR: <0, 0>
+		height: 352
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/store/common/store_top_gradient.rpak"
+			flipVertical: true
+		}
+	}
+
+	panel Border
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <-1, -1, -1, -1>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/borders/border_outline_2px.rpak"
+			colorRGB: #383838
+		}
+	}
+
+	panel HighlightBorder
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <-8, -8, -8, -8>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/borders/border_outline_4px.rpak"
+
+			colorRGB: <1.0, 0.4, 0.0>
+		}
+
+		behavior Animator
+		{
+			tweenAnimations: [
+				{
+					name: "pulse"
+					loop: PINGPONG
+					tweens: [
+						{
+							property: @panel:Image.alpha
+							startValue: 1.0
+							endValue: 0.25
+							duration: 1.2
+							curve: EASE_IN_CUBIC
+						}
+					]
+				}
+			]
+		}
+
+		behavior AnimatorAutoPlay
+		{
+			animation: "pulse"
+		}
+	}
+
+	panel HeaderText
+	{
+		anchor: BOTTOM_STRETCH_WIDTH
+		pivot: <0.5, 1.0>
+		position: <0, -80>
+		offsetsLR: <40, 40>
+
+		behavior Label
+		{
+			bind *.mainText -> @this.text
+			bind *.priceColor -> @this.colorRGB
+
+			face: "TitleBoldFont"
+			textAlignVertical: BOTTOM
+			textAlignHorizontal: CENTER
+			pixelHeight: 40
+			allCaps: true
+		}
+	}
+
+	panel BodyText
+	{
+		anchor: BOTTOM_STRETCH_WIDTH
+		position: <0, -80>
+		pivot: <0.5, 0.0>
+		offsetsLR: <40, 40>
+
+		behavior Label
+		{
+			bind *.subText -> @this.text
+			bind *.newPriceColor -> @this.colorRGB
+
+			face: "TitleBoldFont"
+			textAlignHorizontal: CENTER
+			textAlignVertical: TOP
+			pixelHeight: 24
+			allCaps: true
+		}
+	}
+}

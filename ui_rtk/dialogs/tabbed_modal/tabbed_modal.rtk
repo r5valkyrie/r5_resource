@@ -1,0 +1,20 @@
+panel TabbedModal
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	behavior TabbedModal
+
+	behavior PrefabInstantiator
+	{
+		bind *.tabType -> @this.prefabIndex
+		bindingPath: ""
+		prefabArray: [
+			$"ui_rtk/dialogs/wallet/components/wallet_inventory_panel.rpak",           // eTabbedModalType.WALLET_INVENTORY
+			$"ui_rtk/dialogs/wallet/components/wallet_coins_purchase_panel.rpak",      // eTabbedModalType.WALLET_APEX_COINS
+			$"ui_rtk/dialogs/wallet/components/wallet_exotic_shards_panel.rpak"        // eTabbedModalType.WALLET_EXOTIC_SHARDS
+		]
+	}
+}

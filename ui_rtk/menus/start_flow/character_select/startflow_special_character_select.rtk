@@ -1,0 +1,82 @@
+panel SpecialCharacterSelect
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	behavior Animator
+	{
+		tweenAnimations: [
+			{
+				name: "AnimateProgressBar"
+				tweens: [
+					{
+						property: @panel/ProgressBarPanel:AngledProgressBar.current
+						startValue: 0
+						endValue: 1
+						duration: 27
+					},
+					{
+						property: @panel/ProgressBarPanel:AngledProgressBar.progressBarAlpha
+						startValue: 0
+						endValue: 1
+						duration: 0.5
+						delay: 1.2
+					},
+					{
+						property: @panel/ProgressBarPanel:AngledProgressBar.progressBgAlpha
+						startValue: 0
+						endValue: 1
+						duration: 0.5
+						delay: 1.2
+					}
+				]
+			}
+		]
+	}
+
+	behavior AnimatorAutoPlay
+	{
+		animation: "AnimateProgressBar"
+	}
+
+	panel MapModeInfo
+	{
+		anchor: TOP_LEFT
+		pivot: <0, 0>
+		position: <40, 15>
+
+		behavior FitToContent
+
+		instance $"ui_rtk/menus/start_flow/Components/startflow_map_mode_info.rpak"
+	}
+
+	panel revArmyElement
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+		instance $"ui_rtk/menus/start_flow/Character_select/Revenant_army/Special_character_select_rev_army.rpak"
+	}
+
+	panel ProgressBarPanel
+	{
+		pivot: <0.5, 1.0>
+		anchor: BOTTOM_STRETCH_WIDTH
+		size: <1, 15>
+		offsetsLR: <-15, 0>
+
+		behavior AngledProgressBar
+		{
+			progressBarColor: <0.5, 0, 0>
+			progressBarAlpha: 0.0
+			progressBgColor: <0.06, 0.03, 0.03>
+			progressBgAlpha: 0.0
+			current: 1.0
+			max: 1.0
+			angle: -30
+			isDraining: true
+		}
+	}
+
+}

@@ -1,0 +1,148 @@
+/*TODO: @bcoates -
+		Waiting for a clip property to restrict the visibility of elements outside
+		of the container.
+		Please keep in mind if using this asset its currently using a render group
+		and we can only support around 10 on screen at one time.
+*/
+panel DecorativeBaseButton
+{
+	var buttonText @this/ButtonText:Label.text
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+	inputListener: true
+
+	behavior Button
+	{
+		transitions: [
+			{//IDLE TRANSISTIONS
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @panel/Container:RenderGroup.colorRGB
+				value: <1, 1, 1>
+			},
+			{//HIGHLIGHTED TRANSISTIONS
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @panel/Container:RenderGroup.colorRGB
+				value: <1.0, 0.4, 0.0>
+			},
+			{//PRESSED TRANSISTIONS
+				fromState: ANY
+				toState: PRESSED
+				type: TRANSITION_PROPERTY_SET
+				property: @panel/Container:RenderGroup.colorRGB
+				value: <1, 1, 1>
+			}
+		]
+	}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+	panel Container
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior RenderGroup
+
+		panel BackgroundImage
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, -80, -200>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/lobby/button_arrows_large.rpak"
+			}
+
+			behavior ColorExtensions
+			{
+				lightness: 6.0
+			}
+		}
+
+		panel BackgroundBlur
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/gradient_ud_compressed.rpak"
+				alpha: 0.4
+			}
+		}
+
+		panel Border
+		{
+		    anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	        offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				color: <1, 1, 1, 1>
+				assetPath: $"ui_image/rui/borders/border_outline_2px.rpak"
+			}
+		}
+
+		panel TopBorder
+		{
+			anchor: TOP_STRETCH_WIDTH
+			offsetsLR: <1, 1>
+			pivot: <0.5, 0>
+			height: 2
+
+			behavior Image
+			{
+				color: <1.0, 1.0, 1.0, 1.0>
+			}
+
+			panel Decoration
+			{
+				anchor: TOP
+				pivot: <0.5, 0>
+				size: <150, 25>
+				positionY: -10
+
+				behavior Image
+				{
+					color: <1.0, 1.0, 1.0, 1>
+					assetPath: $"ui_image/rui/borders/ready_frame_border.rpak"
+					flipVertical: true
+				}
+			}
+		}
+
+		panel BottomBorder
+		{
+			anchor: BOTTOM_STRETCH_WIDTH
+			offsetsLR: <1, 1>
+			pivot: <0.5, 1>
+			height: 5
+
+			behavior Image
+			{
+				color: <1.0, 1.0, 1.0, 1.0>
+			}
+		}
+	}
+
+	panel ButtonText
+	{
+		anchor: CENTER
+		size: <300, 100>
+
+		behavior Label
+		{
+			textAlignHorizontal: CENTER
+			textAlignVertical: CENTER
+			pixelHeight: 30
+			face: "TitleBoldFont"
+			text: ""
+			allCaps: true
+		}
+	}
+}

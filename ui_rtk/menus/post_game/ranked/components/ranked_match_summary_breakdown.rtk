@@ -1,0 +1,240 @@
+panel PostGameMatchSummaryBreakdown
+{
+	anchor: TOP
+	positionY: 45
+	offsets: <0, 0, 0, 0>
+	pivot: <0.5, 0.0>
+	size: <540, 400>
+
+	behavior HorizontalContainer
+	{
+		fitContentWidth: true
+		fitContentHeight: true
+		spacing: 60
+	}
+
+	panel BonusPanel
+	{
+		size: <540, 0>
+		pivot: <0, 0>
+
+		behavior Animator
+		{
+			tweenAnimations: [
+			{
+				name: "AnimateIn"
+				tweens: [
+				{
+					property: @panel/HeaderText:Label.alpha
+					startValue: 0
+					endValue: 1
+					duration: 0.9
+					curve: EASE_LINEAR
+				},
+				{
+					property: @panel/HeaderText:Label.outlineColorOuter
+					startValue: <0, 0, 0, 0>
+					endValue: <0, 0, 0, 0.6>
+					duration: 0.9
+					curve: EASE_LINEAR
+				},
+				{
+					property: @panel:Sound.play
+					startValue: false
+					endValue: true
+					duration: 0.9
+					curve: CEIL
+				}
+				]
+			}
+			]
+		}
+
+		behavior TweenStaggerChild
+		{
+			delay: 0.5
+		}
+
+		behavior VerticalContainer
+		{
+			fitContentHeight: true
+		}
+
+		behavior Sound
+		{
+			sound: "UI_Menu_MatchSummary_Ranked_XPBreakdown"
+		}
+
+		panel HeaderText
+		{
+			anchor: CENTER_STRETCH_WIDTH
+			height: 70
+			offsets: <0, 0, 0, 0>
+
+			behavior Label
+			{
+				text: "#RANKED_BONUS_HEADER"
+				face: "TitleBoldFont"
+				pixelHeight: 38
+				colorRGB: <1, 1, 1>
+				outlineColorInner: <0, 0, 0, 0>
+				outlineColorOuter: <0, 0, 0, 0.6>
+				outlineWidth: 1
+				textAlignHorizontal: LEFT
+				textAlignVertical: CENTER
+			}
+		}
+
+		instance $"ui_rtk/menus/post_game/ranked/components/ranked_match_stats_element.rpak" ListTotal
+		{
+			override bind root "*.extraInfo.headers[1]"
+
+			override @var(isHeader) true
+		}
+
+		panel Spacer
+		{
+			size: <0, 16>
+		}
+
+		panel BonusBreakdown
+		{
+			size: <540, 0>
+			pivot: <0, 0>
+
+			behavior VerticalContainer
+			{
+				fitContentHeight: true
+				fitContentWidth: true
+			}
+
+			behavior ListBinder
+			{
+				bindingPath: "*.extraInfo.breakdownBonuses"
+				prefab: $"ui_rtk/menus/post_game/ranked/components/ranked_match_stats_element.rpak"
+			}
+		}
+
+		panel ConditionalsBreakdown
+		{
+			size: <540, 0>
+			pivot: <0, 0>
+
+			behavior VerticalContainer
+			{
+				fitContentHeight: true
+				fitContentWidth: true
+			}
+
+			behavior ListBinder
+			{
+				bindingPath: "*.extraInfo.conditionals"
+				prefab: $"ui_rtk/menus/post_game/ranked/components/ranked_match_summary_conditionals.rpak"
+			}
+		}
+	}
+
+	panel PlacementPanel
+	{
+		size: <540, 0>
+		pivot: <0, 0>
+		inputListener: true
+
+		behavior Animator
+		{
+			tweenAnimations: [
+				{
+					name: "AnimateIn"
+					tweens: [
+						{
+							property: @panel/HeaderText:Label.alpha
+							startValue: 0
+							endValue: 1
+							duration: 0.9
+				            curve: EASE_LINEAR
+						},
+						{
+							property: @panel/HeaderText:Label.outlineColorOuter
+							startValue: <0, 0, 0, 0>
+							endValue: <0, 0, 0, 0.6>
+							duration: 0.9
+							curve: EASE_LINEAR
+						},
+						{
+							property: @panel:Sound.play
+							startValue: false
+							endValue: true
+							duration: 0.9
+							curve: CEIL
+						}
+					]
+				}
+			]
+		}
+
+		behavior TweenStaggerChild
+		{
+			delay: 0.5
+		}
+
+		behavior VerticalContainer
+		{
+			fitContentHeight: true
+		}
+
+		behavior Sound
+		{
+			sound: "UI_Menu_MatchSummary_Ranked_XPBreakdown"
+		}
+
+		panel HeaderText
+		{
+			anchor: CENTER_STRETCH_WIDTH
+			height: 70
+			offsets: <0, 0, 0, 0>
+
+			behavior Label
+			{
+				text: "#RANKED_MATCH_PLACEMENT_TOOLTIP_HEADER"
+				face: "TitleBoldFont"
+				pixelHeight: 38
+				colorRGB: <1, 1, 1>
+				outlineColorInner: <0, 0, 0, 0>
+				outlineColorOuter: <0, 0, 0, 0.6>
+				outlineWidth: 1
+				textAlignHorizontal: LEFT
+				textAlignVertical: CENTER
+			}
+		}
+
+		instance $"ui_rtk/menus/post_game/ranked/components/ranked_match_stats_element.rpak" ListTotal
+		{
+			override bind root "*.extraInfo.headers[2]"
+
+			override @var(isHeader) true
+		}
+
+		panel Spacer
+		{
+			size: <0, 16>
+		}
+
+		panel PlacementBreakdown
+		{
+			size: <540, 0>
+			pivot: <0, 0>
+
+			behavior VerticalContainer
+			{
+				fitContentHeight: true
+				fitContentWidth: true
+			}
+
+			behavior ListBinder
+			{
+				bindingPath: "*.extraInfo.placementBonuses"
+				prefab: $"ui_rtk/menus/post_game/ranked/components/ranked_match_stats_element.rpak"
+			}
+		}
+	}
+}

@@ -1,0 +1,38 @@
+panel EllipseProgressComponent
+{
+	bind root
+	size: <20, 20>
+	offsets: <0, 0, 0, 0>
+
+	panel InnerEllipse
+	{
+		bind * -> LessThanOrEqual( 0 ) -> @this.visible
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		behavior Ellipse
+		{
+			interiorColor: #Gray
+			edgeOutArcColor: #Gray
+			edgeInArcColor: #Gray
+			arcradius: <0.5, 0.5>
+		}
+	}
+
+	panel ProgressEllipse
+	{
+		bind * -> GreaterThan( 0 ) -> @this.visible
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		behavior Ellipse
+		{
+			bind * -> @this.arcMax
+			thickness: 0.35
+			edgeInArcColor: <1, 0.4784, 0, 1>
+			edgeOutArcColor: #Gray
+
+			arcMin: 0.0
+			arcMax: 0.0
+		}
+	}
+
+}

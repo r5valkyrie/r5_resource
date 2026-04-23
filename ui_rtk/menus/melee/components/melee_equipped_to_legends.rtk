@@ -1,0 +1,81 @@
+panel LegendList
+{
+	bind root
+
+	// Expects an array of assets
+	bind * -> HasAny -> @this.visible
+
+	anchor: BOTTOM_RIGHT
+	pivot: <1, 1>
+	size: <280, 100>
+
+	behavior Image
+	{
+		assetPath: $"ui_image/rui/gradient_ud.rpak"
+		color: <0, 0, 0, 0.65>
+	}
+
+	panel Text
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		pivot: <0, 0>
+		offsets: <16, 0, 22, 0>
+
+		behavior Label
+		{
+			text: "#MELEE_CUSTOMIZATION_EQUIPPED_TO"
+
+			pixelHeight: 24
+			face: "DefaultRegularFont"
+			allCaps: true
+			colorRGB: #c4c4c4
+			textAlignVertical: TOP
+			textAlignHorizontal: LEFT
+			useLocaleDirection: true
+			horizontalMode: SQUISH_TO_CONTAINER
+			verticalMode: AUTOSIZE_TO_TEXT
+		}
+	}
+
+	panel IconContainer
+	{
+		anchor: BOTTOM_STRETCH_WIDTH
+		pivot: <0.5, 1>
+		offsetsLR: <10, 10>
+		position: <0, -10>
+
+		behavior HorizontalContainer
+		{
+			fitContentHeight: true
+			spacing: 10
+			alignment: LEFT
+		}
+
+		behavior ListBinder
+		{
+			bindingPath: "*"
+			prefab: $"ui_rtk/controls/image.rpak"
+			rangeEnd : 4
+			varOverrides: {
+				size: <36, 36>
+				colorRGB: #c4c4c4
+			}
+		}
+	}
+
+	panel PlusIcon
+	{
+		bind * -> GetCount -> GreaterThan( 5 ) -> @this.visible
+
+		anchor: BOTTOM_RIGHT
+		pivot: <1, 1>
+		size: <20, 20>
+		position: <-16, -16>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/battlepass/battlepass_purchase/plus_sign.rpak"
+			colorRGB: #c4c4c4
+		}
+	}
+}

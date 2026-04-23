@@ -1,0 +1,265 @@
+panel PackSelectionButton
+{
+	bind root
+	// base settings
+	var size @this.size
+	var pivot @this.pivot
+
+	// idle colors settings
+	var outlineColor @this/Outline:Image.colorRGB
+
+	// hover settings
+	var outlineHoverColor @this/OutlineHover:Image.colorRGB
+
+	anchor: CENTER
+	size: <205, 280>
+	inputListener: true
+
+	behavior SelectableButton
+	{
+		activePanel: @panel/SelectedHover
+		buttonBehavior: @panel:Button
+	}
+
+	behavior Button
+	{
+		soundHighlighted: "ui_menu_focus"
+		soundPressedEnabled: "ui_menu_accept"
+		transitions: [
+		// Inner Glow
+		{
+			fromState: ANY
+			toState: IDLE
+			type: TRANSITION_TWEEN
+			animName: "onIdle"
+		},
+		{
+			fromState: ANY
+			toState: HIGHLIGHTED
+			type: TRANSITION_TWEEN
+			animName: "onHighlighted"
+		},
+		{
+			fromState: HIGHLIGHTED
+			toState: PRESSED
+			type: TRANSITION_TWEEN
+			animName: "onHighlightedToPressed"
+		},
+		{
+			fromState: PRESSED
+			toState: HIGHLIGHTED
+			type: TRANSITION_TWEEN
+			animName: "onPressedToHighlighted"
+		},
+
+		// Outline Hide/Show
+		{
+			fromState: ANY
+			toState: IDLE
+			type: TRANSITION_PROPERTY_SET
+			property: @owner.panel/Outline:Image.alpha
+			value: 1.0
+		},
+		{
+			fromState: ANY
+			toState: HIGHLIGHTED
+			type: TRANSITION_PROPERTY_SET
+			property: @owner.panel/Outline:Image.alpha
+			value: 0.0
+		},
+		{
+			fromState: ANY
+			toState: IDLE
+			type: TRANSITION_PROPERTY_SET
+			property: @owner.panel/OutlineHover:Image.alpha
+			value: 0.0
+		},
+		{
+			fromState: ANY
+			toState: HIGHLIGHTED
+			type: TRANSITION_PROPERTY_SET
+			property: @owner.panel/OutlineHover:Image.alpha
+			value: 1.0
+		}
+		]
+	}
+
+	panel PackBackgroundImage
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		panel Background
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/borders/gifting_packs_box.rpak"
+			}
+		}
+	}
+
+	panel LowDecorations
+	{
+		anchor: BOTTOM_STRETCH_WIDTH
+		pivot: <0.5, 1>
+		offsets: <0, 0, 0, 0>
+		height: 100
+
+		panel BackgroundFill
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				colorRGB: <0, 0, 0>
+			}
+		}
+
+		panel BackgroundGradient
+		{
+			anchor: BOTTOM_STRETCH_WIDTH
+			offsets: <0, 0, 0, 0>
+			pivot: <0.5, 1>
+			height: 137
+			behavior Image
+			{
+				colorRGB: #FF4E1D
+				alpha: 0.2
+				assetPath: $"ui_image/rui/gradient_ud_compressed.rpak"
+			}
+		}
+
+		panel PriceText
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior VerticalContainer
+			{
+				alignment: CENTER
+				spacing: 2
+			}
+
+			panel PackQuantity
+			{
+				behavior FormatLabel
+				{
+					bind *.packQuantity -> @this.arg1
+					bind *.packQuantity -> GreaterThan(1) -> PickStringFromTwo( "#N_PACK", "#N_PACKS" ) -> @this.format
+
+					face: "DefaultRegularFont"
+					text: "DEFAULT"
+					format: "#N_PACK"
+					textAlignHorizontal: LEFT
+					horizontalMode: AUTOSIZE_TO_TEXT
+					verticalMode: AUTOSIZE_TO_TEXT
+					pixelHeight: 26
+					color: <1, 1, 1, 1>
+					arg1: 1
+					allCaps: true
+				}
+			}
+
+			panel OriginalPrice
+			{
+				bind *.discount -> GreaterThan( 0 ) -> @this.visible
+				panel BreakthroughLine
+				{
+					anchor: CENTER_STRETCH_WIDTH
+					height: 4
+					behavior Image
+					{
+						alpha: 0.5
+					}
+				}
+
+				behavior Label
+				{
+					bind *.originalPrice -> @this.text
+					face: "DefaultRegularFont"
+					text: "8,888"
+					textAlignHorizontal: LEFT
+					horizontalMode: AUTOSIZE_TO_TEXT
+					verticalMode: AUTOSIZE_TO_TEXT
+					pixelHeight: 26
+					color: <1, 1, 1, 0.5>
+				}
+			}
+
+			panel NormalPrice
+			{
+				behavior Label
+				{
+					bind *.price -> @this.text
+					face: "DefaultRegularFont"
+					text: "8,888"
+					textAlignHorizontal: LEFT
+					horizontalMode: AUTOSIZE_TO_TEXT
+					verticalMode: AUTOSIZE_TO_TEXT
+					pixelHeight: 26
+					color: <1, 1, 1, 1>
+				}
+			}
+		}
+	}
+
+	panel Icon
+	{
+		bind @root.height -> Subtract(@root/LowDecorations.height) -> @this.height
+
+		anchor: TOP_STRETCH_WIDTH
+		offsets: <0, 0, 0, 0>
+		pivot: <0.5, 0>
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/borders/gifting_packs_1.rpak"
+		}
+	}
+
+	instance $"ui_rtk/common/labels/top_discount_label.rpak"
+	{
+		bind *.discount -> GreaterThan( 0 ) -> @this.visible
+		override bind root "*"
+	}
+
+	panel Outline
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <-0.5, -0.5, 0, 0>
+
+		behavior Image
+		{
+			colorRGB: <0.7, 0.7, 0.7>
+			assetPath: $"ui_image/rui/borders/border_outline_2px.rpak"
+		}
+	}
+
+	panel SelectedHover
+	{
+		visible: false
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <-1, -1, 0, 0>
+
+		behavior Image
+		{
+			colorRGB: #FF4E1D
+			assetPath: $"ui_image/rui/borders/border_outline_4px.rpak"
+		}
+	}
+
+	panel OutlineHover
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <-1, -1, 0, 0>
+
+		behavior Image
+		{
+			colorRGB: <1, 1, 1>
+			assetPath: $"ui_image/rui/borders/border_outline_4px.rpak"
+		}
+	}
+}

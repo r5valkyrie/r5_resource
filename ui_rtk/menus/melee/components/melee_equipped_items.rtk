@@ -1,0 +1,99 @@
+panel MeleeEquippedItems
+{
+	bind root
+
+	anchor: BOTTOM
+	pivot: <0.5, 1>
+	offsets: <0, 0, 0, 0>
+
+	behavior VerticalContainer
+	{
+		spacing: 0
+		fitContentHeight: true
+		fitContentWidth: true
+		alignment: CENTER
+	}
+
+	panel Set
+	{
+		behavior HorizontalContainer
+		{
+			spacing: 14
+			fitContentHeight: true
+			fitContentWidth: true
+			alignment: CENTER
+		}
+
+		instance $"ui_rtk/menus/melee/components/artifact_customization_item_single.rpak" Blade
+		{
+			override bind root "*.blade"
+
+			bind *.isVisible -> @this.visible
+		}
+
+		instance $"ui_rtk/menus/melee/components/artifact_customization_item_single.rpak" Theme
+		{
+			override bind root "*.theme"
+
+			bind *.isVisible -> @this.visible
+		}
+
+		instance $"ui_rtk/menus/melee/components/artifact_customization_item_single.rpak" PowerSource
+		{
+			override bind root "*.powerSource"
+
+			bind *.isVisible -> @this.visible
+
+			override @var(isArrowVisible) false
+		}
+
+		instance $"ui_rtk/menus/melee/components/artifact_customization_item_single.rpak" ActivationEmote
+		{
+			override bind root "*.activationEmote"
+
+			bind *.isVisible -> @this.visible
+		}
+
+		instance $"ui_rtk/menus/melee/components/artifact_customization_item_single.rpak" Deathbox
+		{
+			override bind root "*.deathbox"
+
+			bind *.isVisible -> @this.visible
+
+			override @var(isArrowVisible) false
+		}
+
+		panel Link
+		{
+			bind @root/Set/PowerSource.visible -> And( @root/Set/ActivationEmote.visible ) -> @this.visible
+
+			anchor: RIGHT
+			size: <40, 26>
+			position: <-181, 0>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/melee_customization/melee_customization_grid_link.rpak"
+			}
+
+			behavior ContainerElement
+			{
+				ignoreLayout: true
+			}
+		}
+	}
+
+	instance $"ui_rtk/common/labels/headline_title_label.rpak" Title
+	{
+		bind @root/Set/Blade.visible -> PickIntFromTwo( 452, 952 ) -> @var(width)
+
+		override @var(titleText) "#MELEE_CUSTOMIZATION_EQUIPPED"
+		override @var(titleTextColor) #COLOR_GREY_2
+		override @var(lineColor) #COLOR_GREY_2
+		override @var(flipLinesVertical) true
+
+		anchor: BOTTOM
+		pivot: <0.5, 1>
+		scale: <0.5, 0.5>
+	}
+}

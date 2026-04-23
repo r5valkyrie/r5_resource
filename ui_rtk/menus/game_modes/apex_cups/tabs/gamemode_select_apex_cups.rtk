@@ -1,0 +1,194 @@
+panel GameModeSelectApexCups
+{
+    anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 80, 0>
+
+    behavior GameModeSelectApexCups
+	{
+		infoButton: @panel/InfoButton:Button
+	}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+	instance $"ui_rtk/common/components/vertical_paginated_panel.rpak" VerticalPagination
+	{
+		override @var( cursorZone1Offsets )         <0, 0, 207, 0>
+		override @var( cursorZone1Controller )      false
+		override @var( cursorZone2Controller )      true
+
+		context @var( paddingPanel )
+		{
+			anchor: CENTER_STRETCH_WIDTH
+			height: 996
+
+	        behavior RenderGroup
+			{
+				assetMask: $"ui_image/rui/menu/store/common/store_offer_section_mask.rpak"
+			}
+		}
+
+		context @var( containerPanel )
+		{
+			anchor: TOP_STRETCH_WIDTH
+			position: <0, 121>
+			height: 750
+		}
+
+		context @var( contentPanel )
+		{
+			context @this:VerticalContainer
+			{
+				expandChildWidth: true
+			}
+
+			instance $"ui_rtk/menus/game_modes/components/game_mode_section.rpak"
+			{
+				context @var( Header )
+				{
+					context @var( Label )
+					{
+						text: "#APEX_CUPS_SECTION_ACTIVE"
+					}
+				}
+
+				context @var( Pagination )
+				{
+					context @var( containerPanel )
+					{
+						panel
+						{
+                            anchor: CENTER_STRETCH_WIDTH_HEIGHT
+							behavior Image
+							{
+								color: #00000088
+							}
+
+							bind &menus.apexCups.activeList -> HasAny -> Not -> @this.visible
+
+							panel
+							{
+								anchor: CENTER
+								behavior Label
+								{
+									text: "#APEX_CUPS_SECTION_EMPTY"
+									face: "TitleBoldFont"
+									textAlignHorizontal: CENTER
+									textAlignVertical: CENTER
+									horizontalMode: AUTOSIZE_TO_TEXT
+									verticalMode: AUTOSIZE_TO_TEXT
+									pixelHeight: 32
+								}
+
+								bind &menus.apexCups.loading -> Not -> @this.visible
+							}
+
+							instance $"ui_rtk/common/components/spinner.rpak" Spinner
+							{
+								anchor: CENTER
+								size: <64, 64>
+
+								bind &menus.apexCups.loading -> @this.visible
+							}
+						}
+					}
+
+					context @var( contentPanel )
+					{
+						behavior ListBinder
+						{
+							bindingPath: "&menus.apexCups.activeList"
+							prefab: $"ui_rtk/menus/game_modes/apex_cups/components/cards/apex_cup_card.rpak"
+						}
+					}
+				}
+			}
+
+			instance $"ui_rtk/menus/game_modes/components/game_mode_section.rpak"
+			{
+				context @var( Header )
+				{
+					context @var( Label )
+					{
+						text: "#APEX_CUPS_SECTION_FINISHED"
+					}
+				}
+
+				context @var( Pagination )
+				{
+					context @var( containerPanel )
+					{
+						panel
+						{
+                            anchor: CENTER_STRETCH_WIDTH_HEIGHT
+							behavior Image
+							{
+								color: #00000088
+							}
+
+							bind &menus.apexCups.finishedList -> HasAny -> Not -> @this.visible
+
+							panel
+							{
+								anchor: CENTER
+								behavior Label
+								{
+									text: "#APEX_CUPS_SECTION_EMPTY"
+									face: "TitleBoldFont"
+									textAlignHorizontal: CENTER
+									textAlignVertical: CENTER
+									horizontalMode: AUTOSIZE_TO_TEXT
+									verticalMode: AUTOSIZE_TO_TEXT
+									pixelHeight: 32
+								}
+
+								bind &menus.apexCups.loading -> Not -> @this.visible
+							}
+
+							instance $"ui_rtk/common/components/spinner.rpak" Spinner
+							{
+								anchor: CENTER
+								size: <64, 64>
+
+								bind &menus.apexCups.loading -> @this.visible
+							}
+						}
+					}
+
+					context @var( contentPanel )
+					{
+						behavior ListBinder
+						{
+							bindingPath: "&menus.apexCups.finishedList"
+							prefab: $"ui_rtk/menus/game_modes/apex_cups/components/cards/apex_cup_card.rpak"
+						}
+					}
+				}
+			}
+		}
+
+		context @var( upButtonPanel )
+		{
+			context @var( labelBehavior )
+			{
+				text: "#APEX_CUPS_SECTION_ACTIVE"
+			}
+		}
+
+		context @var( downButtonPanel )
+		{
+			context @var( labelBehavior )
+			{
+				text: "#APEX_CUPS_SECTION_FINISHED"
+			}
+		}
+	}
+
+	instance $"ui_rtk/menus/game_modes/apex_cups/components/info_button.rpak" InfoButton
+	{
+		override @var(labelText) "#CUPS_MORE_INFO_BUTTON"
+
+		anchor: BOTTOM_RIGHT
+		position: <-118, -112>
+		width: 256
+	}
+}

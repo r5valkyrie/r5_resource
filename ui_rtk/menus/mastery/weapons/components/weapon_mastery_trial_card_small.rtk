@@ -1,0 +1,235 @@
+//Expected type: MasteryWeapon_TrialQueryResult
+panel MasteryTrialCardSmall
+{
+	bind root
+
+	size: <587, 104>
+
+	panel NotCompleted
+	{
+		bind  *.trialData.isCompleted -> Not -> @this.visible
+
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			bind  *.trialData.isUnlocked -> PickVectorFromTwo(<0.27, 0.27, 0.27>, <0.16, 0.16, 0.16>) -> @this.colorRGB
+		}
+	}
+
+	panel Completed
+	{
+		bind  *.trialData.isCompleted -> @this.visible
+
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			colorRGB: <0.01, 0.01, 0.01>
+		}
+
+		panel CompletedGradient
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/mastery/mastery_trialitem_complete_gradient.rpak"
+				colorRGB: <0.1254, 0.3215, 0.2078>
+				alpha: 0.3
+			}
+		}
+	}
+
+	panel Border
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			bind  *.trialData.isCompleted -> PickVectorFromTwo(<0.23, 0.23, 0.23>, <0.1254, 0.3215, 0.2078>) -> @this.colorRGB
+
+			assetPath: $"ui_image/rui/borders/border_outline_2px.rpak"
+		}
+	}
+
+    panel Description
+	{
+		anchor: TOP_STRETCH_WIDTH
+		offsets: <0, 0, 0, 0>
+		offsetsLR: <0, 0>
+		pivot: <0.5, 0.0>
+
+		panel Unlocked
+		{
+			bind *.trialData.isUnlocked -> @this.visible
+
+			anchor: TOP_STRETCH_WIDTH
+			offsets: <0, 0, 0, 0>
+			offsetsLR: <0, 0>
+			pivot: <0.5, 0.0>
+			height: 64
+
+			behavior Label
+			{
+				bind *.trialConfig.description -> @this.text
+
+				text: ""
+				textAlignHorizontal: LEFT
+				textAlignVertical: TOP
+				verticalMode: CLIP
+				pixelHeight: 28
+				margin: <10, 10, 5, 0>
+				colorRGB: <0.7, 0.7, 0.7>
+				useLocaleDirection: true
+			}
+		}
+
+		panel Locked
+		{
+			bind *.trialData.isUnlocked -> Not -> @this.visible
+
+			anchor: TOP_STRETCH_WIDTH
+			offsets: <0, 0, 0, 0>
+			offsetsLR: <0, 0>
+			pivot: <0.5, 0.0>
+			height: 64
+
+			behavior FormatLabel
+			{
+				bind *.trialConfig.displayLevel -> @this.arg1
+
+				format: "#MASTERY_GET_TO_LEVEL"
+				textAlignHorizontal: LEFT
+				textAlignVertical: TOP
+				verticalMode: CLIP
+				pixelHeight: 28
+				margin: <10, 10, 5, 0>
+				colorRGB: <0.7, 0.7, 0.7>
+				alpha: 0.5
+				arg1: ""
+				useLocaleDirection: true
+			}
+		}
+	}
+
+	panel Container
+	{
+		anchor: BOTTOM_STRETCH_WIDTH
+        pivot: <0.5, 1.0>
+		offsets: <10, 10, 10, 10>
+		positionY: -10
+
+        behavior HorizontalContainer
+        {
+            spacing: 10
+            alignment: BOTTOM_LEFT
+			useLocaleDirection: true
+        }
+
+		panel TrialNumber
+		{
+			size: <105, 25>
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				bind *.trialData.isUnlocked -> PickVectorFromTwo(<0.3529, 0.3568, 0.33>, <0.59, 0.59, 0.59>) -> @this.colorRGB
+
+				colorRGB: <0.59, 0.59, 0.59>
+			}
+
+			panel
+			{
+				anchor: CENTER_STRETCH_WIDTH
+				offsets: <0, 0, 0, 0>
+				offsetsLR: <8, 8>
+
+				behavior FormatLabel
+				{
+					bind *.trialConfig.tierLevel -> Add(1) -> FloatToInt -> @this.arg1
+					bind *.trialData.isUnlocked -> PickVectorFromTwo(<0.55, 0.55, 0.55>, <0, 0, 0>) -> @this.colorRGB
+
+					format: "#MASTERY_TRIAL_N"
+					textAlignHorizontal: CENTER
+					textAlignVertical: CENTER
+					verticalMode: CLIP
+					horizontalMode: SQUISH_TO_CONTAINER
+					pixelHeight: 28
+					colorRGB: <0, 0, 0>
+					arg1: ""
+					useLocaleDirection: true
+				}
+			}
+		}
+
+		panel Lock
+		{
+			bind *.trialData.isUnlocked -> Not -> @this.visible
+
+			anchor: CENTER
+			offsets: <0, 0, 0, 0>
+            pivot: <0.5, 0.5>
+			size: <26, 25>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/buttons/lock.rpak"
+				alpha: 1.0
+				colorRGB: <0.95, 0.95, 0.95>
+			}
+		}
+
+		panel Progress
+		{
+			bind *.trialData.isUnlocked -> @this.visible
+
+			anchor: LEFT
+			size: <400, 25>
+			pivot: <0, 0.5>
+
+			behavior AngledProgressBar
+			{
+				bind *.trialData.currentValue -> @this.current
+				bind *.trialConfig.goal -> @this.max
+				bind *.trialData.isCompleted -> PickVectorFromTwo(<0.4627, 0.3686, 0.1176>, <0.8980, 0.7058, 0.2039>) -> @this.progressBarColor
+
+				progressBarColor: <0.9215, 0.7843, 0.298>
+				progressBarAlpha: 1.0
+				progressBgColor: <0.2823, 0.2549 ,0.1568>
+				progressBgAlpha: 0.6
+				angle: 45
+			}
+
+			panel ToDo
+			{
+				anchor: LEFT
+				size: <400, 25>
+				pivot: <0, 0.5>
+				useLocaleDirection: true
+
+				behavior FormatLabel
+				{
+					bind *.trialData.currentValue -> @this.arg1
+					bind *.trialConfig.goal -> @this.arg2
+					bind *.trialData.isCompleted -> PickStringFromTwo( "#X/Y", "#MASTERY_COMPLETED_TRIAL" ) -> @this.format
+
+					format: ""
+					face: "DefaultBoldFont"
+					textAlignHorizontal: LEFT
+					textAlignVertical: CENTER
+					pixelHeight: 25
+					colorRGB: <0, 0, 0>
+					margin: <10, 10, 0, 0>
+					arg1: "0"
+					arg2: "0"
+					useLocaleDirection: true
+				}
+			}
+		}
+    }
+}

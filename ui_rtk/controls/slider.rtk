@@ -1,0 +1,161 @@
+panel SliderParent
+{
+	// Slider behavior vars
+	var range @this/SliderChild:Slider.range
+	var defaultValue @this/SliderChild:Slider.defaultValue
+	var showDefaultValue @this/SliderChild:Slider.showDefaultValue
+	var showSelectedBackground @this/SliderChild:Slider.showSelectedBackground
+	var step @this/SliderChild:Slider.step
+	var handleSize @this/SliderChild:Slider.handleSize
+	var currentValue @this/SliderChild:Slider.currentValue
+	var roundingDecimals @this/SliderChild:Slider.roundingDecimals
+	var useLocaleDirection @this/SliderChild:Slider.useLocaleDirection
+
+	// default value handle
+	var defaultHandle @this/DefaultHandle:Image
+	var defaultHandleAsset @this/DefaultHandle:Image.assetPath
+	var defaultHandleColor @this/DefaultHandle:Image.color
+	// selected portion background
+	var selectedBg @this/SliderChild/SelectedBackground:Image
+	var selectedBgAsset @this/SliderChild/SelectedBackground:Image.assetPath
+	var selectedBgColor @this/SliderChild/SelectedBackground:Image.color
+	// regular background
+	var bg @this/SliderChild/SliderBackground:Image
+	var bgAsset @this/SliderChild/SliderBackground:Image.assetPath
+	var bgColor @this/SliderChild/SliderBackground:Image.color
+	var bgAlpha @this/SliderChild/SliderBackground:Image.alpha
+	// draggable handle
+	var handle @this/SliderChild/Handle:Image
+	var handleAsset @this/SliderChild/Handle:Image.assetPath
+	var handleColor @this/SliderChild/Handle:Button.transitions[0].value
+	var handleHighlightColor @this/SliderChild/Handle:Button.transitions[1].value
+	var handlePressedColor @this/SliderChild/Handle:Button.transitions[2].value
+
+	var minKeyRepeatDelay @this/SliderChild:InputRepeater.minRepeatDelay
+	var keyRepeatDecreaseFactor @this/SliderChild:InputRepeater.delayDecreaseFactor
+
+	anchor: CENTER
+	size: < 500, 50 >
+
+	panel SliderChild
+	{
+		bind @parent.size -> @this.size
+
+		anchor: LEFT
+		offsets: <0, 0, 0, 0>
+		pivot: <0, 0.5>
+		inputListener: true
+
+		behavior Slider
+		{
+			defaultHandle: @panel.parent/DefaultHandle
+			selectedBackground: @panel/SelectedBackground
+			backgroundButton: @panel:Button
+			handleDraggable: @panel/Handle:Draggable
+			showDefaultValue: true
+			defaultValue: 0
+			currentValue: 0
+			showSelectedBackground: true
+			range: <0, 100>
+			step: 0.1
+			handleSize: 5
+		}
+
+		behavior InputRepeater
+		{
+			outputBehavior: @panel:Slider
+			delayDecreaseFactor: 0.75
+		}
+
+		behavior RenderGroup
+
+		behavior Button
+
+		behavior InputBlocker
+
+		panel SliderBackground
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0,0,0,0>
+
+			behavior Image ScrollBarBG
+			{
+				color: <0.75, 0.75, 0.75, 0.65>
+			}
+		}
+
+		panel SelectedBackground
+		{
+			pivot: <0, 0.5>
+			anchor: LEFT_STRETCH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				color: #orange
+			}
+		}
+
+		panel Handle
+		{
+			anchor: LEFT_STRETCH_HEIGHT
+			offsets: <0, 0, 0, 0>
+			inputListener: true
+
+			behavior Button
+			{
+				transitions: [
+					{
+						fromState: ANY
+						toState: IDLE
+						type: TRANSITION_PROPERTY_SET
+						value: <1, 0, 0, 1>
+						property: @panel:Image.color
+					},
+					{
+						fromState: ANY
+						toState: HIGHLIGHTED
+						type: TRANSITION_PROPERTY_SET
+						value:  <0, 1, 0, 1>
+						property: @panel:Image.color
+					},
+					{
+						fromState: ANY
+						toState: PRESSED
+						type: TRANSITION_PROPERTY_SET
+						value: <0, 0, 1, 1>
+						property: @panel:Image.color
+					}
+				]
+			}
+
+			behavior Draggable
+			{
+				maintainLocationOnClick: false
+			}
+
+			behavior Constraints
+			{
+				positionYLock: true
+				constrainWholeRect: false
+				constrainToPanel: @panel.parent
+			}
+
+			behavior Image HandleBG
+			{
+				color: <1, 1, 1, 1>
+			}
+		}
+	}
+
+	panel DefaultHandle
+	{
+		size: <3, 15>
+		anchor: LEFT_STRETCH_HEIGHT
+
+		behavior Image
+		{
+			color: <0.5, 0.5, 0.5, 0.75>
+		}
+	}
+}

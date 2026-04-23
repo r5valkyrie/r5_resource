@@ -1,0 +1,96 @@
+panel ApexCupProgressTracker
+{
+	bind root
+	size: < 367, 118 >
+	anchor: CENTER
+	offsets: <0, 0, 0, 0>
+
+	behavior ApexCupProgressTracker
+
+	panel TilePanel
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <-5, -8, 0, 0> //for some reason this background asset im using has space around the sides >:(
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/ranked/rank_lobby_status_frame.rpak"
+		}
+
+		instance $"ui_rtk/common/labels/header_tag.rpak" cornerTag
+		{
+			anchor: TOP_RIGHT
+
+			size: <250, 34>
+			position: <-8, 8>
+
+			bind @root:ApexCupProgressTracker.title -> @this/Rect/RectContents/CornerText:Label.text
+			override @var(bgColor) <0.21 , 0.45 , 0.47>
+			override @var(fontSize) 25
+			override @var(triangleAnchor) LEFT
+		}
+
+	    instance $"ui_rtk/controls/progress_bar.rpak" progressBar
+		{
+			anchor: RIGHT
+			position: <-20, 26>
+			size: <240, 9>
+			pivot: <1, 0>
+
+			//todo (Rhutt) : fill in with real data once its availble
+			override @var(value) 50
+			override @var(min) 0
+			override @var(max) 100
+		}
+
+		panel ProgressValue
+		{
+			anchor: RIGHT
+			position: <-20, -4>
+			pivot: <1.0, 0.0>
+			width: 200
+
+			behavior FormatLabel
+			{
+				bind @root:ApexCupProgressTracker.currentPoints -> @this.arg1
+				bind @root:ApexCupProgressTracker.targetPoints  -> @this.arg2
+
+				face: "DefaultRegularFont"
+				allCaps: true
+				pixelHeight: 30
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				horizontalMode: AUTOSIZE_TO_TEXT
+				verticalMode: AUTOSIZE_TO_TEXT
+				color: <1, 1, 1, 1>
+				format: "#CUPS_PROGRESS_TRACKER_POINTS"
+			}
+
+			behavior LabelAltStyle
+			{
+				face: "DefaultBoldFont"
+				color: <1, 1, 1, 0.2>
+				pixelHeight: 30
+			}
+
+			behavior LabelAltStyle
+			{
+				face: "DefaultBoldFont"
+				color: <1, 1, 1, 1>
+				pixelHeight: 30
+			}
+		}
+		panel Icon
+		{
+			anchor: LEFT
+			size: <110, 110>
+			position: <0, 0>
+			pivot: <0, 0.5>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/gamemode_emblem/generic_ltm.rpak"
+			}
+		}
+	}
+}

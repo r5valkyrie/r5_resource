@@ -1,0 +1,154 @@
+panel ApexCupsHistory
+{
+	bind root
+	size: <1920, 1080>
+    anchor: CENTER_STRETCH_WIDTH_HEIGHT
+    offsets: <0, 0, 0, 0>
+
+    behavior ApexCupHistory
+    {
+        buttonList: @panel/Matches/Border/Timeline/MatchButtons
+	    reRollButton: @panel/ReRollButton/BaseButton:Button
+    }
+
+	panel SquadResults
+	{
+		anchor: TOP
+		size: <1519, 415>
+		pivot: <0.5, 0>
+		position: <0, 460>
+
+		panel NoGamesPlayedPanel
+		{
+			bind &menus.apexCups.playerDataList -> HasAny -> NOT -> @this.visible
+			anchor: CENTER
+			size: <1466, 525>
+			position: <0, -100>
+
+			behavior Image
+			{
+				color: <0.6, 0.6, 0.6, 1.0>
+				imageBlur: ASSET
+			}
+
+			panel text
+			{
+				anchor: CENTER
+				pivot: <0.5, 0.5>
+
+				behavior Label
+				{
+					bind &menus.apexCups.noMatchesText -> @this.text
+
+					verticalMode: AUTOSIZE_TO_TEXT
+					HorizontalMode: AUTOSIZE_TO_TEXT
+					pixelHeight: 26
+					face: "TitleRegularFont"
+					margin: <10, 0, 0, 0>
+					text: "#CUPS_MATCHHISTORY_NO_MATCHES"
+				}
+			}
+		}
+
+		instance $"ui_rtk/common/labels/headline_title_label.rpak" dividerHeader
+		{
+			bind &menus.apexCups.playerDataList -> HasAny -> @this.visible
+			bind &menus.apexCups.selectedIdx -> Add( 1 ) -> FloatToInt -> @var(titleTextArg1)
+
+			anchor: TOP
+			pivot: <0.5, 0>
+
+			position: <0, 0>
+			width: 1268
+
+			override @var(titleText) "#GAMEMODE_APEX_CUPS_HISTORY_RESULTS"
+			override @var(lineColor) #FFFFFF
+		}
+
+		panel PlayerComponent
+		{
+		    anchor: TOP
+            offsets: <0, 0, 0, 0>
+            pivot: <0.5, 0.0>
+			position: <0, 50>
+
+			behavior HorizontalContainer
+			{
+				spaceEvenly: true
+				fitContentHeight: true
+				fitContentWidth: true
+				paddingLeft: 20
+				paddingRight: 20
+			}
+
+			behavior ListBinder
+			{
+				bindingPath: "&menus.apexCups.playerDataList"
+				prefab: $"ui_rtk/menus/game_modes/apex_cups/components/player_summary_widget.rpak"
+			}
+		}
+	}
+
+    panel Matches
+    {
+		anchor: TOP
+		size: <1518, 327>
+		pivot: <0.5, 0>
+		position: <0, 120>
+
+		panel Border
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			instance $"ui_rtk/menus/game_modes/apex_cups/components/apex_cup_history_timeline.rpak" Timeline
+			{
+				anchor: TOP
+				pivot: <0.5, 0>
+				position: <0, 90>
+			}
+
+			instance $"ui_rtk/menus/game_modes/apex_cups/components/results_breakdown_data.rpak" CupResultsBreakdown
+			{
+				bind &menus.apexCups.tierInfo.isTop100 -> NOT -> @var(showNextTierPts)
+
+				anchor: TOP
+				position: <0, 0>
+				pivot: <0.5, 0>
+				size: <1496,119>
+
+				override @var(showMatchesPlayed) false
+				override @var(spacingHorizontal) 120
+				override @var(spacingVertical)   40
+			}
+		}
+	}
+
+	panel ReRollButton
+	{
+		bind &menus.apexCups.showRerollButton -> @this.visible
+
+		anchor: BOTTOM_STRETCH_WIDTH
+		offsetsLR: <0, 0>
+		pivot: <0.5, 1>
+		height: 72
+		positionY: -90
+
+		instance $"ui_rtk/common/buttons/base_button.rpak" BaseButton
+		{
+			bind &menus.apexCups.rerollButtonText -> @var(labelText)
+			bind &menus.apexCups.showRerollButton -> @this:Button.active
+
+			override @var(labelColor)         <1, 1, 1>
+			override @var(backgroundColor)    <0.2, 0.2, 0.2>
+			override @var(outlineColor)       <0.7, 0.7, 0.7>
+			override @var(gradientColor)      <1, 0.3058, 0.1137>
+			override @var(innerGlowColor)     <1, 0.3058, 0.1137>
+			override @var(outlineHoverColor)  <1, 0.3058, 0.1137>
+
+			anchor: BOTTOM
+			size: <400, 70>
+			pivot: <0.5, 1>
+		}
+	}
+}

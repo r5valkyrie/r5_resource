@@ -1,0 +1,245 @@
+panel PostGameXpBreakdownPanel
+{
+	bind root
+
+	anchor: CENTER_STRETCH_HEIGHT
+	size: <1920, 1080>
+	offsets: <0, 0, 0, 0>
+
+	behavior PostGameXpBreakdown
+	{
+		tweenStaggers: [@panel/BreakdownContainer/ListsContainer/ScrollView1/View/Content/List1:TweenStagger,
+		@panel/BreakdownContainer/ListsContainer/ScrollView2/View/Content/List2:TweenStagger
+		]
+		progressBarAnimator: @panel/BreakdownContainer/ProgressBar/BarAnimator
+		breakdownContainer: @panel/BreakdownContainer
+		levelUpPopUp: @panel/LevelUpPopUp
+		gladiatorCard: @panel/GladiatorCard
+		badgePanel: @panel/BadgePopUp
+	}
+
+	panel BreakdownContainer
+	{
+		inputListener: true
+
+		anchor: CENTER_STRETCH_HEIGHT
+		size: <1920, 1080>
+		offsets: <0, 0, 0, 0>
+
+		panel BreakdownTitle
+		{
+			anchor: TOP_LEFT
+			size: <300, 40>
+			offsets: <0, 0, 0, 0>
+			position: <70, 165>
+			pivot: <0,0>
+			useLocaleDirection: true
+
+			behavior Label
+			{
+				text: "#MASTERY_XP_BREAKDOWN"
+				pixelHeight: 40
+				face: "TitleBoldFont"
+				textAlignHorizontal: LEFT
+				horizontalMode: AUTOSIZE_TO_TEXT
+				useLocaleDirection: true
+			}
+		}
+
+		panel ListsContainer
+		{
+			anchor: TOP_LEFT
+			size: <930, 250>
+			offsets: <0, 0, 0, 0>
+			position: <67, 230>
+			pivot: <0,0>
+			useLocaleDirection: true
+
+			behavior HorizontalContainer
+			{
+				spacing: 13
+				useLocaleDirection: true
+			}
+
+			instance $"ui_rtk/common/default_scroll_view.rpak" ScrollView1
+			{
+				override @this/View:ScrollView.autoScroll TOP
+				override @this/View:ScrollView.direction VERTICAL
+				override @this/View/Content:FitToContent.minimumSize <460, 250>
+
+				size: <460, 250>
+				anchor: CENTER
+				offsets: <0, 0, 0, 0>
+				constrainInput: false
+
+				context @this/View/Content
+				{
+					bind @this/List1.size -> @this.size
+					panel List1
+					{
+						pivot: <0, 0>
+						width: 460
+						behavior VerticalContainer
+						{
+							fitContentHeight: true
+						}
+
+						behavior ListBinder
+						{
+							bindingPath: "*.xpList1"
+							prefab: $"ui_rtk/menus/post_game/xp_breakdown/components/postgame_xp_breakdown_list_item.rpak"
+						}
+
+						behavior TweenStagger
+						{
+							active: false
+							isRecursive: true
+							startDelay: 0.1
+							delay: 0.1
+							initTweensOnEnable: true
+							onlyOnForwardNav: false
+							animationName: "AnimateIn"
+						}
+					}
+				}
+
+				context @this/ScrollBar
+				{
+					pivot: <0, 1>
+					anchor: TOP_RIGHT
+					height: 13
+					width: 250
+					rotation: 90
+				}
+			}
+
+			instance $"ui_rtk/common/default_scroll_view.rpak" ScrollView2
+			{
+				override @this/View:ScrollView.autoScroll TOP
+				override @this/View:ScrollView.direction VERTICAL
+				override @this/View/Content:FitToContent.minimumSize <460, 250>
+
+				size: <460, 250>
+				anchor: CENTER
+				offsets: <0, 0, 0, 0>
+				constrainInput: false
+
+				context @this/View/Content
+				{
+					bind @this/List2.size -> @this.size
+					panel List2
+					{
+						pivot: <0, 0>
+						width: 460
+						behavior VerticalContainer
+						{
+							fitContentHeight: true
+						}
+
+						behavior ListBinder
+						{
+							bindingPath: "*.xpList2"
+							prefab: $"ui_rtk/menus/post_game/xp_breakdown/components/postgame_xp_breakdown_list_item.rpak"
+						}
+
+						behavior TweenStagger
+						{
+							active: false
+							isRecursive: true
+							onlyOnForwardNav: false
+							startDelay: 0.1
+							delay: 0.1
+							initTweensOnEnable: true
+							animationName: "AnimateIn"
+						}
+					}
+				}
+
+				context @this/ScrollBar
+				{
+					pivot: <0, 1>
+					anchor: TOP_RIGHT
+					height: 13
+					width: 250
+					rotation: 90
+				}
+			}
+		}
+
+		instance $"ui_rtk/menus/post_game/xp_breakdown/components/postgame_xp_breakdown_rewards.rpak"
+		{
+			override bind root "*.xpRewards"
+			anchor: RIGHT
+			position: <-1055, 290>
+			offsets: <0, 0, 0, 0>
+			useLocaleDirection: true
+		}
+
+		instance $"ui_rtk/menus/post_game/xp_breakdown/components/postgame_xp_breakdown_total_xp.rpak"
+		{
+			override bind root "*.totalXPModel"
+			anchor: CENTER
+			size: <250, 130>
+			offsets: <0, 0, 0, 0>
+			position: <-93, 23>
+			useLocaleDirection: true
+		}
+
+		instance $"ui_rtk/menus/post_game/xp_breakdown/components/postgame_xp_breakdown_progress_bar.rpak" ProgressBar
+		{
+			override bind root "*.accountProgress"
+			offsets: <0, 0, 0, 0>
+			position: <-210, 150>
+			useLocaleDirection: true
+		}
+
+		behavior GlobalInput
+		{
+			behaviorRef: @panel/ContinueButton:Button
+			keyboardButton: KEY_SPACE
+			gamepadButton: BUTTON_A
+		}
+
+		instance $"ui_rtk/common/buttons/base_button.rpak" ContinueButton
+		{
+			positionY: -54
+			size: <384, 66>
+			pivot: <0.5, 1>
+			anchor: BOTTOM
+			useLocaleDirection: true
+
+			override @var(labelText) "#A_BUTTON_CONTINUE"
+			override @var(labelColor) <0.87, 0.87, 0.87>
+			override @var(size) <380, 64>
+			override @var(labelPixelHeight) 24
+			override @var(backgroundColor) <0.3, 0.3, 0.3>
+			override @var(backgroundAlpha) 0.3
+			override @var(gradientColor) <0.5, 0.5, 0.5>
+			override @var(gradientAlpha) 0.75
+			override @var(lineAlpha) 0
+		}
+	}
+
+	instance $"ui_rtk/controls/gladiator_card.rpak" GladiatorCard
+	{
+		anchor: CENTER
+		offsets: <0, 0, 0, 0>
+		positionX: 560
+		useLocaleDirection: true
+	}
+
+	instance $"ui_rtk/menus/post_game/xp_breakdown/components/postgame_xp_breakdown_level_up_card.rpak" LevelUpPopUp
+	{
+		override bind root "*.levelUpModel"
+		visible: false
+		useLocaleDirection: true
+	}
+
+	instance $"ui_rtk/menus/post_game/xp_breakdown/components/postgame_xp_breakdown_badge_card.rpak" BadgePopUp
+	{
+		override bind root "*.badgeUnlocked"
+		visible: false
+		active: false
+		useLocaleDirection: true
+	}
+}

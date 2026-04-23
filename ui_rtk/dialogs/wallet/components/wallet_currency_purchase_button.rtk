@@ -1,0 +1,15 @@
+panel WalletCurrencyButton
+{
+	bind root
+
+	behavior GridContainerElement
+	{
+		bind *.spanCellsHorizontal -> @this.spanCellsHorizontal
+		bind *.spanCellsVertical -> @this.spanCellsVertical
+	}
+
+	instance $"ui_rtk/common/buttons/currency_purchase_button.rpak" CurrencyButton
+	{
+		override bind root "*"
+	}
+}

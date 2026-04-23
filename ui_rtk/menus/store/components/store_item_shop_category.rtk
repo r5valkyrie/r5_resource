@@ -1,0 +1,236 @@
+panel RTKStoreGridCategory
+{
+	bind root
+
+	anchor: TOP_STRETCH_WIDTH
+	height: 750
+	offsetsLR: <0, 0>
+
+	behavior StoreGridSection
+	{
+		bind *.sectionName -> @this.sectionName
+
+		paginationBehavior: @panel/HorizontalPagination:Pagination
+	}
+
+	behavior MinMaxDimensions
+	{
+		maxWidth: 2700
+	}
+
+	instance $"ui_rtk/common/components/horizontal_paginated_panel.rpak" HorizontalPagination
+	{
+		override bind root "*"
+		bind *.sectionVisible -> @this.visible
+		bind *.sectionVisible -> @this.active
+		bind *.startPageIndex -> @this:Pagination.startPageIndex
+
+		override @var(cursorZone1Controller)          false
+		override @var(cursorZone2Controller)          true
+		override @this/CursorZone2:CursorInteract.absorbOnKeyCodePressed false
+		override @this/CursorZone2:CursorInteract.allowKeyCodeInputModeBypass true
+
+		override @var(customPipPrefab) $"ui_rtk/common/buttons/pip_button_v2.rpak"
+
+		context @this:Pagination
+		{
+			useContentSizeAsTotalSize: true
+			containerSizeOffset: 24
+			showNavButtonsOnController: false
+			nextButtonAlt: @panel/RightButtonLarge:Button
+			prevButtonAlt: @panel/LeftButtonLarge:Button
+		}
+
+		context @var(navContainerPanel)
+		{
+			anchor: TOP_RIGHT
+			position: <-125, 0>
+			pivot: <1.0, 0.0>
+			useLocaleDirection: true
+			sizeDelta: <0, 60>
+
+			behavior HorizontalContainer
+			{
+				alignment: RIGHT
+				fitContentWidth: true
+				spacing: 20
+				useLocaleDirection: true
+			}
+		}
+
+		context @this/CursorZone1
+		{
+			constrainInput: false
+			anchor: TOP_RIGHT
+			position: <0, 0>
+			pivot: <1.0, 0.0>
+			size: <960, 85>
+		}
+
+		context @var(containerPanel)
+		{
+			anchor: TOP_STRETCH_WIDTH
+			position: <0, 386>
+			offsetsLR: <112, 112>
+			height: 600
+		}
+
+		context @var(contentPanel)
+		{
+			behavior GridContainer
+			{
+				defaultSlotSize: <320, 288>
+				slotSpacing: <24, 24>
+				wrapAfterSlot: 2
+				startCorner: TOP_LEFT
+				useLocaleDirection: true
+				fillDirection: COLUMN_FIRST
+				gridSlotAnchor: CENTER
+				fitToContentWidth: true
+				isStrictGrid: true
+				fillGaps: true
+			}
+
+			behavior ListBinder
+			{
+				bindingPath: "*.itemsArray"
+				prefab: $"ui_rtk/menus/store/components/store_grid_item.rpak"
+			}
+		}
+
+		panel TopLeftAnchor
+		{
+			anchor: TOP_LEFT
+			position: <112, 0>
+			pivot: <0.0, 0.0>
+			useLocaleDirection: true
+
+			panel StoreSectionNameLabelBlur
+			{
+				anchor: TOP_LEFT
+				position: <-14, 40>
+				size: <470, 60>
+				pivot: <0.0, 0.5>
+				useLocaleDirection: true
+
+				behavior Label
+	            {
+	                bind *.sectionName -> @this.text
+
+	                face: #FONT_DEFAULT_BOLD
+					horizontalMode: AUTOSIZE_TO_TEXT
+	                textAlignHorizontal: LEFT
+					useLocaleDirection: true
+	                textAlignVertical: TOP
+		            allCaps: true
+	                pixelHeight: 72
+		            thicken: 0.4
+	                alpha: 0.15
+	            }
+			}
+
+			panel StoreSectionNameContainer
+			{
+				anchor: TOP_LEFT
+				position: <0, 24>
+				size: <350, 45>
+				pivot: <0.0, 0.5>
+				useLocaleDirection: true
+
+				behavior HorizontalContainer
+				{
+					alignment: LEFT
+					fitContentWidth: true
+					spacing: 50
+					useLocaleDirection: true
+				}
+
+				panel StoreSectionNameLabel
+				{
+					behavior Label
+					{
+						bind *.sectionName -> @this.text
+
+						face: #FONT_DEFAULT_BOLD
+						horizontalMode: AUTOSIZE_TO_TEXT
+						verticalMode: AUTOSIZE_TO_TEXT
+						textAlignHorizontal: LEFT
+						useLocaleDirection: true
+						textAlignVertical: BOTTOM
+						allCaps: true
+						pixelHeight: 52
+					}
+				}
+
+				instance $"ui_rtk/common/components/timer_component_v2.rpak" TimerComponent
+				{
+					bind *.endTime -> GreaterThan( 0 ) -> @this.visible
+					bind *.endTime -> @this:Timer.endTime
+
+					useLocaleDirection: true
+				}
+
+				panel CurrencyText
+				{
+					bind *.sectionCurrency -> IsEmpty -> NOT -> @this.visible
+
+					behavior Label
+					{
+						bind *.sectionCurrency -> @this.text
+
+						face: #FONT_TITLE_BOLD
+						horizontalMode: AUTOSIZE_TO_TEXT
+						verticalMode: AUTOSIZE_TO_TEXT
+						textAlignHorizontal: LEFT
+						useLocaleDirection: true
+						textAlignVertical: BOTTOM
+						allCaps: true
+						pixelHeight: 40
+					}
+				}
+
+				panel CountText
+				{
+					behavior Label
+					{
+						bind *.sectionCount -> @this.text
+
+						face: #FONT_DEFAULT
+						horizontalMode: AUTOSIZE_TO_TEXT
+						verticalMode: AUTOSIZE_TO_TEXT
+						textAlignHorizontal: LEFT
+						useLocaleDirection: true
+						textAlignVertical: BOTTOM
+						pixelHeight: 45
+						colorRGB: #COLOR_GREY_3
+					}
+				}
+			}
+		}
+
+	    instance $"ui_rtk/common/buttons/nav_button_right.rpak" LeftButtonLarge
+		{
+			bind @this:Button.interactive -> PickFloatFromTwo( 0.0, 1.0 ) -> @this:Image.alpha
+			override @this:Image.assetPath $"ui_image/rui/menu/store/common/arrow_button_large.rpak"
+			override @this:Image.flipHorizontal false
+
+			anchor: LEFT
+			position: <80, 8>
+			rotation: 180
+			size: <50, 100>
+			useLocaleDirection: true
+		}
+
+        instance $"ui_rtk/common/buttons/nav_button_right.rpak" RightButtonLarge
+        {
+	        bind @this:Button.interactive -> PickFloatFromTwo( 0.0, 1.0 ) -> @this:Image.alpha
+	        override @this:Image.assetPath $"ui_image/rui/menu/store/common/arrow_button_large.rpak"
+	        override @this:Image.flipHorizontal false
+
+            anchor: RIGHT
+			position: <-80, 8>
+            size: <50, 100>
+			useLocaleDirection: true
+        }
+	}
+}

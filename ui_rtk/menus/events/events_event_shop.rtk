@@ -1,0 +1,44 @@
+panel EventShop
+{
+	bind root
+
+	anchor: CENTER
+	size: <1920, 1080>
+	pivot: <0, 0>
+	offsets: <0, 0, 0, 0>
+
+	behavior EventShopPanel
+	{
+		offersGrid: @panel/Screen/Grid/GridContent
+		tierList: @panel/Screen/Rewards/TiersContent/TierList
+		challengesGridButton: @panel/Screen/Grid/GridFooter/ChallengesButton:Button
+	}
+
+	panel Screen
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <62, 0, 200, 120>
+
+		instance $"ui_rtk/menus/events/components/events_panel_title.rpak" PanelTitle
+		{
+			bind *.eventTitleText -> @var(eventTitleText)
+			bind *.currentPageTitle -> @var(currentPageTitle)
+			bind *.mainIcon -> IsEmpty -> NOT -> @var(mainIconDividerVisible)
+			bind *.mainIcon -> IsEmpty -> NOT -> @var(mainIconVisible)
+			bind *.mainIcon -> @var(mainIcon)
+			bind *.calEventShop -> GetCalEventGlobalSettingBool("leftCornerHeaderBgBlur") -> @var(leftCornerHeaderBgBlur)
+			bind *.calEventShop -> GetCalEventGlobalSettingFloat("leftCornerHeaderBGDarkening") -> @var(leftCornerHeaderBGDarkening)
+			bind *.calEventShop -> GetCalEventGlobalSettingAsset("leftCornerHeaderBg") -> @var(leftCornerHeaderBg)
+			bind *.calEventShop -> GetCalEventGlobalSettingVector("eventShopLeftPanelEventNameColor") -> @var(leftCornerEventNameColor)
+			bind *.calEventShop -> GetCalEventGlobalSettingVector("eventShopLeftPanelTitleColor") -> @var(leftCornerTitleColor)
+			bind *.titleEndTimestamp -> @var(titleEndTimestamp)
+			bind *.titleEndTimestamp -> @var(titleEndTimestamp2)
+			bind *.titleCounterLocalizationString -> @var(titleCounterLocalizationString)
+			bind *.titleCounterColor -> @var(titleCounterColor)
+			bind *.titleCounterColor -> @var(titleCounterColor2)
+		}
+		instance $"ui_rtk/menus/events/components/event_shop_grid.rpak" Grid
+		instance $"ui_rtk/menus/events/components/event_shop_rewards.rpak" Rewards
+	}
+}
+

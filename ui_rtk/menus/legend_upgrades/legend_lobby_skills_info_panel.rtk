@@ -1,0 +1,191 @@
+panel LegendInfoPanel
+{
+	bind root
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	behavior CharacterSkillsInfo
+	{
+		bind &common.characterSkillsInfo.characterGUID -> @this.characterGUID
+	}
+
+	panel LegendSkillsInfo
+	{
+		anchor: TOP_LEFT
+		position: <75, 100>
+		pivot: <0.0, 0.0>
+		width: 400
+		useLocaleDirection: true
+
+		behavior VerticalContainer
+        {
+            spacing: 23
+            alignment: TOP_LEFT
+            fitContentHeight: true
+			useLocaleDirection: true
+        }
+
+		panel LegendNamePlate
+		{
+			behavior VerticalContainer
+	        {
+	            spacing: 0
+	            alignment: TOP_LEFT
+	            fitContentHeight: true
+				useLocaleDirection: true
+	        }
+
+			panel LegendName
+			{
+				size: <400, 60>
+
+				behavior Label
+				{
+					bind *.mainText -> @this.text
+
+					face: "TitleBoldFont"
+					textAlignHorizontal: LEFT
+					horizontalMode: OVERFLOW
+					useLocaleDirection: true
+					pixelHeight: 60
+					allCaps: true
+					color: <1.0, 1.0, 1.0, 1.0>
+
+				}
+			}
+
+			panel LegendSubtitle
+			{
+				size: <400, 28>
+				position: <0, 120>
+
+				behavior Label
+				{
+					bind *.subText -> @this.text
+
+					face: "TitleBoldFont"
+					textAlignHorizontal: LEFT
+					horizontalMode: OVERFLOW
+					useLocaleDirection: true
+					pixelHeight: 28
+					allCaps: true
+					color: <0.5, 0.5, 0.5, 1.0>
+				}
+			}
+		}
+
+		panel LegendSkills
+		{
+			behavior VerticalContainer
+	        {
+	            spacing: 26
+	            alignment: LEFT
+	            fitContentHeight: true
+				useLocaleDirection: true
+	        }
+
+			behavior ListBinder
+			{
+				bindingPath: "*.characterSkillItems"
+				prefab: $"ui_rtk/menus/legend_upgrades/components/legend_skill_info_lobby.rpak"
+			}
+		}
+
+		panel ClassInfo
+		{
+			behavior VerticalContainer
+	        {
+	            spacing: 18
+	            alignment: LEFT
+	            fitContentHeight: true
+				useLocaleDirection: true
+	        }
+
+			panel Separator
+			{
+				size: <400, 2>
+
+				behavior Image
+				{
+					color: <0.7, 0.7, 0.7, 0.2>
+				}
+			}
+
+			panel ClassNamePlate
+			{
+				size: <400, 60>
+
+				panel ClassIcon
+				{
+					anchor: LEFT
+					position: <24, 0>
+					size: <64, 64>
+					useLocaleDirection: true
+
+					behavior Image
+					{
+						bind *.characterClassInfo.icon -> @this.assetPath
+					}
+				}
+
+				panel HeaderText
+				{
+					anchor: LEFT
+					position: <62, -2>
+					pivot: <0, 1>
+					size: <350, 27>
+					useLocaleDirection: true
+
+					behavior Label
+					{
+						bind *.characterClassInfo.headerText -> @this.text
+
+						face: "TitleBoldFont"
+						pixelHeight: 38
+						textAlignHorizontal: LEFT
+						useLocaleDirection: true
+						color: <1.0, 1.0, 1.0, 1.0>
+						allCaps: true
+					}
+				}
+
+				panel DescText
+				{
+					anchor: LEFT
+					position: <62, 4>
+					pivot: <0, 0>
+					size: <350, 20>
+					useLocaleDirection: true
+
+					behavior Label
+					{
+						bind *.characterClassInfo.descText -> @this.text
+
+						face: "TitleBoldFont"
+						pixelHeight: 24
+						textAlignHorizontal: LEFT
+						useLocaleDirection: true
+						color: <0.7, 0.7, 0.7, 0.7>
+						allCaps: true
+					}
+				}
+			}
+		}
+	}
+
+	panel LegendUpgradesInfo
+	{
+		anchor: TOP_RIGHT
+		pivot: <1.0, 0.0>
+		position: <-45, 120>
+		size: <750, 430>
+		useLocaleDirection: true
+
+		instance $"ui_rtk/menus/legend_upgrades/components/legend_upgrades_tree.rpak" Tree
+		{
+			anchor: TOP_RIGHT
+			pivot: <1.0, 0.0>
+			useLocaleDirection: true
+		}
+	}
+}

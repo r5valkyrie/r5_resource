@@ -1,0 +1,21 @@
+panel MasteryTrialIcon
+{
+	bind root
+
+	size: <198, 172>
+
+	panel Status
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		size: <198, 172>
+        pivot: <0.5, 0.5>
+		offsets: <0, 0, 0, 0>
+
+		behavior Image Icon
+		{
+			bind *.trialData.isCompleted -> PickFloatFromTwo( 0.06, 1.0 ) -> @this.alpha
+
+			assetPath: $"ui_image/rui/menu/mastery/weaponmastery_trial_icon.rpak"
+		}
+    }
+}

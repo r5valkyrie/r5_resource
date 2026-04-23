@@ -1,0 +1,140 @@
+panel MapModeInfo
+{
+	bind root
+
+	pivot: <0, 0>
+
+	behavior MapModeInfo
+	{
+		title: @panel/ModeName:Label
+		subtitle: @panel/MapName:Label
+	}
+
+	behavior VerticalContainer
+	{
+		fitContentWidth:  true
+		fitContentHeight: true
+	}
+
+	behavior Animator
+	{
+		tweenAnimations: [
+			{
+				name: "fadeInAnim"
+				tweens: [
+					{
+						property: @panel/ModeName:Label.alpha
+						startValue: 0
+						endValue: 1
+						duration: 0.5
+						delay: 1.2
+						curve: EASE_IN_QUART
+					},
+					{
+						property: @panel/ModeName:Label.outlineColorInner
+						startValue: <0, 0, 0, 0>
+						endValue: <0, 0, 0, 1>
+						duration: 0.5
+						delay: 1.2
+			            curve: EASE_IN_QUART
+					},
+					{
+						property: @panel/ModeName:Label.outlineColorOuter
+						startValue: <0, 0, 0, 0>
+						endValue: <0, 0, 0, 1>
+						duration: 0.5
+						delay: 1.2
+			            curve: EASE_IN_QUART
+					},
+					{
+						property: @panel/MapName:Label.alpha
+						startValue: 0
+						endValue: 1
+						duration: 0.5
+						delay: 1.2
+						curve: EASE_IN_QUART
+					},
+					{
+						property: @panel/MapName:Label.outlineColorInner
+						startValue: <0, 0, 0, 0>
+						endValue: <0, 0, 0, 1>
+						duration: 0.5
+						delay: 1.2
+			            curve: EASE_IN_QUART
+					},
+					{
+						property: @panel/MapName:Label.outlineColorOuter
+						startValue: <0, 0, 0, 0>
+						endValue: <0, 0, 0, 1>
+						duration: 0.5
+						delay: 1.2
+			            curve: EASE_IN_QUART
+					}
+				]
+			}
+		]
+	}
+
+	behavior AnimatorAutoPlay
+	{
+		animation: "fadeInAnim"
+	}
+
+	panel ModeName
+	{
+		anchor: LEFT
+		pivot: <0, 0>
+		offsetsTB: <0, 0>
+		size: <380, 30>
+
+		behavior VerticalContainer
+		{
+			fitContentWidth:  true
+			fitContentHeight: true
+		}
+	    behavior Label
+	    {
+	        text: "Mode Name"
+	        face: "TitleBoldFont"
+	        pixelHeight: 30
+	        horizontalMode: SQUISH_TO_CONTAINER
+	        colorRGB: <1, 1, 1>
+	        outlineWidth: 1.5
+	        outlineColorInner: <0, 0, 0, 0>
+	        outlineColorOuter: <0, 0, 0, 0>
+	        textAlignHorizontal: LEFT
+	        textAlignVertical: CENTER
+	        allCaps: true
+	        alpha: 0
+	    }
+	}
+
+	panel MapName
+	{
+		anchor: LEFT
+		pivot: <0, 0>
+		offsetsTB: <0, 0>
+		size: <380, 20>
+
+		behavior VerticalContainer
+		{
+			fitContentWidth:  true
+			fitContentHeight: true
+		}
+	    behavior Label
+	    {
+	        text: "Map Name"
+	        face: "TitleBoldFont"
+	        pixelHeight: 22
+	        horizontalMode: SQUISH_TO_CONTAINER
+	        colorRGB: <1, 1, 1>
+	        outlineWidth: 1.5
+	        outlineColorInner: <0, 0, 0, 0>
+	        outlineColorOuter: <0, 0, 0, 0>
+	        textAlignHorizontal: LEFT
+	        textAlignVertical: CENTER
+	        allCaps: true
+	        alpha: 0
+	    }
+	}
+}

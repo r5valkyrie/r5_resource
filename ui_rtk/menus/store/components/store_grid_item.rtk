@@ -1,0 +1,44 @@
+panel StoreGridItem
+{
+	bind root
+	size: <664, 600>
+
+	behavior StoreGridItem
+	{
+		bind *.gridItemType -> @this.gridItemType
+		gridContainerElement: @panel:GridContainerElement
+	}
+
+	behavior GridContainerElement
+
+	behavior PrefabInstantiator
+	{
+		bind *.gridItemType -> @this.prefabIndex
+		instanceName: "ItemContent"
+		bindingPath: "*"
+		prevIndex: 0
+		prevInstance: @panel/ItemContent
+		prefabArray: [
+			$"ui_rtk/menus/store/components/store_grid_offer_button.rpak",              // eStoreGridItemType.OFFER_1_1
+			$"ui_rtk/menus/store/components/store_grid_offer_button.rpak",              // eStoreGridItemType.OFFER_2_1
+			$"ui_rtk/menus/store/components/store_grid_offer_button.rpak",              // eStoreGridItemType.OFFER_1_2
+			$"ui_rtk/menus/store/components/store_grid_offer_button.rpak",              // eStoreGridItemType.OFFER_2_2
+			$"ui_rtk/menus/store/components/store_grid_divider.rpak",                   // eStoreGridItemType.DIVIDER
+			$"ui_rtk/menus/store/components/store_grid_divider.rpak",                   // eStoreGridItemType.DIVIDER_ARROW
+			$"ui_rtk/menus/store/components/store_grid_info_panel.rpak",                // eStoreGridItemType.INFO_PANEL
+			$"ui_rtk/menus/store/components/store_grid_info_button.rpak",               // eStoreGridItemType.INFO_MED
+			$"ui_rtk/menus/store/components/store_grid_blank.rpak",                     // eStoreGridItemType.BLANK
+			$"ui_rtk/menus/store/components/store_grid_info_button.rpak",               // eStoreGridItemType.INFO_LRG
+			$"ui_rtk/menus/store/components/store_grid_info_button.rpak",               // eStoreGridItemType.INFO_XLG
+			$"ui_rtk/menus/store/components/store_grid_personalized_offer_button.rpak", // eStoreGridItemType.OFFER_PERSONAL
+			$"ui_rtk/menus/store/components/store_grid_offer_button.rpak",              // eStoreGridItemType.OFFER_3_2
+			$"ui_rtk/menus/store/components/store_grid_mythic_offer_button.rpak",       // eStoreGridItemType.HEIRLOOM
+			$"ui_rtk/menus/store/components/store_grid_mythic_offer_button.rpak",       // eStoreGridItemType.PRESTIGE
+			$"ui_rtk/menus/store/components/store_grid_offer_set_button.rpak",          // eStoreGridItemType.ARTIFACT_SET
+			$"ui_rtk/menus/store/components/store_grid_artifact_offer_button.rpak",     // eStoreGridItemType.ARTIFACT
+			$"ui_rtk/menus/store/components/store_grid_exotic_offer_button.rpak"        // eStoreGridItemType.EXOTIC
+		]
+	}
+
+	instance $"ui_rtk/menus/store/components/store_grid_offer_button.rpak" ItemContent
+}

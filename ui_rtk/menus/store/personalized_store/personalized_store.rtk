@@ -1,0 +1,76 @@
+panel PersonalizedStore
+{
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+    size: <1920, 1080>
+    offsets: <0, 0, 0, 0>
+
+	behavior PersonalizedStore
+	{
+		storeButtons: @panel/Content/StoreButtons
+	}
+
+	panel Content
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		panel TitleBackground
+		{
+			anchor: CENTER_STRETCH_WIDTH
+			height:160
+			position: <0, -440>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/store/store_header_bg_yourshop.rpak"
+				color: <1, 1, 1, 1>
+			}
+
+			panel PersonalizedStoreLabel
+			{
+				anchor: CENTER
+				pivot: <0.5, 0.5>
+
+				behavior Label
+				{
+					text: "#MENU_STORE_PANEL_HOT_DROPS"
+					face: "TitleBoldFont"
+
+					textAlignHorizontal: CENTER
+					textAlignVertical: CENTER
+
+					horizontalMode: AUTOSIZE_TO_TEXT
+					verticalMode: AUTOSIZE_TO_TEXT
+
+					pixelHeight: 40
+					color: <1, 1, 1, 1>
+
+					allCaps: true
+				}
+			}
+		}
+
+		//animator: @panel/StoreButtons/Button0:Animator
+
+		panel StoreButtons
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			scale: <1.128, 1.128>
+			position: <0, -20>
+
+
+			behavior HorizontalContainer
+			{
+				alignment: CENTER
+				fitContentWidth: true
+				spacing: 18.0
+			}
+
+			behavior ListBinder
+			{
+				bindingPath: "&menus.yourStore.pButtons"
+				prefab: $"ui_rtk/menus/store/personalized_store/components/personalized_store_button.rpak"
+			}
+		}
+	}
+}

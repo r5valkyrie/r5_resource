@@ -1,0 +1,159 @@
+panel EventShopTierDialog
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	behavior EventShopTierDialogPanel
+	{
+		backButton: @panel/Container/Buttons/BackButton
+		radioPlayButton: @panel/Container/Buttons/RadioPlayButton
+		challengesButton: @panel/Container/Buttons/ChallengesButton
+	}
+
+	panel Container
+	{
+		anchor: CENTER_STRETCH_WIDTH
+		offsets: <0, 0, 0, 0>
+		height: 850
+
+		panel Progression
+		{
+			anchor: TOP
+			size: <410, 16>
+			pivot: <0.5, 0>
+			position: <0, 165>
+
+			behavior AngledProgressBar
+			{
+				bind *.progress -> @this.current
+				bind &common.activeEvents.events[0].barsColor -> @this.progressBarColor
+
+				progressBarColor: <1, 1, 1>
+				progressBarAlpha: 1.0
+				progressBgColor: <0.3, 0.3, 0.3>
+				progressBgAlpha: 1.0
+				max: 1.0
+				angle: -45
+				isDoubleSided: true
+				current: 0.5
+			}
+		}
+
+		panel CurrencyProgressText
+		{
+			anchor: TOP
+			size: <410, 24>
+			position: <0, 200>
+
+			behavior HorizontalContainer
+			{
+				alignment: CENTER
+				fitContentHeight: true
+				fitContentWidth: true
+			}
+
+			panel CurrencyIcon
+			{
+				anchor: CENTER
+				size: <24, 24>
+
+				behavior Image
+				{
+					bind &common.activeEvents.events[0].currencyIcon -> @this.assetPath
+				}
+			}
+
+			panel Text
+			{
+				anchor: CENTER
+				size: <260, 24>
+				position: <0, 200>
+
+				behavior Label
+				{
+					bind *.progressText -> @this.text
+
+					face: "DefaultRegularFont"
+					pixelHeight: 32
+					colorRGB: #FFFFFF
+					textAlignHorizontal: LEFT
+					textAlignVertical: CENTER
+					allCaps: true
+					horizontalMode: AUTOSIZE_TO_TEXT
+				}
+
+				behavior LabelAltStyle AltStyle1
+				{
+					pixelHeight: 32
+				}
+			}
+		}
+
+		panel Items
+		{
+			anchor: CENTER_STRETCH_WIDTH
+			offsets: <0, 0, 0, 0>
+
+			behavior HorizontalContainer
+			{
+				fitContentHeight: true
+				fitContentWidth: true
+				spacing: 0
+			}
+
+			behavior ListBinder
+			{
+				bindingPath: "*.modalData"
+				prefab: $"ui_rtk/menus/events/components/event_shop_tier_dialog_item.rpak"
+			}
+		}
+
+		panel Buttons
+		{
+			anchor: BOTTOM
+			pivot: <0.5, 1>
+			positionY: -70
+
+			behavior HorizontalContainer
+			{
+				fitContentHeight: true
+				fitContentWidth: true
+				spacing: 36
+			}
+
+			instance $"ui_rtk/common/buttons/base_button.rpak" BackButton
+			{
+				override @var(labelText) "#B_BUTTON_CLOSE"
+				override @var(backgroundColor) #242526
+				override @var(outlineColor) #b4b4b5
+				override @var(lineColor) #b4b4b5
+				override @var(lineAlpha) 0.0
+				override @var(gradientColor) #78797a
+			}
+
+			instance $"ui_rtk/common/buttons/base_button.rpak" RadioPlayButton
+			{
+				override @var(labelText) "#EVENTS_EVENT_SHOP_OPEN_RADIO_PLAY_MOUSE"
+
+				bind *.isLocked -> PickVectorFromTwo( <1, 1, 1>, <0.4, 0.4, 0.4> ) -> @var(labelColor)
+				bind *.isLocked -> PickVectorFromTwo( <0.2, 0.2, 0.2>, <0.2, 0.2, 0.2> ) -> @var(backgroundColor)
+				bind *.isLocked -> PickVectorFromTwo( <0.7, 0.7, 0.7>, <0.3, 0.3, 0.3> ) -> @var(outlineColor)
+				bind *.isLocked -> PickVectorFromTwo( <1, 0.3058, 0.1137>, <0.6, 0.6, 0.6> ) -> @var(gradientColor)
+				bind *.isLocked -> PickVectorFromTwo( <1, 0.3058, 0.1137>, <0.4, 0.4, 0.4> ) -> @var(innerGlowColor)
+				bind *.isLocked -> PickVectorFromTwo( <1, 0.3058, 0.1137>, <0.6, 0.6, 0.6> ) -> @var(lineColor)
+				bind *.isLocked -> PickVectorFromTwo( <1, 0.3058, 0.1137>, <0.4, 0.4, 0.4> ) -> @var(outlineHoverColor)
+
+				bind *.radioPlayGUID -> IsEmpty -> NOT -> @this.visible
+			}
+
+			instance $"ui_rtk/common/buttons/base_button.rpak" ChallengesButton
+			{
+				override @var(labelText) "#EVENTS_EVENT_SHOP_GRID_CHALLENGES"
+
+				bind *.radioPlayGUID -> IsEmpty -> @this.visible
+			}
+		}
+	}
+}

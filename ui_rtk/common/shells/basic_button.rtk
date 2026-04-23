@@ -1,0 +1,323 @@
+panel BasicButton
+{
+	// base settings
+	var lineHeight @this/Line.height
+
+	// visibility
+	var backgroundAlpha @this/BackgroundFill:Image.alpha
+	var gradientAlpha @this/BackgroundGradient:Image.alpha
+	var lineAlpha @this/Line:Image.alpha
+
+	// idle colors settings
+	var backgroundColor @this/BackgroundFill:Image.colorRGB
+	var outlineColor @this/Outline:Image.colorRGB
+	var gradientColor @this/BackgroundGradient:Image.colorRGB
+	var innerGlowColor @this/InnerGlow:Image.colorRGB
+	var lineColor @this/Line:Image.colorRGB
+
+	// hover settings
+	var gradientHoverColor @this/BackgroundGradientHover:Image.colorRGB
+	var outlineHoverColor @this/OutlineHover:Image.colorRGB
+
+	//Context Panel - In case you need to draw behind the border
+	var contentPanel @this/ContentPanel
+	
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+	inputListener: true
+
+	behavior Button
+	{
+		soundHighlighted: "ui_menu_focus"
+		soundPressedEnabled: "ui_menu_accept"
+		transitions: [
+			// Inner Glow
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_TWEEN
+				animName: "onIdle"
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_TWEEN
+				animName: "onHighlighted"
+			},
+			{
+				fromState: HIGHLIGHTED
+				toState: PRESSED
+				type: TRANSITION_TWEEN
+				animName: "onHighlightedToPressed"
+			},
+			{
+				fromState: PRESSED
+				toState: HIGHLIGHTED
+				type: TRANSITION_TWEEN
+				animName: "onPressedToHighlighted"
+			},
+
+			// Outline Hide/Show
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Outline:Image.alpha
+				value: 1.0
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Outline:Image.alpha
+				value: 0.0
+			},
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/OutlineHover:Image.alpha
+				value: 0.0
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/OutlineHover:Image.alpha
+				value: 1.0
+			},
+			{
+				fromState: ANY
+				toState: NON_INTERACTIVE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/OutlineHover:Image.alpha
+				value: 0.0
+			},
+
+			//Line Color
+			{
+				fromState: ANY
+				toState: NON_INTERACTIVE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Line:Image.colorRGB
+				value: #7d7e7f
+			},
+			{
+				fromState: NON_INTERACTIVE
+				toState: ANY
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Line:Image.colorRGB
+				value: #FF4E1D
+			},
+
+			// Background Gradient
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/BackgroundGradient:Image.alpha
+				value: 0.2
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/BackgroundGradient:Image.alpha
+				value: 0.0
+			},
+			{
+				fromState: ANY
+				toState: NON_INTERACTIVE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/BackgroundGradient:Image.colorRGB
+				value: #7d7e7f
+			},
+			{
+				fromState: NON_INTERACTIVE
+				toState: ANY
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/BackgroundGradient:Image.colorRGB
+				value: #FF4E1D
+			},
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/BackgroundGradientHover:Image.alpha
+				value: 0.0
+			},
+			{
+				fromState: ANY
+				toState: NON_INTERACTIVE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/BackgroundGradientHover:Image.alpha
+				value: 0.0
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/BackgroundGradientHover:Image.alpha
+				value: 0.2
+			},
+
+			//Line
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Line:Image.colorRGB
+				value: #FF4E1D
+			},
+			{
+				fromState: HIGHLIGHTED
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Line:Image.colorRGB
+				value: #b4b4b5
+			}
+		]
+	}
+
+	behavior Animator
+	{
+		tweenAnimations: [
+			{
+				name: "onIdle"
+				tweens: [
+					{
+						property: @owner.panel/InnerGlow:Image.alpha
+						startValue: 0.2
+						endValue: 0.0
+						duration: 0.15
+					}
+				]
+			},
+			{
+				name: "onHighlighted"
+				tweens: [
+					{
+						property: @owner.panel/InnerGlow:Image.alpha
+						startValue: 0.0
+						endValue: 0.2
+						duration: 0.15
+					}
+				]
+			},
+			{
+				name: "onHighlightedToPressed"
+				tweens: [
+					{
+						property: @owner.panel/InnerGlow:Image.alpha
+						startValue: 0.2
+						endValue: 0.2
+						duration: 0.15
+					}
+				]
+			},
+			{
+				name: "onPressedToHighlighted"
+				tweens: [
+					{
+						property: @owner.panel/InnerGlow:Image.alpha
+						startValue: 0.2
+						endValue: 0.2
+						duration: 0.15
+					}
+				]
+			}
+		]
+	}
+
+	panel BackgroundFill
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			colorRGB: <0.2, 0.2, 0.2>
+		}
+	}
+
+	panel BackgroundGradient
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			colorRGB: #FF4E1D
+			alpha: 0.2
+			assetPath: $"ui_image/rui/gradient_ud_compressed.rpak"
+		}
+	}
+
+	panel BackgroundGradientHover
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			colorRGB: #FF4E1D
+			assetPath: $"ui_image/rui/gradient_ud_compressed.rpak"
+		}
+	}
+
+	panel ContentPanel
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+	}
+
+	panel InnerGlow
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			colorRGB: #FF4E1D
+			alpha: 0
+			assetPath: $"ui_image/rui/borders/border_inner_glow.rpak"
+		}
+	}
+
+	panel Outline
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <-0.5, -0.5, 0, 0>
+
+		behavior Image
+		{
+			colorRGB: <0.7, 0.7, 0.7>
+			assetPath: $"ui_image/rui/borders/border_outline_2px.rpak"
+		}
+	}
+
+	panel OutlineHover
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <-1, -1, 0, 0>
+
+		behavior Image
+		{
+			colorRGB: #FF4E1D
+			assetPath: $"ui_image/rui/borders/border_outline_4px.rpak"
+		}
+	}
+
+	panel Line
+	{
+		anchor: BOTTOM_STRETCH_WIDTH
+		offsets: <0, 0, 0, 0>
+		pivot: <0.5, 1>
+		height: 10
+
+		behavior Image
+		{
+			colorRGB: #FF4E1D
+		}
+	}
+}

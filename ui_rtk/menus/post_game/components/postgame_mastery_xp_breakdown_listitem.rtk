@@ -1,0 +1,322 @@
+panel PostGameBreakdownListitem
+{
+	bind root
+
+	size: < 445, 40 >
+	offsets: <0, 0, 0, 0>
+	inputListener: true
+
+	behavior Animator
+	{
+		tweenAnimations: [
+			{
+				name: "AnimateIn"
+				tweens: [
+					{
+						property: @panel/LevelUpBG.visible
+						startValue: false
+						endValue: true
+						duration: 0.1
+			            curve: EASE_OUT_QUART
+					},
+					{
+						property: @panel/StandardBG.visible
+						startValue: false
+						endValue: true
+						duration: 0.1
+			            curve: EASE_OUT_QUART
+					},
+					{
+						property: @panel/Container/LevelContainer/Level:FormatLabel.alpha
+						startValue: 0.0
+						endValue: 1.0
+						duration: 0.25
+			            curve: EASE_OUT_QUART
+					},
+					{
+						property: @panel/Container/LevelContainer/Level:FormatLabel.shadowAlpha
+						startValue: 0.0
+						endValue: 0.65
+						duration: 0.25
+			            curve: EASE_OUT_QUART
+					},
+					{
+						property: @panel/Container/LevelContainer/Level/Arrow:Image.alpha
+						startValue: 0.0
+						endValue: 1.0
+						duration: 0.25
+			            curve: EASE_OUT_QUART
+					},
+					{
+						property: @panel/Container/NameContainer/Name:Label.alpha
+						startValue: 0.0
+						endValue: 1.0
+						duration: 0.25
+			            curve: EASE_OUT_QUART
+					},
+					{
+						property: @panel/Container/NameContainer/Name:Label.shadowAlpha
+						startValue: 0.0
+						endValue: 0.65
+						duration: 0.25
+			            curve: EASE_OUT_QUART
+					},
+					{
+						property: @panel/Container/NameContainer/XpChangeContainer/boostImage:Image.alpha
+						startValue: 0.0
+						endValue: 1.0
+						duration: 0.25
+			           curve: EASE_OUT_QUART
+					},
+					{
+						property: @panel/Container/NameContainer/XpChangeContainer/XpChange:Label.alpha
+						startValue: 0.0
+						endValue: 1.0
+						duration: 0.25
+						curve: EASE_OUT_QUART
+					},
+					{
+						property: @panel/Container/NameContainer/XpChangeContainer/XpChange:Label.shadowAlpha
+						startValue: 0.0
+						endValue: 0.65
+						duration: 0.25
+						curve: EASE_OUT_QUART
+					},
+					{
+						property: @panel:Sound.play
+						startValue: false
+						endValue: true
+						duration: 0.01
+						curve: CEIL
+					}
+				]
+			}
+		]
+	}
+
+	behavior Sound
+	{
+		sound: "ui_menu_matchsummary_xpbreakdown"
+	}
+
+	behavior ToolTip
+	{
+		bind *.name -> LocalizeStringInAnother("#MASTERY_GUN_XP_BREAKDOWN") -> @this.textContent
+
+		textContent: ""
+		prefab:  $"ui_rtk/menus/post_game/components/postgame_mastery_actions_tooltip.rpak"
+		offset: <32, 32>
+		delay: 0
+		bindingPath: "*"
+	}
+
+	panel LevelUpBG
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		panel
+		{
+			bind *.leveledUp -> @this.visible
+
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				alpha: 0.1
+				colorRGB: <1.0, 0.85, 0.2>
+			}
+		}
+	}
+
+	panel StandardBG
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		panel
+		{
+			bind *.leveledUp -> Not -> @this.visible
+
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				bind *.index -> Modulo(2)-> PickVectorFromTwo(<0, 0, 0>, <1, 1, 1>) -> @this.colorRGB
+				bind *.index -> Modulo(2)-> PickFloatFromTwo(0.3, 0.1) -> @this.alpha
+			}
+		}
+	}
+
+	panel Container
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior HorizontalContainer
+		{
+			spacing: 0
+			paddingLeft: 0
+			paddingRight: 15
+			alignment: CENTER
+			useLocaleDirection: true
+		}
+
+		panel LevelContainer
+		{
+			anchor: LEFT_STRETCH_HEIGHT
+			offsets: <0, 0, 0, 0>
+			width: 150
+			useLocaleDirection: true
+
+			behavior Image
+			{
+				color: <0.27, 0.27, 0.27, 0.1>
+			}
+
+			panel Level
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <0, 0, 0, 0>
+
+				behavior FormatLabel
+			    {
+					bind *.currentLevel -> @this.arg1
+					bind *.leveledUp -> PickVectorFromTwo(<1, 1, 1>, <1.0, 0.85, 0.2>) -> @this.colorRGB
+
+			        margin: <13, 32, 0, 0>
+			        format: "#HUD_LEVEL_N"//
+			        face: "DefaultBoldFont"
+			        pixelHeight: 28
+			        colorRGB: <1, 1, 1>
+			        textAlignHorizontal: LEFT
+			        textAlignVertical: CENTER
+			        horizontalMode: SQUISH_TO_CONTAINER
+					shadowOffset: <0.5, 0.5>
+					shadowAlpha: 0.65
+					shadowBlur: 6.0
+					arg1: ""
+					useLocaleDirection: true
+			    }
+
+			    panel Arrow
+				{
+					bind *.leveledUp -> @this.visible
+
+					anchor: RIGHT
+					offsets: <0, 0, 0, 0>
+					size: <16, 14>
+					pivot: <1.0, 0.5>
+					positionX: -8
+					useLocaleDirection: true
+
+			        behavior Image
+			        {
+			            assetPath: $"ui_image/rui/hud/offscreen_triangle.rpak"
+			            colorRGB: <1.0, 0.85, 0.2>
+			        }
+			    }
+			}
+		}
+
+		panel NameContainer
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			pivot: <0.5, 0.5>
+			offsets: <0, 150, 0, 0>
+
+			behavior HorizontalContainer
+			{
+				expandToFillEvenly: true
+				spacing: 0
+				paddingLeft: 10
+				paddingRight: 15
+				alignment: CENTER
+				useLocaleDirection: true
+			}
+
+			panel Name
+			{
+				offsets: <0, 0, 0, 0>
+				width: 445
+
+				behavior Label
+			    {
+					bind *.name -> @this.text
+					bind *.leveledUp -> PickVectorFromTwo(<1, 1, 1>, <1.0, 0.85, 0.2>) -> @this.colorRGB
+
+			        text: ""
+			        face: "DefaultBoldFont"
+			        pixelHeight: 28
+			        colorRGB: <1, 1, 1>
+		            textAlignHorizontal: LEFT
+		            textAlignVertical: CENTER
+			        horizontalMode: SQUISH_TO_CONTAINER
+					shadowOffset: <0.5, 0.5>
+					shadowAlpha: 0.65
+					shadowBlur: 6.0
+					useLocaleDirection: true
+			    }
+			}
+
+			panel XpChangeContainer
+			{
+				offsets: <0, 0, 0, 0>
+				size: <445, 40>
+
+				behavior HorizontalContainer
+				{
+					spacing: 5
+					alignment: RIGHT
+					paddingTop: -56
+					fitContentHeight: true
+					useLocaleDirection: true
+				}
+
+				panel boostImage
+				{
+					bind *.boosted -> @this.visible
+					offsets: <0, 0, 0, 0>
+					size: <37, 37>
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/menu/xp_boost/BoostMastery_sm.rpak"
+						color: #db292b
+					}
+					behavior ContainerElement
+					{
+						verticalAlignOverride: TOP
+					}
+				}
+
+				panel XpChange
+				{
+					offsets: <0, 0, 0, 0>
+					width: 445
+
+					behavior FormatLabel
+					{
+						bind *.xpChange -> @this.arg1
+						bind *.leveledUp -> PickVectorFromTwo(<1, 1, 1>, <1.0, 0.85, 0.2>) -> @this.colorRGB
+
+						format: "#MASTERY_GUN_XP_INCREASE"
+						face: "DefaultBoldFont"
+						pixelHeight: 28
+						colorRGB: <1, 1, 1>
+						textAlignHorizontal: RIGHT
+						textAlignVertical: CENTER
+						horizontalMode: AUTOSIZE_TO_TEXT
+						shadowOffset: <0.5, 0.5>
+						shadowAlpha: 0.65
+						shadowBlur: 6.0
+						arg1: ""
+						fitToWidth: 90.0
+						useLocaleDirection: true
+					}
+				}
+			}
+		}
+	}
+}

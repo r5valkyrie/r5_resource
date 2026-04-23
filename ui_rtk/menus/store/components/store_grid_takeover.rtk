@@ -1,0 +1,59 @@
+panel ScreenTakeover
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+	inputListener: true
+
+	behavior DeepLinkButton
+	{
+		bind *.miscText1 -> @this.linkType
+		bind *.miscText2 -> @this.link
+		bind *.telemetryId -> @this.fromPageId
+
+		buttonBehavior: @panel:Button
+	}
+
+	behavior Button
+	{
+		soundHighlighted: "ui_menu_focus"
+	    soundPressedEnabled: "ui_menu_accept"
+
+		transitions: [
+	        {
+			    fromState: ANY
+			    toState: IDLE
+			    type: TRANSITION_PROPERTY_SET
+			    property: @panel/HighlightBorder:Image.alpha
+			    value: 0
+	        },
+	        {
+			    fromState: ANY
+			    toState: HIGHLIGHTED
+			    type: TRANSITION_PROPERTY_SET
+			    property: @panel/HighlightBorder:Image.alpha
+			    value: 1
+	        }
+        ]
+	}
+
+	behavior Image
+	{
+		bind *.mainImage -> @this.assetPath
+		color: <0.5, 0.5, 0.5, 1.0> // TODO: TEMP FOR DEMO ONLY
+	}
+
+	panel HighlightBorder
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <-8, -8, -8, -8>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/borders/border_outline_4px.rpak"
+
+			colorRGB: <1.0, 0.4, 0.0>
+		}
+	}
+}

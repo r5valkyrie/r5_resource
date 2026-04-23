@@ -1,0 +1,60 @@
+panel TrapezoidButton
+{
+	// base settings
+	var size @this.size
+	var pivot @this.pivot
+	var labelText @this/Text:Label.text
+	var labelPixelHeight @this/Text:Label.pixelHeight
+
+	// visibility
+	var backgroundAlpha @this/Background:Image.alpha
+	var outlineAlpha @this/Outline:Image.alpha
+
+	// idle colors settings
+	var labelColor @this/Text:Label.colorRGB
+	var backgroundColor @this/Background:Image.colorRGB
+	var outlineColor @this/Outline:Image.colorRGB
+
+	anchor: CENTER
+	size: <524, 86>
+
+	panel Background
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/borders/border_angled_trapezoid_mask.rpak"
+			colorRGB: #1F1F1F
+			alpha: 0.5
+		}
+	}
+
+	panel Outline
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/borders/border_angled_trapezoid.rpak"
+		}
+	}
+
+	panel Text
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Label
+		{
+			face: "TitleBoldFont"
+			pixelHeight: 34
+			textAlignHorizontal: CENTER
+			textAlignVertical: CENTER
+			horizontalMode: SQUISH_TO_CONTAINER
+			margin: <40, 40, 0, 0>
+		}
+	}
+}

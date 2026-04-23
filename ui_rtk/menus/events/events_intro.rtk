@@ -1,0 +1,43 @@
+panel Intro
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH
+	height: 1080
+	pivot: <0, 0>
+	offsets: <0, 0, 0, 0>
+
+//	behavior Intro
+
+	panel Screen
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <62, 62, 200, 120>
+
+		instance $"ui_rtk/menus/events/components/intro_hero.rpak" Hero
+
+		panel IntroButtons
+		{
+			anchor: BOTTOM_STRETCH_WIDTH
+			offsetsLR: <20, 20>
+			height: 400
+			pivot: <0.5, 1>
+
+			behavior HorizontalContainer
+			{
+				expandToFillEvenly: true
+				fitContentHeight: true
+				spacing: 36
+			}
+
+			// we just need to hide these buttons according to the active section
+			// This intro_tile_button is responsive and self adjusts perfectly if we have 3 or 4 tiles
+			// in case we have less tiles (2), we just need to adjust the offsetsLR depending on the number of tiles
+			instance $"ui_rtk/menus/events/components/intro_tile_button.rpak" LuckyDrawPart1
+			instance $"ui_rtk/menus/events/components/intro_tile_button.rpak" LuckyDrawPart2
+			//instance $"ui_rtk/menus/events/components/intro_tile_button.rpak" EventOffers // not sure if we'll need this, but...
+			instance $"ui_rtk/menus/events/components/intro_tile_button.rpak" RewardShopButton
+		}
+	}
+}
+

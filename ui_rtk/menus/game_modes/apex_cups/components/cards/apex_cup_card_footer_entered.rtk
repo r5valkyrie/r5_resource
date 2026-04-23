@@ -1,0 +1,138 @@
+panel
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+	behavior HorizontalContainer
+	{
+		alignment: LEFT
+		padding: <20, 40, 0, 0>
+		spacing: 20
+		useLocaleDirection: true
+	}
+
+	instance $"ui_rtk/menus/game_modes/apex_cups/components/apex_cup_tier_emblem.rpak"
+	{
+		override bind root "*"
+		size: <78, 78>
+
+		bind *.apexCup -> ApexCupCurrentTierIcon -> @var( emblemIcon )
+		bind *.apexCup -> ApexCupCurrentTierText -> @var( emblemText )
+	}
+
+	panel // Score Tracker
+	{
+		size: <200, 50>
+
+		panel
+		{
+			height: 28
+			anchor: CENTER_STRETCH_WIDTH
+			pivot: <0.5, 1.0>
+
+			behavior FormatLabel
+			{
+				pixelHeight: 24
+				colorRGB: #FFFFFF
+				textAlignHorizontal: LEFT
+				useLocaleDirection: true
+
+				arg1: "0"
+				arg2: "0"
+
+				bind *.entry.gamesPlayed -> LessThanOrEqual( 0 ) -> OR( *.entry.isTop100 ) -> PickStringFromTwo( "#CUPS_PROGRESS_TRACKER_POINTS", "#CUPS_PROGRESS_TOP_SCORERS_PTS" ) -> @this.format
+				bind *.entry.score -> FormatNumberInt( 12, 0 ) -> @this.arg1
+				bind *.entry.upperBound -> FormatNumberInt( 12, 0 ) -> @this.arg2
+			}
+
+			behavior LabelAltStyle
+			{
+				colorRGB: #C4C4C4
+			}
+
+			behavior LabelAltStyle
+			{
+				colorRGB: #C4C4C4
+			}
+		}
+
+		panel
+		{
+			height: 18
+			anchor: CENTER_STRETCH_WIDTH
+			pivot: <0.5, 0.0>
+
+			behavior AngledProgressBar
+			{
+				bind *.entry.score -> Subtract( *.entry.lowerBound ) -> @this.current
+				bind *.entry.upperBound -> Subtract( *.entry.lowerBound ) -> @this.max
+
+				progressBarColor: #F5A523
+				progressBarAlpha: 1.0
+				progressBgColor: #333333
+				progressBgAlpha: 0.5
+				angle: 45
+			}
+		}
+	}
+
+	panel // Game Tracker
+	{
+		bind *.state -> IntEqual(0) -> NOT -> @this.visible
+
+		pivot: <0.5, 1.0>
+		height: 22
+
+		behavior VerticalContainer
+		{
+			alignment: BOTTOM
+			fitContentWidth: true
+			fitContentHeight: true
+			padding: <20, 0, 0, 5>
+		}
+
+		panel
+		{
+			behavior Label
+			{
+				text: "#CUPS_PROGRESS_TRACKER_GAMES_PLAYED"
+				pixelHeight: 24
+				colorRGB: #929396
+				horizontalMode: AUTOSIZE_TO_TEXT
+				verticalMode: AUTOSIZE_TO_TEXT
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				face: "DefaultRegularFont"
+				allCaps: true
+			}
+		}
+
+		panel
+		{
+			behavior FormatLabel
+			{
+				pixelHeight: 30
+				colorRGB: #FFFFFF
+				horizontalMode: AUTOSIZE_TO_TEXT
+				verticalMode: AUTOSIZE_TO_TEXT
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				face: "TitleBoldFont"
+
+				format: "%s1`1/%s2"
+				arg1: 0
+				arg2: 0
+
+				bind *.entry.gamesPlayed -> @this.arg1
+				bind *.calEvent -> ItemFlavorInt( "numMatches" ) -> @this.arg2
+			}
+
+			behavior LabelAltStyle
+			{
+				colorRGB: #929396
+				face: "TitleRegularFont"
+			}
+		}
+	}
+}

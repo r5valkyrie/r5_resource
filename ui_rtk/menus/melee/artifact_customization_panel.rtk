@@ -1,0 +1,172 @@
+panel MeleeCustomizationPanel
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	behavior MeleeCustomizationScreen
+	{
+		sets: @panel/Screen/Components/View/Content/Sets
+		actionButton: @panel/Screen/ActionButton:Button
+	}
+
+	panel Screen
+	{
+		anchor: CENTER
+		offsets: <0, 0, 0, 0>
+		size: <1920, 1080>
+
+		instance $"ui_rtk/common/default_scroll_view.rpak" Components
+		{
+			override @this/View:ScrollView.autoScroll TOP
+
+			anchor: TOP_LEFT
+			pivot: <0, 0>
+			position: <62, 174>
+			size: <480, 800>
+			constrainInput: true
+
+			context @this/View/Content
+			{
+				panel Sets
+				{
+					anchor: TOP_LEFT
+					pivot: <0, 0>
+
+					behavior VerticalContainer
+					{
+						spacing: 12
+						fitContentHeight: true
+						fitContentWidth: true
+					}
+
+					behavior ListBinder
+					{
+						bindingPath: "*.sets"
+						prefab: $"ui_rtk/menus/melee/components/artifact_customization_set_items.rpak"
+					}
+				}
+			}
+
+			context @this/ScrollBar
+			{
+				positionX: -18
+				positionY: 12
+				pivot: <0.5, 1.0>
+				height: 18
+				width: 776
+				rotation: 90
+			}
+		}
+
+		panel VideoArea
+		{
+			anchor: TOP_LEFT
+			pivot: <0, 0>
+			position: <624, 174>
+
+			behavior VerticalContainer
+			{
+				spacing: 0
+				fitContentHeight: true
+				fitContentWidth: true
+				alignment: CENTER
+			}
+
+			panel VideoPreview
+			{
+				anchor: CENTER
+				size: <878, 506>
+				constrainInput: false
+
+				behavior Video
+				{
+					bind *.video.assetPath -> @this.assetPath
+					bind *.video.assetPath -> IsEmpty -> PickIntFromTwo( 1, 3 ) -> @this.status
+					bind *.video.assetPath -> IsEmpty -> NOT -> @this.active
+
+					autoPlayOnAssetChange: true
+					autoPlayOnEnabled: true
+					isLooped: true
+				}
+			}
+
+			panel VideoTitle
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <0, 0, 0, 0>
+
+				behavior Label
+				{
+					bind *.video.title -> @this.text
+
+					face: #FONT_DEFAULT_BOLD
+					pixelHeight: 28
+					horizontalMode: SQUISH_TO_CONTAINER
+					verticalMode: AUTOSIZE_TO_TEXT
+					colorRGB: #COLOR_WHITE_2
+					textAlignHorizontal: CENTER
+					textAlignVertical: CENTER
+					allCaps: true
+				}
+			}
+
+			panel VideoDescription
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <0, 0, 0, 0>
+
+				behavior Label
+				{
+					bind *.video.description -> @this.text
+
+					face: #FONT_DEFAULT
+					pixelHeight: 24
+					horizontalMode: SQUISH_TO_CONTAINER
+					verticalMode: AUTOSIZE_TO_TEXT
+					textAlignHorizontal: CENTER
+					textAlignVertical: CENTER
+					colorRGB: #COLOR_WHITE_2
+				}
+			}
+		}
+
+		instance $"ui_rtk/menus/melee/components/melee_equipped_to_legends.rpak" LegendList
+		{
+			override bind root "*.equippedToLegendIcons"
+
+			position: <-64, -236>
+		}
+
+		instance $"ui_rtk/menus/melee/components/melee_equipped_items.rpak" EquippedItems
+		{
+			override bind root "*.equippedItems"
+
+			positionY: -100
+		}
+
+		instance $"ui_rtk/common/buttons/loot_button.rpak" ActionButton
+		{
+			override @var(labelText) "#MELEE_CUSTOMIZATION_ACTION_BUTTON"
+
+			anchor: BOTTOM_RIGHT
+			pivot: <1, 1>
+			position: <-64, -136>
+			size: <280, 80>
+		}
+	}
+
+
+	instance $"ui_rtk/common/components/currency_corner_panel.rpak" MeleeCurrency
+	{
+		override bind root "*"
+
+		bind *.heirloomShards -> IntToFloat -> FormatAndLocalizeNumber( "1", true ) -> @var(currencyValue)
+		override @var(currencyIcon) $"ui_image/rui/menu/common/currency_heirloom.rpak"
+
+		positionY: 85
+	}
+
+	instance $"ui_rtk/controls/footer.rpak"
+}

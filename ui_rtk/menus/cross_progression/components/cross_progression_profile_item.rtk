@@ -1,0 +1,7 @@
+instance $"ui_rtk/common/buttons/simple_button.rpak" ProfileItem
+{
+	bind root
+
+	bind *.platformId -> PlatformIcon -> @this/Content/Icon:Image.assetPath
+	bind *.nickname -> @this/Content/Text:Label.text
+}

@@ -1,0 +1,80 @@
+panel HeadlineTitleLabel
+{
+	bind root
+	var titleText @this/Text:FormatLabel.format
+	var titleTextArg1 @this/Text:FormatLabel.arg1
+	var titleTextColor @this/Text:FormatLabel.colorRGB
+	var positionY @this.positionY
+	var width @this.width
+	var flipLinesVertical @this/HeaderLeft:Image.flipVertical
+	var lineColor @this/HeaderLeft:Image.colorRGB
+
+	anchor: TOP
+	size: <1035, 38>
+	pivot: <0.5, 0.0>
+	position: <0, 145>
+
+	behavior HorizontalContainer
+	{
+		expandToFillEvenly: true
+		spacing: 50
+	}
+
+	panel HeaderLeft
+	{
+		size: <0, 25>
+		position: <300, 10>
+
+		behavior Image
+		{
+			assetpath: $"ui_image/rui/menu/store/feature_headline_left.rpak"
+		}
+	}
+
+	panel Text
+	{
+		size: <430, 38>
+
+		behavior FormatLabel
+		{
+			bind @root/HeaderLeft:Image.flipVertical -> PickIntFromTwo(0, 2) -> @this.textAlignVertical
+
+			format: "Default Text"
+			face: #FONT_TITLE_BOLD
+			pixelHeight: 38
+			textAlignHorizontal: CENTER
+			textAlignVertical: TOP
+			allcaps: true
+
+			horizontalMode: AUTOSIZE_TO_TEXT
+			verticalMode: CLIP
+		}
+
+		behavior LabelAltStyle AltStyle1
+		{
+			face: #FONT_TITLE_REGULAR
+			colorRGB: #COLOR_GREY_1
+		}
+
+		behavior ContainerElement
+		{
+			autosizeToLabelWidth: true
+			preferredHeight: 57
+			verticalAlignOverride: BOTTOM
+		}
+	}
+
+	panel HeaderRight
+	{
+		size: <0, 25>
+		position: <0, 10>
+		behavior Image
+		{
+			// Keep these styles in sync with HeaderLeft
+			bind @root/HeaderLeft:Image.flipVertical -> @this.flipVertical
+			bind @root/HeaderLeft:Image.colorRGB -> @this.colorRGB
+
+			assetpath: $"ui_image/rui/menu/store/feature_headline_right.rpak"
+		}
+	}
+}

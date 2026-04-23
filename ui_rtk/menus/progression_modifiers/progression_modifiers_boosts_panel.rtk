@@ -1,0 +1,140 @@
+panel ProgressionModifiersBoostPanel
+{
+	bind root
+	inputListener: true
+
+	anchor: CENTER_STRETCH_HEIGHT
+	size: <1920, 1080>
+	offsets: <0, 0, 0, 0>
+
+	behavior ProgressionModifiersBoost
+
+	instance $"ui_rtk/common/labels/headline_title_label.rpak" Title
+	{
+		position: <0, 145>
+		override @var(titleText) "#PROGRESSION_MODIFIERS_BOOST_TITLE"
+	}
+
+	behavior Pagination
+	{
+		container: @panel/PaginationContainerBoostList
+		content: @panel/PaginationContainerBoostList/HorizontalContainer
+		nextButton: @panel/PaginationNavContainer/PaginationNav/RightButton:Button
+		paginationButtons: @panel/PaginationNavContainer/PaginationNav/PaginationPips
+		prevButton: @panel/PaginationNavContainer/PaginationNav/LeftButton:Button
+		animator: @panel/PaginationContainerBoostList:Animator
+		hintAnimator: @panel/PaginationNavContainer/Hint:Animator
+		cursorInteract1Area: @panel/CursorZone:CursorInteract
+
+		vertical: false
+		autoPagesByContainerContent: true
+		fillEmptySpace: false
+	}
+	panel CursorZone
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		inputListener: true
+
+		behavior CursorInteract
+		{
+			mouseEnabled: true
+			controllerEnabled: true
+		}
+	}
+	panel PaginationContainerBoostList
+	{
+		size: <1245, 660>
+		anchor: CENTER
+		pivot: <0.5, 0.5>
+		offsets: <0, 0, 0, 0>
+		useLocaleDirection: true
+		position: <12.5, 0> /*Have to set an offset because to get correct pagination
+		the container needs to be 12.5 pixels extra than it should be which causes bad centre alignment*/
+
+		behavior RenderGroup
+
+		behavior Animator
+		{
+			tweenAnimations: [
+				{
+					name: "NextPage"
+					tweens: [
+						{
+							property: @panel/HorizontalContainer.positionX
+							duration: 0.25
+							startValue: 0
+							endValue: 1
+							curve: EASE_IN_OUT_SINE
+						}
+					]
+				}
+			]
+		}
+
+		panel HorizontalContainer
+		{
+			anchor: TOP_LEFT
+			pivot: <0.0, 0.0>
+			offsets: <0, 0, 0, 0>
+			position: <0, 8>
+			size: <1235, 650>
+			useLocaleDirection: true
+
+			behavior HorizontalContainer
+			{
+				alignment: CENTER
+				fitContentHeight: true
+				fitContentWidth: true
+				useLocaleDirection: true
+			}
+
+			panel BoostList
+			{
+				anchor: TOP_LEFT
+				pivot: <0.0, 0.0>
+				size: <1235, 650>
+
+				behavior GridContainer
+				{
+					defaultSlotSize: <390, 310>
+					wrapAfterSlot: 2
+					gridSlotAnchor: TOP_LEFT
+					fillDirection: COLUMN_FIRST
+					gridSlotAutosize: NONE
+					slotSpacing: <25, 22>
+					fitToContentWidth: true
+					fitToContentHeight: true
+					useLocaleDirection: true
+				}
+
+				behavior ListBinder
+				{
+					bindingPath: "*.boosts"
+					prefab: $"ui_rtk/menus/progression_modifiers/components/progression_modifiers_boost_card.rpak"
+				}
+			}
+		}
+	}
+
+	panel PaginationNavContainer
+	{
+		anchor: BOTTOM_STRETCH_WIDTH
+		pivot: <0.5, 0.0>
+		offsets: <0, 0, 0, 0>
+		positionY: -160
+
+		instance $"ui_rtk/common/pagination_nav_horizontal.rpak" PaginationNav
+		{
+			anchor: TOP_STRETCH_WIDTH
+		}
+
+		instance $"ui_rtk/common/pagination_hint.rpak" Hint
+		{
+			anchor: TOP
+			pivot: <0.5, 0.0>
+			size: <30, 30>
+			positionY: 50
+		}
+	}
+}

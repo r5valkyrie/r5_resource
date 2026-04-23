@@ -1,0 +1,70 @@
+instance $"ui_rtk/common/shells/cut_corner_tile.rpak" CutCornerTileWithContent
+{
+	var titleText @this/Content/Title:Label.text
+	var titleAllCaps @this/Content/Title:Label.allCaps
+	var notificationText @this/Content/Notification:Label.text
+	var notificationAllCaps @this/Content/Notification:Label.allCaps
+	var notificationMargin @this/Content/Notification:Label.margin
+
+	anchor: CENTER
+	offsets: <0, 0, 0, 0>
+	position: <-10, 0>
+
+	panel Content
+	{
+	    anchor: TOP_LEFT
+        offsetsLR: <0, 0>
+        pivot: <0.0, 0.0>
+        width: 800
+        height: 200
+
+		behavior VerticalContainer
+		{
+			alignment: TOP_LEFT
+			fitContentHeight: true
+			expandChildWidth: true
+			useLocaleDirection: true
+			spacing: 0
+		}
+
+		panel Title
+		{
+			behavior Label
+			{
+				face: "DefaultRegularFont"
+				text: ""
+				pixelHeight: 26
+				color: #ffffff
+				outlineColorInner: <0, 0, 0, 0.8>
+				outlineColorOuter: <0, 0, 0, 0>
+				margin: <15, 10, 10, 10>
+				textAlignHorizontal: LEFT
+				textAlignVertical: TOP
+				horizontalMode: WRAP
+				verticalMode: AUTOSIZE_TO_TEXT
+				useLocaleDirection: true
+			}
+		}
+
+		panel Notification
+		{
+			behavior Label
+			{
+				face: "TitleRegularFont"
+				text: ""
+				textAlignHorizontal: LEFT
+				textAlignVertical: BOTTOM
+				horizontalMode: OVERFLOW
+				pixelHeight: 18
+				leading: 1.0
+				color: #ffffff
+				useLocaleDirection: true
+			}
+
+			behavior LabelAltStyle
+			{
+				color: <0.50, 0.50, 0.50, 1>
+			}
+		}
+	}
+}

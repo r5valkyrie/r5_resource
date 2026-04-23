@@ -1,0 +1,50 @@
+panel CurrencyCornerPanel
+{
+	bind root
+
+	var currencyValue @this/Currency/CurrencyAmountText:Label.text
+	var currencyIcon @this/Currency/CurrencyIcon:Image.assetPath
+
+	anchor: TOP_RIGHT
+	pivot: <1, 0>
+
+	behavior HorizontalContainer
+	{
+		fitContentHeight: true
+		fitContentWidth: true
+		alignment: RIGHT
+		spacing: 0
+		padding: <51, 27, 12, 12>
+	}
+
+	panel Background
+	{
+		bind @root/Currency.width -> Add( 78 ) -> @this.width
+		bind @root/Currency.height -> Add( 24 ) -> @this.height
+
+		anchor: RIGHT
+		pivot: <1, 0.5>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/borders/slanted_side_mask.rpak"
+			colorRGB: #COLOR_BLACK
+		}
+
+		behavior ContainerElement
+		{
+			ignoreLayout: true
+		}
+	}
+
+	instance $"ui_rtk/common/components/currency_display.rpak" Currency
+	{
+		anchor: RIGHT
+		pivot: <1, 0.5>
+
+		override @var(currencyIcon) $"ui_image/rui/menu/common/currency_heirloom.rpak"
+		override @var(spacing) 10
+		override @var(currencyValuePixelHeight) 24
+		override @var(currencyValueHeight) 24
+	}
+}

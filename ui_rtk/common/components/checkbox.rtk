@@ -1,0 +1,49 @@
+panel Checkbox
+{
+	var checked @this/CheckMark.visible
+
+	var bgImage @this/Box:Image.assetPath
+	var outlineImage @this/Outline:Image.assetPath
+	var checkImage @this/CheckMark:Image.assetPath
+
+	var bgColor @this/Box:Image.colorRGB
+	var outlineColor @this/Outline:Image.colorRGB
+	var checkColor @this/CheckMark:Image.colorRGB
+
+	var bgAlpha @this/Box:Image.alpha
+	var outlineAlpha @this/Outline:Image.alpha
+	var checkAlpha @this/CheckMark:Image.alpha
+
+    size: <10, 10>
+
+	panel Box
+	{
+		size: <10, 10>
+		pivot: <0, 0>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/mastery/weaponmastery_square_box.rpak"
+		}
+	}
+	panel Outline
+	{
+		size: <10, 10>
+		pivot: <0, 0>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/mastery/weaponmastery_square_thick_outline.rpak"
+		}
+	}
+	panel CheckMark
+	{
+		size: <10, 10>
+		pivot: <0, 0>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/buttons/checked.rpak"
+		}
+	}
+}

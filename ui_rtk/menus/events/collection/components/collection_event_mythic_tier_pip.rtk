@@ -1,0 +1,12 @@
+panel CollectionEventMythicTierPip // Not re-usable, just for list binder
+{
+	bind root
+
+	size: <8, 8>
+
+	behavior Image
+	{
+		bind *.color -> @this.colorRGB
+		colorRGB: #FF00FF
+	}
+}

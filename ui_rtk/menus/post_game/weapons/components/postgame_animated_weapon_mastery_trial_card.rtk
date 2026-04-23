@@ -1,0 +1,107 @@
+//Expected type: MasteryWeapon_TrialQueryResult
+panel WeaponTrialCelebrationCard
+{
+	bind root
+
+	anchor: TOP_LEFT
+	pivot: <0.0, 0.0>
+	size: <460, 1230>
+
+	behavior WeaponTrialCelebrationCard
+	{
+		rewardButtonsContainer: @panel/TrialCard/Container/Unlocked/RewardsContainer
+	}
+
+	behavior RenderGroup
+	{
+		alpha: 1.0
+	}
+
+	behavior Animator
+	{
+		tweenAnimations: [
+			{
+				name: "EnterScene"
+				tweens: [
+					{
+						property: @panel/TrialCard.positionY
+						startValue: 690
+						endValue: 10
+						duration: 0.2669
+						curve: EASE_OUT_CUBIC
+					}
+				]
+			},
+			{
+				name: "ExitScene"
+				tweens: [
+					{
+						property: @panel/TrialCard.positionY
+						startValue: 10
+						endValue: 690
+						duration: 0.2669
+						curve: EASE_OUT_CUBIC
+					}
+				]
+			}
+		]
+
+		keyframeAnimations: [
+			{
+				name: "Unlock"
+				animAsset: $"ui_rtk/menus/post_game/weapons/animations/animation_trial_card_unlock.rpak"
+			},
+			{
+				name: "Complete"
+				animAsset: $"ui_rtk/menus/post_game/weapons/animations/animation_trial_card_complete.rpak"
+			}
+		]
+	}
+
+	instance $"ui_rtk/menus/mastery/weapons/components/weapon_mastery_trial_card.rpak" TrialCard
+	{
+		override bind root "*"
+
+		anchor: TOP_LEFT
+		pivot: <0.0, 0.0>
+		position: <0, 670>
+
+		panel FlashOverlay
+		{
+			anchor: CENTER
+			size: <460, 560>
+
+			behavior Image
+			{
+				colorRGB: <1.0, 1.0, 1.0>
+				alpha: 0.0
+			}
+		}
+
+		panel FlashGlow
+		{
+			anchor: CENTER
+			size: <548, 648>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/mastery/weaponmastery_trial_completion_glow.rpak"
+				colorRGB: <1.0, 0.75, 0.0>
+				alpha: 0.0
+			}
+		}
+
+		panel FlashOutline
+		{
+			anchor: CENTER
+			size: <468, 568>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/borders/border_outline_4px.rpak"
+				colorRGB: <1.0, 0.75, 0.0>
+				alpha: 0.0
+			}
+		}
+	}
+}

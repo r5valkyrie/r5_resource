@@ -1,0 +1,67 @@
+panel MilestoneEventHeader
+{
+	bind root
+	anchor: TOP_LEFT
+	size: <700, 200>
+	pivot: <0, 0>
+	offsets: <0, 0, 0, 0>
+
+	behavior VerticalContainer
+	{
+		fitContentHeight: true
+		spacing: 2
+	}
+
+	panel Header
+	{
+		bind @this/Text.height -> @this.height
+		anchor: TOP_LEFT
+		pivot: <0, 0>
+		size: <600, 200>
+
+		panel Text
+		{
+			anchor: TOP_LEFT
+			pivot: <0, 0>
+			width: 660
+			behavior Label
+			{
+				bind *.isRestricted -> PickStringFromTwo( "#MILESTONE_EVENT_TRACKING_PAGE_TITLE", "#MILESTONE_EVENT_TRACKING_PAGE_TITLE_RESTRICTED") -> @this.text
+				face: "TitleBoldFont"
+				pixelHeight: 42
+				colorRGB: <1, 1, 1>
+				outlineColorInner: <0, 0, 0, 0.8>
+				outlineColorOuter: <0, 0, 0, 0>
+				textAlignHorizontal: LEFT
+				textAlignVertical: CENTER
+				horizontalMode: WRAP
+				verticalMode: AUTOSIZE_TO_TEXT
+				allcaps: true
+			}
+		}
+	}
+
+	panel Timer
+	{
+		width: 600
+		behavior VerticalContainer
+		{
+			fitContentHeight: true
+		}
+
+		behavior Image
+		{
+			bind *.titleBgColor -> @this.colorRGB
+			assetPath: $"ui_image/rui/events/collection_events/season_label_bg.rpak"
+		}
+
+		instance $"ui_rtk/common/components/timer_component_long.rpak" TimeRemaining
+		{
+			width: 550
+			bind *.endtime -> @this:Timer.endTime
+			bind @this/TimerString.height -> @this.height
+			override @var(iconColor) <0.74, 0.74, 0.74>
+			override @var(fontColor) <0.74, 0.74, 0.74>
+		}
+	}
+}

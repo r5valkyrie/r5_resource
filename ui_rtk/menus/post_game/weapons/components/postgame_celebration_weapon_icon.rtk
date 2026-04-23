@@ -1,0 +1,15 @@
+panel WeaponIcon
+{
+	bind root
+
+    anchor: CENTER
+    size: <450, 225>
+
+    behavior Image
+    {
+        bind *.icon -> @this.assetPath
+
+        assetPath: $"ui_image/rui/weapon_icons/r5/weapon_3030repeater.rpak"
+        color: <0.84, 0.84, 0.84, 0>
+    }
+}

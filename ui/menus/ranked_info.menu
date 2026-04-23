@@ -210,25 +210,6 @@ resource/ui/menus/ranked_info.menu
 			}
 		}
 
-		MoreRPInfoPanel
-		{
-            ControlName				RuiPanel
-            wide					1920
-            tall					1080
-            ypos                    0
-            xpos                    1285
-            zpos                    100
-            rui                     "ui/ranked_learn_more_rp_table.rpak"
-            labelText               ""
-            visible					1
-
-            proportionalToParent    1
-
-            pin_to_sibling			CenterFrame
-            pin_corner_to_sibling	CENTER
-            pin_to_sibling_corner	CENTER
-		}
-
 		MoreRPInfoCloseButton
 		{
 			ControlName			    RuiButton

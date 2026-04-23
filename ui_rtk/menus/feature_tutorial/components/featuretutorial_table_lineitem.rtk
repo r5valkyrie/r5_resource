@@ -1,0 +1,110 @@
+panel FeatureTutorialTableLineItem
+{
+	bind root
+
+	anchor: TOP_STRETCH_WIDTH
+	offsets: <0, 0, 0, 0>
+	offsetsTB: <0, 0>
+	height: 30
+
+	panel Background
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+		behavior Image
+		{
+			bind * -> IndexOfElementInArray -> Modulo(2) -> PickFloatFromTwo( 0.35, 0.0 ) -> @this.alpha
+
+			colorRGB: <0, 0, 0>
+			assetPath: $"ui_image/white.rpak"
+		}
+	}
+
+	panel LeftText
+	{
+		anchor: LEFT
+		pivot: <0, 0.5>
+		width: 215
+		positionX: 15
+		useLocaleDirection: true
+
+		behavior FormatLabel
+		{
+			bind *.leftString -> @this.format
+
+			format: ""
+			face: "DefaultRegularFont"
+			textAlignHorizontal: LEFT
+			horizontalMode: SQUISH_TO_CONTAINER
+			verticalMode: AUTOSIZE_TO_TEXT
+			useLocaleDirection: true
+			pixelHeight: 24
+			color: <0.55, 0.55, 0.55, 1>
+			arg1: ""
+			arg2: ""
+			arg3: ""
+			arg4: ""
+			arg5: ""
+			arg6: ""
+		}
+
+		behavior LabelAltStyle
+		{
+			color: #Red
+		}
+
+		behavior LabelAltStyle
+		{
+			color: #Green
+		}
+
+		behavior LabelAltStyle
+		{
+			color: #Yellow
+		}
+	}
+
+	panel RightText
+	{
+		anchor: RIGHT
+		pivot: <1, 0.5>
+		width: 65
+		positionX: -10
+		useLocaleDirection: true
+
+		behavior FormatLabel
+		{
+			bind *.rightString -> @this.format
+
+			format: ""
+			face: "DefaultRegularFont"
+			textAlignHorizontal: LEFT
+			horizontalMode: SQUISH_TO_CONTAINER
+			verticalMode: AUTOSIZE_TO_TEXT
+			useLocaleDirection: true
+			pixelHeight: 24
+			color: <0.55, 0.55, 0.55, 1>
+			arg1: ""
+			arg2: ""
+			arg3: ""
+			arg4: ""
+			arg5: ""
+			arg6: ""
+		}
+
+		behavior LabelAltStyle
+		{
+			color: #Red
+		}
+
+		behavior LabelAltStyle
+		{
+			color: #Green
+		}
+
+		behavior LabelAltStyle
+		{
+			color: #Yellow
+		}
+	}
+}

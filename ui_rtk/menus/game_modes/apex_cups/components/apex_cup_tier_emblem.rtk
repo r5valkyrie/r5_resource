@@ -1,0 +1,34 @@
+panel ApexCupsTierEmblem
+{
+    bind root
+
+    var emblemIcon @root:Image.assetPath
+    var emblemText @root/Text:Label.text
+
+	anchor: CENTER
+	size: <174, 174>
+
+	behavior Image
+	{
+		assetPath: $"ui_image/rui/menu/apex_rumble/cups_emblem_01.rpak"
+	}
+
+	panel Text
+	{
+		behavior RelativePin
+		{
+			pin: < 0.5, 0.82, 0.0 >
+		}
+
+		behavior Label
+		{
+			face: "TitleRegularFont"
+			horizontalMode: AUTOSIZE_TO_TEXT
+			verticalMode: AUTOSIZE_TO_TEXT
+			textAlignHorizontal: CENTER
+			textAlignVertical: CENTER
+
+			bind @root.height -> Divide( 174.0 ) -> Multiply( 20.0 ) -> @this.pixelHeight
+		}
+	}
+}

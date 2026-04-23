@@ -1,0 +1,157 @@
+panel LorePanel
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	behavior LegendLoreScreen
+	{
+		stopCamera: @panel/Container/LoreBlurb:Button
+	}
+
+	panel Container
+	{
+		width: 1920
+		offsetsTB: <0, 0>
+		anchor: CENTER_STRETCH_HEIGHT
+
+		instance $"ui_rtk/menus/lore/components/lore_blurb.rpak" LoreBlurb
+		{
+		    override bind root "&menus.legend.lore"
+
+			inputListener: true
+			positionX: 63
+			positionY: 195
+
+			behavior Button
+
+			context @this/LorePanelContainer/ScrollView/View/Content/Container/Vertical/Header
+			{
+				anchor: TOP
+				offsets: <0, 0, 0, 0>
+
+				behavior VerticalContainer
+				{
+					alignment: TOP
+					fitContentHeight: true
+				}
+
+				panel Container
+				{
+					anchor: TOP
+					width: 575
+					pivot: <0.5, 0>
+					offsets: < 0, 0, 0, 0>
+
+					behavior Image
+					{
+						 color: <0, 0, 0, 0.6>
+					}
+
+					behavior VerticalContainer
+					{
+						alignment: TOP
+						fitContentHeight: true
+						spacing: 6
+						paddingTop: 16
+						paddingBottom: 16
+					}
+
+					panel RealName
+					{
+						anchor: TOP_STRETCH_WIDTH
+						offsets: <35, 35, 0, 0>
+						useLocaleDirection: true
+
+						behavior Label
+						{
+							bind *.legendInfo.realName -> LocalizeStringInAnother( "#LORE_REAL_NAME" ) -> @this.text
+
+							text: ""
+							pixelHeight: 25
+							face: "TitleBoldFont"
+							verticalMode: AUTOSIZE_TO_TEXT
+							useLocaleDirection: true
+						}
+
+						behavior LabelAltStyle
+						{
+							color: <1.0, 0.3058, 0.1137, 1.0>
+						}
+					}
+
+					panel Alias
+					{
+						bind *.legendInfo.alias -> CompareStrings( "" ) -> Not -> @this.visible
+
+						anchor: TOP_STRETCH_WIDTH
+						offsets: <35, 35, 0, 0>
+						useLocaleDirection: true
+
+						behavior Label
+						{
+							bind *.legendInfo.alias -> LocalizeStringInAnother( "#LORE_ALIAS" ) -> @this.text
+
+							text: ""
+							pixelHeight: 25
+							face: "TitleBoldFont"
+							verticalMode: AUTOSIZE_TO_TEXT
+							useLocaleDirection: true
+						}
+
+						behavior LabelAltStyle
+						{
+							color: <1.0, 0.3058, 0.1137, 1.0>
+						}
+					}
+
+					panel Age
+					{
+						anchor: TOP_STRETCH_WIDTH
+						offsets: <35, 35, 0, 0>
+						useLocaleDirection: true
+
+						behavior Label
+						{
+							bind *.legendInfo.age -> LocalizeStringInAnother( "#LORE_AGE" ) -> @this.text
+
+							text: ""
+							pixelHeight: 25
+							face: "TitleBoldFont"
+							verticalMode: AUTOSIZE_TO_TEXT
+							useLocaleDirection: true
+						}
+
+						behavior LabelAltStyle
+						{
+							color: <1.0, 0.3058, 0.1137, 1.0>
+						}
+					}
+
+					panel HomeWorld
+					{
+						anchor: TOP_STRETCH_WIDTH
+						offsets: <35, 35, 0, 0>
+						useLocaleDirection: true
+
+						behavior Label
+						{
+							bind *.legendInfo.homeWorld -> LocalizeStringInAnother( "#LORE_HOME_WORLD" ) -> @this.text
+							text: ""
+							pixelHeight: 25
+							face: "TitleBoldFont"
+							verticalMode: AUTOSIZE_TO_TEXT
+							useLocaleDirection: true
+						}
+
+						behavior LabelAltStyle
+						{
+							color: <1.0, 0.3058, 0.1137, 1.0>
+						}
+					}
+				}
+			}
+	    }
+	}
+}

@@ -1,0 +1,63 @@
+panel TotalXP
+{
+	bind root
+	behavior VerticalContainer
+	{
+		spacing: 14
+		alignment: RIGHT
+		useLocaleDirection: true
+	}
+
+	panel Title
+	{
+		size: <240, 24>
+		behavior Label
+		{
+			text: "#EOG_XP_HEADER_MATCH"
+			face: "TitleRegularFont"
+			pixelHeight: 24
+			horizontalMode: AUTOSIZE_TO_TEXT
+			colorRGB: #919291
+			textAlignHorizontal: RIGHT
+			textAlignVertical: CENTER
+			useLocaleDirection: true
+			allCaps: true
+		}
+	}
+
+	panel BoostsApplied
+	{
+		bind *.boostsApplied -> NotEqual(0) -> @this.visible
+
+		size: <240, 20>
+		behavior FormatLabel
+		{
+			bind *.boostsApplied -> @this.arg1
+			format: "#PROGRESSION_MODIFIERS_N_BOOST_APPLIED"
+			face: "TitleRegularFont"
+			pixelHeight: 20
+			horizontalMode: AUTOSIZE_TO_TEXT
+			colorRGB: #f0cd41
+			textAlignHorizontal: RIGHT
+			textAlignVertical: CENTER
+			useLocaleDirection: true
+		}
+	}
+
+	panel TotalXP
+	{
+		size: <240, 40>
+		behavior Label
+		{
+			bind *.totalXP -> IntToFloat -> FormatAndLocalizeNumber( "1", true ) -> @this.text
+			text: "0000"
+			face: "TitleRegularFont"
+			pixelHeight: 70
+			horizontalMode: AUTOSIZE_TO_TEXT
+			colorRGB: <1,1,1>
+			textAlignHorizontal: RIGHT
+			textAlignVertical: CENTER
+			useLocaleDirection: true
+		}
+	}
+}

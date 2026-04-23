@@ -1,0 +1,100 @@
+panel WalletInventoryPanel
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	behavior WalletInventoryPanel
+
+	panel Container
+	{
+		anchor: TOP_STRETCH_WIDTH
+		pivot: <0.5, 0.0>
+	    positionY: 72
+
+		behavior HorizontalContainer
+		{
+			alignment: TOP
+			spacing: 50
+			useLocaleDirection: true
+		}
+
+		behavior ListBinder
+		{
+			bindingPath: "*.itemsArray"
+			prefab: $"ui_rtk/dialogs/wallet/components/currency_description_item.rpak"
+		}
+	}
+
+	panel DisclaimerContainer
+	{
+		anchor: CENTER
+		pivot: <0.5, 1.0>
+		positionY: 250
+		width: 680
+
+		behavior Label
+		{
+			text: "#CURRENCIES_TOOLTIP_ASTERISK"
+			face: "DefaultRegularFont"
+			textAlignHorizontal: CENTER
+			horizontalMode: WRAP
+			verticalMode: AUTOSIZE_TO_TEXT
+			pixelHeight: 25
+			leading: 1.0
+			color: <0.50, 0.50, 0.50, 1>
+			margin: <0, 0, 0, 0>
+		}
+
+		behavior LabelAltStyle
+		{
+			color: <0.50, 0.50, 0.50, 1>
+		}
+	}
+
+	panel EscrowBalance
+	{
+		anchor: LEFT
+		positionX: 363
+		positionY: 229
+		width: 350
+
+		behavior Label
+		{
+			bind *.escrowBalance -> @this.text
+			face: "TitleBoldFont"
+			textAlignHorizontal: LEFT
+			horizontalMode: WRAP
+			verticalMode: AUTOSIZE_TO_TEXT
+			pixelHeight: 29
+			color: <1, 1, 1, 1>
+			margin: <0, 0, 0, 0>
+		}
+
+		behavior LabelAltStyle
+		{
+			pixelHeight: 25
+		}
+	}
+
+	panel EscrowInfo
+	{
+		anchor: LEFT
+		positionX: 364
+		positionY: 285
+		width: 350
+
+		behavior Label
+		{
+			bind *.escrowInfo -> @this.text
+			face: "DefaultRegularFont"
+			textAlignHorizontal: LEFT
+			horizontalMode: WRAP
+			verticalMode: AUTOSIZE_TO_TEXT
+			pixelHeight: 27
+			color: <0.50, 0.50, 0.50, 1>
+			margin: <0, 0, 0, 0>
+		}
+	}
+}

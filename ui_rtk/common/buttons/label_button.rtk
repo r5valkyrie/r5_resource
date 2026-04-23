@@ -1,0 +1,37 @@
+panel LabelButton
+{
+	var label @this/Label:Label
+	var labelText @this/Label:Label.text
+	var labelColor @this/Label:Label.color
+	var bg @this:Image
+	var bgAsset @this:Image.assetPath
+	var bgColor @this:Image.color
+
+	size: <200, 60>
+	inputListener: true
+
+	behavior Button
+
+	behavior Image
+	{
+		color: <1, 1, 1, 1>
+	}
+
+	panel Label
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <10, 10, 10, 10>
+
+		behavior Label
+		{
+			text: "Label"
+			textAlignHorizontal: CENTER
+			textAlignVertical: CENTER
+			pixelHeight: 40
+			color: <1, 1, 1, 1>
+			outlineColorInner: <0, 0, 0, 1>
+			outlineColorOuter: <0, 0, 0, 1>
+			outlineWidth: 3
+		}
+	}
+}

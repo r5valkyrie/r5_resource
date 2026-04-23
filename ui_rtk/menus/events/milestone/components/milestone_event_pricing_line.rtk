@@ -1,0 +1,152 @@
+panel PricingLine
+{
+	bind root
+	var packQuantityLabel @root/LabelContainer/PackQuantity:FormatLabel.text
+	var packQuantityFormat @root/LabelContainer/PackQuantity:FormatLabel.format
+	var packQuantityArg1 @root/LabelContainer/PackQuantity:FormatLabel.arg1
+
+	behavior ContainerElement
+	{
+		horizontalAlignOverride: LEFT
+	}
+
+	behavior HorizontalContainer
+	{
+		alignment: LEFT
+		fitContentWidth: true
+		fitContentHeight: true
+		spacing: 25
+		useLocaleDirection: true
+	}
+
+	panel LabelContainer
+	{
+		behavior HorizontalContainer
+		{
+			alignment: LEFT
+			fitContentWidth: true
+			fitContentHeight: true
+			spacing: 5
+			useLocaleDirection: true
+		}
+
+		panel DiscountLabel
+		{
+			bind *.discount -> GreaterThan( 0 ) -> @this.visible
+			size: <75, 25>
+			anchor: CENTER
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/events/collection_events/price_tag_arrow.rpak"
+			}
+
+			panel Text
+			{
+				size: <75, 25>
+				anchor: CENTER
+
+				behavior FormatLabel
+				{
+					bind *.discount -> @this.arg1
+					face: "TitleRegularFont"
+					format: "#STORE_BUTTON_DISCOUNT"
+					textAlignHorizontal: CENTER
+					textAlignVertical: CENTER
+					horizontalMode: SQUISH_TO_CONTAINER
+					pixelHeight: 22
+					color: #ffdc23
+					allCaps: true
+					arg1: 0
+				}
+			}
+		}
+
+		panel PackQuantity
+		{
+			size: <100, 25>
+			behavior FormatLabel
+			{
+				text: "1 PACK"
+				face: "DefaultBoldFont"
+				pixelHeight: 25
+				color: #bcbcbc
+				outlineColorInner: <0, 0, 0, 0.8>
+				outlineColorOuter: <0, 0, 0, 0>
+				textAlignHorizontal: LEFT
+				textAlignVertical: CENTER
+				horizontalMode: SQUISH_TO_CONTAINER
+				allCaps: true
+				arg1: 0
+			}
+		}
+	}
+
+
+	panel PriceText
+	{
+		height: 25
+		behavior HorizontalContainer
+		{
+			alignment: LEFT
+			fitContentWidth: true
+			spacing: 5
+			useLocaleDirection: true
+		}
+
+		panel OriginalPrice
+		{
+			bind *.originalPrice -> IsEmpty -> NOT -> @this.visible
+			bind *.discount -> GreaterThan( 0 ) -> @this.visible
+
+			panel BreakthroughLine
+			{
+				anchor: CENTER_STRETCH_WIDTH
+				height: 4
+				behavior Image
+				{
+					alpha: 0.5
+				}
+			}
+
+			behavior Label
+			{
+				bind *.originalPrice -> @this.text
+				face: "TitleFont"
+				text: "8,888"
+				textAlignHorizontal: LEFT
+				horizontalMode: AUTOSIZE_TO_TEXT
+				verticalMode: AUTOSIZE_TO_TEXT
+				pixelHeight: 25
+				color: <1, 1, 1, 0.5>
+				useLocaleDirection: true
+			}
+
+			behavior LabelAltStyle
+			{
+				pixelHeight: 25
+			}
+		}
+
+		panel NormalPrice
+		{
+			bind *.price -> IsEmpty -> NOT -> @this.visible
+			behavior Label
+			{
+				bind *.price -> @this.text
+				face: "TitleFont"
+				text: "8,888"
+				textAlignHorizontal: LEFT
+				horizontalMode: AUTOSIZE_TO_TEXT
+				verticalMode: AUTOSIZE_TO_TEXT
+				pixelHeight: 25
+				color: <1, 1, 1, 1>
+				useLocaleDirection: true
+			}
+
+			behavior LabelAltStyle
+			{
+				pixelHeight: 25
+			}
+		}
+	}
+}

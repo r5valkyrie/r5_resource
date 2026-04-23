@@ -1,0 +1,73 @@
+panel PackProbablilityRow
+{
+	bind root
+	anchor: TOP_STRETCH_WIDTH
+	offsets: <0, 0, 0, 0>
+	pivot: <0, 0.5>
+
+	var elementPrefabPath @this/RatesContainer:ListBinder.prefab
+
+	behavior Image
+	{
+		bind *.color -> @this.colorRGB
+		assetPath: $"ui_image/rui/gradient_lr.rpak"
+		alpha: 0.1
+		useLocaleDirection: true
+	}
+
+	behavior HorizontalContainer
+	{
+		fitContentHeight: true
+		fitContentWidth: true
+		alignment: LEFT
+		useLocaleDirection: true
+	}
+
+	panel Title
+	{
+		bind @root/RatesContainer.height -> Add( 6 ) -> @this.height //6px is padding.
+		anchor: LEFT
+		offsets: <0, 0, 0, 0>
+		pivot: <0, 0.5>
+		width: 155
+		panel Text
+		{
+			offsets: <0, 0, 0, 0>
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			behavior Label
+			{
+				bind *.title -> @this.text
+
+				face: "DefaultBoldFont"
+				text: "TEMP"
+				pixelHeight: 28
+				colorRGB: <0.7, 0.7, 0.7>
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				allCaps: true
+			}
+		}
+	}
+
+	panel RatesContainer
+	{
+		anchor: LEFT
+		offsets: <0, 0, 0, 0>
+		pivot: <0, 0.5>
+
+		behavior VerticalContainer
+		{
+			spacing: 10
+			alignment: CENTER
+			fitContentHeight: true
+			fitContentWidth: true
+		}
+
+		behavior ListBinder
+		{
+			bindingPath: "*.rows"
+			prefab: $"ui_rtk/dialogs/purchase_pack_selection/components/purchase_pack_probablility_row_labels.rpak"
+		}
+	}
+}
+

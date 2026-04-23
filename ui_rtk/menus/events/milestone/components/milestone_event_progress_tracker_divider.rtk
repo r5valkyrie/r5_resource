@@ -1,0 +1,24 @@
+panel ProgressTrackerDivider
+{
+	anchor: BOTTOM
+	pivot: <0.5, 1>
+	offsets: <0, 0, 0, 0>
+	size: <45, 45>
+
+	panel Arrow
+	{
+		anchor: BOTTOM_RIGHT
+		pivot: <1, 1>
+		size: <45, 45>
+
+		behavior Image
+		{
+			bind *.currentLevel -> IntEqual( *.grantLevel ) -> PickVectorFromTwo( #696969, #218c5b ) -> @this.colorRGB
+			bind *.currentLevel -> IntEqual( *.grantLevel ) -> PickFloatFromTwo( 1.0, 0.5 ) -> @this.alpha
+
+			assetPath: $"ui_image/rui/hud/common/chevron_left_big.rpak"
+			flipHorizontal: true
+			colorRGB: #696969
+		}
+	}
+}

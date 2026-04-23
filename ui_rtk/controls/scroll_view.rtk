@@ -1,0 +1,7 @@
+panel
+{
+	inputListener: true
+
+	behavior ScrollView
+	behavior RenderGroup
+}

@@ -1,0 +1,249 @@
+instance $"ui_rtk/menus/game_modes/components/game_mode_button.rpak"
+{
+	bind root
+
+	size: <460, 600>
+
+	override @var( topColor ) #1D4770
+
+	behavior ApexCupCardController
+	{
+		timer: @var( Content )/TimeRemaining:Timer
+		bind *.apexCup -> @this.apexCup
+		bind *.calEvent -> @this.calEvent
+		bind *.lockState -> @this.lockState
+	}
+
+	context @var( Background )
+	{
+		bind *.calEvent -> ItemFlavorIcon -> @this:Image.assetMaskPath
+
+		panel
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/borders/border_playlist_card_mask.rpak"
+
+				bind *.calEvent -> ItemFlavorSourceIcon -> @this.assetMaskPath
+			}
+
+			behavior ImageFit
+			{
+				useImageMask: true
+			}
+		}
+
+		panel
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 250, 94>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/gradient_ud_stronger.rpak"
+
+				color: #111111
+				alpha: 0.99
+			}
+		}
+
+		panel
+		{
+			anchor: BOTTOM_STRETCH_WIDTH
+			height: 89
+			pivot: <0.5, 1.0>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/borders/border_playlist_card_mask.rpak"
+				assetMaskPath: $"ui_image/white.rpak"
+				colorRGB: #000000
+				alpha: 0.99
+				uv0Min: <0.0, 0.1>
+			}
+		}
+	}
+
+	context @var( Content )
+	{
+		useLocaleDirection: true
+		
+		context @this:VerticalContainer
+		{
+			paddingBottom: 4.0
+			spacing: 8.0
+		}
+
+		panel // Icon Container
+		{
+			height: 96
+
+			panel
+			{
+				size: <96, 96>
+				positionX: 34
+				anchor: TOP_LEFT
+				useLocaleDirection: true
+				pivot: <0.0, 0.0>
+
+				behavior Image
+				{
+					bind *.calEvent -> ItemFlavorString( "gameMode" ) -> GamemodeIcon -> @this.assetPath
+				}
+			}
+
+			bind *.calEvent -> ItemFlavorString( "gameMode" ) -> GamemodeIcon -> StrNotEqual( "" ) -> @this.visible
+		}
+
+		panel // Ranked Icon Container
+		{
+			height: 125
+
+			panel
+			{
+				size: <70, 140>
+				positionX: 10
+				anchor: TOP_LEFT
+				pivot: <0.0, 0.0>
+
+				behavior Image
+				{
+					bind *.rankIcon -> @this.assetPath
+
+					flipHorizontal: true
+				}
+			}
+
+			panel
+			{
+				size: <70, 140>
+				positionX: 80
+				anchor: TOP_LEFT
+				pivot: <0.0, 0.0>
+
+				behavior Image
+				{
+					bind *.rankIcon -> @this.assetPath
+				}
+			}
+
+			panel
+			{
+				bind *.rankTextOffset -> PickIntFromTwo( 0, 7 ) -> @this.positionY
+
+				size: <140, 140>
+				positionX: 10
+				anchor: TOP_LEFT
+				pivot: <0.0, 0.0>
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/menu/ranked/rank_rumble_icon.rpak"
+				}
+			}
+
+			bind *.rankIcon -> StrNotEqual( "" ) -> @this.visible
+		}
+
+		panel // Party size
+		{
+			behavior FormatLabel
+			{
+				bind *.calEvent -> ItemFlavorInt( "squadSize" ) -> @this.arg1
+
+				format: "#APEX_CUPS_PARTY_SIZE"
+				arg1: 0
+				margin: <34.0, 20.0, 2.0, 2.0>
+				pixelHeight: 24
+				colorRGB: #ffffff
+				shadowBlur: 4.0
+				shadowAlpha: 0.75
+				textAlignVertical: CENTER
+				textAlignHorizontal: LEFT
+				useLocaleDirection: true
+				horizontalMode: SQUISH_TO_CONTAINER
+				verticalMode: AUTOSIZE_TO_TEXT
+			}
+
+			bind *.rankIcon -> StrEqual( "" ) -> @this.visible
+		}
+
+		instance $"ui_rtk/menus/game_modes/components/game_mode_title.rpak"
+		{
+			context @var( Label )
+			{
+				bind *.calEvent -> ItemFlavorLongName -> @this.text
+				textAlignHorizontal: LEFT
+				useLocaleDirection: true
+			}
+		}
+
+		panel
+		{
+			behavior Label
+			{
+				margin: <34.0, 20.0, 6.0, 6.0>
+				pixelHeight: 24
+				colorRGB: #c4c4c4
+				textAlignVertical: CENTER
+				textAlignHorizontal: LEFT
+				useLocaleDirection: true
+				horizontalMode: WRAP
+				verticalMode: AUTOSIZE_TO_TEXT
+
+				bind *.calEvent -> ItemFlavorString( "gameMode" ) -> GamemodeName -> @this.text
+			}
+		}
+
+		instance $"ui_rtk/common/components/timer_component_long.rpak" TimeRemaining
+		{
+			context @var( Container )
+			{
+				paddingLeft: 34
+				paddingBottom: 13
+				alignment: TOP_LEFT
+				fitContentHeight: true
+			}
+
+			context @var( IconLabel )
+			{
+				pixelHeight: 22
+			}
+
+			context @var( TimerLabel )
+			{
+				pixelHeight: 22
+
+				bind *.state -> PickStringFrom( [ "#APEX_CUPS_TIME_STARTS_IN", "#TIME_REMAINING", "" ] ) -> @this.format
+			}
+
+			bind *.calEvent -> CalEventNextTime -> @this:Timer.endTime
+			bind *.calEvent -> CalEventFinished -> NOT -> @this.active
+			bind *.calEvent -> CalEventFinished -> NOT -> @this.visible
+		}
+
+		panel
+		{
+			height: 89
+
+			behavior PrefabInstantiator
+			{
+				bindingPath: "*"
+				prefabArray: [
+				$"ui_rtk/menus/game_modes/apex_cups/components/cards/apex_cup_card_footer_default.rpak",
+				$"ui_rtk/menus/game_modes/apex_cups/components/cards/apex_cup_card_footer_entered.rpak"
+				]
+
+				bind * -> HasProperty( "entry" ) -> @this.prefabIndex
+			}
+		}
+	}
+
+	context @var( Lock )
+	{
+		bind *.lockState -> Equal( 0 ) -> NOT -> @this.visible
+		bind *.lockState -> ApexCupLockStateText -> @this/Text:Label.text
+	}
+}

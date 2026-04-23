@@ -1,0 +1,373 @@
+panel PostGameRankedPromoTrialsPanel
+{
+	anchor: TOP
+	offsets: <0, 0, 0, 0>
+	pivot: <0.5, 0.0>
+	size: <600, 250>
+
+	behavior RenderGroup Content
+
+	behavior Animator
+	{
+		tweenAnimations: [
+		{
+			name: "AnimateIn"
+			tweens: [
+			{
+				property: @owner.panel/Content.alpha
+				startValue: 0.0
+				endValue: 1.0
+				duration: 0.9
+				curve: EASE_LINEAR
+			}]
+		}]
+	}
+
+	behavior VerticalContainer
+	{
+		fitContentHeight: true
+		expandChildWidth: true
+		padding: <20, 20, 5, 5>
+	}
+
+	panel BackerElements
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior ContainerElement
+		{
+			ignoreLayout: true
+		}
+
+		panel Border
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+			behavior Image
+			{
+				color: <0.82, 0.82, 0.82, 0.8>
+				assetPath: $"ui_image/rui/borders/ready_frame_border_2px.rpak"
+			}
+		}
+
+		panel Background
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+			behavior Image
+			{
+				color: <0.8, 0.8, 0.8, 0.03>
+				assetPath: $"ui_image/rui/borders/ready_frame_border.rpak"
+			}
+		}
+
+		panel StatusColoring
+		{
+			anchor: TOP_STRETCH_WIDTH
+			offsets: <1, 1, 1, 1>
+			pivot: <0.5, 0>
+			height: 60
+			positionY: 1
+
+			behavior Image
+			{
+				bind *.extraInfo.trialsData.trialsStatusBannerColor -> @this.colorRGB
+				bind *.extraInfo.trialsData.trialsStatusBannerAlpha -> @this.alpha
+
+				assetPath: $"ui_image/rui/borders/ready_frame_border.rpak"
+				colorRGB: <0.5, 0.07, 0.01>
+				alpha: 0.65
+			}
+		}
+
+		panel Dots
+		{
+			anchor: TOP_LEFT
+			offsets: <0, 0, 0, 0>
+			pivot: <0, 0>
+			size: <315, 60>
+
+			behavior Image
+			{
+				assetMaskPath: $"ui_image/rui/hud/dynamic_stats/dynamic_stats_dots_end.rpak"
+				assetPath: $"ui_image/rui/menu/ranked/ranked_update_2023/rank_promotional_match_header_mask.rpak"
+				alpha: 0.05
+			}
+		}
+	}
+
+	panel Container
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <10, 10, 10, 10>
+		pivot: <0.5, 0.0>
+
+		behavior VerticalContainer
+		{
+			fitContentHeight: true
+			spacing: 10
+		}
+
+		panel Header
+		{
+			anchor: TOP_STRETCH_WIDTH
+			pivot: <0, 1.0>
+			offsets: <0, 0, 0, 0>
+			height: 50
+
+			panel Title
+			{
+				anchor: LEFT
+				pivot: <0, 0.5>
+				offsets: <0, 0, 0, 0>
+
+				behavior Label
+				{
+					text: "#RANKED_PROMOTION_HEADER"
+					face: "DefaultBoldFont"
+					pixelHeight: 38
+					colorRGB: <1, 1, 1>
+					outlineColorInner: <0, 0, 0, 0>
+					outlineColorOuter: <0, 0, 0, 0>
+					textAlignHorizontal: LEFT
+					textAlignVertical: TOP
+					horizontalMode: AUTOSIZE_TO_TEXT
+					verticalMode: AUTOSIZE_TO_TEXT
+					margin: <0, 0, 10, 0>
+				}
+			}
+
+			panel Status
+			{
+				anchor: RIGHT
+				pivot: <1, 0.5>
+				offsets: <0, 0, 0, 0>
+
+				behavior Label
+				{
+					bind *.extraInfo.trialsData.trialsStatusMessage -> @this.text
+					bind *.extraInfo.trialsData.trialsStatusColor -> @this.colorRGB
+
+					text: ""
+					face: "DefaultRegularFont"
+					pixelHeight: 38
+					colorRGB:  <0.7, 0.7, 0.7>
+					outlineColorInner: <0, 0, 0, 0>
+					outlineColorOuter: <0, 0, 0, 0>
+					textAlignHorizontal: RIGHT
+					textAlignVertical: TOP
+					horizontalMode: AUTOSIZE_TO_TEXT
+					verticalMode: AUTOSIZE_TO_TEXT
+					margin: <0, 0, 10, 0>
+					allCaps: true
+				}
+
+				behavior LabelAltStyle
+				{
+					face: "DefaultBoldFont"
+					colorRGB: <1, 1, 1>
+				}
+			}
+
+			panel Underline
+			{
+				anchor: TOP_STRETCH_WIDTH
+				height: 2
+				offsets: <0, 0, 0, 0>
+				positionY: 55
+
+				behavior Image
+				{
+					color: <1, 1, 1, 0.2>
+				}
+			}
+		}
+
+		panel Trials
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+			behavior VerticalContainer
+			{
+				spacing: 5
+				fitContentHeight: true
+				padding: <0, 0, 10, 10>
+				expandChildWidth: true
+			}
+
+			// TODO: It would be good to change these panels to a ListBinder if we get support for dividers that aren't included in the DataModel itself (the 'OrLabel' panel being the divider in this case)
+			instance $"ui_rtk/menus/ranked_promos/components/labeled_progress_bar.rpak" primaryTrialPanel
+			{
+				override bind root "*.extraInfo.trialsData.trials[0]"
+				override @var(descriptionPixelHeight) 26
+				override @var(progressPixelHeight) 32
+				override @var(progressLabelAnchor) RIGHT
+				override @var(progressLabelPivot) <1, 0.5>
+				override @var(descriptionColor) <1, 1, 1>
+				override @var(progressLabelColor) <0.7, 0.7, 0.7>
+				override @var(progressBarHeight) 30
+				override @var(progressBarAngle) 45
+				override @var(contentPadding) <10, 10, 10, 10>
+				override @var(progressBarPadding) <0, 80, 0, 0>
+
+				bind *.active -> @this.visible
+
+				context @this/ContentPanel/BarContainer:AngledProgressBar
+				{
+					progressBgColor: <0.19, 0.19, 0.22>
+					progressBgAlpha: 0.5
+				}
+
+				offsetsLR: <10, 10>
+				positionY: 85
+				height: 77
+			}
+
+			panel OrPanel
+			{
+				bind &menus.postGame.ranked.extraInfo.trialsData.trialsCount -> GreaterThan( 1 ) -> @this.visible
+
+				anchor: CENTER_STRETCH_WIDTH
+				offsets: <0, 0, 0, 0>
+				offsetsLR: <20, 20>
+				size: <60, 50>
+
+				behavior HorizontalContainer
+				{
+					spacing: -2
+					alignment: LEFT
+				}
+
+				panel LeftLine
+				{
+					anchor: LEFT
+					size: <15, 2>
+					pivot: <0, 0.5>
+
+					behavior Image
+					{
+						color: <1, 1, 1, 1>
+					}
+				}
+
+				panel CenterPanel
+				{
+					anchor: LEFT
+					size: <60, 60>
+					pivot: <0, 0.5>
+
+					panel Shadow
+					{
+						anchor: CENTER
+						size: <60, 60>
+
+						behavior Image
+						{
+							assetPath: $"ui_image/rui/hud/ping/icon_ping_any_shadow.rpak"
+							color: <0, 0, 0, 0.25>
+						}
+					}
+
+					panel Outline
+					{
+						anchor: CENTER
+						size: <60, 60>
+
+						behavior Image
+						{
+							assetPath: $"ui_image/rui/hud/ping/icon_ping_go_outline.rpak"
+							color: <1, 1, 1, 1>
+						}
+					}
+
+					panel OrLabel
+					{
+						anchor: CENTER
+						size: <60, 60>
+
+						behavior Label
+						{
+							text: "#RANKED_PROMOTION_OR"
+							face: "DefaultRegularFont"
+							pixelHeight: 22
+							colorRGB: <1, 1, 1>
+							outlineColorInner: <0, 0, 0, 0>
+							outlineColorOuter: <0, 0, 0, 0>
+							textAlignHorizontal: CENTER
+							textAlignVertical: CENTER
+							allCaps: true
+							fitToWidth: 27
+						}
+					}
+				}
+
+				panel RightLine
+				{
+					anchor: LEFT
+					size: <15, 2>
+					pivot: <0, 0.5>
+
+					behavior Image
+					{
+						color: <1, 1, 1, 1>
+					}
+				}
+			}
+
+			instance $"ui_rtk/menus/ranked_promos/components/labeled_progress_bar.rpak" altTrial1Panel
+			{
+				override bind root "*.extraInfo.trialsData.trials[1]"
+				override @var(descriptionPixelHeight) 26
+				override @var(progressPixelHeight) 32
+				override @var(progressLabelAnchor) RIGHT
+				override @var(progressLabelPivot) <1, 0.5>
+				override @var(descriptionColor) <1, 1, 1>
+				override @var(progressLabelColor) <0.7, 0.7, 0.7>
+				override @var(progressBarHeight) 30
+				override @var(progressBarAngle) 45
+				override @var(contentPadding) <10, 10, 10, 10>
+				override @var(progressBarPadding) <0, 80, 0, 0>
+
+				bind *.active -> @this.visible
+
+				context @this/ContentPanel/BarContainer:AngledProgressBar
+				{
+					progressBgColor: <0.19, 0.19, 0.22>
+					progressBgAlpha: 0.5
+				}
+
+				offsetsLR: <10, 10>
+				positionY: 150
+				height: 77
+			}
+
+			instance $"ui_rtk/menus/ranked_promos/components/labeled_progress_bar.rpak" altTrial2Panel
+			{
+				override bind root "*.extraInfo.trialsData.trials[2]"
+				override @var(descriptionPixelHeight) 26
+				override @var(progressPixelHeight) 32
+				override @var(progressLabelAnchor) RIGHT
+				override @var(progressLabelPivot) <1, 0.5>
+				override @var(descriptionColor) <1, 1, 1>
+				override @var(progressLabelColor) <0.7, 0.7, 0.7>
+				override @var(progressBarHeight) 30
+				override @var(progressBarAngle) 45
+				override @var(contentPadding) <10, 10, 10, 10>
+				override @var(progressBarPadding) <0, 80, 0, 0>
+
+				bind *.active -> @this.visible
+
+				context @this/ContentPanel/BarContainer:AngledProgressBar
+				{
+					progressBgColor: <0.19, 0.19, 0.22>
+					progressBgAlpha: 0.5
+				}
+
+				offsetsLR: <10, 10>
+				positionY: 190
+				height: 77
+			}
+		}
+	}
+}

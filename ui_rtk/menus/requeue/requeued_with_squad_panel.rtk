@@ -1,0 +1,243 @@
+panel RequeuedWithSquadPanel
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	behavior RequeuedWithSquadPanel
+
+	instance $"ui_rtk/common/components/dialog_vertical.rpak" Dialog
+	{
+		pivot: <0.0, 0.5>
+		positionX: 272
+
+		context @this/StackedContent/TitleSizer/TitleContext
+		{
+			behavior VerticalContainer
+			{
+				spacing: 8
+				alignment: TOP_LEFT
+				fitContentHeight: true
+				padding: <25, 25, 25, 25>
+			}
+
+		    panel TopText
+			{
+				anchor: CENTER_STRETCH_WIDTH
+				offsets: <0, 0, 0, 0>
+
+				behavior Label
+				{
+					face: "TitleBoldFont"
+					textAlignHorizontal: LEFT
+					margin: <0, 50, 0, 0>
+					pixelHeight: 44
+					text: "#DIALOG_REQUEUED_WITH_SQUAD_TITLE"
+					horizontalMode: WRAP
+					verticalMode: AUTOSIZE_TO_TEXT
+					color: #FCFCFC
+					shadowBlur: 8.0
+					shadowAlpha: 0.7
+					shadowOffset: <0,0>
+				}
+			}
+			panel WaitingContainer
+			{
+				anchor: CENTER_STRETCH_WIDTH
+				offsets: <0, 0, 0, 0>
+
+				behavior VerticalContainer
+				{
+					alignment: TOP_LEFT
+					fitContentHeight: true
+				}
+
+				panel BottomText
+				{
+					anchor: CENTER_STRETCH_WIDTH
+					offsets: <0, 0, 0, 0>
+
+					behavior Label
+					{
+						textAlignHorizontal: LEFT
+						margin: <0, 50, 0, 0>
+						pixelHeight: 32
+						text: "#DIALOG_REQUEUED_WITH_SQUAD_WAITING" //This might need to be dynamic
+						horizontalMode: WRAP
+						verticalMode: AUTOSIZE_TO_TEXT
+						color: #e0be39
+						shadowBlur: 8.0
+						shadowAlpha: 0.7
+						shadowOffset: <0,0>
+					}
+				}
+				instance $"ui_rtk/common/components/timer_component.rpak" TimeRemaining
+				{
+					width: 330
+//					bind *.titleEndTimestamp -> @this:Timer.endTime
+//					bind @this/TimerString.height -> @this.height
+//					bind *.titleCounterLocalizationString -> @this/TimerString:FormatLabel.format
+//					bind *.titleCounterColor -> @this/TimerString:FormatLabel.colorRGB
+//					bind *.titleCounterColor -> @this/TimerIcon:FormatLabel.colorRGB
+
+					override @var(fontHeight) 28
+					override @var(padding) <-5, 0, 0, 0>
+					override @var(iconPath)   "%$rui/menu/store/feature_timer%"
+					override @var(fontColor) #ABABAB
+					override @var(iconColor) #ABABAB
+				}
+			}
+		}
+
+		context @this/StackedContent/ContentContext
+		{
+
+			behavior VerticalContainer
+			{
+				spacing: 8
+				alignment: TOP
+				fitContentHeight: true
+			}
+
+			panel NextSpacer
+			{
+				anchor: CENTER_STRETCH_WIDTH
+				offsets: <0, 0, 0, 0>
+				height: 100
+			}
+
+			panel NextMatchContainer
+			{
+				anchor: CENTER_STRETCH_WIDTH
+				offsetsTB: <0, 0>
+				offsetsLR: <20, 20>
+
+				behavior VerticalContainer
+				{
+					spacing: 8
+					alignment: TOP
+					fitContentHeight: true
+				}
+
+				panel UpNextTitle
+				{
+					anchor: CENTER_STRETCH_WIDTH
+					offsets: <0, 0, 0, 0>
+
+					behavior Label
+					{
+						textAlignHorizontal: LEFT
+						face: "DefaultBoldFont"
+						margin: <0, 50, 0, 0>
+						pixelHeight: 32
+						text: "#UP_NEXT"
+						horizontalMode: WRAP
+						verticalMode: AUTOSIZE_TO_TEXT
+						color: #fbfbfb
+						shadowBlur: 8.0
+						shadowAlpha: 0.7
+						shadowOffset: <0, 0>
+						allCaps: true
+					}
+				}
+				panel Line
+				{
+					anchor: TOP_STRETCH_WIDTH
+					offsets: <0, 0, 0, 0>
+					height: 2
+
+					behavior Image
+				    {
+			           color: #959595
+				    }
+				}
+
+				panel UpNext
+				{
+					anchor: CENTER_STRETCH_WIDTH
+					offsets: <0, 0, 0, 0>
+
+					behavior Label
+					{
+						bind *.upNext -> @this.text
+
+						textAlignHorizontal: LEFT
+						margin: <0, 50, 0, 0>
+						pixelHeight: 32
+						text: ""
+						horizontalMode: WRAP
+						verticalMode: AUTOSIZE_TO_TEXT
+						color: #9e9f9f
+						shadowBlur: 5.0
+						shadowAlpha: 0.7
+						shadowOffset: <0,0>
+					}
+				}
+			}
+
+			panel PartySpacer
+			{
+				anchor: CENTER_STRETCH_WIDTH
+				offsets: <0, 0, 0, 0>
+				height: 20
+			}
+
+			panel PartyStatusContainer
+			{
+				anchor: CENTER_STRETCH_WIDTH
+				offsets: <0, 0, 0, 0>
+				offsetsLR: <20, 20>
+
+				behavior VerticalContainer
+				{
+					spacing: 2
+					alignment: TOP
+					fitContentHeight: true
+				}
+
+				behavior ListBinder
+				{
+					bindingPath: "*.party"
+					prefab: $"ui_rtk/menus/requeue/components/requeue_player_listitem.rpak"
+				}
+			}
+
+			panel ButtonsContainer
+			{
+				anchor: CENTER_STRETCH_WIDTH
+				offsets: <0, 0, 0, 0>
+
+				behavior VerticalContainer
+				{
+					spacing: 10
+					alignment: TOP
+					fitContentHeight: true
+					padding: <25, 25, 25, 25>
+				}
+
+				instance $"ui_rtk/common/buttons/base_button.rpak" RequeuePartyOfTwo
+				{
+					positionY: -54
+					size: <578, 66>
+					pivot: <0.5, 1>
+					anchor: BOTTOM
+
+					override @var(labelText) "#BUTTON_CANCEL_AND_EXIT_TO_LOBBY"
+					override @var(labelColor) <0.87, 0.87, 0.87>
+					override @var(size) <578, 64>
+					override @var(labelPixelHeight) 24
+					override @var(backgroundColor) #242526
+					override @var(outlineColor) #b4b4b5
+					override @var(gradientColor) #ff4200
+					override @var(lineAlpha) 1
+				}
+			}
+		}
+
+		context @this/FooterContext
+		{
+			instance $"ui_rtk/controls/footer.rpak"
+		}
+	}
+}

@@ -1,0 +1,353 @@
+panel WeaponMasteryTrialsPanel
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	behavior WeaponMasteryTrialsScreen
+	{
+		pagination: @panel:Pagination
+	}
+
+	panel CursorZone
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		inputListener: true
+
+		behavior CursorInteract
+		{
+			mouseEnabled: true
+			controllerEnabled: true
+		}
+	}
+
+    behavior Pagination
+	{
+		container: @panel/BlackBar/Screen/RenderGroupContent/PaginatedContainer
+		content: @panel/BlackBar/Screen/RenderGroupContent/PaginatedContainer/HorizontalContainer
+
+        nextButton: @panel/BlackBar/Screen/PaginationNavContainer/PaginationNav/RightButton:Button
+        paginationButtons: @panel/BlackBar/Screen/PaginationNavContainer/PaginationNav/PaginationPips
+        prevButton: @panel/BlackBar/Screen/PaginationNavContainer/PaginationNav/LeftButton:Button
+        hintAnimator: @panel/BlackBar/Screen/PaginationNavContainer/Hint:Animator
+        animator: @panel/BlackBar/Screen/RenderGroupContent/PaginatedContainer:Animator
+		cursorInteract1Area: @panel/CursorZone:CursorInteract
+
+		vertical: false
+		autoPagesByContainerContent: true
+		panelsAlwaysStartNewPages: false
+	}
+
+	panel BG
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+	        colorRGB: <0.13, 0.13, 0.13>
+	    }
+	}
+
+	panel Screen
+	{
+		anchor: CENTER_STRETCH_HEIGHT
+		width: 1920
+		offsets: <0, 0, 0, 0>
+
+		panel
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, -0, 0>
+
+			behavior Rui
+			{
+				ruiAsset: $"ui/fullscreen_arrows_bg.rpak"
+			}
+		}
+
+		panel TitleVerticalContainer
+		{
+			offsets: <0, 0, 0, 0>
+			positionY: 45
+			anchor: TOP
+			pivot: <0.5, 0.0>
+
+			behavior VerticalContainer
+	        {
+	            spacing: 10
+	            alignment: TOP
+	            fitContentHeight: true
+            }
+
+            panel Title
+			{
+				anchor: CENTER_STRETCH_WIDTH
+				offsets: <0, 0, 0, 0>
+
+				behavior FormatLabel
+				{
+					bind *.overall.name -> LocalizeString -> @this.arg1
+
+					format: "#MASTERY_TRIALS_TITLE"
+					pixelHeight: 55
+					textAlignHorizontal: CENTER
+					horizontalMode: AUTOSIZE_TO_TEXT
+					verticalMode: AUTOSIZE_TO_TEXT
+					allCaps: true
+					face: "TitleBoldFont"
+
+					arg1: ""
+					arg2: ""
+					arg3: ""
+				}
+			}
+
+			panel IconsHorizontalContainer
+			{
+				offsets: <0, 0, 0, 0>
+				anchor: TOP
+
+				behavior HorizontalContainer
+		        {
+		            spacing: 14
+		            alignment: TOP
+		            fitContentHeight: true
+	            }
+
+				behavior ListBinder
+				{
+					bindingPath: "*.trials"
+					prefab: $"ui_rtk/menus/mastery/components/mastery_trial_icon_listitem_small.rpak"
+				}
+			}
+
+			panel Help1
+			{
+				anchor: CENTER_STRETCH_WIDTH
+				offsets: <0, 0, 0, 0>
+
+				behavior Label
+				{
+					text: "#MASTERY_TRIALS_UNLOCK_HELP_1"
+					pixelHeight: 32
+					face: "TitleRegularFont"
+					textAlignHorizontal: CENTER
+					horizontalMode: AUTOSIZE_TO_TEXT
+					verticalMode: AUTOSIZE_TO_TEXT
+					margin: <0 ,0, 10, 0>
+				}
+			}
+
+			panel Help2
+			{
+				anchor: CENTER_STRETCH_WIDTH
+				offsets: <0, 0, 0, 0>
+
+				behavior Label
+				{
+					text: "#MASTERY_TRIALS_UNLOCK_HELP_2"
+					pixelHeight: 25
+					face: "TitleRegularFont"
+					textAlignHorizontal: CENTER
+					horizontalMode: AUTOSIZE_TO_TEXT
+					verticalMode: AUTOSIZE_TO_TEXT
+					margin: <0 ,0, -2, 0>
+					alpha: 0.3
+				}
+			}
+		}
+	}
+
+	panel BlackBar
+	{
+		anchor: TOP_STRETCH_WIDTH
+		pivot: <0.5, 0.0>
+		height: 629
+		positionY: 272
+		constrainInput: false
+
+		behavior Image
+		{
+	        colorRGB: <0, 0, 0>
+	    }
+
+	    panel TopBar
+		{
+			anchor: TOP_STRETCH_WIDTH
+			pivot: <0.5, 0.0>
+			height: 2
+
+			behavior Image
+			{
+		        colorRGB: <0.41, 0.41, 0.41>
+		    }
+		}
+
+		panel BottomBar
+		{
+			anchor: BOTTOM_STRETCH_WIDTH
+			pivot: <0.5, 1.0>
+			height: 2
+
+			behavior Image
+			{
+		        colorRGB: <0.41, 0.41, 0.41>
+		    }
+		}
+
+	    panel Screen
+		{
+			size: <1920, 800>
+			anchor: TOP
+			pivot: <0.5, 0.0>
+
+			panel RenderGroupContent
+			{
+				anchor: TOP
+				size: <1920, 624>
+				pivot: <0.5, 0.0>
+				offsets: <0, 0, 0, 0>
+				offsetsTB: <0, 0>
+				offsetsLR: <0, 0>
+
+				behavior RenderGroup
+				{
+					assetMask: $"ui_image/rui/menu/mastery/weaponmastery_trial_pagination_mask.rpak"
+				}
+
+				panel PaginatedContainer
+				{
+					offsets: <0, 0, 0, 0>
+					anchor: TOP_LEFT
+					size: <1500, 624>
+					pivot: <0, 0>
+					position: <180, 35>
+					constrainInput: false
+
+					behavior Animator
+			        {
+			            tweenAnimations: [
+			                {
+			                    name: "NextPage"
+			                    tweens: [
+			                        {
+			                            property: @panel/HorizontalContainer.positionX
+			                            duration: 0.25
+			                            startValue: 0
+			                            endValue: 1
+			                            curve: EASE_IN_CUBIC
+			                        }
+			                    ]
+			                }
+			            ]
+			        }
+
+					panel HorizontalContainer
+					{
+						anchor: TOP_LEFT
+						pivot: <0, 0.0>
+						useLocaleDirection: true
+
+						behavior HorizontalContainer
+						{
+							fitContentWidth: true
+							fitContentHeight: true
+							spacing: 40
+							alignment: CENTER
+							useLocaleDirection: true
+						}
+
+						behavior TweenStagger
+						{
+							isRecursive: true
+							startDelay: 0.25
+							delay: -0.08
+							useMaxTweenTime: true
+							animationName: "AnimateIn"
+						}
+
+						panel
+						{
+							behavior HorizontalContainer
+							{
+								fitContentWidth: true
+								fitContentHeight: true
+								spacing: 40
+								alignment: CENTER
+								useLocaleDirection: true
+							}
+
+							behavior ListBinder
+							{
+								bindingPath: "*.trials"
+								prefab: $"ui_rtk/menus/mastery/weapons/components/weapon_mastery_trial_card.rpak"
+							}
+						}
+
+						panel
+						{
+							behavior HorizontalContainer
+							{
+								fitContentWidth: true
+								fitContentHeight: true
+								spacing: 40
+								alignment: CENTER
+								useLocaleDirection: true
+							}
+
+							behavior ListBinder
+							{
+								bindingPath: "*.bonusTrials"
+								prefab: $"ui_rtk/menus/mastery/weapons/components/weapon_mastery_trial_card.rpak"
+							}
+						}
+
+						panel
+						{
+							behavior HorizontalContainer
+							{
+								fitContentWidth: true
+								fitContentHeight: true
+								spacing: 40
+								alignment: CENTER
+								useLocaleDirection: true
+							}
+
+							behavior ListBinder
+							{
+								bindingPath: "&common.weapons.mastery.allWeaponsTrials"
+								prefab: $"ui_rtk/menus/mastery/weapons/components/weapon_mastery_trial_card_all.rpak"
+							}
+						}
+					}
+				}
+			}
+
+			panel PaginationNavContainer
+			{
+				anchor: BOTTOM_STRETCH_WIDTH
+				pivot: <0.5, 0.0>
+				offsets: <0, 0, 0, 0>
+				positionY: -160
+
+				instance $"ui_rtk/common/pagination_nav_horizontal.rpak" PaginationNav
+				{
+					anchor: TOP_STRETCH_WIDTH
+				}
+
+		        instance $"ui_rtk/common/pagination_hint.rpak" Hint
+			    {
+			        anchor: TOP
+			        pivot: <0.5, 0.0>
+			        size: <30, 30>
+			        positionY: 50
+			    }
+			}
+	    }
+	}
+
+	//instance $"ui_rtk/controls/footer.rpak"
+}

@@ -1,0 +1,152 @@
+panel
+{
+	bind root
+
+	bind *.label -> @this/Label:Label.text
+	bind *.gamepadButton -> @this:GlobalInput.gamepadButton
+	bind *.keyboardButton -> @this:GlobalInput.keyboardButton
+	bind *.activateGUID -> @this:FooterButton.activateGUID
+
+	anchor: TOP_LEFT
+	pivot: <0, 0>
+	size: <100, 100>
+	inputListener: true
+
+	behavior Button
+	{
+		soundHighlighted: "ui_menu_focus"
+		explicitInputButtons: [ BUTTON_INVALID, BUTTON_INVALID ]
+
+		transitions: [
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/BG:Image.alpha
+				value: 0
+			},
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Label:Label.colorRGB
+				value: <0.941, 0.941, 0.941>
+			},
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Label:Label.outlineWidth
+				value: 5
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/BG:Image.alpha
+				value: 0.5
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Label:Label.colorRGB
+				value: <0, 0, 0>
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Label:Label.outlineWidth
+				value: 0
+			}
+		]
+	}
+
+	behavior GlobalInput
+	{
+		behaviorRef: @panel:Button
+	}
+
+	behavior FooterButton
+	{
+		button: @panel:Button
+		activateGUID: -1
+	}
+
+	behavior VerticalContainer
+	{
+		alignment: CENTER
+		fitContentWidth: true
+		fitContentHeight: true
+		padding: <13, 13, 0, 0>
+	}
+
+	behavior NxOverrides
+	{
+		overrides: [
+			{
+				propertyRef: @panel:VerticalContainer.padding
+				nxValue: <10, 10, 10, 10>
+			}
+		]
+	}
+
+	panel BG
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			color: <1, 1, 1, 0>
+		}
+
+		behavior ContainerElement
+		{
+			ignoreLayout: true
+		}
+	}
+
+	panel Label
+	{
+		anchor: CENTER
+		size: <100, 36>
+		offsets: <0, 0, 0, 0>
+
+		behavior Label
+		{
+			text: "Label"
+			face: "DefaultRegularFont"
+			pixelHeight: 32
+			colorRGB: <1, 1, 1>
+			outlineColorInner: <0, 0, 0, 0.8>
+			outlineColorOuter: <0, 0, 0, 0>
+			textAlignHorizontal: CENTER
+			textAlignVertical: CENTER
+			horizontalMode: AUTOSIZE_TO_TEXT
+			verticalMode: CLIP
+		}
+
+		behavior LabelAltStyle
+		{
+			face: "DefaultRegularFont"
+			pixelHeight: 32
+			color: <1, 1, 1, 1>
+		}
+
+		behavior NxOverrides
+		{
+			overrides: [
+				{
+					propertyRef: @panel:Label.pixelHeight
+					nxValue: 36
+				},
+				{
+					propertyRef: @panel:LabelAltStyle.pixelHeight
+					nxValue: 36
+				}
+			]
+		}
+	}
+}

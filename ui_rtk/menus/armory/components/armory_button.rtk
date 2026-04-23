@@ -1,0 +1,407 @@
+panel ArmoryButton
+{
+	bind root
+
+	var iconSize @this/IconContainer/Icon.size
+	var iconPositionY @this/IconContainer/Icon.positionY
+	var arrowsBGWidth @this/Arrows:Rui.args.width
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+	inputListener: true
+
+	behavior Button
+	{
+		soundHighlighted: "ui_menu_focus"
+		soundPressedEnabled: "ui_menu_accept"
+		transitions: [
+		{
+			fromState: HIGHLIGHTED
+			toState: IDLE
+			type: TRANSITION_TWEEN
+			animName: "onHighlightedToIdle"
+		},
+		{
+			fromState: ANY
+			toState: HIGHLIGHTED
+			type: TRANSITION_TWEEN
+			animName: "onHighlighted"
+		}
+		]
+	}
+
+	behavior Animator
+	{
+		tweenAnimations: [
+			{
+				name: "onHighlightedToIdle"
+				tweens: [
+					{
+						property: @owner.panel/Border:Image.colorRGB
+						startValue: <1.0, 0.305, 0.1137>
+						endValue: <0.84, 0.84, 0.84>
+						duration: 0.15
+					},
+					{
+						property: @owner.panel/InfoContainer/Name:Label.colorRGB
+						startValue: <1.0, 0.305, 0.1137>
+						endValue: <0.84, 0.84, 0.84>
+						duration: 0.15
+					},
+					{
+						property: @owner.panel:Image.colorRGB
+						startValue: <1.0, 0.305, 0.1137>
+						endValue: <0.84, 0.84, 0.84>
+						duration: 0.15
+					},
+					//Pips below, would like to revisit this
+					{
+						property: @owner.panel/InfoContainer/Pips/Pip1:Image.colorRGB
+						startValue: <1.0, 0.305, 0.1137>
+						endValue: <0.61, 0.61, 0.61>
+						duration: 0.15
+					},
+					{
+						property: @owner.panel/InfoContainer/Pips/Pip2:Image.colorRGB
+						startValue: <1.0, 0.305, 0.1137>
+						endValue: <0.61, 0.61, 0.61>
+						duration: 0.15
+					},
+					{
+						property: @owner.panel/InfoContainer/Pips/Pip3:Image.colorRGB
+						startValue: <1.0, 0.305, 0.1137>
+						endValue: <0.61, 0.61, 0.61>
+						duration: 0.15
+					},
+					{
+						property: @owner.panel/InfoContainer/Pips/Pip4:Image.colorRGB
+						startValue: <1.0, 0.305, 0.1137>
+						endValue: <0.61, 0.61, 0.61>
+						duration: 0.15
+					},
+					{
+						property: @owner.panel/InfoContainer/Pips/Pip5:Image.colorRGB
+						startValue: <1.0, 0.305, 0.1137>
+						endValue: <0.61, 0.61, 0.61>
+						duration: 0.15
+					},
+					{
+						property: @owner.panel/InfoContainer/Pips/Pip6:Image.colorRGB
+						startValue: <1.0, 0.305, 0.1137>
+						endValue: <0.61, 0.61, 0.61>
+						duration: 0.15
+					},
+					{
+						property: @owner.panel/InfoContainer/Pips/Pip7:Image.colorRGB
+						startValue: <1.0, 0.305, 0.1137>
+						endValue: <0.61, 0.61, 0.61>
+						duration: 0.15
+					},
+					{
+						property: @owner.panel/InfoContainer/Pips/Pip8:Image.colorRGB
+						startValue: <1.0, 0.305, 0.1137>
+						endValue: <0.61, 0.61, 0.61>
+						duration: 0.15
+					}
+				]
+			},
+			{
+				name: "onHighlighted"
+				tweens: [
+					{
+						property: @owner.panel/Border:Image.colorRGB
+						startValue: <0.84, 0.84, 0.84>
+						endValue: <1.0, 0.305, 0.1137>
+						duration: 0.15
+					},
+					{
+						property: @owner.panel/InfoContainer/Name:Label.colorRGB
+						startValue: <0.84, 0.84, 0.84>
+						endValue: <1.0, 0.305, 0.1137>
+						duration: 0.15
+					},
+					{
+						property: @owner.panel:Image.colorRGB
+						startValue: <0.84, 0.84, 0.84>
+						endValue: <1.0, 0.305, 0.1137>
+						duration: 0.15
+					},
+					//Pips below, would like to revisit this
+					{
+						property: @owner.panel/InfoContainer/Pips/Pip1:Image.colorRGB
+						startValue: <0.61, 0.61, 0.61>
+						endValue: <1.0, 0.305, 0.1137>
+						duration: 0.15
+					},
+					{
+						property: @owner.panel/InfoContainer/Pips/Pip2:Image.colorRGB
+						startValue: <0.61, 0.61, 0.61>
+						endValue: <1.0, 0.305, 0.1137>
+						duration: 0.15
+					},
+					{
+						property: @owner.panel/InfoContainer/Pips/Pip3:Image.colorRGB
+						startValue: <0.61, 0.61, 0.61>
+						endValue: <1.0, 0.305, 0.1137>
+						duration: 0.15
+					},
+					{
+						property: @owner.panel/InfoContainer/Pips/Pip4:Image.colorRGB
+						startValue: <0.61, 0.61, 0.61>
+						endValue: <1.0, 0.305, 0.1137>
+						duration: 0.15
+					},
+					{
+						property: @owner.panel/InfoContainer/Pips/Pip5:Image.colorRGB
+						startValue: <0.61, 0.61, 0.61>
+						endValue: <1.0, 0.305, 0.1137>
+						duration: 0.15
+					},
+					{
+						property: @owner.panel/InfoContainer/Pips/Pip6:Image.colorRGB
+						startValue: <0.61, 0.61, 0.61>
+						endValue: <1.0, 0.305, 0.1137>
+						duration: 0.15
+					},
+					{
+						property: @owner.panel/InfoContainer/Pips/Pip7:Image.colorRGB
+						startValue: <0.61, 0.61, 0.61>
+						endValue: <1.0, 0.305, 0.1137>
+						duration: 0.15
+					},
+					{
+						property: @owner.panel/InfoContainer/Pips/Pip8:Image.colorRGB
+						startValue: <0.61, 0.61, 0.61>
+						endValue: <1.0, 0.305, 0.1137>
+						duration: 0.15
+					}
+				]
+			}
+		]
+	}
+
+	behavior Image
+	{
+		assetPath: $"ui_image/rui/menu/buttons/weapon_categories/more_panel_mask.rpak"
+		imageBlur: ASSETMASK
+	}
+
+	panel Darken
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			color: <0, 0, 0, 0.4>
+			assetPath: $"ui_image/rui/menu/buttons/weapon_categories/more_panel_mask.rpak"
+		}
+	}
+
+	panel Arrows
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Rui
+		{
+			ruiAsset: $"ui/mastery_arrows_bg.rpak"
+			args: {
+				width: 0
+			}
+		}
+	}
+
+	panel DotsTopLeft
+	{
+		anchor: TOP_LEFT
+		offsets: <0, 0, 0, 0>
+		size: <233, 229>
+		pivot: <0.0, 0.0>
+		positionX: 2
+
+		behavior Image
+		{
+			alpha: 0.3
+			assetPath: $"ui_image/rui/menu/buttons/weapon_categories/more_panel_dots.rpak"
+		}
+	}
+
+	panel DotsRottomRight
+	{
+		anchor: BOTTOM_RIGHT
+		offsets: <0, 0, 0, 0>
+		size: <233, 229>
+		pivot: <0.0, 0.0>
+		positionX: -2
+		rotation: 180
+
+		behavior Image
+		{
+			alpha: 0.3
+			assetPath: $"ui_image/rui/menu/buttons/weapon_categories/more_panel_dots.rpak"
+		}
+	}
+
+	panel Border
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/buttons/weapon_categories/more_panel.rpak"
+		}
+	}
+
+	panel IconContainer
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 20, 70>
+
+		panel Icon
+		{
+			anchor: CENTER
+			size: <255, 140>
+
+			behavior Image
+			{
+				bind *.icon -> @this.assetPath
+
+				assetPath: $""
+				colorRGB: <0.84, 0.84, 0.84>
+			}
+		}
+	}
+
+	instance $"ui_rtk/common/new.rpak"
+	{
+		bind *.hasNew -> @this.visible
+
+		anchor: TOP_RIGHT
+		pivot: <1.0, 0.0>
+		position: <-12, 7>
+		size: <38, 38>
+	}
+
+	panel InfoContainer
+	{
+		anchor: BOTTOM_STRETCH_WIDTH
+		pivot: <0.5, 1.0>
+		offsets: <0, 0, 0, 0>
+		height: 34
+		positionY: -24
+
+		behavior VerticalContainer
+		{
+			expandChildWidth: true
+			expandToFillEvenly: true
+		}
+
+		panel Name
+		{
+			anchor: CENTER_STRETCH_WIDTH
+			pivot: <0.5, 0.5>
+			height: 26
+			offsetsLR: <60, 0>
+
+			behavior Label
+			{
+				bind *.name -> @this.text
+
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				verticalMode: OVERFLOW
+				horizontalMode: SQUISH_TO_CONTAINER
+				pixelHeight: 28
+				text: ""
+				allCaps: true
+			}
+		}
+
+		panel Pips
+		{
+			anchor: BOTTOM_STRETCH_WIDTH
+	        pivot: <0.5, 0.5>
+
+			behavior HorizontalContainer
+	        {
+	            spacing: 5
+	            alignment: BOTTOM
+	            fitContentHeight: true
+	        }
+
+	        panel Pip1
+			{
+				bind *.count -> GreaterThanOrEqual(1) -> @this.visible
+
+				size: <6,6>
+
+				behavior Image
+			}
+
+			panel Pip2
+			{
+				bind *.count -> GreaterThanOrEqual(2) -> @this.visible
+
+				size: <6,6>
+
+				behavior Image
+			}
+
+			panel Pip3
+			{
+				bind *.count -> GreaterThanOrEqual(3) -> @this.visible
+
+				size: <6,6>
+
+				behavior Image
+			}
+
+			panel Pip4
+			{
+				bind *.count -> GreaterThanOrEqual(4) -> @this.visible
+
+				size: <6,6>
+
+				behavior Image
+			}
+
+			panel Pip5
+			{
+				bind *.count -> GreaterThanOrEqual(5) -> @this.visible
+
+				size: <6,6>
+
+				behavior Image
+			}
+
+			panel Pip6
+			{
+				bind *.count -> GreaterThanOrEqual(6) -> @this.visible
+
+				size: <6,6>
+
+				behavior Image
+			}
+
+			panel Pip7
+			{
+				bind *.count -> GreaterThanOrEqual(7) -> @this.visible
+
+				size: <6,6>
+
+				behavior Image
+			}
+
+			panel Pip8
+			{
+				bind *.count -> GreaterThanOrEqual(8) -> @this.visible
+
+				size: <6,6>
+
+				behavior Image
+			}
+	    }
+	}
+}

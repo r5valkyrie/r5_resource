@@ -1,0 +1,121 @@
+instance $"ui_rtk/menus/store/components/store_grid_offer_button.rpak" GridMythicButton
+{
+	override bind root "*"
+
+	append @this:Button.transitions
+	{
+		fromState: ANY
+		toState: HIGHLIGHTED
+		type: TRANSITION_PROPERTY_SET
+		property: @panel/Background/Offer/BinkVideo.visible
+		value: true
+	}
+
+	append @this:Button.transitions
+	{
+		fromState: ANY
+		toState: HIGHLIGHTED
+		type: TRANSITION_PROPERTY_SET
+		property: @panel/Background/Offer/BinkVideo:Video.status
+		value: 1
+	}
+
+	append @this:Button.transitions
+	{
+		fromState: ANY
+		toState: HIGHLIGHTED
+		type: TRANSITION_PROPERTY_SET
+		property: @panel/ShimmerBorder:Image.uv1Translate
+		value: <0.0, 2.5>
+	}
+
+	append @this:Button.transitions
+	{
+		fromState: ANY
+		toState: HIGHLIGHTED
+		type: TRANSITION_PROPERTY_SET
+		property: @panel/Background/Offer.scale
+		value: <1.0, 1.0>
+	}
+
+	append @this:Button.transitions
+	{
+		fromState: HIGHLIGHTED
+		toState: ANY
+		type: TRANSITION_PROPERTY_SET
+		property: @panel/Background/Offer/BinkVideo.visible
+		value: false
+	}
+
+	append @this:Button.transitions
+	{
+		fromState: HIGHLIGHTED
+		toState: ANY
+		type: TRANSITION_PROPERTY_SET
+		property: @panel/Background/Offer/BinkVideo:Video.status
+		value: 3
+	}
+
+	append @this:Button.transitions
+	{
+		fromState: HIGHLIGHTED
+		toState: ANY
+		type: TRANSITION_TWEEN
+		animName: "onHighlightedToAny"
+	}
+
+	append @this:Animator.tweenAnimations
+	{
+		name: "onHighlightedToAny"
+		tweens: [
+			{
+				property: @panel/Background/Offer.scale
+				startValue: <0.8, 0.8>
+				endValue: <1.0, 1.0>
+				duration: 0.4
+				curve: EASE_OUT_CUBIC
+			},
+			{
+				property: @panel/ShimmerBorder:Image.uv1Translate
+				startValue: <0.0, 2.1>
+				endValue: <0.0, -2.1>
+				duration: 2.0
+				delay: 0.2
+				curve: EASE_OUT_QUAD
+			}
+		]
+	}
+
+	context @var(offerPanel)
+	{
+		panel BinkVideo
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Video
+			{
+				bind *.binkRef -> @this.assetPath
+
+				isLooped: true
+			}
+		}
+	}
+
+	panel ShimmerBorder
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <-8, -8, -8, -8>
+
+		behavior Image
+		{
+			bind *.rarity -> QualityColor( false ) -> @this.colorRGB
+
+			assetPath: $"ui_image/rui/menu/store/common/store_frame_highlight.rpak"
+			assetMaskPath: $"ui_image/rui/gradient_ud_du.rpak"
+			uv1Translate: <0.0, 2.1>
+			uv1Scale: <1.0, 2.5>
+			uv1Rotate: 0.16
+		}
+	}
+}

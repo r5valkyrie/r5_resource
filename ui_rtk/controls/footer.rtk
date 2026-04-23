@@ -1,0 +1,48 @@
+panel Footer
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	instance $"ui_rtk/common/footer_group.rpak" LeftFooterGroup
+	{
+		override @var(bindingPath) "&menus.leftFooterGroup.items"
+
+		anchor: BOTTOM_LEFT
+		position: <48, -54>
+		pivot: <0, 1>
+
+		behavior NxOverrides
+		{
+			overrides: [
+				{
+					propertyRef: @panel.position
+					nxValue: <44, -23>
+				},
+				{
+					propertyRef: @panel:HorizontalContainer.spacing
+					nxValue: 40
+				}
+			]
+		}
+	}
+
+	instance $"ui_rtk/common/footer_group.rpak" CenterFooterGroup
+	{
+		override @var(bindingPath) "&menus.centerFooterGroup.items"
+
+		anchor: BOTTOM
+		position: <0, -54>
+		pivot: <0.5, 1>
+	}
+
+	instance $"ui_rtk/common/footer_group.rpak" RightFooterGroup
+	{
+		override @var(bindingPath) "&menus.rightFooterGroup.items"
+
+		anchor: BOTTOM_RIGHT
+		position: <-48, -54>
+		pivot: <1, 1>
+	}
+}

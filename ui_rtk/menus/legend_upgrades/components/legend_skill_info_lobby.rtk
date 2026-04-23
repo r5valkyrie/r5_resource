@@ -1,0 +1,80 @@
+panel
+{
+	bind root
+
+	size: <270, 48>
+
+	var descTextPosition @this/DescText.position
+
+	panel SkillIcon
+	{
+		anchor: LEFT
+		pivot: <0.0, 0.5>
+		size: <48, 48>
+		useLocaleDirection: true
+
+		behavior Image
+		{
+			bind *.icon -> @this.assetPath
+		}
+	}
+
+	panel Separator
+	{
+		anchor: LEFT
+		position: <66, 0>
+		size: <4, 48>
+		useLocaleDirection: true
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/common/vertical_trapezoid_separator.rpak"
+			flipHorizontal: true
+			color: <1.0, 1.0, 1.0, 0.4>
+		}
+	}
+
+	panel HeaderText
+	{
+		anchor: LEFT
+		position: <84, -3>
+		pivot: <0, 1>
+		size: <300, 18>
+		useLocaleDirection: true
+
+		behavior Label
+		{
+			bind *.headerText -> @this.text
+
+			face: "TitleBoldFont"
+			pixelHeight: 18
+			textAlignHorizontal: LEFT
+			useLocaleDirection: true
+			color: <0.7, 0.7, 0.7, 1.0>
+			allCaps: true
+			shadowAlpha: 0.6
+		}
+	}
+
+	panel DescText
+	{
+		anchor: LEFT
+		position: <84, -3>
+		pivot: <0, 0>
+		size: <300, 22>
+		useLocaleDirection: true
+
+		behavior Label
+		{
+			bind *.descText -> @this.text
+
+			face: "TitleBoldFont"
+			pixelHeight: 22
+			textAlignHorizontal: LEFT
+			useLocaleDirection: true
+			color: <1.0, 1.0, 1.0, 1.0>
+			allCaps: true
+			shadowAlpha: 0.6
+		}
+	}
+}

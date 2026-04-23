@@ -1,0 +1,160 @@
+panel AngledButton
+{
+	// base settings
+	var size @this.size
+	var pivot @this.pivot
+	var flipHorizontal @this/Background:Image.flipHorizontal
+	var labelText @this/Text:Label.text
+	var labelPixelHeight @this/Text:Label.pixelHeight
+
+	// visibility
+	var labelAlpha @this/Text:Label.alpha
+	var backgroundAlpha @this/Background:Image.alpha
+	var outlineAlpha @this/Outline:Image.alpha
+
+	// idle colors settings
+	var labelColor @this/Text:Label.colorRGB
+	var backgroundColor @this/Background:Image.colorRGB
+	var outlineColor @this/Outline:Image.colorRGB
+
+	// hover settings
+	var outlineHoverColor @this:Button.transitions[1].value
+
+	anchor: CENTER
+	size: <90, 60>
+	inputListener: true
+
+	behavior Button
+	{
+		soundHighlighted: "ui_menu_focus"
+		soundPressedEnabled: "ui_menu_accept"
+		transitions: [
+		{
+			fromState: ANY
+			toState: IDLE
+			type: TRANSITION_PROPERTY_SET
+			property: @owner.panel/Outline:Image.colorRGB
+			value: #FFFFFF
+		},
+		{
+			fromState: ANY
+			toState: HIGHLIGHTED
+			type: TRANSITION_PROPERTY_SET
+			property: @owner.panel/Outline:Image.colorRGB
+			value: #FF4E1D
+		},
+		{
+			fromState: ANY
+			toState: IDLE
+			type: TRANSITION_PROPERTY_SET
+			property: @owner.panel/Outline:Image.assetPath
+			value: $"ui_image/rui/borders/border_angled_2px.rpak"
+		},
+		{
+			fromState: ANY
+			toState: HIGHLIGHTED
+			type: TRANSITION_PROPERTY_SET
+			property: @owner.panel/Outline:Image.assetPath
+			value: $"ui_image/rui/borders/border_angled_4px.rpak"
+		},
+		{
+			fromState: ANY
+			toState: IDLE
+			type: TRANSITION_TWEEN
+			animName: "onIdle"
+		},
+		{
+			fromState: ANY
+			toState: HIGHLIGHTED
+			type: TRANSITION_TWEEN
+			animName: "onHighlighted"
+		},
+		{
+			fromState: ANY
+			toState: PRESSED
+			type: TRANSITION_TWEEN
+			animName: "onPressed"
+		}
+		]
+	}
+
+	behavior Animator
+	{
+		tweenAnimations: [
+			{
+				name: "onIdle"
+				tweens: [
+					{
+						property: @owner.panel.scale
+						startValue: <1.0, 1.0>
+						endValue: <1.0, 1.0>
+						duration: 0.1
+					}
+				]
+			},
+			{
+				name: "onHighlighted"
+				tweens: [
+					{
+						property: @owner.panel.scale
+						startValue: <1.0, 1.0>
+						endValue: <1.0, 1.0>
+						duration: 0.1
+					}
+				]
+			},
+			{
+				name: "onPressed"
+				tweens: [
+					{
+						property: @owner.panel.scale
+						startValue: <1.0, 1.0>
+						endValue: <0.9, 0.9>
+						duration: 0.1
+					}
+				]
+			}
+		]
+	}
+
+	panel Background
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/borders/border_angled_mask.rpak"
+			colorRGB: #1C1C1C
+			alpha: 1.0
+		}
+	}
+
+	panel Outline
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			bind @root/Background:Image.flipHorizontal -> @this.flipHorizontal
+
+			assetPath: $"ui_image/rui/borders/border_angled_2px.rpak"
+		}
+	}
+
+	panel Text
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Label
+		{
+			face: "TitleBoldFont"
+			pixelHeight: 34
+			textAlignHorizontal: CENTER
+			textAlignVertical: CENTER
+			horizontalMode: SQUISH_TO_CONTAINER
+		}
+	}
+}

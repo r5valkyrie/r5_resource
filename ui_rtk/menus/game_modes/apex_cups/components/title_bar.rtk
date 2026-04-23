@@ -1,0 +1,59 @@
+panel TitleBar
+{
+	behavior HorizontalContainer
+	{
+		alignment: LEFT
+		fitContentHeight: true
+		expandToFillEvenly: true
+		spacing: 15
+	}
+
+	panel TitleBarLeft
+	{
+		size: <20, 5>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/apex_rumble/borders/title_bar_line.rpak"
+			color: #ABABAB
+			flipVertical: true
+		}
+	}
+
+	panel TitleText
+	{
+		behavior Label
+		{
+			bind &menus.cupOverview.calEvent -> ItemFlavorString( "gameMode" ) -> GamemodeName -> @this.text
+
+			text: "Default Text"
+			face: "TitleRegularFont"
+			pixelHeight: 32
+			color: #ABABAB
+			shadowAlpha: 0.6
+			shadowBlur: 6.0
+			textAlignHorizontal: CENTER
+			textAlignVertical: CENTER
+			horizontalMode: AUTOSIZE_TO_TEXT
+			verticalMode: CLIP
+		}
+
+		behavior ContainerElement
+		{
+			autosizeToLabelWidth: true
+			preferredHeight: 32
+		}
+	}
+
+    panel TitleBarRight
+    {
+	    size: <20, 5>
+
+        behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/apex_rumble/borders/title_bar_line.rpak"
+			color: #ABABAB
+			flipVertical: true
+		}
+    }
+}

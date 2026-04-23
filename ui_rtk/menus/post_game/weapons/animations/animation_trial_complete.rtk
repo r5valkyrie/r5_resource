@@ -1,0 +1,68 @@
+data RTKKeyFrameAsset
+{
+	duration: 0.6673
+	tracks: [
+	{
+		property: @panel/TrialCard/FlashOverlay:Image.alpha
+		keyframes: [
+		{
+			time: 0.0
+			value: 0.0
+		},
+		{
+			time: 0.0667
+			value: 0.96
+		},
+		{
+			time: 0.6340
+			value: 0.0
+		}
+		]
+	},
+	{
+		property: @panel/TrialCard/FlashGlow:Image.alpha
+		keyframes: [
+		{
+			time: 0.0
+			value: 0.0
+		},
+		{
+			time: 0.1001
+			value: 1.0
+		},
+		{
+			time: 0.6673
+			value: 0.0
+		}
+		]
+	},
+	{
+		property: @panel/TrialCard/FlashOutline:Image.alpha
+		keyframes: [
+		{
+			time: 0.0
+			value: 1.0
+			curve: EASE_OUT_CUBIC
+		},
+		{
+			time: 0.5672
+			value: 0.0
+		}
+		]
+	},
+	{
+		property: @panel/TrialCard/FlashOutline.size
+		keyframes: [
+		{
+			time: 0.0
+			value: <468, 568>
+			curve: EASE_OUT_CUBIC
+		},
+		{
+			time: 0.5672
+			value: <556, 656>
+		}
+		]
+	}
+	]
+}

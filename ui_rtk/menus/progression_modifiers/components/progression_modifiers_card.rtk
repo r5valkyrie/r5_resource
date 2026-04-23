@@ -1,0 +1,111 @@
+panel ProgressionModifierInfoCard
+{
+	bind root
+
+	var title @this/TextContent/Title:Label.text
+	var description @this/TextContent/Description:Label.text
+	var iconPath @this/BoostImage:Image.assetPath
+	var color @this/Background/TopLine:Image.colorRGB
+
+	size: <480,550>
+	offsets: <0, 0, 0, 0>
+
+	panel Background
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/xp_boost/boost_panel.rpak"
+		}
+
+		panel TopLine
+		{
+			anchor: TOP_STRETCH_WIDTH
+			size: <1, 8>
+			offsets: <0, 0, 0, 0>
+			behavior Image
+		}
+	}
+
+	panel BoostImage
+	{
+		anchor: TOP
+		size: <200,200>
+		pivot: <0.5, 0.0>
+		position: <0, 85>
+
+		behavior Image
+		{
+			bind @panel.parent/Background/TopLine:Image.colorRGB -> @this.colorRGB
+		}
+
+		behavior ColorExtensions
+		{
+			lightness: 0.25
+		}
+	}
+
+	panel TextContent
+	{
+		width: 480
+		positionY: 25
+		anchor: CENTER
+		pivot: <0.5, 0>
+
+		behavior VerticalContainer
+		{
+			fitContentHeight: true
+			spacing: 17.5
+			alignment: CENTER
+		}
+
+		panel Title
+		{
+			anchor: CENTER
+			size: <410,35>
+			behavior Label
+			{
+				text: "TITLE TEXT"
+				face: "TitleBoldFont"
+				pixelHeight: 35
+				colorRGB: <1, 1, 1>
+				outlineColorInner: <0, 0, 0, 0>
+				outlineColorOuter: <0, 0, 0, 0>
+				textAlignHorizontal: CENTER
+				textAlignVertical: TOP
+
+				horizontalMode: SQUISH_TO_CONTAINER
+				verticalMode: CLIP
+
+				shadowAlpha: 0.6
+				shadowBlur: 6.0
+				shadowOffset: <0, 0>
+				allCaps: true
+			}
+		}
+
+		panel Description
+		{
+			anchor: CENTER
+			size: <410,160>
+			behavior Label
+			{
+				text: "Description Text"
+				face: "DefaultBoldFont"
+				pixelHeight: 30
+				colorRGB: #808080
+				outlineColorInner: <0, 0, 0, 0>
+				outlineColorOuter: <0, 0, 0, 0>
+				textAlignHorizontal: CENTER
+				horizontalMode: WRAP
+				verticalMode: AUTOSIZE_TO_TEXT
+
+				shadowAlpha: 0.6
+				shadowBlur: 6.0
+				shadowOffset: <0, 0>
+			}
+		}
+	}
+}

@@ -1,0 +1,119 @@
+panel MilestoneEventHeader
+{
+	bind root
+	anchor: TOP_LEFT
+	size: <700, 200>
+	pivot: <0, 0>
+	offsets: <0, 0, 0, 0>
+
+	behavior VerticalContainer
+	{
+		fitContentHeight: true
+		spacing: 2
+	}
+
+	panel Header
+	{
+		bind @this/Text.height -> @this.height
+		anchor: TOP_LEFT
+		pivot: <0, 0>
+		size: <700, 200>
+
+		panel Text
+		{
+			anchor: TOP_LEFT
+			pivot: <0, 0>
+			width: 540
+			behavior Label
+			{
+				bind *.color -> @this.colorRGB
+				text: "#MILESTONE_EVENT_COLLECTION_TITLE"
+				face: "TitleBoldFont"
+				pixelHeight: 42
+				colorRGB: <1, 1, 1>
+				outlineColorInner: <0, 0, 0, 0.8>
+				outlineColorOuter: <0, 0, 0, 0>
+				textAlignHorizontal: LEFT
+				textAlignVertical: CENTER
+				horizontalMode: SQUISH_TO_CONTAINER
+				verticalMode: AUTOSIZE_TO_TEXT
+				allcaps: true
+			}
+		}
+	}
+
+	panel LineSeparator
+	{
+		bind @this.parent.width -> @this.width
+		height: 4
+		behavior Image
+		{
+			color: <1.0, 1.0, 1.0, 1.0>
+		}
+		visible: false
+	}
+
+	panel ItemsCollected
+	{
+		bind @this/Text.height -> @this.height
+		anchor: TOP_LEFT
+		pivot: <0, 0>
+		size: <600, 200>
+
+		behavior Image
+		{
+			bind *.titleBgColor -> @this.colorRGB
+			assetPath: $"ui_image/rui/events/collection_events/season_label_bg.rpak"
+		}
+
+		panel Text
+		{
+			anchor: TOP_LEFT
+			pivot: <0, 0>
+			width: 550
+			behavior FormatLabel
+			{
+				bind *.collectedItems -> @this.arg1
+				bind *.totalItems -> @this.arg2
+				format: "#MILESTONE_EVENT_COLLECTION_SUBTITLE"
+				face: "TitleBoldFont"
+				pixelHeight: 30
+				margin: <20, 0, 0, 0>
+				colorRGB: <1, 1, 1>
+				outlineColorInner: <0, 0, 0, 0.8>
+				outlineColorOuter: <0, 0, 0, 0>
+				textAlignHorizontal: LEFT
+				textAlignVertical: CENTER
+				horizontalMode: SQUISH_TO_CONTAINER
+				verticalMode: AUTOSIZE_TO_TEXT
+				allcaps: true
+				arg1: 13
+				arg2: 35
+			}
+
+			behavior LabelAltStyle
+			{
+				face: "TitleFont"
+				pixelHeight: 30
+				color: <0.75, 0.75, 0.75, 1>
+			}
+		}
+	}
+
+	//Commented out but left here in case we have space to bring this back in some form since we all liked it.
+	//panel CategoryDisplay
+	//{
+	//	behavior HorizontalContainer
+	//	{
+	//		fitContentHeight: true
+	//		fitContentWidth: true
+	//		spacing: 20
+	//	}
+//
+	//	behavior ListBinder
+	//	{
+	//		bindingPath: "*.collectedInfo"
+	//		prefab: $"ui_rtk/menus/events/milestone/components/milestone_event_collection_label.rpak"
+	//	}
+	//}
+}

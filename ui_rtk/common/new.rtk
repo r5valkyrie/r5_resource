@@ -1,0 +1,11 @@
+panel New
+{
+	anchor: CENTER
+	offsets: <0, 0, 0, 0>
+	size: <28, 28>
+
+	behavior Image
+	{
+		assetPath: $"ui_image/rui/menu/buttons/new.rpak"
+	}
+}

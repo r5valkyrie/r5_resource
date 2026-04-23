@@ -1,0 +1,167 @@
+panel ApexCupsLeaderboardRow
+{
+    bind root
+
+	bind *.index -> IntEqual(0) -> PickIntFromTwo( 46, 68 ) -> @this.height
+	bind *.name -> IsEmpty -> Not -> @this.active
+
+	anchor: TOP
+	offsets: <0, 0, 0, 0>
+	pivot: <0, 0>
+	width: 1054
+	height: 46
+	inputListener: true
+
+	behavior Button
+	{
+		soundHighlighted: "ui_menu_focus"
+		soundPressedEnabled: "ui_menu_accept"
+	}
+
+	behavior InspectButton
+	{
+		bind *.name -> @this.playerName
+		bind *.hardware -> @this.playerHardware
+		bind *.playerUID -> @this.playerUID
+	}
+
+	panel Content
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		pivot: <0, 0>
+
+		behavior HorizontalContainer
+		{
+			expandToFillEvenly: false
+			expandChildHeight: true
+			spaceEvenly: false
+			spacing: 2
+
+			fitContentWidth: true
+			fitContentHeight: false
+
+			alignment: CENTER
+		}
+
+		panel PlacementString
+		{
+			pivot: <0, 0>
+			position: <0, 0>
+			width: 142
+
+			panel background
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+				behavior Image
+				{
+					bind *.index -> isEven -> PickVectorFromTwo( #474747 , #333333 ) -> @this.colorRGB
+					bind *.playerUID -> IsLocalPlayer -> PickVectorFromTwo( @this.colorRGB, #F5A523 ) -> @this.colorRGB
+					bind *.playerUID -> IsLocalPlayer -> PickFloatFromTwo( 0.9, 0.3 ) -> @this.alpha
+				}
+			}
+
+			panel text
+			{
+				anchor: CENTER
+
+				behavior FormatLabel
+				{
+					bind *.placement  -> @this.arg1
+					bind *.playerUID -> IsLocalPlayer -> PickVectorFromTwo( #FFFFFF, #F5A523 ) -> @this.colorRGB
+
+					verticalMode: AUTOSIZE_TO_TEXT
+					HorizontalMode: AUTOSIZE_TO_TEXT
+					pixelHeight: 26
+					face: "TitleRegularFont"
+					margin: <0, 0, 0, 0>
+					format: "#CUPS_LEADERBOARD_PLACEMENT_VAL"
+					arg1: 0
+				}
+			}
+		}
+
+		panel NameString
+		{
+			pivot: <0, 0>
+			position: <0, 0>
+			width: 754
+
+			panel background
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				behavior Image
+				{
+					bind @root/Content/PlacementString/background:Image.color -> @this.color
+				}
+			}
+
+			panel text
+			{
+				anchor: LEFT
+				pivot: <0, 0.5>
+
+				behavior Label
+				{
+					bind *.name -> PlayerDisplayName( *.hardware ) -> IfEmpty( "#CUPS_LEADERBOARD_EMPTY_DATA" ) -> @this.text
+					bind @root/Content/PlacementString/text:FormatLabel.color -> @this.color
+
+					verticalMode: AUTOSIZE_TO_TEXT
+					HorizontalMode: AUTOSIZE_TO_TEXT
+					pixelHeight: 28
+					face: #FONT_DEFAULT
+					margin: <10, 0, 0, 0>
+				}
+			}
+		}
+
+		panel PointsString
+		{
+			pivot: <0, 0>
+			position: <0, 0>
+			width: 160
+
+			panel background
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				behavior Image
+				{
+					bind @root/Content/PlacementString/background:Image.color -> @this.color
+				}
+			}
+
+			panel text
+			{
+				anchor: CENTER
+
+				behavior Label
+				{
+					bind *.points -> @this.text
+					bind @root/Content/PlacementString/text:FormatLabel.color -> @this.color
+
+					verticalMode: AUTOSIZE_TO_TEXT
+					HorizontalMode: AUTOSIZE_TO_TEXT
+					pixelHeight: 28
+					face: #FONT_DEFAULT
+					margin: <0, 0, 0, 0>
+					text: "000000"
+				}
+			}
+		}
+
+		panel SelectionBox
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			behavior ContainerElement
+			{
+				ignoreLayout: true
+			}
+			behavior Image
+			{
+				bind *.index -> Equal( &menus.apexCups.selectedIdx ) -> PickIntFromTwo(0,1) -> @this.alpha
+
+				assetPath: $"ui_image/rui/borders/border_outline_2px.rpak"
+			}
+		}
+	}
+}

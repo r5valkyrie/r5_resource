@@ -1,0 +1,51 @@
+panel RewardIcon
+{
+	bind root
+	anchor: CENTER
+	size: <120,120>
+
+	panel BackgroundImage
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/postgame/reward_empty.rpak"
+		}
+	}
+
+	panel Icon
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			bind *.icon -> @this.assetPath
+			assetPath: $"ui_image/rui/menu/buttons/battlepass/apex_pack.rpak"
+		}
+	}
+
+	instance $"ui_rtk/common/labels/slanted_decorated_label.rpak"
+	{
+		bind *.value -> @this/Value/ValueText:Label.text
+		override @this/Value/ValueText:Label.allCaps true
+		override @this/Value/ValueText:Label.fitToWidth 90.00
+		anchor: BOTTOM_RIGHT
+		pivot: <1,1>
+		position: <-4,-2>
+	}
+
+	panel Frame
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			colorRGB: <1, 1, 1>
+			assetPath: $"ui_image/rui/borders/border_outline_4px.rpak"
+		}
+	}
+}

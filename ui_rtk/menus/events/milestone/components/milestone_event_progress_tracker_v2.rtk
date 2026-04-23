@@ -1,0 +1,100 @@
+panel ProgressTrackerV2
+{
+	bind root
+	offsets: <0, 0, 0, 0>
+	size: <850, 200>
+
+	panel Header
+	{
+		anchor: TOP_LEFT
+		pivot: <0, 0>
+		useLocaleDirection: true
+
+		behavior Label
+		{
+			text: "#MILESTONE_TRACKER_HEADER"
+			face: "TitleBoldFont"
+			color: <1.0, 1.0, 1.0, 1>
+			pixelHeight: 24
+			textAlignHorizontal: LEFT
+			horizontalMode: AUTOSIZE_TO_TEXT
+			allCaps: true
+		}
+	}
+
+	panel CompletionTracker
+	{
+		anchor: TOP_RIGHT
+		pivot: <1, 0>
+		useLocaleDirection: true
+
+		behavior VerticalContainer
+		{
+			fitContentHeight: true
+			alignment: RIGHT
+			spacing: -2
+			useLocaleDirection: true
+		}
+
+		panel Percentage
+		{
+			anchor: TOP_RIGHT
+
+			behavior Label
+			{
+				bind *.completionPercentage -> @this.text
+
+				face: "TitleRegularFont"
+				text: ""
+				textAlignHorizontal: RIGHT
+				textAlignVertical: CENTER
+				horizontalMode: AUTOSIZE_TO_TEXT
+				verticalMode: AUTOSIZE_TO_TEXT
+				useLocaleDirection: true
+				pixelHeight: 20
+				color: <1, 1, 1, 1>
+			}
+		}
+
+		panel PacksTillMilestone
+		{
+			anchor: TOP_RIGHT
+
+			behavior Label
+			{
+				bind *.nextMilestoneText -> @this.text
+
+				face: "TitleRegularFont"
+				text: ""
+				textAlignHorizontal: RIGHT
+				textAlignVertical: CENTER
+				horizontalMode: AUTOSIZE_TO_TEXT
+				verticalMode: AUTOSIZE_TO_TEXT
+				useLocaleDirection: true
+				pixelHeight: 20
+				color: <1, 1, 1, 1>
+			}
+		}
+	}
+
+	panel Milestones
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		pivot: <0, 1>
+
+		behavior HorizontalContainer
+		{
+			fitContentHeight: true
+			alignment: BOTTOM_LEFT
+			expandToFillEvenly: true
+			expandChildHeight: true
+		}
+
+		behavior ListBinder
+		{
+			bindingPath: "*.rewardTiersModel"
+			prefab: $"ui_rtk/menus/events/milestone/components/milestone_event_progress_tracker_tier.rpak"
+		}
+	}
+
+}

@@ -1,0 +1,97 @@
+panel Disclaimer
+{
+	bind root
+
+	anchor: TOP_STRETCH_WIDTH
+	offsets: <0, 0, 0, 0>
+
+	bind *.isRestricted -> NOT -> @this.visible
+	bind *.isRestricted -> NOT -> @this.active
+	panel ImageBG
+	{
+		// If we don't have any offer data, we'll hide our backer since nothing is visible
+		bind *.packPricingData[0].doesOfferExist -> OR( *.packPricingData[1].doesOfferExist ) -> @this.visible
+
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsetsLR: <-20, -20>
+
+		pivot: <0, 0.5>
+		behavior Image
+		{
+			bind *.disclaimerBoxColor -> @this.colorRGB
+			alpha: 0.8
+		}
+
+		behavior ContainerElement
+		{
+			ignoreLayout: true
+		}
+	}
+
+	behavior VerticalContainer
+	{
+		fitContentHeight: true
+		spacing: 8
+		alignment: CENTER
+		paddingTop: 10
+		paddingBottom: 10
+		useLocaleDirection: true
+	}
+
+	panel Text
+	{
+		bind @this:Label.pixelHeight -> @this.height
+		bind *.hasGuaranteedPack -> @this.visible
+
+		width: 850
+		anchor: TOP_STRETCH_WIDTH
+		pivot: <0, 0.5>
+		behavior Label
+		{
+			text: "#MILESTONE_EVENT_TRACKING_PAGE_DISCLAIMER"
+			face: "DefaultBoldFont"
+			pixelHeight: 28
+			color: #bcbcbc
+			outlineColorInner: <0, 0, 0, 0.8>
+			outlineColorOuter: <0, 0, 0, 0>
+			textAlignHorizontal: CENTER
+			textAlignVertical: CENTER
+			horizontalMode: WRAP
+			verticalMode: AUTOSIZE_TO_TEXT
+		}
+
+		behavior LabelAltStyle
+		{
+			color: #ffcd3c //Legendary
+		}
+
+		behavior LabelAltStyle
+		{
+			color: #00f9c7 //Iconic
+		}
+	}
+
+	panel PricingLines
+	{
+		behavior VerticalContainer
+		{
+			spacing: 5
+			fitContentWidth: true
+			fitContentHeight: true
+		}
+
+		instance $"ui_rtk/menus/events/milestone/components/milestone_event_pricing_line.rpak" PricingLine1
+		{
+			override bind root "*.packPricingData[0]"
+			override @var(packQuantityFormat) "#N_APEX_PACK"
+			override @var(packQuantityArg1) 1
+			bind *.doesOfferExist -> @this.visible
+		}
+		instance $"ui_rtk/menus/events/milestone/components/milestone_event_pricing_line.rpak" PricingLine2
+		{
+			override bind root "*.packPricingData[1]"
+			override @var(packQuantityFormat) "#MILESTONE_BUNDLE_EVENT_MULTIDRAW_LABEL_SHORT"
+			bind *.doesOfferExist -> @this.visible
+		}
+	}
+}

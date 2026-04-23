@@ -1,0 +1,87 @@
+panel ProgressTracker
+{
+	bind root
+	offsets: <0, 0, 0, 0>
+	size: <850, 100>
+
+	panel Bar
+	{
+		anchor: BOTTOM_LEFT
+		pivot: <0, 0.5>
+		size: <850, 25>
+		positionY: -20
+
+		behavior AngledProgressBar
+		{
+			bind *.currentCollectedItems -> @this.current
+			bind *.totalItems -> @this.max
+			bind *.trackerProgressBarColor -> @this.progressBarColor
+			bind *.trackerProgressBarBGColor -> @this.progressBgColor
+			progressBarAlpha: 1.0
+			progressBgAlpha: 0.75
+			angle: 30
+			isDoubleSided: true
+		}
+	}
+
+	/*Note(tc): Everything from here down is a hardcoded solution because of time constraints.
+	It needs a rework using a behavior and instantiating based on the data model.*/
+
+	//Top Buttoms (-14px offset from image added to where the location should be based on % progress)
+	instance $"ui_rtk/menus/events/milestone/components/milestone_event_progress_reward.rpak" RewardButton1
+	{
+		override bind root "*.rewardsItemsModel[0]"
+
+		position: <105, -40>
+	}
+
+	instance $"ui_rtk/menus/events/milestone/components/milestone_event_progress_reward.rpak" RewardButton2
+	{
+		override bind root "*.rewardsItemsModel[1]"
+
+		position: <225, -40>
+	}
+
+	instance $"ui_rtk/menus/events/milestone/components/milestone_event_progress_reward.rpak" RewardButton3
+	{
+		override bind root "*.rewardsItemsModel[2]"
+
+		position: <465, -40>
+	}
+
+	instance $"ui_rtk/menus/events/milestone/components/milestone_event_progress_reward.rpak" RewardButton4
+	{
+		override bind root "*.rewardsItemsModel[3]"
+
+		position: <836, -40>
+	}
+
+	//Bottom Indicators (+14px offset from image added to where the location should be based on % progress)
+	instance $"ui_rtk/menus/events/milestone/components/milestone_event_progress_tracker_indicator.rpak" BottomIndicator1
+	{
+		anchor: BOTTOM_RIGHT
+		position: <-717, -9>
+		override @var(milestoneNumber) "5"
+	}
+
+	instance $"ui_rtk/menus/events/milestone/components/milestone_event_progress_tracker_indicator.rpak" BottomIndicator2
+	{
+		anchor: BOTTOM_RIGHT
+		position: <-595, -9>
+		override @var(milestoneNumber) "10"
+	}
+
+	instance $"ui_rtk/menus/events/milestone/components/milestone_event_progress_tracker_indicator.rpak" BottomIndicator3
+	{
+		anchor: BOTTOM_RIGHT
+		position: <-351, -9>
+		override @var(milestoneNumber) "20"
+	}
+
+	instance $"ui_rtk/menus/events/milestone/components/milestone_event_progress_tracker_indicator.rpak" BottomIndicator4
+	{
+		anchor: BOTTOM_RIGHT
+		position: <19, -9>
+		override @var(milestoneNumber) "36"
+	}
+}

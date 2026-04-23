@@ -1,0 +1,271 @@
+panel ArmoryMorePanel
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	behavior ArmoryMorePanel
+	{
+		healthInjectorPanel: @panel/Stickers/Container/Row1/Health
+		shieldCellPanel: @panel/Stickers/Container/Row1/Cell
+		shieldBatteryPanel: @panel/Stickers/Container/Row2/Battery
+		phoenixKidPanel: @panel/Stickers/Container/Row2/Phoenix
+
+		transitionsPanel: @panel/Game/Container/Row1/Transitions
+		musicPanel: @panel/Game/Container/Row1/Music
+		skydiveTrailsPanel: @panel/Game/Container/Row2/Skydive
+	}
+
+	panel Stickers
+	{
+		anchor: CENTER
+		pivot: <1.0, 0.5>
+		size: < 650, 650 >
+		offsetTop: -44
+		positionX: -8
+
+		panel GradientBG
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/gradient_ud.rpak"
+				flipVertical: true
+				color: <0, 0, 0, 0.8>
+			}
+		}
+
+		panel Header
+		{
+			anchor: TOP_STRETCH_WIDTH
+			offsets: <0, 0, 0, 0>
+			pivot: <0.5, 0.0>
+			height: 65
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/buttons/weapon_categories/more_header.rpak"
+			}
+
+			panel Title
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <10, 10, 0, 0>
+
+				behavior Label
+				{
+					text: "#LOOT_CATEGORY_STICKERS"
+					face: "TitleBoldFont"
+					allCaps: true
+					pixelHeight: 45
+					textAlignVertical: CENTER
+					textAlignHorizontal: CENTER
+					horizontalMode: SQUISH_TO_CONTAINER
+				}
+			}
+		}
+
+		panel Container
+		{
+			anchor: TOP
+			pivot: <0.5, 0.0>
+			positionY: 100
+
+			behavior VerticalContainer
+			{
+				fitContentHeight: true
+				fitContentWidth: true
+				alignment: TOP_LEFT
+				spacing: 32
+			}
+
+			panel Row1
+			{
+				anchor: TOP_LEFT
+
+				behavior HorizontalContainer
+				{
+					fitContentHeight: true
+					fitContentWidth: true
+					spacing: 32
+				}
+
+				instance $"ui_rtk/menus/armory/components/armory_button.rpak" Health
+				{
+					override bind root "&menus.armory.moreCategories.healthInjector"
+					override @var(iconSize) <170, 170>
+					override @var(arrowsBGWidth) 286
+
+					anchor: CENTER
+					size: <286, 229>
+				}
+
+				instance $"ui_rtk/menus/armory/components/armory_button.rpak" Cell
+				{
+					override bind root "&menus.armory.moreCategories.shieldCell"
+					override @var(iconSize) <170, 170>
+					override @var(arrowsBGWidth) 286
+
+					anchor: CENTER
+					size: <286, 229>
+				}
+			}
+
+			panel Row2
+			{
+				anchor: TOP_LEFT
+
+				behavior HorizontalContainer
+				{
+					fitContentHeight: true
+					fitContentWidth: true
+					spacing: 32
+				}
+
+				instance $"ui_rtk/menus/armory/components/armory_button.rpak" Battery
+				{
+					override bind root "&menus.armory.moreCategories.shieldBattery"
+					override @var(iconSize) <170, 170>
+					override @var(arrowsBGWidth) 286
+
+					anchor: CENTER
+					size: <286, 229>
+				}
+
+				instance $"ui_rtk/menus/armory/components/armory_button.rpak" Phoenix
+				{
+					override bind root "&menus.armory.moreCategories.phoenixKit"
+					override @var(iconSize) <170, 170>
+					override @var(arrowsBGWidth) 286
+
+					anchor: CENTER
+					size: <286, 229>
+				}
+			}
+		}
+	}
+
+	panel Game
+	{
+		anchor: CENTER
+		pivot: <0.0, 0.5>
+		size: < 650, 650 >
+		offsetTop: -44
+		positionX: 8
+
+		panel GradientBG
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/gradient_ud.rpak"
+				flipVertical: true
+				color: <0, 0, 0, 0.8>
+			}
+		}
+
+		panel Header
+		{
+			anchor: TOP_STRETCH_WIDTH
+			offsets: <0, 0, 0, 0>
+			pivot: <0.5, 0.0>
+			height: 65
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/buttons/weapon_categories/more_header.rpak"
+			}
+
+			panel Title
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <10, 10, 0, 0>
+
+				behavior Label
+				{
+					text: "#MISC_CUSTOMIZATION"
+					face: "TitleBoldFont"
+					allCaps: true
+					pixelHeight: 45
+					textAlignVertical: CENTER
+					textAlignHorizontal: CENTER
+					horizontalMode: SQUISH_TO_CONTAINER
+				}
+			}
+		}
+
+		panel Container
+		{
+			anchor: TOP
+			pivot: <0.5, 0.0>
+			positionY: 100
+
+			behavior VerticalContainer
+			{
+				fitContentHeight: true
+				fitContentWidth: true
+				alignment: TOP_LEFT
+				spacing: 32
+			}
+
+			panel Row1
+			{
+				anchor: TOP_LEFT
+
+				behavior HorizontalContainer
+				{
+					fitContentHeight: true
+					fitContentWidth: true
+					spacing: 32
+				}
+
+				instance $"ui_rtk/menus/armory/components/armory_button.rpak" Transitions
+				{
+					override bind root "&menus.armory.moreCategories.loadscreen"
+					override @var(iconSize) <170, 170>
+					override @var(arrowsBGWidth) 286
+
+					anchor: CENTER
+					size: <286, 229>
+				}
+
+				instance $"ui_rtk/menus/armory/components/armory_button.rpak" Music
+				{
+					override bind root "&menus.armory.moreCategories.music"
+					override @var(iconSize) <170, 170>
+					override @var(arrowsBGWidth) 286
+
+					anchor: CENTER
+					size: <286, 229>
+				}
+			}
+
+			panel Row2
+			{
+				anchor: TOP_LEFT
+
+				behavior HorizontalContainer
+				{
+					fitContentHeight: true
+					fitContentWidth: true
+					spacing: 32
+				}
+
+				instance $"ui_rtk/menus/armory/components/armory_button.rpak" Skydive
+				{
+					override bind root "&menus.armory.moreCategories.skydive"
+					override @var(iconSize) <170, 170>
+					override @var(arrowsBGWidth) 286
+
+					anchor: CENTER
+					size: <286, 229>
+				}
+			}
+		}
+	}
+}

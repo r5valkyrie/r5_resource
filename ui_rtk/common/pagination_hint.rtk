@@ -1,0 +1,51 @@
+panel Hint
+{
+    size: <25,25>
+
+	behavior Rui
+	{
+		ruiAsset: $"ui/rtk_scroll_nav_hint.rpak"
+		args : {
+			alpha: 0.2
+		}
+	}
+
+    behavior Animator
+	{
+		tweenAnimations: [
+			{
+				name: "FadeIn"
+				tweens: [
+					{
+						property: @panel:Rui.args.alpha
+						startValue: 0.2
+						endValue: 1.0
+						duration: 0.1
+					}
+				]
+			},
+			{
+				name: "FadeOut"
+				tweens: [
+					{
+						property: @panel:Rui.args.alpha
+						startValue: 1.0
+						endValue: 0.2
+						duration: 0.1
+					}
+				]
+			},
+			{
+				name: "Hide"
+				tweens: [
+					{
+						property: @panel:Rui.args.alpha
+						startValue: 0.0
+						endValue: 0.0
+						duration: 0.1
+					}
+				]
+			}
+		]
+	}
+}

@@ -1,0 +1,25 @@
+panel LoreBlurbListItem
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH
+	offsets: <0, 0, 0, 0>
+	useLocaleDirection: true
+
+	behavior FormatLabel
+	{
+		bind *.line -> @this.text
+		bind *.margin -> @this.margin
+
+		text: ""
+		pixelHeight: 30
+		verticalMode: AUTOSIZE_TO_TEXT
+		margin: <0, 0, 0, 0>
+		useLocaleDirection: true
+	}
+
+	behavior LabelAltStyle
+	{
+		face: "DefaultBoldFont"
+	}
+}

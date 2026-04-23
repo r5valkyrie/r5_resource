@@ -1,0 +1,83 @@
+instance $"ui_rtk/common/buttons/offer_button.rpak" ArtifactOfferButton
+{
+	override bind root "*"
+
+	bind *.gridItemType -> GetGradientAssetFromGridItemType -> @this/Background/Gradient:Image.assetPath
+	bind *.gridItemType -> GetLoadAssetFromGridItemType -> @this/Background/Offer:ExternalImage.fallbackImage
+	bind *.offerIndex -> @this:OfferButton.offerIndex
+
+	// Align price based on whether or not it's purchased with Heirloom Shards (miscBool)
+	bind *.miscBool -> PickIntFromTwo( 6, 7 ) -> @var(price).anchor // 7 BOTTOM, 6 BOTTOM_LEFT
+	bind *.miscBool -> PickVectorFromTwo( <25, -28, 0>, <0, -28, 0> ) -> @var(price).position
+	bind *.miscBool -> PickVectorFromTwo( <0.0, 0.5, 0>, <0.5, 0.5, 0> ) -> @var(price).pivot
+	bind *.miscBool -> PickIntFromTwo( 0, 1 ) -> @var(priceAlign) // 1 CENTER, 0 LEFT
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	behavior OfferButton
+	{
+		bind *.slotIndex -> @this.slotIndex
+
+		buttonBehavior: @panel:Button
+		purchaseLimitParent: @panel/Description/TopLines
+	}
+
+	context @var(textBGPanel)
+	{
+		bind *.rarity -> QualityColor( false ) -> [
+			@this/DotsBottomLeft:Image.colorRGB,
+			@this/DotsBottomRight:Image.colorRGB
+		]
+
+		panel DotsBottomLeft
+		{
+			bind *.miscBool -> @this.visible
+
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+			pivot: <0.0, 1.0>
+
+			behavior Image
+			{
+				alpha: 0.4
+				assetMaskPath: $"ui_image/rui/menu/lobby/jclb_dots.rpak"
+				uv1Scale: <1.865625, 0.3>
+				uv1Translate: <0.4328125, -0.3>
+				flipVertical: true
+			}
+		}
+
+		panel DotsBottomRight
+		{
+			bind *.miscBool -> @this.visible
+
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+			pivot: <1.0, 1.0>
+
+			behavior Image
+			{
+				alpha: 0.4
+				assetMaskPath: $"ui_image/rui/menu/lobby/jclb_dots.rpak"
+				uv1Scale: <1.865625, 0.3>
+				uv1Translate: <0.4328125, -0.3>
+				flipVertical: true
+				flipHorizontal: true
+			}
+		}
+	}
+
+	panel Locked
+	{
+		bind *.locked -> @this.visible
+
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			color: <0, 0, 0, 0.65>
+		}
+	}
+}

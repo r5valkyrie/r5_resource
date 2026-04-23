@@ -1,0 +1,74 @@
+panel
+{
+	var handle @this/Handle:Image
+	var handleAsset @this/Handle:Image.assetPath
+	var handleColor @this/Handle:Button.transitions[0].value
+	var handleHighlightColor @this/Handle:Button.transitions[1].value
+	var handlePressedColor @this/Handle:Button.transitions[2].value
+	var bg @this:Image
+	var bgAsset @this:Image.assetPath
+	var bgColor @this:Image.color
+
+	size: <15, 200>
+	inputListener: true
+
+	behavior InputBlocker
+
+	behavior Image ScrollBarBG
+	{
+		color: <0.49, 0.49, 0.49, 0.2>
+	}
+
+	behavior Button
+
+	behavior ScrollBar
+	{
+		backgroundButton: @panel:Button
+		handleDraggable: @panel/Handle:Draggable
+	}
+
+	panel Handle
+	{
+		anchor: LEFT_STRETCH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		inputListener: true
+
+		behavior Button
+		{
+			transitions: [
+				{
+					fromState: ANY
+					toState: IDLE
+					type: TRANSITION_PROPERTY_SET
+					value: <0.68, 0.68, 0.68, 1.0>
+					property: @panel:Image.color
+				},
+				{
+					fromState: ANY
+					toState: HIGHLIGHTED
+					type: TRANSITION_PROPERTY_SET
+					value: <1.0, 1.0, 1.0, 1.0>
+					property: @panel:Image.color
+				},
+				{
+					fromState: ANY
+					toState: PRESSED
+					type: TRANSITION_PROPERTY_SET
+					value: <1.0, 1.0, 1.0, 1.0>
+					property: @panel:Image.color
+				}
+			]
+		}
+
+		behavior Draggable
+
+		behavior Constraints
+		{
+			positionYLock: true
+			constrainWholeRect: true
+			constrainToPanel: @root
+		}
+
+		behavior Image HandleBG
+	}
+}

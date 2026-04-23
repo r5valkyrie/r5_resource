@@ -1,0 +1,33 @@
+instance $"ui_rtk/common/buttons/base_button.rpak" InfoButton
+{
+	override @var(size) <340, 36>
+	override @var(pivot) <1.0, 1.0>
+
+	override @var(labelText) "#CUPS_POINTS_AND_SCORING"
+	override @var(labelFont) "TitleRegularFont"
+	override @var(labelPixelHeight) 24
+	override @var(labelOffsets) <10, 10, 10, 10>
+	override @var(lineHeight) 4
+
+	override @var(backgroundColor) #242526
+	override @var(outlineColor) #b4b4b5
+	override @var(gradientColor) #78797a
+
+	//Line Colour on Highlight
+	append @this:Button.transitions
+	{
+		fromState: ANY
+		toState: IDLE
+		type: TRANSITION_PROPERTY_SET
+		property: @panel/Line:Image.colorRGB
+		value: <0.73, 0.73, 0.73>
+    }
+    append @this:Button.transitions
+    {
+		fromState: ANY
+		toState: HIGHLIGHTED
+		type: TRANSITION_PROPERTY_SET
+		property: @panel/Line:Image.colorRGB
+		value: <1.0, 0.31, 0.11>
+    }
+}

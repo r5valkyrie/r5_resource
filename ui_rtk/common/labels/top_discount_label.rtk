@@ -1,0 +1,37 @@
+panel TopDiscount
+{
+	bind root
+	bind @this/Text:FormatLabel.pixelHeight -> @this.height
+
+	var offsets @this.offsets
+
+	anchor: TOP_STRETCH_WIDTH
+	offsets: <3, 3, 0, 0>
+	pivot: <0.5, 0>
+	height: 24
+
+	behavior Image
+	{
+		assetPath:  $"ui_image/rui/events/s19me01/button_discount_backer.rpak"
+		colorRGB: #ffcf25
+	}
+
+	panel Text
+	{
+		pivot: <0.5, 0>
+		anchor: TOP
+		bind @this:Label.pixelHeight -> @this.height
+		behavior FormatLabel
+		{
+			bind *.discount -> @this.arg1
+			face: "TitleBoldFont"
+			format: "#STORE_BUTTON_DISCOUNT"
+			textAlignHorizontal: CENTER
+			horizontalMode: AUTOSIZE_TO_TEXT
+			pixelHeight: 24
+			color: <0, 0, 0, 1>
+			allCaps: true
+			arg1: 0
+		}
+	}
+}

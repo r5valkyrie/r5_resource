@@ -1,0 +1,82 @@
+panel apexCupHistoryStat
+{
+	bind root
+    offsets: <0, 0, 0, 0>
+
+    var titleText @this/Content/Text/TitleText:Label.text
+    var valueText @this/Content/Text/ValueText:Label.text
+    var iconVisibility @this/Content/Icon.visible
+
+	panel Content
+	{
+		anchor: CENTER
+
+		behavior HorizontalContainer
+		{
+			fitContentWidth: true
+			fitContentHeight: false
+			padding: <8, 8 ,0 ,0>
+			alignment: CENTER
+		}
+
+		panel Icon
+		{
+			anchor: LEFT
+			size: <84, 84>
+			position: <0, 0>
+			pivot: <0.5, 0.5>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/gamemode_emblem/generic_ltm.rpak"
+			}
+		}
+
+		panel Text
+		{
+			behavior VerticalContainer
+			{
+				fitContentWidth: true
+				fitContentHeight: false
+				padding: <8, 8 ,0 ,0>
+				alignment: CENTER
+			}
+
+			panel TitleText
+			{
+				anchor: CENTER
+
+				behavior Label
+				{
+					text: "default"
+					textAlignHorizontal: CENTER
+					textAlignVertical: BOTTOM
+					horizontalMode: AUTOSIZE_TO_TEXT
+					verticalMode: AUTOSIZE_TO_TEXT
+					pixelHeight: 21
+					margin: <0, 0, 0, -2>
+					color: <1.0, 1.0, 1.0, 1.0>
+					face: "DefaultBoldFont"
+				}
+			}
+
+			panel ValueText
+			{
+				anchor: CENTER
+
+				behavior Label
+				{
+					text: "123456"
+					textAlignHorizontal: CENTER
+					textAlignVertical: TOP
+					horizontalMode: AUTOSIZE_TO_TEXT
+					verticalMode: AUTOSIZE_TO_TEXT
+					pixelHeight: 48
+					margin: <0, 0, -8, 0>
+					color: <1.0, 1.0, 1.0, 1.0>
+					face: "DefaultBoldFont"
+				}
+			}
+		}
+	}
+}

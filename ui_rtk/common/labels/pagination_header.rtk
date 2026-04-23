@@ -1,0 +1,30 @@
+panel
+{
+	var Label @root:Label
+
+	behavior Label
+    {
+        face: "TitleBoldFont"
+        pixelHeight: 45
+        allCaps: true
+    }
+
+	panel BackgroundText
+	{
+		anchor: LEFT
+		pivot: <0.0, 0.5>
+		position: <-12, 16>
+
+		behavior Label
+        {
+            face: "TitleBoldFont"
+			horizontalMode: AUTOSIZE_TO_TEXT
+			verticalMode: AUTOSIZE_TO_TEXT
+            pixelHeight: 60
+			allCaps: true
+            alpha: 0.15
+        }
+	}
+
+	bind @this:Label.text -> @this/BackgroundText:Label.text
+}

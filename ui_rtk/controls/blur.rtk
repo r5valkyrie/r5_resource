@@ -1,0 +1,7 @@
+panel
+{
+	behavior Image
+	{
+		imageBlur: ASSET
+	}
+}

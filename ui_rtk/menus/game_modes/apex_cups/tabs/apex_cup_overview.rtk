@@ -1,0 +1,472 @@
+panel ApexCupsOverview
+{
+	size: <1920, 1080>
+	anchor: CENTER
+
+    behavior ApexCupsOverview
+    {
+        optInButton: @panel/MainContent/OptInPanel/OptInButton/OptInButton:Button
+	    matchHistoryButton: @panel/MainContent/OptInPanel/MatchHistoryButton/MatchHistoryButton:Button
+        infoButton: @panel/InfoButton:Button
+    }
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+	panel TitlePanel
+	{
+		anchor: TOP
+		pivot: < 0.5, 0>
+		positionY: 132
+		width: 1920
+
+		instance $"ui_rtk/menus/game_modes/apex_cups/components/title_bar.rpak" TitleBarTop
+		{
+			bind @parent/CupTitle/Title.width -> Subtract(60) -> @this.width
+			anchor: TOP
+			positionY: 20
+			pivot: <0.5, 1.0>
+		}
+
+		panel CupTitle
+		{
+			anchor: CENTER_STRETCH_WIDTH
+
+			panel BackgroundText
+			{
+				bind &menus.cupOverview.calEvent -> ItemFlavorLongName -> @this:Label.text
+				anchor: CENTER
+
+				behavior Label
+				{
+					text: "TITLE TEST"
+					face: "TitleBoldFont"
+					pixelHeight: 110
+					colorRGB: #FFFFFF
+					alpha: 0.01
+					textAlignHorizontal: CENTER
+					textAlignVertical: CENTER
+					HorizontalMode: AUTOSIZE_TO_TEXT
+					allCaps: true
+				}
+			}
+
+			panel Title
+			{
+				bind &menus.cupOverview.calEvent -> ItemFlavorLongName -> @this:Label.text
+				anchor: CENTER
+
+				behavior Label
+				{
+					text: "TITLE TEST"
+					face: "TitleBoldFont"
+					pixelHeight: 62
+					shadowAlpha: 0.6
+					shadowBlur: 6.0
+					textAlignHorizontal: CENTER
+					textAlignVertical: CENTER
+					HorizontalMode: AUTOSIZE_TO_TEXT
+					VerticalMode: AUTOSIZE_TO_TEXT
+					allCaps: true
+				}
+			}
+		}
+
+		panel TitleBarBottom
+		{
+			bind @parent/TitleBarTop.width -> @this.width
+
+			anchor: BOTTOM
+			pivot: <0.5, 0>
+			positionY: -12
+			height: 5
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/apex_rumble/borders/title_bar_line.rpak"
+				color: #ABABAB
+			}
+		}
+
+		instance $"ui_rtk/common/components/timer_component_long.rpak" Timer
+		{
+			override @var(fitContentHeight) true
+			override @var(iconPath) ""
+			override @var(iconHeight) 34
+
+			context @var( TimerLabel )
+			{
+				face: "TitleBoldFont"
+				pixelHeight: 34
+				color: #ABABAB
+				shadowAlpha: 0.6
+				shadowBlur: 6.0
+
+				bind &menus.cupOverview.state -> PickStringFrom( [ "#APEX_CUPS_TIME_STARTS_IN", "#TIME_REMAINING", "" ] ) -> @this.format
+			}
+
+			bind &menus.cupOverview.calEvent -> CalEventNextTime -> @this:Timer.endTime
+			bind &menus.cupOverview.calEvent -> CalEventFinished -> NOT -> @this.active
+			bind &menus.cupOverview.calEvent -> CalEventFinished -> NOT -> @this.visible
+
+			anchor: BOTTOM
+			pivot: <0.5, 0>
+		}
+	}
+
+	panel MainContent
+	{
+		anchor: CENTER
+		positionY: 60
+
+		behavior HorizontalContainer
+		{
+			spacing: 73
+			fitContentWidth: true
+			fitContentHeight: true
+			useLocaleDirection: true
+		}
+
+		panel OptInPanel
+		{
+			anchor: CENTER
+			size: <600, 600>
+			pivot: <0.5, 0.5>
+
+			instance $"ui_rtk/common/shells/single_cornered_tile.rpak" CardPanel
+			{
+				override @var(bgColor) <0.6, 0.6, 0.6, 1.0>
+				override @var(borderAlpha) 0.2
+			}
+
+			panel TopBorder
+			{
+				anchor: TOP_STRETCH_WIDTH
+				offsetsLR: <0, 0>
+				height: 5
+				pivot: <0.5, 0>
+
+				behavior Image
+				{
+					color: <0.25, 0.58, 0.62, 1.0>
+				}
+			}
+
+			panel OverviewContent
+			{
+				anchor: TOP_STRETCH_WIDTH
+				offsetsLR: <46, 49>
+				pivot: <0.5, 0.0>
+				height: 290
+				positionY: 46
+
+				behavior VerticalContainer
+				{
+					alignment: TOP_LEFT
+					spacing: 16
+					useLocaleDirection: true
+				}
+
+				panel Title
+				{
+					anchor: TOP_STRETCH_WIDTH
+					offsetsLR: <0, 0>
+					pivot: <0.5, 0.0>
+					height: 30
+
+					behavior Label
+					{
+						textAlignHorizontal: LEFT
+						verticalMode: AUTOSIZE_TO_TEXT
+						HorizontalMode: AUTOSIZE_TO_TEXT
+						useLocaleDirection: true
+						allCaps: true
+						pixelHeight: 38
+						face: "TitleBoldFont"
+						colorRGB: <1, 1, 1>
+						text: "#CUP_RULES"
+					}
+				}
+
+				panel ModeTags
+				{
+					anchor: TOP_STRETCH_WIDTH
+					offsetsLR: <0, 0>
+					pivot: <0.5, 0.0>
+					height: 16
+
+					behavior HorizontalContainer
+					{
+						alignment: TOP_LEFT
+						fitContentWidth: true
+						fitContentHeight: true
+						spacing: 10
+						useLocaleDirection: true
+					}
+
+					behavior ListBinder
+					{
+						bindingPath: "&menus.optInData.tagsList"
+						prefab: $"ui_rtk/menus/game_modes/apex_cups/components/game_tags.rpak"
+					}
+				}
+
+				panel Rules
+				{
+					anchor: TOP_STRETCH_WIDTH
+					offsetsLR: <0, 0>
+					pivot: <0.5, 0.0>
+
+					behavior FitToContent
+
+					panel List
+					{
+						anchor: TOP_STRETCH_WIDTH
+						offsetsLR: <0, 0>
+						pivot: <0.0, 0.0>
+						useLocaleDirection: true
+
+						behavior VerticalContainer
+						{
+							alignment: TOP_LEFT
+							fitContentWidth: true
+							fitContentHeight: true
+							spacing: 16
+							useLocaleDirection: true
+						}
+
+						behavior ListBinder
+						{
+							bindingPath: "&menus.optInData.rulesList"
+							prefab: $"ui_rtk/menus/game_modes/apex_cups/components/bulletpoint_list.rpak"
+						}
+					}
+				}
+			}
+
+			panel OptInButton
+			{
+				bind &menus.optInData.showButton -> @this.visible
+
+				anchor: BOTTOM_STRETCH_WIDTH
+				offsetsLR: <0, 0>
+				pivot: <0.5, 1>
+				height: 72
+				positionY: -50
+
+				instance $"ui_rtk/common/buttons/base_button.rpak" OptInButton
+				{
+					bind &menus.optInData.buttonText -> @var(labelText)
+					bind &menus.optInData.buttonActive -> @this:Button.active
+
+					//Active and disabled states
+					bind @this:Button.active -> PickVectorFromTwo( <0.4, 0.4, 0.4>, <1, 1, 1> ) -> @var(labelColor)
+					bind @this:Button.active -> PickVectorFromTwo( <0.2, 0.2, 0.2>, <0.2, 0.2, 0.2> ) -> @var(backgroundColor)
+					bind @this:Button.active -> PickVectorFromTwo( <0.3, 0.3, 0.3>, <0.7, 0.7, 0.7> ) -> @var(outlineColor)
+					bind @this:Button.active -> PickVectorFromTwo( <0.6, 0.6, 0.6>, <1, 0.3058, 0.1137> ) -> @var(gradientColor)
+					bind @this:Button.active -> PickVectorFromTwo( <0.4, 0.4, 0.4>, <1, 0.3058, 0.1137> ) -> @var(innerGlowColor)
+					bind @this:Button.active -> PickVectorFromTwo( <0.4, 0.4, 0.4>, <1, 0.3058, 0.1137> ) -> @var(outlineHoverColor)
+					bind @this:Button.active -> PickVectorFromTwo( <0.31, 0.31, 0.31>, <1, 0.3058, 0.1137> ) -> @var(lineColor)
+					bind @this:Button.active -> PickIntFromTwo( 0, 1 ) -> @this/BackgroundGradient.visible
+					bind @this:Button.active -> PickIntFromTwo( 0, 1 ) -> @this/BackgroundGradientHover.visible
+
+					override @var(labelPixelHeight) 26
+
+					anchor: BOTTOM
+					size: <500, 74>
+					pivot: <0.5, 1>
+
+					behavior ToolTip LockedReasons
+					{
+						bind &menus.optInData.toolTipData.titleText -> @this.varOverrides.titleText
+						bind &menus.optInData.toolTipData.bodyText -> @this.varOverrides.bodyText
+						bind &menus.optInData.toolTipData.tooltipActive -> @this.active
+
+						prefab: $"ui_rtk/common/tooltips/base_tooltip.rpak"
+						offset: <32, -68>
+						delay: 0
+
+						varOverrides: {
+							// defaults
+							titleText: ""
+							bodyText: ""
+							isIconVisible: true
+							titleColor: #ffffff
+							bodyTextAltColor: #b9b9b9
+							bgColor: #2d2d2d
+
+							// overrides
+							isSubtitleVisible: false
+							isAdditionalTextVisible: false
+						}
+					}
+				}
+			}
+
+			panel MatchHistoryButton
+			{
+				bind &menus.optInData.showMatchHistoryButton -> @this.visible
+
+				anchor: BOTTOM_STRETCH_WIDTH
+				offsetsLR: <0, 0>
+				pivot: <0.5, 1>
+				height: 72
+				positionY: -50
+
+				instance $"ui_rtk/common/buttons/base_button.rpak" MatchHistoryButton
+				{
+					bind &menus.optInData.buttonText -> @var(labelText)
+					bind &menus.optInData.showMatchHistoryButton -> @this:Button.active
+
+					override @var(labelColor)         <1, 1, 1>
+					override @var(backgroundColor)    <0.2, 0.2, 0.2>
+					override @var(outlineColor)       <0.7, 0.7, 0.7>
+					override @var(gradientColor)      <1, 0.3058, 0.1137>
+					override @var(innerGlowColor)     <1, 0.3058, 0.1137>
+					override @var(outlineHoverColor)  <1, 0.3058, 0.1137>
+
+					anchor: BOTTOM
+					size: <400, 70>
+					pivot: <0.5, 1>
+				}
+			}
+		}
+
+		panel RewardsBox
+		{
+			anchor: CENTER
+			size: <1013, 600>
+			pivot: <0.5, 0.5>
+
+			instance $"ui_rtk/common/shells/single_cornered_tile.rpak" CardPanel
+			{
+				override @var(bgColor) <0.6, 0.6, 0.6, 1.0>
+				override @var(borderAlpha) 0.2
+			}
+
+			panel RewardBoxContent
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <46,56,46,58>
+				useLocaleDirection: true
+
+				panel Title
+				{
+					anchor: TOP_LEFT
+					offsetsLR: <0, 0>
+					pivot: <0.0, 0.0>
+					height: 38
+					useLocaleDirection: true
+
+					behavior Label
+					{
+						horizontalMode: OVERFLOW
+						textAlignHorizontal: LEFT
+						verticalMode: AUTOSIZE_TO_TEXT
+						useLocaleDirection: true
+						allCaps: true
+						pixelHeight: 38
+						face: "TitleBoldFont"
+						colorRGB: <1, 1, 1>
+						text: "#CUPS_REWARDS_TITLE"
+					}
+				}
+
+				panel Description
+				{
+					anchor: TOP_LEFT
+					width: 740
+					offsetsLR: <0, 0>
+					pivot: <0.0, 0.0>
+					position: <0, 85>
+					useLocaleDirection: true
+
+					behavior Label
+					{
+						horizontalMode: WRAP
+						textAlignHorizontal: LEFT
+						verticalMode: AUTOSIZE_TO_TEXT
+						useLocaleDirection: true
+						pixelHeight: 27
+						leading: 8
+						colorRGB: <0.8, 0.8, 0.8>
+						face: "DefaultRegularFont"
+						text: "#CUPS_REWARDS_DESC"
+					}
+				}
+
+				panel RewardsList
+				{
+					anchor: BOTTOM_LEFT
+					pivot: <0.0, 1.0>
+					useLocaleDirection: true
+
+					behavior HorizontalContainer
+					{
+						fitContentWidth: true
+						fitContentHeight: true
+						spacing: 4
+						useLocaleDirection: true
+					}
+
+					behavior ListBinder CupList
+					{
+						bindingPath: "&menus.rewardTiers.rewardList"
+						prefab: $"ui_rtk/menus/game_modes/apex_cups/components/apex_cup_reward_tier.rpak"
+					}
+				}
+
+				panel Disclaimer
+				{
+					anchor: BOTTOM_LEFT
+					pivot: <0.0, 0.0>
+					useLocaleDirection: true
+
+					behavior Label
+					{
+						text: "#CUPS_REWARDS_DISCLAIMER"
+						textAlignHorizontal: LEFT
+						useLocaleDirection: true
+						margin: <0,0,6,0>
+						horizontalMode: AUTOSIZE_TO_TEXT
+						verticalMode: AUTOSIZE_TO_TEXT
+						pixelHeight: 22
+						color: #8C8F90
+					}
+				}
+			}
+
+			panel TierEmblem
+			{
+				bind &menus.cupOverview.cupID -> ApexCupCurrentTierIcon -> IsEmpty -> NOT -> @this.visible
+				
+				anchor: TOP_RIGHT
+				pivot: <1 , 0>
+				size: <163, 189>
+				position: <-40, 1>
+				useLocaleDirection: true
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/menu/apex_rumble/borders/apex_cups_tier_bg.rpak"
+				}
+
+				instance $"ui_rtk/menus/game_modes/apex_cups/components/apex_cup_tier_emblem.rpak" Icon
+				{
+					anchor: CENTER
+					size: <163, 163>
+
+					bind &menus.cupOverview.cupID -> ApexCupCurrentTierIcon -> @var( emblemIcon )
+					bind &menus.cupOverview.cupID -> ApexCupCurrentTierText -> @var( emblemText )
+				}
+			}
+		}
+	}
+
+	instance $"ui_rtk/menus/game_modes/apex_cups/components/info_button.rpak" InfoButton
+	{
+		override @var(size) <256, 36>
+
+		anchor: BOTTOM_RIGHT
+		position: <-118, -112>
+	}
+}

@@ -1,0 +1,538 @@
+panel
+{
+	bind root
+
+	bind *.accountProgress -> @this/AccountProgress.active
+	bind *.accountProgress -> @this/AccountProgress.visible
+	bind *.battlepassProgress -> @this/BattlepassProgress.active
+	bind *.battlepassProgress -> @this/BattlepassProgress.visible
+	bind *.rankedProgress -> @this/RankedProgress.active
+	bind *.rankedProgress -> @this/RankedProgress.visible
+
+	size: <590, 686>
+
+	instance $"ui_rtk/controls/blur.rpak"
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+	}
+
+	panel
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		
+		behavior Image
+		{
+			color: <0, 0, 0, 0.85>
+		}
+	}
+
+	panel
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/borders/border_outline_stats_screen_panel.rpak"
+		}
+	}
+
+	panel
+	{
+		anchor: TOP_STRETCH_WIDTH
+		size: <0, 70>
+		position: <0, 26>
+		pivot: <0.5, 0>
+		offsets: <0, 0, 0, 0>
+		inputListener: true
+
+		behavior NxOverrides
+		{
+			overrides: [
+				{
+					propertyRef: @panel.height
+					nxValue: 110
+				},
+				{
+					propertyRef: @panel:HorizontalContainer.padding
+					nxValue: <3, 1, 0, 0>
+				},
+				{
+					propertyRef: @panel:HorizontalContainer.alignment
+					nxValue: 3
+				},
+				{
+					propertyRef: @panel.position
+					nxValue: <0, 21>
+				}
+			]
+		}
+
+		behavior HorizontalContainer
+		{
+			alignment: CENTER
+			spacing: 1
+			padding: <1,1,0,0>
+		}
+
+		behavior ToolTip
+		{
+			bind *.headerTooltipText -> @this.textContent
+
+			textContent: ""
+			prefab: $"ui_rtk/stats_menu/stats_tooltip.rpak"
+			offset: <32, 32>
+			delay: 0
+		}
+
+		instance $"ui_rtk/stats_menu/header_stat.rpak"
+		{
+			override bind root "*.headerStats[0]"
+
+			behavior NxOverrides
+			{
+				overrides: [
+					{
+						propertyRef: @panel.width
+						nxValue: 192
+					}
+				]
+			}
+		}
+
+		panel spacerGroup
+		{
+			size: <1, 70>
+
+			panel spacer
+			{
+				anchor: CENTER
+				size: <1, 70>
+
+				behavior Image
+				{
+					colorRGB: #Gray
+				}
+
+				behavior NxOverrides
+				{
+					overrides: [
+						{
+							propertyRef: @panel.size
+							nxValue: <3, 90>
+						}
+					]
+				}
+			}
+		}
+
+		instance $"ui_rtk/stats_menu/header_stat.rpak"
+		{
+			override bind root "*.headerStats[1]"
+
+			behavior NxOverrides
+			{
+				overrides: [
+					{
+						propertyRef: @panel.width
+						nxValue: 199
+					}
+				]
+			}
+		}
+
+		panel spacerGroup
+		{
+			size: <1, 70>
+
+			behavior NxOverrides
+			{
+				overrides: [
+					{
+						propertyRef: @panel.width
+						nxValue: -7
+					}
+				]
+			}
+
+			panel spacer
+			{
+				size: <1, 70>
+				anchor: CENTER
+
+				behavior Image
+				{
+					colorRGB: #Gray
+				}
+
+				behavior NxOverrides
+				{
+					overrides: [
+						{
+							propertyRef: @panel.size
+							nxValue: <3, 90>
+						},
+						{
+							propertyRef: @panel.position
+							nxValue: <6, 0>
+						}
+					]
+				}
+			}
+		}
+
+		instance $"ui_rtk/stats_menu/header_stat.rpak"
+		{
+			override bind root "*.headerStats[2]"
+		}
+	}
+
+	instance $"ui_rtk/stats_menu/account_progress.rpak" AccountProgress
+	{
+		override bind root "*.accountModel"
+
+		position: <0, -169>
+
+		behavior NxOverrides
+		{
+			overrides: [
+				{
+					propertyRef: @panel.position
+					nxValue: <0, -201>
+				}
+			]
+		}
+	}
+
+	instance $"ui_rtk/stats_menu/battlepass_progress.rpak" BattlepassProgress
+	{
+		override bind root "*.battlepassModel"
+
+		position: <0, -169>
+
+		behavior NxOverrides
+		{
+			overrides: [
+				{
+					propertyRef: @panel.size
+					nxValue: <100, 100>
+				},
+				{
+					propertyRef: @panel.position
+					nxValue: <-2, -201>
+				}
+			]
+		}
+	}
+
+	instance $"ui_rtk/stats_menu/ranked_progress.rpak" RankedProgress
+	{
+		override bind root "*.rankedModel"
+
+		position: <0, -172>
+
+		behavior NxOverrides
+		{
+			overrides: [
+				{
+					propertyRef: @panel.size
+					nxValue: <410, 250>
+				},
+				{
+					propertyRef: @panel.position
+					nxValue: <-5, -216>
+				}
+			]
+		}
+	}
+
+	panel
+	{
+		anchor: CENTER
+		position: <-138, 53>
+		size: <264, 264>
+		inputListener: true
+
+		behavior ToolTip
+		{
+			bind *.leftCircleTooltipText -> @this.textContent
+
+			textContent: ""
+			prefab: $"ui_rtk/stats_menu/stats_tooltip.rpak"
+			offset: <32, 32>
+			delay: 0
+		}
+
+		behavior NxOverrides
+		{
+			overrides: [
+				{
+					propertyRef: @panel.position
+					nxValue: <-137, -7>
+				}
+			]
+		}
+
+		instance $"ui_rtk/stats_menu/circle_stat.rpak"
+		{
+			override bind root "*.leftCircleStats"
+		}
+	}
+
+	panel
+	{
+		anchor: CENTER
+		position: <138, 53>
+		size: <264, 264>
+		inputListener: true
+
+		behavior ToolTip
+		{
+			bind *.rightCircleTooltipText -> @this.textContent
+
+			textContent: ""
+			prefab: $"ui_rtk/stats_menu/stats_tooltip.rpak"
+			offset: <32, 32>
+			delay: 0
+		}
+
+		behavior NxOverrides
+		{
+			overrides: [
+				{
+					propertyRef: @panel.position
+					nxValue: <139, -7>
+				}
+			]
+		}
+
+		instance $"ui_rtk/stats_menu/circle_stat.rpak"
+		{
+			override bind root "*.rightCircleStats"
+		}
+	}
+
+	panel footerLeftColumn
+	{
+		anchor: BOTTOM_LEFT
+		position: <160, -20>
+		pivot: <0.5, 1>
+		inputListener: true
+
+		behavior VerticalContainer
+		{
+			fitContentWidth: true
+			fitContentHeight: true
+		}
+
+		behavior NxOverrides
+		{
+			overrides: [
+				{
+					propertyRef: @panel.position
+					nxValue: <162,-19>
+				}
+			]
+		}
+
+		behavior ToolTip
+		{
+			bind *.leftFooterTooltipText -> @this.textContent
+
+			textContent: ""
+			prefab: $"ui_rtk/stats_menu/stats_tooltip.rpak"
+			offset: <32, 32>
+			delay: 0
+		}
+
+		instance $"ui_rtk/stats_menu/footer_stat.rpak"
+		{
+			override bind root "*.footerStats[0]"
+		}
+
+		panel spacerGroup
+		{
+			size: <256, 1>
+
+			panel spacer
+			{
+				size: <256, 1>
+				position: <-3, -5>
+				anchor: CENTER
+
+				behavior Image
+				{
+					color: <0.58, 0.58, 0.58, 1>
+				}
+
+				behavior NxOverrides
+				{
+					overrides: [
+						{
+							propertyRef: @panel.size
+							nxValue: <256, 3>
+						},
+						{
+							propertyRef: @panel.position
+							nxValue: <-1, -1>
+						}
+					]
+				}
+			}
+		}
+
+		instance $"ui_rtk/stats_menu/footer_stat.rpak"
+		{
+			override bind root "*.footerStats[1]"
+		}
+
+		panel spacerGroup
+		{
+			size: <256, 1>
+
+			panel spacer
+			{
+				size: <256, 1>
+				position: <-3, -5>
+				anchor: CENTER
+
+				behavior Image
+				{
+					color: <0.58, 0.58, 0.58, 1>
+				}
+
+				behavior NxOverrides
+				{
+					overrides: [
+						{
+							propertyRef: @panel.size
+							nxValue: <256, 3>
+						},
+						{
+							propertyRef: @panel.position
+							nxValue: <-1, -1>
+						}
+					]
+				}
+			}
+		}
+
+		instance $"ui_rtk/stats_menu/footer_stat.rpak"
+		{
+			override bind root "*.footerStats[2]"
+		}
+	}
+
+	panel footerRightColumn
+	{
+		anchor: BOTTOM_RIGHT
+		position: <-155, -20>
+		pivot: <0.5, 1>
+		inputListener: true
+
+		behavior VerticalContainer
+		{
+			fitContentWidth: true
+			fitContentHeight: true
+		}
+
+		behavior NxOverrides
+		{
+			overrides: [
+				{
+					propertyRef: @panel.position
+					nxValue: <-151,-19>
+				}
+			]
+		}
+
+		behavior ToolTip
+		{
+			bind *.rightFooterTooltipText -> @this.textContent
+
+			textContent: ""
+			prefab: $"ui_rtk/stats_menu/stats_tooltip.rpak"
+			offset: <32, 32>
+			delay: 0
+		}
+
+		instance $"ui_rtk/stats_menu/footer_stat.rpak"
+		{
+			override bind root "*.footerStats[3]"
+		}
+
+		panel spacerGroup
+		{
+			size: <256, 1>
+
+			panel spacer
+			{
+				size: <256, 1>
+				position: <-3, -5>
+				anchor: CENTER
+
+				behavior Image
+				{
+					color: <0.58, 0.58, 0.58, 1>
+				}
+
+				behavior NxOverrides
+				{
+					overrides: [
+					{
+						propertyRef: @panel.size
+						nxValue: <256, 3>
+					},
+					{
+						propertyRef: @panel.position
+						nxValue: <-1, -1>
+					}
+					]
+				}
+			}
+		}
+
+		instance $"ui_rtk/stats_menu/footer_stat.rpak"
+		{
+			override bind root "*.footerStats[4]"
+		}
+
+		panel spacerGroup
+		{
+			size: <256, 1>
+
+			panel spacer
+			{
+				size: <256, 1>
+				position: <-3, -5>
+				anchor: CENTER
+
+				behavior Image
+				{
+					color: <0.58, 0.58, 0.58, 1>
+				}
+
+				behavior NxOverrides
+				{
+					overrides: [
+					{
+						propertyRef: @panel.size
+						nxValue: <256, 3>
+					},
+					{
+						propertyRef: @panel.position
+						nxValue: <-1, -1>
+					}
+					]
+				}
+			}
+		}
+
+		instance $"ui_rtk/stats_menu/footer_stat.rpak"
+		{
+			override bind root "*.footerStats[5]"
+		}
+	}
+}

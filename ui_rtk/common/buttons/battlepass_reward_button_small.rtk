@@ -1,0 +1,4 @@
+instance $"ui_rtk/common/buttons/battlepass_reward_button.rpak"
+{
+	size: <75, 75>
+}

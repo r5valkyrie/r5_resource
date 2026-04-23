@@ -1,0 +1,329 @@
+panel LootButton
+{
+	bind @this.visible -> @this.inputListener
+	bind @this.active -> @this.inputListener
+
+	// base settings
+	var size @this.size
+	var pivot @this.pivot
+	var iconContainerSize @this/ContainerPackContent/ImageContainer.size
+	var icon @this/ContainerPackContent/ImageContainer/ImageIcon:Image.assetPath
+	var iconPosition @this/ContainerPackContent/ImageContainer/ImageIcon.position
+	var iconSize @this/ContainerPackContent/ImageContainer/ImageIcon.size
+
+	var labelText @this/LabelSimple:Label.text
+	var labelPixelHeight @this/LabelSimple:Label.pixelHeight
+	var packCountText @this/ContainerPackContent/LabelPackCount:Label.text
+	var packCountTextSize @this/ContainerPackContent/LabelPackCount.size
+	var packCountTextColor @this/ContainerPackContent/LabelPackCount:Label.color
+	var packCountPixelHeight @this/ContainerPackContent/LabelPackCount:Label.pixelHeight
+	var packCountTextMargin @this/ContainerPackContent/LabelPackCount:Label.margin
+	var packCountHorizontalMode @this/ContainerPackContent/LabelPackCount:Label.horizontalMode
+	var packTitleText @this/ContainerPackContent/ContainerPackDescription/LabelPackName:Label.text
+	var packTitlePixelHeight @this/ContainerPackContent/ContainerPackDescription/LabelPackName:Label.pixelHeight
+	var packTitleHorizontalMode @this/ContainerPackContent/ContainerPackDescription/LabelPackName:Label.horizontalMode
+	var packDescriptionText @this/ContainerPackContent/ContainerPackDescription/LabelPackDescription:Label.text
+	var packDescriptionFontName @this/ContainerPackContent/ContainerPackDescription/LabelPackDescription:Label.face
+	var packDescriptionPixelHeight @this/ContainerPackContent/ContainerPackDescription/LabelPackDescription:Label.pixelHeight
+	var packDescriptionHorizontalMode @this/ContainerPackContent/ContainerPackDescription/LabelPackDescription:Label.horizontalMode
+
+	// visibility
+	var labelVisible @this/LabelSimple.visible
+	var packContentVisible @this/ContainerPackContent.visible
+
+	// idle colors settings
+	var labelColor @this/LabelSimple:Label.colorRGB
+	var backgroundColor @this/ImageBackgroundFill:Image.colorRGB
+	var backgroundAssetPath @this/ImageBackgroundFill:Image.assetPath
+	var outlineColor @this/ImageOutline:Image.colorRGB
+	var backgroundAlpha @this/ImageBackgroundFill:Image.alpha
+	var backgroundSaturation @this/ImageBackgroundFill:ColorExtensions.saturation
+	var backgroundLightness @this/ImageBackgroundFill:ColorExtensions.lightness
+
+	anchor: CENTER
+	size: <340, 104>
+	inputListener: true
+
+	behavior Button
+	{
+		soundHighlighted: "ui_menu_focus"
+		soundPressedEnabled: "ui_menu_accept"
+		transitions: [
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/ImageOutline:Image.colorRGB
+				value: #999999
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/ImageOutline:Image.colorRGB
+				value: #FF4E1D
+			},
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/ImageTopLeftDecoration:Image.colorRGB
+				value: #FFFFFF
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/ImageTopLeftDecoration:Image.colorRGB
+				value: #FF4E1D
+			},
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/ImageBottomRightDecoration:Image.colorRGB
+				value: #FFFFFF
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/ImageBottomRightDecoration:Image.colorRGB
+				value: #FF4E1D
+			}
+		]
+	}
+
+	panel ImageBackgroundFill
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			color: #000000
+			alpha: 0.6
+			assetPath: $"ui_image/rui/borders/border_jclb_mask.rpak"
+		}
+
+		behavior ColorExtensions
+		{
+			saturation: 0.5
+			lightness: 0.05
+		}
+	}
+
+	panel DotsTopLeft
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		pivot: <0.0, 0.0>
+		positionX: 2
+
+		behavior Image
+		{
+			alpha: 0.4
+			assetPath: $"ui_image/rui/borders/border_jclb_mask.rpak"
+			assetMaskPath: $"ui_image/rui/menu/lobby/jclb_dots.rpak"
+			uv1Scale: <0.66, 0.48>
+		}
+	}
+
+	panel DotsBottomRight
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		pivot: <1.0, 1.0>
+		positionX: 2
+
+		behavior Image
+		{
+			alpha: 0.4
+			assetPath: $"ui_image/rui/borders/border_jclb_mask.rpak"
+			assetMaskPath: $"ui_image/rui/menu/lobby/jclb_dots.rpak"
+			uv1Scale: <0.66, 0.48>
+			flipVertical: true
+			flipHorizontal: true
+		}
+	}
+
+	panel ImageOutline
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			colorRGB: #999999
+			assetPath: $"ui_image/rui/borders/border_jclb.rpak"
+		}
+	}
+
+	panel ImageTopLeftDecoration
+	{
+		anchor: LEFT_STRETCH_HEIGHT
+		pivot: <0, 0>
+
+		behavior Image
+		{
+			colorRGB: #FFFFFF
+			assetPath: $"ui_image/rui/borders/border_jclb_tl.rpak"
+		}
+	}
+
+	panel ImageBottomRightDecoration
+	{
+		anchor: RIGHT_STRETCH_HEIGHT
+		pivot: <1, 1>
+
+		behavior Image
+		{
+			colorRGB: #FFFFFF
+			assetPath: $"ui_image/rui/borders/border_jclb_br.rpak"
+		}
+	}
+
+	panel LabelSimple
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <10, 10, 10, 10>
+
+		behavior Label
+		{
+			face: "TitleBoldFont"
+			text: ""
+			textAlignHorizontal: CENTER
+			textAlignVertical: CENTER
+			horizontalMode: WRAP
+			pixelHeight: 28
+			color: <1, 1, 1, 1>
+			allCaps: true
+			alpha: 1
+		}
+	}
+
+	panel ContainerPackContent
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		pivot: <0.5, 0>
+		visible: false
+
+		behavior HorizontalContainer
+		{
+			fitContentHeight: false
+			fitContentWidth: false
+			alignment: CENTER
+			spacing: 8
+			useLocaleDirection: true
+		}
+
+		panel ImageContainer
+		{
+			anchor: LEFT
+			size: <0, 60>
+
+			panel ImageIcon
+			{
+				anchor: LEFT
+				position: <10, 0>
+				size: <60, 60>
+
+				behavior Image
+				{
+					assetPath: $""
+					colorRGB: <1, 1, 1>
+					alpha: 1
+				}
+			}
+		}
+
+		panel LabelPackCount
+		{
+			anchor: LEFT
+			offsets: <10, 10, 10, 10>
+
+			behavior Label
+			{
+				face: "TitleBoldFont"
+				text: ""
+				textAlignHorizontal: LEFT
+				textAlignVertical: CENTER
+				horizontalMode: AUTOSIZE_TO_TEXT
+				pixelHeight: 60
+				color: <1, 1, 1, 1>
+				allCaps: true
+				outlineColorInner: <0, 0, 0, 0.5>
+				outlineColorOuter: <0, 0, 0, 0.8>
+				outlineWidth: 2
+			}
+		}
+
+		panel ContainerPackDescription
+		{
+			anchor: LEFT
+			pivot: <0, 0>
+
+			behavior VerticalContainer
+			{
+				fitContentHeight: true
+				alignment: LEFT
+				spacing: 1
+			}
+
+			panel LabelPackName
+			{
+				anchor: LEFT
+
+				behavior Label
+				{
+					face: "TitleBoldFont"
+					text: ""
+					textAlignHorizontal: LEFT
+					textAlignVertical: BOTTOM
+					horizontalMode: SQUISH_TO_CONTAINER
+					pixelHeight: 21
+					color: <1, 1, 1, 1>
+					allCaps: true
+					outlineColorInner: <0, 0, 0, 0.5>
+					outlineColorOuter: <0, 0, 0, 0.8>
+					outlineWidth: 1
+				}
+			}
+
+			panel ImageDivider
+			{
+				anchor: TOP_STRETCH_WIDTH
+				pivot: <0, 0>
+				height: 1
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/gradient_lr.rpak"
+					colorRGB: <1, 1, 1>
+					alpha: 0.4
+				}
+			}
+
+			panel LabelPackDescription
+			{
+				anchor: LEFT
+
+				behavior Label
+				{
+					face: "TitleBoldFont"
+					text: ""
+					textAlignHorizontal: LEFT
+					textAlignVertical: TOP
+					horizontalMode: SQUISH_TO_CONTAINER
+					pixelHeight: 21
+					color: #ff4e1d
+					allCaps: true
+					outlineColorInner: <0, 0, 0, 0.5>
+					outlineColorOuter: <0, 0, 0, 0.8>
+					outlineWidth: 1
+				}
+			}
+		}
+	}
+}

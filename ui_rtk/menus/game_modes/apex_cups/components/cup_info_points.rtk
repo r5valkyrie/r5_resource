@@ -1,0 +1,172 @@
+panel CupInfoPoints
+{
+	anchor: CENTER
+	size: <1520, 510>
+	position: <0, 65>
+
+	behavior CupInfoPoints
+
+    behavior VerticalContainer
+	{
+		alignment: TOP
+	}
+
+	panel AboutText
+	{
+	    anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	    offsets: <0, 0, 0, 0>
+
+		behavior Label
+		{
+			bind &menus.apexCupsDialog.isCupRanked -> PickStringFromTwo( "#CUPS_PLACEMENT_DESC" , "#CUPS_POINTS_RANKED_DESC" ) -> @this.text
+
+			verticalMode: AUTOSIZE_TO_TEXT
+			HorizontalMode: WRAP
+			textAlignHorizontal: CENTER
+			pixelHeight: 28
+			shadowAlpha: 0.5
+			margin: <0, 0, 0, 50>
+			color: #929396
+			face: "TitleRegularFont"
+			text: "#CUPS_PLACEMENT_DESC"
+		}
+	}
+
+    panel ListContainer
+    {
+	    anchor:  TOP
+	    offsets: <0, 0, 0, 0>
+		pivot: <0.5, 0>
+
+        behavior HorizontalContainer
+		{
+			spacing: 40
+			fitContentWidth: true
+			fitContentHeight: true
+			useLocaleDirection: true
+		}
+
+		panel Placement
+		{
+            anchor: TOP
+            offsetsLR: <0, 0>
+            pivot: <0.0, 0.0>
+
+            behavior VerticalContainer
+			{
+				alignment: TOP_LEFT
+				fitContentWidth: true
+				fitContentHeight: true
+				useLocaleDirection: true
+			}
+
+			panel Title
+			{
+	            behavior Label
+				{
+					verticalMode: AUTOSIZE_TO_TEXT
+					horizontalMode: AUTOSIZE_TO_TEXT
+					useLocaleDirection: true
+					face: "TitleRegularFont"
+					margin: <0, 0, 0, 10>
+					pixelHeight: 32
+					allCaps: true
+					text: "#CUPS_POINTS_PLACEMENT"
+				}
+			}
+
+            panel Lists
+            {
+		        behavior HorizontalContainer
+				{
+					spacing: 13
+					fitContentWidth: true
+					fitContentHeight: true
+					useLocaleDirection: true
+				}
+
+		        panel List1
+		        {
+		            behavior VerticalContainer
+					{
+						alignment: TOP_LEFT
+						fitContentWidth: true
+						fitContentHeight: true
+					}
+
+			        behavior ListBinder
+					{
+						bindingPath: "&menus.apexCupsDialog.pointList1"
+						prefab: $"ui_rtk/common/components/simple_table.rpak"
+					}
+		        }
+
+		        panel List2
+		        {
+		            behavior VerticalContainer
+					{
+						alignment: TOP_LEFT
+						fitContentWidth: true
+						fitContentHeight: true
+					}
+
+			        behavior ListBinder
+					{
+						bindingPath: "&menus.apexCupsDialog.pointList2"
+						prefab: $"ui_rtk/common/components/simple_table.rpak"
+					}
+		        }
+            }
+		}
+
+		panel Additional
+		{
+            anchor: TOP
+            offsetsLR: <0, 0>
+            pivot: <0.0, 0.0>
+
+            behavior VerticalContainer
+			{
+				alignment: TOP_LEFT
+				fitContentWidth: true
+				fitContentHeight: true
+				useLocaleDirection: true
+			}
+
+			panel Title
+			{
+	            behavior Label
+				{
+					verticalMode: AUTOSIZE_TO_TEXT
+					horizontalMode: AUTOSIZE_TO_TEXT
+					useLocaleDirection: true
+					face: "TitleRegularFont"
+					margin: <0, 0, 0, 10>
+					pixelHeight: 32
+					allCaps: true
+					text: "#CUPS_POINTS_ADDITIONAL"
+				}
+			}
+
+            panel List3
+            {
+	            behavior VerticalContainer
+				{
+					alignment: TOP_LEFT
+					fitContentWidth: true
+					fitContentHeight: true
+				}
+
+		        behavior ListBinder
+				{
+					bindingPath: "&menus.apexCupsDialog.additionalList"
+					prefab: $"ui_rtk/common/components/simple_table.rpak"
+
+					varOverrides: {
+						rowWidth: 460
+					}
+				}
+            }
+		}
+    }
+}

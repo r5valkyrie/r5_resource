@@ -1,0 +1,164 @@
+panel
+{
+	var Animator @root:Animator
+	var Background @root/Body/Background
+	var Border @root/Body/Border
+	var Content @root/Body/Content
+	var Lock @root/Body/Lock
+
+	behavior Animator
+	{
+		tweenAnimations: [
+			{
+				name: "onInitialize"
+				tweens: [
+					{
+						property: @panel/Body.width
+						startValue: 0
+						endValue: 0
+						duration: 0.337
+						curve: EASE_OUT_CUBIC
+					},
+					{
+						// Toggle primary content, until hierarchical clipping or alpha is supported.
+						property: @panel/Body/Content.visible
+						startValue: false
+						endValue: true
+						duration: 0.337
+						curve: FLOOR
+					}
+				]
+			}
+		]
+
+		bind @root.width -> @this.tweenAnimations[0].tweens[0].endValue
+	}
+
+	behavior AnimatorAutoPlay
+	{
+		animation: "onInitialize"
+	}
+
+	panel Body
+	{
+		anchor: LEFT_STRETCH_HEIGHT
+		pivot: <0.0, 0.5>
+
+		// Allow for dynamic resizing, once the button has animated in displayed.
+		bind @root.width -> @this.width
+
+		panel Background
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/borders/border_playlist_card_mask.rpak"
+			}
+
+			behavior ImageFit
+			{
+				useImageMask: true
+			}
+		}
+
+		panel Fade
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/borders/border_playlist_card_mask.rpak"
+				assetMaskPath: $"ui_image/rui/gradient_ud.rpak"
+				color: #00000044
+			}
+		}
+
+		panel Content
+		{
+			anchor: BOTTOM_STRETCH_WIDTH
+			pivot: <0.5, 1.0>
+
+			behavior VerticalContainer
+			{
+				alignment: BOTTOM
+				spacing: 4
+				paddingBottom: 15
+				fitContentHeight: true
+				expandChildWidth: true
+			}
+		}
+
+		panel Lock
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+			visible: false
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/borders/border_playlist_card_mask.rpak"
+				assetMaskPath: $"ui_image/white.rpak"
+				colorRGB: #COLOR_GREY_4
+				alpha: 0.6
+			}
+
+			panel Icon
+			{
+				anchor: TOP
+				pivot: <0.5, 0>
+				size: <88, 110>
+				positionY: 100
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/menu/buttons/large_lock.rpak"
+				}
+			}
+
+			panel Text
+			{
+				anchor: TOP_STRETCH_WIDTH
+				offsetsLR: <20, 20>
+				pivot: <0.5, 0>
+				positionY: 230
+
+				behavior Label
+				{
+					face: #FONT_TITLE_REGULAR
+					pixelHeight: 24
+					colorRGB: #ffffff
+					textAlignVertical: TOP
+					textAlignHorizontal: CENTER
+					useLocaleDirection: true
+					horizontalMode: WRAP
+					verticalMode: AUTOSIZE_TO_TEXT
+				}
+			}
+		}
+
+		panel Border
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/borders/border_playlist_card.rpak"
+			}
+
+			panel Top
+			{
+				anchor: TOP_STRETCH_WIDTH
+				pivot: <0.5, 0>
+				offsetsLR: <0, 0>
+				height: 10
+
+				behavior Image
+				{
+					assetPath: $"ui_image/white.rpak"
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,27 @@
+panel ProgressTrackerTier
+{
+	bind root
+	offsets: <0, 0, 0, 0>
+
+	behavior ContainerElement
+	{
+		bind *.prefabIndex -> IntEqual( 1 ) -> PickIntFromTwo( 10000, 35 ) -> @this.maxWidth
+		bind *.prefabIndex -> IntEqual( 1 ) -> PickIntFromTwo( 10000, 45 ) -> @this.maxHeight
+
+		horizontalAlignOverride: EXPAND_WIDTH
+	}
+
+	behavior PrefabInstantiator
+	{
+		bind *.prefabIndex -> @this.prefabIndex
+		instanceName: "MilestoneTiers"
+		prevIndex: 0
+		prevInstance: @panel/MilestoneTiers
+		prefabArray: [
+			$"ui_rtk/menus/events/milestone/components/milestone_event_progress_tracker_item.rpak",
+			$"ui_rtk/menus/events/milestone/components/milestone_event_progress_tracker_divider.rpak"
+		]
+	}
+
+	instance $"ui_rtk/menus/events/milestone/components/milestone_event_progress_tracker_item.rpak" MilestoneTiers
+}

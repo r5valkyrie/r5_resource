@@ -1,0 +1,30 @@
+panel FeatureTutorialPanel
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+	offsetsTB: <0, 0>
+
+	panel Container
+	{
+		anchor: CENTER_STRETCH_WIDTH
+		offsets: <0, 0, 0, 0>
+		height: 850
+		pivot: <0.5, 0.0>
+		positionY: -175
+
+		behavior HorizontalContainer
+		{
+			fitContentHeight: true
+			fitContentWidth: true
+	        spacing: 8
+		}
+
+		behavior ListBinder
+		{
+			bindingPath: "&menus.featureTutorial.rules"
+			prefab: $"ui_rtk/menus/feature_tutorial/components/featuretutorial_listitem.rpak"
+		}
+	}
+}

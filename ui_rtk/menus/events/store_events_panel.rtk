@@ -1,0 +1,27 @@
+panel StoreEvents
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, -65, 0>
+
+	behavior MilestoneEventController
+	{
+		contentPanel: @panel/ContentPanel
+		isStoreEventsPanel: true
+		loadingSpinner: @panel/Spinner
+	}
+
+	panel ContentPanel
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 50, 0>
+	}
+
+	instance $"ui_rtk/common/components/spinner.rpak" Spinner
+	{
+		anchor: CENTER
+		size: <64, 64>
+		visible: false
+	}
+}

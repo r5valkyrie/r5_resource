@@ -1,0 +1,13 @@
+data RTKConstants Deuteranopia
+{
+	values: {
+
+		// Based on STORE_LOOT_TIER values in colorpalette_table.csv
+		STORE_COMMON_COLOR: < 0.282, 0.282, 0.282, 1.0 > // TIER 1
+		STORE_RARE_COLOR: < 0, 0.294, 0.733, 1.0 > // TIER 2
+		STORE_EPIC_COLOR: < 0.886, 0.686, 1, 1.0> // TIER 3
+		STORE_LEGENDARY_COLOR: < 1, 0.682, 0.251, 1.0 > // TIER 4
+		STORE_MYTHIC_COLOR: < 1, 0.196, 0.157, 1.0 > // TIER 5
+		STORE_ICONIC_COLOR: < 0.396, 0.812, 0.729, 1.0 > // TIER 6
+	}
+}

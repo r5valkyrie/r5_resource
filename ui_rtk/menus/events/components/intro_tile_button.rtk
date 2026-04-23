@@ -1,0 +1,86 @@
+panel IntroTileButton
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH
+	height: 400
+
+	instance $"ui_rtk/controls/blur.rpak"
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+	}
+
+	panel Background
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			colorRGB: #151515
+			alpha: 0.8
+		}
+	}
+
+	panel Arrows
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 140>
+
+		behavior Image
+		{
+			colorRGB: #222222
+			alpha: 0.5
+
+			assetPath: $"ui_image/rui/menu/buttons/weapon_categories/more_panel_arrows.rpak"
+		}
+	}
+
+	panel Outline
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			colorRGB: #Gray
+			assetPath: $"ui_image/rui/borders/border_outline_4px.rpak"
+		}
+	}
+
+	panel Icon
+	{
+		anchor: BOTTOM
+		size: <300, 300>
+		pivot: <0.5, 1>
+		positionY: -140
+		offsetsLR: <0, 0>
+
+		behavior Image
+		{
+			colorRGB: #Gray
+			alpha: 0.5
+		}
+	}
+
+	panel Text
+	{
+		anchor: BOTTOM_STRETCH_WIDTH
+		offsetsLR: <20, 20>
+		pivot: <0.5, 1>
+		height: 140
+
+		behavior Label
+		{
+			face: "TitleBoldFont"
+			pixelHeight: 36
+			colorRGB: <1, 1, 1>
+			text: "A LONG TEXT BUT NOT TOO LONG BUT DEFINITELY TWO LINES"
+			textAlignHorizontal: CENTER
+			textAlignVertical: CENTER
+			allCaps: true
+		}
+	}
+}
+

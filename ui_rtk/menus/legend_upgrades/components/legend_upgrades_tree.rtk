@@ -1,0 +1,30 @@
+panel LegendUpgradesTree
+{
+	bind root
+
+	var characterGUID @this:LegendUpgradeTree.characterGUID
+
+	offsets: <0, 0, 0, 0>
+
+	behavior LegendUpgradeTree
+	{
+		bind &common.legendUpgradeTree.characterGUID -> @this.characterGUID
+
+		tierList: @root
+	}
+
+	behavior VerticalContainer
+	{
+		fitContentWidth: true
+		fitContentHeight: true
+		spacing: 0
+		alignment: TOP
+		paddingBottom: -32
+	}
+
+	behavior ListBinder
+	{
+		bindingPath: "*"
+		prefab: $"ui_rtk/menus/legend_upgrades/components/legend_upgrades_tree_tier.rpak"
+	}
+}

@@ -1,0 +1,18 @@
+panel
+{
+	bind root
+
+    behavior SinglePanelContainer
+
+    behavior PrefabInstantiator
+    {
+		bindingPath: "*"
+        prefabArray: [
+            $"ui_rtk/menus/game_modes/apex_cups/components/cards/apex_cup_card_narrow.rpak",    // STARTING
+            $"ui_rtk/menus/game_modes/apex_cups/components/cards/apex_cup_card_base.rpak",      // IN PROGRESS
+            $"ui_rtk/menus/game_modes/apex_cups/components/cards/apex_cup_card_finished.rpak",  // FINISHED
+        ]
+
+		bind *.state -> @this.prefabIndex
+    }
+}

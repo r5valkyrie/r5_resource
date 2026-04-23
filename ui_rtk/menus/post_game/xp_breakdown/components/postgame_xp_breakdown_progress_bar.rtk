@@ -1,0 +1,167 @@
+panel
+{
+	bind root
+
+	anchor: CENTER
+	size: <500, 144>
+
+	behavior Animator BarAnimator
+	{
+		bind *.progressFracStart ->     @this.tweenAnimations[0].tweens[1].startValue
+		bind *.boostFracStart ->	    @this.tweenAnimations[0].tweens[0].startValue
+		bind *.startXP ->               @this.tweenAnimations[0].tweens[2].startValue
+		bind *.progressFracEnd ->       @this.tweenAnimations[0].tweens[1].endValue
+		bind *.boostFracEnd ->	        @this.tweenAnimations[0].tweens[0].endValue
+		bind *.endXP ->                 @this.tweenAnimations[0].tweens[2].endValue
+		bind *.animDuration ->          [@this.tweenAnimations[0].tweens[0].duration,
+										@this.tweenAnimations[0].tweens[1].duration,
+										@this.tweenAnimations[0].tweens[2].duration]
+
+		tweenAnimations: [
+		{
+			name: "AnimateBar"
+			tweens: [
+			{
+				property: @panel/BarContainer/BoostProgressBar:AngledProgressBar.current
+				startValue: 0.0
+				endValue: 1.0
+				duration: 1.0
+			},
+			{
+				property: @panel/BarContainer/ProgressBar:AngledProgressBar.current
+				startValue: 0.0
+				endValue: 1.0
+				duration: 1.0
+			},
+			{
+				property: @panel/BarContainer/EarnedXP:FormatLabel.arg1
+				startValue: 1
+				endValue: 1
+				duration: 1.0
+			},
+			]
+		}
+		]
+	}
+
+	panel CurrentBadge
+	{
+		anchor: CENTER
+		size: <144, 144>
+		position: <-180, 0>
+		useLocaleDirection: true
+
+		behavior Badge
+		{
+			bind *.currentBadge.badgeRuiAsset -> @this.badgeRuiAsset
+			bind *.currentBadge.tier -> @this.tier
+
+			badgeRuiAsset: $"ui/gcard_badge_account_t1.rpak"
+			tier: 20
+		}
+	}
+
+	panel BarContainer
+	{
+		size: <280, 14>
+		pivot: <0, 0>
+		position: <150, 70>
+		useLocaleDirection: true
+
+		panel BarLine
+		{
+			anchor: TOP_STRETCH_WIDTH
+			pivot: <0.5, 0>
+			height: 1
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				color: <0.58, 0.58, 0.58, 1>
+			}
+		}
+
+		panel BoostProgressBar
+		{
+			anchor: LEFT_STRETCH_HEIGHT
+			pivot: <0, 0.5>
+			offsetsTB: <0, 0>
+			size: <280, 14>
+			behavior AngledProgressBar
+			{
+				bind *.boostFracEnd -> @this.current
+
+				progressBarColor: #f9d543
+				progressBarAlpha: 1.0
+				progressBgAlpha: 0.0
+				max: 1.0
+				current: 0.5
+				angle: -45
+				isDoubleSided: true
+			}
+		}
+
+		panel ProgressBar //Normal XP
+		{
+			anchor: LEFT_STRETCH_HEIGHT
+			pivot: <0, 0.5>
+			offsetsTB: <0, 0>
+			size: <280, 14>
+
+			behavior AngledProgressBar
+			{
+				bind *.progressFracEnd -> @this.current
+
+				progressBarColor: <1, 1, 1>
+				progressBarAlpha: 1.0
+				progressBgAlpha: 0.0
+				max: 1.0
+				current: 0.5
+				angle: -45
+				isDoubleSided: true
+			}
+		}
+
+		panel EarnedXP
+		{
+			anchor: BOTTOM_STRETCH_WIDTH
+			pivot: <0.5, 1.0>
+			position: <0, -15>
+			height: 28
+			offsets: <0,0,0,0>
+			useLocaleDirection: true
+
+			behavior FormatLabel
+			{
+				bind *.startXP -> @this.arg1
+				bind *.maxLevelXP -> @this.arg2
+
+				format: "#VAL_SLASH_VAL"
+				face: "DefaultRegularFont"
+				color: <1.0, 1.0, 1.0, 1>
+				pixelHeight: 23
+				textAlignHorizontal: RIGHT
+				useLocaleDirection: true
+				arg1: 0
+				arg2: 0
+			}
+		}
+	}
+
+	panel NextBadge
+	{
+		anchor: CENTER
+		size: <56, 56>
+		position: <215, 0>
+		useLocaleDirection: true
+
+		behavior Badge
+		{
+			bind *.nextBadge.badgeRuiAsset -> @this.badgeRuiAsset
+			bind *.nextBadge.tier -> @this.tier
+
+			badgeRuiAsset: $"ui/gcard_badge_account_t1.rpak"
+			tier: 21
+		}
+	}
+}

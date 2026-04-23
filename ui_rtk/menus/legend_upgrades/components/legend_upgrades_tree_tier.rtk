@@ -1,0 +1,44 @@
+panel LegendUpgradesTier
+{
+	bind root
+
+	bind *.hasUpgrades -> [
+		@this/LeftSkill.visible,
+		@this/LeftSkill:Button.active,
+		@this/RightSkill.visible,
+		@this/RightSkill:Button.active
+	]
+	bind *.showTitle -> [
+		@this/LeftSkill/SkillInfo/Title.visible,
+		@this/RightSkill/SkillInfo/Title.visible
+	]
+	bind *.showDescription -> [
+		@this/LeftSkill/SkillInfo/Description.visible,
+		@this/RightSkill/SkillInfo/Description.visible
+	]
+
+	behavior HorizontalContainer
+	{
+		fitContentWidth: true
+		fitContentHeight: true
+		alignment: TOP
+		spacing: -12
+	}
+
+	instance $"ui_rtk/menus/legend_upgrades/components/legend_upgrades_skill.rpak" LeftSkill
+	{
+		override bind root "*.leftUpgrade"
+	}
+
+	instance $"ui_rtk/menus/legend_upgrades/components/legend_upgrades_evo_shield.rpak" EvoShield
+	{
+		override bind root "*.evoShield"
+	}
+
+	instance $"ui_rtk/menus/legend_upgrades/components/legend_upgrades_skill.rpak" RightSkill
+	{
+		override bind root "*.rightUpgrade"
+
+		override @var(isInverted) true
+	}
+}

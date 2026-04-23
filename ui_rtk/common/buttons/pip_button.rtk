@@ -1,0 +1,94 @@
+panel PipButton
+{
+	bind root
+
+	var size @this.size
+
+	anchor: TOP_LEFT
+	pivot: <0, 0>
+	size: <50, 20>
+	inputListener: true
+
+	behavior Button
+	{
+		soundHighlighted: "ui_menu_focus"
+		soundPressedEnabled: "ui_menu_accept"
+		transitions: [
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Container/InActive:Image.colorRGB
+				value: <0.4, 0.4, 0.4>
+			},
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Container/Active:Image.colorRGB
+				value: <1.0, 0.4, 0.0>
+			},
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Container.offsetsTB
+				value: <4, 4>
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Container/InActive:Image.colorRGB
+				value: <0.4, 0.4, 0.4>
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Container/Active:Image.colorRGB
+				value: <1.0, 0.4, 0.0>
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Container.offsetsTB
+				value: <0, 0>
+			}
+		]
+	}
+
+	panel Container
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		offsetsTB: <0, 0>
+
+		panel InActive
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				bind *.isActive -> PickFloatFromTwo( 1.0, 0.0 ) -> @this.alpha
+
+				color: <0.5, 0.5, 0.5, 1>
+			}
+		}
+
+		panel Active
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				bind *.isActive -> PickFloatFromTwo( 0.0, 1.0 ) -> @this.alpha
+
+				color: <0.5, 0.6, 0.2, 1>
+			}
+		}
+	}
+}

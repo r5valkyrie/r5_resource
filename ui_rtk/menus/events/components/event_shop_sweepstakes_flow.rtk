@@ -1,0 +1,582 @@
+panel SweepstakesFlow
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	behavior SweepstakesFlowPanel
+	{
+		tokenSelectorClose: @panel/TokenSelector/Buttons/CloseButton
+		tokenSelectorAgreeToRules: @panel/TokenSelector/Buttons/AgreeToRules
+		tokenSelectorLinkToRules: @panel/TokenSelector/Buttons/LinkToRules
+		confirmEntryBack: @panel/ConfirmEntry/Buttons/BackButton
+		confirmEntryButton: @panel/ConfirmEntry/Buttons/ConfirmEntryButton
+		doneCloseButton: @panel/Done/CloseButton
+		multiItemSelector: @panel/TokenSelector/MultiItemSelector:MultiItemSelector
+	}
+
+	instance $"ui_rtk/controls/blur.rpak" Blur
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+	}
+
+	panel Background
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			color: #000000
+			alpha: 0.85
+		}
+	}
+
+	panel TokenSelector
+	{
+		bind *.flow -> IntEqual( 0 ) -> @this.visible
+		bind *.flow -> IntEqual( 0 ) -> @this.active
+
+		anchor: CENTER_STRETCH_WIDTH
+		offsetsLR: <0, 0>
+		height: 850
+
+		behavior VerticalContainer
+		{
+			alignment: CENTER
+			spaceEvenly: true
+		}
+
+		instance $"ui_rtk/common/labels/headline_title_label.rpak" Title
+		{
+			override bind root "*"
+			bind *.titleText -> @this/Text:Label.text
+
+			override @var(positionY) 0
+			override @var(width) 1600
+		}
+
+		panel TotalTokens
+		{
+			anchor: CENTER
+			offsetTop: -30
+			width: 1000
+			height: 32
+
+			behavior FormatLabel
+			{
+				bind *.titleText -> LocalizeString -> @this.arg1
+				bind *.totalEntries -> @this.arg2
+
+				face: "DefaultRegularFont"
+				pixelHeight: 32
+				format: "#SWEEPSTAKES_TOTAL_ENTRIES_N"
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				colorRGB: #D7D7D7
+			}
+
+			behavior LabelAltStyle
+			{
+				face: "DefaultRegularFont"
+				pixelHeight: 32
+				colorRGB: #D7D7D7
+			}
+		}
+
+		instance $"ui_rtk/common/shells/default_cornered_tile.rpak" ArrowedCorneredTile
+		{
+			override bind root "*"
+			anchor: CENTER
+			size: <960, 436>
+
+			context @this/Content
+			{
+				panel Rules
+				{
+					anchor: CENTER_STRETCH_WIDTH
+					offsets: <0, 0, 0, 0>
+
+					behavior HorizontalContainer
+					{
+						alignment: CENTER
+						fitContentHeight: true
+						fitContentWidth: true
+						spacing: 30
+					}
+
+					panel Token
+					{
+						anchor: CENTER
+
+						behavior HorizontalContainer
+						{
+							alignment: CENTER
+							fitContentHeight: true
+							fitContentWidth: true
+							spacing: 0
+						}
+
+						panel TokenImage
+						{
+							anchor: CENTER
+							size: <224, 336>
+
+							behavior Image
+							{
+								bind *.image -> @this.assetPath
+							}
+						}
+
+						panel TokenMultiplier
+						{
+							anchor: CENTER_STRETCH_HEIGHT
+							width: 26
+
+							behavior Label
+							{
+								face: "TitleBoldFont"
+								pixelHeight: 49
+								text: "#SWEEPSTAKES_TIMES_TOKENS"
+								textAlignHorizontal: CENTER
+								textAlignVertical: CENTER
+								horizontalMode: SQUISH_TO_CONTAINER
+							}
+						}
+
+						panel NumberOfTokens
+						{
+							anchor: CENTER_STRETCH_HEIGHT
+							width: 70
+
+							behavior Label
+							{
+								bind *.tokenCount -> @this.text
+
+								face: "TitleBoldFont"
+								pixelHeight: 96
+								textAlignHorizontal: CENTER
+								textAlignVertical: CENTER
+							}
+						}
+					}
+
+					instance $"ui_rtk/common/default_scroll_view.rpak" ScrollView
+					{
+						override @this/View:ScrollView.autoScroll TOP
+
+						anchor: TOP_LEFT
+						pivot: <0, 0>
+						size: <500, 300>
+						constrainInput: false
+
+						context @this/View/Content
+						{
+							anchor: TOP_LEFT
+							pivot: <0, 0>
+							size: <500, 300>
+
+							panel Vertical
+							{
+								anchor: TOP_STRETCH_WIDTH
+								pivot: <0, 0>
+								offsetsLR: <0, 0>
+
+								behavior VerticalContainer
+								{
+									alignment: TOP
+									spacing: 10
+									fitContentHeight: true
+									fitContentWidth: true
+								}
+
+								panel LegalText1
+								{
+									anchor: TOP_LEFT
+									pivot: <0, 0>
+									width: 470
+
+									behavior Label
+									{
+										face: "DefaultRegularFont"
+										pixelHeight: 22
+										text: "#SWEEPSTAKES_FLOW_LEGAL_1"
+										verticalMode: AUTOSIZE_TO_TEXT
+									}
+								}
+
+								panel LegalText2
+								{
+									anchor: TOP_LEFT
+									pivot: <0, 0>
+									width: 470
+
+									behavior Label
+									{
+										face: "DefaultRegularFont"
+										pixelHeight: 22
+										text: "#SWEEPSTAKES_FLOW_LEGAL_2"
+										verticalMode: AUTOSIZE_TO_TEXT
+									}
+								}
+
+								panel LegalText3
+								{
+									anchor: TOP_LEFT
+									pivot: <0, 0>
+									width: 470
+
+									behavior Label
+									{
+										face: "DefaultRegularFont"
+										pixelHeight: 22
+										text: "#SWEEPSTAKES_FLOW_LEGAL_3"
+										verticalMode: AUTOSIZE_TO_TEXT
+									}
+								}
+
+								panel LegalText4
+								{
+									anchor: TOP_LEFT
+									pivot: <0, 0>
+									width: 470
+
+									behavior Label
+									{
+										face: "DefaultRegularFont"
+										pixelHeight: 22
+										text: "#SWEEPSTAKES_FLOW_LEGAL_4"
+										verticalMode: AUTOSIZE_TO_TEXT
+									}
+								}
+
+								panel LegalText5
+								{
+									anchor: TOP_LEFT
+									pivot: <0, 0>
+									width: 470
+
+									behavior Label
+									{
+										face: "DefaultRegularFont"
+										pixelHeight: 22
+										text: "#SWEEPSTAKES_FLOW_LEGAL_5"
+										verticalMode: AUTOSIZE_TO_TEXT
+									}
+								}
+
+								panel LegalText6
+								{
+									anchor: TOP_LEFT
+									pivot: <0, 0>
+									width: 470
+
+									behavior Label
+									{
+										face: "DefaultRegularFont"
+										pixelHeight: 22
+										text: "#SWEEPSTAKES_FLOW_LEGAL_6"
+										verticalMode: AUTOSIZE_TO_TEXT
+									}
+								}
+							}
+						}
+
+						context @this/ScrollBar
+						{
+							positionX: -18
+							pivot: <0.5, 1.0>
+							height: 18
+							width: 300
+							rotation: 90
+						}
+					}
+				}
+			}
+		}
+
+		instance $"ui_rtk/common/components/multi_item_selector.rpak" MultiItemSelector
+		{
+			bind *.titleText -> NumberTitleText( *.tokenCount ) -> @this/Content/ItemInfo/Text:Label.text
+
+			bind *.tokenCount -> IntEqual( 0 ) -> PickFloatFromTwo( 1.0, 0.3 ) -> [
+				@this/Content/Subtraction/Text:Label.alpha,
+				@this/Content/Subtraction/Background:Image.alpha,
+				@this/Content/Subtraction/Outline:Image.alpha
+			]
+
+			bind *.tokenCount -> IntEqual( *.availablePurchases ) -> PickFloatFromTwo( 1.0, 0.3 ) -> [
+				@this/Content/Addition/Text:Label.alpha,
+				@this/Content/Addition/Background:Image.alpha,
+				@this/Content/Addition/Outline:Image.alpha
+			]
+
+			override bind root "*"
+
+			override @var(subtractionText) "#SWEEPSTAKES_MINUS_1"
+			override @var(additionText) "#SWEEPSTAKES_PLUS_1"
+		}
+
+		panel Buttons
+		{
+			anchor: CENTER
+
+			behavior HorizontalContainer
+			{
+				fitContentHeight: true
+				fitContentWidth: true
+				spacing: 100
+			}
+
+			instance $"ui_rtk/common/buttons/base_button.rpak" CloseButton
+			{
+				override @var(labelText) "#B_BUTTON_CLOSE"
+				override @var(backgroundColor) #242526
+				override @var(outlineColor) #b4b4b5
+				override @var(lineColor) #b4b4b5
+				override @var(lineAlpha) 0.0
+				override @var(gradientColor) #78797a
+			}
+
+			instance $"ui_rtk/common/buttons/base_button.rpak" AgreeToRules
+			{
+				bind *.tokenCount -> AgreeToRulesText( *.price ) -> @var(labelText)
+				bind *.canPurchaseTokens -> @this.visible
+				bind *.canPurchaseTokens -> @this.active
+
+				override @var(size) <524, 100>
+			}
+
+			instance $"ui_rtk/common/buttons/base_button.rpak" CantAgreeToRules
+			{
+				bind *.tokenCount -> AgreeToRulesText( *.price ) -> @var(labelText)
+				bind *.canPurchaseTokens -> NOT -> @this.visible
+				bind *.canPurchaseTokens -> NOT -> @this.active
+
+				override @var(size) <524, 100>
+				override @var(backgroundColor) #242526
+				override @var(outlineColor) #b4b4b5
+				override @var(lineColor) #b4b4b5
+				override @var(lineAlpha) 0.0
+				override @var(gradientColor) #78797a
+				override @var(gradientHoverColor) #78797a
+				override @var(innerGlowColor) #78797a
+				override @var(outlineHoverColor) #b4b4b5
+			}
+
+			instance $"ui_rtk/common/buttons/base_button.rpak" LinkToRules
+			{
+				override @var(labelText) "#SWEEPSTAKES_VIEW_RULES"
+				override @var(backgroundColor) #242526
+				override @var(outlineColor) #b4b4b5
+				override @var(lineColor) #b4b4b5
+				override @var(lineAlpha) 0.0
+				override @var(gradientColor) #78797a
+			}
+		}
+	}
+
+	panel ConfirmEntry
+	{
+		bind *.flow -> IntEqual( 1 ) -> @this.visible
+		bind *.flow -> IntEqual( 1 ) -> @this.active
+
+		anchor: CENTER_STRETCH_WIDTH
+		offsetsLR: <0, 0>
+		height: 850
+
+		behavior VerticalContainer
+		{
+			alignment: CENTER
+			spaceEvenly: true
+		}
+
+		instance $"ui_rtk/common/labels/headline_title_label.rpak" Title
+		{
+			override @var(positionY) 0
+			override @var(width) 1600
+			override @var(titleText) "#SWEEPSTAKES_CONFIRM_ENTRY_TITLE"
+		}
+
+		panel LegalText
+		{
+			anchor: CENTER_STRETCH_WIDTH
+			offsetsLR: <0, 0>
+
+			behavior Label
+			{
+				face: "DefaultRegularFont"
+				pixelHeight: 32
+				text: "#SWEEPSTAKES_CONFIRM_ENTRY_LEGAL"
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				verticalMode: AUTOSIZE_TO_TEXT
+				horizontalMode: AUTOSIZE_TO_TEXT
+			}
+		}
+
+		panel PrizeImage
+		{
+			anchor: CENTER
+			size: <728, 420>
+
+			behavior Image
+			{
+				bind *.prizeImage -> @this.assetPath
+			}
+		}
+
+		panel Buttons
+		{
+			anchor: CENTER
+
+			behavior HorizontalContainer
+			{
+				fitContentHeight: true
+				fitContentWidth: true
+				spacing: 100
+			}
+
+			instance $"ui_rtk/common/buttons/base_button.rpak" BackButton
+			{
+				override @var(labelText) "#B_BUTTON_CLOSE"
+				override @var(backgroundColor) #242526
+				override @var(outlineColor) #b4b4b5
+				override @var(lineColor) #b4b4b5
+				override @var(lineAlpha) 0.0
+				override @var(gradientColor) #78797a
+			}
+
+			instance $"ui_rtk/common/buttons/base_button.rpak" ConfirmEntryButton
+			{
+				bind *.tokenCount -> ConfirmEntryText -> @var( labelText )
+			}
+		}
+	}
+
+	panel Done
+	{
+		bind *.flow -> IntEqual( 2 ) -> @this.visible
+		bind *.flow -> IntEqual( 2 ) -> @this.active
+
+		anchor: CENTER_STRETCH_WIDTH
+		offsetsLR: <0, 0>
+		height: 850
+
+		behavior VerticalContainer
+		{
+			alignment: CENTER
+			spaceEvenly: true
+		}
+
+		instance $"ui_rtk/common/labels/headline_title_label.rpak" Title
+		{
+			override @var(positionY) 0
+			override @var(width) 1600
+			override @var(titleText) "#SWEEPSTAKES_ENTRY_CONFIRMED"
+		}
+
+		panel TotalTokens
+		{
+			anchor: CENTER
+			size: <594, 594>
+
+			panel Background
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <0, 0, 0, 0>
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/menu/events/event_shop/sweepstakes_token_total.rpak"
+				}
+			}
+
+			panel Number
+			{
+				anchor: CENTER
+				size: <160, 160>
+
+				behavior Label
+				{
+					bind *.totalEntries -> @this.text
+
+					face: "TitleBoldFont"
+					pixelHeight: 120
+					textAlignHorizontal: CENTER
+					textAlignVertical: CENTER
+				}
+			}
+		}
+
+		panel TotalTokens
+		{
+			anchor: CENTER
+			width: 1000
+			height: 36
+
+			behavior FormatLabel
+			{
+				bind *.titleText -> LocalizeString -> @this.arg1
+
+				face: "TitleRegularFont"
+				pixelHeight: 36
+				format: "#SWEEPSTAKES_TOTAL_ENTRIES"
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				colorRGB: #FFFFFF
+				allCaps: true
+				margin: <0, 0, -220, 0>
+			}
+
+			behavior LabelAltStyle
+			{
+				face: "TitleRegularFont"
+				pixelHeight: 36
+				colorRGB: #FFFFFF
+			}
+		}
+
+
+		instance $"ui_rtk/common/buttons/base_button.rpak" CloseButton
+		{
+			override @var(labelText) "#B_BUTTON_CLOSE"
+			override @var(backgroundColor) #242526
+			override @var(outlineColor) #b4b4b5
+			override @var(lineColor) #b4b4b5
+			override @var(lineAlpha) 0.0
+			override @var(gradientColor) #78797a
+		}
+	}
+
+	panel AvailableToday
+	{
+		bind *.flow -> IntEqual( 0 ) -> @this.visible
+		bind *.flow -> IntEqual( 0 ) -> @this.active
+
+		anchor: BOTTOM
+		pivot: <0.5, 1>
+		positionY: -74
+		size: <1000, 32>
+
+		behavior FormatLabel
+		{
+			bind *.availablePurchases -> @this.arg1
+			bind *.purchaseLimit -> @this.arg2
+
+			face: "DefaultRegularFont"
+			pixelHeight: 32
+			format: "#EVENTS_EVENT_SHOP_GRID_COUNTER_DAILY_LIMIT"
+			textAlignHorizontal: CENTER
+			textAlignVertical: CENTER
+		}
+
+		behavior LabelAltStyle
+		{
+			face: "DefaultRegularFont"
+			pixelHeight: 32
+		}
+	}
+}

@@ -1,0 +1,67 @@
+panel BindToolTip
+{
+	bind root
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	behavior VerticalContainer
+	{
+		fitContentWidth: true
+		fitContentHeight: true
+	}
+
+	behavior Image
+	{
+		color: <0.1, 0.1, 0.1, 0.85>
+	}
+
+	panel Tooltip
+	{
+		behavior VerticalContainer
+		{
+			padding: <16, 16, 8, 8>
+			fitContentWidth: true
+			fitContentHeight: true
+		}
+
+		panel Title
+		{
+			bind @this:Label.pixelHeight -> @this.height
+
+			size: <0, 38>
+			behavior Label
+			{
+				bind *.tooltipTitle -> @this.text
+				text: "Default Text"
+				face: "TitleBoldFont"
+				pixelHeight: 32
+				textAlignHorizontal: LEFT
+				textAlignVertical: TOP
+				color: <0.79, 0.79, 0.79, 1>
+
+				horizontalMode: AUTOSIZE_TO_TEXT
+			}
+		}
+
+		panel List
+		{
+			behavior VerticalContainer
+			{
+				fitContentWidth: true
+				fitContentHeight: true
+			}
+
+			behavior ListBinder
+			{
+				bindingPath: "*.tooltipDescription"
+				prefab: $"ui_rtk/common/tooltips/tool_tip_description.rpak"
+			}
+		}
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/borders/border_outline_1px.rpak"
+			color: <1.0, 1.0, 1.0, 1>
+		}
+	}
+}

@@ -1,0 +1,44 @@
+panel RadioPlayPanel
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+	offsetsTB: <0, 0>
+
+	behavior RadioPlayScreen
+
+	panel
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		offsetsTB: <0, 0>
+
+		behavior Image
+		{
+			colorRGB: <0 ,0, 0>
+		}
+		panel RenderGroupContainer
+		{
+			anchor: CENTER
+			size: <1920, 1080>
+			offsets: <0, 0, 0, 0>
+			offsetsTB: <0, 0>
+
+			behavior RenderGroup
+
+			panel LayersContainer
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <0, 0, 0, 0>
+				offsetsTB: <0, 0>
+
+				behavior ListBinder
+				{
+					bindingPath: "&menus.radioPlay.layers"
+					prefab: $"ui_rtk/menus/radio_play/components/radio_play_layer.rpak"
+				}
+			}
+		}
+	}
+}

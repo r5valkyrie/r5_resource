@@ -1,0 +1,103 @@
+panel UltWeaponTrialCelebrationCard
+{
+	bind root
+	anchor: CENTER
+	pivot: <0.5, 0.5>
+	size: <700, 700>
+
+	behavior RenderGroup
+	{
+		alpha: 0.0
+	}
+
+	instance $"ui_rtk/menus/mastery/weapons/components/weapon_mastery_trial_card_all.rpak" TrialCard
+	{
+		anchor: CENTER
+		pivot: <0.5, 0.5>
+		position: <0, 0>
+
+		override bind root "*"
+
+		panel FlashOverlay
+		{
+			anchor: CENTER
+			size: <460, 560>
+
+			behavior Image
+			{
+				colorRGB: <1.0, 1.0, 1.0>
+				alpha: 0.0
+			}
+		}
+
+		panel FlashGlow
+		{
+			anchor: CENTER
+			size: <548, 648>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/mastery/weaponmastery_trial_completion_glow.rpak"
+				colorRGB: <1.0, 0.75, 0.0>
+				alpha: 0.0
+			}
+		}
+
+		panel FlashOutline
+		{
+			anchor: CENTER
+			size: <468, 568>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/borders/border_outline_4px.rpak"
+				colorRGB: <1.0, 0.75, 0.0>
+				alpha: 0.0
+			}
+		}
+	}
+
+	behavior Animator
+	{
+		tweenAnimations: [
+			{
+				name: "EnterScene"
+				tweens: [
+					{
+						property: @panel/TrialCard.positionY
+						startValue: 680
+						endValue: 0
+						duration: 0.2669
+						curve: EASE_OUT_CUBIC
+					},
+					{
+						property: @panel:RenderGroup.alpha
+						startValue: 0.0
+						endValue: 1.0
+						duration: 0.15
+						curve: EASE_OUT_CUBIC
+					}
+				]
+			},
+			{
+				name: "FadeOut"
+				tweens: [
+					{
+						property: @panel:RenderGroup.alpha
+						startValue: 1
+						endValue: 0
+						duration: 0.3
+						curve: EASE_OUT_CUBIC
+					}
+				]
+			}
+		]
+
+		keyframeAnimations: [
+			{
+				name: "Complete"
+				animAsset: $"ui_rtk/menus/post_game/weapons/animations/animation_trial_complete.rpak"
+			}
+		]
+	}
+}

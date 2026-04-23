@@ -1,0 +1,135 @@
+panel EventShopRewards
+{
+	anchor: TOP_RIGHT
+	pivot: <1, 0>
+	size: <592, 760>
+
+	panel Background
+	{
+		anchor: RIGHT
+		size: <592, 760>
+		pivot: <1, 0.5>
+
+		panel BackgroundBlur
+		{
+			bind *.calEventShop -> GetCalEventGlobalSettingBool("rightPanelBgBlur") -> @this.visible
+
+			anchor: RIGHT
+			size: <592, 760>
+			pivot: <1, 0.5>
+
+			behavior Image
+			{
+				imageBlur: ASSET
+			}
+		}
+
+		panel BackgroundBlurDarken
+		{
+			anchor: RIGHT
+			size: <592, 760>
+			pivot: <1, 0.5>
+
+			behavior Image
+			{
+				bind *.calEventShop -> GetCalEventGlobalSettingFloat("rightPanelOpacity") -> @this.alpha
+
+				colorRGB: <0, 0, 0>
+			}
+		}
+
+		panel ThemeBackground
+		{
+			anchor: RIGHT
+			size: <592, 760>
+			pivot: <1, 0.5>
+
+			behavior Image
+			{
+				bind *.calEventShop -> GetCalEventGlobalSettingAsset("rightPanelBg") -> @this.assetPath
+			}
+		}
+	}
+
+	panel StoryProgression
+	{
+		anchor: TOP_RIGHT
+		size: <460, 32>
+		pivot: <1, 1>
+
+		panel ProgressionDecoration
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+			behavior VerticalContainer
+			{
+				fitContentHeight: true
+			}
+
+			behavior Image
+			{
+				bind *.calEventShop -> GetCalEventGlobalSettingVector("rightPanelBgColor") -> @this.colorRGB
+				flipHorizontal: true
+				assetPath: $"ui_image/rui/events/collection_events/season_label_bg.rpak"
+			}
+		}
+
+		panel TiersHeader
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <48, 10, 0, 0>
+
+			behavior HorizontalContainer
+			{
+				alignment: CENTER
+				fitContentHeight: true
+				fitContentWidth: true
+			}
+
+			panel Title
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+				behavior Label
+				{
+					bind &menus.eventShop.rewardsTitle -> @this.text
+
+					face: "TitleBoldFont"
+					pixelHeight: 20
+					color: #ffffff
+					textAlignHorizontal: CENTER
+					textAlignVertical: CENTER
+					allCaps: true
+					horizontalMode: SQUISH_TO_CONTAINER
+				}
+
+				behavior LabelAltStyle
+				{
+					color: #bcbcbc
+				}
+			}
+		}
+	}
+
+	panel TiersContent
+	{
+		anchor: RIGHT
+		size: <592, 760>
+		pivot: <1, 0.5>
+		offsetRight: 62
+
+		panel TierList
+		{
+			anchor: RIGHT
+			size: <450, 696>
+			pivot: <1, 0.5>
+			position: <-62, 0>
+
+			behavior ListBinder
+			{
+				bindingPath: "&menus.eventShop.tiers"
+				prefab: $"ui_rtk/menus/events/components/event_shop_badge_reward.rpak"
+			}
+		}
+	}
+}

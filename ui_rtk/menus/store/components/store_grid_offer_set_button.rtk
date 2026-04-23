@@ -1,0 +1,74 @@
+instance $"ui_rtk/common/buttons/offer_button.rpak" OfferSetButton
+{
+	override bind root "*"
+
+	override @var(descBGAlpha) 0.0
+	override @var(descBlurVisible) false
+	override @var(descRarityVisible) false
+	override @var(textBackgroundVisible) false
+
+	override @var(price).anchor BOTTOM
+	override @var(price).position <0, -28>
+	override @var(price).pivot <0.5, 0.5>
+	override @var(priceAlign) CENTER
+
+	bind *.gridItemType -> GetGradientAssetFromGridItemType -> @this/Background/Gradient:Image.assetPath
+	bind *.gridItemType -> GetLoadAssetFromGridItemType -> @this/Background/Offer:ExternalImage.fallbackImage
+	bind *.offerIndex -> @this:OfferSetButton.setIndex
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	behavior OfferSetButton
+	{
+		buttonBehavior: @panel:Button
+	}
+
+	context @var(backgroundPanel)
+	{
+		panel PricePerItem
+		{
+			bind *.miscText3 -> @this/Text:Label.text
+
+			anchor: TOP_LEFT
+			pivot: <0, 0>
+			size: <320, 48>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/common/price_corner_bg.rpak"
+			}
+
+			panel Text
+			{
+				anchor: LEFT
+				pivot: <0, 0.5>
+				position: <20, 0>
+
+				behavior Label
+				{
+					face: "TitleBoldFont"
+					textAlignHorizontal: LEFT
+					textAlignVertical: CENTER
+					horizontalMode: AUTOSIZE_TO_TEXT
+					verticalMode: AUTOSIZE_TO_TEXT
+					color: <1.0, 1.0, 1.0, 1.0>
+					pixelHeight: 26
+				}
+			}
+		}
+	}
+
+	panel Locked
+	{
+		bind *.locked -> @this.visible
+
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			color: <0, 0, 0, 0.65>
+		}
+	}
+}

@@ -1,0 +1,174 @@
+panel TabButton
+{
+	size: <220, 48>
+	pivot: <0, 0>
+	position: <0, 0>
+	anchor: TOP_LEFT
+	inputListener: true
+
+	var text @this/ButtonText:Label.text
+	var allCaps @this/ButtonText:Label.allCaps
+
+	behavior TabButton
+	{
+		activePanel: @panel/Active
+		buttonBehavior: @panel:Button
+	}
+
+	behavior Button
+	{
+		soundHighlighted: "ui_menu_focus"
+		soundPressedEnabled: "ui_menu_accept"
+
+		transitions: [
+		{
+			fromState: ANY
+			toState: IDLE
+			type: TRANSITION_PROPERTY_SET
+			property: @panel/ButtonHighlight.visible
+			value: false
+		},
+		{
+			fromState: ANY
+			toState: HIGHLIGHTED
+			type: TRANSITION_PROPERTY_SET
+			property: @panel/ButtonHighlight.visible
+			value: true
+		}
+		]
+	}
+
+	panel ButtonHighlight
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		panel Background
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				alpha: 0.04
+			}
+		}
+
+		panel BackgroundGlow
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/glow_half_top.rpak"
+				alpha: 0.45
+				colorRGB: <1, 0, 0>
+			}
+		}
+
+		panel ButtonBarMain
+		{
+			anchor: BOTTOM_STRETCH_WIDTH
+			pivot: <0.5, 1>
+			offsets: <0, 0, 0, 0>
+			height: 4
+
+			behavior Image
+			{
+				alpha: 0.45
+				colorRGB: <1, 0, 0>
+			}
+		}
+
+		panel ButtonBarGlow
+		{
+			anchor: BOTTOM_STRETCH_WIDTH
+			pivot: <0.5, 1>
+			offsets: <0, 0, 0, 0>
+			height: 4
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/glow.rpak"
+				alpha: 0.55
+				colorRGB: <1, 0, 0>
+			}
+		}
+	}
+
+
+	panel ButtonText
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Label
+		{
+			text: "TEST"
+			face: "DefaultRegularFont"
+			pixelHeight: 28
+			textAlignHorizontal: CENTER
+			textAlignVertical: CENTER
+			allCaps: true
+		}
+	}
+
+	panel Active
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		panel Background
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				alpha: 0.04
+			}
+		}
+
+		panel BackgroundGlow
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/glow_half_top.rpak"
+				alpha: 0.45
+				colorRGB: <1, 0, 0>
+			}
+		}
+
+		panel ButtonBarMain
+		{
+			anchor: BOTTOM_STRETCH_WIDTH
+			pivot: <0.5, 1>
+			offsets: <0, 0, 0, 0>
+			height: 4
+
+			behavior Image
+			{
+				alpha: 0.45
+				colorRGB: <1, 0, 0>
+			}
+		}
+
+		panel ButtonBarGlow
+		{
+			anchor: BOTTOM_STRETCH_WIDTH
+			pivot: <0.5, 1>
+			offsets: <0, 0, 0, 0>
+			height: 4
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/glow.rpak"
+				alpha: 0.55
+				colorRGB: <1, 0, 0>
+			}
+		}
+
+	}
+}

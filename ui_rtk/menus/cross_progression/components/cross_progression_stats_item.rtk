@@ -1,0 +1,53 @@
+panel CrossProgressionStatsItem
+{
+	var statName @this/StatName:Label.text
+	var statValue @this/StatValue:Label.text
+
+	anchor: TOP_STRETCH_WIDTH
+	pivot: <0, 0>
+	height: 26
+	offsetsLR: <0, 0>
+
+	behavior HorizontalContainer
+	{
+		spaceEvenly: true
+		fitContentHeight: true
+		alignment: CENTER
+		spacing: 10
+	}
+
+	panel StatName
+	{
+		anchor: LEFT_STRETCH_HEIGHT
+		offsetsTB: <0, 0>
+		pivot: <0, 0.5>
+		width: 350
+
+		behavior Label
+		{
+			text: "StatName"
+			textAlignHorizontal: LEFT
+			textAlignVertical: CENTER
+			horizontalMode: SQUISH_TO_CONTAINER
+			pixelHeight: 26
+			face: "DefaultRegularFont"
+		}
+	}
+
+	panel StatValue
+	{
+		anchor: RIGHT_STRETCH_HEIGHT
+		offsetsTB: <0, 0>
+		pivot: <1, 0.5>
+
+		behavior Label
+		{
+			text: "StatValue"
+			textAlignHorizontal: RIGHT
+			textAlignVertical: CENTER
+			horizontalMode: SQUISH_TO_CONTAINER
+			pixelHeight: 26
+			face: "DefaultRegularFont"
+		}
+	}
+}

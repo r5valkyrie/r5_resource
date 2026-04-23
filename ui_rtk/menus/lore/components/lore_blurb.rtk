@@ -1,0 +1,104 @@
+panel LorePanel
+{
+	bind root
+
+	size: <600, 700>
+	pivot: <0, 0>
+	constrainInput: false
+
+	panel LorePanelContainer
+	{
+		anchor: LEFT
+		pivot: <0, 0.5>
+		size: <575, 700>
+		offsets: <0, 0, 0, 0>
+		constrainInput: false
+
+		behavior Image
+		{
+			color: <0, 0, 0, 0.4>
+			assetPath: $"ui_image/rui/borders/menu_border_button_bottom.rpak"
+		}
+
+		instance $"ui_rtk/common/default_scroll_view.rpak" ScrollView
+		{
+			override @this/View:ScrollView.autoScroll TOP
+			override @this/View/Content:FitToContent.minimumSize <575, 700>
+
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+			constrainInput: false
+
+			context @this/View/Border
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <0, -1, -1, -2>
+
+				behavior Image
+				{
+					color: <0.5, 0.5, 0.5, 1.0>
+					assetPath: $"ui_image/rui/borders/menu_border_list_bg.rpak"
+				}
+			}
+
+			context @this/View/Content
+			{
+				panel Container
+				{
+					anchor: TOP
+					pivot: <0.5, 0.0>
+					size:  <575, 700>
+
+					behavior FitToContent
+
+					panel Vertical
+					{
+						anchor: TOP
+						pivot: <0.5, 0.0>
+						size:  <505, 700>
+
+						behavior VerticalContainer
+						{
+							alignment: TOP
+							fitContentHeight: true
+							spacing: 15
+						}
+
+						panel Header
+						{
+							anchor: TOP
+							offsets: <0, 0, 0, 0>
+						}
+
+						panel Desc
+						{
+							anchor: CENTER_STRETCH_WIDTH
+							offsets: <0, 0, 0, 0>
+
+							behavior VerticalContainer
+							{
+								alignment: TOP
+								fitContentHeight: true
+							}
+
+							behavior ListBinder
+							{
+								bindingPath: "*.bio"
+								prefab: $"ui_rtk/menus/lore/components/lore_blurb_listitem.rpak"
+							}
+						}
+					}
+				}
+			}
+
+			context @this/ScrollBar
+			{
+				positionX: 9
+				pivot: <0.5, 1.0>
+				height: 15
+				width: 700
+				rotation: 90
+			}
+		}
+	}
+}

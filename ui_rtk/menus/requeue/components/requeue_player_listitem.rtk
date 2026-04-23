@@ -1,0 +1,151 @@
+panel RequeuedPlayerListitem
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH
+	offsets: <0, 0, 0, 0>
+	height: 46
+
+	behavior Image
+    {
+		color: #101112
+    }
+
+	panel PlayerContainer
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		visible: true // hook me up to data if player data
+
+		panel PlayerGridContainer
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior HorizontalContainer
+			{
+				fitContentHeight: true
+				alignment: LEFT
+			}
+
+			panel PlayerColor
+			{
+				anchor: LEFT_STRETCH_HEIGHT
+				offsets: <0, 0, 0, 0>
+				width: 7
+
+				behavior Image
+			    {
+					color: #ffffff
+			    }
+			}
+
+			panel PlatformContainer
+			{
+				anchor: LEFT_STRETCH_HEIGHT
+				offsets: <0, 0, 0, 0>
+				width: 51
+
+				panel Platform
+				{
+					anchor: CENTER_STRETCH_WIDTH_HEIGHT
+					offsets: <10, 5, 5, 5>
+
+					behavior Image
+				    {
+						color: #ffffff
+				    }
+				}
+			}
+
+			panel LeaderContainer
+			{
+				anchor: LEFT_STRETCH_HEIGHT
+				offsets: <0, 0, 0, 0>
+				width: 32
+
+				panel Leader
+				{
+					anchor: CENTER
+					size: <20, 20>
+					positionX: -4
+
+					behavior Image
+				    {
+				        assetPath: $"ui_image/rui/menu/lobby/party_leader_icon.rpak"
+						color: #ffffff
+				    }
+				}
+			}
+
+			panel PlayerNameContainer
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <0, 0, 0, 0>
+
+				panel PlayerName
+				{
+					anchor: CENTER_STRETCH_WIDTH_HEIGHT
+					offsets: <0, 0, 0, 0>
+					offsetsLR: <0, 95>
+
+					behavior Label
+					{
+						face: "TitleBoldFont"
+						textAlignHorizontal: LEFT
+						textAlignVertical: CENTER
+						margin: <0, 50, 0, 0>
+						pixelHeight: 30
+						text: "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+						horizontalMode: SQUISH_TO_CONTAINER
+						color: #FCFCFC
+						shadowBlur: 8.0
+						shadowAlpha: 0.7
+						shadowOffset: <0,0>
+					}
+				}
+			}
+		}
+		instance $"ui_rtk/common/components/checkbox.rpak" Ready
+		{
+			positionX: -15
+			pivot: <1.0, 0.5>
+			anchor: RIGHT
+
+			bind *.color -> @this/Outline:Image.colorRGB
+
+			override @var(checked) true
+			override @var(outlineColor) #087373
+			override @var(checkColor) #f9f9f9
+		}
+	}
+
+	panel MessageContainer
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		visible: false // hook me up to data if no player data and want to show a message
+
+		panel Message
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+			offsetsLR: <20, 20>
+
+			behavior Label
+			{
+				face: "TitleBoldFont"
+				textAlignHorizontal: LEFT
+				textAlignVertical: CENTER
+				margin: <0, 0, 0, 0>
+				pixelHeight: 30
+				text: "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+				horizontalMode: SQUISH_TO_CONTAINER
+				color: #cea933
+				shadowBlur: 8.0
+				shadowAlpha: 0.7
+				shadowOffset: <0,0>
+			}
+		}
+	}
+}

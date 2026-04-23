@@ -1,0 +1,53 @@
+panel ProgressIndicator
+{
+	var milestoneNumber @this/Text:Label.text
+	anchor: RIGHT
+	pivot: <1, 0.5>
+	useLocaleDirection: true
+
+	behavior HorizontalContainer
+	{
+		fitContentWidth: true
+		fitContentHeight: true
+		spacing: -5
+		useLocaleDirection: true
+	}
+
+	panel Text
+	{
+		anchor: RIGHT
+		pivot: <1, 0.5>
+		bind @this:Label.pixelHeight -> @this.height
+
+		behavior Label
+		{
+			text: "1"
+			face: "DefaultBoldFont"
+			pixelHeight: 28
+			textAlignVertical: TOP
+			textAlignHorizontal: RIGHT
+			horizontalMode: AUTOSIZE_TO_TEXT
+			useLocaleDirection: true
+			color: #8b8b8b
+		}
+
+		behavior ContainerElement
+		{
+			verticalAlignOverride: BOTTOM
+			preferredHeight: 26
+		}
+	}
+
+	panel Image
+	{
+		anchor: RIGHT
+		pivot: <1, 0.5>
+		size: <35,50>
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/mastery/mastery_overview_progressbar_notch.rpak"
+			useLocaleDirection: true
+			color: #8b8b8b
+		}
+	}
+}

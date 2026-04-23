@@ -188,6 +188,107 @@
         ControlName				RuiButton
         InheritProperties		MatchCharacterButton
     }
+    Button30
+    {
+        ControlName				RuiButton
+        InheritProperties		MatchCharacterButton
+    }
+    Button31
+    {
+        ControlName				RuiButton
+        InheritProperties		MatchCharacterButton
+    }
+    Button32
+    {
+        ControlName				RuiButton
+        InheritProperties		MatchCharacterButton
+    }
+    Button33
+    {
+        ControlName				RuiButton
+        InheritProperties		MatchCharacterButton
+    }
+    Button34
+    {
+        ControlName				RuiButton
+        InheritProperties		MatchCharacterButton
+    }
+    Button35
+    {
+        ControlName				RuiButton
+        InheritProperties		MatchCharacterButton
+    }
+    Button36
+    {
+        ControlName				RuiButton
+        InheritProperties		MatchCharacterButton
+    }
+    Button37
+    {
+        ControlName				RuiButton
+        InheritProperties		MatchCharacterButton
+    }
+    Button38
+    {
+        ControlName				RuiButton
+        InheritProperties		MatchCharacterButton
+    }
+    Button39
+    {
+        ControlName				RuiButton
+        InheritProperties		MatchCharacterButton
+    }
+    Button40
+    {
+        ControlName				RuiButton
+        InheritProperties		MatchCharacterButton
+    }
+    Button41
+    {
+        ControlName				RuiButton
+        InheritProperties		MatchCharacterButton
+    }
+    Button42
+    {
+        ControlName				RuiButton
+        InheritProperties		MatchCharacterButton
+    }
+    Button43
+    {
+        ControlName				RuiButton
+        InheritProperties		MatchCharacterButton
+    }
+    Button44
+    {
+        ControlName				RuiButton
+        InheritProperties		MatchCharacterButton
+    }
+    Button45
+    {
+        ControlName				RuiButton
+        InheritProperties		MatchCharacterButton
+    }
+    Button46
+    {
+        ControlName				RuiButton
+        InheritProperties		MatchCharacterButton
+    }
+    Button47
+    {
+        ControlName				RuiButton
+        InheritProperties		MatchCharacterButton
+    }
+    Button48
+    {
+        ControlName				RuiButton
+        InheritProperties		MatchCharacterButton
+    }
+    Button49
+    {
+        ControlName				RuiButton
+        InheritProperties		MatchCharacterButton
+    }
+
 
 //Assault Class List
 

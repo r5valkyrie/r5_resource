@@ -1,0 +1,91 @@
+panel PlayLTMTimer
+{
+	bind root
+
+	var endTime @this/Content/Text:Timer.endTime
+	var visible @this/Content.visible
+	var anchor @this.anchor
+	var size @this.size
+	var position @this.position
+	var bgRotation @this/Content/Background.rotation
+	var bgColor @this/Content/Background:Image.colorRGB
+
+	anchor: TOP_LEFT
+	size: <361, 32>
+	pivot: < 0, 0 >
+	position: < 0, 0 >
+
+	behavior Animator
+	{
+		tweenAnimations: [
+		{
+			name: "fadeInAnim"
+			tweens: [
+			{
+				property: @panel/Content/Background:Image.alpha
+				startValue: 0.0
+				endValue: 1.0
+				duration: 0.3
+				delay: 0.1
+				curve: EASE_IN_QUART
+			}
+			,{
+				property: @panel/Content/Text:FormatLabel.alpha
+				startValue: 0.0
+				endValue: 1.0
+				duration: 0.3
+				delay: 0.2
+				curve: EASE_IN_QUART
+			}
+			]
+		}
+		]
+	}
+
+	behavior AnimatorAutoPlay
+	{
+		animation: "fadeInAnim"
+	}
+
+	panel Content
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <50, 50, 0, 0>
+
+		panel Background
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/common/white_trapezoid_fill.rpak"
+				colorRGB: #686a6f
+				alpha: 0.0
+			}
+		}
+
+		panel Text
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <20, 20, 0, 0>
+
+			behavior Timer
+
+			behavior FormatLabel
+			{
+				bind @panel:Timer.remainingTime -> FormatTimeProperty -> @this.arg1
+				format: "#TIME_REMAINING_SHORT_CLOCK"
+				textAlignHorizontal:  CENTER
+				textAlignVertical: CENTER
+				horizontalMode: SQUISH_TO_CONTAINER
+				verticalMode: AUTOSIZE_TO_TEXT
+				pixelHeight: 30
+				face: "DefaultRegularFont"
+				colorRGB: <1.0, 1.0, 1.0>
+				alpha: 0
+			}
+		}
+	}
+}
+

@@ -1,0 +1,515 @@
+panel BaseButton
+{
+	var buttonText @this/PackText/TextContainer/Text:Label.text
+	// This is a hack and we should do this. RTK Code to investigate why I can't hide it with script code.
+	bind @this:Button.interactive -> @this.visible
+	bind @this:Button.interactive -> @this.active
+	bind root
+	anchor: CENTER
+	size: <406, 152>
+	inputListener: true
+
+	behavior Button
+	{
+		soundHighlighted: "ui_menu_focus"
+		soundPressedEnabled: "ui_menu_accept"
+		transitions: [
+			// Inner Glow
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_TWEEN
+				animName: "onIdle"
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_TWEEN
+				animName: "onHighlighted"
+			},
+			{
+				fromState: HIGHLIGHTED
+				toState: PRESSED
+				type: TRANSITION_TWEEN
+				animName: "onHighlightedToPressed"
+			},
+			{
+				fromState: PRESSED
+				toState: HIGHLIGHTED
+				type: TRANSITION_TWEEN
+				animName: "onPressedToHighlighted"
+			},
+
+			// Outline Hide/Show
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Outline:Image.alpha
+				value: 1.0
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Outline:Image.alpha
+				value: 0.0
+			},
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/OutlineHover:Image.alpha
+				value: 0.0
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/OutlineHover:Image.alpha
+				value: 1.0
+			},
+            {
+                fromState: ANY
+                toState: NON_INTERACTIVE
+                type: TRANSITION_PROPERTY_SET
+                property: @owner.panel/OutlineHover:Image.alpha
+                value: 0.0
+            },
+
+			//Outline Color
+			{
+                fromState: ANY
+                toState: NON_INTERACTIVE
+                type: TRANSITION_PROPERTY_SET
+                property: @owner.panel/Outline:Image.colorRGB
+                value: #7d7e7f
+            },
+
+			// Background Gradient
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/BackgroundGradient:Image.alpha
+				value: 0.2
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/BackgroundGradient:Image.alpha
+				value: 0.0
+			},
+			{
+                fromState: ANY
+                toState: NON_INTERACTIVE
+                type: TRANSITION_PROPERTY_SET
+                property: @owner.panel/BackgroundGradient:Image.alpha
+                value: 0.0
+            },
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/BackgroundGradientHover:Image.alpha
+				value: 0.0
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/BackgroundGradientHover:Image.alpha
+				value: 0.2
+			},
+			{
+                fromState: ANY
+                toState: NON_INTERACTIVE
+                type: TRANSITION_PROPERTY_SET
+                property: @owner.panel/BackgroundGradientHover:Image.alpha
+                value: 0.0
+            },
+
+			//Top Line
+			{
+				fromState: ANY
+            	toState: IDLE
+            	type: TRANSITION_PROPERTY_SET
+            	property: @owner.panel/TopLine:Image.colorRGB
+            	value: <1, 1, 1>
+			},
+			{
+            	fromState: ANY
+                toState: HIGHLIGHTED
+                type: TRANSITION_PROPERTY_SET
+            	property: @owner.panel/TopLine:Image.colorRGB
+                value: #FF4E1D
+            },
+            {
+                fromState: ANY
+                toState: NON_INTERACTIVE
+                type: TRANSITION_PROPERTY_SET
+                property: @owner.panel/TopLine:Image.colorRGB
+                value: #7d7e7f
+            },
+
+            //Bottom Line
+             {
+                 fromState: ANY
+                 toState: NON_INTERACTIVE
+                 type: TRANSITION_PROPERTY_SET
+                 property: @owner.panel/Line:Image.colorRGB
+                 value: <0.31, 0.31, 0.31>
+             },
+              {
+                 fromState: NON_INTERACTIVE
+                 toState: ANY
+                 type: TRANSITION_PROPERTY_SET
+                 property: @owner.panel/Line:Image.colorRGB
+                 value: #FF4E1D
+              }
+		]
+	}
+
+	behavior Animator
+	{
+		tweenAnimations: [
+			{
+				name: "onIdle"
+				tweens: [
+					{
+						property: @owner.panel/InnerGlow:Image.alpha
+						startValue: 0.2
+						endValue: 0.0
+						duration: 0.15
+					}
+				]
+			},
+			{
+				name: "onHighlighted"
+				tweens: [
+					{
+						property: @owner.panel/InnerGlow:Image.alpha
+						startValue: 0.0
+						endValue: 0.2
+						duration: 0.15
+					}
+				]
+			},
+			{
+				name: "onHighlightedToPressed"
+				tweens: [
+					{
+						property: @owner.panel/InnerGlow:Image.alpha
+						startValue: 0.2
+						endValue: 0.2
+						duration: 0.15
+					}
+				]
+			},
+			{
+				name: "onPressedToHighlighted"
+				tweens: [
+					{
+						property: @owner.panel/InnerGlow:Image.alpha
+						startValue: 0.2
+						endValue: 0.2
+						duration: 0.15
+					}
+				]
+			}
+		]
+	}
+
+	panel BackgroundFill
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			colorRGB: <0.2, 0.2, 0.2>
+		}
+	}
+
+	panel BackgroundGradient
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			colorRGB: #FF4E1D
+			alpha: 0.2
+			assetPath: $"ui_image/rui/gradient_ud_compressed.rpak"
+		}
+	}
+
+	panel BackgroundGradientHover
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			colorRGB: #FF4E1D
+			assetPath: $"ui_image/rui/gradient_ud_compressed.rpak"
+		}
+	}
+
+	panel BaseText
+	{
+		bind *.isPaidPack -> NOT -> @this.visible
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <10, 10, 10, 10>
+
+		behavior Label
+		{
+			face: "TitleBoldFont"
+			text: "#MILESTONE_EVENT_TRACKING_PAGE_OPEN_FREE"
+			textAlignHorizontal: CENTER
+			textAlignVertical: CENTER
+			horizontalMode: WRAP
+			pixelHeight: 32
+			color: <1, 1, 1, 1>
+			allCaps: true
+		}
+	}
+
+	panel PackText
+    {
+    	bind *.isPaidPack -> @this.visible
+    	anchor: LEFT
+    	pivot: <0, 0.5>
+    	offsets: <10, 10, 10, 10>
+
+    	behavior HorizontalContainer
+    	{
+    	    alignment: LEFT
+    	    fitContentWidth: true
+            fitContentHeight: true
+            spacing: 12
+            paddingLeft: 30
+			useLocaleDirection: true
+    	}
+
+    	panel PackNumber
+    	{
+    	    behavior Label
+            {
+                bind *.quantity -> @this.text
+            	face: "TitleBoldFont"
+            	text: "4"
+            	textAlignHorizontal: LEFT
+            	textAlignVertical: CENTER
+            	horizontalMode: AUTOSIZE_TO_TEXT
+            	pixelHeight: 64
+            	color: <1, 1, 1, 1>
+            	allCaps: true
+            }
+    	}
+
+    	panel SeparatorLine
+    	{
+    	    size: <1, 75>
+    	    behavior Image
+    	}
+
+		panel TextContainer
+		{
+		    anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			behavior VerticalContainer
+            {
+                alignment: LEFT
+                fitContentWidth: true
+                fitContentHeight: true
+				useLocaleDirection: true
+            }
+			panel Text
+			{
+				 bind @root.width -> Subtract(@root/PackText/PackNumber.width) -> Subtract(65) -> @this.width
+				 behavior Label
+                 {
+                 	face: "TitleBoldFont"
+                 	text: "DEFAULT"
+                 	textAlignHorizontal: LEFT
+                 	horizontalMode: WRAP
+                 	verticalMode: AUTOSIZE_TO_TEXT
+                 	pixelHeight: 25
+                 	color: <1, 1, 1, 1>
+                 	allCaps: true
+					useLocaleDirection: true
+                 }
+			}
+
+            panel PriceText
+            {
+                behavior HorizontalContainer
+                {
+                    alignment: LEFT
+                    fitContentWidth: true
+                    fitContentHeight: true
+                    spacing: 5
+					useLocaleDirection: true
+                }
+
+                panel OriginalPrice
+                {
+					bind *.originalPrice -> IsEmpty -> NOT -> @this.visible
+					bind *.discount -> GreaterThan( 0 ) -> And( *.isPaidPack ) -> @this.visible
+
+					panel BreakthroughLine
+					{
+						anchor: CENTER_STRETCH_WIDTH
+                        height: 4
+                        behavior Image
+                        {
+                            alpha: 0.5
+                        }
+					}
+
+					behavior Label
+					{
+                        bind *.originalPrice -> @this.text
+                     	face: "TitleFont"
+                     	text: "8,888"
+                     	textAlignHorizontal: LEFT
+                     	horizontalMode: AUTOSIZE_TO_TEXT
+                     	verticalMode: AUTOSIZE_TO_TEXT
+                     	pixelHeight: 30
+                     	color: <1, 1, 1, 0.5>
+						useLocaleDirection: true
+					}
+
+	                behavior LabelAltStyle
+	                {
+                     	pixelHeight: 30
+	                }
+                }
+
+                panel NormalPrice
+                {
+            	    bind @this.parent.parent/Text.width -> Subtract( @this.parent/OriginalPrice.width ) -> @this.width
+            	    bind *.price -> IsEmpty -> NOT -> @this.visible
+                    behavior Label
+                    {
+                        bind *.price -> @this.text
+                    	face: "TitleFont"
+                    	text: "8,888"
+                    	textAlignHorizontal: LEFT
+                    	horizontalMode: WRAP
+                    	verticalMode: AUTOSIZE_TO_TEXT
+                    	pixelHeight: 30
+                    	color: <1, 1, 1, 1>
+						useLocaleDirection: true
+                    }
+
+	                behavior LabelAltStyle
+					{
+						pixelHeight: 30
+                    }
+                }
+            }
+		}
+    }
+
+
+	panel InnerGlow
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			colorRGB: #FF4E1D
+			alpha: 0
+			assetPath: $"ui_image/rui/borders/border_inner_glow.rpak"
+		}
+	}
+
+	panel Line
+	{
+		anchor: BOTTOM_STRETCH_WIDTH
+		pivot: <0.5, 1>
+		height: 10
+		offsetsLR: <0, 0>
+
+		behavior Image
+		{
+			colorRGB: #FF4E1D
+		}
+	}
+
+	panel Outline
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <-1, -1, -1, -1>
+
+		behavior Image
+		{
+			colorRGB: <0.7, 0.7, 0.7>
+			assetPath: $"ui_image/rui/borders/border_outline_2px.rpak"
+		}
+	}
+
+	panel OutlineHover
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <-1, -1, -1, -1>
+
+		behavior Image
+		{
+			colorRGB: #FF4E1D
+			assetPath: $"ui_image/rui/borders/border_outline_4px.rpak"
+		}
+	}
+
+	panel TopLine
+	{
+	    bind *.discount -> GreaterThan( 0 ) -> And( *.isPaidPack ) -> NOT -> @this.visible
+		anchor: TOP_STRETCH_WIDTH
+    	offsets: <85, 85, 0, 0>
+    	pivot: <0.5, 0>
+    	height: 17
+
+		behavior Image
+    	{
+    		assetPath: $"ui_image/rui/borders/border_topcenter.rpak"
+    	}
+	}
+
+	panel TopDiscount
+    {
+        bind *.discount -> GreaterThan( 0 ) -> And( *.isPaidPack ) -> @this.visible
+        bind @this/Text:FormatLabel.pixelHeight -> @this.height
+    	anchor: TOP_STRETCH_WIDTH
+    	offsets: <85, 85, 0, 0>
+    	pivot: <0.5, 0>
+    	height: 24
+
+    	behavior Image
+    	{
+    	    assetPath:  $"ui_image/rui/events/s19me01/button_discount_backer.rpak"
+    		colorRGB: #ffcf25
+    	}
+
+    	panel Text
+    	{
+            pivot: <0.5, 0>
+            anchor: TOP
+    	    bind @this:Label.pixelHeight -> @this.height
+    	    behavior FormatLabel
+            {
+                bind *.discount -> @this.arg1
+            	face: "TitleBoldFont"
+            	format: "#STORE_BUTTON_DISCOUNT"
+            	textAlignHorizontal: CENTER
+            	horizontalMode: AUTOSIZE_TO_TEXT
+            	pixelHeight: 24
+            	color: <0, 0, 0, 1>
+            	allCaps: true
+            	arg1: 0
+            }
+    	}
+    }
+}

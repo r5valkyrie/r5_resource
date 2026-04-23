@@ -1,0 +1,37 @@
+panel LorePanel
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	behavior WeaponLoreScreen
+	{
+		stopCamera: @panel/Container/LoreBlurb:Button
+	}
+
+	panel Container
+	{
+		width: 1920
+		offsetsTB: <0, 0>
+		anchor: CENTER_STRETCH_HEIGHT
+
+		instance $"ui_rtk/menus/lore/components/lore_blurb.rpak" LoreBlurb
+		{
+			override bind root "&menus.weapon.lore"
+
+			inputListener: true
+			positionX: 63
+			positionY: 195
+
+			behavior Button
+
+			context @this/LorePanelContainer/ScrollView/View/Content/Container/Vertical/Header
+			{
+				anchor: TOP
+				offsets: <0, 0, 0, 0>
+				size: <0, 0>
+			}
+	    }
+	}
+}

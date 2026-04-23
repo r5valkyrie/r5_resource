@@ -1,0 +1,13 @@
+data RTKConstants Protanopia
+{
+	values: {
+
+		// Based on STORE_LOOT_TIER values in colorpalette_table.csv
+		STORE_COMMON_COLOR: < 0.282, 0.282, 0.282, 1.0 > // TIER 1
+		STORE_RARE_COLOR: < 0, 0.243, 0.463, 1.0 > // TIER 2
+		STORE_EPIC_COLOR: < 0.616, 0.518, 0.949, 1.0 > // TIER 3
+		STORE_LEGENDARY_COLOR: < 0.980, 0.953, 0.298, 1.0 > // TIER 4
+		STORE_MYTHIC_COLOR: < 1, 0.427, 0.643, 1.0 > // TIER 5
+		STORE_ICONIC_COLOR: < 0.090, 0.800, 0.525, 1.0 > // TIER 6
+	}
+}

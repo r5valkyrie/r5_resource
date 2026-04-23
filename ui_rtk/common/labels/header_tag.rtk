@@ -1,0 +1,78 @@
+panel HeaderTag
+{
+	bind root
+
+	pivot: <1, 0>
+
+	var titleText @this/Rect/RectContents/CornerText:Label.text
+	var fontSize  @this/Rect/RectContents/CornerText:Label.pixelheight
+	var bgColor   @this/Rect:Image.colorRGB
+	var alpha     @this/Rect:Image.alpha
+	var triangleAnchor @this/Triangle.anchor //use LEFT or RIGHT to change which side the triangle is on
+	var triangleFlipVertical @this/Triangle:Image.flipVertical
+
+	panel Triangle
+	{
+		bind @root/Rect.height -> @this.width
+		bind @root/Rect.height -> @this.height
+		bind @this.anchor -> IntEqual( 5 ) -> @this:Image.flipHorizontal
+		bind @this.anchor -> IntEqual( 3 ) -> PickVectorFromTwo( <1.0, 0.5, 0.0>, <0.0, 0.5, 0.0> ) -> @this.pivot
+		anchor: LEFT
+
+		behavior Image
+		{
+			bind @root/Rect:Image.colorRGB  -> @this.colorRGB
+			bind @root/Rect:Image.alpha     -> @this.alpha
+			assetPath: $"ui_image/rui/triangle_tr.rpak"
+		}
+	}
+
+	panel Rect
+	{
+		//3 = LEFT // 5 RIGHT
+		bind @root/Triangle.anchor -> IntEqual( 3 ) -> PickIntFromTwo( 0, @root/Triangle.width ) -> @this.offsetLeft
+		bind @root/Triangle.anchor -> IntEqual( 5 ) -> PickIntFromTwo( 0, @root/Triangle.width ) -> @this.offsetRight
+		pivot: <1, 0.5>
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsetsTB: <0,0>
+
+		behavior Image
+		{
+			colorRGB: <0, 0, 0>
+		}
+
+		panel RectContents
+		{
+			anchor: CENTER
+			pivot: <0.5, 0.5>
+			position:<0,0>
+
+			behavior HorizontalContainer
+			{
+				fitContentHeight: true
+				fitContentWidth: true
+				padding: <5,5,5,5>
+				spacing: 5.0
+				alignment: CENTER
+			}
+
+			panel CornerText
+			{
+				pivot: <0, 0>
+
+				behavior Label
+				{
+					text: "default text"
+					textAlignHorizontal: LEFT
+					textAlignVertical: CENTER
+					horizontalMode: AUTOSIZE_TO_TEXT
+					verticalMode: AUTOSIZE_TO_TEXT
+					pixelHeight: 35
+					margin: <0, 0, 0, 0>
+					color: <1.0, 1.0, 1.0, 1.0>
+					face: "DefaultBoldFont"
+				}
+			}
+		}
+	}
+}

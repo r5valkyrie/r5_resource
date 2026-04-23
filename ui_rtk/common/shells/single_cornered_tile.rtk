@@ -1,0 +1,34 @@
+panel SingleCorneredTile
+{
+	var bgColor @this/Background:Image.color
+	var borderAlpha @this/Border:Image.alpha
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+	panel Background
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/borders/border_playlist_card_mask.rpak"
+			imageBlur: ASSETMASK
+		}
+	}
+
+	panel Border
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/borders/border_playlist_card.rpak"
+		}
+	}
+
+}

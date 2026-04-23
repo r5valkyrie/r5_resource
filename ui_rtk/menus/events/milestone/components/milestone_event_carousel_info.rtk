@@ -1,0 +1,334 @@
+panel MilestoneEventCarouselComponent
+{
+	bind root
+	anchor: TOP_LEFT
+	size: <250, 415>
+	pivot: <0, 0>
+	offsets: <0, 0, 0, 0>
+
+	var flipRight @this:HorizontalContainer.reverseOrder // Setting this to flipRight will flip the configuration of a ton of elements in this rtk
+
+	behavior HorizontalContainer
+	{
+		fitContentHeight: true
+		fitContentWidth: true
+		alignment: RIGHT
+	}
+
+	panel Decoration
+	{
+		bind @root/Body.height -> Subtract( 10 ) -> @this.height
+
+		anchor: RIGHT
+		pivot: <1, 0.5>
+		panel TopLine
+		{
+			bind @root/Body.height -> Divide( 2 ) -> Subtract( 20 ) -> @this.height
+			bind @root:HorizontalContainer.reverseOrder -> PickIntFromTwo( 5, 3 ) -> @this.anchor
+			bind @root:HorizontalContainer.reverseOrder -> PickVectorFromTwo( <1.0, 1.0, 0.0>, <0.0, 1.0, 0.0> ) -> @this.pivot
+
+			anchor: RIGHT
+			pivot: <1, 1>
+			offsets: <0, 0, 0, 0>
+			width: 3
+			positionY: -27
+
+			behavior Image
+			{
+				alpha: 0.45
+			}
+		}
+
+		panel BottomLine
+		{
+			bind @root/Body.height -> Divide( 2 ) -> Subtract( 20 ) -> @this.height
+			bind @root:HorizontalContainer.reverseOrder -> PickIntFromTwo( 5, 3 ) -> @this.anchor
+			bind @root:HorizontalContainer.reverseOrder -> PickVectorFromTwo( <1.0, 0.0, 0.0>, <0.0, 0.0, 0.0> ) -> @this.pivot
+
+			anchor: RIGHT
+			pivot: <1, 0>
+			offsets: <0, 0, 0, 0>
+			width: 3
+			positionY: 28
+
+			behavior Image
+			{
+				alpha: 0.45
+			}
+		}
+
+		panel Arrow
+		{
+			bind @root:HorizontalContainer.reverseOrder -> PickIntFromTwo( 5, 3 ) -> @this.anchor
+			bind @root:HorizontalContainer.reverseOrder -> PickVectorFromTwo( <1.0, 0.5, 0.0>, <0.0, 0.5, 0.0> ) -> @this.pivot
+
+			anchor: RIGHT
+			pivot: <1, 0.5>
+			size: <23, 55>
+			behavior Image
+			{
+				bind @root:HorizontalContainer.reverseOrder -> @this.flipHorizontal
+
+				assetPath: $"ui_image/rui/menu/battlepass/details_box_indicator.rpak"
+				alpha: 1.5
+			}
+		}
+
+	}
+
+	panel Body
+	{
+		anchor: TOP_LEFT
+		pivot: <0, 0>
+		size: <250, 415>
+
+
+		behavior Image
+		{
+			color: <0.75, 0.75, 0.75, 1.0>
+			assetPath: $"ui_image/rui/menu/common/variable_size_square_gradient_100px.rpak"
+			imageBlur: ASSETMASK
+		}
+
+		behavior VerticalContainer
+		{
+			bind @root:HorizontalContainer.reverseOrder -> NotForRTL -> PickIntFromTwo( 0, 2 ) -> @this.alignment
+
+			spacing: 50
+			padding: <10, 10, 0, 0>
+			fitContentHeight: true
+			fitContentWidth: true
+			useLocaleDirection: true
+		}
+
+		panel Text
+		{
+
+			behavior VerticalContainer
+			{
+				bind @root:HorizontalContainer.reverseOrder -> NotForRTL -> PickIntFromTwo( 0, 2 ) -> @this.alignment
+
+				fitContentHeight: true
+				fitContentWidth: true
+				useLocaleDirection: true
+			}
+
+			panel Title
+			{
+				width: 250
+				behavior Label
+				{
+					bind @root:HorizontalContainer.reverseOrder -> NotForRTL -> PickIntFromTwo( 0, 2 ) -> @this.textAlignHorizontal
+					bind *.name -> @this.text
+					text: "NAME OF ITEM HERE"
+					face: "TitleBoldFont"
+					pixelHeight: 24
+					colorRGB: <1, 1, 1>
+					outlineColorInner: <0, 0, 0, 0.8>
+					outlineColorOuter: <0, 0, 0, 0>
+					textAlignHorizontal: LEFT
+					textAlignVertical: CENTER
+					horizontalMode: WRAP
+					verticalMode: AUTOSIZE_TO_TEXT
+					allcaps: true
+					useLocaleDirection: true
+				}
+
+			}
+
+			panel Subtitle
+			{
+				width: 250
+				behavior Label
+				{
+					bind @root:HorizontalContainer.reverseOrder -> NotForRTL -> PickIntFromTwo( 0, 2 ) -> @this.textAlignHorizontal
+					bind *.quality -> QualityTextColor -> @this.colorRGB
+					bind *.quality -> QualityName -> @this.text
+
+					text: "ICONIC"
+					face: "TitleFont"
+					pixelHeight: 22
+					colorRGB: <1, 1, 1>
+					outlineColorInner: <0, 0, 0, 0.8>
+					outlineColorOuter: <0, 0, 0, 0>
+					textAlignHorizontal: LEFT
+					textAlignVertical: CENTER
+					horizontalMode: WRAP
+					verticalMode: AUTOSIZE_TO_TEXT
+					allcaps: true
+					useLocaleDirection: true
+				}
+			}
+
+			panel Description
+			{
+				width: 250
+				behavior Label
+				{
+					bind @root:HorizontalContainer.reverseOrder -> NotForRTL -> PickIntFromTwo( 0, 2 ) -> @this.textAlignHorizontal
+					bind *.itemTypeDescription -> @this.text
+					text: "Legend Name and Type"
+					face: "TitleFont"
+					pixelHeight: 22
+					colorRGB: <1, 1, 1>
+					outlineColorInner: <0, 0, 0, 0.8>
+					outlineColorOuter: <0, 0, 0, 0>
+					textAlignHorizontal: LEFT
+					textAlignVertical: CENTER
+					horizontalMode: WRAP
+					verticalMode: AUTOSIZE_TO_TEXT
+					useLocaleDirection: true
+				}
+			}
+
+			panel Indicators
+			{
+				behavior HorizontalContainer
+				{
+					fitContentHeight: true
+					fitContentWidth: true
+				}
+
+				behavior ListBinder
+				{
+					bindingPath: "*.progress"
+					prefab: $"ui_rtk/common/components/ellipse_progress_component.rpak"
+				}
+			}
+		}
+
+		panel PackAndPriceInfo
+		{
+			bind *.isOwned -> NOT -> @this.visible
+
+			behavior VerticalContainer
+			{
+				bind @root:HorizontalContainer.reverseOrder -> NotForRTL -> PickIntFromTwo( 0, 2 ) -> @this.alignment
+
+				spacing: 5
+				fitContentHeight: true
+				fitContentWidth: true
+				useLocaleDirection: true
+			}
+			panel Title
+			{
+				width: 250
+				behavior Label
+				{
+					bind @root:HorizontalContainer.reverseOrder -> NotForRTL -> PickIntFromTwo( 0, 2 ) -> @this.textAlignHorizontal
+					text: "#COLLECTION_EVENT_UNLOCK_WITH"
+					face: "TitleBoldFont"
+					pixelHeight: 18
+					colorRGB: <1, 1, 1>
+					outlineColorInner: <0, 0, 0, 0.8>
+					outlineColorOuter: <0, 0, 0, 0>
+					textAlignHorizontal: LEFT
+					textAlignVertical: CENTER
+					horizontalMode: WRAP
+					verticalMode: AUTOSIZE_TO_TEXT
+					allcaps: true
+					useLocaleDirection: true
+				}
+			}
+
+			panel PackInfo
+			{
+				bind *.isRestricted -> NOT -> @this.visible
+				behavior HorizontalContainer
+				{
+					spacing: 15
+					padding: <10, -5, 5, 5>
+					alignment: LEFT
+					fitContentHeight: true
+					fitContentWidth: true
+					useLocaleDirection: true
+				}
+
+				behavior Image
+				{
+					colorRGB: <0.45, 0.45, 0.45>
+					alpha: 0.5
+				}
+
+				panel Icon
+				{
+					size: <25, 25>
+					behavior Image
+					{
+						bind *.packIcon -> @this.assetPath
+					}
+				}
+				panel Text
+				{
+					width: 250
+					behavior Label
+					{
+						bind *.packName -> @this.text
+						text: "EVENT PACK"
+						face: "TitleBoldFont"
+						pixelHeight: 20
+						colorRGB: <1, 1, 1>
+						outlineColorInner: <0, 0, 0, 0.8>
+						outlineColorOuter: <0, 0, 0, 0>
+						textAlignHorizontal: LEFT
+						textAlignVertical: CENTER
+						horizontalMode: WRAP
+						verticalMode: AUTOSIZE_TO_TEXT
+						allcaps: true
+						useLocaleDirection: true
+					}
+				}
+			}
+
+			panel PriceInfo
+			{
+				bind *.price -> GreaterThan( 0 ) -> @this.visible
+
+				behavior HorizontalContainer
+				{
+					spacing: 15
+					padding: <10, -5, 5, 5>
+					alignment: LEFT
+					fitContentHeight: true
+					fitContentWidth: true
+					useLocaleDirection: true
+				}
+
+				behavior Image
+				{
+					colorRGB: <0.45, 0.45, 0.45>
+					alpha: 0.5
+				}
+
+				panel Icon
+				{
+					size: <25, 25>
+					behavior Image
+					{
+						bind *.coinIcon -> @this.assetPath
+					}
+				}
+				panel Text
+				{
+					width: 250
+					behavior Label
+					{
+						bind *.price -> IntToFloat -> FormatAndLocalizeNumber( "1", true ) -> @this.text
+						text: "8,888"
+						face: "TitleBoldFont"
+						pixelHeight: 20
+						colorRGB: <1, 1, 1>
+						outlineColorInner: <0, 0, 0, 0.8>
+						outlineColorOuter: <0, 0, 0, 0>
+						textAlignHorizontal: LEFT
+						textAlignVertical: CENTER
+						horizontalMode: WRAP
+						verticalMode: AUTOSIZE_TO_TEXT
+						allcaps: true
+						useLocaleDirection: true
+					}
+				}
+			}
+		}
+	}
+}

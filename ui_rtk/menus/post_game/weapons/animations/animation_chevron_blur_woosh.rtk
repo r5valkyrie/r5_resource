@@ -1,0 +1,40 @@
+data RTKKeyFrameAsset
+{
+	duration: 0.7
+	tracks: [
+		{
+			property: @panel/ChevronWoosh.positionX
+			keyframes: [
+				{
+					time: 0.0
+					value: -700
+				},
+				{
+					time: 0.5
+					value: 700
+				}
+			]
+		},
+		{
+			property: @panel/ChevronWoosh:Image.alpha
+			keyframes: [
+				{
+					time: 0.0
+					value: 0.0
+				},
+				{
+					time: 0.1
+					value: 1.0
+				},
+				{
+					time: 0.4
+					value: 1.0
+				},
+				{
+					time: 0.5
+					value: 0.0
+				}
+			]
+		}
+	]
+}

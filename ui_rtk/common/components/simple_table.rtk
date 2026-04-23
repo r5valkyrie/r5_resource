@@ -1,0 +1,88 @@
+panel SimpleTable
+{
+    bind root
+
+    anchor: CENTER
+    size: <400, 30>
+
+	//use varOverrides to override properties in a ListBinder
+	var rowWidth    @this.width
+	var rowAlpha    @this:Image.alpha
+	var textSize    @this/Container/LeftText:FormatLabel.pixelHeight
+	var textColor   @this/Container/LeftText:FormatLabel.colorRGB
+
+    bind @this/Container.height -> @this.height
+
+	behavior Image
+	{
+		bind *.index -> Modulo(2) -> PickVectorFromTwo(<0.2, 0.2, 0.2>, <0.4, 0.4, 0.4>) -> @this.colorRGB
+		alpha: 0.6
+	}
+
+	panel Container
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior HorizontalContainer
+		{
+			expandToFillEvenly: true
+			spacing: 0
+			paddingLeft: 10
+			paddingRight: 15
+			alignment: CENTER
+			fitContentHeight: true
+			useLocaleDirection: true
+		}
+
+		panel LeftText
+		{
+			behavior FormatLabel
+			{
+				bind *.leftText -> @this.format
+				bind *.textArgs -> @this.arg1
+
+				face: "DefaultRegularFont"
+				colorRGB: <0.8, 0.8, 0.8>
+				shadowBlur: 10.0
+				shadowAlpha: 0.5
+				pixelHeight: 30
+				shadowOffset: <0,0>
+				margin: <0, 0, 5, 5>
+	            textAlignHorizontal: LEFT
+	            textAlignVertical: CENTER
+				useLocaleDirection: true
+		        horizontalMode: SQUISH_TO_CONTAINER
+		        verticalMode: AUTOSIZE_TO_TEXT
+		        format: ""
+		        arg1: ""
+			}
+
+			behavior LabelAltStyle
+			{
+				color: <0.65, 0.65, 0.65, 1.0>
+				pixelHeight: 26
+				shadowAlpha: 1
+			}
+		}
+
+		panel RightText
+		{
+			behavior Label
+			{
+				bind *.rightText -> @this.text
+				bind @root/Container/LeftText:FormatLabel.pixelHeight -> @this.pixelHeight
+				bind @root/Container/LeftText:FormatLabel.colorRGB -> @this.colorRGB
+
+				face: "DefaultRegularFont"
+				colorRGB: <0.8, 0.8, 0.8>
+				pixelHeight: 30
+	            textAlignHorizontal: RIGHT
+	            textAlignVertical: CENTER
+				useLocaleDirection: true
+		        horizontalMode: SQUISH_TO_CONTAINER
+		        verticalMode: AUTOSIZE_TO_TEXT
+			}
+		}
+	}
+}

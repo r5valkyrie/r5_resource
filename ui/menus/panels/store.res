@@ -1,35 +1,54 @@
 "resource/ui/menus/panels/store.res"
 {
-	PanelFrame
-	{
-		ControlName				Label
-		xpos					0
-		ypos					0
-		wide					%100
-		tall					%100
-		labelText				""
-	    bgcolor_override		"70 30 30 255"
-		visible					0
-		paintbackground			1
-		proportionalToParent    1
-	}
+	ScreenFrame
+    {
+        ControlName				Label
+        xpos					0
+        ypos					0
+        wide					f0
+        tall					f0
+        labelText				""
+        visible				    1
+    }
+
+    PanelFrame
+    {
+        ControlName				Label
+        xpos					0
+        ypos					0
+        wide					1920
+        tall					%100
+        labelText				""
+        visible				    1
+
+        pin_to_sibling          ScreenFrame
+        pin_corner_to_sibling   CENTER
+        pin_to_sibling_corner   CENTER
+    }
 
 	TabsBackground
     {
         ControlName				RuiPanel
 		InheritProperties		TabsBackgroundShort
+        zpos					1
 
 
         pin_to_sibling           PanelFrame
 	    pin_corner_to_sibling    TOP
 	    pin_to_sibling_corner    TOP
+
+		ruiArgs
+        {
+           hasBlur 0
+           isOpaque 1
+        }
     }
 
     TabsCommon
     {
         ControlName				CNestedPanel
         classname				"TabsCommonClass"
-        zpos					1
+        zpos					2
         wide					f0
         tall					60
         visible					1
@@ -61,12 +80,29 @@
         zpos			    4
         wide			    200
         tall			    60
+        xpos                -210
         ypos                0
         visible			    1
         enabled             1
         rui					"ui/store_button_vc_pop_up.rpak"
 
-        pin_to_sibling						PanelFrame
+        pin_to_sibling						ScreenFrame
+        pin_corner_to_sibling				TOP_RIGHT
+        pin_to_sibling_corner				TOP_RIGHT
+    }
+
+    ExoticShardsPopUpButton
+    {
+        ControlName			RuiButton
+        zpos			    4
+        wide			    200
+        tall			    60
+        ypos                0
+        visible			    1
+        enabled             1
+        rui					"ui/store_button_exotic_pop_up.rpak"
+
+        pin_to_sibling						ScreenFrame
         pin_corner_to_sibling				TOP_RIGHT
         pin_to_sibling_corner				TOP_RIGHT
     }
@@ -160,12 +196,7 @@
         visible					0
         tabPosition             1
         proportionalToParent    1
-                    
-                                                                      
-     
-		//todo (cmottram): remove after feature flag not needed
-        controlSettingsFile     "resource/ui/menus/panels/store_loot_old.res"
-      
+        controlSettingsFile		"resource/ui/menus/panels/store_loot.res"
 		proportionalToParent    1
 
         pin_to_sibling			PanelFrame
@@ -204,4 +235,57 @@
         pin_corner_to_sibling	    BOTTOM_RIGHT
         pin_to_sibling_corner	    BOTTOM_RIGHT
     }
+
+    PersonalizedStorePanel
+    {
+       ControlName              RTKVGUIPanel
+       wide                     %100
+       tall                     %100
+       prefab                   "ui_rtk/menus/store/personalized_store/personalized_store.rpak"
+       visible				    0
+       pin_to_sibling			PanelFrame
+       pin_corner_to_sibling	TOP
+       pin_to_sibling_corner	TOP
+    }
+
+                     
+    StoreItemShop
+    {
+       ControlName              RTKVGUIPanel
+       wide                     %100
+       tall                     %100
+       prefab                   "ui_rtk/menus/store/item_shop/store_item_shop.rpak"
+       visible				    0
+       pin_to_sibling			PanelFrame
+       pin_corner_to_sibling	TOP
+       pin_to_sibling_corner	TOP
+    }
+          
+                                        
+    StoreMythicShop
+    {
+       ControlName              RTKVGUIPanel
+       wide                     %100
+       tall                     %100
+       prefab                   "ui_rtk/menus/store/item_shop/store_item_shop.rpak"
+       visible				    0
+       pin_to_sibling			PanelFrame
+       pin_corner_to_sibling	TOP
+       pin_to_sibling_corner	TOP
+    }
+          
+
+                                           
+                  
+     
+                                            
+                                    
+                                    
+                                                                                     
+                       
+                                  
+                                
+                                
+     
+          
 }

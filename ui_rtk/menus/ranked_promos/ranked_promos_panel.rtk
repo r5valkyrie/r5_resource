@@ -1,0 +1,322 @@
+panel RankedPromotionTrialsPanel
+{
+	bind root
+
+	anchor: BOTTOM_STRETCH_WIDTH
+	pivot: <0.5, 1.0>
+	height: 260
+	offsets: <0, 0, 0, 0>
+
+	behavior RankedPromotionTrials
+	{
+		expandButton: @panel/Container/Header/expandButton:Button
+		contentVerticalContainer: @panel/Container:VerticalContainer
+		trialsPanel: @panel/Container/Trials
+		containerPanel: @panel/Container
+	}
+
+	panel Container
+	{
+		anchor: BOTTOM_STRETCH_WIDTH
+		pivot: <0.5, 1>
+		offsets: <0, 0, 0, 0>
+		inputListener: true
+
+		behavior VerticalContainer
+		{
+			fitContentHeight: true
+			expandChildWidth: true
+		}
+
+		instance $"ui_rtk/controls/blur.rpak"
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior ContainerElement
+			{
+				ignoreLayout: true
+			}
+		}
+
+		panel Background
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior ContainerElement
+			{
+				ignoreLayout: true
+			}
+
+			behavior Image
+			{
+				colorRGB: <0, 0, 0>
+				alpha: 0.75
+			}
+		}
+
+		panel Header
+		{
+			size: <1, 55>
+			anchor: TOP_STRETCH_WIDTH
+			offsets: <0, 0, 0, 0>
+			pivot: <0.5, 0.0>
+
+			panel BG
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+				behavior Image
+				{
+					color:<0, 0, 0, 0.9>
+				}
+			}
+
+			panel Stripes
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+				behavior Image
+				{
+					color: <0.84, 0.84, 0.84, 0.04>
+					assetPath: $"ui_image/rui/menu/ranked/ranked_update_2023/rank_promotional_header_stripes.rpak"
+				}
+			}
+
+			panel Dots
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/menu/ranked/ranked_update_2023/rank_promotional_header_dots.rpak"
+					alpha: 0.3
+				}
+			}
+
+			panel Outline
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <-1, -1, -1, -1>
+
+				behavior Image
+				{
+					colorRGB: <0.7, 0.7, 0.7>
+					assetPath: $"ui_image/rui/borders/border_outline_2px.rpak"
+				}
+			}
+
+			panel HeaderText
+			{
+				size: <1, 28>
+				anchor: CENTER_STRETCH_WIDTH
+				offsets: <0, 0, 0, 0>
+
+				behavior Label
+				{
+					text: "#RANKED_PROMOTION_HEADER"
+					face: "TitleBoldFont"
+					pixelHeight: 24
+					colorRGB: <0.84, 0.84, 0.84>
+					outlineColorInner: <0, 0, 0, 0>
+					outlineColorOuter: <0, 0, 0, 0>
+					textAlignHorizontal: LEFT
+					textAlignVertical: CENTER
+					allCaps: true
+					margin: <20, 0, 0, 0>
+				}
+			}
+
+			instance $"ui_rtk/common/buttons/icon_button.rpak" expandButton
+			{
+				bind &common.ranked.promoTrials.isExpanderEnabled -> @this.visible
+				bind &common.ranked.promoTrials.isExpanderEnabled -> @this.active
+
+				override @var(iconAsset) $"ui_image/rui/hud/common/chevron_left_big.rpak"
+				override @var(bgColor) <1, 1, 1, 0>
+
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <0, 0, 0, 0>
+
+				context @this:Button
+				{
+					transitions: [
+					{
+						fromState: ANY
+						toState: IDLE
+						type: TRANSITION_PROPERTY_SET
+						property: @panel/Icon:Image.color
+						value: <0.7, 0.7, 0.7, 1>
+					},
+					{
+						fromState: ANY
+						toState: HIGHLIGHTED
+						type: TRANSITION_PROPERTY_SET
+						property: @panel/Icon:Image.color
+						value: <1.0, 0.31, 0.12, 1>
+					},
+					{
+						fromState: ANY
+						toState: PRESSED
+						type: TRANSITION_PROPERTY_SET
+						property: @panel/Icon:Image.color
+						value: <1.0, 0.31, 0.12, 1>
+					}
+					]
+				}
+
+				context @this/Icon
+				{
+					bind &common.ranked.promoTrials.isTrialPanelExpanded -> PickFloatFromTwo( 90.0, 270.0 ) -> @this.rotation
+
+					anchor: RIGHT
+					size: <42, 60>
+					rotation: 270
+					positionX: -40
+				}
+			}
+		}
+
+		panel Trials
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+			behavior VerticalContainer
+			{
+				spacing: 18
+				fitContentHeight: true
+				padding: <20, 20, 20, 20>
+				expandChildWidth: true
+			}
+
+			// TODO: It would be good to change these panels to a ListBinder if we get support for dividers that aren't included in the DataModel itself (the 'OrPanel' panel being the divider in this case)
+			instance $"ui_rtk/menus/ranked_promos/components/labeled_progress_bar.rpak" primaryTrialPanel
+			{
+				override bind root "&common.ranked.promoTrials.trials[0]"
+				override @var(descriptionColor) <0.85, 0.85, 0.85>
+				override @var(progressLabelColor) <0.85, 0.85, 0.85>
+				override @var(progressBarHeight) 4
+				override @var(backgroundAlpha) 0
+
+				bind *.active -> @this.visible
+				height: 27
+			}
+
+			panel OrPanel
+			{
+				bind &common.ranked.promoTrials.trialsCount -> GreaterThan( 1 ) -> @this.visible
+
+				anchor: CENTER_STRETCH_WIDTH
+				offsets: <0, 0, 0, 0>
+				offsetsLR: <20, 20>
+				size: <60, 30>
+
+				behavior HorizontalContainer
+				{
+					spacing: -2
+					alignment: LEFT
+				}
+
+				panel LeftLine
+				{
+					anchor: LEFT
+					size: <15, 2>
+					pivot: <0, 0.5>
+
+					behavior Image
+					{
+						color: <1, 1, 1, 1>
+					}
+				}
+
+				panel CenterPanel
+				{
+					anchor: LEFT
+					size: <60, 60>
+					pivot: <0, 0.5>
+
+					panel Shadow
+					{
+						anchor: CENTER
+						size: <60, 60>
+
+						behavior Image
+						{
+							assetPath: $"ui_image/rui/hud/ping/icon_ping_any_shadow.rpak"
+							color: <0, 0, 0, 0.25>
+						}
+					}
+
+					panel Outline
+					{
+						anchor: CENTER
+						size: <60, 60>
+
+						behavior Image
+						{
+							assetPath: $"ui_image/rui/hud/ping/icon_ping_go_outline.rpak"
+							color: <1, 1, 1, 1>
+						}
+					}
+
+					panel OrLabel
+					{
+						anchor: CENTER
+						size: <60, 60>
+
+						behavior Label
+						{
+							text: "#RANKED_PROMOTION_OR"
+							face: "DefaultRegularFont"
+							pixelHeight: 22
+							colorRGB: <1, 1, 1>
+							outlineColorInner: <0, 0, 0, 0>
+							outlineColorOuter: <0, 0, 0, 0>
+							textAlignHorizontal: CENTER
+							textAlignVertical: CENTER
+							allCaps: true
+							fitToWidth: 27
+						}
+					}
+				}
+
+				panel RightLine
+				{
+					anchor: LEFT
+					size: <15, 2>
+					pivot: <0, 0.5>
+
+					behavior Image
+					{
+						color: <1, 1, 1, 1>
+					}
+				}
+			}
+
+			instance $"ui_rtk/menus/ranked_promos/components/labeled_progress_bar.rpak" altTrial1Panel
+			{
+				override bind root "&common.ranked.promoTrials.trials[1]"
+				override @var(descriptionColor) <0.85, 0.85, 0.85>
+				override @var(progressLabelColor) <0.85, 0.85, 0.85>
+				override @var(progressBarHeight) 4
+				override @var(backgroundAlpha) 0
+
+				bind *.active -> @this.visible
+				height: 27
+			}
+
+			instance $"ui_rtk/menus/ranked_promos/components/labeled_progress_bar.rpak" altTrial2Panel
+			{
+				override bind root "&common.ranked.promoTrials.trials[2]"
+				override @var(descriptionColor) <0.85, 0.85, 0.85>
+				override @var(progressLabelColor) <0.85, 0.85, 0.85>
+				override @var(progressBarHeight) 4
+				override @var(backgroundAlpha) 0
+
+				bind *.active -> @this.visible
+				height: 27
+			}
+		}
+	}
+}

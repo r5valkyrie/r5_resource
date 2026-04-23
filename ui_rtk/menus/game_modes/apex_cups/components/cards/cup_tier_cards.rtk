@@ -1,0 +1,99 @@
+panel CupTierCard
+{
+	bind root
+
+	bind *.tierIndex -> LessThanOrEqual(2) -> PickFloatFromTwo( 180, 284 ) -> @this.width
+
+	behavior Image
+	{
+		bind *.tierIndex -> LessThanOrEqual(2) -> PickAssetFromTwo( $"ui_image/rui/menu/apex_rumble/rumble_tier_bg_small.rpak", $"ui_image/rui/menu/apex_rumble/rumble_tier_bg_large.rpak" ) -> @this.assetPath
+	}
+
+	panel TierPercentage
+	{
+		anchor: TOP
+		pivot: <0.5, 1>
+
+		behavior Label
+		{
+			bind *.tierPercentage -> @this.text
+
+			face: #FONT_DEFAULT_BOLD
+			color: #929396
+			textAlignHorizontal: CENTER
+			textAlignVertical: CENTER
+			horizontalMode: AUTOSIZE_TO_TEXT
+			verticalMode: AUTOSIZE_TO_TEXT
+			pixelHeight: 32
+			allCaps: true
+		}
+	}
+
+	instance $"ui_rtk/menus/game_modes/apex_cups/components/apex_cup_tier_emblem.rpak" TierEmblem
+	{
+		override bind root "*"
+		bind *.tierIndex -> LessThanOrEqual(2) -> PickFloatFromTwo( 176, 245 ) -> @this.width
+		bind @this.width -> @this.height
+
+		bind *.cupID -> ApexCupTierIcon( *.tierIndex ) -> @var( emblemIcon )
+		bind *.cupID -> ApexCupTierText( *.tierIndex ) -> @var( emblemText )
+
+		anchor: BOTTOM
+		pivot: <0.5, 1>
+		positionY: -135
+	}
+
+	panel TierRewards
+	{
+		bind @root.width -> Subtract(28) -> @this.width
+		anchor: BOTTOM
+		pivot: <0.5, 1>
+		height: 90
+
+		behavior VerticalContainer
+		{
+			alignment: TOP_LEFT
+			spacing: 2
+			useLocaleDirection: true
+		}
+
+		panel Title
+		{
+			bind @parent.width -> @this.width
+
+			behavior Label
+			{
+				face: #FONT_TITLE_BOLD
+				color: #929396
+				textAlignHorizontal: LEFT
+				textAlignVertical: CENTER
+				useLocaleDirection: true
+				horizontalMode: SQUISH_TO_CONTAINER
+				verticalMode: AUTOSIZE_TO_TEXT
+				pixelHeight: 22
+				allCaps: true
+				text: "#CUPS_REWARDS"
+			}
+		}
+
+		panel TierReward
+		{
+			bind @parent.width -> @this.width
+			height: 60
+
+			behavior Label
+			{
+				bind *.tierReward -> @this.text
+
+				face: #FONT_DEFAULT
+				color: #929396
+	            textAlignHorizontal: LEFT
+	            textAlignVertical: TOP
+				useLocaleDirection: true
+		        horizontalMode: WRAP
+		        verticalMode: CLIP
+		        pixelHeight: 20
+			}
+		}
+	}
+}

@@ -1,0 +1,102 @@
+//Expected Type: MasteryWeapon_TrialQueryResult
+panel PostGameWeaponTrialsTooltip
+{
+	bind root
+
+	behavior VerticalContainer
+	{
+		padding: <20, 20, 10, 20>
+		fitContentWidth: true
+		fitContentHeight: true
+		spacing: 18
+		alignment: TOP
+	}
+
+	instance $"ui_rtk/controls/blur.rpak"
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior ContainerElement
+		{
+			ignoreLayout: true
+		}
+	}
+
+	panel Background
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			color: <0.025, 0.025, 0.025, 0.8>
+		}
+
+		behavior ContainerElement
+		{
+			ignoreLayout: true
+		}
+	}
+
+	panel Border
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/borders/border_outline_1px.rpak"
+			color: <1.0, 1.0, 1.0, 1>
+		}
+
+		behavior ContainerElement
+		{
+			ignoreLayout: true
+		}
+	}
+
+	panel TipDescription
+	{
+		anchor: CENTER
+		offsets: <0, 0, 0, 0>
+		size: <587, 32>
+
+		behavior Label
+		{
+			bind *.tooltipTitle -> @this.text
+
+			text: ""
+			textAlignHorizontal: CENTER
+			horizontalMode: SQUISH_TO_CONTAINER
+			face: "TitleBoldFont"
+			pixelHeight: 32
+			color: <0.55, 0.55, 0.55, 1>
+			allCaps: true
+			outlineWidth: 0.5
+			outlineColorOuter: <0, 0, 0, 0.3>
+			outlineColorInner: <0, 0, 0, 0>
+			shadowAlpha: 0.4
+			shadowBlur: 6.0
+			shadowOffset: <1.5, 1.5>
+		}
+	}
+
+	panel AllTrialsVerticalList
+	{
+		offsets: <0, 0, 0, 0>
+
+		behavior VerticalContainer
+		{
+			fitContentHeight: true
+			fitContentWidth: true
+            spacing: 10
+		}
+
+		behavior ListBinder
+		{
+			bindingPath: "*.allTrials"
+			prefab: $"ui_rtk/menus/mastery/weapons/components/weapon_mastery_trial_card_small.rpak"
+		}
+	}
+}

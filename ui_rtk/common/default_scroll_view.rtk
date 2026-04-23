@@ -1,0 +1,41 @@
+panel
+{
+	anchor: CENTER
+	constrainInput: false
+
+	var content @this/View/Content
+	var scrollBar @this/ScrollBar
+	var scrollViewAutoScroll @this/View:ScrollView.autoScroll
+
+	instance $"ui_rtk/controls/scroll_view.rpak" View
+	{
+		override @this:ScrollView.content @this/Content
+		override @this:ScrollView.verticalScrollBar @parent/ScrollBar:ScrollBar
+
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		panel Content
+		{
+			behavior FitToContent
+		}
+
+		panel Border
+		{
+			pivot: <0, 0>
+			size: <0, 0>
+		}
+	}
+
+	instance $"ui_rtk/controls/scroll_bar.rpak" ScrollBar
+	{
+		override @this:ScrollBar.step 20.0
+		override @this:ScrollBar.dynamicHandleSize true
+
+		anchor: RIGHT_STRETCH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		position: <0, 0>
+		pivot: <0, 0.5>
+		width: 15
+	}
+}

@@ -1,0 +1,35 @@
+panel ApexCupsSquadStatsRow
+{
+    bind root
+
+	anchor: TOP
+	offsets: <0, 0, 0, 0>
+	size: <450, 52>
+
+	bind *.squadStats -> GetCount -> greaterThan(0) -> @this.visible
+
+	behavior Image
+	{
+		colorRGB: <0.0, 0.0, 0.0>
+	}
+
+	panel RightText
+	{
+		anchor: CENTER_STRETCH_WIDTH
+		offsetsLR: < 10, 10 >
+
+		behavior FormatLabel
+		{
+			bind *.points -> @this.arg1
+			face: "TitleBoldFont"
+			pixelHeight: 32
+			colorRGB: <1.0, 1.0, 1.0>
+			textAlignHorizontal: RIGHT
+			textAlignVertical: CENTER
+			horizontalMode: SQUISH_TO_CONTAINER
+			verticalMode: AUTOSIZE_TO_TEXT
+			format: "#CUPS_TOTAL_CUP_POINTS_VALUE"
+			arg1: ""
+		}
+	}
+}

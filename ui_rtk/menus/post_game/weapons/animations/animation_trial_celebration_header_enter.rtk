@@ -1,0 +1,348 @@
+data RTKKeyFrameAsset
+{
+	duration: 1.5
+	tracks: [
+		{
+			property: @panel/MainBanner:RenderGroup.alpha
+			keyframes: [
+				{
+					time: 0.0
+					value: 0.0
+				},
+				{
+					time: 0.6
+					value: 1.0
+				}
+			]
+		},
+		{
+			property: @panel/MainBanner.size
+			keyframes: [
+				{
+					time: 0.0
+					value: <0, 108>
+					curve: EASE_IN_CUBIC
+				},
+				{
+					time: 0.5
+					value: <908, 108>
+				}
+			]
+		},
+		{
+			property: @panel/MainBanner:RenderGroup.alpha
+			keyframes: [
+				{
+					time: 0.0
+					value: 0.0
+				},
+				{
+					time: 0.05
+					value: 1.0
+				}
+			]
+		},
+		{
+			property: @panel/ChevronWooshLeft.positionX
+			keyframes: [
+				{
+					time: 0.0
+					value: 0
+					curve: EASE_IN_CUBIC
+				},
+				{
+					time: 0.5
+					value: -454
+					curve: EASE_OUT_CUBIC
+				},
+				{
+					time: 0.8
+					value: -600
+				}
+			]
+		},
+		{
+			property: @panel/ChevronWooshLeft:Image.alpha
+			keyframes: [
+				{
+					time: 0.0
+					value: 0.0
+				},
+				{
+					time: 0.05
+					value: 1.0
+				},
+				{
+					time: 0.5
+					value: 1.0
+					curve: EASE_OUT_CUBIC
+				},
+				{
+					time: 0.8
+					value: 0.0
+				}
+			]
+		},
+		{
+			property: @panel/ChevronWooshLeft/Chevron:Image.alpha
+			keyframes: [
+				{
+					time: 0.0
+					value: 0.0
+				},
+				{
+					time: 0.05
+					value: 1.0
+				},
+				{
+					time: 0.5
+					value: 1.0
+					curve: EASE_OUT_CUBIC
+				},
+				{
+					time: 0.8
+					value: 0.0
+				}
+			]
+		},
+		{
+			property: @panel/ChevronWooshRight.positionX
+			keyframes: [
+				{
+					time: 0.0
+					value: 0
+					curve: EASE_IN_CUBIC
+				},
+				{
+					time: 0.5
+					value: 454
+					curve: EASE_OUT_CUBIC
+				},
+				{
+					time: 0.8
+					value: 600
+				}
+			]
+		},
+		{
+			property: @panel/ChevronWooshRight:Image.alpha
+			keyframes: [
+				{
+					time: 0.0
+					value: 0.0
+				},
+				{
+					time: 0.05
+					value: 1.0
+				},
+				{
+					time: 0.5
+					value: 1.0
+					curve: EASE_OUT_CUBIC
+				},
+				{
+					time: 0.8
+					value: 0.0
+				}
+			]
+		},
+		{
+			property: @panel/ChevronWooshRight/Chevron:Image.alpha
+			keyframes: [
+				{
+					time: 0
+					value: 0.0
+				},
+				{
+					time: 0.05
+					value: 1.0
+				},
+				{
+					time: 0.5
+					value: 1.0
+					curve: EASE_OUT_CUBIC
+				},
+				{
+					time: 0.8
+					value: 0.0
+				}
+			]
+		},
+		{
+			property: @panel/CircleBlur.scale
+			keyframes: [
+				{
+					time: 0.0
+					value: <0.0, 0.0>
+				},
+				{
+					time: 0.9
+					value: <1.0, 1.0>
+				}
+			]
+		},
+		{
+			property: @panel/CircleBlur:Image.alpha
+			keyframes: [
+				{
+					time: 0.0
+					value: 0.0
+				},
+				{
+					time: 0.6
+					value: 0.8
+				},
+				{
+					time: 0.7
+					value: 0.8
+				},
+				{
+					time: 0.9
+					value: 0.0
+				}
+			]
+		},
+		{
+			property: @panel/RingSolid.scale
+			keyframes: [
+				{
+					time: 0.0
+					value: <0.0, 0.0>
+				},
+				{
+					time: 1.5
+					value: <1.75, 1.75>
+					curve: EASE_OUT_CUBIC
+				}
+			]
+		},
+		{
+			property: @panel/RingSolid:Image.alpha
+			keyframes: [
+				{
+					time: 0.0
+					value: 0.0
+				},
+				{
+					time: 0.6
+					value: 0.25
+				},
+				{
+					time: 1.2
+					value: 0.25
+				},
+				{
+					time: 1.5
+					value: 0.0
+				}
+			]
+		},
+		{
+			property: @panel/RingDots.scale
+			keyframes: [
+				{
+					time: 0.0
+					value: <0.0, 0.0>
+					curve: EASE_OUT_CUBIC
+				},
+				{
+					time: 1.8
+					value: <1.0, 1.0>
+				}
+			]
+		},
+		{
+			property: @panel/RingDots/Arc1:Image.alpha
+			keyframes: [
+				{
+					time: 0.0
+					value: 0.0
+				},
+				{
+					time: 0.6
+					value: 0.25
+				},
+				{
+					time: 1.2
+					value: 0.25
+				},
+				{
+					time: 1.5
+					value: 0.0
+				}
+			]
+		},
+		{
+			property: @panel/RingDots/Arc2:Image.alpha
+			keyframes: [
+				{
+					time: 0.0
+					value: 0.0
+				},
+				{
+					time: 0.6
+					value: 0.25
+				},
+				{
+					time: 1.2
+					value: 0.25
+				},
+				{
+					time: 1.5
+					value: 0.0
+				}
+			]
+		},
+		{
+			property: @panel/RingDots/Arc3:Image.alpha
+			keyframes: [
+				{
+					time: 0.0
+					value: 0.0
+				},
+				{
+					time: 0.6
+					value: 0.25
+				},
+				{
+					time: 1.2
+					value: 0.25
+				},
+				{
+					time: 1.5
+					value: 0.0
+				}
+			]
+		},
+		{
+			property: @panel/RingDots/Arc4:Image.alpha
+			keyframes: [
+				{
+					time: 0.0
+					value: 0.0
+				},
+				{
+					time: 0.6
+					value: 0.25
+				},
+				{
+					time: 1.2
+					value: 0.25
+				},
+				{
+					time: 1.5
+					value: 0.0
+				}
+			]
+		},
+		{
+			property: @panel.positionY
+			keyframes: [
+				{
+					time: 0.0
+					value: -190
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,65 @@
+instance $"ui_rtk/menus/game_modes/components/game_mode_card.rpak"
+{
+	var topColor @root:Button.transitions[4].value
+
+	// Prevent button transitions from taking place until animation is complete.
+	append @root:Animator.tweenAnimations[0].tweens
+	{
+		property: @panel.inputListener
+		startValue: false
+		endValue: true
+		duration: 0.337
+		curve: FLOOR
+	}
+
+	behavior Button
+	{
+		soundHighlighted: "ui_menu_focus"
+		soundPressedEnabled: "ui_menu_accept"
+
+		transitions: [
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @root/Body/Fade:Image.color
+				value: #00000044
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @root/Body/Fade:Image.color
+				value: #FF4E1D08
+			},
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @root/Body/Border:Image.colorRGB
+				value: #888898
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @root/Body/Border:Image.colorRGB
+				value: #FF4E1D
+			},
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @root/Body/Border/Top:Image.colorRGB
+				value: #FFFFFF
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @root/Body/Border/Top:Image.colorRGB
+				value: #FF4E1D
+			},
+		]
+	}
+}

@@ -1,0 +1,33 @@
+panel GameTags
+{
+    bind root
+	anchor: LEFT
+
+	var bgColor     @this:Image.colorRGB
+	var textColor   @this/TagSting:Label.colorRGB
+
+	behavior FitToContent
+
+    behavior Image
+    {
+        alpha: 0.1
+    }
+
+	panel TagSting
+	{
+        anchor: CENTER
+
+        behavior Label
+		{
+	        bind *.tagText -> @this.text
+
+			textAlignHorizontal: LEFT
+			verticalMode: AUTOSIZE_TO_TEXT
+			HorizontalMode: AUTOSIZE_TO_TEXT
+			allCaps: true
+			pixelHeight: 20
+			face: "BoldRegularFont"
+			margin: <5, 5, 5, 5>
+		}
+	}
+}

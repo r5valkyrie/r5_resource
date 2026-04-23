@@ -1,0 +1,44 @@
+panel RadioPlayLayer
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+	offsetsTB: <0, 0>
+
+	panel
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		offsetsTB: <0, 0>
+
+		behavior RuiAnimation
+		{
+			bind *.ruis -> @this.ruis
+			bind *.durations -> @this.durations
+			bind *.sounds -> @this.sounds
+
+			ruis: []
+			durations: []
+			sounds: []
+			writeStartTime: true
+			invalidateVisualsOnDraw: true
+			ruiBehavior: @panel/Layer:Rui
+		}
+
+		panel Layer
+		{
+			anchor: CENTER
+			size: <1920, 1080>
+			offsets: <0, 0, 0, 0>
+
+			behavior Rui
+			{
+				ruiAsset: $"ui/rtk_scroll_nav_hint.rpak"
+				args : {
+					startTime: 0
+				}
+			}
+		}
+	}
+}

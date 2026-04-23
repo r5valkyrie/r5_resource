@@ -1,0 +1,154 @@
+panel PostGameSummaryConditional
+{
+	bind root
+
+	anchor: TOP
+	offsets: <0, 0, 0, 0>
+	pivot: <0.5, 0.0>
+	size: <540, 40>
+	inputListener: true
+
+	behavior ToolTip ConditionalTooltip
+	{
+		bind *.tooltipTitle -> @this.varOverrides.titleText
+		bind *.tooltipBody -> @this.varOverrides.bodyText
+
+		prefab: $"ui_rtk/common/tooltips/base_tooltip.rpak"
+		offset: <32, -68>
+		delay: 0
+
+		varOverrides: {
+			titleText: ""
+			titleColor: #Yellow
+			isSubtitleVisible: false
+			bodyText: ""
+			bodyTextAltColor: #Yellow
+			additionalText: ""
+			additionalTextAltColor: #Yellow
+			actionText: ""
+			icon: $""
+			iconColor: #Yellow
+		}
+	}
+
+	behavior Animator
+	{
+		bind * -> IndexOfElementInArray -> Add( *.alternatingBGOffset ) -> Modulo(2) -> PickFloatFromTwo( 0.6, 0.2 ) -> @this.tweenAnimations[0].tweens[0].endValue
+
+		tweenAnimations: [
+		{
+			name: "AnimateIn"
+			tweens: [
+				{
+					property: @panel:Image.alpha
+					startValue: 0
+					endValue: 0.8
+					duration: 0.9
+		            curve: EASE_LINEAR
+				},
+				{
+					property: @panel/HeaderText:Label.alpha
+					startValue: 0
+					endValue: 0.98
+					duration: 0.9
+		            curve: EASE_LINEAR
+				},
+				{
+					property: @panel/Value:Label.alpha
+					startValue: 0
+					endValue: 0.98
+					duration: 0.9
+		            curve: EASE_LINEAR
+				},
+				{
+					property: @panel/HeaderText:Label.outlineColorOuter
+					startValue: <0, 0, 0, 0>
+					endValue: <0, 0, 0, 0.6>
+					duration: 0.9
+					curve: EASE_LINEAR
+				},
+				{
+					property: @panel/Value:Label.outlineColorOuter
+					startValue: <0, 0, 0, 0>
+					endValue: <0, 0, 0, 0.6>
+					duration: 0.9
+					curve: EASE_LINEAR
+				},
+				{
+					property: @panel:Sound.play
+					startValue: false
+					endValue: true
+					duration: 0.9
+					curve: CEIL
+				}
+			]
+		}]
+	}
+
+	behavior Image
+	{
+		bind * -> IndexOfElementInArray -> Add( *.alternatingBGOffset ) -> Modulo(2) -> PickVectorFromTwo( <0.45, 0.45, 0.45>, <0, 0, 0> ) -> @this.colorRGB
+		bind * -> IndexOfElementInArray -> Add( *.alternatingBGOffset ) -> Modulo(2) -> PickFloatFromTwo( 0.3, 0.2 ) -> @this.alpha
+
+		colorRGB: <0.45, 0.45, 0.45>
+		alpha: 0.3
+	}
+
+	behavior Sound
+	{
+		sound: "UI_Menu_MatchSummary_Ranked_XPBreakdown"
+	}
+
+	panel HeaderText
+	{
+		anchor: LEFT_STRETCH_HEIGHT
+		pivot: <0, 0>
+		offsetsTB: <0, 0>
+		positionX: 10
+		width: 200
+
+		behavior Label
+	    {
+			bind *.stringL -> @this.text
+			bind *.colorL -> @this.colorRGB
+
+	        text: "#RANKED_ABANDON_PENALTY"
+	        face: "DefaultFont"
+	        pixelHeight: 28
+	        horizontalMode: SQUISH_TO_CONTAINER
+	        colorRGB: <1, 1, 1>
+		    outlineColorInner: <0, 0, 0, 0>
+		    outlineColorOuter: <0, 0, 0, 0.6>
+		    outlineWidth: 1
+	        textAlignHorizontal: LEFT
+	        textAlignVertical: CENTER
+	    }
+	}
+
+	panel Value
+	{
+		anchor: RIGHT_STRETCH_HEIGHT
+		pivot: <1.0, 0>
+		offsetsTB: <0, 0>
+		positionX: -10
+		width: 200
+
+		behavior FormatLabel
+		{
+			bind *.stringR -> @this.arg1
+			bind *.colorR -> @this.colorRGB
+
+			format: "#RANKED_LP_DISPLAY"
+			face: "DefaultFont"
+			pixelHeight: 28
+			horizontalMode: SQUISH_TO_CONTAINER
+			colorRGB: <1, 0.26, 0.26>
+			outlineColorInner: <0, 0, 0, 0>
+			outlineColorOuter: <0, 0, 0, 0.6>
+			outlineWidth: 1
+			textAlignHorizontal: RIGHT
+			textAlignVertical: CENTER
+			arg1: "0"
+		}
+	}
+}

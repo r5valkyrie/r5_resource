@@ -1,0 +1,56 @@
+panel ProbabilityLabel
+{
+	bind root
+	offsets: <0, 0, 0, 0>
+	anchor: CENTER_STRETCH_WIDTH
+	height: 52
+	behavior Image
+	{
+		color: #191919
+	}
+	behavior VerticalContainer
+	{
+		spacing: 5
+		alignment: CENTER
+	}
+
+	panel Text
+	{
+		bind @this:Label.pixelHeight -> @this.height
+		bind @root.width -> Subtract( 5 ) -> @this:Label.lineBreakWidth
+		offsets: <0, 0, 0, 0>
+		behavior Label
+		{
+			bind *.title -> @this.text
+
+			face: "DefaultRegularFont"
+			text: "TEMP"
+			pixelHeight: 18
+			colorRGB: <0.7, 0.7, 0.7>
+			textAlignHorizontal: CENTER
+			textAlignVertical: CENTER
+			horizontalMode: AUTOSIZE_TO_TEXT
+			leading: -3
+			allCaps: true
+		}
+	}
+
+	panel Text2
+	{
+		bind @this:Label.pixelHeight -> @this.height
+		bind *.rate -> IsEmpty -> NOT -> @this.visible
+		offsets: <0, 0, 0, 0>
+		behavior Label
+		{
+			bind *.quality -> QualityTextColor -> @this.colorRGB
+			bind *.rate -> @this.text
+			face: "TitleRegularFont"
+			text: "TEMP"
+			pixelHeight: 22
+			colorRGB: <0.7, 0.7, 0.7>
+			textAlignHorizontal: CENTER
+			textAlignVertical: CENTER
+			horizontalMode: AUTOSIZE_TO_TEXT
+		}
+	}
+}

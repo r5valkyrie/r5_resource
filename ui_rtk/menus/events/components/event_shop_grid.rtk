@@ -1,0 +1,223 @@
+panel EventShopGrid
+{
+	anchor: TOP_LEFT
+	pivot: <0, 0>
+	position: <0, 160>
+	size: <530, 598>
+
+	panel BackgroundPanel
+	{
+		size: <530, 598>
+		pivot: <0, 0>
+
+		panel BackgroundBlur
+		{
+			bind *.calEventShop -> GetCalEventGlobalSettingBool("leftPanelBlur") -> @this.visible
+
+			size: <530, 598>
+			pivot: <0, 0>
+
+			behavior Image
+			{
+				imageBlur: ASSET
+			}
+		}
+
+		panel BackgroundBlurDarken
+		{
+			size: <530, 598>
+			pivot: <0, 0>
+
+			behavior Image
+			{
+				bind *.calEventShop -> GetCalEventGlobalSettingFloat("leftPanelOpacity") -> @this.alpha
+
+				colorRGB: <0, 0, 0>
+			}
+		}
+
+		panel ThemeBackground
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			pivot: <0, 0>
+			offsets: <-2, -2, -3, -3> // texture has empty space for slicing R5DEV-568986
+
+			behavior Image
+			{
+				bind *.calEventShop -> GetCalEventGlobalSettingAsset("eventShopPageItemsBg") -> @this.assetPath
+			}
+		}
+	}
+
+	panel GridTopPanel
+	{
+		anchor: TOP
+		size: <496, 100>
+		pivot: <0.5, 0.0>
+		offsets: <0, 0, 0, 0>
+
+		panel LeftPartWrapper
+		{
+			anchor: LEFT_STRETCH_HEIGHT
+			pivot: <0, 0.5>
+			width: 180
+			offsets: <0, 0, 0, 0>
+
+			behavior VerticalContainer
+			{
+				alignment: LEFT
+				fitContentHeight: true
+				fitContentWidth: true
+				padding: <0, 0, 0, 0>
+			}
+
+			panel CurrencyWrapper
+			{
+				anchor: TOP_LEFT
+				pivot: <0, 0>
+				offsets: <0, 0, 0, 0>
+
+				behavior HorizontalContainer
+				{
+					alignment: CENTER
+					fitContentWidth: true
+					fitContentHeight: true
+					padding: <0, 0, 0, 0>
+				}
+
+				panel CurrencyIcon
+				{
+					anchor: TOP_LEFT
+					pivot: <0, 0>
+					size: <40, 40>
+					offsets: <0, 0, 0, 0>
+
+					behavior Image
+					{
+						bind *.currencyIcon -> @this.assetPath
+
+						color: <1, 1, 1, 1>
+					}
+				}
+
+				panel CurrencyWallet
+				{
+					anchor: TOP_LEFT
+					pivot: <0, 0>
+					size: <160, 30>
+					offsets: <0, 0, 0, 0>
+
+					behavior Label
+					{
+						bind *.currencyInWallet -> IntToFloat -> FormatAndLocalizeNumber( "1", true ) -> @this.text
+
+						face: "TitleBoldFont"
+						pixelHeight: 30
+						colorRGB: <1.0, 1.0, 1.0>
+						textAlignHorizontal: LEFT
+						textAlignVertical: CENTER
+						allCaps: true
+					}
+				}
+			}
+
+			panel CurrencyName
+			{
+				anchor: TOP_LEFT
+				pivot: <0, 0>
+				size: <174, 20>
+				offsets: <3, 0, 0, 0>
+
+				behavior Label
+				{
+					bind *.currencyLongName -> LocalizeStringInAnother("#EVENTS_EVENT_SHOP_CURRENCY_TO_REDEEM") -> @this.text
+
+					face: "DefaultRegularFont"
+					pixelHeight: 21
+					colorRGB: <1.0, 1.0, 1.0>
+					text: "#EVENTS_EVENT_SHOP_CURRENCY_AVAILABLE"
+					textAlignHorizontal: LEFT
+					textAlignVertical: TOP
+					allCaps: true
+					horizontalMode: WRAP
+				}
+			}
+		}
+
+		panel Explanation
+		{
+			anchor: RIGHT_STRETCH_HEIGHT
+			pivot: <1, 0.5>
+			width: 335
+			offsets: <0, 0, 0, 0>
+
+			behavior Label
+			{
+				bind &menus.eventShop.gridTitle -> @this.text
+
+				face: "DefaultRegularFont"
+				pixelHeight: 20
+				colorRGB: #FFFFFF
+				textAlignHorizontal: RIGHT
+				textAlignVertical: CENTER
+				allCaps: true
+			}
+		}
+	}
+
+	panel GridContent
+	{
+		anchor: CENTER
+		positionY: 10
+		size: <496, 416>
+
+		behavior GridContainer
+		{
+			defaultSlotSize: <112, 200>
+			wrapAfterSlot: 4
+			gridSlotAnchor: TOP_LEFT
+			gridSlotAutosize: CONTENT_HEIGHT
+			slotSpacing: <16, 16>
+		}
+
+		behavior ListBinder
+		{
+			bindingPath: "&menus.eventShop.offers"
+			prefab: $"ui_rtk/menus/events/components/event_shop_grid_item.rpak"
+		}
+	}
+
+	panel GridFooter
+	{
+		anchor: BOTTOM
+		pivot: <0.5, 1>
+		size: <496, 80>
+		offsets: <0, 0, 0, 0>
+
+//		behavior Label
+//		{
+//			bind *.currencyLongName -> LocalizeStringInAnother( "#EVENTS_EVENT_SHOP_LEGAL_TEXT" ) -> @this.text
+//
+//			face: "TitleRegularFont"
+//			pixelHeight: 18
+//			colorRGB: <0.9, 0.9, 0.9>
+//			textAlignHorizontal: CENTER
+//			textAlignVertical: CENTER
+//			allCaps: true
+//			outlineColorInner: <0, 0, 0, 1>
+//			outlineColorOuter: <0, 0, 0, 1>
+//			outlineWidth: 1
+//		}
+
+		instance $"ui_rtk/common/buttons/base_button.rpak" ChallengesButton
+		{
+			override @var(labelText) "#EVENTS_EVENT_SHOP_GRID_CHALLENGES"
+			override @var(size) <340, 40>
+			override @var(labelPixelHeight) 20
+			override @var(backgroundColor) #242526
+			override @var(outlineColor) #b4b4b5
+			override @var(gradientColor) #78797a
+			override @var(lineAlpha) 0
+		}
+	}
+}

@@ -1,0 +1,29 @@
+panel BattlepassRewardButton
+{
+	bind root
+
+	size: <100, 100>
+	offsets: <0, 0, 0, 0>
+	offsetsTB: <0, 0>
+	inputListener: true
+
+	behavior Button
+	{
+		soundHighlighted: "UI_Menu_BattlePass_Level_Focus"
+	}
+
+	behavior BattlePassRewardButton
+	{
+		bind *.quantity -> @this.quantity
+		bind *.level -> @this.level
+		bind *.isOwned -> @this.isOwned
+		bind *.isTall -> @this.isTall
+		bind *.isRumble -> @this.isRumble
+		bind *.flav.guid -> @this.flavGUID
+		//jmasse: Rebuild via RTK model when time permits
+		//Maybe use mutators to break apart the item flav?
+
+		button: @panel:Button
+		battlepassRewardRui: $"ui/battle_pass_reward_button_v2.rpak"
+	}
+}

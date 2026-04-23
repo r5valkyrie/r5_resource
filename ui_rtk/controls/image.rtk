@@ -1,0 +1,14 @@
+panel
+{
+	bind root
+
+	var size @this.size
+	var colorRGB @this:Image.colorRGB
+
+	size: <0, 0>
+
+	behavior Image
+	{
+		bind * -> @this.assetPath
+	}
+}

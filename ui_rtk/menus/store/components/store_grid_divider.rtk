@@ -1,0 +1,20 @@
+panel Divider
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	panel
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+		behavior Image
+		{
+			bind *.mainImage -> @this.assetPath
+
+			color: <1.0, 1.0, 1.0, 0.5>
+			assetPath: $"ui_image/rui/menu/common/vertical_trapezoid_separator.rpak"
+		}
+	}
+}

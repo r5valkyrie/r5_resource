@@ -1,0 +1,25 @@
+panel PostgameResultsBreakdown
+{
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	behavior RenderGroup
+
+	panel BackgroundPanel
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		instance $"ui_rtk/common/components/angled_top_corners_panel.rpak" ResultsBreakdownBody
+	}
+
+	panel ResultsBreakdownPanel
+	{
+		anchor: BOTTOM
+		offsets: <0, 0, 0, 0>
+		size: <1500, 120>
+		pivot: <0.5, 1.0>
+
+		instance $"ui_rtk/menus/game_modes/apex_cups/components/results_breakdown_data.rpak" ResultsBreakdownData
+	}
+}

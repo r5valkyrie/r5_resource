@@ -1,0 +1,67 @@
+panel LegendUpgradesInventory
+{
+	bind root
+
+	anchor: TOP_LEFT
+	pivot: <0, 0>
+
+	behavior FitToContent
+
+	panel Wrapper
+	{
+		bind &common.legendUpgradeTree.isVisible -> @this.visible
+
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <-16, -16, -16, -16>
+
+		panel Background
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				color: #000000
+				assetPath: $"ui_image/rui/events/collection_events/thin_square_mask.rpak"
+				alpha: 0.6
+			}
+		}
+
+		panel LeftBracket
+		{
+			anchor: LEFT_STRETCH_HEIGHT
+			positionX: -10
+			width: 12
+			offsets: <0, 0, -16, -16>
+
+			behavior Image
+			{
+				color: #FFFFFF
+				assetPath: $"ui_image/rui/hud/upgrades/legend_upgrades_tree_bracket.rpak"
+				flipHorizontal: true
+				alpha: 0.07
+			}
+		}
+
+		panel RightBracket
+		{
+			anchor: RIGHT_STRETCH_HEIGHT
+			pivot: <1, 0.5>
+			positionX: 16
+			width: 12
+			offsets: <0, 0, -16, -16>
+
+			behavior Image
+			{
+				color: #FFFFFF
+				assetPath: $"ui_image/rui/hud/upgrades/legend_upgrades_tree_bracket.rpak"
+				alpha: 0.07
+			}
+		}
+	}
+
+	instance $"ui_rtk/menus/legend_upgrades/components/legend_upgrades_tree.rpak" UpgradesTree
+	{
+		anchor: CENTER
+	}
+}

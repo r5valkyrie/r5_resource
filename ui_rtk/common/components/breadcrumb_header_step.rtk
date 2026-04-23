@@ -1,0 +1,51 @@
+panel BreadcrumbHeaderStep
+{
+	bind root
+	inputListener: true
+
+	behavior HorizontalContainer
+	{
+		alignment: LEFT
+		fitContentWidth: true
+		spacing: 5
+	}
+
+	behavior BreadcrumbStep
+	{
+		bind *.stepIndex -> @this.stepIndex
+		seasonalColors: true
+		buttonBehavior: @panel:Button
+		stepTitle: @panel/StepTitle:Label
+	}
+
+	behavior Button
+
+	panel ArrowImage
+	{
+		bind *.stepIndex -> greaterThan(0) -> @this.visible
+
+		size: <35, 35>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/hud/common/chevron_left_big.rpak"
+		}
+	}
+
+	panel StepTitle
+	{
+		behavior Label
+		{
+			bind *.title -> @this.text
+			bind *.isLastStep -> PickStringFromTwo( "TitleRegularFont", "TitleBoldFont" ) -> @this.face
+			//bind *.isLastStep -> PickVectorFromTwo( #COLOR_WHITE_1 , #COLOR_ORANGE_1 ) -> @this.colorRGB //TEMP HIGHLIGHT COLOR
+
+			face: #FONT_TITLE_REGULAR
+			horizontalMode: AUTOSIZE_TO_TEXT
+			verticalMode: AUTOSIZE_TO_TEXT
+			pixelHeight: 35
+			colorRGB: #COLOR_WHITE_1
+			allCaps: true
+		}
+	}
+}

@@ -1,0 +1,33 @@
+panel IconButton
+{
+	bind @this.visible -> @this.inputListener
+	bind @this.visible -> @this.active
+
+	var icon @this/Icon:Image
+	var iconAsset @this/Icon:Image.assetPath
+	var iconColor @this/Icon:Image.color
+	var bg @this:Image
+	var bgAsset @this:Image.assetPath
+	var bgColor @this:Image.color
+
+	size: <80, 80>
+	inputListener: true
+
+	behavior Button
+
+	behavior Image
+	{
+		color: <1, 1, 1, 1>
+	}
+
+	panel Icon
+	{
+		anchor: CENTER
+		size: <60, 60>
+
+		behavior Image
+		{
+			color: <1, 1, 1, 1>
+		}
+	}
+}

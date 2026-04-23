@@ -1,0 +1,98 @@
+panel PostGameMasteryActionsTooltip
+{
+	bind root
+
+	instance $"ui_rtk/controls/blur.rpak"
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior ContainerElement
+		{
+			ignoreLayout: true
+		}
+	}
+
+	panel Background
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			color: <0.025, 0.025, 0.025, 0.8>
+		}
+
+		behavior ContainerElement
+		{
+			ignoreLayout: true
+		}
+	}
+
+	panel Border
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/borders/border_outline_1px.rpak"
+			color: <1.0, 1.0, 1.0, 1>
+		}
+
+		behavior ContainerElement
+		{
+			ignoreLayout: true
+		}
+	}
+
+	behavior VerticalContainer
+	{
+		padding: <20, 20, 10, 20>
+		fitContentWidth: true
+		fitContentHeight: true
+		spacing: 18
+		alignment: TOP
+	}
+
+	panel TipDescription
+	{
+		anchor: CENTER
+		offsets: <0, 0, 0, 0>
+		size: <575, 32>
+
+		behavior Label
+		{
+			textAlignHorizontal: CENTER
+			horizontalMode: AUTOSIZE_TO_TEXT
+			face: "TitleBoldFont"
+			text: ""
+			pixelHeight: 32
+			color: <0.55, 0.55, 0.55, 1>
+			allCaps: true
+			outlineWidth: 0.5
+			outlineColorOuter: <0, 0, 0, 0.3>
+			outlineColorInner: <0, 0, 0, 0>
+			shadowAlpha: 0.4
+			shadowBlur: 6.0
+			shadowOffset: <1.5, 1.5>
+		}
+	}
+
+	panel ActionsVerticalList
+	{
+		offsets: <0, 0, 0, 0>
+
+		behavior VerticalContainer
+		{
+			fitContentHeight: true
+			fitContentWidth: true
+		}
+
+		behavior ListBinder
+		{
+			bindingPath: "*.actions"
+			prefab: $"ui_rtk/menus/post_game/components/postgame_mastery_actions_listitem.rpak"
+		}
+	}
+}

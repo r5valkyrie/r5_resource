@@ -1,0 +1,173 @@
+panel ButtonAnchor
+{
+	var labelPanel      @this/ButtonPanel/SectionNameLabel
+	var labelBehavior   @this/ButtonPanel/SectionNameLabel:Label
+
+    inputListener: true
+    pivot: <0.5, 1.0>
+    size: <300, 100>
+
+	behavior Button
+    {
+        bind @this.interactive -> @panel/ButtonPanel.visible
+
+        soundHighlighted: "ui_menu_focus"
+		soundPressedEnabled: "ui_menu_accept"
+
+        transitions: [
+            {
+				fromState: ANY
+				toState: IDLE
+                type: TRANSITION_PROPERTY_SET
+                property: @panel/ButtonPanel:Image.colorRGB
+                value: <0.8, 0.8, 0.8>
+            },
+            {
+				fromState: ANY
+				toState: IDLE
+                type: TRANSITION_PROPERTY_SET
+                property: @panel/ButtonPanel/Arrow:Image.colorRGB
+                value: <0.8, 0.8, 0.8>
+            },
+            {
+				fromState: ANY
+				toState: IDLE
+                type: TRANSITION_PROPERTY_SET
+                property: @panel/ButtonPanel/SectionNameLabel:Label.colorRGB
+                value: <0.8, 0.8, 0.8>
+            },
+            {
+				fromState: ANY
+				toState: HIGHLIGHTED
+                type: TRANSITION_PROPERTY_SET
+                property: @panel/ButtonPanel:Image.colorRGB
+                value: <1.0, 0.4, 0.0>
+            },
+            {
+				fromState: ANY
+				toState: HIGHLIGHTED
+                type: TRANSITION_PROPERTY_SET
+                property: @panel/ButtonPanel/Arrow:Image.colorRGB
+                value: <1.0, 0.4, 0.0>
+            },
+            {
+				fromState: ANY
+				toState: HIGHLIGHTED
+                type: TRANSITION_PROPERTY_SET
+                property: @panel/ButtonPanel/SectionNameLabel:Label.colorRGB
+                value: <1.0, 0.4, 0.0>
+            },
+            {
+				fromState: IDLE
+				toState: HIGHLIGHTED
+                type: TRANSITION_TWEEN
+	            animName: "onIdleToHighlighted"
+            },
+            {
+				fromState: HIGHLIGHTED
+				toState: IDLE
+                type: TRANSITION_TWEEN
+                animName: "onHighlightedToIdle"
+            },
+            {
+				fromState: ANY
+				toState: PRESSED
+                type: TRANSITION_PROPERTY_SET
+                property: @panel/ButtonPanel:ColorExtensions.tintRGB
+                value: <0.75, 0.75, 0.75>
+            },
+            {
+				fromState: PRESSED
+				toState: ANY
+                type: TRANSITION_PROPERTY_SET
+                property: @panel/ButtonPanel:ColorExtensions.tintRGB
+                value: <1.0, 1.0, 1.0>
+            },
+            {
+				fromState: NON_INTERACTIVE
+				toState: ANY
+                type: TRANSITION_PROPERTY_SET
+                property: @panel/ButtonPanel.positionY
+                value: 35
+            }
+        ]
+    }
+
+	behavior Animator
+	{
+		tweenAnimations: [
+			{
+				name: "onIdleToHighlighted"
+				tweens: [
+					{
+						property: @panel/ButtonPanel.positionY
+						startValue: 35
+						endValue: 0
+						duration: 0.15
+						curve: EASE_OUT_CUBIC
+					}
+				]
+			},
+			{
+				name: "onHighlightedToIdle"
+				tweens: [
+					{
+						property: @panel/ButtonPanel.positionY
+						startValue: 0
+						endValue: 35
+						duration: 0.15
+						curve: EASE_OUT_CUBIC
+					}
+				]
+			}
+		]
+	}
+
+	panel ButtonPanel
+	{
+		anchor: BOTTOM
+	    pivot: <0.5, 1.0>
+	    position: <0, 35>
+	    size: <300, 100>
+
+	    behavior Image
+	    {
+	        assetPath: $"ui_image/rui/menu/buttons/button_section_vertical.rpak"
+	        color: <0.8, 0.8, 0.8, 1.0>
+	    }
+
+		behavior ColorExtensions
+
+		panel Arrow
+		{
+			anchor: BOTTOM
+			position: <0, -29>
+			rotation: -90
+			size: <50, 50>
+
+			behavior Image
+			{
+	            assetPath: $"ui_image/rui/hud/common/chevron_left_big.rpak"
+	            color: <0.8, 0.8, 0.8, 1.0>
+			}
+		}
+
+	    panel SectionNameLabel
+	    {
+	        anchor: BOTTOM
+	        position: <0, -65>
+	        size: <250, 36>
+
+	        behavior Label
+	        {
+	            face: "DefaultFont"
+	            textAlignHorizontal: CENTER
+	            textAlignVertical: CENTER
+	            pixelHeight: 32
+	            leading: -10
+	            color: <0.8, 0.8, 0.8, 1.0>
+		        horizontalMode: WRAP
+	        }
+	    }
+    }
+}

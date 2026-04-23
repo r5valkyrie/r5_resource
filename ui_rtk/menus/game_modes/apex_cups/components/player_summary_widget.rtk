@@ -1,0 +1,244 @@
+panel PostGameSummaryComponent
+{
+    bind root
+
+    anchor: TOP_LEFT
+	offsets: <0, 0, 0, 0>
+	pivot: <0, 0>
+	width: 478
+
+	////////////////////////////////////////////////////////////////////////////////////////////
+
+	panel StatCard
+	{
+		anchor: TOP_STRETCH_WIDTH
+		pivot: <0.5, 0.0>
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			colorRGB: <0.3, 0.3, 0.3>
+			assetPath: $"ui_image/rui/menu/apex_rumble/T_Player_Border_Base_BC.rpak"
+		}
+
+		behavior VerticalContainer
+		{
+			alignment: TOP_LEFT
+			fitContentHeight: true
+			padding: <15, 6, 6, 6>
+			expandChildWidth: true
+		}
+
+		panel BackgroundBlur
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <13, 3, 3, 3>
+
+			behavior Image
+			{
+				imageBlur: ASSET
+			}
+
+			behavior ContainerElement
+			{
+				ignoreLayout: true
+			}
+		}
+
+		panel BorderGradient
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+			behavior Image
+			{
+				colorRGB: #F5A523
+				assetPath: $"ui_image/rui/menu/apex_rumble/T_Player_Border_Gradient_BC.rpak"
+			}
+
+			behavior ContainerElement
+			{
+				ignoreLayout: true
+			}
+		}
+
+		panel Info
+		{
+			anchor: TOP_STRETCH_WIDTH
+			offsetsLR: <0, 0>
+			pivot: <0.5, 0>
+			height: 81
+
+			panel Background
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/menu/apex_rumble/T_Character_Mask_BC.rpak"
+					colorRGB: #F5A523
+					alpha: 0.5
+				}
+			}
+
+			panel Portrait
+			{
+				anchor: LEFT
+				pivot: <0, 0.5>
+				size: <152, 81>
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/menu/apex_rumble/T_Character_Mask_BC.rpak"
+					colorRGB: <0, 0, 0>
+					alpha: 0.5
+				}
+
+				panel LegendPortait
+				{
+					anchor: CENTER_STRETCH_WIDTH_HEIGHT
+					size: <120, 120>
+					offsets: <0, 0, 0, 0>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/menu/apex_rumble/T_Character_Mask_BC.rpak"
+						bind *.playerAssetPath -> @this.assetMaskPath
+					}
+				}
+			}
+
+			panel NameStrings
+			{
+				anchor: CENTER
+				pivot: <0.5, 0.5>
+				position: <-25, -15>
+
+				panel PlayerName
+				{
+					anchor: LEFT
+					pivot: <0, 0.5>
+
+					behavior Label
+					{
+						bind *.playerName -> PlayerDisplayName( *.playerHardware ) -> IfEmpty( "#CUPS_LEADERBOARD_EMPTY_DATA" ) -> @this.text
+
+						verticalMode: AUTOSIZE_TO_TEXT
+						HorizontalMode: AUTOSIZE_TO_TEXT
+						pixelHeight: 24
+						face: "TitleRegularFont"
+						margin: <10, 0, 0, 0>
+					}
+				}
+
+				panel LegendName
+				{
+					anchor: LEFT
+					position: <0, 30>
+					pivot: <0.0, 0.5>
+
+					behavior Label
+					{
+						bind *.playerLegendName -> @this.text
+
+						verticalMode: AUTOSIZE_TO_TEXT
+						HorizontalMode: AUTOSIZE_TO_TEXT
+						pixelHeight: 22
+						face: "TitleRegularFont"
+						color: <0.8, 0.8, 0.8, 1.0>
+						margin: <10, 0, 0, 0>
+						allCaps: true
+					}
+				}
+			}
+		}
+
+		panel Binder
+		{
+			behavior VerticalContainer
+			{
+				alignment: CENTER
+				fitContentWidth: true
+				fitContentHeight: true
+			}
+
+			behavior ListBinder
+			{
+				bind * -> IndexOfElementInArray -> FormatString( "&menus.apexCups.playerDataList[%s].summaryList") -> @this.bindingPath
+				bindingPath: "&menus.apexCups.playerDataList[0].summaryList"
+				prefab: $"ui_rtk/common/components/simple_table.rpak"
+
+				varOverrides: {
+					rowWidth: 457
+					textSize: 24
+				}
+			}
+		}
+
+		panel Points
+		{
+			anchor: BOTTOM_STRETCH_WIDTH
+			offsetsLR: <0, 0>
+			position: <0, 6>
+			pivot: <0.5, 0.0>
+			height: 46
+
+			behavior Image
+			{
+				colorRGB: <0.1, 0.1, 0.1>
+			}
+
+			panel TotalLeftText
+			{
+				anchor: CENTER
+				position: <-86, 0>
+				size: <258, 28>
+				pivot: <0.5, 0.5>
+				offsets: <0, 0, 0, 0>
+				useLocaleDirection: true
+
+				behavior Label
+				{
+					text: "#CROSS_PROGRESSION_COSMETICS_TOTAL"
+					face: "BoldRegularFont"
+					color: #F5A523
+					margin: <0, 0, 5, 5>
+					textAlignHorizontal: LEFT
+					textAlignVertical: CENTER
+					horizontalMode: SQUISH_TO_CONTAINER
+					useLocaleDirection: true
+					pixelHeight: 22
+					allCaps: true
+				}
+			}
+
+			panel TotalRightText
+			{
+				anchor: CENTER
+				position: <90, 0>
+				size: <258, 28>
+				pivot: <0.5, 0.5>
+				offsets: <0, 0, 0, 0>
+				useLocaleDirection: true
+
+				behavior Label
+				{
+					bind *.playerPoints -> @this.text
+
+					face: "BoldRegularFont"
+					color: #F5A523
+					margin: <0, 0, 5, 5>
+					textAlignHorizontal: RIGHT
+					textAlignVertical: CENTER
+					horizontalMode: SQUISH_TO_CONTAINER
+					useLocaleDirection: true
+					pixelHeight: 24
+				}
+
+				behavior LabelAltStyle
+				{
+					face: "DefaultRegularFont"
+				}
+			}
+		}
+	}
+}

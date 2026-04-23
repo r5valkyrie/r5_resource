@@ -1,0 +1,106 @@
+panel LevelUpCard
+{
+
+	bind root
+
+	anchor: CENTER_STRETCH_HEIGHT
+	size: <1920, 1080>
+	offsets: <0, 0, 0, 0>
+
+	active: false
+	inputListener: true
+
+	panel LevelUpText
+	{
+		bind @this:Label.pixelHeight -> @this.height
+
+		positionY: -190
+		anchor: CENTER
+		behavior Label
+		{
+			text: "#EOG_LEVEL_UP_HEADER"
+			pixelHeight: 52
+			face: "TitleBoldFont"
+			allcaps: true
+			textAlignHorizontal: CENTER
+			horizontalMode: AUTOSIZE_TO_TEXT
+		}
+	}
+
+	panel BadgeIcon
+	{
+		positionY: -35
+		size: <200, 200>
+		anchor: CENTER
+
+		behavior Badge
+		{
+			bind *.badge.badgeRuiAsset -> @this.badgeRuiAsset
+			bind *.badge.tier -> @this.tier
+			badgeRuiAsset: $"ui/gcard_badge_account_t1.rpak"
+			tier: 20
+		}
+	}
+
+	panel RewardsTitle
+	{
+		bind @this:Label.pixelHeight -> @this.height
+
+		positionY: 140
+		anchor: CENTER
+		behavior Label
+		{
+			bind &menus.postGame.xp_breakdown.levelUpModel.rewards -> GetArrayCount -> GreaterThan(1) -> PickStringFromTwo("#EOG_REWARD_LABEL", "#EOG_REWARDS_LABEL") -> @this.text
+			text: "#EOG_REWARD_LABEL"
+			pixelHeight: 25
+			face: "TitleBoldFont"
+			allcaps: true
+			textAlignHorizontal: CENTER
+			horizontalMode: AUTOSIZE_TO_TEXT
+		}
+	}
+	panel Rewards
+	{
+		positionY: 223
+		anchor: CENTER
+		offsets: <0, 0, 0, 0>
+
+		behavior HorizontalContainer
+		{
+			fitContentWidth: true
+			fitContentHeight: true
+			spacing: 10
+		}
+
+		behavior ListBinder
+		{
+			bindingPath: "*.rewards"
+			prefab: $"ui_rtk/menus/post_game/xp_breakdown/components/postgame_xp_breakdown_reward_icon.rpak"
+		}
+	}
+
+	behavior GlobalInput
+	{
+		behaviorRef: @panel/ContinueButton:Button
+		keyboardButton: KEY_SPACE
+		gamepadButton: BUTTON_A
+	}
+
+	instance $"ui_rtk/common/buttons/base_button.rpak" ContinueButton
+	{
+		positionY: -54
+		size: <384, 66>
+		pivot: <0.5, 1>
+		anchor: BOTTOM
+
+		override @var(labelText) "#A_BUTTON_CONTINUE"
+		override @var(labelColor) <0.87, 0.87, 0.87>
+		override @var(size) <380, 64>
+		override @var(labelPixelHeight) 24
+		override @var(backgroundColor) <0.3, 0.3, 0.3>
+		override @var(backgroundAlpha) 0.3
+		override @var(gradientColor) <0.5, 0.5, 0.5>
+		override @var(gradientAlpha) 0.75
+		override @var(lineAlpha) 0
+	}
+}

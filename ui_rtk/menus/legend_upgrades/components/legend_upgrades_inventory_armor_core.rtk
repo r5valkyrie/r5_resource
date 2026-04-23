@@ -1,0 +1,135 @@
+panel InventoryUpgradeCore
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	pivot: <0, 0>
+
+	behavior LegendUpgradesArmorCore
+
+	panel Container
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior HorizontalContainer
+		{
+			spacing: -10
+			alignment: CENTER
+			fitContentHeight: true
+		}
+
+		panel ArmorLevelContainer
+		{
+			anchor: LEFT
+			offsets: <0, 0, 0, 0>
+			size: <158, 132>
+
+			panel BG
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <0, 0, 0, 0>
+				size: <158, 132>
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/hud/upgrades/lgnd_upgrades_inventory_armor_bg.rpak"
+					color: #000000
+					alpha: 0.5
+				}
+			}
+
+			panel Border
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <0, 0, 0, 0>
+				size: <158, 132>
+
+				behavior Image
+				{
+					bind *.upgradeTier -> HUDQualityColor( false ) -> @this.colorRGB
+
+					assetPath: $"ui_image/rui/hud/upgrades/lgnd_upgrades_inventory_armor_border.rpak"
+					alpha: 0.35
+				}
+			}
+
+			panel Frame
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <0, 0, 0, 0>
+				size: <158, 132>
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/hud/upgrades/lgnd_upgrades_inventory_armor_frame.rpak"
+					alpha: 0.07
+				}
+			}
+
+			panel ArmorIcon
+			{
+				anchor: CENTER
+				offsets: <0, 0, 0, 0>
+				size: <72, 72>
+				positionY: -10
+
+				behavior Image
+				{
+					bind *.upgradeTier -> HUDQualityColor( false ) -> @this.colorRGB
+
+					assetPath: $"ui_image/rui/hud/loot/loot_armor_upgrade.rpak"
+				}
+			}
+		}
+
+		panel ChargeIcon
+		{
+			anchor: LEFT
+			width: 204
+
+			panel Arrows
+			{
+				anchor: LEFT
+				offsets: <0, 0, 0, 0>
+				pivot: <0, 0.5>
+				size: <84, 112>
+
+				behavior Image
+				{
+					color: #97a2a2
+					assetPath: $"ui_image/rui/hud/upgrades/lgnd_upgrades_inventory_connection_frame.rpak"
+					alpha: 0.25
+				}
+			}
+
+			panel EnergyIcon
+			{
+				anchor: LEFT
+				offsets: <0, 0, 0, 0>
+				pivot: <0, 0.5>
+				size: <84, 112>
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/hud/upgrades/lgnd_upgrades_inventory_connection_icon.rpak"
+				}
+			}
+
+			panel RightBracket
+			{
+				anchor: RIGHT
+				offsets: <0, 0, 0, 0>
+				size: <13, 111>
+
+				behavior Image
+				{
+					color: #ffffff
+					assetPath: $"ui_image/rui/menu/inventory/gear_container_side_bracket.rpak"
+					flipHorizontal: true
+					alpha: 0.5
+				}
+			}
+		}
+	}
+}

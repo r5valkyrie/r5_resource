@@ -1,0 +1,17 @@
+panel Label
+{
+	var text @this:Label.text
+
+	anchor: TOP_LEFT
+	size: <200, 50>
+
+	behavior Label
+	{
+		text: ""
+		pixelHeight: 40
+		horizontalMode: OVERFLOW
+		outlineColorInner: <0, 0, 0, 1>
+		outlineColorOuter: <0, 0, 0, 1>
+		outlineWidth: 3
+	}
+}

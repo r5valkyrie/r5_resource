@@ -1,0 +1,64 @@
+panel LegendNameplatePerkBreakdown
+{
+	bind root
+	anchor: RIGHT
+	offsets: <0, 0, 0, 0>
+	pivot: <0.0, 0.0>
+
+	behavior HorizontalContainer
+	{
+		alignment: CENTER
+		fitContentWidth:  true
+		fitContentHeight: true
+		spacing: 20
+		paddingRight: 37
+	}
+
+	panel PerkNamePanel
+	{
+		anchor: TOP_RIGHT
+		pivot: <0, 0>
+
+		behavior Label
+	    {
+	        bind *.descText -> @this.text
+
+	        text: "Perk Description"
+	        face: "TitleBoldFont"
+	        pixelHeight: 20
+	        horizontalMode: AUTOSIZE_TO_TEXT
+	        verticalMode: AUTOSIZE_TO_TEXT
+	        colorRGB: <1, 1, 1>
+	        textAlignHorizontal: RIGHT
+	        textAlignVertical: CENTER
+	        allCaps: true
+	    }
+
+	    behavior ContainerElement
+		{
+			autosizeToLabelWidth: true
+			autosizeToLabelHeight: true
+		}
+	}
+
+	panel SpacerIconPanel
+	{
+		size:<4, 48>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/common/vertical_trapezoid_separator.rpak"
+		}
+	}
+
+	panel PerkIconPanel
+	{
+		size:<52, 52>
+
+		behavior Image
+		{
+			bind *.icon -> @this.assetPath
+		}
+	}
+
+}

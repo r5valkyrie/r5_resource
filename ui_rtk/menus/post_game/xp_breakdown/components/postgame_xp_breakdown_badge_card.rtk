@@ -1,0 +1,217 @@
+panel
+{
+	bind root
+	size: <1920, 1080>
+	offsets: <0, 0, 0, 0>
+	anchor: CENTER_STRETCH_HEIGHT
+
+	inputListener: true
+	behavior CursorInteract
+	{
+		mouseEnabled: true
+		controllerEnabled: true
+	}
+
+	behavior Animator
+	{
+		tweenAnimations: [
+		{
+			name: "FadeIn"
+			tweens: [
+			{
+				property: @panel/BadgeDisplayArea:RenderGroup.alpha
+				duration: 0.35
+				startValue: 0
+				endValue: 1
+				curve: EASE_OUT_CUBIC
+			}
+			]
+		},
+		{
+			name: "FadeOut"
+			tweens: [
+			{
+				property:  @panel/BadgeDisplayArea:RenderGroup.alpha
+				duration: 0.35
+				startValue: 1
+				endValue: 0
+				curve: EASE_OUT_CUBIC
+			}
+			]
+		}
+		]
+	}
+
+	panel BadgeDisplayArea
+	{
+		size: <1250, 1080>
+		offsets: <0, 0, 0, 0>
+		pivot: <0, 0.5>
+		anchor: LEFT
+		useLocaleDirection: true
+
+		behavior RenderGroup
+		{
+			alpha: 0
+		}
+
+		panel BadgeInformation
+		{
+			anchor: TOP
+			positionY: 185
+			pivot: <0.5, 0>
+			height: 160
+
+			panel BadgeEarnedText
+			{
+				anchor: TOP
+				pivot: <0.5, 0>
+				width: 290
+				bind @this:Label.pixelHeight -> @this.height
+
+				behavior Label
+				{
+					text: "#BADGE_EARNED"
+					pixelHeight: 46
+					face: "TitleRegularFont"
+					textAlignHorizontal: CENTER
+					horizontalMode: AUTOSIZE_TO_TEXT
+				}
+			}
+
+			panel BadgeText
+			{
+				anchor: TOP
+				pivot: <0.5, 0>
+				positionY: 83
+
+				behavior VerticalContainer
+				{
+					spacing: 5
+					fitContentHeight: true
+					fitContentWidth: true
+					alignment: TOP
+				}
+
+				panel BadgeTitle
+				{
+					bind @this:Label.pixelHeight -> @this.height
+					behavior Label
+					{
+						bind *.badgeTitle -> @this.text
+						text: "#BADGE_EARNED"
+						pixelHeight: 36
+						face: "TitleBoldFont"
+						allcaps: true
+						textAlignHorizontal: CENTER
+						horizontalMode: AUTOSIZE_TO_TEXT
+						verticalMode: AUTOSIZE_TO_TEXT
+					}
+
+					behavior LabelAltStyle
+					{
+						face: "TitleBoldFont"
+					}
+
+					behavior LabelAltStyle
+					{
+						face: "TitleBoldFont"
+					}
+
+					behavior LabelAltStyle
+					{
+						face: "TitleBoldFont"
+					}
+				}
+
+				panel BadgeDescription
+				{
+					width: 850
+					bind @this:Label.pixelHeight -> @this.height
+					behavior Label
+					{
+						bind *.badgeDescription -> @this.text
+						text: "#BADGE_EARNED"
+						pixelHeight: 36
+						face: "DefaultRegularFont"
+						textAlignHorizontal: CENTER
+						horizontalMode: WRAP
+						verticalMode: AUTOSIZE_TO_TEXT
+						colorRGB: #918b8d
+					}
+
+					behavior LabelAltStyle
+					{
+						face: "DefaultRegularFont"
+					}
+
+					behavior LabelAltStyle
+					{
+						face: "DefaultRegularFont"
+					}
+
+					behavior LabelAltStyle
+					{
+						face: "DefaultRegularFont"
+					}
+				}
+			}
+		}
+
+		panel BadgeDisplay
+		{
+			size: <440, 315>
+			positionY: 40
+			pivot: <0.5, 0.5>
+			anchor: CENTER
+
+			panel BadgeIcon
+			{
+				size: <256, 256>
+				anchor: TOP
+				pivot: <0.5, 0>
+				behavior Badge
+				{
+					bind *.badge.badgeRuiAsset -> @this.badgeRuiAsset //Toado(tc): R5DEV-494375
+					bind *.badge.imageAsset -> @this.imageAsset
+					bind *.badge.tier -> @this.tier
+					badgeRuiAsset: $"ui/gcard_badge_account_t1.rpak"
+					tier: 20
+				}
+			}
+
+			panel BadgeTypeText
+			{
+				bind @this:Label.pixelHeight -> @this.height
+				anchor: BOTTOM
+				pivot: <0.5, 1>
+				behavior Label
+				{
+					bind *.badgeType -> @this.text
+					text: "#BADGE_EARNED"
+					pixelHeight: 35
+					face: "DefaultBoldFont"
+					textAlignHorizontal: CENTER
+					horizontalMode: AUTOSIZE_TO_TEXT
+					colorRGB: #c0c2c3
+				}
+
+				behavior LabelAltStyle
+				{
+					face: "DefaultBoldFont"
+				}
+
+				behavior LabelAltStyle
+				{
+					face: "DefaultBoldFont"
+				}
+
+				behavior LabelAltStyle
+				{
+					face: "DefaultBoldFont"
+				}
+			}
+		}
+	}
+}
+

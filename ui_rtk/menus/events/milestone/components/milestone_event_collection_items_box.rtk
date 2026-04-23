@@ -1,0 +1,144 @@
+panel MilestoneEventCollectionBox
+{
+	bind root
+
+	var listFillDirection @this/RenderGroupContent/PaginatedContainer/ItemsList:GridContainer.fillDirection
+	var listWrapAfterXItems @this/RenderGroupContent/PaginatedContainer/ItemsList:GridContainer.wrapAfterSlot
+
+	size: <874, 430>
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <20, 20, 20, 0>
+
+	panel CursorZone
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		inputListener: true
+
+		behavior CursorInteract
+		{
+			mouseEnabled: false
+			controllerEnabled: true
+			absorbOnKeyCodePressed: false
+		}
+	}
+
+	behavior Pagination
+	{
+		container: @panel/RenderGroupContent/PaginatedContainer
+		content: @panel/RenderGroupContent/PaginatedContainer/ItemsList
+
+		nextButton: @panel/PaginationNavContainer/PaginationNav/RightButton:Button
+		paginationButtons: @panel/PaginationNavContainer/PaginationNav/PaginationPips
+		prevButton: @panel/PaginationNavContainer/PaginationNav/LeftButton:Button
+
+		hintAnimator: @panel/PaginationNavContainer/Hint:Animator
+		animator: @panel/RenderGroupContent/PaginatedContainer:Animator
+
+		cursorInteract1Area: @panel/CursorZone:CursorInteract
+		useContentSizeAsTotalSize: true
+
+		vertical: false
+		autoPagesByContainerContent: true
+		panelsAlwaysStartNewPages: false
+		containerSizeOffset: 15
+	}
+	//Pagination
+
+	panel RenderGroupContent
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		pivot: <0.5, 0.0>
+		offsets: <0, 0, 0, 70>
+
+		behavior RenderGroup
+
+		panel PaginatedContainer
+		{
+			offsets: <0, 0, 0, 0>
+			anchor: TOP_LEFT
+			size: <996, 390>
+			pivot: <0, 0>
+			position: <1, 0>
+			constrainInput: false
+
+			behavior Animator
+			{
+				tweenAnimations: [
+				{
+					name: "NextPage"
+					tweens: [
+					{
+						property: @panel/ItemsList.positionX
+						duration: 0.25
+						startValue: 0
+						endValue: 1
+						curve: EASE_IN_CUBIC
+					}
+					]
+				}
+				]
+			}
+
+			panel ItemsList
+			{
+				anchor: TOP_LEFT
+				pivot: <0.0, 0.0>
+				size: <874, 450>
+				position: <0, 0>
+				useLocaleDirection: true
+
+				behavior GridContainer
+				{
+					defaultSlotSize: <112, 188>
+					wrapAfterSlot: 2
+					gridSlotAnchor: TOP_LEFT
+					fillDirection: COLUMN_FIRST
+					startCorner: TOP_LEFT
+					useLocaleDirection: true
+					slotSpacing: <14, 14>
+					fitToContentWidth: true
+					fitToContentHeight: true
+					isStrictGrid: true
+				}
+
+				behavior ListBinder
+				{
+					bindingPath: "*.collectedItemsModel"
+					prefab: $"ui_rtk/menus/events/milestone/components/milestone_event_collection_item.rpak"
+				}
+			}
+		}
+	}
+
+	panel PaginationNavContainer
+	{
+		inputListener: true
+		anchor: BOTTOM_STRETCH_WIDTH
+		pivot: <0.5, 1.0>
+		offsets: <0, 0, 0, 0>
+		position: <0, 0>
+		height: 60
+
+		instance $"ui_rtk/common/pagination_nav_horizontal.rpak" PaginationNav
+		{
+			override @var(pipsPrefab) $"ui_rtk/common/buttons/pip_button_v2.rpak"
+
+			inputListener: true
+			anchor: TOP_STRETCH_WIDTH
+		}
+
+		instance $"ui_rtk/common/pagination_hint.rpak" Hint
+		{
+			behavior ShowByInputMode
+			{
+				showIfMKB: false
+				showIfController: true
+			}
+			anchor: TOP
+			pivot: <0.5, 0.0>
+			size: <30, 30>
+			positionY: 45
+		}
+	}
+}

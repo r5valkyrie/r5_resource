@@ -1,0 +1,147 @@
+panel HorizontalPaginatedPanel
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	var autoPagesByContent          @this:Pagination.autoPagesByContainerContent
+	var useContentSizeAsTotalSize   @this:Pagination.useContentSizeAsTotalSize
+	var pageCount                   @this:Pagination.pages
+	var containerSizeOffset         @this:Pagination.containerSizeOffset
+
+	var cursorZone1Offsets          @this/CursorZone1.offsets // Override this to adjust cursor interaction zone
+	var cursorZone2Offsets          @this/CursorZone2.offsets // Override this to adjust cursor interaction zone
+	var cursorZone1Mouse            @this/CursorZone1:CursorInteract.mouseEnabled
+	var cursorZone1Controller       @this/CursorZone1:CursorInteract.controllerEnabled
+	var cursorZone2Mouse            @this/CursorZone2:CursorInteract.mouseEnabled
+	var cursorZone2Controller       @this/CursorZone2:CursorInteract.controllerEnabled
+
+	var paddingPanel                @this/Padding // Your "viewport". Put RenderGroup or overlays here if needed
+
+	var containerPanel              @this/Padding/ContentContainer
+	var containerOffsets            @this/Padding/ContentContainer.offsets // This determines page size
+	var contentPanel                @this/Padding/ContentContainer/Content // Put content children panels, ListBinders, etc in here
+
+	var navContainerPanel           @this/NavContainer
+	var navContainerAnchor          @this/NavContainer.anchor
+	var navContainerPivot           @this/NavContainer.pivot
+	var navContainerPosition        @this/NavContainer.position
+
+	var useDefaultNavButtons        @this/NavContainer/PaginationNav/LeftButton.visible
+	var leftButtonPanel             @this/NavContainer/PaginationNav/LeftButton
+	var rightButtonPanel            @this/NavContainer/PaginationNav/RightButton
+	var customNavLeftButton         @this:Pagination.prevButtonAlt
+	var customNavRightButton        @this:Pagination.nextButtonAlt
+	var customPipPrefab             @this/NavContainer/PaginationNav/PaginationPips:ListBinder.prefab
+	var canWrap                     @this:Pagination.canWrap
+
+	var animationDuration           @this:Animator.tweenAnimations[0].tweens[0].duration // Set this to 0 to disable animation
+
+	behavior Pagination
+	{
+		container:              @panel/Padding/ContentContainer
+		content:                @panel/Padding/ContentContainer/Content
+        animator:               @panel:Animator
+		cursorInteract1Area:    @panel/CursorZone1:CursorInteract
+		cursorInteract2Area:    @panel/CursorZone2:CursorInteract
+
+        nextButton:             @panel/NavContainer/PaginationNav/RightButton:Button
+        paginationButtons:      @panel/NavContainer/PaginationNav/PaginationPips
+        prevButton:             @panel/NavContainer/PaginationNav/LeftButton:Button
+        hintAnimator:           @panel/NavContainer/Hint:Animator
+
+		autoPagesByContainerContent: true
+	}
+
+	behavior Animator
+    {
+        tweenAnimations: [
+            {
+                name: "NextPage"
+                tweens: [
+                    {
+                        property: @panel/Padding/ContentContainer/Content.positionX
+                        duration: 0.35
+                        startValue: 0
+                        endValue: 1
+                        curve: EASE_OUT_CUBIC
+                    }
+                ]
+            }
+        ]
+    }
+
+    panel CursorZone1
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		inputListener: true
+
+		behavior CursorInteract
+		{
+			mouseEnabled: true
+			controllerEnabled: true
+		}
+	}
+
+	panel CursorZone2
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		inputListener: true
+
+		behavior CursorInteract
+		{
+			mouseEnabled: false
+			controllerEnabled: false
+		}
+	}
+
+	panel Padding
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		panel ContentContainer
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			panel Content // !!! Add a layout behavior to this panel when using this prefab !!!
+			{
+				anchor: TOP_LEFT
+				pivot: <0.0, 0.0>
+				useLocaleDirection: true
+			}
+		}
+	}
+
+	panel NavContainer
+	{
+		bind @this.pivot -> @this/Hint.pivot
+		bind @this.pivot -> @this/PaginationNav.pivot
+
+		anchor: BOTTOM_STRETCH_WIDTH
+		pivot: <0.5, 1.0>
+		sizeDelta: <0, 110>
+
+        instance $"ui_rtk/common/pagination_hint.rpak" Hint
+	    {
+	        anchor: BOTTOM
+	        pivot: <0.5, 1.0>
+	        size: <30, 30>
+	    }
+
+		instance $"ui_rtk/common/pagination_nav_horizontal.rpak" PaginationNav
+		{
+			bind @this/LeftButton.visible -> @this/LeftButton.active
+			bind @this/LeftButton.visible -> @this/RightButton.visible
+			bind @this/LeftButton.visible -> @this/RightButton.active
+
+			anchor: BOTTOM
+			positionY: -20
+			pivot: <0.5, 1.0>
+		}
+	}
+}

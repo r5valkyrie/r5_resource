@@ -1,0 +1,50 @@
+panel PaginationNavigation
+{
+	bind @this/PaginationPips.visible -> @this.visible
+
+    var pipsPrefab @this/PaginationPips:ListBinder.prefab
+
+    anchor: LEFT
+    width: 60
+    pivot: <0.0, 0.5>
+
+	behavior Image
+	{
+		assetPath: $"ui_image/rui/menu/navigation/nav_vertical_backing.rpak"
+
+		color: <0.0, 0.0, 0.0, 0.98>
+	}
+
+	behavior VerticalContainer
+	{
+		alignment: TOP_LEFT
+		fitContentHeight: true
+		spacing: 10
+		paddingTop: 32
+		paddingLeft: 13
+		paddingBottom: 32
+	}
+
+	instance $"ui_rtk/common/pagination_hint.rpak" Hint
+    {
+        pivot: <0.5, 0.5>
+        size: <30, 30>
+    }
+
+	panel PaginationPips
+	{
+		behavior VerticalContainer
+		{
+			fitContentWidth: true
+			fitContentHeight: true
+			alignment: CENTER
+			spacing: 2
+		}
+
+		behavior ListBinder
+		{
+			bindingPath: ""
+			prefab: $"ui_rtk/common/buttons/pip_button_vertical.rpak"
+		}
+	}
+}

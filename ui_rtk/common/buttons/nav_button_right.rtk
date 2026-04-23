@@ -1,0 +1,85 @@
+panel RightButton
+{
+    inputListener: true
+    size: <60, 60>
+    anchor: CENTER
+
+    behavior Image
+    {
+        assetPath: $"ui_image/rui/hud/common/chevron_left_big.rpak"
+        flipHorizontal: true
+		useLocaleDirection: true
+    }
+
+	behavior ColorExtensions
+
+    behavior Button
+    {
+        soundHighlighted: "ui_menu_focus"
+		soundPressedEnabled: "ui_menu_accept"
+
+        transitions: [
+            {
+				fromState: ANY
+				toState: IDLE
+                type: TRANSITION_PROPERTY_SET
+                property: @panel:Image.colorRGB
+                value: <1, 1, 1>
+            },
+            {
+				fromState: ANY
+				toState: HIGHLIGHTED
+                type: TRANSITION_PROPERTY_SET
+                property: @panel:Image.colorRGB
+                value: <1.0, 0.4, 0.0>
+            },
+            {
+				fromState: HIGHLIGHTED
+				toState: PRESSED
+                type: TRANSITION_TWEEN
+                animName: "onHighlightedToPressed"
+            },
+            {
+				fromState: PRESSED
+				toState: ANY
+                type: TRANSITION_TWEEN
+                animName: "onPressedToAny"
+            },
+            {
+				fromState: ANY
+				toState: NON_INTERACTIVE
+                type: TRANSITION_PROPERTY_SET
+                property: @panel:Image.colorRGB
+                value: <0.4, 0.4, 0.4>
+            }
+        ]
+    }
+
+	behavior Animator
+	{
+		tweenAnimations: [
+			{
+				name: "onHighlightedToPressed"
+				tweens: [
+					{
+						property: @panel:ColorExtensions.tintRGB
+						startValue: <1.0, 1.0, 1.0>
+						endValue: <0.55, 0.55, 0.55>
+						duration: 0.1
+					}
+				]
+			},
+			{
+				name: "onPressedToAny"
+				tweens: [
+					{
+						property: @panel:ColorExtensions.tintRGB
+						startValue: <0.55, 0.55, 0.55>
+						endValue: <1.0, 1.0, 1.0>
+						duration: 0.1
+					}
+				]
+			}
+		]
+	}
+}

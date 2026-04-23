@@ -1,0 +1,443 @@
+panel CollectionEventPage
+{
+	bind root
+	bind *.visible -> @this.visible
+
+	anchor: TOP_LEFT
+	size: <1920, 1080>
+	pivot: <0, 0>
+	offsets: <0, 0, 0, 0>
+
+	behavior CollectionEventPanel
+	{
+		offersGrid: @panel/LeftContent/CollectionItemsGrid/ItemsContainer/RenderGroupContent/PaginatedContainer/ItemsList
+		chaseButton: @panel/LeftContent/ChaseItemProgress:Button
+		informationButton: @panel/RightContent/InfoButtonArea:Button
+		openPackButton: @panel/RightContent/EventPackOpenerHolder/OpenPackButton:Button
+		eventPackOpenerHolder: @panel/RightContent/EventPackOpenerHolder:Button
+		giftButton: @panel/RightContent/PurchaseButtonsContainer/GiftPackButtonContainer/GiftPackButton:Button
+		purchaseButton: @panel/RightContent/PurchaseButtonsContainer/PurchasePackButtonContainer/PurchasePackButton:Button
+		mythicTierBreakdown: @panel/RightContent/InspectDetails/Details/PrestigeSkinDetails/MythicTierBreakdown
+		heirloomBreakdown: @panel/RightContent/InspectDetails/Details/HeirloomDetails/MythicTierBreakdown
+	}
+
+	panel LeftContent
+	{
+		anchor: TOP_LEFT
+		pivot: <0, 0>
+		offsets: <0, 0, 0, 0>
+		position: <75, 182>
+
+		behavior VerticalContainer
+		{
+			spacing: 16
+			fitContentHeight: true
+			fitContentWidth: true
+			alignment: TOP_LEFT
+		}
+
+		instance $"ui_rtk/menus/events/components/events_panel_title.rpak" PanelTitle
+		{
+			bind *.titleEndTimestamp -> @var(titleEndTimestamp)
+			bind *.titleEndTimestamp -> @var(titleEndTimestamp2)
+			bind *.eventTitleText -> @var(eventTitleText)
+			bind *.currentPageTitle -> @var(currentPageTitle)
+			bind *.titleCounterLocalizationString -> @var(titleCounterLocalizationString)
+			bind *.calEventCollection -> GetCalEventGlobalSettingAsset("mainIcon") -> IsEmpty -> NOT -> @var(mainIconDividerVisible)
+			bind *.calEventCollection -> GetCalEventGlobalSettingAsset("mainIcon") -> IsEmpty -> NOT -> @var(mainIconVisible)
+			bind *.calEventCollection -> GetCalEventGlobalSettingAsset("mainIcon") -> @var(mainIcon)
+			bind *.calEventCollection -> GetCalEventGlobalSettingBool("collectionLeftCornerHeaderBgBlur") -> @var(leftCornerHeaderBgBlur)
+			bind *.calEventCollection -> GetCalEventGlobalSettingFloat("collectionLeftCornerHeaderBGDarkening") -> @var(leftCornerHeaderBGDarkening)
+			bind *.calEventCollection -> GetCalEventGlobalSettingAsset("collectionLeftCornerHeaderBg") -> @var(leftCornerHeaderBg)
+			bind *.calEventCollection -> GetCalEventGlobalSettingVector("collectionLeftPanelEventNameColor") -> @var(leftCornerEventNameColor)
+			bind *.calEventCollection -> GetCalEventGlobalSettingVector("collectionLeftPanelTitleColor") -> @var(leftCornerTitleColor)
+			bind *.calEventCollection -> GetCalEventGlobalSettingVector("collectionLeftPanelTimeRemainingColor") -> @var(titleCounterColor)
+			bind *.calEventCollection -> GetCalEventGlobalSettingVector("collectionLeftPanelTimeRemainingColor") -> @var(titleCounterColor2)
+
+			size: <530, 140>
+		}
+
+		instance $"ui_rtk/menus/events/collection/components/collection_event_collection_items_box.rpak" CollectionItemsGrid
+		{
+			bind *.calEventCollection -> GetCalEventGlobalSettingBool("collectionGridBGBlur") -> @var(backgroundBlur)
+			bind *.calEventCollection -> GetCalEventGlobalSettingFloat("collectionGridBGDarkening") -> @var(backgroundBlurDarken)
+			bind *.calEventCollection -> GetCalEventGlobalSettingAsset("collectionGridBG") -> @var(backgroundAssetPath)
+
+			override @var(size) <535, 354>
+			override @var(size2) <535, 354>
+			override @var(itemSize) <84, 84>
+			override @var(itemSize2) <84, 84>
+			override @var(bindingPath) "*.collectedItemsModel"
+		}
+
+		instance $"ui_rtk/menus/events/collection/components/collection_event_completion_reward_box.rpak" ChaseItemProgress
+		{
+			bind *.chaseItemModel.visible -> @var(visible)
+			bind *.calEventCollection -> GetCalEventGlobalSettingBool("chaseItemBGBlur") -> @var(backgroundBlur)
+			bind *.calEventCollection -> GetCalEventGlobalSettingFloat("chaseItemBGDarkening") -> @var(backgroundBlurDarken)
+			bind *.calEventCollection -> GetCalEventGlobalSettingAsset("chaseItemBG") -> @var(backgroundAssetPath)
+			bind *.chaseItemModel.chaseItemTitleFormat -> @var(titleFormat)
+			bind *.chaseItemModel.chaseItemTitleArgs[0] -> @var(titleArg0)
+			bind *.chaseItemModel.chaseItemTitleArgs[1] -> @var(titleArg1)
+			bind *.chaseItemModel.tooltipInfo.titleText -> @var(tooltipTitle)
+			bind *.calEventCollection -> GetCalEventGlobalSettingVector("chaseItemProgressBarColor") -> @var(progressBarColor)
+			bind *.calEventCollection -> GetCalEventGlobalSettingVector("chaseItemProgressBarBGColor") -> @var(progressBarBGColor)
+			bind *.calEventCollection -> GetCalEventGlobalSettingVector("chaseItemProgressBarBorderColor") -> @var(progressBarBorderColor)
+			bind *.chaseItemModel.currentCollectedItems -> @var(progressBarValue)
+			bind *.chaseItemModel.totalItems -> @var(progressBarMaxValue)
+			bind *.chaseItemModel.chaseItemDescription -> @var(descriptionText)
+			bind *.chaseItemModel.chaseItemSubtitle -> @var(subtitleText)
+			bind *.calEventCollection -> GetCalEventGlobalSettingAsset("chaseItemFrame") -> @var(rewardFrameAssetPath)
+			bind *.chaseItemModel.icon -> @var(rewardImageAssetPath)
+			bind *.chaseItemModel.isOwned -> @var(rewardCheckmarkVisible)
+		}
+	}
+
+	panel RightContent
+	{
+		anchor: TOP_RIGHT
+		pivot: <1, 0>
+		offsets: <0, 0, 0, 0>
+		position: <0, 186>
+
+		behavior VerticalContainer
+		{
+			spacing: 30
+			fitContentHeight: true
+			fitContentWidth: true
+			alignment: TOP_RIGHT
+		}
+
+		panel BackgroundBlur
+		{
+			bind *.calEventCollection -> GetCalEventGlobalSettingBool("rightBGBlur") -> @this.visible
+
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+			behavior Image
+			{
+				imageBlur: ASSET
+			}
+
+			behavior ContainerElement
+			{
+				ignoreLayout: true
+			}
+		}
+
+		panel BackgroundBlurDarken
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+			behavior Image
+			{
+				bind *.calEventCollection -> GetCalEventGlobalSettingFloat("rightBGDarkening") -> @this.alpha
+				colorRGB: <0, 0, 0>
+			}
+
+			behavior ContainerElement
+			{
+				ignoreLayout: true
+			}
+		}
+
+		panel Background
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <-2, -2, -2, -2>
+
+			behavior Image
+			{
+				bind *.calEventCollection -> GetCalEventGlobalSettingAsset("rightBG") -> @this.assetPath
+			}
+
+			behavior ContainerElement
+			{
+				ignoreLayout: true
+			}
+		}
+
+		instance $"ui_rtk/menus/events/collection/components/collection_event_inspect.rpak" InspectDetails
+		{
+			bind *.detailsInfo.preTitle -> @var(preTitleLabel)
+			bind *.detailsInfo.quality -> QualityTextColor -> @var(preTitleLabelColor)
+			bind *.detailsInfo.title -> @var(titleLabel)
+			bind *.detailsInfo.subTitle -> @var(subTitleLabel)
+			bind *.detailsInfo.packDetailsVisible ->  @var(packDetailsVisible)
+			bind *.detailsInfo.prestigeSkinDetailsVisible ->  @var(prestigeSkinDetailsVisible)
+			bind *.detailsInfo.heirloomDetailsVisible ->  @var(heirloomDetailsVisible)
+			bind *.detailsInfo.artifactDetailsVisible ->  @var(artifactDetailsVisible)
+			bind *.detailsInfo.unlockWithDetailsVisible ->  @var(unlockWithDetailsVisible)
+			bind *.detailsInfo.isRestricted -> NOT ->  @var(packInfoVisible)
+			bind *.detailsInfo.packIcon -> @var(packAssetPath)
+			bind *.detailsInfo.packName -> @var(packLabel)
+			bind *.detailsInfo.price1 -> GreaterThan( 0 ) -> @var(price1Visible)
+			bind *.detailsInfo.coinIcon1 -> @var(price1AssetPath)
+			bind *.detailsInfo.price1 -> IntToFloat -> FormatAndLocalizeNumber( "1", true ) -> @var(price1Label)
+			bind *.detailsInfo.price2 -> GreaterThan( 0 ) -> @var(price2Visible)
+			bind *.detailsInfo.coinIcon2 -> @var(price2AssetPath)
+			bind *.detailsInfo.price2 -> IntToFloat -> FormatAndLocalizeNumber( "1", true ) -> @var(price2Label)
+
+			override @var(mythicTierBindingPath) "*.detailsInfo.mythicTiers"
+		}
+
+		panel EventPacksTitle
+		{
+			anchor: TOP_STRETCH_WIDTH
+			height: 24
+
+			behavior HorizontalContainer
+			{
+				fitContentHeight: false
+				fitContentWidth: false
+				alignment: CENTER
+				spacing: 20
+			}
+
+			panel ImageDivider
+			{
+				anchor: LEFT
+				pivot: <0, 0>
+				width: 140
+				height: 4
+
+				behavior Image
+				{
+					assetPath: $"ui_image/white.rpak"
+					colorRGB: <0.5, 0.5, 0.5>
+					alpha: 0.4
+				}
+			}
+
+			panel LabelPackName
+			{
+				anchor: LEFT
+
+				behavior Label
+				{
+					face: "TitleRegularFont"
+					text: "#COLLECTION_EVENT_PACKS"
+					textAlignHorizontal: LEFT
+					textAlignVertical: CENTER
+					horizontalMode: AUTOSIZE_TO_TEXT
+					pixelHeight: 24
+					color: <0.70, 0.70, 0.70, 1>
+					allCaps: true
+					outlineColorInner: <0, 0, 0, 0.5>
+					outlineColorOuter: <0, 0, 0, 0.8>
+					outlineWidth: 1
+				}
+			}
+
+			panel ImageDivider
+			{
+				anchor: LEFT
+				pivot: <0, 0>
+				width: 140
+				height: 4
+
+				behavior Image
+				{
+					assetPath: $"ui_image/white.rpak"
+					colorRGB: <0.5, 0.5, 0.5>
+					alpha: 0.4
+				}
+			}
+		}
+
+		panel EventPackOpenerHolder
+		{
+			anchor: TOP_LEFT
+			size: <535, 92>
+			inputListener: true
+
+			behavior Button
+
+			instance $"ui_rtk/common/buttons/loot_button.rpak" OpenPackButton
+			{
+				bind *.packModel.icon -> @var(icon)
+				bind *.packModel.packCountText -> @var(packCountText)
+				bind *.packModel.packTitleText -> @var(packTitleText)
+				bind *.packModel.packDescriptionText -> @var(packDescriptionText)
+				override @var(labelVisible) false
+				override @var(packContentVisible) true
+				override @var(backgroundSaturation) 1.0
+				override @var(backgroundLightness) 0
+				override @var(backgroundAlpha) 1.0
+				override @var(backgroundColor) #202020
+
+				anchor: TOP
+				position: <0, 0>
+				size: <310, 92>
+				pivot: <0.5, 0>
+			}
+		}
+
+		panel PurchaseButtonsContainer
+		{
+			bind *.isRestricted -> NOT -> @this.visible
+
+			anchor: TOP_STRETCH_WIDTH
+			pivot: <0, 0>
+			position: <0, 0>
+
+			behavior HorizontalContainer
+			{
+				fitContentHeight: true
+				fitContentWidth: false
+				spacing: 15
+				useLocaleDirection: true
+				alignment: TOP
+			}
+
+			panel GiftPackButtonContainer
+			{
+				bind *.giftButtonData.visible -> @this.visible
+
+				behavior VerticalContainer
+				{
+					spacing: 8
+					fitContentHeight: true
+					fitContentWidth: true
+					alignment: TOP
+				}
+
+				instance $"ui_rtk/common/buttons/base_button.rpak" GiftPackButton
+				{
+					bind *.giftButtonData.state -> GetGiftingButtonTitle -> @var( labelText )
+					bind *.giftButtonData.state -> GetGiftingButtonDescription -> @var( labelDescText )
+					bind *.giftButtonData.state -> IsGiftingButtonInteractable -> @this:Button.interactive
+
+					override @var(size) <230, 92>
+					override @var(labelPixelHeight) 32
+					override @var(labelDescPixelHeight) 24
+					override @var(labelHorizontalMode) SQUISH_TO_CONTAINER
+				}
+
+				panel GiftPackButtonDetails
+				{
+					anchor: TOP_STRETCH_WIDTH
+					pivot: <0.5, 0>
+					offsets: <0, 0, 0, 0>
+
+					behavior Label
+					{
+						face: "TitleRegularFont"
+						text: "#COLLECTION_GIFTING_DETAILS"
+						textAlignHorizontal: CENTER
+						textAlignVertical: TOP
+						horizontalMode: WRAP
+						pixelHeight: 24
+						color: <0.9, 0.9, 0.9, 1>
+						allCaps: true
+						outlineColorInner: <0, 0, 0, 0.5>
+						outlineColorOuter: <0, 0, 0, 0.8>
+						outlineWidth: 1
+					}
+				}
+			}
+
+			panel PurchasePackButtonContainer
+			{
+				bind *.purchaseButtonData.visible -> @this.visible
+
+				behavior VerticalContainer
+				{
+					spacing: 8
+					fitContentHeight: true
+					fitContentWidth: true
+					alignment: TOP
+				}
+
+				instance $"ui_rtk/common/buttons/base_button.rpak" PurchasePackButton
+				{
+					bind *.purchaseButtonData.interactive -> @this:Button.interactive
+					bind *.purchaseButtonData.title -> @var( labelText )
+					// TODO : R5DEV-601552 Instead of changing the value of "labelHorizontalMode" based on the "interactive" property we should have a better WRAP / SQUISH implementation for this cases.
+					bind *.purchaseButtonData.interactive -> PickIntFromTwo( 4, 2 ) -> @var( labelHorizontalMode ) // 4 SQUISH_TO_CONTAINER, 2 WRAP
+
+					override @var(size) <230, 92>
+					override @var(labelPixelHeight) 33
+				}
+
+				panel PurchasePackButtonDetails
+				{
+					bind *.purchaseButtonData.details -> @this:Label.text
+					bind *.purchaseButtonData.detailsVisible -> @this.visible
+
+					anchor: TOP_STRETCH_WIDTH
+					pivot: <0.5, 0>
+					offsets: <0, 0, 0, 0>
+
+					behavior Label
+					{
+						face: "TitleRegularFont"
+						text: ""
+						textAlignHorizontal: CENTER
+						textAlignVertical: TOP
+						horizontalMode: WRAP
+						pixelHeight: 24
+						color: <0.9, 0.9, 0.9, 1>
+						allCaps: true
+						outlineColorInner: <0, 0, 0, 0.5>
+						outlineColorOuter: <0, 0, 0, 0.8>
+						outlineWidth: 1
+					}
+				}
+			}
+		}
+
+		panel InfoButtonArea
+		{
+			inputListener: true
+			anchor: BOTTOM
+			position: <0, 0>
+			size: <535, 50>
+
+			behavior Button
+			{
+				soundHighlighted: "ui_menu_focus"
+				soundPressedEnabled: "ui_menu_accept"
+				transitions: [
+					{
+						fromState: ANY
+						toState: IDLE
+						type: TRANSITION_PROPERTY_SET
+						property: @panel/InfoButton:Image.colorRGB
+						value: <1, 1, 1>
+					},
+					{
+						fromState: ANY
+						toState: HIGHLIGHTED
+						type: TRANSITION_PROPERTY_SET
+						property: @panel/InfoButton:Image.colorRGB
+						value: #febb00
+					},
+					{
+						fromState: ANY
+						toState: PRESSED
+						type: TRANSITION_PROPERTY_SET
+						property: @panel/InfoButton:Image.colorRGB
+						value: #febb00
+					}
+				]
+			}
+
+			behavior ContainerElement
+			{
+				ignoreLayout: true
+			}
+
+			panel InfoButton
+			{
+				anchor: CENTER
+				size: <50, 50>
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/borders/gifting_more_info.rpak"
+				}
+			}
+		}
+	}
+}

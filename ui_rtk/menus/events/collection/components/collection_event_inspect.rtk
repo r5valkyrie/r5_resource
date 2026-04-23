@@ -1,0 +1,582 @@
+panel InspectDetails
+{
+	var size @this.size
+	var anchor @this.anchor
+	var preTitleLabel @this/Details/PreTitleLabel:Label.text
+	var preTitleLabelColor @this/Details/PreTitleLabel:Label.colorRGB
+	var titleLabel @this/Details/TitleLabel:Label.text
+	var subTitleLabel @this/Details/DescriptionLabel:Label.text
+	var packDetailsVisible @this/Details/PackDetails.visible
+	var prestigeSkinDetailsVisible @this/Details/PrestigeSkinDetails.visible
+	var heirloomDetailsVisible @this/Details/HeirloomDetails.visible
+	var artifactDetailsVisible @this/Details/ArtifactDetails.visible
+	var unlockWithDetailsVisible @this/Details/UnlockWithDetails.visible
+	var packInfoVisible @this/Details/UnlockWithDetails/HorizontalContainer/PackInfo.visible
+	var packAssetPath @this/Details/UnlockWithDetails/HorizontalContainer/PackInfo/Icon:Image.assetPath
+	var packLabel @this/Details/UnlockWithDetails/HorizontalContainer/PackInfo/Text:Label.text
+	var price1Visible @this/Details/UnlockWithDetails/HorizontalContainer/PriceInfo1.visible
+	var price1AssetPath @this/Details/UnlockWithDetails/HorizontalContainer/PriceInfo1/Icon:Image.assetPath
+	var price1Label @this/Details/UnlockWithDetails/HorizontalContainer/PriceInfo1/Text:Label.text
+	var price2Visible @this/Details/UnlockWithDetails/HorizontalContainer/PriceInfo2.visible
+	var price2AssetPath @this/Details/UnlockWithDetails/HorizontalContainer/PriceInfo2/Icon:Image.assetPath
+	var price2Label @this/Details/UnlockWithDetails/HorizontalContainer/PriceInfo2/Text:Label.text
+	var mythicTierBindingPath @this/Details/PrestigeSkinDetails/MythicTierBreakdown/ListBinder.bindingPath
+
+	size: <535, 380>
+	pivot: <0, 0>
+
+	panel Details
+	{
+		anchor: TOP_STRETCH_WIDTH
+		pivot: <0, 0>
+		position: <0, 0>
+		offsets: <20, 20, 0, 0>
+
+		behavior VerticalContainer
+		{
+			spacing: 12
+			fitContentHeight: true
+			fitContentWidth: false
+			alignment: TOP
+			paddingTop: 36
+		}
+
+		panel PreTitleLabel
+		{
+			anchor: TOP_STRETCH_WIDTH
+			pivot: <0, 0>
+			position: <0, 0>
+
+			behavior Label
+			{
+				face: "TitleBoldFont"
+				text: ""
+				textAlignHorizontal: CENTER
+				textAlignVertical: TOP
+				horizontalMode: WRAP
+				verticalMode: AUTOSIZE_TO_TEXT
+				pixelHeight: 21
+				color: <0.7, 0.9, 1, 1>
+				allCaps: true
+				outlineColorInner: <0, 0, 0, 0.5>
+				outlineColorOuter: <0, 0, 0, 0.8>
+				outlineWidth: 1
+			}
+		}
+
+		panel TitleLabel
+		{
+			anchor: TOP_STRETCH_WIDTH
+			pivot: <0, 0>
+			position: <0, 0>
+
+			behavior Label
+			{
+				face: "TitleBoldFont"
+				text: ""
+				textAlignHorizontal: CENTER
+				textAlignVertical: TOP
+				horizontalMode: WRAP
+				verticalMode: AUTOSIZE_TO_TEXT
+				pixelHeight: 34
+				color: <1, 1, 1, 1>
+				allCaps: true
+				outlineColorInner: <0, 0, 0, 0.5>
+				outlineColorOuter: <0, 0, 0, 0.8>
+				outlineWidth: 1
+			}
+		}
+
+		panel DescriptionLabel
+		{
+			anchor: TOP_STRETCH_WIDTH
+			pivot: <0, 0>
+			position: <0, 0>
+
+			behavior Label
+			{
+				face: "TitleRegularFont"
+				text: ""
+				textAlignHorizontal: CENTER
+				textAlignVertical: TOP
+				horizontalMode: WRAP
+				verticalMode: AUTOSIZE_TO_TEXT
+				pixelHeight: 21
+				color: <0.7, 0.7, 0.7, 1>
+				allCaps: false
+				outlineColorInner: <0, 0, 0, 0.5>
+				outlineColorOuter: <0, 0, 0, 0.8>
+				outlineWidth: 1
+			}
+		}
+
+		panel PackDetails
+		{
+			visible: false
+
+			anchor: TOP_STRETCH_WIDTH
+			pivot: <0, 0>
+
+			panel Details
+			{
+				anchor: TOP_STRETCH_WIDTH
+				pivot: <0, 0>
+				position: <0, 0>
+				offsets: <20, 20, 0, 0>
+
+				behavior VerticalContainer
+				{
+					spacing: 12
+					fitContentHeight: true
+					fitContentWidth: false
+					alignment: TOP
+					paddingTop: 32
+				}
+
+				panel DetailsLabel1
+				{
+					anchor: TOP_STRETCH_WIDTH
+					pivot: <0, 0>
+
+					behavior Label
+					{
+						face: "TitleRegularFont"
+						text: "#COLLECTION_EVENT_PACK_ITEMS_DESCRIPTION_1"
+						textAlignHorizontal: CENTER
+						textAlignVertical: TOP
+						horizontalMode: WRAP
+						verticalMode: AUTOSIZE_TO_TEXT
+						pixelHeight: 21
+						color: <0.80, 0.80, 0.80, 1>
+						allCaps: true
+						outlineColorInner: <0, 0, 0, 0.3>
+						outlineColorOuter: <0, 0, 0, 0.5>
+						outlineWidth: 1
+					}
+				}
+
+				panel DetailsLabel2
+				{
+					anchor: TOP_STRETCH_WIDTH
+					pivot: <0, 0>
+
+					behavior Label
+					{
+						face: "TitleRegularFont"
+						text: "#COLLECTION_EVENT_PACK_ITEMS_DESCRIPTION_2"
+						textAlignHorizontal: CENTER
+						textAlignVertical: TOP
+						horizontalMode: WRAP
+						verticalMode: AUTOSIZE_TO_TEXT
+						pixelHeight: 21
+						color: <0.70, 0.70, 0.70, 1>
+						allCaps: false
+						outlineColorInner: <0, 0, 0, 0.3>
+						outlineColorOuter: <0, 0, 0, 0.5>
+						outlineWidth: 1
+					}
+				}
+			}
+		}
+
+		panel PrestigeSkinDetails
+		{
+			visible: false
+
+			anchor: TOP_STRETCH_WIDTH
+			pivot: <0, 0>
+
+			behavior VerticalContainer
+			{
+				spacing: 12
+				paddingTop: 32
+				fitContentHeight: true
+				fitContentWidth: false
+				alignment: CENTER
+			}
+
+			panel TierLabel
+			{
+				bind *.detailsInfo.mythicTitle -> @this:Label.text
+
+				anchor: TOP_STRETCH_WIDTH
+				offsets: <20, 20, 0, 0>
+				pivot: <0, 0>
+
+				behavior Label
+				{
+					face: "TitleBoldFont"
+					text: ""
+					textAlignHorizontal: CENTER
+					textAlignVertical: TOP
+					horizontalMode: WRAP
+					verticalMode: AUTOSIZE_TO_TEXT
+					pixelHeight: 24
+					color: <1, 1, 1, 1>
+					allCaps: true
+					outlineColorInner: <0, 0, 0, 0.3>
+					outlineColorOuter: <0, 0, 0, 0.5>
+					outlineWidth: 1
+				}
+			}
+
+			panel MythicTierBreakdown
+			{
+				behavior HorizontalContainer
+				{
+					spacing: 6
+					fitContentHeight: true
+					fitContentWidth: true
+					alignment: CENTER
+				}
+
+				behavior ListBinder ListBinder
+				{
+					bindingPath: "*.detailsInfo.mythicTiers"
+					prefab: $"ui_rtk/menus/events/collection/components/collection_event_mythic_tier.rpak"
+				}
+			}
+
+			panel UnlockDetailsLabel
+			{
+				anchor: TOP_STRETCH_WIDTH
+				offsets: <20, 20, 0, 0>
+				pivot: <0, 0>
+
+				behavior Label
+				{
+					face: "TitleRegularFont"
+					text: "#COLLECTION_MYTHIC_LEVELUP_DETAILS"
+					textAlignHorizontal: CENTER
+					textAlignVertical: TOP
+					horizontalMode: WRAP
+					verticalMode: AUTOSIZE_TO_TEXT
+					pixelHeight: 21
+					color: <0.70, 0.70, 0.70, 1>
+					allCaps: false
+					outlineColorInner: <0, 0, 0, 0.3>
+					outlineColorOuter: <0, 0, 0, 0.5>
+					outlineWidth: 1
+				}
+			}
+		}
+
+		panel HeirloomDetails
+		{
+			visible: false
+
+			anchor: TOP_STRETCH_WIDTH
+			pivot: <0, 0>
+
+			behavior VerticalContainer
+			{
+				spacing: 12
+				paddingTop: 32
+				fitContentHeight: true
+				fitContentWidth: false
+				alignment: CENTER
+			}
+
+			panel TierLabel
+			{
+				anchor: TOP_STRETCH_WIDTH
+				offsets: <20, 20, 0, 0>
+				pivot: <0, 0>
+
+				behavior Label
+				{
+					face: "TitleBoldFont"
+					text: "#COLLECTION_EVENT_DETAILS_HEIRLOOM_TITLE"
+					textAlignHorizontal: CENTER
+					textAlignVertical: TOP
+					horizontalMode: WRAP
+					verticalMode: AUTOSIZE_TO_TEXT
+					pixelHeight: 24
+					color: <1, 1, 1, 1>
+					allCaps: true
+					outlineColorInner: <0, 0, 0, 0.3>
+					outlineColorOuter: <0, 0, 0, 0.5>
+					outlineWidth: 1
+				}
+			}
+
+			panel MythicTierBreakdown
+			{
+				behavior HorizontalContainer
+				{
+					spacing: 6
+					fitContentHeight: true
+					fitContentWidth: true
+					alignment: CENTER
+				}
+
+				behavior ListBinder ListBinder
+				{
+					bindingPath: "*.detailsInfo.mythicTiers"
+					prefab: $"ui_rtk/menus/events/collection/components/collection_event_mythic_tier.rpak"
+				}
+			}
+
+			panel UnlockDetailsLabel
+			{
+				anchor: TOP_STRETCH_WIDTH
+				offsets: <20, 20, 0, 0>
+				pivot: <0, 0>
+
+				behavior Label
+				{
+					face: "TitleRegularFont"
+					text: "#COLLECTION_EVENT_DETAILS_HEIRLOOM_DESCRIPTION"
+					textAlignHorizontal: CENTER
+					textAlignVertical: TOP
+					horizontalMode: WRAP
+					verticalMode: AUTOSIZE_TO_TEXT
+					pixelHeight: 21
+					color: <0.70, 0.70, 0.70, 1>
+					allCaps: false
+					outlineColorInner: <0, 0, 0, 0.3>
+					outlineColorOuter: <0, 0, 0, 0.5>
+					outlineWidth: 1
+				}
+			}
+		}
+
+		panel ArtifactDetails
+		{
+			visible: false
+			anchor: TOP_STRETCH_WIDTH
+			pivot: <0, 0>
+
+			behavior VerticalContainer
+			{
+				spacing: 12
+				paddingTop: 32
+				fitContentHeight: true
+				fitContentWidth: false
+				alignment: CENTER
+			}
+
+			panel Label
+			{
+				anchor: TOP_STRETCH_WIDTH
+				offsets: <20, 20, 0, 0>
+				pivot: <0, 0>
+
+				behavior Label
+				{
+					face: "TitleRegularFont"
+					text: "Artifact Details Placeholder"
+					textAlignHorizontal: CENTER
+					textAlignVertical: TOP
+					horizontalMode: WRAP
+					verticalMode: AUTOSIZE_TO_TEXT
+					pixelHeight: 21
+					color: <0.70, 0.70, 0.70, 1>
+					allCaps: false
+					outlineColorInner: <0, 0, 0, 0.3>
+					outlineColorOuter: <0, 0, 0, 0.5>
+					outlineWidth: 1
+				}
+			}
+		}
+
+		panel UnlockWithDetails
+		{
+			anchor: TOP_STRETCH_WIDTH
+			pivot: <0, 0>
+
+			behavior VerticalContainer
+			{
+				spacing: 12
+				paddingTop: 32
+				fitContentHeight: true
+				fitContentWidth: false
+				useLocaleDirection: true
+				alignment: TOP
+			}
+
+			panel Title
+			{
+				anchor: TOP
+				pivot: <0, 0>
+
+				behavior Label
+				{
+					text: "#COLLECTION_EVENT_UNLOCK_WITH"
+					face: "TitleRegularFont"
+					pixelHeight: 21
+					colorRGB: <0.8, 0.8, 0.8>
+					outlineWidth: 1
+					outlineColorInner: <0, 0, 0, 0.8>
+					outlineColorOuter: <0, 0, 0, 0>
+					textAlignHorizontal: CENTER
+					textAlignVertical: TOP
+					horizontalMode: AUTOSIZE_TO_TEXT
+					verticalMode: AUTOSIZE_TO_TEXT
+					allcaps: true
+					useLocaleDirection: true
+				}
+			}
+
+			panel HorizontalContainer
+			{
+				anchor: TOP
+				pivot: <0, 0>
+
+				behavior HorizontalContainer
+				{
+					spacing: 8
+					fitContentHeight: false
+					fitContentWidth: true
+					useLocaleDirection: true
+					alignment: TOP
+				}
+
+				panel PackInfo
+				{
+
+					width: 224
+					height: 124
+
+					behavior VerticalContainer
+					{
+						spacing: 16
+						paddingBottom: 12
+						alignment: BOTTOM
+						fitContentHeight: false
+						fitContentWidth: false
+					}
+
+					behavior Image
+					{
+						colorRGB: <0.33, 0.33, 0.33>
+						alpha: 0.5
+						assetPath: $"ui_image/rui/borders/menu_border_button.rpak"
+					}
+
+					panel Icon
+					{
+						size: <48, 48>
+
+						behavior Image
+					}
+
+					panel Text
+					{
+						behavior Label
+						{
+							text: "EVENT PACK"
+							face: "TitleBoldFont"
+							pixelHeight: 20
+							colorRGB: <1, 1, 1>
+							outlineColorInner: <0, 0, 0, 0.8>
+							outlineColorOuter: <0, 0, 0, 0>
+							textAlignHorizontal: CENTER
+							textAlignVertical: TOP
+							horizontalMode: AUTOSIZE_TO_TEXT
+							verticalMode: AUTOSIZE_TO_TEXT
+							allcaps: true
+							useLocaleDirection: true
+						}
+					}
+				}
+
+				panel PriceInfo1
+				{
+					width: 112
+					height: 124
+
+					behavior VerticalContainer
+					{
+						spacing: 16
+						paddingBottom: 12
+						alignment: BOTTOM
+						fitContentHeight: false
+						fitContentWidth: false
+					}
+
+					behavior Image
+					{
+						colorRGB: <0.33, 0.33, 0.33>
+						alpha: 0.5
+						assetPath: $"ui_image/rui/borders/menu_border_button.rpak"
+					}
+
+					panel Icon
+					{
+						size: <48, 48>
+
+						behavior Image
+					}
+
+					panel Text
+					{
+						behavior Label
+						{
+							text: "8,888"
+							face: "TitleBoldFont"
+							pixelHeight: 20
+							colorRGB: <1, 1, 1>
+							outlineColorInner: <0, 0, 0, 0.8>
+							outlineColorOuter: <0, 0, 0, 0>
+							textAlignHorizontal: CENTER
+							textAlignVertical: TOP
+							horizontalMode: WRAP
+							verticalMode: AUTOSIZE_TO_TEXT
+							allcaps: true
+							useLocaleDirection: true
+						}
+					}
+				}
+
+				panel PriceInfo2
+				{
+					width: 112
+					height: 124
+
+					behavior VerticalContainer
+					{
+						spacing: 16
+						paddingBottom: 12
+						alignment: BOTTOM
+						fitContentHeight: false
+						fitContentWidth: false
+					}
+
+					behavior Image
+					{
+						colorRGB: <0.33, 0.33, 0.33>
+						alpha: 0.5
+						assetPath: $"ui_image/rui/borders/menu_border_button.rpak"
+					}
+
+					panel Icon
+					{
+						size: <48, 48>
+
+						behavior Image
+					}
+
+					panel Text
+					{
+						behavior Label
+						{
+							text: "8,888"
+							face: "TitleBoldFont"
+							pixelHeight: 20
+							colorRGB: <1, 1, 1>
+							outlineColorInner: <0, 0, 0, 0.8>
+							outlineColorOuter: <0, 0, 0, 0>
+							textAlignHorizontal: CENTER
+							textAlignVertical: TOP
+							horizontalMode: WRAP
+							verticalMode: AUTOSIZE_TO_TEXT
+							allcaps: true
+							useLocaleDirection: true
+						}
+					}
+				}
+			}
+		}
+	}
+}

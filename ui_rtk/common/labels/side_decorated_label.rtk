@@ -1,0 +1,55 @@
+panel SideDecoratedLabel
+{
+	bind root
+	var pixelHeight @this/Text:Label.pixelHeight
+	var text @this/Text:Label.text
+	var textColorRGB @this/Text:Label.colorRGB
+	var textAlpha @this/Text:Label.alpha
+	var textFace @this/Text:Label.face
+	var lineColorRGB @this/Decoration:Image.colorRGB
+	var lineAlpha @this/Decoration:Image.alpha
+	var width @this/Text.width
+
+	anchor: CENTER
+	offsets: <0, 0, 0, 0>
+	pivot: <0.5, 0.5>
+
+	behavior HorizontalContainer
+	{
+		fitContentWidth: true
+		fitContentHeight: true
+		alignment: LEFT
+		spacing: 15
+		useLocaleDirection: true
+	}
+
+	panel Decoration
+	{
+		bind @root/Text.height -> Add(10) -> @this.height
+		offsets: <0, 0, 0, 0>
+		width: 6
+		behavior Image
+		{
+			color: #959595 //Grey
+		}
+	}
+
+	panel Text
+	{
+		pivot: <0, 0.5>
+		anchor: LEFT
+		behavior Label
+		{
+			bind * -> @this.text
+
+			face: "DefaultRegularFont"
+			text: "This is some super generic testing text"
+			textAlignHorizontal: LEFT
+			horizontalMode: WRAP
+			verticalMode: AUTOSIZE_TO_TEXT
+			useLocaleDirection: true
+			pixelHeight: 24
+			color: #959595 //Grey
+		}
+	}
+}

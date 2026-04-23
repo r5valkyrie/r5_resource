@@ -1,0 +1,218 @@
+instance $"ui_rtk/common/buttons/base_button.rpak" GiftingOptionsButton
+{
+	bind @this.visible -> @this.inputListener
+	bind @this.active -> @this.inputListener
+
+	var title @this/TextContent/TitleText:Label.text
+	var description @this/TextContent/DescriptionText:Label.text
+	var notification @this/TextContent/NotificationText:Label.text
+	var interactive @this:Button.interactive
+	var color @this/TopTab:Image.colorRGB
+
+	override @var(lineHeight) 20
+
+	pivot: <0, 0>
+	size: <320, 200>
+	inputListener: true
+
+	// TopTab transitions
+	append @this:Button.transitions
+	{
+		fromState: ANY
+		toState: IDLE
+		type: TRANSITION_PROPERTY_SET
+		property: @owner.panel/TopTab:Image.colorRGB
+		value: #COLOR_WHITE_1
+	}
+
+	append @this:Button.transitions
+	{
+		fromState: ANY
+		toState: HIGHLIGHTED
+		type: TRANSITION_PROPERTY_SET
+		property: @owner.panel/TopTab:Image.colorRGB
+		value: #FF4E1D
+	}
+
+	append @this:Button.transitions
+	{
+		fromState: ANY
+		toState: NON_INTERACTIVE
+		type: TRANSITION_PROPERTY_SET
+		property: @owner.panel/TopTab:Image.colorRGB
+		value: #7d7e7f
+	}
+
+	append @this:Button.transitions
+	{
+		fromState: NON_INTERACTIVE
+		toState: ANY
+		type: TRANSITION_PROPERTY_SET
+		property: @owner.panel/TopTab:Image.colorRGB
+		value: #FF4E1D
+	}
+
+	// Title transitions
+	append @this:Button.transitions
+	{
+		fromState: ANY
+		toState: IDLE
+		type: TRANSITION_PROPERTY_SET
+		property: @owner.panel/TextContent/TitleText:Label.colorRGB
+		value: #COLOR_WHITE_1
+	}
+
+	append @this:Button.transitions
+	{
+		fromState: ANY
+		toState: HIGHLIGHTED
+		type: TRANSITION_PROPERTY_SET
+		property: @owner.panel/TextContent/TitleText:Label.colorRGB
+		value: #COLOR_WHITE_1
+	}
+
+	append @this:Button.transitions
+	{
+		fromState: ANY
+		toState: NON_INTERACTIVE
+		type: TRANSITION_PROPERTY_SET
+		property: @owner.panel/TextContent/TitleText:Label.colorRGB
+		value: #7d7e7f
+	}
+
+	append @this:Button.transitions
+	{
+		fromState: NON_INTERACTIVE
+		toState: ANY
+		type: TRANSITION_PROPERTY_SET
+		property: @owner.panel/TextContent/TitleText:Label.colorRGB
+		value: #COLOR_WHITE_1
+	}
+
+	// Description transitions
+	append @this:Button.transitions
+	{
+		fromState: ANY
+		toState: IDLE
+		type: TRANSITION_PROPERTY_SET
+		property: @owner.panel/TextContent/DescriptionText:Label.colorRGB
+		value: #COLOR_WHITE_1
+	}
+
+	append @this:Button.transitions
+	{
+		fromState: ANY
+		toState: HIGHLIGHTED
+		type: TRANSITION_PROPERTY_SET
+		property: @owner.panel/TextContent/DescriptionText:Label.colorRGB
+		value: #COLOR_WHITE_1
+	}
+
+	append @this:Button.transitions
+	{
+		fromState: ANY
+		toState: NON_INTERACTIVE
+		type: TRANSITION_PROPERTY_SET
+		property: @owner.panel/TextContent/DescriptionText:Label.colorRGB
+		value: #7d7e7f
+	}
+
+	append @this:Button.transitions
+	{
+		fromState: NON_INTERACTIVE
+		toState: ANY
+		type: TRANSITION_PROPERTY_SET
+		property: @owner.panel/TextContent/DescriptionText:Label.colorRGB
+		value: #COLOR_WHITE_1
+	}
+
+	panel TopTab
+	{
+		anchor: TOP
+		size: <222, 14>
+		pivot: <0.5, 0>
+		offsets: <0, 0, 0, 0>
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/common/white_trapezoid_filL.rpak"
+			color: #FF4E1D
+		}
+	}
+
+	panel TextContent
+	{
+		anchor: CENTER_STRETCH_WIDTH
+		offsets: <0, 0, 0, 0>
+
+		behavior VerticalContainer
+		{
+			alignment: CENTER
+			fitContentHeight: true
+			fitContentWidth: true
+			spacing: 10
+		}
+
+		panel TitleText
+		{
+			anchor: CENTER
+			offsets: <20, 50, 0, 0>
+
+			behavior Label
+			{
+				face: "TitleBoldFont"
+				text: ""
+				textAlignHorizontal: LEFT
+				textAlignVertical: CENTER
+				horizontalMode: AUTOSIZE_TO_TEXT
+				verticalMode: AUTOSIZE_TO_TEXT
+				pixelHeight: 34
+				color: <1, 1, 1, 1>
+				allCaps: true
+				margin: <2, 0, 0, 0>
+				useLocaleDirection: true
+			}
+		}
+
+		panel DescriptionText
+		{
+			anchor: CENTER
+			offsets: <20, 50, 0, 0>
+
+			behavior Label
+			{
+				face: "TitleRegularFont"
+				text: ""
+				textAlignHorizontal: LEFT
+				textAlignVertical: CENTER
+				horizontalMode: AUTOSIZE_TO_TEXT
+				verticalMode: AUTOSIZE_TO_TEXT
+				pixelHeight: 23
+				color: <1, 1, 1, 1>
+				allCaps: true
+				margin: <2, 0, 0, 0>
+				useLocaleDirection: true
+			}
+		}
+
+		panel NotificationText
+		{
+			size: <100, 1>
+			behavior Label
+			{
+				face: "TitleRegularFont"
+				colorRGB: #COLOR_RED_1
+				pixelHeight: 18
+	            textAlignHorizontal: CENTER
+	            textAlignVertical: CENTER
+		        horizontalMode: OVERFLOW
+		        verticalMode: OVERFLOW
+		        text: ""
+		        margin: <0, 0, 0, -60>
+			}
+			behavior ContainerElement
+			{
+				verticalAlignOverride: CENTER
+			}
+		}
+	}
+}

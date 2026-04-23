@@ -1,0 +1,84 @@
+panel DividerHeader
+{
+	bind root
+	var titleText @this/Text:Label.text
+	var textPixelHeight @this/Text:Label.pixelHeight
+	var lineHeight @this/HeaderLeft.height
+	var lineColor @this/HeaderLeft:Image.color
+
+	anchor: CENTER
+	pivot: <0.5, 0.0>
+
+	behavior HorizontalContainer
+	{
+		fitContentHeight: true
+		expandToFillEvenly: true
+		spacing: 25
+		alignment: LEFT
+	}
+
+	panel HeaderLeft
+	{
+		anchor: CENTER
+
+		size: <460,24>
+		position: <300, 10>
+		pivot: <0.5, 0.0>
+
+		behavior Image
+		{
+			color: <0, 0, 0, 0>
+			assetPath: $"ui_image/rui/menu/store/feature_headline_left.rpak"
+		}
+		behavior ContainerElement
+		{
+			verticalAlignOverride: BOTTOM
+		}
+	}
+
+	panel Text
+	{
+		size: <430, 38>
+		anchor: CENTER
+
+		behavior Label
+		{
+			text: "Default Text"
+			face: "TitleBoldFont"
+			pixelHeight: 38
+			textAlignHorizontal: CENTER
+			textAlignVertical: CENTER
+			allcaps: true
+
+			horizontalMode: AUTOSIZE_TO_TEXT
+			verticalMode: AUTOSIZE_TO_TEXT
+		}
+
+		behavior ContainerElement
+		{
+			autosizeToLabelWidth: true
+			verticalAlignOverride: CENTER
+		}
+	}
+
+	panel HeaderRight
+	{
+		bind @root/HeaderLeft.height -> @this.height
+		bind @root/HeaderLeft:Image.color -> @this:Image.color
+
+		anchor: CENTER
+		size: <460,24>
+		position: <0, 10>
+		pivot: <0.5, 0.0>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/store/feature_headline_left.rpak"
+			flipHorizontal: true
+		}
+		behavior ContainerElement
+		{
+			verticalAlignOverride: BOTTOM
+		}
+	}
+}

@@ -1,0 +1,19 @@
+instance $"ui_rtk/common/buttons/offer_button.rpak" OfferButton
+{
+	override bind root "*"
+
+	bind *.gridItemType -> GetGradientAssetFromGridItemType -> @this/Background/Gradient:Image.assetPath
+	bind *.gridItemType -> GetLoadAssetFromGridItemType -> @this/Background/Offer:ExternalImage.fallbackImage
+	bind *.offerIndex -> @this:OfferButton.offerIndex
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	behavior OfferButton
+	{
+		bind *.slotIndex -> @this.slotIndex
+
+		buttonBehavior: @panel:Button
+		purchaseLimitParent: @panel/Description/TopLines
+	}
+}

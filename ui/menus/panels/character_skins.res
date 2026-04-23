@@ -45,24 +45,6 @@
         pin_to_sibling_corner	TOP_RIGHT
     }
 
-	MythicSkinInfo
-	{
-		ControlName             RuiPanel
-		xpos                    -96
-		ypos                    -143
-		zpos                    0
-		wide                    308
-		wide_nx_handheld        380		[$NX || $NX_UI_PC]
-		tall                    250
-		tall_nx_handheld        370		[$NX || $NX_UI_PC]
-		rui                     "ui/character_mythin_skin_info.rpak"
-		visible                 0
-
-		pin_to_sibling			PanelFrame
-		pin_corner_to_sibling	TOP_RIGHT
-		pin_to_sibling_corner	TOP_RIGHT
-	}
-
     MythicSkinLeftButton
     {
         ControlName             RuiButton
@@ -228,24 +210,6 @@
 	}
 
                          
-    EquipMeleeSkinButton
-    {
-        ControlName             RuiButton
-        wide                    280
-		wide_nx_handheld		330 		[$NX || $NX_UI_PC]
-        tall                    110
-		tall_nx_handheld		170			[$NX || $NX_UI_PC]
-        ypos                    32
-        rui                     "ui/melee_equip_button.rpak"
-        labelText               ""
-        visible                 1
-        cursorVelocityModifier  0.7
-        rightClickEvents		1
-
-        pin_to_sibling			ActionButton
-        pin_corner_to_sibling	BOTTOM_RIGHT
-        pin_to_sibling_corner	TOP_RIGHT
-    }
      
                        
      

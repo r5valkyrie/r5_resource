@@ -1,0 +1,260 @@
+panel ApexCupsLeaderboard
+{
+	size: <1920, 1080>
+    anchor: CENTER
+    offsets: <0, 0, 0, 0>
+
+    behavior ApexCupLeaderboard
+	{
+		LeaderBoardRowsList: @panel/Border/Leaderboard/LeaderboardRows
+		infoButton: @panel/InfoButton:Button
+	}
+
+	panel Border
+	{
+		anchor: TOP
+		pivot: <0.5, 0>
+		position: <0, 270>
+		offsets: <0, 0, 0, 0>
+		size: <1620, 584>
+
+		panel tierInfo
+		{
+			anchor: TOP
+			pivot: <0.5, 1.0>
+			height: 150
+
+			behavior HorizontalContainer
+			{
+				fitContentWidth: true
+				fitContentHeight: false
+				alignment: CENTER
+				spacing: 50
+				useLocaleDirection: true
+			}
+
+			instance $"ui_rtk/menus/game_modes/apex_cups/components/apex_cup_tier_progress.rpak" tierProgress
+			{
+				pivot: <0.5, 0.5>
+
+				panel PositionText
+				{
+					anchor: CENTER
+					pivot: <0.5, 0.5>
+
+					behavior VerticalContainer
+					{
+						spaceEvenly: true
+						fitContentWidth: true
+						fitContentHeight: true
+						paddingTop: 14
+						useLocaleDirection: true
+					}
+
+					panel HeaderSting
+					{
+						anchor: LEFT
+						pivot: <0.5, 0.5>
+						position: <0, 0>
+
+						behavior Label
+						{
+							bind &menus.apexCups.cupCalEvent -> CalEventFinished -> PickStringFromTwo( "#CUPS_LEADERBOARD_CURRENTPOS" , "#CUPS_LEADERBOARD_FINALPOS" ) -> @this.text
+
+							verticalMode: AUTOSIZE_TO_TEXT
+							HorizontalMode: AUTOSIZE_TO_TEXT
+							useLocaleDirection: true
+							pixelHeight: 32
+							face: "DefaultBoldFont"
+							margin: <0, 0, 0, 0>
+							colorRGB: #COLOR_GREY_2
+							shadowAlpha: 0.6
+							shadowBlur: 6.0
+							allCaps: true
+							text: "#CUPS_LEADERBOARD_CURRENTPOS"
+						}
+					}
+
+					panel ValueSting
+					{
+						anchor: CENTER
+						pivot: <0.5, 0.5>
+						position: <0, 0>
+
+						behavior FormatLabel
+						{
+							bind &menus.apexCups.tierInfo.currentPoints -> LessThanOrEqual(0) -> PickStringFromTwo( "#CUPS_LEADERBOARD_TOPPOS_VAL" , "#CUPS_LEADERBOARD_EMPTY_DATA" ) -> IfTrueSwapString( &menus.apexCups.tierInfo.isTop100, "#CUPS_LEADERBOARD_PLACEMENT_VAL" ) -> @this.format
+							bind &menus.apexCups.tierInfo.positionPercentage  -> @this.arg1
+
+							verticalMode: AUTOSIZE_TO_TEXT
+							HorizontalMode: AUTOSIZE_TO_TEXT
+							useLocaleDirection: true
+							pixelHeight: 48
+							face: "DefaultBoldFont"
+							margin: <0, 0, 0, 0>
+							color: <1, 1, 1, 1>
+							shadowAlpha: 0.6
+							shadowBlur: 6.0
+							allCaps: true
+							format: "#CUPS_LEADERBOARD_TOPPOS_VAL"
+							arg1: 100
+						}
+					}
+				}
+			}
+		}
+
+		behavior Image
+		{
+			color: <0.57, 0.57, 0.57, 1.0> //grey
+			assetPath: $"ui_image/rui/menu/apex_rumble/borders/apex_cups_leaderboard.rpak"
+		}
+
+		panel Background
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+			behavior Image
+			{
+				color: <0.6, 0.6, 0.6, 1.0>
+				assetPath: $"ui_image/rui/menu/apex_rumble/borders/apex_cups_leaderboard_BG.rpak"
+				imageBlur: ASSETMASK
+			}
+
+			panel InfoString
+			{
+				bind &menus.apexCups.cupCalEvent -> CalEventStarted -> NOT -> @this.visible
+				anchor: CENTER
+				pivot: <0.5, 0.5>
+				position: <0, 0>
+
+				behavior Label
+				{
+					verticalMode: AUTOSIZE_TO_TEXT
+					HorizontalMode: AUTOSIZE_TO_TEXT
+					pixelHeight: 28
+					face: "TitleRegularFont"
+					margin: <0, 0, 0, 0>
+					color: <1, 1, 1, 1>
+					text: "#CUPS_LEADERBOARD_NOT_STARTED"
+				}
+			}
+		}
+
+		panel Leaderboard
+		{
+			bind &menus.apexCups.cupCalEvent -> CalEventStarted -> @this.visible
+
+			anchor: TOP_LEFT
+			width: 1110
+			pivot: <0, 0>
+			useLocaleDirection: true
+
+			behavior VerticalContainer
+			{
+				spaceEvenly: true
+				fitContentHeight: true
+				paddingLeft: 46
+				paddingRight: 24
+				paddingTop: 10
+				useLocaleDirection: true
+			}
+
+			panel LeaderboardHeaders
+			{
+				anchor: TOP_STRETCH_WIDTH
+				height: 57
+				width: 1060
+
+				panel HeaderSting
+				{
+					anchor: TOP_LEFT
+					pivot: <0, 0>
+					position: <0, 0>
+
+					behavior Label
+					{
+						bind &menus.apexCups.headerString -> @this.text
+
+						verticalMode: AUTOSIZE_TO_TEXT
+						HorizontalMode: AUTOSIZE_TO_TEXT
+						pixelHeight: 28
+						face: "DefaultBoldFont"
+						margin: <0, 0, 12, 14>
+						color: <1, 1, 1, 1>
+						allCaps: true
+						text: "#CUPS_LEADERBOARD_HEADER"
+					}
+				}
+
+				panel HeaderSting
+				{
+					anchor: TOP_RIGHT
+					pivot: <1, 0>
+					position: <0, 0>
+
+					behavior Label
+					{
+						verticalMode: AUTOSIZE_TO_TEXT
+						HorizontalMode: AUTOSIZE_TO_TEXT
+						pixelHeight: 28
+						face: "DefaultBoldFont"
+						margin: <0, 0, 12, 14>
+						color: <1, 1, 1, 1>
+						allCaps: true
+						text: "#CUPS_LEADERBOARD_HEADER_POINTS"
+					}
+				}
+			}
+
+			panel LeaderboardRows
+			{
+				anchor: CENTER
+				pivot: <0.5, 1>
+				position: <0, 20>
+
+				behavior VerticalContainer
+				{
+					expandToFillEvenly: false
+					spaceEvenly: false
+					spacing: 2
+
+					fitContentWidth: true
+					fitContentHeight: true
+
+					alignment: CENTER
+				}
+
+				behavior ListBinder
+				{
+					bindingPath: "&menus.apexCups.rows"
+					prefab: $"ui_rtk/menus/game_modes/apex_cups/components/apex_cup_leaderboard_row.rpak"
+				}
+			}
+		}
+
+		panel SquadStats
+		{
+			anchor: TOP_RIGHT
+			pivot: <1.0, 0.0>
+			useLocaleDirection: true
+
+			behavior PrefabInstantiator
+			{
+				bindingPath: "&menus.apexCups"
+				prefabArray: [
+					$"ui_rtk/menus/game_modes/apex_cups/components/squad_stats_table.rpak"
+				]
+				bind &menus.apexCups.showStatTable -> @this.prefabIndex
+			}
+		}
+	}
+
+	instance $"ui_rtk/menus/game_modes/apex_cups/components/info_button.rpak" InfoButton
+	{
+		anchor: BOTTOM_RIGHT
+		position: <-118, -112>
+	}
+}
+
+

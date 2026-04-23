@@ -1,0 +1,294 @@
+panel EventShopBadgeReward
+{
+	bind root
+
+	bind * -> IndexOfElementInArray -> TierXPosition( -90 ) -> @this.positionX
+	bind * -> IndexOfElementInArray -> TierYPosition( -174 ) -> @this.positionY
+
+	anchor: BOTTOM_RIGHT
+	pivot: <1, 1>
+	position: <0, 0>
+	size: <360, 168>
+	offsets: <0, 90, 0, 0>
+	inputListener: true
+
+	behavior Button
+	{
+		soundHighlighted: "ui_menu_focus"
+		soundPressedEnabled: "ui_menu_accept"
+	}
+
+	behavior ToolTip RewardInfo
+	{
+		bind &menus.eventShop.tooltipInfo.titleText -> @this.varOverrides.titleText
+		bind &menus.eventShop.tooltipInfo.bodyText -> @this.varOverrides.bodyText
+		bind *.isLocked -> NOT -> @this.varOverrides.isIconVisible
+		bind &common.activeEvents.events[0].tooltipsColor -> [
+			@this.varOverrides.titleColor,
+			@this.varOverrides.bodyTextAltColor,
+			@this.varOverrides.iconColor
+		]
+
+		prefab: $"ui_rtk/common/tooltips/base_tooltip.rpak"
+		offset: <32, -68>
+		delay: 0
+
+		varOverrides: {
+			// defaults
+			titleText: ""
+			bodyText: ""
+			isIconVisible: true
+			titleColor: #ffffff
+			bodyTextAltColor: #ffffff
+			iconColor: #ffffff
+
+			// overrides
+			isSubtitleVisible: false
+			isAdditionalTextVisible: false
+			actionText: "#EVENTS_EVENT_SHOP_MILESTONE_ACTION"
+			icon: $"ui_image/rui/menu/buttons/checked.rpak"
+		}
+	}
+
+	panel BackgroundPlate
+	{
+		anchor: LEFT
+		pivot: <0, 0.5>
+		size: <360, 168>
+
+		panel BackgroundPlateFill
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				bind *.isLocked -> PickFloatFromTwo( 0.7, 0.3 ) -> @this.alpha
+
+				colorRGB: <0, 0, 0>
+				assetPath: $"ui_image/rui/menu/events/event_shop/milestone_container_fill.rpak"
+			}
+		}
+
+		panel BackgroundPlateDetails
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				bind *.isLocked -> PickFloatFromTwo( 1.0, 0.3 ) -> @this.alpha
+
+				colorRGB: <0.6, 0.6, 0.6>
+				assetPath: $"ui_image/rui/menu/events/event_shop/milestone_container.rpak"
+			}
+		}
+	}
+
+	panel Milestone
+	{
+		anchor: LEFT
+		pivot: <0.5, 0.5>
+		size: <32, 32>
+
+		panel Meter
+		{
+			bind * -> IndexOfElementInArray -> Equal( 0 ) -> NOT -> @this.visible
+			bind * -> IndexOfElementInArray -> IsEven -> PickFloatFromTwo( 0, -90 ) -> @this.positionX
+
+			anchor: CENTER
+			pivot: <0.5, 0>
+			size: <100, 148>
+			positionY: 13
+
+			panel Empty
+			{
+				bind *.isLocked -> @this.visible
+
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <0, 0, 0, 0>
+
+				behavior Image
+				{
+					bind * -> IndexOfElementInArray -> IsEven -> @this.flipHorizontal
+
+					colorRGB: <0.4, 0.4, 0.4>
+					assetPath: $"ui_image/rui/menu/events/event_shop/milestone_meter_bend.rpak"
+				}
+			}
+
+			panel Filled
+			{
+				bind *.isLocked -> NOT -> @this.visible
+
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <0, 0, 0, 0>
+
+				behavior Image
+				{
+					bind * -> IndexOfElementInArray -> IsEven -> @this.flipHorizontal
+					bind &common.activeEvents.events[0].barsColor -> @this.colorRGB
+
+					colorRGB: <0.4, 0.4, 0.4>
+					assetPath: $"ui_image/rui/menu/events/event_shop/milestone_meter_bend.rpak"
+				}
+			}
+		}
+
+		panel Check
+		{
+			bind * -> IndexOfElementInArray -> IsEven -> PickFloatFromTwo( -46, -44 ) -> @this.positionX
+
+			anchor: CENTER
+			size: <26, 26>
+
+			behavior Image
+			{
+				bind *.isLocked -> PickAssetFromTwo( $"ui_image/rui/menu/events/event_shop/milestone_step_checked.rpak", $"ui_image/rui/menu/events/event_shop/milestone_step_empty.rpak") -> @this.assetPath
+				bind *.isLocked -> PickVectorFromTwo( <0.7, 0.7, 0.7>, <0.4, 0.4, 0.4> ) -> @this.colorRGB
+			}
+		}
+	}
+
+	panel Badge
+	{
+		anchor: LEFT
+		size: <168, 168>
+		pivot: <0, 0.5>
+		positionX: 6
+
+		behavior Image
+		{
+			bind *.badgeIcon -> @this.assetPath
+			bind *.isLocked -> PickFloatFromTwo( 1.0, 0.2 ) -> @this.alpha
+		}
+	}
+
+	panel ProgressionIconText
+	{
+		bind *.isLocked -> @this.visible
+
+		anchor: RIGHT
+		size: <156, 16>
+		pivot: <1, 1>
+		position: <-20, 0>
+
+		behavior HorizontalContainer
+		{
+			alignment: LEFT
+			padding: <0, 0, 0, 0>
+			fitContentHeight: true
+			spacing: 5
+		}
+
+		panel CurrencyIcon
+		{
+			anchor: RIGHT
+			pivot: <0, 0.5>
+			size: <30, 30>
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				bind &common.activeEvents.events[0].currencyIcon -> @this.assetPath
+
+				colorRGB: <0.7, 0.7, 0.7>
+			}
+		}
+
+		panel ProgressionText
+		{
+			anchor: LEFT
+			pivot: <0, 0.5>
+			height: 30
+			offsets: <5, 0, 0, 0>
+
+			behavior Label
+			{
+				bind *.unlockValue -> IntToFloat -> FormatAndLocalizeNumber( "1", true ) -> @this.text
+
+				face: "DefaultBoldFont"
+				pixelHeight: 28
+				colorRGB: <0.7, 0.7, 0.7>
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				horizontalMode: AUTOSIZE_TO_TEXT
+				allCaps: true
+			}
+		}
+	}
+
+	panel CompletedText
+	{
+		bind *.isLocked -> NOT -> @this.visible
+
+		anchor: RIGHT
+		size: <157, 16>
+		pivot: <1, 1>
+		position: <-20, 0>
+
+		behavior HorizontalContainer
+		{
+			alignment: LEFT
+			padding: <0, 0, 0, 0>
+			fitContentHeight: true
+			spacing: 5
+		}
+
+		panel Text
+		{
+			anchor: LEFT
+			width: 120
+			pivot: <0, 0.5>
+			height: 30
+			offsets: <5, 0, 0, 0>
+
+			behavior Label
+			{
+				face: "DefaultBoldFont"
+				pixelHeight: 26
+				text: "#EVENTS_EVENT_SHOP_MILESTONE_COMPLETED"
+				colorRGB: <0.7, 0.7, 0.7>
+				textAlignHorizontal: LEFT
+				textAlignVertical: CENTER
+				horizontalMode: SQUISH_TO_CONTAINER
+			}
+		}
+
+		panel CheckIcon
+		{
+			anchor: RIGHT
+			pivot: <0, 0.5>
+			size: <24, 24>
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/buttons/checked.rpak"
+				colorRGB: <0.7, 0.7, 0.7>
+			}
+		}
+	}
+
+	panel Progression
+	{
+		anchor: RIGHT
+		size: <156, 16>
+		pivot: <1, 0>
+		position: <-20, 5>
+
+		behavior AngledProgressBar
+		{
+			bind *.progress -> @this.current
+			bind &common.activeEvents.events[0].barsColor -> @this.progressBarColor
+
+			progressBarColor: <1, 1, 1>
+			progressBarAlpha: 1.0
+			progressBgColor: <0.3, 0.3, 0.3>
+			progressBgAlpha: 1.0
+			max: 1.0
+			angle: 0
+			current: 0.5
+		}
+	}
+}

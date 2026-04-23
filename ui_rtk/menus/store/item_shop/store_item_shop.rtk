@@ -1,0 +1,184 @@
+panel ItemShop
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 84>
+
+	behavior StoreItemShop
+	{
+		paginationBehavior:     @panel/VerticalPagination:Pagination
+		backgroundImageFader:   @panel/Background:ImageCrossfader
+		contentPanel:           @panel/VerticalPagination/Padding/ContentContainer/Content
+		moreInfoButton:         @panel/MoreInfoButton:Button
+	}
+
+	behavior MinMaxDimensions
+	{
+		maxWidth: 2700
+	}
+
+	// Backdrop for crossfades
+	panel DefaultBackground
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, -84, 0>
+
+		behavior MinMaxDimensions
+		{
+			maxWidth: 2700
+		}
+
+		behavior MaintainAspectRatio
+		{
+			ratioWidth: 1920
+			ratioHeight: 1180
+			runOnce: false
+		}
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/store/backgrounds/store_background_default.rpak"
+		}
+	}
+
+	instance $"ui_rtk/common/components/image_crossfader.rpak" Background
+	{
+		offsets: <0, 0, -84, 0>
+
+		behavior MinMaxDimensions
+		{
+			maxWidth: 2700
+		}
+
+		behavior MaintainAspectRatio
+		{
+			ratioWidth: 1920
+			ratioHeight: 1180
+			runOnce: false
+		}
+	}
+
+	panel TopGradient
+	{
+		anchor: TOP_STRETCH_WIDTH
+		pivot: <0.5, 0.0>
+		offsetsLR: <0, 0>
+		height: 352
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/store/common/store_top_gradient.rpak"
+		}
+	}
+
+	panel BottomGradient
+	{
+		anchor: BOTTOM_STRETCH_WIDTH
+		pivot: <0.5, 1.0>
+		offsetsLR: <0, 0>
+		height: 352
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/store/common/store_top_gradient.rpak"
+			flipVertical: true
+		}
+	}
+
+	instance $"ui_rtk/common/components/vertical_paginated_panel.rpak" VerticalPagination
+	{
+		override bind root "*"
+		bind *.startPageIndex -> @this:Pagination.startPageIndex
+
+		override @var(cursorZone1Offsets)             <0, 0, 207, 0>
+		override @var(cursorZone1Controller)          false
+		override @var(cursorZone2Controller)          true
+
+		context @var(paddingPanel)
+		{
+			anchor: CENTER_STRETCH_WIDTH
+			height: 996
+
+	        behavior RenderGroup
+			{
+				assetMask: $"ui_image/rui/menu/store/common/store_offer_section_mask.rpak"
+			}
+		}
+
+		context @var(containerPanel)
+		{
+			anchor: TOP_STRETCH_WIDTH
+			position: <0, 121>
+			height: 750
+		}
+
+		context @var(contentPanel)
+		{
+			behavior ListBinder
+			{
+				bindingPath: "*.sections"
+				prefab: $"ui_rtk/menus/store/components/store_item_shop_category.rpak"
+			}
+		}
+
+		context @var(upButtonPanel)
+		{
+			position: <0, 47>
+
+			context @var(labelBehavior)
+			{
+	            bind *.prevSection -> @this.text
+			}
+
+			behavior NxOverrides
+			{
+				overrides: [
+					{
+						propertyRef: @panel.positionY
+						nxValue: 64
+					}
+				]
+			}
+		}
+
+		context @var(downButtonPanel)
+		{
+			context @var(labelBehavior)
+			{
+	            bind *.nextSection -> @this.text
+			}
+
+			override @this/ButtonPanel.position <0, 10>
+			override @this:Animator.tweenAnimations[0].tweens[0].startValue 10
+            override @this:Animator.tweenAnimations[1].tweens[0].endValue 10
+            override @this:Button.transitions[10].value 10
+		}
+
+		behavior NxOverrides
+		{
+			overrides: [
+				// Saving this in case Switch performance is bad and scroll animation needs to be skipped
+				{
+					propertyRef: @panel:Animator.tweenAnimations[0].tweens[0].duration
+					nxValue: 0.0
+				}
+			]
+		}
+	}
+
+	instance $"ui_rtk/common/buttons/base_button.rpak" MoreInfoButton
+	{
+		bind *.showMoreInfoButton -> @this.visible
+
+		anchor: BOTTOM_RIGHT
+		pivot: <1, 1>
+		position: <-60, -60>
+
+		override @var(labelText) "#COLLECTION_EVENT_MORE_INFO"
+		override @var(labelHorizontalMode) SQUISH_TO_CONTAINER
+		override @var(size) <200, 40>
+		override @var(gradientColor) #78797a
+		override @var(lineAlpha) 0
+	}
+}

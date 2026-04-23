@@ -1,0 +1,161 @@
+panel RequeuePanel
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	behavior RequeuePanel
+
+	instance $"ui_rtk/common/components/dialog_vertical.rpak" Dialog
+	{
+		pivot: <0.0, 0.5>
+		positionX: 272
+
+		context @this/StackedContent/TitleSizer/TitleContext
+		{
+			behavior VerticalContainer
+			{
+				spacing: 8
+				alignment: TOP_LEFT
+				fitContentHeight: true
+				padding: <25, 25, 25, 25>
+			}
+
+		    panel TopText
+			{
+				anchor: CENTER_STRETCH_WIDTH
+				offsets: <0, 0, 0, 0>
+
+				behavior Label
+				{
+					face: "TitleBoldFont"
+					textAlignHorizontal: LEFT
+					margin: <0, 50, 0, 0>
+					pixelHeight: 44
+					text: "#DIALOG_REQUEUE_WITH_SQUAD_TITLE"
+					horizontalMode: WRAP
+					verticalMode: AUTOSIZE_TO_TEXT
+					color: #FCFCFC
+					shadowBlur: 8.0
+					shadowAlpha: 0.7
+					shadowOffset: <0,0>
+				}
+			}
+			panel BottomText
+			{
+				anchor: CENTER_STRETCH_WIDTH
+				offsets: <0, 0, 0, 0>
+
+				behavior Label
+				{
+					textAlignHorizontal: LEFT
+					margin: <0, 50, 0, 0>
+					pixelHeight: 32
+					text: "#DIALOG_REQUEUE_WITH_SQUAD_DESC"
+					horizontalMode: WRAP
+					verticalMode: AUTOSIZE_TO_TEXT
+					color: #e0be39
+					shadowBlur: 8.0
+					shadowAlpha: 0.7
+					shadowOffset: <0,0>
+				}
+			}
+		}
+
+		context @this/StackedContent/ContentContext
+		{
+			behavior VerticalContainer
+			{
+				spacing: 8
+				alignment: TOP
+				fitContentHeight: true
+			}
+
+			panel MiddleSpacer
+			{
+				anchor: CENTER_STRETCH_WIDTH
+				offsets: <0, 0, 0, 0>
+				height: 125
+			}
+
+			panel ButtonsContainer
+			{
+				anchor: CENTER_STRETCH_WIDTH
+				offsets: <0, 0, 0, 0>
+
+				behavior VerticalContainer
+				{
+					spacing: 10
+					alignment: TOP
+					fitContentHeight: true
+					padding: <25, 25, 25, 25>
+				}
+
+				instance $"ui_rtk/common/buttons/base_button.rpak" RequeueWithSquad
+				{
+					positionY: -54
+					size: <578, 66>
+					pivot: <0.5, 1>
+					anchor: BOTTOM
+
+					override @var(labelText) "#BUTTON_REQUEUE_WITH_SQUAD"
+					override @var(labelColor) <0.87, 0.87, 0.87>
+					override @var(size) <578, 64>
+					override @var(labelPixelHeight) 24
+					override @var(backgroundColor) #242526
+					override @var(outlineColor) #b4b4b5
+					override @var(gradientColor) #ff4200
+					override @var(lineAlpha) 1
+				}
+
+				instance $"ui_rtk/common/buttons/base_button.rpak" RequeuePartyOfTwo
+				{
+					positionY: -54
+					size: <578, 66>
+					pivot: <0.5, 1>
+					anchor: BOTTOM
+
+					override @var(labelText) "#BUTTON_REQUEUE_WITH_PARTY"
+					override @var(labelColor) <0.87, 0.87, 0.87>
+					override @var(size) <578, 64>
+					override @var(labelPixelHeight) 24
+					override @var(backgroundColor) #242526
+					override @var(outlineColor) #b4b4b5
+					override @var(gradientColor) #ff4200
+					override @var(lineAlpha) 1
+				}
+
+				panel Padding
+				{
+					anchor: CENTER_STRETCH_WIDTH
+					offsets: <0, 0, 0, 0>
+					height: 20
+				}
+
+				instance $"ui_rtk/common/buttons/base_button.rpak" HoldToExitToLobby
+				{
+					positionY: -54
+					size: <578, 66>
+					pivot: <0.5, 1>
+					anchor: BOTTOM
+
+					override @var(labelText) "#BUTTON_REQUEUE_HOLD_EXIT_TO_LOBBY"
+					override @var(labelColor) <0.87, 0.87, 0.87>
+					override @var(size) <578, 64>
+					override @var(labelPixelHeight) 24
+					override @var(backgroundColor) <0.3, 0.3, 0.3>
+					override @var(backgroundAlpha) 0.3
+					override @var(gradientColor) <0.5, 0.5, 0.5>
+					override @var(gradientAlpha) 0.75
+					override @var(lineAlpha) 0
+				}
+			}
+		}
+
+		context @this/FooterContext
+		{
+			instance $"ui_rtk/controls/footer.rpak"
+		}
+	}
+}

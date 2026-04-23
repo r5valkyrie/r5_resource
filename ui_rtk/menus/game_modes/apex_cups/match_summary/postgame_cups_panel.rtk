@@ -1,0 +1,147 @@
+panel PostGameCups
+{
+	size: <1920, 1080>
+    anchor: TOP
+    pivot: <0.5, 0.0>
+
+    behavior PostGameCups
+
+    behavior VerticalContainer
+	{
+		alignment: TOP
+		paddingTop: 160
+		spacing: 10
+	}
+
+	panel SquadSummary
+	{
+		anchor: TOP
+		size: <1500, 230>
+		pivot: <0.5, 0.5>
+
+		panel Tracker
+		{
+			anchor: TOP
+			height: 120
+			pivot: <0.5, 0.0>
+
+
+			behavior HorizontalContainer
+			{
+				alignment: CENTER
+				spacing: 25
+				fitContentHeight: true
+				fitContentWidth: true
+				paddingBottom: -30
+			}
+
+			instance $"ui_rtk/menus/game_modes/apex_cups/components/apex_cup_tier_progress.rpak" tierProgress
+		}
+
+		instance $"ui_rtk/menus/game_modes/apex_cups/components/results_breakdown_data.rpak" CupResultsBreakdown
+		{
+			anchor: BOTTOM
+			pivot: <0.5, 1.0>
+			height: 86
+
+			override @var(showNextTierPts) false
+			override @var(showMatchesPlayed) true
+			override @var(spacingHorizontal) 112
+		}
+	}
+
+    panel Divider
+    {
+        anchor: CENTER
+        offsets: <0, 0, 0, 0>
+        size: <1400,54>
+
+        behavior HorizontalContainer
+		{
+			alignment: CENTER
+			spacing: 20
+		}
+		panel LeftLine
+		{
+			size: <460,24>
+			pivot: <0.5, 0.0>
+
+			behavior ContainerElement
+			{
+				verticalAlignOverride: BOTTOM
+			}
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/store/feature_headline_left.rpak"
+			}
+		}
+
+		panel DividerString
+		{
+			anchor: CENTER
+
+			behavior ContainerElement
+			{
+				autosizeToLabelWidth: true
+				verticalAlignOverride: CENTER
+			}
+			behavior FormatLabel
+			{
+				bind &menus.apexCups.matchesCompleted -> @this.arg1
+
+				face: "TitleRegularFont"
+				pixelHeight: 36
+				textAlignHorizontal: CENTER
+				horizontalMode: AUTOSIZE_TO_TEXT
+				verticalMode: AUTOSIZE_TO_TEXT
+				colorRGB: <1.0, 1.0, 1.0>
+				format: "#CUPS_POSTGAME_SQUAD_RESULTS"
+				allCaps: true
+				arg1: "0"
+			}
+		}
+
+		panel RightLine
+		{
+			size: <460,24>
+			pivot: <0.5, 0.0>
+
+			behavior ContainerElement
+			{
+				verticalAlignOverride: BOTTOM
+			}
+
+			behavior Image
+			{
+				flipHorizontal: true
+				assetPath: $"ui_image/rui/menu/store/feature_headline_left.rpak"
+			}
+		}
+    }
+
+	panel PlayerSummary
+	{
+		anchor: BOTTOM
+		pivot: <0.5, 0>
+		positionY: 150
+		width: 1400
+
+		behavior HorizontalContainer
+		{
+			alignment: CENTER
+			spaceEvenly: true
+			fitContentHeight: true
+			paddingBottom: 14
+			paddingLeft: 20
+			paddingRight: 20
+		}
+
+		behavior ListBinder
+		{
+			bindingPath: "&menus.apexCups.playerDataList"
+			prefab: $"ui_rtk/menus/game_modes/apex_cups/components/player_summary_widget.rpak"
+		}
+	}
+
+}

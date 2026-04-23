@@ -1,0 +1,261 @@
+panel MasteryLevelPip
+{
+	bind root
+
+	pivot: <0.0, 0.0>
+	size: <351, 12>
+	useLocaleDirection: true
+
+	panel ProgressRui
+	{
+		anchor: CENTER
+		size: <351, 12>
+
+		behavior AngledProgressBar
+		{
+			bind *.progress -> @this.current
+
+			progressBarColor: <0.67058, 0.5372, 0.1960>
+			progressBarAlpha: 1.0
+			progressBgColor: <0.0, 0.0, 0.0>
+			progressBgAlpha: 0.6
+			max: 1.0
+			angle: 30
+			isDoubleSided: true
+		}
+	}
+
+	panel LeftSideBracket
+	{
+		anchor: LEFT
+		size: <32, 44>
+		positionX: 12
+		positionY: 14
+		useLocaleDirection: true
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/mastery/mastery_overview_progressbar_notch.rpak"
+			colorRGB: <0.6, 0.6, 0.6>
+			useLocaleDirection: true
+		}
+	}
+
+	panel LeftSideBracketText
+	{
+		anchor: BOTTOM_LEFT
+		pivot: <1.0, 0>
+		positionY: 3
+		size: <400, 44>
+		useLocaleDirection: true
+
+		behavior FormatLabel
+		{
+			bind *.startLevel -> @this.arg1
+
+			format: "#HUD_LEVEL_N"
+			pixelHeight: 32
+			allCaps: true
+			arg1:""
+			textAlignHorizontal: RIGHT
+			colorRGB:  <0.6, 0.6, 0.6>
+			shadowAlpha: 0.6
+			shadowBlur: 6.0
+			shadowOffset: <0, 0>
+			useLocaleDirection: true
+		}
+	}
+
+	panel RightSideBracket
+	{
+		bind *.isLast -> @this.visible
+
+		anchor: RIGHT
+		size: <32, 44>
+		positionX: 4
+		positionY: 14
+		useLocaleDirection: true
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/mastery/mastery_overview_progressbar_notch.rpak"
+			colorRGB: <0.6, 0.6, 0.6>
+			useLocaleDirection: true
+		}
+	}
+
+	panel RightSideBracketText
+	{
+		bind *.isLast -> @this.visible
+
+		anchor: BOTTOM_RIGHT
+		pivot: <1.0, 0>
+		positionX: -6
+		positionY: 3
+		size: <400, 44>
+		useLocaleDirection: true
+
+		behavior FormatLabel
+		{
+			bind *.endLevel -> @this.arg1
+
+			format: "#HUD_LEVEL_N"
+			pixelHeight: 32
+			allCaps: true
+			arg1:""
+			textAlignHorizontal: RIGHT
+			colorRGB: <0.6, 0.6, 0.6>
+			shadowAlpha: 0.6
+			shadowBlur: 6.0
+			shadowOffset: <0, 0>
+			useLocaleDirection: true
+		}
+	}
+
+	panel LevelProgress
+	{
+		bind *.showLargeXpNotch -> @this.visible
+		bind *.currentLevel -> PositionXPNotch( -42, 320 ) -> @this.positionX
+
+		anchor: TOP_LEFT
+		pivot: <0, 1.0>
+		size: <206, 106>
+		position: <0, 18>
+		useLocaleDirection: true
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/mastery/mastery_overview_progressbox_base.rpak"
+			useLocaleDirection: true
+		}
+
+		panel
+		{
+			anchor: BOTTOM
+			size: <155, 24>
+			pivot: <0.5, 1.0>
+			positionX: 16
+			positionY: -3
+			useLocaleDirection: true
+
+			behavior AngledProgressBar
+			{
+				bind *.currentLevelFrac -> @this.current
+
+				progressBarColor: <0.9215, 0.7843, 0.298>
+				progressBarAlpha: 1.0
+				progressBgColor: <0.0, 0.0, 0.0>
+				progressBgAlpha: 0.6
+				max: 1.0
+				current: 0.5
+				angle: 30
+				isDoubleSided: true
+			}
+		}
+
+		panel Level
+		{
+			anchor: BOTTOM_LEFT
+			pivot: <0, 1.0>
+			size: <105, 65>
+			offsets: <0, 0, 0, 0>
+			positionY: -29
+			positionX: 40
+			useLocaleDirection: true
+
+			behavior Label
+			{
+				bind *.currentLevel -> @this.text
+
+				text: ""
+				face: "TitleBoldFont"
+				pixelHeight: 60
+				colorRGB: <1, 1, 1>
+				outlineColorInner: <0, 0, 0, 0.8>
+				outlineColorOuter: <0, 0, 0, 0>
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				horizontalMode: SQUISH_TO_CONTAINER
+				allCaps: true
+			}
+		}
+
+		panel Frame
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/mastery/mastery_overview_progressbox_frame.rpak"
+				colorRGB: <0.52, 0.52, 0.52>
+				useLocaleDirection: true
+			}
+		}
+
+		//TopText
+		panel TopText
+		{
+			anchor: TOP
+			pivot: <0.5, 1.0>
+			offsets: <0, 0, 0, 0>
+			positionX: -30
+			useLocaleDirection: true
+
+			behavior VerticalContainer
+			{
+				fitContentWidth: true
+	            spacing: -5
+				alignment: BOTTOM
+			}
+
+			panel XP
+			{
+				height: 32
+
+				behavior FormatLabel
+				{
+					bind *.xpToNextlevel -> FormatNumberInt( 4, 0) -> @this.arg1
+
+					format: "#MASTERY_XP"
+					face: "DefaultCompactFont"
+					pixelHeight: 32
+					colorRGB: <0.901, 0.764, 0.29>
+					outlineColorInner: <0, 0, 0, 0.8>
+					outlineColorOuter: <0, 0, 0, 0>
+					textAlignHorizontal: CENTER
+					horizontalMode: AUTOSIZE_TO_TEXT
+					allCaps: true
+					shadowAlpha: 0.6
+					shadowBlur: 6.0
+					shadowOffset: <0, 0>
+					arg1: ""
+				}
+			}
+
+			panel ToLevel
+			{
+				height: 32
+
+				behavior FormatLabel
+				{
+					bind *.currentLevel -> Add(1) -> FloatToInt -> @this.arg1
+
+					format: "#MASTERY_TO_LEVEL"
+					face: "DefaultCompactFont"
+					pixelHeight: 32
+					colorRGB: <1, 1, 1>
+					outlineColorInner: <0, 0, 0, 0.8>
+					outlineColorOuter: <0, 0, 0, 0>
+					textAlignHorizontal: CENTER
+					horizontalMode: AUTOSIZE_TO_TEXT
+					allCaps: true
+					shadowAlpha: 0.6
+					shadowBlur: 6.0
+					shadowOffset: <0, 0>
+					arg1: ""
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,71 @@
+panel SquadStatsTable
+{
+	bind root
+
+	bind &menus.apexCups.cupCalEvent -> CalEventStarted -> @this.visible
+
+	anchor: TOP_RIGHT
+	pivot: <1, 0.0>
+	useLocaleDirection: true
+
+	behavior VerticalContainer
+	{
+		alignment: LEFT
+		fitContentHeight: true
+		fitContentWidth: true
+		paddingRight: 30
+		paddingTop: 20
+		useLocaleDirection: true
+	}
+
+	panel HeaderSting
+	{
+		behavior Label
+		{
+			bind &menus.apexCups.selectedIdx -> FormatString( "&menus.apexCups.rows[%s].name" ) -> ModelGetString -> @this.text
+
+			verticalMode: AUTOSIZE_TO_TEXT
+			HorizontalMode: AUTOSIZE_TO_TEXT
+			useLocaleDirection: true
+			pixelHeight: 28
+			face: "DefaultBoldFont"
+			margin: <0, 0, 12, 14>
+			color: <1, 1, 1, 1>
+			allCaps: true
+			text: "--"
+		}
+	}
+
+	panel Content
+	{
+		pivot: <0.5, 0.0>
+
+		behavior VerticalContainer
+		{
+			alignment: TOP
+			fitContentWidth: true
+			fitContentHeight: true
+			spacing: 2
+			paddingBottom : 2
+			paddingTop : 4
+		}
+
+		behavior ListBinder
+		{
+			bind &menus.apexCups.selectedIdx -> FormatString( "&menus.apexCups.rows[%s].squadStats" ) -> @this.bindingPath
+			prefab: $"ui_rtk/common/components/simple_table.rpak"
+
+			varOverrides: {
+				rowWidth: 450
+				textSize: 28
+				rowAlpha: 0.7
+				textColor: <1.0, 1.0, 1.0>
+			}
+		}
+	}
+
+	instance $"ui_rtk/menus/game_modes/apex_cups/components/apex_cup_squadstats_row.rpak" TotalPtsRow
+	{
+		bind &menus.apexCups.selectedIdx -> FormatString( "&menus.apexCups.rows[%s]" ) -> @this:DataBindingRoot.bindingPath
+	}
+}

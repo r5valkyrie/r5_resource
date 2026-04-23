@@ -1,0 +1,143 @@
+panel MeleePanel
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	behavior LegendMeleeScreen
+	{
+		itemList: @panel/Screen/ItemList
+		equipButton: @panel/Screen/ButtonContainer/EquipButton:Button
+		customizeButton: @panel/Screen/ButtonContainer/CustomizeButton:Button
+		equippedItems: @panel/Screen/EquippedItems
+	}
+
+	panel Screen
+	{
+		anchor: CENTER_STRETCH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		width: 1920
+
+		panel Title
+		{
+			bind &menus.legend.melee.inCustomization -> NOT -> @this.visible
+			bind &menus.legend.melee.listHeader -> @this:Label.text
+
+			width: 400
+			pivot: <0, 0>
+			position: <70, 190>
+			anchor: TOP_LEFT
+
+			behavior Label
+			{
+				face: "DefaultBoldFont"
+				text: ""
+				textAlignHorizontal: LEFT
+				pixelHeight: 36
+				color: <1, 1, 1, 1>
+				allCaps: true
+			}
+		}
+
+		panel ItemList
+		{
+			bind &menus.legend.melee.inCustomization -> NOT -> @this.visible
+
+			width: 1920
+			pivot: <0, 0>
+			position: <70, 240>
+			anchor: TOP_LEFT
+
+			behavior VerticalContainer
+			{
+				spacing: 10
+				fitContentHeight: true
+			}
+
+			behavior ListBinder
+			{
+				bindingPath: "&menus.legend.melee.listItems"
+				prefab: $"ui_rtk/common/buttons/item_button.rpak"
+				propertyOverrides: [
+					{
+						select: @this:Button.doubleClickEnabled
+						value: true
+					}
+				]
+			}
+		}
+
+		panel FistsImage
+		{
+			bind &menus.legend.melee.inCustomization -> NOT -> AND( &menus.legend.melee.isDefault ) -> @this.visible
+
+			pivot: <0, 0>
+			position: <600, 240>
+			size: <960, 540>
+			constrainInput: false
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/common/fists.rpak"
+			}
+		}
+
+		instance $"ui_rtk/menus/melee/components/melee_equipped_items.rpak" EquippedItems
+		{
+			override bind root "&menus.legend.melee.equippedItems"
+
+			bind &menus.legend.melee.showEquippedItems -> @this.visible
+
+			positionY: -100
+		}
+
+		panel ButtonContainer
+		{
+			pivot: <1, 1>
+			position: <-64, -136>
+			anchor: BOTTOM_RIGHT
+
+			behavior VerticalContainer
+			{
+				alignment: BOTTOM_RIGHT
+				spacing: 20
+				fitContentHeight: true
+				fitContentWidth: true
+			}
+
+			instance $"ui_rtk/menus/melee/components/melee_equipped_to_legends.rpak" LegendList
+			{
+				override bind root "&menus.legend.melee.equippedToLegendIcons"
+			}
+
+			instance $"ui_rtk/common/buttons/loot_button.rpak" CustomizeButton
+			{
+				bind &menus.legend.melee.inCustomization -> OR( &menus.legend.melee.previewItem.locked ) -> NOT -> @this.visible
+
+				size: <280, 80>
+
+				override @var(labelText) "#BUTTON_CUSTOMIZE"
+			}
+
+			instance $"ui_rtk/common/buttons/loot_button.rpak" EquipButton
+			{
+				bind &menus.legend.melee.isLegendLocked -> OR( &menus.legend.melee.previewItem.equipped ) -> NOT -> @this.visible
+				bind &menus.legend.melee.previewItem.equipped -> NOT -> @this.active
+				bind &menus.legend.melee.previewItem.actionText -> @var(labelText)
+
+				size: <280, 80>
+			}
+		}
+	}
+
+	instance $"ui_rtk/common/components/currency_corner_panel.rpak" MeleeCurrency
+	{
+		override bind root "*"
+
+		bind &menus.legend.melee.heirloomShards -> IntToFloat -> FormatAndLocalizeNumber( "1", true ) -> @var(currencyValue)
+		override @var(currencyIcon) $"ui_image/rui/menu/common/currency_heirloom.rpak"
+
+		positionY: 85
+	}
+}

@@ -1,0 +1,166 @@
+panel ProgressTrackerItem
+{
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	pivot: <0, 1>
+	offsets: <0, 0, 0, 0>
+
+	panel Content
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		pivot: <0, 1>
+		offsets: <0, 0, 0, 0>
+
+		panel Progress
+		{
+			anchor: BOTTOM_STRETCH_WIDTH
+			pivot: <0.5, 1>
+			height: 45
+			offsets: <0, 0, 0, 0>
+
+			panel Underline
+			{
+				anchor: BOTTOM_STRETCH_WIDTH
+				pivot: <0.5, 1>
+				height: 6
+
+				behavior Image
+				{
+					bind *.currentLevel -> IntEqual( *.grantLevel ) -> PickVectorFromTwo( #696969, #218c5b ) -> @this.colorRGB
+				}
+			}
+
+			panel ProgressBar
+			{
+				bind *.currentLevel -> IntEqual( *.grantLevel ) -> PickVectorFromTwo( <-4, 0, 0>, <-4, 18, 0> ) -> @this.offsetsLR
+
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsetsTB: <-2, -2>
+				offsetsLR: <-4, 18>
+
+				behavior ImageProgressBar
+				{
+					bind *.currentLevel -> Subtract( *.tierStartLevel ) -> @this.current
+					bind *.grantLevel -> Subtract( *.tierStartLevel ) -> @this.max
+
+					progressBarColor: #218c5b
+					progressBarAlpha: 1.0
+					progressBgColor: #696969
+					progressBgAlpha: 1.0
+					bgImage: $"ui_image/rui/events/milestone_events/milestone_interval_progress_sliced.rpak"
+					fillImage: $"ui_image/rui/events/milestone_events/milestone_interval_progress_sliced.rpak"
+				}
+			}
+
+			panel EndCap
+			{
+				bind *.currentLevel -> IntEqual( *.grantLevel ) -> PickVectorFromTwo( <25, 44, 0>, <42, 44, 0> ) -> @this.size
+
+				anchor: RIGHT_STRETCH_HEIGHT
+				pivot: <1, 0.5>
+
+				behavior Image
+				{
+					bind *.currentLevel -> IntEqual( *.grantLevel ) -> PickVectorFromTwo( #696969, #218c5b ) -> @this.colorRGB
+					bind *.currentLevel -> IntEqual( *.grantLevel ) -> PickAssetFromTwo( $"ui_image/rui/events/milestone_events/milestone_interval_small_cap.rpak", $"ui_image/rui/events/milestone_events/milestone_interval_large_cap.rpak" ) -> @this.assetPath
+
+				}
+			}
+
+			panel MilestoneLevel
+			{
+				bind *.currentLevel -> IntEqual( *.grantLevel ) -> PickFloatFromTwo( -30.0, -50.0 ) -> @this.positionX
+
+				anchor: RIGHT
+				pivot: <1, 0.5>
+				positionX: -50
+				positionY: -4
+
+				behavior HorizontalContainer
+				{
+					alignment: RIGHT
+					useLocaleDirection: true
+					spacing: 8
+					fitContentHeight: true
+				}
+
+				panel PackImage
+				{
+					bind &menus.trackingPage.isRestricted -> NOT -> @this.visible
+
+					size: <24, 24>
+
+					behavior Image
+					{
+						bind *.currentLevel -> IntEqual( *.grantLevel ) -> PickFloatFromTwo( 1.0, 0.2 ) -> @this.alpha
+
+						assetPath: $"ui_image/rui/events/milestone_events/milestone_pack_icon_tiny.rpak"
+						colorRGB: <1, 1, 1>
+					}
+				}
+
+				panel Text
+				{
+					behavior FormatLabel
+					{
+						bind *.grantLevel -> @this.arg1
+						bind *.currentLevel -> IntEqual( *.grantLevel ) -> PickFloatFromTwo( 1.0, 0.2 ) -> @this.alpha
+
+						text: "DEFAULT TEXT"
+						format: "%s1"
+						pixelHeight: 24
+						textAlignHorizontal: CENTER
+						textAlignVertical: CENTER
+						horizontalMode: AUTOSIZE_TO_TEXT
+						verticalMode: AUTOSIZE_TO_TEXT
+						face: "TitleBoldFont"
+						color: <1,1,1,1>
+						arg1: 0
+						arg2: 0
+						arg3: ""
+						allcaps: true
+						shadowAlpha: 0.6
+						shadowBlur: 6.0
+						shadowOffset: <0, 0>
+						outlineColorInner: <0, 0, 0, 0.8>
+						outlineColorOuter: <0, 0, 0, 0>
+					}
+				}
+			}
+		}
+
+		panel Gradient
+		{
+			anchor: BOTTOM_STRETCH_WIDTH
+			pivot: <0.5, 1>
+			positionY: -50
+
+			behavior Image
+			{
+				bind *.currentLevel -> IntEqual( *.grantLevel ) -> PickVectorFromTwo( #696969, #218c5b ) -> @this.colorRGB
+
+				assetPath: $"ui_image/rui/events/milestone_events/milestone_interval_gradient_top.rpak"
+				alpha: 0.2
+			}
+		}
+
+		panel Items
+		{
+			anchor: BOTTOM
+			pivot: <0.5, 1>
+			positionY: -75
+
+			behavior HorizontalContainer
+			{
+				fitContentHeight: true
+				fitContentWidth: true
+				spacing: 15
+			}
+
+			behavior ListBinder
+			{
+				bindingPath: "*.items"
+				prefab: $"ui_rtk/menus/events/milestone/components/milestone_event_progress_reward.rpak"
+			}
+		}
+	}
+}

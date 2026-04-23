@@ -1,0 +1,127 @@
+panel BaseEventLandingPage
+{
+
+	bind root
+	anchor: CENTER
+	size: <1920, 1080>
+	pivot: <0.5, 0.5>
+	offsets: <0, 0, 0, 0>
+
+	behavior BaseEventLandingPanel
+	{
+		buttonsPanel: @panel/Buttons
+	}
+
+	panel TitleContainer
+	{
+		anchor: TOP
+		positionY: 275
+		pivot: <0.5, 0>
+		behavior VerticalContainer
+		{
+			fitContentHeight: true
+			fitContentWidth: true
+			alignment: CENTER
+			spacing: 10
+		}
+
+		panel TopDecorations
+		{
+			behavior HorizontalContainer
+			{
+				fitContentHeight: true
+				fitContentWidth: true
+				alignment: BOTTOM
+				spacing: 15
+			}
+
+			instance $"ui_rtk/common/components/double_slanted_decoration_line.rpak" TopLeft
+			{
+				override @var(alpha) 0.3
+			}
+
+			panel BadgePivot
+			{
+				size: <150, 60>
+				panel BadgeImage
+				{
+					anchor: TOP
+					pivot: <0.5, 0.5>
+					size: <300, 300>
+					behavior Image
+					{
+						bind *.titleImage -> @this.assetPath
+					}
+				}
+			}
+
+			instance $"ui_rtk/common/components/double_slanted_decoration_line.rpak" TopRight
+			{
+				override @var(alpha) 0.3
+			}
+		}
+
+		panel Title
+		{
+			bind @this:Label.pixelHeight -> @this.height
+			behavior Label
+			{
+				bind *.titleData.text -> @this.text
+				bind *.titleData.color -> @this.colorRGB
+				bind *.titleData.pixelHeight -> @this.pixelHeight
+				bind *.titleData.outlineInnerColor -> @this.outlineColorInner
+				bind *.titleData.outlineOuterColor -> @this.outlineColorOuter
+				bind *.titleData.outlineWidth -> @this.outlineWidth
+
+				face: "TitleBoldFont"
+				text: ""
+				pixelHeight: 62
+				colorRGB: <1.0, 1.0, 1.0>
+				outlineColorInner: <0.0, 0.0, 0.0, 0.9>
+				outlineColorOuter: <0.0, 0.0, 0.0, 0.6>
+				outlineWidth: 3.5
+				textAlignHorizontal: CENTER
+				textAlignVertical: TOP
+				horizontalMode: AUTOSIZE_TO_TEXT
+				allCaps: true
+			}
+		}
+
+		instance $"ui_rtk/common/components/double_slanted_decoration_line.rpak" BottomBar
+		{
+			override @var(alpha) 0.3
+			override @var(width) 800
+			rotation: 180
+		}
+
+		instance $"ui_rtk/common/components/timer_component_long.rpak" TimeRemaining
+		{
+			width: 550
+			bind *.endtime -> @this:Timer.endTime
+			bind *.subtitleData.pixelHeight -> @this/TimerString:FormatLabel.pixelHeight
+			bind *.subtitleData.color -> @this/TimerIcon:FormatLabel.colorRGB
+			bind *.subtitleData.color -> @this/TimerString:FormatLabel.colorRGB
+			bind @this/TimerString.height -> @this.height
+		}
+	}
+
+	panel Buttons
+	{
+		anchor: BOTTOM
+		pivot: <0.5, 1>
+		positionY: -150
+
+		behavior HorizontalContainer
+		{
+			fitContentWidth: true
+			fitContentHeight: true
+			spacing: 30
+		}
+
+		behavior ListBinder
+		{
+			bindingPath: "*.buttonData"
+			prefab: $"ui_rtk/menus/events/components/base_event_landing_button.rpak"
+		}
+	}
+}

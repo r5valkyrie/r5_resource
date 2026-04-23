@@ -1,0 +1,95 @@
+panel PaginationNav
+{
+	var leftButtonSize @this/LeftButton.size
+	var rightButtonSize @this/RightButton.size
+	var buttonSpacing @this:HorizontalContainer.spacing
+
+	var indexPathToModel @this:PaginationNavController.pathToModel
+	var paginationBehavior @this:PaginationNavController.paginationBehavior
+	var indexPropName @this:PaginationNavController.indexPropName
+
+	var nextButtonAlt @this:PaginationNavController.nextButtonAlt
+	var prevButtonAlt @this:PaginationNavController.prevButtonAlt
+
+	var canWrap @this:PaginationNavController.canWrap
+	var hasHintIcon @this/Hint.visible
+	var cursorInteractBehaviorExtra @this:PaginationNavController.cursorInteractBehaviorExtra
+
+	var pipsPrefab @this/PaginationPips:ListBinder.prefab
+	var pipsBindingPath @this/PaginationPips:ListBinder.bindingPath
+	var pathToPipModel @this:PaginationNavController.pathToPipModel
+
+	anchor: BOTTOM_STRETCH_WIDTH
+	height: 64
+	offsetsLR: <0, 0>
+	pivot: <0.5, 0>
+
+	behavior PaginationNavController
+	{
+		pipParentPanel: @panel/PaginationPips
+		hintAnimatorBehavior: @panel/Hint:Animator
+		cursorInteractBehavior: @panel/CursorZone:CursorInteract
+
+		nextButton: @panel/RightButton:Button
+		prevButton: @panel/LeftButton:Button
+	}
+
+	behavior HorizontalContainer
+	{
+		fitContentWidth: true
+		fitContentHeight: true
+		alignment: CENTER
+		spacing: 10
+		useLocaleDirection: true
+	}
+
+	instance $"ui_rtk/common/pagination_hint.rpak" Hint
+	{
+		visible: false
+
+		size: <30, 30>
+	}
+
+	instance $"ui_rtk/common/buttons/nav_button_right.rpak" LeftButton
+	{
+		rotation: 180
+	}
+
+	panel PaginationPips
+	{
+		behavior HorizontalContainer
+		{
+			fitContentWidth: true
+			fitContentHeight: true
+			alignment: CENTER
+			spacing: 12
+			useLocaleDirection: true
+		}
+
+		behavior ListBinder
+		{
+			bindingPath: ""
+			prefab: $"ui_rtk/common/buttons/pip_button_v2.rpak"
+		}
+	}
+
+	instance $"ui_rtk/common/buttons/nav_button_right.rpak" RightButton
+
+	panel CursorZone
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <-45, -45, -80, -80>
+		inputListener: true
+
+		behavior ContainerElement
+		{
+			ignoreLayout: true
+		}
+
+		behavior CursorInteract
+		{
+			mouseEnabled: true
+			controllerEnabled: true
+		}
+	}
+}

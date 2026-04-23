@@ -1,0 +1,394 @@
+panel StatsScreen
+{
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0,0,0,0>
+
+	behavior StatsScreenController
+	{
+		decorationAnimator: @panel/Decoration:Animator
+		leftButtonLabel: @panel/Stats/LeftDropDown/DropDownMainButton/Label:Label
+		leftButtonTooltip: @panel/Stats/LeftDropDown/DropDownMainButton/ToolTip
+		rightButtonLabel: @panel/Stats/RightDropDown/DropDownMainButton/Label:Label
+		rightButtonTooltip: @panel/Stats/RightDropDown/DropDownMainButton/ToolTip
+		leftDropDown: @panel/Stats/LeftDropDown:DropDown
+		rightDropDown: @panel/Stats/RightDropDown:DropDown
+		leftPanelBindingRoot: @panel/Stats/LeftPanel:DataBindingRoot
+		rightPanelBindingRoot: @panel/Stats/RightPanel:DataBindingRoot
+	}
+
+	panel Decoration
+	{
+		size: <1920, 110>
+		anchor: TOP_STRETCH_WIDTH
+		offsets: <0,0,0,0>
+		pivot: <0.5, 0>
+
+		behavior Animator
+		{
+			tweenAnimations: [
+				{
+					name: "SlideIn"
+					tweens: [
+						{
+							property: @panel/TopLeftDecoration.positionX
+							startValue: -420
+							endValue: 0
+							duration: 0.33
+							curve: EASE_IN_OUT_CUBIC
+						},
+						{
+							property: @panel/TopRightDecoration.positionX
+							startValue: 420
+							endValue: 0
+							duration: 0.33
+							curve: EASE_IN_OUT_CUBIC
+						}
+					]
+				}
+			]
+		}
+
+		panel TopLeftDecoration
+		{
+			anchor: TOP_LEFT
+			size: <580, 110>
+			pivot: <0, 0>
+
+			panel
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <0, 0, 0, 0>
+				
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/menu/common/header_blade_3_mask.rpak"
+					imageBlur: ASSETMASK
+				}
+			}
+
+			panel
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <0, 0, 0, 0>
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/menu/common/header_blade_3_l.rpak"
+				}
+			}
+		}
+
+		panel TopRightDecoration
+		{
+			anchor: TOP_RIGHT
+			size: <580, 110>
+			pivot: <1, 0>
+
+			panel
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <0, 0, 0, 0>
+				
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/menu/common/header_blade_3_mask.rpak"
+					imageBlur: ASSETMASK
+					flipHorizontal: true
+				}
+			}
+
+			panel
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <0, 0, 0, 0>
+				
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/menu/common/header_blade_3_l.rpak"
+					flipHorizontal: true
+				}
+			}
+		}
+
+		panel
+		{
+			anchor: TOP_LEFT
+			size: <123, 143>
+			position: <48, 0>
+			pivot: <0, 0>
+			
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/logo_small.rpak"
+			}
+		}
+	}
+
+	panel profile
+	{
+		anchor: TOP
+		size: <800, 64>
+		position: <0, 80>
+		pivot: <0.5, 0.5>
+		
+		behavior Label
+		{
+			bind &menus.statsScreen.profile -> @this.text
+
+			text: "XEHNRSPN"
+			face: "TitleBoldFont"
+			color: <1.0, 1.0, 1.0, 1>
+			pixelHeight: 64
+			textAlignHorizontal: CENTER
+			horizontalMode: SQUISH_TO_CONTAINER
+		}
+
+		behavior LabelAltStyle
+		{
+			pixelHeight: 24
+		}
+
+		behavior NxOverrides
+		{
+			overrides: [
+				{
+					propertyRef: @panel.position
+					nxValue: <-5, 80>
+				},
+				{
+					propertyRef: @panel:LabelAltStyle.pixelHeight
+					nxValue: 35
+				},
+				{
+					propertyRef: @panel:Label.margin
+					nxValue: <10,0,0,0>
+				}
+			]
+		}
+	}
+
+	panel Stats
+	{
+		anchor: CENTER_STRETCH_HEIGHT
+		width: 1920
+		pivot: <0.5, 0.5>
+		offsets: <0, 0, 0, 0>
+
+		panel Banner
+		{
+			size: <848, 848>
+			anchor: TOP
+			position: <-620, 565>
+
+			behavior GladiatorCard
+
+			behavior NxOverrides
+			{
+				overrides: [
+					{
+						propertyRef: @panel.position
+						nxValue: <-630, 590>
+					},
+					{
+						propertyRef: @panel.size
+						nxValue: <893, 938>
+					}
+				]
+			}
+		}
+
+		panel
+		{
+			anchor: TOP_LEFT
+			size: <500, 30>
+			position: <340, 190>
+			pivot: <0.5, 0>
+			offsets: <0, 0, 0, 0>
+
+			behavior HorizontalContainer
+			{
+				expandToFillEvenly: true
+				spacing: 10
+			}
+
+			behavior NxOverrides
+			{
+				overrides: [
+					{
+						propertyRef: @panel.position
+						nxValue: <329, 156>
+					},
+					{
+						propertyRef: @panel.size
+						nxValue: <575, 30 >
+					}
+				]
+			}
+
+			panel
+			{
+				//anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				size: <128, 22>
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/menu/store/feature_headline_left.rpak"
+				}
+			}
+
+			panel
+			{
+				anchor: CENTER_STRETCH_WIDTH
+				size: <268, 26>
+				pivot: <0.5, 0.5>
+
+				behavior Label
+				{
+					text: "#STATS_MENU_LEGEND_CARD"
+					face: "TitleRegularFont"
+					color: <1.0, 1.0, 1.0, 1>
+					pixelHeight: 26
+					textAlignHorizontal: CENTER
+					horizontalMode: AUTOSIZE_TO_TEXT
+					margin: <0, 0, -13.0, 0>
+				}
+
+				behavior ContainerElement
+				{
+					autosizeToLabelWidth: true
+				}
+
+				behavior NxOverrides
+				{
+					overrides: [
+						{
+							propertyRef: @panel:Label.pixelHeight
+							nxValue: 32.5
+						},
+						{
+							propertyRef: @panel.width
+							nxValue: 308
+						},
+						{
+							propertyRef: @panel:Label.margin
+							nxValue: <0, 0, -15, 0>
+						}
+					]
+				}
+			}
+
+			panel
+			{
+				//anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				size: <128, 22>
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/menu/store/feature_headline_right.rpak"
+				}
+			}
+		}
+
+		instance $"ui_rtk/stats_menu/stats_dropdown.rpak" LeftDropDown
+		{
+			override @var(bindingPath) "&menus.statsScreen.modeOptions"
+
+			anchor: TOP_LEFT
+			position: <935, 190>
+
+			behavior NxOverrides
+			{
+				overrides: [
+					{
+						propertyRef: @panel.position
+						nxValue: <935, 147>
+					},
+					{
+						propertyRef: @panel.height
+						nxValue: 65
+					},
+					{
+						propertyRef: @panel:DropDown.listSpacing
+						nxValue: -65
+					}
+				]
+			}
+		}
+
+		instance $"ui_rtk/stats_menu/stats_dropdown.rpak" RightDropDown
+		{
+			bind &menus.statsScreen.rightButtonInteractive -> @this/DropDownMainButton/Arrow.visible
+			bind &menus.statsScreen.rightButtonInteractive -> @this/DropDownMainButton:Button.interactive
+			bind &menus.statsScreen.rightButtonInteractive -> @this/DropDownMainButton:ToolTip.active
+
+			override @var(bindingPath) "&menus.statsScreen.seasonOptions"
+
+			anchor: TOP_LEFT
+			position: <1572, 190>
+
+			behavior NxOverrides
+			{
+				overrides: [
+					{
+						propertyRef: @panel.position
+						nxValue: <1572, 147>
+					},
+					{
+						propertyRef: @panel.height
+						nxValue: 65.0
+					},
+					{
+						propertyRef: @panel:DropDown.listSpacing
+						nxValue: -65.0
+					}
+				]
+			}
+		}
+
+		instance $"ui_rtk/stats_menu/stats_panel.rpak" LeftPanel
+		{
+			override bind root "&menus.statsScreen.leftPanelModel"
+
+			anchor: TOP
+			position: <-24, 565>
+
+			behavior NxOverrides
+			{
+				overrides: [
+					{
+						propertyRef: @panel.position
+						nxValue: <-10, 592>
+					},
+					{
+						propertyRef: @panel.size
+						nxValue: <595, 800>
+					}
+				]
+			}
+		}
+
+		instance $"ui_rtk/stats_menu/stats_panel.rpak" RightPanel
+		{
+			override bind root "&menus.statsScreen.rightPanelModel"
+
+			anchor: TOP
+			position: <614, 565>
+
+			behavior NxOverrides
+			{
+				overrides: [
+					{
+						propertyRef: @panel.position
+						nxValue: <625,592>
+					},
+					{
+						propertyRef: @panel.size
+						nxValue: <595, 800>
+					}
+				]
+			}
+		}
+	}
+
+	instance $"ui_rtk/controls/footer.rpak"
+}

@@ -1,0 +1,203 @@
+panel SweepstakesRules
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH
+	offsetsLR: <0, 0>
+	height: 560
+	positionY: 64
+
+	behavior SweepstakesRulesPanel
+	{
+		closeButton: @panel/Buttons/CloseButton:Button
+		linkToRulesButton: @panel/Buttons/AgreeToRules:Button
+	}
+
+	behavior VerticalContainer
+	{
+		alignment: CENTER
+		spaceEvenly: true
+	}
+
+	panel Content
+	{
+		anchor: CENTER
+
+		behavior HorizontalContainer
+		{
+			alignment: CENTER
+			fitContentHeight: true
+			fitContentWidth: true
+			spacing: 30
+		}
+
+		panel Prize
+		{
+			anchor: CENTER
+			size: <728, 420>
+
+			behavior Image
+			{
+				bind *.image -> @this.assetPath
+			}
+		}
+
+		instance $"ui_rtk/common/default_scroll_view.rpak" ScrollView
+		{
+			override @this/View:ScrollView.autoScroll TOP
+
+			anchor: TOP_LEFT
+			pivot: <0, 0>
+			size: <500, 420>
+			constrainInput: false
+
+			context @this/View/Content
+			{
+				anchor: TOP_LEFT
+				pivot: <0, 0>
+				size: <500, 420>
+
+				panel Vertical
+				{
+					anchor: TOP_STRETCH_WIDTH
+					pivot: <0, 0>
+					offsetsLR: <0, 0>
+
+					behavior VerticalContainer
+					{
+						alignment: TOP
+						spacing: 10
+						fitContentHeight: true
+						fitContentWidth: true
+					}
+
+					panel LegalText1
+					{
+						anchor: TOP_LEFT
+						pivot: <0, 0>
+						width: 470
+
+						behavior Label
+						{
+							face: "DefaultRegularFont"
+							pixelHeight: 22
+							text: "#SWEEPSTAKES_RULES_LEGAL_1"
+							verticalMode: AUTOSIZE_TO_TEXT
+						}
+					}
+
+					panel LegalText2
+					{
+						anchor: TOP_LEFT
+						pivot: <0, 0>
+						width: 470
+
+						behavior Label
+						{
+							face: "DefaultRegularFont"
+							pixelHeight: 22
+							text: "#SWEEPSTAKES_RULES_LEGAL_2"
+							verticalMode: AUTOSIZE_TO_TEXT
+						}
+					}
+
+					panel LegalText3
+					{
+						anchor: TOP_LEFT
+						pivot: <0, 0>
+						width: 470
+
+						behavior Label
+						{
+							face: "DefaultRegularFont"
+							pixelHeight: 22
+							text: "#SWEEPSTAKES_RULES_LEGAL_3"
+							verticalMode: AUTOSIZE_TO_TEXT
+						}
+					}
+
+					panel LegalText4
+					{
+						anchor: TOP_LEFT
+						pivot: <0, 0>
+						width: 470
+
+						behavior Label
+						{
+							face: "DefaultRegularFont"
+							pixelHeight: 22
+							text: "#SWEEPSTAKES_RULES_LEGAL_4"
+							verticalMode: AUTOSIZE_TO_TEXT
+						}
+					}
+
+					panel LegalText5
+					{
+						anchor: TOP_LEFT
+						pivot: <0, 0>
+						width: 470
+
+						behavior Label
+						{
+							face: "DefaultRegularFont"
+							pixelHeight: 22
+							text: "#SWEEPSTAKES_RULES_LEGAL_5"
+							verticalMode: AUTOSIZE_TO_TEXT
+						}
+					}
+
+					panel LegalText6
+					{
+						anchor: TOP_LEFT
+						pivot: <0, 0>
+						width: 470
+
+						behavior Label
+						{
+							face: "DefaultRegularFont"
+							pixelHeight: 22
+							text: "#SWEEPSTAKES_RULES_LEGAL_6"
+							verticalMode: AUTOSIZE_TO_TEXT
+						}
+					}
+				}
+			}
+
+			context @this/ScrollBar
+			{
+				positionX: -18
+				pivot: <0.5, 1.0>
+				height: 18
+				width: 420
+				rotation: 90
+			}
+		}
+	}
+
+	panel Buttons
+	{
+		anchor: CENTER
+
+		behavior HorizontalContainer
+		{
+			fitContentHeight: true
+			fitContentWidth: true
+			spacing: 100
+		}
+
+		instance $"ui_rtk/common/buttons/base_button.rpak" CloseButton
+		{
+			override @var(labelText) "#B_BUTTON_CLOSE"
+			override @var(backgroundColor) #242526
+			override @var(outlineColor) #b4b4b5
+			override @var(lineColor) #b4b4b5
+			override @var(lineAlpha) 0.0
+			override @var(gradientColor) #78797a
+		}
+
+		instance $"ui_rtk/common/buttons/base_button.rpak" AgreeToRules
+		{
+			override @var(labelText) "#SWEEPSTAKES_VIEW_RULES"
+		}
+	}
+}

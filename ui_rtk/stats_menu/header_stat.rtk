@@ -1,0 +1,103 @@
+panel
+{
+	bind root
+
+	size: <195, 70>
+	anchor: CENTER
+
+	panel
+	{
+		anchor: TOP_LEFT
+		size: <195, 39>
+		pivot: <0, 0>
+
+		behavior Label
+		{
+			bind *.label -> @this.text
+
+			text: ""
+			face: "DefaultRegularFont"
+			color: <0.58, 0.58, 0.58, 1>
+			pixelHeight: 24
+			textAlignHorizontal: CENTER
+			textAlignVertical: BOTTOM
+			leading: -3.0
+			margin: <4.0,0,0,0>
+			kerning: -0.02
+			pixelHeight: 20
+		}
+
+		behavior LabelAltStyle
+		{
+		  		pixelHeight: 25
+		}
+
+		behavior NxOverrides
+		{
+			overrides: [
+				{
+					propertyRef: @panel:Label.pixelHeight
+					nxValue: 34
+				},
+				{
+					propertyRef: @panel:LabelAltStyle.pixelHeight
+					nxValue: 34
+				},
+				{
+					propertyRef: @panel:Label.leading
+					nxValue: -10.0
+				},
+				{
+					propertyRef: @panel.height
+					nxValue: 58
+				},
+				{
+					propertyRef: @panel.position
+					nxValue: <0, -13>
+				},
+				{
+					propertyRef: @panel:Label.face
+					nxValue: "DefaultBoldFont"
+				}
+			]
+		}
+	}
+
+	panel
+	{
+		anchor: TOP_LEFT
+		size: <195, 42>
+		position: <0, 33>
+		pivot: <0, 0>
+
+		behavior Label
+		{
+			bind *.value -> @this.text
+
+			text: ""
+			face: "TitleBoldFont"
+			color: <1.0, 1.0, 1.0, 1>
+			pixelHeight: 42
+			textAlignHorizontal: CENTER
+			textAlignVertical: TOP
+		}
+
+		behavior NxOverrides
+		{
+			overrides: [
+				{
+					propertyRef: @panel:Label.pixelHeight
+					nxValue: 46
+				},
+				{
+					propertyRef: @panel:Label.margin
+					nxValue: <7.0, 0, 0, 0>
+				},
+				{
+					propertyRef: @panel.position
+					nxValue: <0, 37>
+				}
+			]
+		}
+	}
+}

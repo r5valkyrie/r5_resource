@@ -1,0 +1,154 @@
+panel ImageCrossfaderPanel
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	var bottomImageOffsets  @this/BottomLayer.offsets
+	var topImageOffsets     @this/TopLayer.offsets
+
+	behavior ImageCrossfader
+	{
+		animator:       @panel:Animator
+		imageBottom:    @panel/BottomLayer:Image
+		imageTop:       @panel/TopLayer:Image
+	}
+
+	behavior Animator // This controls the background fade in/out
+    {
+        tweenAnimations: [
+            {
+                name: "FadeIn"
+                tweens: [
+                    {
+                        property: @panel/TopLayer:Image.alpha
+                        duration: 0.5
+                        startValue: 0
+                        endValue: 1
+                    },
+	                {
+		                property: @panel/BottomLayer:Image.alpha
+		                duration: 0.5
+		                startValue: 1
+		                endValue: 0
+	                },
+					{
+						property: @panel/TopLayer.positionY
+						duration: 0.0
+						startValue: 0
+						endValue: 0
+					},
+	                {
+		                property: @panel/BottomLayer.positionY
+		                duration: 0.0
+		                startValue: 0
+		                endValue: 0
+	                }
+                ]
+            },
+            {
+                name: "FadeInUp"
+                tweens: [
+                    {
+                        property: @panel/TopLayer:Image.alpha
+                        duration: 0.5
+                        startValue: 0
+                        endValue: 1
+                    },
+	                {
+		                property: @panel/BottomLayer:Image.alpha
+		                duration: 0.5
+		                startValue: 1
+		                endValue: 0
+	                },
+                    {
+                        property: @panel/TopLayer.positionY
+                        duration: 0.5
+                        startValue: 50
+                        endValue: 0
+                        curve: EASE_OUT_CUBIC
+                    },
+                    {
+                        property: @panel/BottomLayer.positionY
+                        duration: 0.5
+                        startValue: 0
+                        endValue: -50
+                        curve: EASE_OUT_CUBIC
+                    }
+                ]
+            },
+            {
+                name: "FadeInDown"
+                tweens: [
+                    {
+                        property: @panel/TopLayer:Image.alpha
+                        duration: 0.5
+                        startValue: 0
+                        endValue: 1
+                    },
+	                {
+		                property: @panel/BottomLayer:Image.alpha
+		                duration: 0.5
+		                startValue: 1
+		                endValue: 0
+	                },
+                    {
+                        property: @panel/TopLayer.positionY
+                        duration: 0.5
+                        startValue: -50
+                        endValue: 0
+                        curve: EASE_OUT_CUBIC
+                    },
+                    {
+                        property: @panel/BottomLayer.positionY
+                        duration: 0.5
+                        startValue: 0
+                        endValue: 50
+                        curve: EASE_OUT_CUBIC
+                    }
+                ]
+            },
+            {
+                name: "FadeOut"
+                tweens: [
+                    {
+                        property: @panel/BottomLayer:Image.alpha
+                        duration: 0.5
+                        startValue: 1
+                        endValue: 0
+                        curve: EASE_OUT_CUBIC
+                    }
+                ]
+            }
+        ]
+    }
+
+	panel BottomLayer
+	{
+		bind @this:Image.isStreaming -> PickVectorFromTwo( <1, 1, 1>,  <0, 0, 0> ) -> @this.scale
+
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			colorRGB: <1.0, 1.0, 1.0>
+			alpha: 1
+		}
+	}
+
+	panel TopLayer
+	{
+		bind @this:Image.isStreaming -> PickVectorFromTwo( <1, 1, 1>,  <0, 0, 0> ) -> @this.scale
+
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			colorRGB: <1.0, 1.0, 1.0>
+			alpha: 0
+		}
+	}
+}

@@ -1,0 +1,58 @@
+panel CurrencyWidget
+{
+	bind root
+
+	behavior CurrencyWidget
+
+	behavior VerticalContainer
+	{
+		fitContentHeight: true
+		fitContentWidth: true
+		alignment: RIGHT
+		spacing: 10
+	}
+
+	panel Row1
+	{
+		behavior HorizontalContainer
+		{
+			fitContentHeight: true
+			fitContentWidth: true
+			spacing: 8
+		}
+
+		instance $"ui_rtk/common/components/currency_display.rpak" LegendTokens
+		{
+			bind *.currencyDisplays[0].currencyIcon -> @this/CurrencyIcon:Image.assetPath
+			bind *.currencyDisplays[0].currencyAmount -> FormatNumberInt( 3, 0 ) -> @this/CurrencyAmountText:Label.text
+		}
+
+		instance $"ui_rtk/common/components/currency_display.rpak" CraftingMetals
+		{
+			bind *.currencyDisplays[1].currencyIcon -> @this/CurrencyIcon:Image.assetPath
+			bind *.currencyDisplays[1].currencyAmount -> FormatNumberInt( 3, 0 ) -> @this/CurrencyAmountText:Label.text
+		}
+	}
+
+	panel Row2
+	{
+		behavior HorizontalContainer
+		{
+			fitContentHeight: true
+			fitContentWidth: true
+			spacing: 8
+		}
+
+		instance $"ui_rtk/common/components/currency_display.rpak" ExoticShards
+		{
+			bind *.currencyDisplays[2].currencyIcon -> @this/CurrencyIcon:Image.assetPath
+			bind *.currencyDisplays[2].currencyAmount -> FormatNumberInt( 6, 0 ) -> @this/CurrencyAmountText:Label.text
+		}
+
+		instance $"ui_rtk/common/components/currency_display.rpak" ApexCoins
+		{
+			bind *.currencyDisplays[3].currencyIcon -> @this/CurrencyIcon:Image.assetPath
+			bind *.currencyDisplays[3].currencyAmount -> FormatNumberInt( 6, 0 ) -> @this/CurrencyAmountText:Label.text
+		}
+	}
+}

@@ -1,0 +1,121 @@
+panel
+{
+	size: <450, 55>
+
+	behavior DropDown
+	{
+		//maxShownItems: 15
+		mainButton: @panel/DropDownMainButton:Button
+		menuList: @panel/DropDownMenuListContainer
+		menuListContents: @panel/DropDownMenuListContainer/DropDownMenuList/Content
+		listSpacing: -55
+		soundOpened: "UI_Menu_SelectMode_Extend"
+		soundClosed: "UI_Menu_SelectMode_Close"
+	}
+
+	instance $"ui_rtk/stats_menu/dropdown_button.rpak" DropDownMainButton
+	{
+		override @this/Label:Label.margin <22, 68, 0, 0>
+
+		behavior NxOverrides
+		{
+			overrides: [
+				{
+					propertyRef: @panel.height
+					nxValue: 65
+				}
+			]
+		}
+
+		behavior ToolTip ToolTip
+		{
+			textContent: ""
+			prefab: $"ui_rtk/stats_menu/stats_tooltip.rpak"
+			offset: <32, 32>
+			delay: 0
+		}
+
+		panel Arrow
+		{
+			anchor: RIGHT
+			pivot: <0.5, 0.5>
+			position: <-36, 0>
+			size: <46, 46>
+			useLocaleDirection: true
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/buttons/button_collapse.rpak"
+			}
+
+			behavior NxOverrides
+			{
+				overrides: [
+					{
+						propertyRef: @panel.size
+						nxValue: <55, 55>
+					},
+					{
+						propertyRef: @panel.position
+						nxValue: <-29, 0>
+					}
+				]
+			}
+		}
+	}
+
+	panel DropDownMenuListContainer
+	{
+		bind @this.height -> @this/VScrollBar.width
+
+		anchor: TOP_LEFT
+		size: <450, 825>
+		inputListener: true
+		constrainInput: false
+
+		behavior InputBlocker
+
+		instance $"ui_rtk/controls/scroll_view.rpak" DropDownMenuList
+		{
+			override @this:ScrollView.content @this/Content
+			override @this:ScrollView.verticalScrollBar @parent/VScrollBar:ScrollBar
+
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			panel Content
+			{
+				anchor: TOP_LEFT
+
+				behavior VerticalContainer
+				{
+					fitContentWidth: true
+					fitContentHeight: true
+				}
+
+				behavior ListBinder
+				{
+					var bindingPath @this.bindingPath
+
+					bindingPath: ""
+					prefab: $"ui_rtk/stats_menu/dropdown_button_db.rpak"
+				}
+			}
+		}
+
+		instance $"ui_rtk/controls/scroll_bar.rpak" VScrollBar
+		{
+			override @this:ScrollBar.step 55.0
+			override @this:ScrollBar.dynamicHandleSize true
+			override @var(bgColor) <1, 1, 1, 0.0392>
+			override @var(handleColor) <1, 1, 1, 0.3921>
+			override @var(handleHighlightColor) <1, 1, 1, 1>
+			override @var(handlePressedColor) <1, 1, 1, 1>
+
+			anchor: RIGHT
+			pivot: <0.5, 1>
+			height: 20
+			rotation: 90
+		}
+	}
+}

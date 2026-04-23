@@ -1,0 +1,26 @@
+panel AutoCrossfader
+{
+	bind root
+
+	bind * -> HasAny -> [ @this.visible, @this.active ]
+
+	var imageFader @this:AutoCrossfader.imageFader
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+	behavior AutoCrossfader
+
+	behavior HorizontalContainer
+	{
+		fitContentWidth: true
+		fitContentHeight: true
+		spacing: 10
+		alignment: CENTER
+	}
+
+	behavior ListBinder
+	{
+		bindingPath: "*"
+		prefab: $"ui_rtk/common/components/auto_crossfader_pip.rpak"
+	}
+}

@@ -1,0 +1,178 @@
+panel ArmoryCategoriesPanel
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	behavior ArmoryCategoriesPanel
+	{
+		arPanel: @panel/Screen/WeaponCategories/Row1/AR
+		smgPanel: @panel/Screen/WeaponCategories/Row1/SMG
+		lmgPanel: @panel/Screen/WeaponCategories/Row1/LMG
+		marksmanPanel: @panel/Screen/WeaponCategories/Row2/Marksman
+		sniperPanel: @panel/Screen/WeaponCategories/Row2/Sniper
+		pistolPanel: @panel/Screen/WeaponCategories/Row3/Pistol
+		shotgunPanel: @panel/Screen/WeaponCategories/Row3/Shotgun
+	}
+
+	panel Screen
+	{
+		width: 1920
+		offsetsTB: <0, 0>
+		anchor: CENTER_STRETCH_HEIGHT
+
+		panel WeaponCategories
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+			offsetTop: -13
+
+			behavior VerticalContainer
+			{
+				fitContentHeight: true
+				fitContentWidth: true
+				alignment: CENTER
+				spacing: 32
+			}
+
+			panel Row1
+			{
+				anchor: TOP_LEFT
+
+				behavior HorizontalContainer
+				{
+					fitContentHeight: true
+					fitContentWidth: true
+					spacing: 32
+				}
+
+				instance $"ui_rtk/menus/armory/components/armory_button.rpak" AR
+				{
+					override bind root "&menus.armory.weaponCategories.ar"
+					override @var(iconSize) <400, 200>
+					override @var(iconPositionY) 9
+					override @var(arrowsBGWidth) 410
+
+					anchor: CENTER
+					size: <410, 229>
+				}
+
+				instance $"ui_rtk/menus/armory/components/armory_button.rpak" SMG
+				{
+					override bind root "&menus.armory.weaponCategories.smg"
+					override @var(iconSize) <400, 200>
+					override @var(iconPositionY) 9
+					override @var(arrowsBGWidth) 410
+
+					anchor: CENTER
+					size: <410, 229>
+				}
+
+				instance $"ui_rtk/menus/armory/components/armory_button.rpak" LMG
+				{
+					override bind root "&menus.armory.weaponCategories.lmg"
+					override @var(iconSize) <400, 200>
+					override @var(iconPositionY) 9
+					override @var(arrowsBGWidth) 410
+
+					anchor: CENTER
+					size: <410, 229>
+				}
+			}
+
+			panel Row2
+			{
+				anchor: TOP_LEFT
+
+				behavior HorizontalContainer
+				{
+					fitContentHeight: true
+					fitContentWidth: true
+					spacing: 32
+				}
+
+				instance $"ui_rtk/menus/armory/components/armory_button.rpak" Marksman
+				{
+					override bind root "&menus.armory.weaponCategories.marksman"
+					override @var(iconSize) <450, 225>
+					override @var(iconPositionY) 14
+					override @var(arrowsBGWidth) 590
+
+					anchor: CENTER
+					size: <590, 229>
+				}
+
+				instance $"ui_rtk/menus/armory/components/armory_button.rpak" Sniper
+				{
+					override bind root "&menus.armory.weaponCategories.sniper"
+					override @var(iconSize) <450, 225>
+					override @var(iconPositionY) 14
+					override @var(arrowsBGWidth) 590
+
+					anchor: CENTER
+					size: <590, 229>
+				}
+			}
+
+			panel Row3
+			{
+				anchor: TOP_LEFT
+
+				behavior HorizontalContainer
+				{
+					fitContentHeight: true
+					fitContentWidth: true
+					spacing: 32
+				}
+
+				instance $"ui_rtk/menus/armory/components/armory_button.rpak" Pistol
+				{
+					override bind root "&menus.armory.weaponCategories.pistol"
+					override @var(iconSize) <350, 175>
+					override @var(iconPositionY) -11
+					override @var(arrowsBGWidth) 410
+
+					anchor: CENTER
+					size: <410, 229>
+				}
+
+				instance $"ui_rtk/menus/armory/components/armory_button.rpak" Shotgun
+				{
+					override bind root "&menus.armory.weaponCategories.shotgun"
+					override @var(iconSize) <400, 200>
+					override @var(iconPositionY) 5
+					override @var(arrowsBGWidth) 410
+
+					anchor: CENTER
+					size: <410, 229>
+				}
+			}
+		}
+
+		panel RightWidget
+		{
+			//temp kill switch
+			bind &menus.armory.weaponCategories.ar.count -> CheckIfWeaponMasteryEnabled -> @this.visible
+
+			anchor: TOP_RIGHT
+			pivot: <1.0, 0.0>
+			position: <-72, 82>
+			constrainInput: false
+			visible: false
+
+			behavior VerticalContainer
+			{
+				spacing: 55
+				alignment: TOP
+			}
+
+			instance $"ui_rtk/menus/mastery/weapons/components/weapon_mastery_level.rpak"
+			{
+				anchor: TOP_RIGHT
+			}
+
+			instance $"ui_rtk/menus/mastery/weapons/components/top/mastery_top_weapons.rpak"
+		}
+	}
+}

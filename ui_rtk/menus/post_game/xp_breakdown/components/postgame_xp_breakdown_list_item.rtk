@@ -1,0 +1,228 @@
+panel BreakdownListElement
+{
+	bind root
+	size: <460, 40>
+	pivot: <0, 0>
+
+	behavior Animator
+	{
+		tweenAnimations: [
+		{
+			name: "AnimateIn"
+			tweens: [
+			{
+				property: @panel.visible
+				startValue: false
+				endValue: true
+				duration: 0.1
+			},
+			{
+				property: @panel:Sound.play
+				startValue: false
+				endValue: true
+				duration: 0.1
+				curve: CEIL
+			}
+			]
+		}
+		]
+	}
+
+	behavior Image
+	{
+		bind *.backgroundColor -> @this.colorRGB
+		bind * -> IndexOfElementInArray -> Modulo(2) -> PickFloatFromTwo(0.25, 0.05) -> @this.alpha
+	}
+
+	behavior Sound
+	{
+		sound: "UI_Menu_MatchSummary_Ranked_XPBreakdown"
+	}
+
+	behavior VerticalContainer
+	{
+		fitContentHeight: true
+		spacing: 5
+	}
+
+	panel Line1
+	{
+		anchor: CENTER
+		pivot: <0.5, 0.5>
+		size: <460, 40>
+
+		panel Header
+		{
+			behavior HorizontalContainer
+			{
+				spacing: 5
+				useLocaleDirection: true
+			}
+
+			anchor: LEFT_STRETCH_HEIGHT
+			pivot: <0, 0>
+			offsetsTB: <0, 0>
+			positionX: 10
+			width: 200
+			useLocaleDirection: true
+
+			panel HeaderText
+			{
+				anchor: LEFT_STRETCH_HEIGHT
+				pivot: <0, 0>
+				offsetsTB: <0, 0>
+				positionX: 10
+				width: 200
+				useLocaleDirection: true
+
+				behavior FormatLabel
+				{
+					bind *.title -> @this.format
+					bind *.textColor -> @this.colorRGB
+
+					format: "DEFAULT"
+					face: "DefaultFont"
+					pixelHeight: 30
+					horizontalMode: AUTOSIZE_TO_TEXT
+					colorRGB: <1, 1, 1>
+					outlineColorInner: <0, 0, 0, 0>
+					outlineColorOuter: <0, 0, 0, 0>
+					textAlignHorizontal: LEFT
+					textAlignVertical: CENTER
+					arg1: ""
+					useLocaleDirection: true
+				}
+
+				behavior LabelAltStyle
+				{
+					color: #bcbcbc
+				}
+			}
+		}
+
+		panel NonBoostedExperienceValue
+		{
+			bind *.boostPercentage -> Equal( 0 ) -> @this.visible
+
+			anchor: RIGHT_STRETCH_HEIGHT
+			pivot: <1.0, 0>
+			offsetsTB: <0, 0>
+			positionX: -10
+			width: 200
+			useLocaleDirection: true
+
+			behavior FormatLabel
+			{
+				bind *.textColor -> @this.colorRGB
+				bind *.xpValue -> Equal( 0 ) -> PickStringFromTwo( "#EOG_XP_PLUSNUMBER", "#EOG_XP_NONE" ) -> @this.format
+				bind *.xpValue -> @this.arg1
+
+				face: "DefaultFont"
+				format: ""
+				arg1: 0
+				pixelHeight: 30
+				horizontalMode: SQUISH_TO_CONTAINER
+				colorRGB: <1, 1, 1>
+				outlineColorInner: <0, 0, 0, 0>
+				outlineColorOuter: <0, 0, 0, 0>
+				textAlignHorizontal: RIGHT
+				textAlignVertical: CENTER
+				useLocaleDirection: true
+			}
+		}
+
+		panel BoostIcons
+		{
+			bind *.boostPercentage -> NotEqual( 0 ) -> @this.visible
+
+			inputListener: true
+
+			anchor: RIGHT_STRETCH_HEIGHT
+			pivot: <1.0, 0>
+			offsetsTB: <0, 0>
+			position: <-4, -24>
+			size: <50, 50>
+			useLocaleDirection: true
+
+			behavior Image
+			{
+				color: #f6a323
+				assetPath: $"ui_image/rui/menu/xp_boost/BoostXP_sm.rpak"
+			}
+
+			behavior ToolTip ToolTip
+			{
+				bind *.boostPercentage -> NotEqual( 0 ) -> @this.active
+
+				bindingPath: "*"
+				prefab: $"ui_rtk/common/tooltips/list_tool_tip.rpak"
+				offset: <32, 32>
+				delay: 0
+			}
+		}
+	}
+
+	panel Line2
+	{
+		bind *.boostPercentage -> NotEqual( 0 ) -> @this.visible
+
+		anchor: CENTER
+		pivot: <0.5, 0.5>
+		size: <460, 40>
+
+		panel HeaderText
+		{
+			anchor: LEFT_STRETCH_HEIGHT
+			pivot: <0, 0>
+			offsetsTB: <0, 0>
+			positionX: 10
+			width: 200
+			useLocaleDirection: true
+
+			behavior FormatLabel
+			{
+				bind *.textColor -> @this.colorRGB
+				bind *.boostPercentage -> @this.arg1
+
+				format: "#PROGRESSION_MODIFIERS_BOOST_APPLIED_PERCENTAGE"
+				face: "DefaultFont"
+				pixelHeight: 30
+				horizontalMode: SQUISH_TO_CONTAINER
+				colorRGB:  #bcbcbc
+				outlineColorInner: <0, 0, 0, 0>
+				outlineColorOuter: <0, 0, 0, 0>
+				textAlignHorizontal: LEFT
+				textAlignVertical: CENTER
+				arg1: ""
+				useLocaleDirection: true
+			}
+		}
+
+		panel BoostedExperienceValue
+		{
+			anchor: RIGHT_STRETCH_HEIGHT
+			pivot: <1.0, 0>
+			offsetsTB: <0, 0>
+			positionX: -10
+			width: 200
+			useLocaleDirection: true
+
+			behavior Label
+			{
+				bind *.xpValue -> @this.text
+				bind *.textColor -> @this.colorRGB
+
+				text: ""
+				face: "DefaultFont"
+				pixelHeight: 30
+				horizontalMode: SQUISH_TO_CONTAINER
+				colorRGB: <1, 1, 1>
+				outlineColorInner: <0, 0, 0, 0>
+				outlineColorOuter: <0, 0, 0, 0>
+				textAlignHorizontal: RIGHT
+				textAlignVertical: CENTER
+				useLocaleDirection: true
+			}
+		}
+	}
+}

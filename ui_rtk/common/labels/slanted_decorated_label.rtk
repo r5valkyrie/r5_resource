@@ -1,0 +1,52 @@
+panel SlantedLabel
+{
+	var text @this/Value/ValueText:Label.text
+	behavior HorizontalContainer
+	{
+		fitContentWidth: true
+		fitContentHeight: true
+	}
+
+	panel Slant
+	{
+		bind @parent/Value/ValueText:Label.pixelHeight -> @this.width
+		bind @parent/Value/ValueText:Label.pixelHeight -> @this.height
+
+		behavior Image
+		{
+			colorRGB: <1, 1, 1>
+			assetPath: $"ui_image/rui/menu/common/button_left_30deg.rpak"
+			flipVertical: true
+		}
+	}
+
+	panel Value
+	{
+		behavior HorizontalContainer
+		{
+			fitContentWidth: true
+			fitContentHeight: true
+		}
+
+		behavior Image
+
+		panel ValueText
+		{
+			bind @this:Label.pixelHeight -> @this.height
+
+			anchor: RIGHT
+			pivot: <1, 1>
+
+			behavior Label
+			{
+				text: "DEFAULT"
+				face: "TitleBoldFont"
+				pixelHeight: 28
+				horizontalMode: AUTOSIZE_TO_TEXT
+				colorRGB: <0, 0, 0>
+				textAlignHorizontal: RIGHT
+				textAlignVertical: CENTER
+			}
+		}
+	}
+}

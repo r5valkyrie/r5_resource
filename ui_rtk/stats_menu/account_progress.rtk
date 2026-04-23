@@ -1,0 +1,190 @@
+panel
+{
+	bind root
+
+	anchor: CENTER
+	size: <400, 118>
+
+	panel CurrentBadge
+	{
+		anchor: CENTER
+		size: <116, 116>
+		position: <-149, 0>
+		useLocaleDirection: true
+
+		behavior Badge
+		{
+			bind *.currentBadge.badgeRuiAsset -> @this.badgeRuiAsset
+			bind *.currentBadge.tier -> @this.tier
+
+			badgeRuiAsset: $"ui/gcard_badge_account_t1.rpak"
+			tier: 20
+		}
+
+		behavior NxOverrides
+		{
+			overrides: [
+				{
+					propertyRef: @panel.size
+					nxValue: <100, 100>
+				},
+				{
+					propertyRef: @panel.position
+					nxValue: <-139,-3>
+				}
+			]
+		}
+	}
+
+	panel BarContainer
+	{
+		size: <225, 12>
+		pivot: <0, 0>
+		position: <120, 58>
+		useLocaleDirection: true
+
+		behavior NxOverrides
+		{
+			overrides: [
+				{
+					propertyRef: @panel.size
+					nxValue: <200, 12>
+				},
+				{
+					propertyRef: @panel.position
+					nxValue: <120, 56>
+				}
+			]
+		}
+
+		behavior ProgressBar
+		{
+			bind *.progressFrac -> @this.value
+
+			min: 0.0
+			max: 1.0
+			barContainer: @panel
+			bar: @panel/Bar
+			useLocaleDirection: true
+		}
+
+		panel BarLine
+		{
+			anchor: TOP_STRETCH_WIDTH
+			pivot: <0.5, 0>
+			height: 2
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				color: <0.58, 0.58, 0.58, 1>
+			}
+
+			behavior NxOverrides
+			{
+				overrides: [
+					{
+						propertyRef: @panel.height
+						nxValue: 4
+					}
+				]
+			}
+		}
+
+		panel Bar
+		{
+			anchor: LEFT_STRETCH_HEIGHT
+			pivot: <0, 0.5>
+			offsetsTB: <0, 0>
+			useLocaleDirection: true
+
+			behavior Image
+		}
+
+		panel EarnedXP
+		{
+			anchor: BOTTOM_STRETCH_WIDTH
+			pivot: <0.5, 1.0>
+			position: <0, -10>
+			height: 23
+			offsets: <0,0,0,0>
+
+			behavior Label
+			{
+				bind *.earnedXP -> @this.text
+
+				text: "8775 / 12500"
+				face: "DefaultRegularFont"
+				color: <1.0, 1.0, 1.0, 1>
+				pixelHeight: 23
+				textAlignHorizontal: RIGHT
+				useLocaleDirection: true
+			}
+
+			behavior NxOverrides
+			{
+				overrides: [
+					{
+						propertyRef: @panel.anchor
+						nxValue: 9 // TOP_STRETCH_WIDTH
+					},
+					{
+						propertyRef: @panel.offsets
+						nxValue: <0,0,0,0>
+					},
+					{
+						propertyRef: @panel:Label.pixelHeight
+						nxValue: 32
+					},
+					{
+						propertyRef: @panel:Label.margin
+						nxValue: <0, 2, -9, 0>
+					},
+					{
+						propertyRef: @panel:Label.kerning
+						nxValue: -0.02
+					},
+					{
+						propertyRef: @panel:Label.face
+						nxValue: "DefaultBoldFont"
+					},
+					{
+						propertyRef: @panel.position
+						nxValue: <0, 0>
+					}
+				]
+			}
+		}
+	}
+
+	panel NextBadge
+	{
+		anchor: CENTER
+		size: <46, 46>
+		position: <170, -1>
+		useLocaleDirection: true
+
+		behavior Badge
+		{
+			bind *.nextBadge.badgeRuiAsset -> @this.badgeRuiAsset
+			bind *.nextBadge.tier -> @this.tier
+
+			badgeRuiAsset: $"ui/gcard_badge_account_t1.rpak"
+			tier: 21
+		}
+
+		behavior NxOverrides
+		{
+			overrides: [
+				{
+					propertyRef: @panel.size
+					nxValue: <59, 59>
+				},
+				{
+					propertyRef: @panel.position
+					nxValue: <150,-2>
+				}
+			]
+		}
+	}
+}

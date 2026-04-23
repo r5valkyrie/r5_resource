@@ -1,0 +1,100 @@
+panel PipButton
+{
+	bind root
+
+	var size @this.size
+
+	anchor: TOP_LEFT
+	pivot: <0, 0>
+	size: <20, 48>
+	inputListener: true
+
+	behavior Button
+	{
+		soundHighlighted: "ui_menu_focus"
+		soundPressedEnabled: "ui_menu_accept"
+		transitions: [
+			{
+				fromState: HIGHLIGHTED
+				toState: IDLE
+				type: TRANSITION_TWEEN
+				animName: "onHighlightedToIdle"
+			},
+			{
+				fromState: IDLE
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @panel/Container/HighlightBorder:Image.alpha
+				value: 1.0
+			}
+		]
+	}
+
+	behavior Animator
+	{
+		tweenAnimations: [
+			{
+				name: "onHighlightedToIdle"
+				tweens: [
+					{
+						property: @panel/Container/HighlightBorder:Image.alpha
+						startValue: 1.0
+						endValue: 0.0
+						duration: 0.15
+					}
+				]
+			}
+		]
+	}
+
+	panel Container
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		panel InActive
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				bind *.isActive -> PickFloatFromTwo( 1.0, 0.0 ) -> @this.alpha
+				bind *.miscBool -> PickVectorFromTwo( <0.6, 0.6, 0.6>, <1.0, 1.0, 1.0> ) -> @this.colorRGB
+
+				assetPath: $"ui_image/rui/menu/navigation/nav_vertical_pip.rpak"
+				color: <0.6, 0.6, 0.6, 1>
+			}
+
+			behavior ColorExtensions
+		}
+
+		panel Active
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				bind *.isActive -> PickFloatFromTwo( 0.0, 1.0 ) -> @this.alpha
+
+				assetPath: $"ui_image/rui/menu/navigation/nav_vertical_pip.rpak"
+				color: <1.0, 0.4, 0.0, 1>
+			}
+
+			behavior ColorExtensions
+		}
+
+		panel HighlightBorder
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <-2, -2, -8, -8>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/navigation/nav_vertical_pip_border.rpak"
+				color: <1.0, 0.4, 0.0, 0>
+			}
+		}
+	}
+}

@@ -1,0 +1,388 @@
+//Expected Type: PostGameWeaponMasteryTrialsChangedModel
+panel PostGameBreakdownListitem
+{
+	bind root
+
+	size: <590, 228>
+	offsets: <0, 0, 0, 0>
+	pivot: <0, 0>
+	inputListener: true
+
+	behavior ToolTip
+	{
+		textContent: ""
+		prefab:  $"ui_rtk/menus/post_game/weapons/components/postgame_weapon_trials_tooltip.rpak"
+		offset: <0, 0>
+		delay: 0
+		bindingPath: "*"
+	}
+
+	panel BackCards
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		pivot: <0.5, 0.5>
+		offsetsTB: <0, 0>
+		position: <7, 7>
+
+		panel BottomBackCard2
+		{
+			bind *.totalUpdated -> GreaterThan(2.0) -> @this.visible
+
+			anchor: BOTTOM_RIGHT
+			size: <590, 6>
+			offsets: <0, 0, 0, 0>
+			pivot: <1.0, 1.0>
+			offsetsTB: <0, 0>
+			position: <5, 5>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/mastery/mastery_trialitem_multiples_bottom.rpak"
+			}
+		}
+
+		panel SideBackCard2
+		{
+			bind *.totalUpdated -> GreaterThan(2.0) -> @this.visible
+
+			anchor: BOTTOM_RIGHT
+			size: <6, 222>
+			offsets: <0, 0, 0, 0>
+			pivot: <1.0, 1.0>
+			offsetsTB: <0, 0>
+			position: <5, -1>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/mastery/mastery_trialitem_multiples_right.rpak"
+			}
+		}
+
+		panel BottomBackCard1
+		{
+			bind *.totalUpdated -> GreaterThan(1.0) -> @this.visible
+
+			anchor: BOTTOM_RIGHT
+			size: <590, 6>
+			offsets: <0, 0, 0, 0>
+			pivot: <1.0, 1.0>
+			offsetsTB: <0, 0>
+			position: <-1, -1>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/mastery/mastery_trialitem_multiples_bottom.rpak"
+			}
+		}
+
+		panel SideBackCard1
+		{
+			bind *.totalUpdated -> GreaterThan(1.0) -> @this.visible
+
+			anchor: BOTTOM_RIGHT
+			size: <6, 222>
+			offsets: <0, 0, 0, 0>
+			pivot: <1.0, 1.0>
+			offsetsTB: <0, 0>
+			position: <-1, -7>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/mastery/mastery_trialitem_multiples_right.rpak"
+			}
+		}
+	}
+
+	panel Container
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		pivot: <0.5, 0>
+		offsetsTB: <0, 0>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/mastery/mastery_trialitem_default.rpak"
+		}
+
+		panel CompletedArt
+		{
+			bind *.changedTrials[0].isComplete -> @this.visible
+
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+			pivot: <0.5, 0>
+			offsetsTB: <0, 0>
+
+			panel CompletedTopLeft
+			{
+				anchor: TOP_LEFT
+				offsets: <0, 0, 0, 0>
+				pivot: <0, 0>
+				size: <312, 44>
+				position: <-4, -2>
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/menu/mastery/mastery_trialitem_topleft_base.rpak"
+					colorRGB: <0.1254, 0.3215, 0.2078>
+				}
+			}
+
+			panel CompletedGradient
+			{
+				offsets: <-2, -2, -3, -3>
+				anchor: BOTTOM_STRETCH_WIDTH
+				pivot: <0.5, 1.0>
+				size: <0, 118>
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/menu/mastery/mastery_trialitem_complete_gradient.rpak"
+					colorRGB: <0.1254, 0.3215, 0.2078>
+					alpha: 0.3
+				}
+			}
+
+			panel CompletedOutline
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <-2, -2, -3, -3>
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/menu/mastery/mastery_trialitem_frame.rpak"
+					colorRGB: <0.1254, 0.3215, 0.2078>
+				}
+			}
+		}
+		
+		panel HeaderLeft
+		{
+			anchor: TOP_LEFT
+			offsets: <0, 0, 3, 0>
+			pivot: <0, 0>
+			size: <265, 37>
+
+			panel Name
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <12, 12, 0, 0>
+
+			    behavior Label
+			    {
+				    bind *.name -> @this.text
+
+				    text: ""
+			        face: "DefaultBoldFont"
+			        pixelHeight: 35
+			        colorRGB: <1, 1, 1>
+			        outlineColorInner: <0, 0, 0, 0>
+			        outlineColorOuter: <0, 0, 0, 0>
+			        textAlignHorizontal: LEFT
+			        textAlignVertical: CENTER
+			        allCaps: true
+					shadowOffset: <0.5, 0.5>
+					shadowAlpha: 0.65
+					shadowBlur: 6.0
+			    }
+			}
+		}
+
+		panel HeaderRight
+		{
+			anchor: TOP_RIGHT
+			offsets: <0, 0, 3, 0>
+			pivot: <1, 0>
+			size: <265, 43>
+
+			panel Name
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <12, 12, 0, 0>
+
+			    behavior FormatLabel
+			    {
+			        bind *.trialsUnlocked -> @this.arg1
+			        bind *.totalTrials -> @this.arg2
+
+			        format: "#MASTERY_WEAPONS_TRIALS_UNLOCKED_COUNT"
+			        face: "DefaultFont"
+			        pixelHeight: 30
+			        colorRGB: <0.52, 0.52, 0.52>
+			        outlineColorInner: <0, 0, 0, 0>
+			        outlineColorOuter: <0, 0, 0, 0>
+			        textAlignHorizontal: RIGHT
+			        textAlignVertical: CENTER
+			        verticalMode: CLIP
+			        horizontalMode: SQUISH_TO_CONTAINER
+					shadowOffset: <0.5, 0.5>
+					shadowAlpha: 0.65
+					shadowBlur: 6.0
+					arg1: ""
+					arg2: ""
+			    }
+			}
+		}
+
+		panel Content
+		{
+			anchor: TOP_LEFT
+			offsets: <0, 0, 0, 0>
+			pivot: <0, 0>
+			size: <460, 115>
+			positionX: 14
+			positionY: 58
+			useLocaleDirection: true
+
+			behavior VerticalContainer
+			{
+				expandChildWidth: true
+			}
+
+			panel UpdateCountMultiple
+			{
+				bind *.totalUpdated -> GreaterThanOrEqual( 2 ) -> @this.visible
+
+				offsets: <0, 80, 0, 0>
+				pivot: <0, 0>
+				height: 25
+
+			    behavior Label
+			    {
+					bind *.totalUpdated -> FloatToInt -> LocalizeStringInAnother( "#MASTERY_WEAPONS_TRIALS_UPDATES" ) -> @this.text
+
+				    text: ""
+			        face: "DefaultRegularFont"
+			        pixelHeight: 25
+			        colorRGB: <0.9215, 0.7843, 0.298>
+			        outlineColorInner: <0, 0, 0, 0>
+			        outlineColorOuter: <0, 0, 0, 0>
+			        textAlignHorizontal: LEFT
+			        horizontalMode: SQUISH_TO_CONTAINER
+					useLocaleDirection: true
+			    }
+			}
+
+			panel UpdateCountSingle
+			{
+				bind *.totalUpdated -> Equal( 1 ) -> @this.visible
+
+				offsets: <0, 0, 0, 0>
+				pivot: <0, 0>
+				height: 25
+
+			    behavior Label
+			    {
+					bind *.totalUpdated -> LocalizeStringInAnother( "#MASTERY_WEAPONS_TRIALS_UPDATE" ) -> @this.text
+
+				    text: ""
+			        face: "DefaultRegularFont"
+			        pixelHeight: 25
+			        colorRGB: <0.9215, 0.7843, 0.298>
+			        outlineColorInner: <0, 0, 0, 0>
+			        outlineColorOuter: <0, 0, 0, 0>
+			        textAlignHorizontal: LEFT
+			        horizontalMode: SQUISH_TO_CONTAINER
+					useLocaleDirection: true
+			    }
+			}
+
+			panel Description
+			{
+				anchor: TOP_STRETCH_WIDTH
+				offsets: <0, 0, 0, 0>
+				pivot: <0, 0>
+
+			    behavior Label
+			    {
+			        bind *.changedTrials[0].trialConfig.description -> @this.text
+
+				    text: ""
+			        face: "DefaultRegularFont"
+			        pixelHeight: 28
+			        colorRGB: <1, 1, 1>
+			        outlineColorInner: <0, 0, 0, 0>
+			        outlineColorOuter: <0, 0, 0, 0>
+			        textAlignHorizontal: LEFT
+				    verticalMode: AUTOSIZE_TO_TEXT
+				    horizontalMode: WRAP
+				    verticalMode: CLIP
+					useLocaleDirection: true
+			    }
+			}
+		}
+
+		panel Rewards
+		{
+			anchor: BOTTOM_RIGHT
+			pivot: <1.0, 1.0>
+			positionX: -14
+			positionY: -16
+			size: <88, 88>
+			useLocaleDirection: true
+
+			behavior VerticalContainer
+			{
+				alignment: BOTTOM_RIGHT
+				spacing: 8
+			}
+
+			behavior ListBinder
+			{
+				bindingPath: "*.changedTrials[0].trialConfig.rewards"
+				prefab: $"ui_rtk/common/buttons/battlepass_reward_button_small.rpak"
+				rangeStart: 0
+				rangeEnd : 1
+			}
+		}
+
+		panel Progress
+		{
+			anchor: BOTTOM_LEFT
+			pivot: <0, 1.0>
+			positionX: 14
+			positionY: -16
+			size: <450, 30>
+			useLocaleDirection: true
+
+			behavior AngledProgressBar
+			{
+				bind *.changedTrials[0].currentFrac -> @this.current
+				bind  *.changedTrials[0].isComplete -> PickVectorFromTwo(<0.4627, 0.3686, 0.1176>, <0.8980, 0.7058, 0.2039>) -> @this.progressBarColor
+
+				progressBarColor: <0.9215, 0.7843, 0.298>
+				progressBarAlpha: 1.0
+				progressBgColor: <0.2823, 0.2549 ,0.1568>
+				progressBgAlpha: 0.6
+				angle: 45
+				max: 1.0
+			}
+
+	        panel Status
+			{
+				anchor: CENTER_STRETCH_WIDTH
+				offsets: <0, 0, 0, 0>
+
+				behavior FormatLabel
+				{
+					bind *.changedTrials[0].currentValue -> @this.arg1
+					bind *.changedTrials[0].trialConfig.goal -> @this.arg2
+					bind *.changedTrials[0].isComplete -> PickStringFromTwo( "#X/Y", "#MASTERY_COMPLETED_TRIAL" ) -> @this.format
+
+					format: ""
+					face: "DefaultBoldFont"
+					textAlignHorizontal: LEFT
+					textAlignVertical: CENTER
+					pixelHeight: 25
+					colorRGB: <0, 0, 0>
+					margin: <10, 10, 0, 0>
+					arg1: "0"
+					arg2: "0"
+					useLocaleDirection: true
+				}
+			}
+		}
+	}
+}

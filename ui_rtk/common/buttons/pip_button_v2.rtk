@@ -1,0 +1,97 @@
+panel PipButton
+{
+	bind root
+
+	var size @this.size
+	var containerPanel @this/Container
+	var inActiveColorRGB @this/Container/InActive:Image.colorRGB
+
+	anchor: TOP_LEFT
+	pivot: <0, 0>
+	size: <60, 12>
+	inputListener: true
+
+	behavior Button
+	{
+		soundHighlighted: "ui_menu_focus"
+		soundPressedEnabled: "ui_menu_accept"
+		transitions: [
+			{
+				fromState: HIGHLIGHTED
+				toState: IDLE
+				type: TRANSITION_TWEEN
+				animName: "onHighlightedToIdle"
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Container/HighlightBorder:Image.alpha
+				value: 1
+			}
+		]
+	}
+
+	behavior Animator
+	{
+		tweenAnimations: [
+			{
+				name: "onHighlightedToIdle"
+				tweens: [
+					{
+						property: @owner.panel/Container/HighlightBorder:Image.alpha
+						startValue: 1
+						endValue: 0
+						duration: 0.2
+					}
+				]
+			}
+		]
+	}
+
+	panel Container
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		panel InActive
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			bind *.isActive -> NOT -> @this.visible
+
+			behavior Image
+			{
+				colorRGB: #COLOR_GREY_NAV_PIP
+			}
+		}
+
+		panel Active
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			bind *.isActive -> @this.visible
+
+			behavior Image
+			{
+				colorRGB: #COLOR_ORANGE_1
+			}
+		}
+
+		panel HighlightBorder
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <-5, -5, -5, -5>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/borders/border_outline_2px.rpak"
+
+				colorRGB: #COLOR_ORANGE_1
+				alpha: 0
+			}
+		}
+	}
+}

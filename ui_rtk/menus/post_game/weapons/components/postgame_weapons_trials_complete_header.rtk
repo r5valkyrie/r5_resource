@@ -1,0 +1,404 @@
+panel WeaponTrialsCompleteHeader
+{
+	bind root
+	
+	size: <1920, 1080>
+
+	behavior Animator
+    {
+		keyframeAnimations: [
+			{
+				name: "EnterScene"
+				animAsset: $"ui_rtk/menus/post_game/weapons/animations/animation_trial_celebration_header_enter.rpak"
+			},
+			{
+				name: "EnterSceneUltimate"
+				animAsset: $"ui_rtk/menus/post_game/weapons/animations/animation_all_trial_celebration_header_enter.rpak"
+			}
+		]
+
+		tweenAnimations: [
+			{
+				name: "Reset"
+				tweens: [
+					{
+						property: @panel/MainBanner:RenderGroup.alpha
+						startValue: 1.0
+						endValue: 0.0
+						duration: 0.35
+						curve: EASE_OUT_CUBIC
+					}
+				]
+			}
+		]
+    }
+
+    panel WeaponIcons
+    {
+        anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+
+        behavior ListBinder
+		{
+			bindingPath: "*.weaponIcons"
+			prefab: $"ui_rtk/menus/post_game/weapons/components/postgame_celebration_weapon_icon.rpak"
+		}
+
+    }
+
+    panel ApexLogo
+    {
+        anchor: CENTER
+        size: <600, 600>
+        position: <0, -43>
+        pivot: <0.5, 0.53>
+
+        behavior Image
+        {
+            assetPath: $"ui_image/rui/hud/gametype_icons/apex_logo.rpak"
+			color: <1.0, 1.0, 1.0, 0.0>
+        }
+    }
+
+    panel CircleBlur
+    {
+        anchor: CENTER
+        size: <450, 450>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/mastery/weaponmastery_background_mask.rpak"
+			color: <0.69, 0.0, 0.0, 0.0>
+		}
+    }
+
+    panel RingSolid
+    {
+        anchor: CENTER
+        size: <256, 256>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/mastery/weaponmastery_circle_solid_outline.rpak"
+			color: <0.69, 0.0, 0.0, 0.0>
+		}
+    }
+
+    panel RingDots
+    {
+		anchor: CENTER
+        size: <800, 800>
+
+		panel Arc1
+		{
+			anchor: CENTER
+			size: <400, 400>
+			pivot: <0.0, 0.0>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/mastery/weaponmastery_dotted_arc.rpak"
+				color: <0.69, 0.0, 0.0, 0.0>
+				flipVertical: true
+			}
+		}
+
+		panel Arc2
+		{
+			anchor: CENTER
+			size: <400, 400>
+			pivot: <1.0, 0.0>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/mastery/weaponmastery_dotted_arc.rpak"
+				color: <0.69, 0.0, 0.0, 0.0>
+				flipVertical: true
+				flipHorizontal: true
+			}
+		}
+
+		panel Arc3
+		{
+			anchor: CENTER
+			size: <400, 400>
+			pivot: <1.0, 1.0>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/mastery/weaponmastery_dotted_arc.rpak"
+				color: <0.69, 0.0, 0.0, 0.0>
+				flipHorizontal: true
+			}
+		}
+
+		panel Arc4
+		{
+			anchor: CENTER
+			size: <400, 400>
+			pivot: <0.0, 1.0>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/mastery/weaponmastery_dotted_arc.rpak"
+				color: <0.69, 0.0, 0.0, 0.0>
+			}
+		}
+    }
+
+    panel CircleFilled
+    {
+        anchor: CENTER
+        size: <128, 128>
+
+        behavior Image
+		{
+			assetPath: $"ui_image/circle.rpak"
+			color: <0.69, 0.2, 0.2, 0.0>
+		}
+    }
+
+    panel Diamond
+    {
+        anchor: CENTER
+        size: <276, 276>
+        rotation: 45
+
+        behavior Image
+        {
+            assetPath: $"ui_image/rui/menu/mastery/weaponmastery_square_box.rpak"
+			color: <0.69, 0.0, 0.0, 0.0>
+        }
+    }
+
+    panel DiamondThicc
+    {
+        anchor: CENTER
+        size: <276, 276>
+        rotation: 45
+
+        behavior Image
+        {
+            assetPath: $"ui_image/rui/menu/mastery/weaponmastery_square_thick_outline.rpak"
+			color: <0.9, 0.15, 0.15, 0.0>
+        }
+    }
+
+    panel CornerLeft
+    {
+        anchor: CENTER
+        size: <120, 234>
+
+        behavior Image
+        {
+            assetPath: $"ui_image/rui/menu/mastery/weaponmastery_corner_large.rpak"
+			color: <0.8, 0.1, 0.1, 0.0>
+        }
+    }
+
+    panel CornerRight
+    {
+        anchor: CENTER
+        size: <120, 234>
+
+        behavior Image
+        {
+            assetPath: $"ui_image/rui/menu/mastery/weaponmastery_corner_large.rpak"
+			color: <0.8, 0.1, 0.1, 0.0>
+			flipHorizontal: true
+        }
+    }
+
+    panel MainBanner
+	{
+		anchor: CENTER
+		size: <908, 108>
+
+		behavior RenderGroup
+		{
+			alpha: 0.0
+		}
+
+		panel RightBG
+		{
+			anchor: CENTER
+			size: <440, 108>
+			pivot: <0.0, 0.5>
+
+			panel
+			{
+				anchor: RIGHT
+				size: <440, 108>
+				pivot: <1.0, 0.5>
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/menu/mastery/weaponmastery_completion_bracket.rpak"
+					flipHorizontal: true
+					color: <0.69, 0.0, 0.0, 1.0>
+				}
+			}
+			panel
+			{
+				anchor: RIGHT
+				position: <14, 7>
+				size: <38, 70>
+				pivot: <1.0, 0.5>
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/menu/mastery/weaponmastery_completion_chevron.rpak"
+					flipHorizontal: true
+					color: <0.69, 0.0, 0.0, 1.0>
+				}
+			}
+		}
+
+		panel LeftBG
+		{
+			anchor: CENTER
+			size: <440, 108>
+			pivot: <1.0, 0.5>
+
+			panel
+			{
+				anchor: LEFT
+				size: <440, 108>
+				pivot: <0.0, 0.5>
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/menu/mastery/weaponmastery_completion_bracket.rpak"
+					color: <0.69, 0.0, 0.0, 1.0>
+				}
+			}
+			panel
+			{
+				anchor: LEFT
+				position: <-14, 7>
+				size: <38, 70>
+				pivot: <0.0, 0.5>
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/menu/mastery/weaponmastery_completion_chevron.rpak"
+					color: <0.69, 0.0, 0.0, 1.0>
+				}
+			}
+		}
+
+		panel WeaponText
+		{
+			anchor: TOP
+			size: <380, 25>
+			pivot: <0.5, 0.5>
+			position: <0, 22>
+
+			behavior FormatLabel
+			{
+				bind *.headerData.weaponName -> @this.arg1
+
+				format: "%s1"
+				face: "TitleBoldFont"
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				pixelHeight: 32
+				colorRGB: <1.0, 0.8, 0.27>
+				margin: <10, 10, 0, 0>
+				allCaps: true
+				arg1: "weapon name"
+			}
+		}
+
+		panel CompleteText
+		{
+			anchor: BOTTOM
+			size: <800, 25>
+	        pivot: <0.5, 0.5>
+	        position: <0, -46>
+
+			behavior Label
+			{
+				text: "#MASTERY_TRIALS_TRIALS_COMPLETE"
+				face: "TitleBoldFont"
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				verticalMode: AUTOSIZE_TO_TEXT
+				pixelHeight: 55
+
+				allCaps: true
+				colorRGB: <1.0, 0.8, 0.27> //
+
+				bind *.headerData.celebrationType -> @this.text
+			}
+	    }
+    }
+
+    panel ChevronWooshLeft
+	{
+		anchor: CENTER
+		pivot: <0.35, 0.5>
+		position: <0, 1>
+		size: <128, 112>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/mastery/weaponmastery_completion_chevron_blur.rpak"
+			color: <0.8, 0.1, 0.1, 0.0>
+		}
+
+		panel Chevron
+		{
+			anchor: CENTER
+			position: <-18, 0>
+			size: <61, 112>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/mastery/weaponmastery_completion_chevron.rpak"
+				color: <0.8, 0.1, 0.1, 0.0>
+			}
+		}
+	}
+
+    panel ChevronWooshRight
+	{
+		anchor: CENTER
+		pivot: <0.65, 0.5>
+		position: <0, 1>
+		size: <128, 112>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/mastery/weaponmastery_completion_chevron_blur.rpak"
+			flipHorizontal: true
+			color: <0.8, 0.1, 0.1, 0.0>
+		}
+
+		panel Chevron
+		{
+			anchor: CENTER
+			position: <18, 0>
+			size: <61, 112>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/mastery/weaponmastery_completion_chevron.rpak"
+				flipHorizontal: true
+				color: <0.8, 0.1, 0.1, 0.0>
+			}
+		}
+	}
+
+    panel CircleBlurFront
+    {
+        anchor: CENTER
+        size: <450, 450>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/mastery/weaponmastery_background_mask.rpak"
+			color: <0.69, 0.0, 0.0, 0.0>
+		}
+    }
+}

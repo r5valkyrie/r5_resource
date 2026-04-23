@@ -1,0 +1,954 @@
+panel PostGameRankedMatchSummary
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	size: <1920, 1080>
+	offsets: <0, 0, 0, 0>
+
+	behavior RankedMatchSummary
+	{
+		progressBarAnimator: @panel/TopPanel/ProgressPanel/RankProgress:Animator
+		tweenStagger: @panel/BottomPanel:TweenStagger
+	}
+
+	panel BottomPanel
+	{
+		bind *.screen.isRankUpAnimationInProgress -> NOT -> @this.visible
+
+		anchor: TOP
+		pivot: <0.5, 0>
+		positionX: 0
+		positionY: 460
+		width: 540
+
+		behavior HorizontalContainer
+		{
+			fitContentWidth: true
+			fitContentHeight: true
+			spacing: 60
+		}
+
+		behavior TweenStagger
+		{
+			active: false
+			isRecursive: true
+			startDelay: 0.5
+			delay: -0.9
+			useMaxTweenTime: true
+			animationName: "AnimateIn"
+		}
+
+		panel StatsBreakdown
+		{
+			bind *.extraInfo.trialsData.hasTrial -> NOT -> @this.visible
+			bind *.extraInfo.trialsData.hasTrial -> NOT -> @this.active
+
+			size: <540, 0>
+			pivot: <0, 0>
+
+			behavior Animator
+			{
+				tweenAnimations: [
+				{
+					name: "AnimateIn"
+					tweens: [
+					{
+						property: @panel/HeaderText:Label.alpha
+						startValue: 0
+						endValue: 1
+						duration: 0.9
+						curve: EASE_LINEAR
+					},
+					{
+						property: @panel/HeaderText:Label.outlineColorOuter
+						startValue: <0, 0, 0, 0>
+						endValue: <0, 0, 0, 0.6>
+						duration: 0.9
+						curve: EASE_LINEAR
+					},
+					{
+						property: @panel/KillValueHeader:FormatLabel.alpha
+						startValue: 0
+						endValue: 1
+						duration: 0.9
+						curve: EASE_LINEAR
+					},
+					{
+						property: @panel/KillValueHeader:FormatLabel.outlineColorOuter
+						startValue: <0, 0, 0, 0>
+						endValue: <0, 0, 0, 0.6>
+						duration: 0.9
+						curve: EASE_LINEAR
+					},
+					{
+						property: @panel/KillValueHeader/AltStyle1.alpha
+						startValue: 0
+						endValue: 1
+						duration: 0.9
+						curve: EASE_LINEAR
+					},
+					{
+						property: @panel/KillValueHeader/AltStyle1.outlineColorOuter
+						startValue: <0, 0, 0, 0>
+						endValue: <0, 0, 0, 0.6>
+						duration: 0.9
+						curve: EASE_LINEAR
+					},
+					{
+						property: @panel/KillValueDesc:FormatLabel.alpha
+						startValue: 0
+						endValue: 1
+						duration: 0.9
+						curve: EASE_LINEAR
+					},
+					{
+						property: @panel/KillValueDesc:FormatLabel.outlineColorOuter
+						startValue: <0, 0, 0, 0>
+						endValue: <0, 0, 0, 0.6>
+						duration: 0.9
+						curve: EASE_LINEAR
+					},
+					{
+						property: @panel/KillValueDesc/AltStyle1.alpha
+						startValue: 0
+						endValue: 1
+						duration: 0.9
+						curve: EASE_LINEAR
+					},
+					{
+						property: @panel/KillValueDesc/AltStyle2.alpha
+						startValue: 0
+						endValue: 1
+						duration: 0.9
+						curve: EASE_LINEAR
+					},
+					{
+						property: @panel/KillValueDesc/AltStyle1.outlineColorOuter
+						startValue: <0, 0, 0, 0>
+						endValue: <0, 0, 0, 0.6>
+						duration: 0.9
+						curve: EASE_LINEAR
+					},
+					{
+						property: @panel/KillValueDesc/AltStyle2.outlineColorOuter
+						startValue: <0, 0, 0, 0>
+						endValue: <0, 0, 0, 0.6>
+						duration: 0.9
+						curve: EASE_LINEAR
+					},
+					{
+						property: @panel:Sound.play
+						startValue: false
+						endValue: true
+						duration: 0.9
+						curve: CEIL
+					}
+					]
+				}
+				]
+			}
+
+			behavior VerticalContainer
+			{
+				fitContentHeight: true
+			}
+
+			behavior Sound
+			{
+				sound: "UI_Menu_MatchSummary_Ranked_XPBreakdown"
+			}
+
+			panel HeaderText
+			{
+				anchor: CENTER_STRETCH_WIDTH
+				height: 70
+				offsets: <0, 0, 0, 0>
+
+				behavior Label
+				{
+					text: "#RANKED_COMBAT_HEADER"
+					face: "TitleBoldFont"
+					pixelHeight: 38
+					colorRGB: <1, 1, 1>
+					outlineColorInner: <0, 0, 0, 0>
+					outlineColorOuter: <0, 0, 0, 0.6>
+					outlineWidth: 1
+					textAlignHorizontal: LEFT
+					textAlignVertical: CENTER
+					useLocaleDirection: true
+				}
+			}
+
+			instance $"ui_rtk/menus/post_game/ranked/components/ranked_match_stats_element.rpak" ListTotal
+			{
+				override bind root "*.extraInfo.headers[0]"
+
+				override @var(isHeader) true
+			}
+
+			panel Spacer
+			{
+				size: <0, 16>
+			}
+
+			panel List
+			{
+				behavior VerticalContainer
+				{
+					fitContentHeight: true
+					fitContentWidth: true
+				}
+
+				behavior ListBinder
+				{
+					bindingPath: "*.extraInfo.stats"
+					prefab: $"ui_rtk/menus/post_game/ranked/components/ranked_match_stats_element.rpak"
+				}
+			}
+
+			panel KillValueHeader
+			{
+				bind *.extraInfo.baseKillValue -> GreaterThan( 0 ) -> @this.visible
+
+				anchor: CENTER_STRETCH_WIDTH
+				height: 50
+				offsets: <0, 0, 0, 0>
+
+				behavior FormatLabel
+				{
+					bind *.extraInfo.baseKillValue -> @this.arg1
+
+					format: "#RANKED_KILL_VALUE"
+					face: "DefaultBoldFont"
+					pixelHeight: 28
+					colorRGB: <1, 1, 1>
+					outlineColorInner: <0, 0, 0, 0>
+					outlineColorOuter: <0, 0, 0, 0.6>
+					outlineWidth: 1
+					textAlignHorizontal: LEFT
+					textAlignVertical: BOTTOM
+					allCaps: true
+
+					arg1: 0
+				}
+
+				behavior LabelAltStyle AltStyle1
+				{
+					color: #FFDA47
+				}
+			}
+
+			panel KillValueDesc
+			{
+				bind *.extraInfo.baseKillValue -> GreaterThan( 0 ) -> @this.visible
+
+				anchor: CENTER_STRETCH_WIDTH
+				height: 40
+				offsets: <0, 0, 0, 0>
+
+				behavior FormatLabel
+				{
+					format: "#RANKED_KILL_VALUE_DESC"
+					face: "DefaultFont"
+					pixelHeight: 28
+					colorRGB: <0.7, 0.7, 0.7>
+					outlineColorInner: <0, 0, 0, 0>
+					outlineColorOuter: <0, 0, 0, 0.6>
+					outlineWidth: 1
+					textAlignHorizontal: LEFT
+					textAlignVertical: TOP
+				}
+
+				behavior LabelAltStyle AltStyle1
+				{
+					color: #FFFFFF
+				}
+
+				behavior LabelAltStyle AltStyle2
+				{
+					color: #FFDA47
+				}
+			}
+		}
+
+		instance $"ui_rtk/menus/post_game/ranked/components/ranked_match_promotional_trials_panel.rpak" PromoTrialsPanel
+		{
+			bind *.extraInfo.trialsData.hasTrial -> @this.visible
+			bind *.extraInfo.trialsData.hasTrial -> @this.active
+		}
+
+		instance $"ui_rtk/menus/post_game/ranked/components/ranked_match_summary_breakdown.rpak" MatchSummaryBreakdown
+		{
+			bind *.extraInfo.trialsData.hasTrial -> NOT -> @this.visible
+			bind *.extraInfo.trialsData.hasTrial -> NOT -> @this.active
+		}
+	}
+
+	panel TopPanel
+	{
+		bind *.screen.isRankUpAnimationInProgress -> NOT -> @this.visible
+		bind *.extraInfo.trialsData.hasTrial -> PickIntFromTwo( 150, 200 ) -> @this.positionY
+
+		anchor: TOP
+		pivot: <0.5, 0>
+		positionX: 0
+		positionY: 150
+		width: 540
+
+		behavior Animator topPanelAnim
+		{
+			tweenAnimations: [
+			{
+				name: "AnimateIn"
+				tweens: [
+				{
+					property: @panel.visible
+					startValue: false
+					endValue: true
+					duration: 0.9
+					curve: CEIL
+				}
+				]
+			}
+			]
+		}
+
+		behavior VerticalContainer
+		{
+			bind *.extraInfo.progressData.currentTween.isDoubleBadge -> PickIntFromTwo( 25,  0 ) -> @this.spacing
+
+			fitContentHeight: true
+			alignment: CENTER
+			spacing: 0
+		}
+
+		panel LPPointsPanel
+		{
+			bind *.extraInfo.trialsData.hasTrial -> NOT -> AND( *.screen.isProgressPanelVisible ) -> @this.visible
+
+			anchor: TOP
+			pivot: <0, 0>
+			size: <540, 50>
+
+			behavior ContainerElement
+			{
+				horizontalAlignOverride: CENTER
+			}
+
+			behavior VerticalContainer
+			{
+				fitContentHeight: true
+				alignment: BOTTOM
+				spacing: 5
+			}
+
+			behavior Animator lpPoints
+			{
+				tweenAnimations: [
+				{
+					name: "AnimateIn"
+					tweens: [
+					{
+						property: @panel/HeaderText:Label.alpha
+						startValue: 0
+						endValue: 0.98
+						duration: 0.9
+						curve: EASE_LINEAR
+					},
+					{
+						property: @panel/LPValue:Label.alpha
+						startValue: 0
+						endValue: 0.98
+						duration: 0.9
+						curve: EASE_LINEAR
+					},
+					{
+						property: @panel:Sound.play
+						startValue: false
+						endValue: true
+						duration: 0.9
+						curve: CEIL
+					}
+					]
+				}
+				]
+			}
+
+			panel LPValue
+			{
+				anchor: CENTER
+				offsetsLR: <0, 0>
+				height: 45
+				pivot: <0, 1>
+
+				behavior FormatLabel
+				{
+					bind *.breakdown.netLP -> GreaterThan( -1 ) -> PickStringFromTwo( "#RANKED_SCORE_DISPLAY_MAX", "#EOG_XP_PLUSNUMBER" ) -> @this.format
+					bind *.breakdown.netLP -> @this.arg1
+
+					face: "TitleBoldFont"
+					format: ""
+					arg1: 0
+					pixelHeight: 84
+					horizontalMode: AUTOSIZE_TO_TEXT
+					verticalMode: AUTOSIZE_TO_TEXT
+					colorRGB: #FFDA47
+					outlineColorInner: <0, 0, 0, 0>
+					outlineColorOuter: <0, 0, 0, 0.4>
+					outlineWidth: 2
+					textAlignHorizontal: CENTER
+					textAlignVertical: BOTTOM
+				}
+			}
+
+			panel HeaderText
+			{
+				anchor: CENTER
+				offsetsLR: <0, 0>
+				pivot: <0, 1>
+				height: 30
+
+				behavior Label HeaderText
+				{
+					bind *.breakdown.netLP -> GreaterThan( -1 ) -> PickStringFromTwo( "#RANKED_LP_LOST", "#RANKED_LP_EARNED" ) -> @this.text
+
+					text: "#RANKED_LP_EARNED"
+					face: "DefaultFont"
+					pixelHeight: 30
+					horizontalMode: AUTOSIZE_TO_TEXT
+					colorRGB: <1, 1, 1>
+					outlineColorInner: <0, 0, 0, 0>
+					outlineColorOuter: <0, 0, 0, 0.6>
+					outlineWidth: 1
+					textAlignHorizontal: CENTER
+					textAlignVertical: TOP
+					allCaps: true
+				}
+			}
+
+			panel Badge1Desc
+			{
+				bind *.extraInfo.isPlacement -> @this.visible
+
+				anchor: CENTER
+				offsetsLR: <0, 0>
+				pivot: <0, 1>
+				height: 30
+
+				behavior FormatLabel
+				{
+					bind *.extraInfo.numPlacementMatches -> @this.arg1
+
+					format: "#RANKED_PROVISIONAL_HEADER"
+					arg1: 0
+
+					face: "DefaultFont"
+					pixelHeight: 30
+					horizontalMode: AUTOSIZE_TO_TEXT
+					colorRGB: <0.7, 0.7, 0.7>
+					outlineColorInner: <0, 0, 0, 0>
+					outlineColorOuter: <0, 0, 0, 0.6>
+					outlineWidth: 1
+					textAlignHorizontal: CENTER
+					textAlignVertical: TOP
+				}
+			}
+
+			behavior Sound
+			{
+				sound: "UI_Menu_MatchSummary_Ranked_XPBreakdown"
+			}
+		}
+
+		panel ProgressPanel
+		{
+			bind *.screen.isProgressPanelVisible -> @this.visible
+
+			behavior HorizontalContainer
+			{
+				fitContentWidth: true
+				fitContentHeight: true
+				alignment: CENTER
+				spacing: -5
+			}
+
+			behavior Animator progressPanel
+			{
+				tweenAnimations: [
+				{
+					name: "AnimateIn"
+					tweens: [
+					{
+						property: @panel/Badge1.visible
+						startValue: false
+						endValue: true
+						duration: 0.9
+						curve: CEIL
+					},
+					{
+						property: @panel/Badge2.visible
+						startValue: false
+						endValue: true
+						duration: 0.9
+						curve: CEIL
+					},
+					{
+						property: @panel/RankProgress/CurrentScoreLabel:FormatLabel.alpha
+						startValue: 0
+						endValue: 0.98
+						duration: 0.9
+						curve: EASE_LINEAR
+					},
+					{
+						property: @panel/RankProgress/MaxScoreLabel:FormatLabel.alpha
+						startValue: 0
+						endValue: 0.98
+						duration: 0.9
+						curve: EASE_LINEAR
+					},
+					{
+						property: @panel/RankProgress/ProgressBar:AngledProgressBar.progressBarAlpha
+						startValue: 0
+						endValue: 1
+						duration: 0.9
+						curve: EASE_LINEAR
+					},
+					{
+						property: @panel/RankProgress/ProgressBar:AngledProgressBar.progressBgAlpha
+						startValue: 0
+						endValue: 1
+						duration: 0.9
+						curve: EASE_LINEAR
+					},
+					{
+						property: @panel:Sound.play
+						startValue: false
+						endValue: true
+						duration: 0.9
+						curve: CEIL
+					}
+					]
+				}
+				]
+			}
+
+			panel Badge1
+			{
+				bind *.extraInfo.progressData.currentTween.isDoubleBadge -> PickVectorFromTwo( <1.4, 1.4, 1.4>,  <1, 1, 1> ) -> @this.scale
+
+				anchor: CENTER
+				size: <160, 160>
+				inputListener: true
+
+				behavior ToolTip Badge1Tooltip
+				{
+					bind *.extraInfo.progressData.currentTween.badge1.tooltipTitle -> @this.varOverrides.titleText
+					bind *.extraInfo.progressData.currentTween.badge1.tooltipBody -> @this.varOverrides.bodyText
+					bind *.extraInfo.progressData.currentTween.badge1.rankColor -> @this.varOverrides.titleColor
+
+					prefab: $"ui_rtk/common/tooltips/base_tooltip.rpak"
+					offset: <32, -68>
+					delay: 0
+
+					varOverrides: {
+						titleText: ""
+						titleColor: #Yellow
+						isSubtitleVisible: false
+						bodyText: ""
+						bodyTextAltColor: #Yellow
+						additionalText: ""
+						additionalTextAltColor: #Yellow
+						actionText: ""
+						icon: $""
+						iconColor: #Yellow
+					}
+				}
+
+				behavior RankedBadge
+				{
+					bind *.extraInfo.progressData.currentTween.badge1.badgeRuiAsset -> @this.badgeRuiAsset
+					bind *.extraInfo.progressData.currentTween.badge1.rankedIcon -> @this.rankedIcon
+					bind *.extraInfo.progressData.currentTween.badge1.isPlacementMode -> @this.isPlacementMode
+					bind *.extraInfo.progressData.currentTween.badge1.completedMatches -> @this.completedMatches
+					bind *.extraInfo.progressData.currentTween.badge1.maxMatches -> @this.maxMatches
+					bind *.extraInfo.progressData.currentTween.badge1.useDynamicPips -> @this.useDynamicPips
+					bind *.extraInfo.progressData.currentTween.badge1.isPromotional -> @this.isPromotional
+					bind *.extraInfo.progressData.currentTween.badge1.startPip -> @this.startPip
+					bind *.extraInfo.progressData.currentTween.badge1.wonMatches -> @this.wonMatches
+					bind *.extraInfo.progressData.currentTween.badge1.emblemText -> @this.emblemText
+					bind *.extraInfo.progressData.currentTween.badge1.emblemDisplayMode -> @this.emblemDisplayMode
+					bind *.extraInfo.progressData.currentTween.badge1.ladderPosition -> @this.ladderPosition
+					bind *.extraInfo.progressData.currentTween.badge1.rankScore -> @this.rankScore
+
+					badgeRuiAsset: $"ui/ranked_badge_basic.rpak"
+					rankedIcon: $"ui_image/rui/menu/ranked/rank_emblem_bronze.rpak"
+					emblemText: ""
+					emblemDisplayMode: 0
+					ladderPosition: 0
+					rankScore: 0
+				}
+
+				panel Badge1Text
+				{
+					bind *.extraInfo.progressData.currentTween.badge1.emblemDisplayMode -> PickIntFrom( [ 36, 47, 47, 36 ] ) -> @this.positionY
+
+					anchor: CENTER
+					position: <0, 36>
+					size: <100, 24>
+
+					behavior Label
+					{
+						bind *.extraInfo.progressData.currentTween.badge1.badgeLabel -> @this.text
+						bind *.extraInfo.progressData.currentTween.badge1.emblemDisplayMode -> PickIntFrom( [ 22, 12, 18, 22 ] ) -> @this.pixelHeight
+
+						text: ""
+						face: "TitleBoldFont"
+						color: <1.0, 1.0, 1.0, 1>
+						pixelHeight: 22
+						textAlignHorizontal: CENTER
+						textAlignVertical: CENTER
+						verticalMode: CLIP
+					}
+
+					behavior LabelAltStyle
+					{
+						bind *.extraInfo.progressData.currentTween.badge1.emblemDisplayMode -> PickIntFrom( [ 24, 12, 18, 24 ] ) -> @this.pixelHeight
+
+						face: "TitleBoldFont"
+						color: <0.55, 0.55, 0.55, 1>
+						pixelHeight: 22
+					}
+
+					behavior NxOverrides
+					{
+						overrides: [
+						{
+							propertyRef: @panel:Label.pixelHeight
+							nxValue: 23
+						},
+						{
+							propertyRef: @panel:Label.kerning
+							nxValue: -0.05
+						},
+						{
+							propertyRef: @panel.position
+							nxValue: <2, 34>
+						}
+						]
+					}
+				}
+			}
+
+			panel RankProgress
+			{
+				bind *.extraInfo.progressData.currentTween.isDoubleBadge -> @this.visible
+
+				anchor: CENTER
+				size: <325, 50>
+
+				behavior Animator BarAnimator
+				{
+					bind *.extraInfo.progressData.currentTween.progressFracStart ->     @this.tweenAnimations[0].tweens[0].startValue
+					bind *.extraInfo.progressData.currentTween.adjustedStartScore ->    @this.tweenAnimations[0].tweens[1].startValue
+					bind *.extraInfo.progressData.currentTween.progressFracEnd ->       @this.tweenAnimations[0].tweens[0].endValue
+					bind *.extraInfo.progressData.currentTween.adjustedEndScore ->      @this.tweenAnimations[0].tweens[1].endValue
+
+					tweenAnimations: [
+					{
+						name: "AnimateBar"
+						tweens: [
+						{
+							property: @panel/ProgressBar:AngledProgressBar.current
+							startValue: 0.0
+							endValue: 1.0
+							duration: 1.0
+						},
+						{
+							property: @panel/CurrentScoreLabel:FormatLabel.arg1
+							startValue: 1
+							endValue: 1
+							duration: 1.0
+						}]
+					}]
+				}
+
+				panel CurrentScoreLabel
+				{
+					anchor: TOP_LEFT
+					pivot: <0, 0>
+					size: <300, 24>
+					offsets: <0, 0, 0, 0>
+					useLocaleDirection: true
+
+					behavior FormatLabel CurrentScore
+					{
+						bind *.extraInfo.progressData.currentTween.adjustedEndScore -> @this.arg1
+
+						format: "#RANKED_POINTS_GENERIC"
+						face: "DefaultBoldFont"
+						color: <1.0, 1.0, 1.0, 1>
+						pixelHeight: 24
+						textAlignHorizontal: LEFT
+						arg1: 0
+						useLocaleDirection: true
+					}
+
+					behavior LabelAltStyle
+					{
+						face: "DefaultRegularFont"
+						color: <0.55, 0.55, 0.55, 1>
+						pixelHeight: 24
+					}
+				}
+
+				panel MaxScoreLabel
+				{
+					anchor: TOP_RIGHT
+					pivot: <1, 0>
+					size: <300, 24>
+					offsets: <0, 0, 0, 0>
+					useLocaleDirection: true
+
+					behavior FormatLabel MaxScore
+					{
+						bind *.extraInfo.progressData.currentTween.adjustedMaxRankScore -> @this.arg1
+
+						format: "#RANKED_POINTS_GENERIC"
+						face: "DefaultBoldFont"
+						color: <1.0, 1.0, 1.0, 1>
+						pixelHeight: 24
+						textAlignHorizontal: RIGHT
+						arg1: 0
+						useLocaleDirection: true
+					}
+
+					behavior LabelAltStyle
+					{
+						face: "DefaultRegularFont"
+						color: <0.55, 0.55, 0.55, 1>
+						pixelHeight: 24
+					}
+				}
+
+				panel ProgressBar
+				{
+					bind *.extraInfo.progressData.currentTween.hasPromoTrialAtEnd -> PickFloatFromTwo( 0, 15) -> @this.offsetRight
+
+					anchor: BOTTOM_STRETCH_WIDTH
+					size: <350, 20>
+					pivot: <0.5, 1>
+					offsets: <0, 0, 0, 0>
+
+					behavior AngledProgressBar
+					{
+						bind *.extraInfo.progressData.currentTween.progressFracEnd -> @this.current
+
+						progressBarColor: <0.9215, 0.7843, 0.298>
+						progressBarAlpha: 1.0
+						progressBgColor: <0.0, 0.0, 0.0>
+						progressBgAlpha: 0.6
+						max: 1.0
+						angle: 35
+					}
+				}
+
+				panel ProgressCap
+				{
+					bind *.extraInfo.progressData.currentTween.hasPromoTrialAtEnd -> @this.visible
+
+					anchor: BOTTOM_RIGHT
+					size: <20, 20>
+					pivot: <1, 1>
+
+					behavior Image
+					{
+						bind *.extraInfo.progressData.currentTween.promoTrialCapImage -> @this.assetMaskPath
+
+						color: <1, 1, 1, 1>
+						assetPath: $"ui_image/rui/menu/ranked/ranked_update_2023/rank_promotional_indicator_mask_02.rpak"
+					}
+				}
+			}
+
+			panel Badge2
+			{
+				bind *.extraInfo.progressData.currentTween.isDoubleBadge -> @this.visible
+
+				anchor: CENTER
+				size: <145, 145>
+				inputListener: true
+
+				behavior ToolTip Badge1Tooltip
+				{
+					bind *.extraInfo.progressData.currentTween.badge2.divisionName -> @this.varOverrides.titleText
+					bind *.extraInfo.progressData.currentTween.badge2.rankColor -> @this.varOverrides.titleColor
+
+					prefab: $"ui_rtk/common/tooltips/base_tooltip.rpak"
+					offset: <32, -68>
+					delay: 0
+
+					varOverrides: {
+						titleText: ""
+						titleColor: #Yellow
+						isSubtitleVisible: false
+						bodyText: ""
+						bodyTextAltColor: #Yellow
+						additionalText: ""
+						additionalTextAltColor: #Yellow
+						actionText: ""
+						icon: $""
+						iconColor: #Yellow
+					}
+				}
+
+				behavior RankedBadge
+				{
+					bind *.extraInfo.progressData.currentTween.badge2.badgeRuiAsset -> @this.badgeRuiAsset
+					bind *.extraInfo.progressData.currentTween.badge2.rankedIcon -> @this.rankedIcon
+					bind *.extraInfo.progressData.currentTween.badge2.isPlacementMode -> @this.isPlacementMode
+					bind *.extraInfo.progressData.currentTween.badge2.completedMatches -> @this.completedMatches
+					bind *.extraInfo.progressData.currentTween.badge2.maxMatches -> @this.maxMatches
+					bind *.extraInfo.progressData.currentTween.badge2.useDynamicPips -> @this.useDynamicPips
+					bind *.extraInfo.progressData.currentTween.badge2.isPromotional -> @this.isPromotional
+					bind *.extraInfo.progressData.currentTween.badge2.startPip -> @this.startPip
+					bind *.extraInfo.progressData.currentTween.badge2.wonMatches -> @this.wonMatches
+					bind *.extraInfo.progressData.currentTween.badge2.emblemText -> @this.emblemText
+					bind *.extraInfo.progressData.currentTween.badge2.emblemDisplayMode -> @this.emblemDisplayMode
+					bind *.extraInfo.progressData.currentTween.badge2.ladderPosition -> @this.ladderPosition
+					bind *.extraInfo.progressData.currentTween.badge2.rankScore -> @this.rankScore
+
+					badgeRuiAsset: $"ui/ranked_badge_basic.rpak"
+					rankedIcon: $"ui_image/rui/menu/ranked/rank_emblem_bronze.rpak"
+					emblemText: ""
+					emblemDisplayMode: 0
+					ladderPosition: 0
+					rankScore: 0
+				}
+
+				panel Badge2Text
+				{
+					bind *.extraInfo.progressData.currentTween.badge2.isLadderOnlyRank -> PickIntFromTwo( 33, 40 ) -> @this.positionY
+
+					anchor: CENTER
+					position: <0, 33>
+					size: <100, 24>
+
+					behavior Label
+					{
+						bind *.extraInfo.progressData.currentTween.badge2.badgeLabel -> @this.text
+						bind *.extraInfo.progressData.currentTween.badge2.isLadderOnlyRank -> PickIntFromTwo( 22, 13 ) -> @this.pixelHeight
+
+						text: ""
+						face: "TitleBoldFont"
+						color: <1.0, 1.0, 1.0, 1>
+						pixelHeight: 22
+						textAlignHorizontal: CENTER
+						textAlignVertical: CENTER
+						verticalMode: CLIP
+					}
+
+					behavior LabelAltStyle
+					{
+						bind *.extraInfo.progressData.currentTween.badge2.isLadderOnlyRank -> PickIntFromTwo( 22, 13 ) -> @this.pixelHeight
+
+						face: "TitleBoldFont"
+						color: <0.55, 0.55, 0.55, 1>
+						pixelHeight: 22
+					}
+
+					behavior NxOverrides
+					{
+						overrides: [
+						{
+							propertyRef: @panel:Label.pixelHeight
+							nxValue: 23
+						},
+						{
+							propertyRef: @panel:Label.kerning
+							nxValue: -0.05
+						},
+						{
+							propertyRef: @panel.position
+							nxValue: <2, 34>
+						}
+						]
+					}
+				}
+			}
+
+			behavior Sound
+			{
+				sound: "UI_Menu_MatchSummary_Ranked_XPBreakdown"
+			}
+		}
+
+		panel PromoTrialsInfo
+		{
+			bind *.extraInfo.trialsData.hasTrial -> AND( *.screen.isProgressPanelVisible ) -> @this.visible
+
+			anchor: TOP_LEFT
+			pivot: <0, 0>
+
+			behavior ContainerElement
+			{
+				horizontalAlignOverride: CENTER
+				autosizeToLabelWidth: true
+				autosizeToLabelHeight: true
+			}
+
+			behavior Animator lpPoints
+			{
+				tweenAnimations: [
+				{
+					name: "AnimateIn"
+					tweens: [
+					{
+						property: @panel:Label.alpha
+						startValue: 0
+						endValue: 0.98
+						duration: 0.9
+						curve: EASE_LINEAR
+					},
+					{
+						property: @panel:Sound.play
+						startValue: false
+						endValue: true
+						duration: 0.9
+						curve: CEIL
+					}
+					]
+				}
+				]
+			}
+
+			behavior Label
+			{
+				bind *.extraInfo.trialsData.trialsInfoString -> @this.text
+
+				text: "#RANKED_LP_EARNED"
+				face: "DefaultFont"
+				pixelHeight: 30
+				horizontalMode: AUTOSIZE_TO_TEXT
+				verticalMode: AUTOSIZE_TO_TEXT
+				colorRGB: <1, 1, 1>
+				outlineColorInner: <0, 0, 0, 0>
+				outlineColorOuter: <0, 0, 0, 0.6>
+				outlineWidth: 1
+				textAlignHorizontal: LEFT
+				textAlignVertical: TOP
+				margin: <14, 0, 0, 0>
+			}
+
+			behavior LabelAltStyle
+			{
+				colorRGB: <0.95, 0.81, 0.27>
+			}
+
+			behavior Sound
+			{
+				sound: "UI_Menu_MatchSummary_Ranked_XPBreakdown"
+			}
+		}
+	}
+}

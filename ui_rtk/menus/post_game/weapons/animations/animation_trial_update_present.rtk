@@ -1,0 +1,779 @@
+data RTKKeyFrameAsset
+{
+	duration: 4.0
+	tracks: [
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row1.positionX
+		keyframes: [
+		{
+			time: 0.0
+			value: 426.0
+			curve: EASE_OUT_CUBIC
+		},
+		{
+			time: 0.2669
+			value: 0.0
+		}
+		]
+	},
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row1/Devotion:Image.alpha
+		keyframes: [
+		{
+			time: 0.0
+			value: 0.0
+		},
+		{
+			time: 0.2669
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row1/CAR:Image.alpha
+		keyframes: [
+		{
+			time: 0.0
+			value: 0.0
+		},
+		{
+			time: 0.2669
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row1/RE45:Image.alpha
+		keyframes: [
+		{
+			time: 0.0
+			value: 0.0
+		},
+		{
+			time: 0.2669
+			value: 0.46
+		}
+		]
+	},
+
+
+
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row2.positionX
+		keyframes: [
+		{
+			time: 0.1335
+			value: 477.0
+			curve: EASE_OUT_CUBIC
+		},
+		{
+			time: 0.4004
+			value: 51.0
+		}
+		]
+	},
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row2/EVA8:Image.alpha
+		keyframes: [
+		{
+			time: 0.1335
+			value: 0.0
+		},
+		{
+			time: 0.4004
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row2/EnergyAR:Image.alpha
+		keyframes: [
+		{
+			time: 0.1335
+			value: 0.0
+		},
+		{
+			time: 0.4004
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row2/P2020:Image.alpha
+		keyframes: [
+		{
+			time: 0.1335
+			value: 0.0
+		},
+		{
+			time: 0.4004
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row2/G7:Image.alpha
+		keyframes: [
+		{
+			time: 0.1335
+			value: 0.0
+		},
+		{
+			time: 0.4004
+			value: 0.46
+		}
+		]
+	},
+
+
+
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row3.positionX
+		keyframes: [
+		{
+			time: 0.267
+			value: 547.0
+			curve: EASE_OUT_CUBIC
+		},
+		{
+			time: 0.5339
+			value: 121.0
+		}
+		]
+	},
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row3/LStar:Image.alpha
+		keyframes: [
+		{
+			time: 0.267
+			value: 0.0
+		},
+		{
+			time: 0.5339
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row3/Longbow:Image.alpha
+		keyframes: [
+		{
+			time: 0.267
+			value: 0.0
+		},
+		{
+			time: 0.5339
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row3/Hemlock:Image.alpha
+		keyframes: [
+		{
+			time: 0.267
+			value: 0.0
+		},
+		{
+			time: 0.5339
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row3/Mastiff:Image.alpha
+		keyframes: [
+		{
+			time: 0.267
+			value: 0.0
+		},
+		{
+			time: 0.5339
+			value: 0.46
+		}
+		]
+	},
+
+
+
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row4.positionX
+		keyframes: [
+		{
+			time: 0.4005
+			value: 519.0
+			curve: EASE_OUT_CUBIC
+		},
+		{
+			time: 0.6674
+			value: 93.0
+		}
+		]
+	},
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row4/Mozambique:Image.alpha
+		keyframes: [
+		{
+			time: 0.4005
+			value: 0.0
+		},
+		{
+			time: 0.6674
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row4/Nemesis:Image.alpha
+		keyframes: [
+		{
+			time: 0.4005
+			value: 0.0
+		},
+		{
+			time: 0.6674
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row4/Peacekeeper:Image.alpha
+		keyframes: [
+		{
+			time: 0.4005
+			value: 0.0
+		},
+		{
+			time: 0.6674
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row4/R97:Image.alpha
+		keyframes: [
+		{
+			time: 0.4005
+			value: 0.0
+		},
+		{
+			time: 0.6674
+			value: 0.46
+		}
+		]
+	},
+
+
+
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row5.positionX
+		keyframes: [
+		{
+			time: 0.534
+			value: 473.0
+			curve: EASE_OUT_CUBIC
+		},
+		{
+			time: 0.8009
+			value: 47.0
+		}
+		]
+	},
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row5/TripleTake:Image.alpha
+		keyframes: [
+		{
+			time: 0.534
+			value: 0.0
+		},
+		{
+			time: 0.8009
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row5/Volt:Image.alpha
+		keyframes: [
+		{
+			time: 0.534
+			value: 0.0
+		},
+		{
+			time: 0.8009
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row5/Sentinel:Image.alpha
+		keyframes: [
+		{
+			time: 0.534
+			value: 0.0
+		},
+		{
+			time: 0.8009
+			value: 0.46
+		}
+		]
+	},
+
+
+
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row6.positionX
+		keyframes: [
+		{
+			time: 0.6675
+			value: 635.0
+			curve: EASE_OUT_CUBIC
+		},
+		{
+			time: 0.9334
+			value: 209.0
+		}
+		]
+	},
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row6/Wingman:Image.alpha
+		keyframes: [
+		{
+			time: 0.6675
+			value: 0.0
+		},
+		{
+			time: 0.9334
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row6/Repeater:Image.alpha
+		keyframes: [
+		{
+			time: 0.6675
+			value: 0.0
+		},
+		{
+			time: 0.9334
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row6/Bow:Image.alpha
+		keyframes: [
+		{
+			time: 0.6675
+			value: 0.0
+		},
+		{
+			time: 0.9334
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/LeftBGWeapons/Rotation/Row6/R301:Image.alpha
+		keyframes: [
+		{
+			time: 0.6675
+			value: 0.0
+		},
+		{
+			time: 0.9334
+			value: 0.46
+		}
+		]
+	},
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	{
+		property: @panel/RightBGWeapons/Rotation/Row1.positionX
+		keyframes: [
+		{
+			time: 0.0
+			value: -426.0
+			curve: EASE_OUT_CUBIC
+		},
+		{
+			time: 0.2669
+			value: 0.0
+		}
+		]
+	},
+	{
+		property: @panel/RightBGWeapons/Rotation/Row1/Devotion:Image.alpha
+		keyframes: [
+		{
+			time: 0.0
+			value: 0.0
+		},
+		{
+			time: 0.2669
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/RightBGWeapons/Rotation/Row1/CAR:Image.alpha
+		keyframes: [
+		{
+			time: 0.0
+			value: 0.0
+		},
+		{
+			time: 0.2669
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/RightBGWeapons/Rotation/Row1/RE45:Image.alpha
+		keyframes: [
+		{
+			time: 0.0
+			value: 0.0
+		},
+		{
+			time: 0.2669
+			value: 0.46
+		}
+		]
+	},
+
+
+
+	{
+		property: @panel/RightBGWeapons/Rotation/Row2.positionX
+		keyframes: [
+		{
+			time: 0.1335
+			value: -477.0
+			curve: EASE_OUT_CUBIC
+		},
+		{
+			time: 0.4004
+			value: -51.0
+		}
+		]
+	},
+	{
+		property: @panel/RightBGWeapons/Rotation/Row2/EVA8:Image.alpha
+		keyframes: [
+		{
+			time: 0.1335
+			value: 0.0
+		},
+		{
+			time: 0.4004
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/RightBGWeapons/Rotation/Row2/EnergyAR:Image.alpha
+		keyframes: [
+		{
+			time: 0.1335
+			value: 0.0
+		},
+		{
+			time: 0.4004
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/RightBGWeapons/Rotation/Row2/P2020:Image.alpha
+		keyframes: [
+		{
+			time: 0.1335
+			value: 0.0
+		},
+		{
+			time: 0.4004
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/RightBGWeapons/Rotation/Row2/G7:Image.alpha
+		keyframes: [
+		{
+			time: 0.1335
+			value: 0.0
+		},
+		{
+			time: 0.4004
+			value: 0.46
+		}
+		]
+	},
+
+
+
+	{
+		property: @panel/RightBGWeapons/Rotation/Row3.positionX
+		keyframes: [
+		{
+			time: 0.267
+			value: -547.0
+			curve: EASE_OUT_CUBIC
+		},
+		{
+			time: 0.5339
+			value: -121.0
+		}
+		]
+	},
+	{
+		property: @panel/RightBGWeapons/Rotation/Row3/LStar:Image.alpha
+		keyframes: [
+		{
+			time: 0.267
+			value: 0.0
+		},
+		{
+			time: 0.5339
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/RightBGWeapons/Rotation/Row3/Longbow:Image.alpha
+		keyframes: [
+		{
+			time: 0.267
+			value: 0.0
+		},
+		{
+			time: 0.5339
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/RightBGWeapons/Rotation/Row3/Hemlock:Image.alpha
+		keyframes: [
+		{
+			time: 0.267
+			value: 0.0
+		},
+		{
+			time: 0.5339
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/RightBGWeapons/Rotation/Row3/Mastiff:Image.alpha
+		keyframes: [
+		{
+			time: 0.267
+			value: 0.0
+		},
+		{
+			time: 0.5339
+			value: 0.46
+		}
+		]
+	},
+
+
+
+	{
+		property: @panel/RightBGWeapons/Rotation/Row4.positionX
+		keyframes: [
+		{
+			time: 0.4005
+			value: -519.0
+			curve: EASE_OUT_CUBIC
+		},
+		{
+			time: 0.6674
+			value: -93.0
+		}
+		]
+	},
+	{
+		property: @panel/RightBGWeapons/Rotation/Row4/Mozambique:Image.alpha
+		keyframes: [
+		{
+			time: 0.4005
+			value: 0.0
+		},
+		{
+			time: 0.6674
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/RightBGWeapons/Rotation/Row4/Nemesis:Image.alpha
+		keyframes: [
+		{
+			time: 0.4005
+			value: 0.0
+		},
+		{
+			time: 0.6674
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/RightBGWeapons/Rotation/Row4/Peacekeeper:Image.alpha
+		keyframes: [
+		{
+			time: 0.4005
+			value: 0.0
+		},
+		{
+			time: 0.6674
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/RightBGWeapons/Rotation/Row4/R97:Image.alpha
+		keyframes: [
+		{
+			time: 0.4005
+			value: 0.0
+		},
+		{
+			time: 0.6674
+			value: 0.46
+		}
+		]
+	},
+
+
+
+	{
+		property: @panel/RightBGWeapons/Rotation/Row5.positionX
+		keyframes: [
+		{
+			time: 0.534
+			value: -473.0
+			curve: EASE_OUT_CUBIC
+		},
+		{
+			time: 0.8009
+			value: -47.0
+		}
+		]
+	},
+	{
+		property: @panel/RightBGWeapons/Rotation/Row5/TripleTake:Image.alpha
+		keyframes: [
+		{
+			time: 0.534
+			value: 0.0
+		},
+		{
+			time: 0.8009
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/RightBGWeapons/Rotation/Row5/Volt:Image.alpha
+		keyframes: [
+		{
+			time: 0.534
+			value: 0.0
+		},
+		{
+			time: 0.8009
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/RightBGWeapons/Rotation/Row5/Sentinel:Image.alpha
+		keyframes: [
+		{
+			time: 0.534
+			value: 0.0
+		},
+		{
+			time: 0.8009
+			value: 0.46
+		}
+		]
+	},
+
+
+
+	{
+		property: @panel/RightBGWeapons/Rotation/Row6.positionX
+		keyframes: [
+		{
+			time: 0.6675
+			value: -635.0
+			curve: EASE_OUT_CUBIC
+		},
+		{
+			time: 0.9334
+			value: -209.0
+		}
+		]
+	},
+	{
+		property: @panel/RightBGWeapons/Rotation/Row6/Wingman:Image.alpha
+		keyframes: [
+		{
+			time: 0.6675
+			value: 0.0
+		},
+		{
+			time: 0.9334
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/RightBGWeapons/Rotation/Row6/Repeater:Image.alpha
+		keyframes: [
+		{
+			time: 0.6675
+			value: 0.0
+		},
+		{
+			time: 0.9334
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/RightBGWeapons/Rotation/Row6/Bow:Image.alpha
+		keyframes: [
+		{
+			time: 0.6675
+			value: 0.0
+		},
+		{
+			time: 0.9334
+			value: 0.46
+		}
+		]
+	},
+	{
+		property: @panel/RightBGWeapons/Rotation/Row6/R301:Image.alpha
+		keyframes: [
+		{
+			time: 0.6675
+			value: 0.0
+		},
+		{
+			time: 0.9334
+			value: 0.46
+		}
+		]
+	}
+	]
+}

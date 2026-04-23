@@ -1,0 +1,355 @@
+panel SquadGladCard
+{
+	bind root
+
+	size: < 510, 800>
+
+	panel GladCardHitArea
+	{
+		inputListener: true
+		anchor: TOP
+		size: <510, 686>
+		pivot: <0.5, 0.0>
+		positionY: 0
+
+		behavior Button
+		{
+			soundHighlighted: "ui_menu_focus"
+			soundPressedEnabled: "ui_menu_accept"
+
+			acceptKeyEvents: true
+			rightMouseEnabled: true
+			explicitInputButtons: [ KEY_F, BUTTON_A, BUTTON_X, BUTTON_Y ]
+		}
+
+		behavior ToolTip
+		{
+			bind *.actionText -> IsEmpty -> Not -> @this.active
+			bind *.name -> @this.varOverrides.titleText
+			bind *.actionText -> @this.varOverrides.actionText
+
+			prefab: $"ui_rtk/common/tooltips/base_tooltip.rpak"
+			offset: <32, -68>
+			delay: 0
+
+			varOverrides: {
+				titleText: ""
+				actionText: ""
+				isIconVisible: false
+				isAdditionalTextVisible: false
+				isBodyVisible: false
+				isActionTextVisible: true
+			}
+		}
+
+		panel GladiatorCardContainer
+		{
+			inputListener: true
+			anchor: TOP
+			size: <848, 848>
+			pivot: <0.5, 0.0>
+
+			positionY: -80
+
+			behavior GladiatorCard
+			{
+				bind *.uid -> @this.playerUID
+				bind *.isLocalPlayer -> @this.isForLocalPlayer
+			}
+		}
+	}
+
+
+	panel Bottom
+	{
+		anchor: BOTTOM_STRETCH_WIDTH
+		pivot: <0.0, 1.0>
+
+		behavior VerticalContainer
+		{
+			alignment: TOP
+			fitContentHeight: true
+			expandChildWidth: true
+			spacing: 4
+		}
+
+		panel Actions
+		{
+			anchor: BOTTOM_STRETCH_WIDTH
+			pivot: <0.0, 1.0>
+
+			behavior HorizontalContainer
+			{
+				fitContentHeight: true
+				alignment: LEFT
+				spacing: 10
+				useLocaleDirection: true
+			}
+
+			panel MuteButtonContainer
+			{
+				bind *.canMute -> @this.visible
+
+				size: < 64, 64 >
+
+				instance $"ui_rtk/common/shells/basic_button.rpak" MuteButton
+				{
+					bind *.canMute -> @this.inputListener
+
+					override @var(lineHeight) 0
+					override @var(gradientColor) #COLOR_GREY_3
+
+					behavior ToolTip
+					{
+						prefab: $"ui_rtk/common/tooltips/base_tooltip.rpak"
+						offset: <32, -68>
+						delay: 0
+
+						varOverrides: {
+							titleText: "#MUTE"
+							actionText: ""
+							isIconVisible: false
+							isAdditionalTextVisible: false
+							isBodyVisible: false
+							isActionTextVisible: false
+						}
+					}
+
+					context @var(contentPanel)
+					{
+						panel Icon
+						{
+							anchor: CENTER_STRETCH_WIDTH_HEIGHT
+							offsetLeft: 8
+							offsetRight: 8
+							offsetTop: 8
+							offsetBottom: 8
+
+							behavior Image
+							{
+								bind *.isMuted -> PickAssetFromTwo( $"ui_image/rui/menu/lobby/icon_voicechat.rpak", $"ui_image/rui/menu/lobby/icon_voicechat_muted.rpak" ) -> @this.assetpath
+
+								assetpath: $""
+							}
+						}
+					}
+				}
+			}
+
+			panel MutePingsContainer
+			{
+				bind *.canMutePing -> @this.visible
+
+				size: < 64, 64 >
+
+				instance $"ui_rtk/common/shells/basic_button.rpak" MutePingsButton
+				{
+					bind *.canMutePing -> @this.inputListener
+
+					override @var(lineHeight) 0
+					override @var(gradientColor) #COLOR_GREY_3
+
+					behavior ToolTip
+					{
+						prefab: $"ui_rtk/common/tooltips/base_tooltip.rpak"
+						offset: <32, -68>
+						delay: 0
+
+						varOverrides: {
+							titleText: "#MUTE_PING"
+							actionText: ""
+							isIconVisible: false
+							isAdditionalTextVisible: false
+							isBodyVisible: false
+							isActionTextVisible: false
+						}
+					}
+
+					context @var(contentPanel)
+					{
+						panel Icon
+						{
+							anchor: CENTER_STRETCH_WIDTH_HEIGHT
+							offsetLeft: 10
+							offsetRight: 10
+							offsetTop: 10
+							offsetBottom: 10
+
+							behavior Image
+							{
+								bind *.isPingMuted -> PickAssetFromTwo( $"ui_image/rui/menu/lobby/icon_ping.rpak", $"ui_image/rui/menu/lobby/icon_ping_muted.rpak" ) -> @this.assetpath
+							}
+						}
+					}
+				}
+			}
+
+			panel ReportButtonContainer
+			{
+				bind *.canReport -> @this.visible
+
+				size: < 64, 64 >
+
+				instance $"ui_rtk/common/shells/basic_button.rpak" ReportButton
+				{
+					bind *.canReport -> @this.inputListener
+
+					override @var(lineHeight) 0
+					override @var(gradientColor) #COLOR_GREY_3
+
+					behavior ToolTip
+					{
+						prefab: $"ui_rtk/common/tooltips/base_tooltip.rpak"
+						offset: <32, -68>
+						delay: 0
+
+						varOverrides: {
+							titleText: "#REPORT_SQUAD_MATE"
+							actionText: ""
+							isIconVisible: false
+							isAdditionalTextVisible: false
+							isBodyVisible: false
+							isActionTextVisible: false
+						}
+					}
+
+					context @var(contentPanel)
+					{
+						panel Icon
+						{
+							anchor: CENTER_STRETCH_WIDTH_HEIGHT
+							offsetLeft: 10
+							offsetRight: 10
+							offsetTop: 10
+							offsetBottom: 10
+
+							behavior Image
+							{
+								assetpath: $"ui_image/rui/menu/lobby/icon_report.rpak"
+							}
+						}
+					}
+				}
+			}
+
+			panel BlockContainer
+			{
+				bind *.canBlock -> @this.visible
+
+				size: < 64, 64 >
+
+				instance $"ui_rtk/common/shells/basic_button.rpak" BlockButton
+				{
+					bind *.canBlock -> @this.inputListener
+
+					override @var(lineHeight) 0
+					override @var(gradientColor) #COLOR_GREY_3
+
+					behavior ToolTip
+					{
+						prefab: $"ui_rtk/common/tooltips/base_tooltip.rpak"
+						offset: <32, -68>
+						delay: 0
+
+						varOverrides: {
+							titleText: "#BLOCK_SQUAD_MATE"
+							actionText: ""
+							isIconVisible: false
+							isAdditionalTextVisible: false
+							isBodyVisible: false
+							isActionTextVisible: false
+						}
+					}
+
+					context @var(contentPanel)
+					{
+						panel Icon
+						{
+							anchor: CENTER_STRETCH_WIDTH_HEIGHT
+							offsetLeft: 10
+							offsetRight: 10
+							offsetTop: 10
+							offsetBottom: 10
+
+							behavior Image
+							{
+								assetpath: $"ui_image/rui/menu/crossplatform/blocked.rpak"
+							}
+						}
+					}
+				}
+			}
+			panel DisconnectedContainer
+			{
+				size: < 220, 64>
+
+				bind *.isConnected -> Not -> @this.visible
+
+
+				panel BG
+				{
+					anchor: CENTER_STRETCH_WIDTH
+					offsets: <0, 0, 0, 0>
+					height: 44
+
+					behavior Image
+					{
+						assetpath: $"ui_image/white.rpak"
+						color: #COLOR_BLACK
+						alpha: 0.8
+					}
+			    }
+
+				panel Border
+				{
+					anchor: CENTER_STRETCH_WIDTH_HEIGHT
+					offsets: <0, 0, 0, 0>
+
+					behavior Image
+					{
+						assetpath: $"ui_image/rui/menu/lobby/disconnect_button.rpak"
+						color: #COLOR_GREY_2
+					}
+			    }
+
+
+				panel DisconnectedText
+				{
+					anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+					behavior FormatLabel
+			        {
+			            format: "#UNITFRAME_DISCONNECTED"
+			            face: "DefaultRegularFont"
+				        horizontalMode: AUTOSIZE_TO_TEXT
+			            textAlignHorizontal: LEFT
+						useLocaleDirection: true
+			            textAlignVertical: CENTER
+			            pixelHeight: 30
+			            colorRGB: #RED
+			            allCaps: true
+			            fitToWidth: 200
+			        }
+			    }
+			}
+		}
+		panel ID
+		{
+			height: 26
+
+			behavior FormatLabel
+	        {
+	            bind *.id -> @this.format
+
+	            format: ""
+	            face: "DefaultRegularFont"
+		        horizontalMode: AUTOSIZE_TO_TEXT
+	            textAlignHorizontal: LEFT
+				useLocaleDirection: true
+	            textAlignVertical: CENTER
+	            pixelHeight: 26
+	            colorRGB: <0.67, 0.67, 0.67>
+	        }
+		}
+	}
+}

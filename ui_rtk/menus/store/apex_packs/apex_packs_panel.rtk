@@ -1,0 +1,130 @@
+panel ApexPacksPanelRoot
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+	size: <1920, 1080>
+
+	behavior ApexPacksPanel
+	{
+		giftButton: @panel/PurchaseAndGiftingButtons/GiftPackButton:Button
+		purchaseButton: @panel/PurchaseAndGiftingButtons/PurchasePackButton:Button
+		openPackButton: @panel/OpenPackButton:Button
+		moreInfoButton: @panel/MoreInfoButton:Button
+	}
+
+	behavior Image
+	{
+		assetPath: $"ui_image/rui/menu/store/backgrounds/store_background_default.rpak"
+	}
+
+	panel LegendImage
+	{
+		position: <880, 540>
+		size: <1000, 900>
+		pivot: <0, 0>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/borders/gifting_loot_tick.rpak"
+			alpha: 0.8
+		}
+	}
+
+	panel ScreenTitle
+	{
+		size: <500, 120>
+		position: <1000, 600>
+		pivot: <0, 0>
+		offsets: <0, 0, 0, 0>
+		height: 50
+
+		behavior Label
+		{
+			face: "TitleBoldFont"
+			pixelHeight: 60
+			colorRGB: <1, 1, 1>
+			shadowAlpha: 0.6
+			shadowBlur: 6.0
+			textAlignHorizontal: LEFT
+			textAlignVertical: CENTER
+			horizontalMode: AUTOSIZE_TO_TEXT
+			horizontalMode: SQUISH_TO_CONTAINER
+			allCaps: true
+			text: "#APEX_PACKS"
+		}
+	}
+
+	instance $"ui_rtk/common/shells/cut_corner_tile_with_content.rpak" DescriptionTile
+	{
+		override @var(bgColor) <0.1, 0.1, 0.1, 0.95>
+		override @var(borderAlpha) 0.95
+
+		override @var(titleText) "#LOOT_TICK_INFO"
+		override @var(notificationText) "#AC_ONLY_DISCLAIMER"
+		override @var(titleAllCaps) false
+		override @var(notificationAllCaps) false
+		override @var(notificationMargin) <10, 0, 50, 0>
+
+		position: <-850, 0>
+		size: <800, 200>
+		pivot: <0, 0>
+	}
+
+	panel PurchaseAndGiftingButtons
+	{
+		anchor: CENTER
+		position: <400, -112>
+		size: <660, 480>
+
+		behavior HorizontalContainer
+		{
+			expandToFillEvenly: true
+			spacing: 20
+			paddingLeft: 0
+			paddingRight: 0
+			alignment: CENTER
+			fitContentWidth: true
+		}
+
+		instance $"ui_rtk/common/buttons/gifting_options_button.rpak" GiftPackButton
+		{
+			bind *.giftButtonData.title -> @var( title )
+			bind *.giftButtonData.description -> @var( description )
+			bind *.giftButtonData.notification -> @var( notification )
+			bind *.giftButtonData.interactive -> @var( interactive )
+		}
+
+		instance $"ui_rtk/common/buttons/gifting_options_button.rpak" PurchasePackButton
+		{
+			bind *.purchaseButtonData.title -> @var( title )
+			bind *.purchaseButtonData.description -> @var( description )
+			bind *.purchaseButtonData.notification -> @var( notification )
+			bind *.purchaseButtonData.interactive -> @var( interactive )
+		}
+	}
+
+	instance $"ui_rtk/common/buttons/apex_packs_open_button.rpak" OpenPackButton
+	{
+		position: <400, 107>
+
+		bind *.openPackButtonData.title -> @var(packTitleText)
+		bind *.openPackButtonData.description -> @var(packDescriptionText)
+		bind *.openPackButtonData.packCountText -> @var(packCountText)
+		bind *.openPackButtonData.availablePacksText -> @var(availablePacksText)
+		bind *.openPackButtonData.availablePacksText -> IsEmpty -> NOT -> @var(availablePacksVisible)
+		bind *.openPackButtonData.icon -> @var(icon)
+	}
+
+	instance $"ui_rtk/common/buttons/base_button.rpak" MoreInfoButton
+	{
+		position: <720, 320>
+		size: <224, 48>
+
+		override @var(labelText) "#COLLECTION_EVENT_MORE_INFO"
+		override @var(size) <200, 40>
+		override @var(gradientColor) #78797a
+		override @var(lineAlpha) 0
+	}
+}

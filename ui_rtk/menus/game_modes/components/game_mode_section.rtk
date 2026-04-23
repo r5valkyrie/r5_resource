@@ -1,0 +1,74 @@
+panel
+{
+	var Header @root/Header
+	var Pagination @root/HorizontalPagination
+
+	anchor: CENTER_STRETCH_WIDTH
+	height: 750
+
+	instance $"ui_rtk/common/labels/pagination_header.rpak" Header
+	{
+		positionX: 112
+		pivot: <0, 0>
+		useLocaleDirection: true
+		context @var( Label )
+		{
+			horizontalMode: AUTOSIZE_TO_TEXT
+			verticalMode: AUTOSIZE_TO_TEXT
+		}
+	}
+
+	instance $"ui_rtk/common/components/horizontal_paginated_panel.rpak" HorizontalPagination
+	{
+		override @var( cursorZone1Controller )  false
+		override @var( cursorZone2Controller )  true
+		override @this/CursorZone2:CursorInteract.absorbOnKeyCodePressed false
+		override @this/CursorZone2:CursorInteract.allowKeyCodeInputModeBypass true
+
+		context @var( containerPanel )
+		{
+			anchor: TOP_STRETCH_WIDTH
+			position: <0, 386>
+			offsetsLR: <112, 112>
+			height: 600
+		}
+
+		context @var( contentPanel )
+		{
+			anchor: LEFT
+			pivot: <0.0, 0.5>
+
+			behavior HorizontalContainer
+			{
+				alignment: LEFT
+				useLocaleDirection: true
+				fitContentWidth: true
+				fitContentHeight: true
+				spacing: 24
+			}
+		}
+
+		context @var( navContainerPanel )
+		{
+			anchor: TOP_RIGHT
+			position: <-112, 0>
+			pivot: <1.0, 0.0>
+			sizeDelta: <0, 60>
+
+			behavior HorizontalContainer
+			{
+				alignment: RIGHT
+				fitContentWidth: true
+				spacing: 20
+			}
+		}
+
+		context @this/CursorZone1
+		{
+			anchor: TOP_RIGHT
+			position: <0, 0>
+			pivot: <1.0, 0.0>
+			size: <640, 85>
+		}
+	}
+}

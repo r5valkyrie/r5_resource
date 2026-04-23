@@ -1,0 +1,86 @@
+panel MilestoneEventMainPanel
+{
+	bind root
+	anchor: CENTER
+	size: <1920, 1080>
+	pivot: <0.5, 0.5>
+	offsets: <0, 0, 0, 0>
+
+	behavior MilestoneEventMainPanel
+	{
+		giftButton: @panel/Content/EventBox/PurchaseButtonsContainer/PurchaseButtons/GiftPackButton:Button
+		purchaseButton: @panel/Content/EventBox/PurchaseButtonsContainer/PurchaseButtons/PurchasePackButton:Button
+		viewAllItemsButtons: [
+		@panel/Content/EventBox/ViewAllItemsButton:Button,
+		@panel/CarouselContainer/ViewAllItemsButton:Button
+		]
+
+		informationButton: @panel/Content/EventBox/InfoButtonArea:Button
+
+		rewardButtons: [
+		@panel/Content/EventBox/ProgressTracker/RewardButton1:Button,
+		@panel/Content/EventBox/ProgressTracker/RewardButton2:Button,
+		@panel/Content/EventBox/ProgressTracker/RewardButton3:Button,
+		@panel/Content/EventBox/ProgressTracker/RewardButton4:Button
+		]
+	}
+
+	panel Content
+	{
+		anchor: LEFT
+		pivot: <0, 0.5>
+		position: <65, 0>
+		behavior VerticalContainer
+		{
+			fitContentWidth: true
+			fitContentHeight: true
+			spacing: 0
+		}
+
+		instance $"ui_rtk/menus/events/milestone/components/milestone_event_header.rpak" EventHeader
+		{
+			override bind root "*"
+		}
+		instance $"ui_rtk/menus/events/milestone/components/milestone_event_box.rpak" EventBox
+		{
+			override bind root "*"
+		}
+	}
+
+	panel CarouselContainer
+	{
+		anchor: RIGHT
+		position: <-60, 10>
+		pivot: <1, 0.5>
+		size: <300, 460>
+
+		behavior VerticalContainer
+		{
+			fitContentWidth: true
+			alignment: BOTTOM_LEFT
+			spacing: 10
+			useLocaleDirection: true
+		}
+
+		instance $"ui_rtk/menus/events/milestone/components/milestone_event_carousel_info.rpak" CarouselBox
+		{
+			override bind root "*.carouselInfo"
+			override @this:HorizontalContainer.paddingLeft -10
+			anchor: LEFT
+			position: <0, 0>
+			pivot: <0, 0.5>
+		}
+
+		instance $"ui_rtk/common/buttons/base_button.rpak" ViewAllItemsButton
+		{
+			bind *.isRestricted -> NOT -> @this.visible
+			bind *.isRestricted -> NOT -> @this.active
+
+			anchor: BOTTOM_LEFT
+			pivot: <0, 1>
+			override @var(size) <315, 74>
+			override @var(labelText) "#MILESTONE_EVENT_TRACKING_PAGE_VIEW_ITEMS"
+		}
+	}
+}
+

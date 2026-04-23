@@ -1,0 +1,269 @@
+panel Screen
+{
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	behavior RenderGroup
+	{
+		alpha: 0
+	}
+
+	behavior Animator
+	{
+		tweenAnimations: [
+			{
+				name: "fadeInAnim"
+				tweens: [
+					{
+						property: @panel:RenderGroup.alpha
+						startValue: 0
+						endValue: 1
+						duration: 0.5
+						delay: 1.2
+						curve: EASE_IN_QUART
+					}
+				]
+			}
+		]
+	}
+
+	behavior AnimatorAutoPlay
+	{
+		animation: "fadeInAnim"
+	}
+
+	panel LegendNamePlateInfo
+	{
+		bind root
+
+		anchor: TOP_RIGHT
+		position: <-55, 110>
+		pivot: <1.0, 0.0>
+
+		//Todo: renable when RTK supports in world rendering
+		// See fileLevel.backgroundRui and fileLevel.scrollingBGRui for character select
+		visible: false
+
+		behavior CharacterSkillsInfo
+		{
+			bind &common.characterSkillsInfo.characterGUID -> @this.characterGUID
+		}
+
+		behavior VerticalContainer
+		{
+			fitContentWidth:  true
+			fitContentHeight: true
+			alignment: TOP_RIGHT
+			spacing: 43
+		}
+
+		panel LegendPanel
+		{
+			anchor: TOP_STRETCH_WIDTH
+			pivot: <0, 0>
+
+			behavior VerticalContainer
+			{
+				fitContentWidth:  true
+				fitContentHeight: true
+				alignment: TOP_RIGHT
+				spacing: -2
+				paddingRight: 25
+			}
+
+			panel LegendName
+			{
+			    behavior Label
+			    {
+			        bind *.mainText -> @this.text
+
+			        text: "Legend Name"
+			        face: "TitleBoldFont"
+			        pixelHeight: 90
+			        horizontalMode: AUTOSIZE_TO_TEXT
+			        verticalMode: AUTOSIZE_TO_TEXT
+			        colorRGB: <0.85, 0.85, 0.85>
+			        shadowAlpha: 0.5
+			        textAlignHorizontal: RIGHT
+			        textAlignVertical: CENTER
+			        allCaps: true
+			    }
+
+			    behavior ContainerElement
+				{
+					autosizeToLabelWidth: true
+					autosizeToLabelHeight: true
+				}
+			}
+
+			panel LegendFootnote
+			{
+			    behavior Label
+			    {
+			        bind *.subText -> @this.text
+
+			        text: "Legend Footnote"
+			        face: "TitleBoldFont"
+			        pixelHeight: 28
+			        horizontalMode: AUTOSIZE_TO_TEXT
+			        verticalMode: AUTOSIZE_TO_TEXT
+			        colorRGB: <0.85, 0.85, 0.85>
+			        shadowAlpha: 0.5
+			        textAlignHorizontal: RIGHT
+			        textAlignVertical: CENTER
+			        allCaps: true
+			    }
+
+			    behavior ContainerElement
+				{
+					autosizeToLabelWidth: true
+					autosizeToLabelHeight: true
+				}
+			}
+		}
+	}
+
+	instance $"ui_rtk/common/components/horizontal_tabbed_paginated_panel.rpak" TabbedPagination
+	{
+		anchor: TOP_RIGHT
+		position: <-230, 246>
+		pivot: <0.5, 0.0>
+		size: <460, 514>
+
+		context @var(paginationBehavior)
+		{
+			pageNames: [ "#Upgrades", "#Abilities" ]
+			globalInput: true
+			supportDpadButtonNav: false
+		}
+
+		context @var(contentPanel)
+		{
+			anchor: TOP_LEFT
+			pivot: <0.0, 0.0>
+
+			panel UpgradeTreePanel
+			{
+				bind @this.parent.parent.size -> @this.size
+
+				behavior VerticalContainer
+				{
+					spacing: 10
+					alignment: CENTER
+					fitContentHeight: true
+				}
+
+				panel UpgradesInfo
+				{
+					anchor: TOP
+					pivot: <0.5, 0.0>
+					width: 250
+
+					behavior Label
+					{
+						text: "#UPGRADES_CHARACTER_SELECT_INFO"
+						face: "DefaultBoldFont"
+						pixelHeight: 22
+						horizontalMode: WRAP
+						verticalMode: AUTOSIZE_TO_TEXT
+						colorRGB: <0.85, 0.85, 0.85>
+						shadowAlpha: 0.6
+						textAlignHorizontal: CENTER
+						textAlignVertical: CENTER
+						leading: -3
+						allCaps: true
+					}
+				}
+
+				instance $"ui_rtk/menus/legend_upgrades/components/legend_upgrades_tree.rpak" UpgradeTree
+				{
+					anchor: TOP
+					pivot: <0.5, 0.0>
+					scale: <0.8, 0.8>
+
+					context @this:ListBinder
+					{
+						varOverrides: {
+							descVisible: false
+							titleVisible: false
+						}
+					}
+				}
+			}
+
+			panel SkillsPerksPanel
+			{
+				bind @this.parent.parent.size -> @this.size
+
+				panel ClassContainer
+				{
+					bind root
+
+					anchor: TOP
+					pivot: <0.5, 0.0>
+
+					behavior CharacterSkillsInfo
+					{
+						bind &common.characterSkillsInfo.characterGUID -> @this.characterGUID
+					}
+
+					behavior VerticalContainer
+					{
+						fitContentWidth:  true
+						fitContentHeight: true
+						alignment: TOP_LEFT
+						useLocaleDirection: true
+						spacing: 15
+					}
+
+					panel LegendSkills
+					{
+						behavior VerticalContainer
+				        {
+				            spacing: 26
+				            alignment: LEFT
+							fitContentWidth:  true
+				            fitContentHeight: true
+				        }
+
+						behavior ListBinder
+						{
+							bindingPath: "*.characterSkillItems"
+							prefab: $"ui_rtk/menus/legend_upgrades/components/legend_skill_info_lobby.rpak"
+						}
+					}
+
+					panel Separator
+					{
+						size: <300, 4>
+
+						behavior Image
+						{
+							color: <1.0, 1.0, 1.0, 0.4>
+						}
+					}
+
+					panel ClassSkills
+					{
+						behavior VerticalContainer
+				        {
+				            spacing: 26
+				            alignment: LEFT
+							fitContentWidth:  true
+				            fitContentHeight: true
+				        }
+
+						behavior ListBinder
+						{
+							bindingPath: "*.characterClassItems"
+							prefab: $"ui_rtk/menus/legend_upgrades/components/legend_skill_info_lobby.rpak"
+							varOverrides: {
+								descTextPosition: <84, -18>
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,122 @@
+panel StatsToolTip
+{
+	behavior VerticalContainer
+	{
+		padding: <16, 16, 8, 8>
+		fitContentWidth: true
+		fitContentHeight: true
+		useLocaleDirection: true
+	}
+
+	behavior RenderGroup Content
+	{
+		alpha: 1.0
+	}
+
+	behavior Animator
+	{
+		tweenAnimations: [
+		{
+			name: "FadeIn"
+			tweens: [
+			{
+				property: @owner.panel/Content.alpha
+				startValue: 0.0
+				endValue: 1.0
+				duration: 0.2
+			}
+			]
+		}//,
+		// tooltip currently does not support fadeout animation, in keeping with parity with live game functionality
+		/*{
+				name:  "FadeOut"
+				tweens: [
+					{
+						property: @owner.panel/Content.alpha
+						startValue: 1.0
+						endValue: 0.0
+						duration: 0.2
+					}
+				]
+			}*/
+		]
+	}
+
+	instance $"ui_rtk/controls/blur.rpak"
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior ContainerElement
+		{
+			ignoreLayout: true
+		}
+	}
+
+	panel Background
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		
+		behavior Image
+		{
+			color: <0.1, 0.1, 0.1, 0.75>
+		}
+
+		behavior ContainerElement
+		{
+			ignoreLayout: true
+		}
+	}
+
+	panel Border
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/borders/border_outline_1px.rpak"
+			color: <1.0, 1.0, 1.0, 1>
+		}
+
+		behavior ContainerElement
+		{
+			ignoreLayout: true
+		}
+	}
+
+	panel TipDescription
+	{
+		anchor: CENTER
+		offsets: <0, 0, 0, 0>
+
+		behavior Label
+		{
+			text: "ToolTip Description"
+			pixelHeight: 28
+			color: <0.79, 0.79, 0.79, 1>
+			horizontalMode: AUTOSIZE_TO_TEXT
+			verticalMode: AUTOSIZE_TO_TEXT
+			useLocaleDirection: true
+		}
+
+		behavior NxOverrides
+		{
+			overrides: [
+				{
+					propertyRef: @panel:Label.pixelHeight
+					nxValue: 45
+				},
+				{
+					propertyRef: @panel:Label.face
+					nxValue: "DefaultBoldFont"
+				},
+				{
+					propertyRef: @panel:Label.leading
+					nxValue:  -7
+				}
+			]
+		}
+	}
+}

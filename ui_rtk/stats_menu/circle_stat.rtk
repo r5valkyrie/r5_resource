@@ -1,0 +1,191 @@
+panel
+{
+	bind root
+
+	size: <264, 264>
+	anchor: CENTER
+
+	panel border
+	{
+		size: <264, 264>
+		anchor: CENTER
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/player_stats/stats_ring_double.rpak"
+			color: <0.58, 0.58, 0.58, 1>
+		}
+
+		behavior NxOverrides
+		{
+			overrides: [
+				{
+					propertyRef: @panel:Image.assetPath
+					nxValue: $"ui_image/rui/borders/border_outline_4px.rpak"
+				},
+				{
+					propertyRef: @panel.size
+					nxValue: <250, 250>
+				}
+			]
+		}
+	}
+
+	panel headinglabel
+	{
+		anchor: CENTER
+		size: <200, 50>
+		position: <0, -64>
+		pivot: <0.5, 0.5>
+
+		behavior Label
+		{
+			bind *[0].label -> @this.text
+
+			text: ""
+			face: "DefaultRegularFont"
+			color: <0.58, 0.58, 0.58, 1>
+			pixelHeight: 27
+			textAlignHorizontal: CENTER
+			leading: -5.5
+		}
+
+		behavior NxOverrides
+		{
+			overrides: [
+				{
+					propertyRef: @panel:Label.pixelHeight
+					nxValue: 34
+				},
+				{
+					propertyRef: @panel:Label.face
+					nxValue: "DefaultBoldFont"
+				},
+				{
+					propertyRef: @panel:Label.leading
+					nxValue: -8
+				},
+				{
+					propertyRef: @panel.position
+					nxValue: <0, -62>
+				}
+			]
+		}
+	}
+
+	panel headingStat
+	{
+		anchor: CENTER
+		size: <215, 54>
+		position: <0, 0>
+		pivot: <0.5, 0.5>
+
+		behavior Label
+		{
+			bind *[0].value -> @this.text
+
+			text: ""
+			face: "TitleBoldFont"
+			color: <1.0, 1.0, 1.0, 1>
+			pixelHeight: 54
+			textAlignHorizontal: CENTER
+			horizontalMode: SQUISH_TO_CONTAINER
+		}
+	}
+
+	panel secondaryStat
+	{
+		anchor: CENTER
+		size: <200, 26>
+		position: <0, 54>
+		pivot: <0.5, 0.5>
+
+		behavior Label
+		{
+			bind *[1].combined -> @this.text
+
+			text: ""
+			face: "DefaultRegularFont"
+			color: <0.58, 0.58, 0.58, 1>
+			pixelHeight: 26
+			textAlignHorizontal: CENTER
+		}
+
+		behavior LabelAltStyle
+		{
+			face: "TitleBoldFont"
+			color: #White
+			pixelHeight: 23
+		}
+
+		behavior NxOverrides
+		{
+			overrides: [
+				{
+					propertyRef: @panel.position
+					nxValue: <-2, 40>
+				},
+				{
+					propertyRef: @panel:Label.pixelHeight
+					nxValue: 34
+				},
+				{
+					propertyRef: @panel:LabelAltStyle.pixelHeight
+					nxValue: 30
+				},
+				{
+					propertyRef: @panel:Label.face
+					nxValue: "DefaultBoldFont"
+				}
+			]
+		}
+	}
+
+	panel TertiaryStat
+	{
+		anchor: CENTER
+		size: <200, 26>
+		position: <0, 81>
+		pivot: <0.5, 0.5>
+
+		behavior Label
+		{
+			bind *[2].combined -> @this.text
+
+			text: ""
+			face: "DefaultRegularFont"
+			color: <0.58, 0.58, 0.58, 1>
+			pixelHeight: 26
+			textAlignHorizontal: CENTER
+		}
+
+		behavior LabelAltStyle
+		{
+			face: "TitleBoldFont"
+			color: #White
+			pixelHeight: 23
+		}
+
+		behavior NxOverrides
+		{
+			overrides: [
+				{
+					propertyRef: @panel.position
+					nxValue: <-1, 73>
+				},
+				{
+					propertyRef: @panel:Label.pixelHeight
+					nxValue: 34
+				},
+				{
+					propertyRef: @panel:LabelAltStyle.pixelHeight
+					nxValue: 30
+				},
+				{
+					propertyRef: @panel:Label.face
+					nxValue: "DefaultBoldFont"
+				}
+			]
+		}
+	}
+}

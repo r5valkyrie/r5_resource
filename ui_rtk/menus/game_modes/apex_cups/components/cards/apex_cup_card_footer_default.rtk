@@ -1,0 +1,17 @@
+panel
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+	behavior Label
+	{
+		face: "TitleBoldFont"
+		pixelHeight: 24
+		allCaps: true
+		textAlignHorizontal: CENTER
+		textAlignVertical: CENTER
+
+		bind *.state -> PickStringFrom( [ "#APEX_CUPS_STATUS_STARTING", "#APEX_CUPS_STATUS_IN_PROGRESS", "#APEX_CUPS_STATUS_FINISHED" ] ) -> @this.text
+	}
+}

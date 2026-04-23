@@ -1,0 +1,293 @@
+panel MilestoneEventCollectionItem
+{
+	bind root
+
+	anchor: TOP_LEFT
+	size: <112, 190>
+	inputListener: true
+
+	behavior GridContainerElement
+	{
+		bind *.gridColSpan -> @this.spanCellsHorizontal
+		bind *.gridRowSpan -> @this.spanCellsVertical
+
+		spanCellsHorizontal: 1
+		spanCellsVertical: 1
+	}
+
+	behavior Button
+	{
+		soundHighlighted: "ui_menu_focus"
+		soundPressedEnabled: "ui_menu_accept"
+		transitions: [
+		{
+			fromState: ANY
+			toState: IDLE
+			type: TRANSITION_PROPERTY_SET
+			property: @owner.panel/HighlightOutline:Image.alpha
+			value: 0.0
+		},
+		{
+			fromState: ANY
+			toState: HIGHLIGHTED
+			type: TRANSITION_PROPERTY_SET
+			property: @owner.panel/HighlightOutline:Image.alpha
+			value: 1.0
+		},
+		{
+			fromState: ANY
+			toState: IDLE
+			type: TRANSITION_PROPERTY_SET
+			property: @owner.panel/InnerGlow:Image.alpha
+			value: 0
+		},
+		{
+			fromState: ANY
+			toState: HIGHLIGHTED
+			type: TRANSITION_PROPERTY_SET
+			property: @owner.panel/InnerGlow:Image.alpha
+			value: 0.07
+		}
+		]
+
+	}
+
+	behavior ToolTip Tooltip
+	{
+		bind *.tooltipInfo.titleText -> @this.varOverrides.titleText
+		bind *.tooltipInfo.descText -> @this.varOverrides.bodyText
+		bind *.quality -> QualityName -> @this.varOverrides.subtitleText
+		bind *.quality -> QualityTextColor -> @this.varOverrides.subtitleColor
+
+		prefab: $"ui_rtk/common/tooltips/base_tooltip.rpak"
+		offset: <32, -68>
+		delay: 0
+		preferSide: RIGHT
+
+		varOverrides: {
+			// defaults
+			titleText: ""
+			subtitleText: ""
+			bodyText: ""
+			additionalText: ""
+			icon: $""
+			isIconVisible: false
+			isAdditionalTextVisible: false
+			titleColor: #ffffff
+			subtitleColor: #ffffff
+			additionalTextAltColor: #ffffff
+			iconColor: #ffffff
+
+			// overrides
+			actionText: "#A_BUTTON_INSPECT"
+			isSubtitleVisible: true
+		}
+	}
+
+	panel BackgroundFill
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			color: #Black
+			assetPath: $"ui_image/rui/menu/events/event_shop/notched_bg.rpak"
+		}
+	}
+
+	panel BackgroundGradient
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			bind *.quality -> Add(1) -> QualityColor( false ) -> @this.colorRGB
+			bind *.state -> AlphaFromShopItemState( 0.1, 0.2 ) -> @this.alpha
+
+			color: <1.0, 1.0, 1.0, 0.2>
+			assetPath: $"ui_image/rui/menu/events/event_shop/shop_item_gradient.rpak"
+		}
+	}
+
+	panel BackgroundDots
+	{
+		anchor: TOP_LEFT
+		pivot: <0, 0>
+		size: <112, 112>
+		position: <5, 5>
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			bind *.quality -> Add(1) -> QualityColor( false ) -> @this.colorRGB
+			bind *.state -> AlphaFromShopItemState( 0.3, 1.0 ) -> @this.alpha
+
+			color: <1, 1, 1, 1>
+			assetPath: $"ui_image/rui/menu/events/event_shop/shop_item_dots.rpak"
+		}
+	}
+
+	panel AssetIcon
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		pivot: <0.5, 0>
+		offsets: <5, 5, 5, 5>
+
+		behavior Image
+		{
+			bind *.icon -> @this.assetPath
+			bind *.state -> AlphaFromShopItemState( 0.2, 1.0 ) -> @this.alpha
+			assetMaskPath: $"ui_image/rui/menu/events/event_shop/shop_item_mask.rpak"
+		}
+	}
+
+	panel InnerGlow
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			colorRGB: <1, 0.3, 0.1>
+			alpha: 0
+			assetPath: $"ui_image/rui/inner_glow.rpak"
+		}
+	}
+
+	panel PriceArea
+	{
+		bind *.isPurchasable -> @this.visible
+
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		pivot: <0.5, 1>
+		offsets: <0, 0, 0, 0>
+		height: 36
+		positionY: -3
+
+		behavior Image
+		{
+			color: #Black
+			assetPath: $"ui_image/rui/menu/events/event_shop/notched_bg_half.rpak"
+		}
+
+		panel CurrencyPrice
+		{
+			bind *.isOwned -> NOT -> @this.visible
+
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, -2, 2>
+
+			behavior HorizontalContainer
+			{
+				alignment: CENTER
+				padding: <0, 0, 0, 0>
+				fitContentHeight: true
+				spacing: 5
+			}
+
+			panel CurrencyIcon
+			{
+				anchor: RIGHT
+				pivot: <0, 0.5>
+				size: <22, 22>
+
+				behavior Image
+				{
+					bind *.state -> AlphaFromShopItemState( 0.2, 1.0 ) -> @this.alpha
+
+					assetPath: $"ui_image/rui/menu/common/currency_premium.rpak"
+					color: <1, 1, 1, 1>
+				}
+			}
+
+			panel PriceText
+			{
+				anchor: LEFT
+				pivot: <0, 0.5>
+				height: 34
+
+				behavior Label
+				{
+					bind *.price -> IntToFloat -> FormatAndLocalizeNumber( "1", true ) -> @this.text
+					bind *.state -> AlphaFromShopItemState( 0.2, 1.0 ) -> @this.alpha
+
+					face: "DefaultBoldFont"
+					text: "8,888"
+					pixelHeight: 28
+					colorRGB: <1.0, 1.0, 1.0>
+					textAlignHorizontal: CENTER
+					textAlignVertical: CENTER
+					horizontalMode: AUTOSIZE_TO_TEXT
+					allCaps: true
+				}
+			}
+		}
+
+		panel OwnedText
+		{
+			bind *.isOwned -> @this.visible
+
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <10, 10, -2, 2>
+
+			behavior Label
+			{
+				bind *.state -> AlphaFromShopItemState( 0.2, 1.0 ) -> @this.alpha
+
+				face: "DefaultBoldFont"
+				pixelHeight: 30
+				colorRGB: <1.0, 1.0, 1.0>
+				text: "#OWNED"
+				horizontalMode: SQUISH_TO_CONTAINER
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				allCaps: true
+			}
+		}
+	}
+
+	panel BackgroundOutline
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			bind *.quality -> Add(1) -> QualityColor( *.isOwned ) -> @this.colorRGB
+			bind *.state -> AlphaFromShopItemState( 0.2, 1.0 ) -> @this.alpha
+
+			color: <1, 1, 1, 1>
+			assetPath: $"ui_image/rui/menu/events/event_shop/notched_border_2px.rpak"
+		}
+	}
+
+	panel HighlightOutline
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <-0.3, -0.3, -0.3, -0.3>
+
+		behavior Image
+		{
+			color: <1, 0.3, 0.1, 0>
+			assetPath: $"ui_image/rui/menu/events/event_shop/notched_border_4px.rpak"
+		}
+	}
+
+	panel OwnedFlag
+	{
+		bind *.isOwned -> @this.visible
+
+		anchor: TOP_RIGHT
+		pivot: <1, 0>
+		size: <40, 40>
+		position: <-0.5, 0.3>
+
+		behavior Image
+		{
+			color: <1, 1, 1, 1>
+			assetPath: $"ui_image/rui/menu/events/event_shop/shop_item_owned.rpak"
+		}
+	}
+}

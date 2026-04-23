@@ -1,0 +1,118 @@
+panel LegendUpgradesEvoShield
+{
+	bind root
+
+	bind *.state -> AlphaFromUpgradeState( 0.05, 1.0 ) -> [
+		@this/Outline:Image.alpha,
+		@this/Icon:Image.alpha,
+		@this/Level:Label.alpha,
+		@this/LeftArrow:Image.alpha,
+		@this/RightArrow:Image.alpha
+	]
+
+	anchor: CENTER
+	size: <120, 120>
+
+	panel Background
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			bind *.state -> AlphaFromUpgradeState( 0.4, 0.5 ) -> @this.alpha
+
+			assetPath: $"ui_image/rui/gladiator_cards/upgrades/legend_upgrades_glad_card_bg.rpak"
+			color: #000000
+			alpha: 0.5
+		}
+	}
+
+	panel LeftArrow
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			bind *.quality -> HUDQualityColor( *.isLocked ) -> @this.colorRGB
+
+			assetPath: $"ui_image/rui/hud/upgrades/legend_upgrades_choice_arrows.rpak"
+			flipHorizontal: true
+		}
+	}
+
+	panel RightArrow
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			bind *.quality -> HUDQualityColor( *.isLocked ) -> @this.colorRGB
+
+			assetPath: $"ui_image/rui/hud/upgrades/legend_upgrades_choice_arrows.rpak"
+		}
+	}
+
+	panel Outline
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			bind *.quality -> HUDQualityColor( *.isLocked ) -> @this.colorRGB
+
+			colorRGB: <0.2, 0.2, 0.2>
+			assetPath: $"ui_image/rui/gladiator_cards/upgrades/legend_upgrades_glad_card_outline.rpak"
+		}
+	}
+
+	panel ConnectorLine
+	{
+		bind *.quality -> Equal( 1 ) -> NOT -> @this.visible
+
+		anchor: CENTER
+		size: <22, 30>
+		positionY: -77
+
+		behavior Image
+		{
+			bind *.isLocked -> PickAssetFromTwo( $"ui_image/rui/hud/upgrades/legend_upgrades_tree_arrow_line_unlocked.rpak", $"ui_image/rui/hud/upgrades/legend_upgrades_tree_arrow_line.rpak" ) -> @this.assetPath
+
+			colorRGB: #FFFFFF
+		}
+	}
+
+	panel Icon
+	{
+		anchor: CENTER
+		size: <44, 44>
+		positionY: -12
+
+		behavior Image
+		{
+			bind *.quality -> HUDQualityColor( false ) -> @this.colorRGB
+
+			assetPath: $"ui_image/rui/hud/loot/loot_armor_upgrade.rpak"
+		}
+	}
+
+	panel Level
+	{
+		anchor: TOP
+		positionY: 16
+		height: 20
+
+		behavior Label
+		{
+			bind *.level -> LocalizeStringInAnother( "#LVL_N" ) -> @this.text
+
+			face: "TitleBoldFont"
+			colorRGB: #FFFFFF
+			pixelHeight: 20
+			horizontalMode: AUTOSIZE_TO_TEXT
+		}
+	}
+}

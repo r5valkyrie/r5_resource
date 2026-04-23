@@ -1,0 +1,54 @@
+panel BulletPointList
+{
+    bind root
+    anchor: TOP_STRETCH_WIDTH
+	offsetsLR: <0, 0>
+	pivot: <0.5, 0.0>
+    height: 30
+
+	behavior HorizontalContainer
+	{
+		alignment: LEFT
+		spacing: 10
+		useLocaleDirection: true
+	}
+
+	panel BulletPointAsset
+	{
+		size: <20, 20>
+
+		behavior Image
+		{
+			assetpath: $"ui_image/rui/bullet_point.rpak"
+		}
+	}
+
+	panel BulletPointText
+	{
+	    anchor: TOP_STRETCH_WIDTH
+		offsetsLR: <0, 0>
+		pivot: <0.5, 0.0>
+
+		behavior FormatLabel
+		{
+			bind *.bulletpointText -> @this.format
+			bind *.textArgs -> @this.arg1
+			bind *.visible -> @root.visible
+
+			textAlignHorizontal: LEFT
+			verticalMode: AUTOSIZE_TO_TEXT
+			useLocaleDirection: true
+			color: <0.8, 0.8, 0.8, 1.0>
+			face: "DefaultRegularFont"
+			pixelHeight: 28
+	        format: ""
+	        arg1: ""
+		}
+
+		behavior LabelAltStyle
+		{
+			colorRGB: <1, 0.8, 0.24>
+			alpha: 1.0
+		}
+	}
+}

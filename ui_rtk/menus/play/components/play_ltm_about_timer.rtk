@@ -1,0 +1,11 @@
+instance $"ui_rtk/menus/play/components/play_ltm_timer.rpak" PlayLTMAboutTimer
+{
+	bind &menus.play.aboutModeTimer.endTime -> @var(endTime)
+	bind &menus.play.aboutModeTimer.endTime -> GreaterThan( 0 ) -> @this.visible
+	bind &menus.play.aboutModeTimer.endTime -> GreaterThan( 0 ) -> @var(visible)
+	override @var(anchor) TOP_LEFT
+	override @var(size) <280, 32>
+	override @var(position) <44, 22>
+	override @var(bgColor) #686a6f
+	override @var(bgRotation) 180
+}

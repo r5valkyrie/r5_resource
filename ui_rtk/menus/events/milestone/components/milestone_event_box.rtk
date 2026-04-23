@@ -1,0 +1,637 @@
+panel MilestoneEventBox
+{
+	bind root
+
+	inputListener: true
+	size: <900, 340>
+	anchor: TOP_LEFT
+	pivot: <0, 0>
+	offsets: <0, 0, 0, 0>
+
+	behavior VerticalContainer
+	{
+		spacing: 30
+		fitContentHeight: true
+		padding: <20, 0, 20, 20>
+	}
+
+	panel BackgroundImage
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <-2, -2, -3, -2> // texture has empty space for slicing R5DEV-567035
+
+		behavior Image
+		{
+			bind *.trackerBoxBGImage -> @this.assetPath
+		}
+
+		behavior ContainerElement
+		{
+			ignoreLayout: true
+		}
+	}
+
+	panel HeaderPanel
+	{
+		bind @this.parent.width -> Subtract(50) -> @this.width
+		bind @this/LeftText.height -> @this.height
+		size: <1000, 50>
+		anchor: TOP
+		pivot: <0.5, 0>
+		positionY: 25
+
+ 		panel LeftText
+		{
+			size: <400, 50>
+			anchor: TOP_LEFT
+			pivot: <0, 0>
+			useLocaleDirection: true
+
+			behavior VerticalContainer
+			{
+				spacing: 2
+				fitContentHeight: true
+				useLocaleDirection: true
+			}
+
+			panel Title
+			{
+				bind @this:Label.pixelHeight -> @this.height
+				anchor: TOP_LEFT
+				pivot: <0, 0>
+				behavior Label
+				{
+					bind *.subtitleColor -> @this.colorRGB
+					text: "#MILESTONE_EVENT_TRACKING_BOX_TITLE"
+					face: "TitleBoldFont"
+					allCaps: true
+					pixelHeight: 42
+					textAlignVertical: TOP
+					textAlignHorizontal: LEFT
+					horizontalMode: AUTOSIZE_TO_TEXT
+					useLocaleDirection: true
+					color: #bcbcbc
+				}
+			}
+			panel Subtitle
+			{
+				bind @this:Label.pixelHeight -> @this.height
+
+				anchor: TOP_LEFT
+				pivot: <0, 0>
+				behavior Label
+				{
+					bind *.nextMilestoneText -> @this.text
+					text: "#MILESTONE_EVENT_TRACKING_BOX_NEXT_MILE"
+					face: "TitleFont"
+					allCaps: true
+					pixelHeight: 30
+					textAlignVertical: TOP
+					textAlignHorizontal: LEFT
+					horizontalMode: AUTOSIZE_TO_TEXT
+					color: #bcbcbc
+				}
+			}
+		}
+		panel RightText
+		{
+			size: <400, 50>
+			anchor: TOP_RIGHT
+			pivot: <1, 0>
+			useLocaleDirection: true
+
+			behavior VerticalContainer
+			{
+				spacing: 2
+				fitContentHeight: true
+				alignment: TOP_RIGHT
+				useLocaleDirection: true
+			}
+
+			panel CollectedRatio
+			{
+				bind @this:Label.pixelHeight -> @this.height
+
+				anchor: TOP_RIGHT
+				pivot: <1, 0>
+				behavior FormatLabel
+				{
+					bind *.currentCollectedItems -> @this.arg1
+					bind *.totalItems -> @this.arg2
+					format: "#VAL_SLASH_VAL_TWO_STYLE"
+					face: "TitleBoldFont"
+					allCaps: true
+					pixelHeight: 42
+					textAlignVertical: TOP
+					textAlignHorizontal: RIGHT
+					horizontalMode: AUTOSIZE_TO_TEXT
+					useLocaleDirection: true
+					color: #ffffff
+					arg1: 0
+					arg2: 0
+					outlineColorInner: <0.0, 0.0, 0.0, 0.8>
+					outlineColorOuter: <0.0, 0.0, 0.0, 0.5>
+					outlineWidth: 2
+				}
+
+				behavior LabelAltStyle
+				{
+					color: #bcbcbc
+				}
+			}
+			panel CollectedText
+			{
+				bind @this:Label.pixelHeight -> @this.height
+
+				anchor: TOP_RIGHT
+				pivot: <1, 0>
+				behavior Label
+				{
+					text: "#MILESTONE_EVENT_TRACKING_BOX_ITEMS_COLLECTED"
+					face: "TitleFont"
+					allCaps: true
+					pixelHeight: 30
+					textAlignVertical: TOP
+					textAlignHorizontal: RIGHT
+					horizontalMode: AUTOSIZE_TO_TEXT
+					useLocaleDirection: true
+					color: #bcbcbc
+				}
+			}
+		}
+	}
+
+	instance $"ui_rtk/menus/events/milestone/components/milestone_event_progress_tracker.rpak"
+	{
+		override bind root "*"
+	}
+
+	panel RatesContainer
+	{
+		bind *.isRestricted -> NOT -> @this.visible
+		bind *.isRestricted -> NOT -> @this.active
+
+		behavior HorizontalContainer
+		{
+			fitContentHeight: true
+			fitContentWidth: true
+			useLocaleDirection: true
+		}
+
+		panel Rates
+		{
+			size: <850, 50>
+			behavior VerticalContainer
+			{
+				fitContentHeight: true
+				fitContentWidth: true
+				spacing: 6
+				useLocaleDirection: true
+			}
+			panel Title
+			{
+				behavior HorizontalContainer
+				{
+					fitContentHeight: true
+					fitContentWidth: true
+					useLocaleDirection: true
+				}
+
+				panel Column1
+				{
+					bind @this:Label.pixelHeight -> @this.height
+
+					width: 315
+					behavior Label
+					{
+						text: "#MILESTONE_EVENT_TRACKING_PAGE_PACK_TITLE"
+						face: "TitleBoldFont"
+						pixelHeight: 24
+						color: #bcbcbc
+						outlineColorInner: <0, 0, 0, 0.8>
+						outlineColorOuter: <0, 0, 0, 0>
+						textAlignHorizontal: LEFT
+						textAlignVertical: TOP
+						horizontalMode: SQUISH_TO_CONTAINER
+						verticalMode: CLIP
+						useLocaleDirection: true
+						allcaps: true
+					}
+				}
+
+				panel Column2
+				{
+					bind @this:Label.pixelHeight -> @this.height
+
+					width: 500
+					behavior Label
+					{
+						text: "#MILESTONE_EVENT_TRACKING_PAGE_PROBABLITY_TITLE"
+						face: "TitleBoldFont"
+						pixelHeight: 24
+						color: #bcbcbc
+						outlineColorInner: <0, 0, 0, 0.8>
+						outlineColorOuter: <0, 0, 0, 0>
+						textAlignHorizontal: LEFT
+						textAlignVertical: TOP
+						horizontalMode: SQUISH_TO_CONTAINER
+						verticalMode: CLIP
+						useLocaleDirection: true
+						allcaps: true
+					}
+				}
+			}
+
+			panel LineSeparator
+			{
+				bind @this.parent.width -> Subtract( 20 ) -> @this.width
+				height: 3
+				behavior Image
+				{
+					color: #bcbcbc
+				}
+			}
+
+			panel Description1
+			{
+				behavior HorizontalContainer
+				{
+					fitContentHeight: true
+					fitContentWidth: true
+					useLocaleDirection: true
+				}
+
+				panel Column1
+				{
+					bind @this:Label.pixelHeight -> @this.height
+					bind @this.parent.parent/Title/Column1.width -> @this.width
+
+					width: 400
+					behavior Label
+					{
+						text: "#MILESTONE_EVENT_TRACKING_PAGE_PACK_1_ITEM"
+						face: "DefaultBoldFont"
+						pixelHeight: 28
+						color: #bcbcbc
+						outlineColorInner: <0, 0, 0, 0.8>
+						outlineColorOuter: <0, 0, 0, 0>
+						textAlignHorizontal: LEFT
+						textAlignVertical: TOP
+						horizontalMode: SQUISH_TO_CONTAINER
+						verticalMode: CLIP
+						useLocaleDirection: true
+					}
+				}
+
+				panel Column2
+				{
+					bind @this/TextPart1:Label.pixelHeight -> @this.height
+					bind @this.parent.parent/Title/Column2.width -> @this.width
+
+					behavior VerticalContainer
+					{
+						alignment: LEFT
+						spacing: -4
+						fitContentHeight: true
+						fitContentWidth: true
+						useLocaleDirection: true
+					}
+
+					panel TextPart1
+					{
+						bind @this:Label.pixelHeight -> @this.height
+						behavior Label
+						{
+							text: "#MILESTONE_EVENT_TRACKING_PAGE_PACK_1_ITEM_RATES_1"
+							face: "DefaultBoldFont"
+							pixelHeight: 28
+							color: #bcbcbc
+							outlineColorInner: <0, 0, 0, 0.8>
+							outlineColorOuter: <0, 0, 0, 0>
+							textAlignHorizontal: LEFT
+							textAlignVertical: TOP
+							horizontalMode: AUTOSIZE_TO_TEXT
+							verticalMode: CLIP
+							useLocaleDirection: true
+						}
+
+						behavior LabelAltStyle
+						{
+							color: #COLOR_HUD_LOOT_TIER_5 //Mythic
+						}
+
+						behavior LabelAltStyle
+						{
+							color: #00f9c7 //Iconic
+						}
+					}
+					panel TextPart2
+					{
+						bind @this:Label.pixelHeight -> @this.height
+						behavior Label
+						{
+							text: "#MILESTONE_EVENT_TRACKING_PAGE_PACK_1_ITEM_RATES_2"
+							face: "DefaultBoldFont"
+							pixelHeight: 28
+							color: #bcbcbc
+							outlineColorInner: <0, 0, 0, 0.8>
+							outlineColorOuter: <0, 0, 0, 0>
+							textAlignHorizontal: LEFT
+							textAlignVertical: TOP
+							horizontalMode: AUTOSIZE_TO_TEXT
+							verticalMode: CLIP
+							useLocaleDirection: true
+						}
+
+						behavior LabelAltStyle
+						{
+							color: #ffcd3c //Legendary
+						}
+
+						behavior LabelAltStyle
+						{
+							color: #ce60e3 //Epic
+						}
+					}
+				}
+			}
+
+			panel Description2
+			{
+				behavior HorizontalContainer
+				{
+					fitContentHeight: true
+					fitContentWidth: true
+					useLocaleDirection: true
+				}
+
+				panel Column1
+				{
+					bind @this:Label.pixelHeight -> @this.height
+					bind @this.parent.parent/Title/Column1.width -> @this.width
+
+					width: 400
+					behavior Label
+					{
+						text: "#MILESTONE_EVENT_TRACKING_PAGE_PACK_2_ITEM"
+						face: "DefaultBoldFont"
+						pixelHeight: 28
+						color: #bcbcbc
+						outlineColorInner: <0, 0, 0, 0.8>
+						outlineColorOuter: <0, 0, 0, 0>
+						textAlignHorizontal: LEFT
+						textAlignVertical: TOP
+						horizontalMode: SQUISH_TO_CONTAINER
+						verticalMode: CLIP
+						useLocaleDirection: true
+					}
+				}
+
+				panel Column2
+				{
+					bind @this:Label.pixelHeight -> @this.height
+					bind @this.parent.parent/Title/Column2.width -> @this.width
+
+					width: 400
+					behavior Label
+					{
+						text: "#MILESTONE_EVENT_TRACKING_PAGE_PACK_2_ITEM_RATES"
+						face: "DefaultBoldFont"
+						pixelHeight: 28
+						color: #bcbcbc
+						outlineColorInner: <0, 0, 0, 0.8>
+						outlineColorOuter: <0, 0, 0, 0>
+						textAlignHorizontal: LEFT
+						textAlignVertical: TOP
+						horizontalMode: SQUISH_TO_CONTAINER
+						verticalMode: CLIP
+						useLocaleDirection: true
+					}
+
+					behavior LabelAltStyle
+					{
+						color: #ffcd3c //Legendary
+					}
+
+					behavior LabelAltStyle
+					{
+						color: #ce60e3 //Epic
+					}
+
+					behavior LabelAltStyle
+					{
+						color: #62c8ff //Rare
+					}
+				}
+			}
+		}
+
+		panel InfoButton
+		{
+			size: <50,50>
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/borders/gifting_more_info.rpak"
+			}
+		}
+	}
+
+	panel Disclaimer
+	{
+		//bind @this/Text.height -> @this.height
+		//bind @this/ImageBG.width -> @this.width
+		bind @root.width -> @this.width
+		bind *.isRestricted -> NOT -> @this.visible
+		bind *.isRestricted -> NOT -> @this.active
+		panel ImageBG
+		{
+			bind @root:VerticalContainer.paddingLeft -> Minus -> @this.positionX
+			bind @root.width -> @this.width
+			bind @parent.height -> @this.height
+
+			anchor: LEFT
+			pivot: <0, 0.5>
+			behavior Image
+			{
+				bind *.disclaimerBoxColor -> @this.colorRGB
+			}
+
+			behavior ContainerElement
+			{
+				ignoreLayout: true
+			}
+		}
+
+		behavior VerticalContainer
+		{
+			fitContentHeight: true
+			spacing: 5
+			alignment: CENTER
+			paddingTop: 10
+			paddingBottom: 10
+			useLocaleDirection: true
+		}
+
+		panel Text
+		{
+			bind @this:Label.pixelHeight -> @this.height
+
+			width: 850
+			anchor: LEFT
+			pivot: <0, 0.5>
+			behavior Label
+			{
+				text: "#MILESTONE_EVENT_TRACKING_PAGE_DISCLAIMER"
+				face: "DefaultBoldFont"
+				pixelHeight: 28
+				color: #bcbcbc
+				outlineColorInner: <0, 0, 0, 0.8>
+				outlineColorOuter: <0, 0, 0, 0>
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				horizontalMode: WRAP
+				verticalMode: AUTOSIZE_TO_TEXT
+			}
+
+			behavior LabelAltStyle
+			{
+				color: #ffcd3c //Legendary
+			}
+
+			behavior LabelAltStyle
+			{
+				color: #00f9c7 //Iconic
+			}
+		}
+
+		instance $"ui_rtk/menus/events/milestone/components/milestone_event_pricing_line.rpak" PricingLine1
+		{
+			override bind root "*.packPricingData[0]"
+			override @var(packQuantityFormat) "#N_APEX_PACK"
+			override @var(packQuantityArg1) 1
+		}
+		instance $"ui_rtk/menus/events/milestone/components/milestone_event_pricing_line.rpak" PricingLine2
+		{
+			override bind root "*.packPricingData[1]"
+			override @var(packQuantityFormat) "#MILESTONE_BUNDLE_EVENT_MULTIDRAW_LABEL_SHORT"
+		}
+}
+
+	panel PurchaseButtonsContainer
+	{
+		behavior VerticalContainer
+		{
+			fitContentHeight: true
+			fitContentWidth: true
+			spacing: 10
+			alignment: CENTER
+		}
+
+		panel PurchaseButtons
+		{
+			bind *.isRestricted -> NOT -> @this.visible
+			behavior HorizontalContainer
+			{
+				fitContentHeight: true
+				fitContentWidth: true
+				spacing: 15
+				paddingLeft: 15
+				useLocaleDirection: true
+			}
+
+			instance $"ui_rtk/common/buttons/base_button.rpak" GiftPackButton
+			{
+				bind *.giftButtonData.state -> GetGiftingButtonTitle -> @var( labelText )
+				bind *.giftButtonData.state -> GetGiftingButtonDescription -> @var( labelDescText )
+				bind *.giftButtonData.state -> IsGiftingButtonInteractable -> @this:Button.interactive
+				override @var(size) <395, 110>
+				override @var(labelPixelHeight) 32
+				override @var(labelDescPixelHeight) 32
+			}
+
+			instance $"ui_rtk/common/buttons/base_button.rpak" PurchasePackButton
+			{
+				bind *.purchaseButtonData.state -> IsMilestonePackPurchaseButtonInteractable -> @this:Button.interactive
+				bind *.purchasebuttonData.state -> GetMilestonePackPurchaseButtonTitle -> @var( labelText )
+				override @var(size) <395, 110>
+				override @var(labelPixelHeight) 32
+			}
+		}
+
+		panel MilestonePackAlert
+		{
+			bind *.eventShopHasMilestonePack -> @this.visible
+			bind @this:Label.pixelHeight -> @this.height
+			anchor: CENTER
+			pivot: <0, 0>
+			size: <406, 35>
+
+			behavior Label
+			{
+				text: "#MILESTONE_EVENT_PACK_BUTTON_MILESTONESHOP"
+				face: "TitleBoldFont"
+				pixelHeight: 22
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				horizontalMode: AUTOSIZE_TO_TEXT
+				verticalMode: AUTOSIZE_TO_TEXT
+			}
+		}
+	}
+
+	instance $"ui_rtk/common/buttons/base_button.rpak" ViewAllItemsButton
+	{
+		bind *.isRestricted -> @this.visible
+		bind *.isRestricted -> @this.active
+
+		override @var(size) <470, 80>
+		override @var(labelText) "#MILESTONE_EVENT_TRACKING_PAGE_VIEW_ITEMS"
+		behavior ContainerElement
+		{
+			horizontalAlignOverride: CENTER
+		}
+	}
+
+	panel InfoButtonArea
+	{
+		bind *.isRestricted -> NOT -> @this.active
+		bind *.isRestricted -> NOT -> @this.visible
+		inputListener: true
+		position: <0, 215>
+		size: <900, 190>
+		pivot: <0, 0>
+		behavior Button
+		{
+			soundHighlighted: "ui_menu_focus"
+			soundPressedEnabled: "ui_menu_accept"
+			transitions: [
+			{//IDLE TRANSISTIONS
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @root/RatesContainer/InfoButton:Image.colorRGB
+				value: <1, 1, 1>
+			},
+			{//HIGHLIGHTED TRANSISTIONS
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @root/RatesContainer/InfoButton:Image.colorRGB
+				value: #febb00
+			},
+			{//PRESSED TRANSISTIONS
+				fromState: ANY
+				toState: PRESSED
+				type: TRANSITION_PROPERTY_SET
+				property: @root/RatesContainer/InfoButton:Image.colorRGB
+				value: #febb00
+			}
+			]
+		}
+		behavior ContainerElement
+		{
+			ignoreLayout: true
+		}
+	}
+}
+

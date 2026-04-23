@@ -1,0 +1,43 @@
+panel Spinner
+{
+	var icon @this/Content:Image.assetPath
+	var speed @this:Animator.tweenAnimations[0].tweens[0].duration
+	var loop @this:Animator.tweenAnimations[0].loop
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	behavior Animator
+	{
+		tweenAnimations: [
+			{
+				name: "Rotate"
+				loop: LOOP
+				tweens: [
+					{
+						property: @panel/Content.rotation
+						startValue: 0.0
+						endValue: 360.0
+						duration: 3.0
+					}
+				]
+			}
+		]
+	}
+
+	behavior AnimatorAutoPlay
+	{
+		animation: "Rotate"
+	}
+
+	panel Content
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/ui/menu/title_screen/spinner.rpak"
+		}
+	}
+}

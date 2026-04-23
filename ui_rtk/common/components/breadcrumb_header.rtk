@@ -1,0 +1,71 @@
+panel BreadcrumbHeader
+{
+	bind root
+
+	anchor: TOP_STRETCH_WIDTH
+	pivot: <0.5, 0.0>
+	offsetsLR: <0.0, 0.0>
+	height: 85
+
+	behavior BreadcrumbHeader
+	{
+		seasonalColors: true
+		rightImage: @panel/RightImage
+	}
+
+	behavior Image
+	{
+		imageBlur: ASSET
+	}
+
+	panel Background
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			color: <0, 0, 0, 0.7>
+			imageBlur: ASSET
+		}
+	}
+
+	panel RightImage
+	{
+		bind @root.height -> @this.height
+		anchor: TOP_RIGHT
+		pivot: <1, 0>
+		width: 494
+		visible: false
+
+		behavior Image
+		{
+			assetPath: $""
+		}
+	}
+
+	panel Breadcrumbs
+	{
+		anchor: LEFT
+		position: <48, 0>
+		pivot: <0.0, 0.5>
+
+		behavior HorizontalContainer
+		{
+			spacing: 5
+		}
+
+		behavior ListBinder
+		{
+			bindingPath: "*.breadcrumbSteps"
+			prefab: $"ui_rtk/common/components/breadcrumb_header_step.rpak"
+		}
+	}
+
+	instance $"ui_rtk/common/components/currency_widget.rpak" CurrencyWidget
+	{
+		anchor: RIGHT
+		position: <-30, 5>
+		pivot: <1.0, 0.5>
+	}
+}

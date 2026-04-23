@@ -1,0 +1,154 @@
+panel TierBox
+{
+	bind root
+	size: <144, 200> //154, 242
+
+
+	behavior Image
+	{
+		colorRGB: <0.08, 0.08, 0.08>
+		alpha: 0.5
+		assetPath: $"ui_image/white.rpak"
+	}
+
+	panel RewardButton
+	{
+		position: <0, -23>
+		size: <100, 100>
+		pivot: <0.5, 1.0>
+		anchor: BOTTOM
+
+		inputListener: true
+
+		behavior Button
+		{
+			soundHighlighted: "UI_Menu_BattlePass_Level_Focus"
+			soundPressedEnabled: "ui_menu_accept"
+		}
+
+		behavior BattlePassRewardButton
+		{
+			bind *.quantity -> @this.quantity
+			bind *.level -> @this.level
+			bind *.isOwned -> @this.isOwned
+			bind *.isTall -> @this.isTall
+			bind *.isRumble -> @this.isRumble
+			bind *.flavGUID -> @this.flavGUID
+			bind *.badgeTier -> @this.tier
+
+			button: @panel:Button
+			battlepassRewardRui: $"ui/battle_pass_reward_button_v2.rpak"
+		}
+
+
+		panel RewardButtonQuantityBox
+		{
+			size: <100,33>
+			pivot: <0.5, 1>
+			anchor: BOTTOM
+
+			bind *.showQuantity -> @this.visible
+
+			behavior Image
+			{
+				colorRGB: <0.07,0.07,0.07>
+				alpha: 0.5
+				assetPath: $"ui_image/white.rpak"
+			}
+
+			panel ItemIconQuantityText
+			{
+				anchor: CENTER
+				behavior Label
+				{
+					bind *.quantity -> @this.text
+					margin: <0, 0, 0, 0>
+					face: "DefaultBoldFont"
+					pixelHeight: 23
+					colorRGB: #ffffff
+					textAlignHorizontal: CENTER
+					verticalMode: AUTOSIZE_TO_TEXT
+					allCaps: false
+				}
+			}
+		}
+	}
+
+	panel TopBox
+	{
+		size: <144, 44>
+		anchor: TOP
+		pivot: <0.5, 1>
+
+		behavior Image
+		{
+			color: <0.07,0.07,0.07, 0.75>
+			assetPath: $"ui_image/white.rpak"
+		}
+
+		panel Current
+		{
+			bind *.isCurrentTier -> @this.visible
+
+			anchor: TOP_STRETCH_WIDTH
+			pivot: <0.5, 1>
+			offsets: <0, 0, 0, 0>
+			height: 29
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/apex_rumble/borders/apex_cups_tier_current.rpak"
+				colorRGB: #COLOR_ORANGE_2
+			}
+
+			panel Text
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+				behavior Label
+				{
+					margin: <0, 0, 0, 0>
+					face: #FONT_DEFAULT_BOLD
+					text: "#CUPS_REWARDS_TIER_CURRENT"
+					pixelHeight: 22
+					colorRGB: #BLACK
+					textAlignHorizontal: CENTER
+					horizontalMode: SQUISH_TO_CONTAINER
+					verticalMode: AUTOSIZE_TO_TEXT
+					allCaps: true
+				}
+			}
+		}
+
+		panel Tier
+		{
+			anchor: CENTER_STRETCH_WIDTH
+			pivot: <0.5, 0.5>
+			offsets: <0, 0, 0, 0>
+
+			behavior Label
+			{
+				bind *.tier -> @this.text
+				margin: <0, 0, 0, 0>
+				face: "TitleBoldFont"
+				pixelHeight: 24
+				colorRGB: #8C8F90
+				textAlignHorizontal: CENTER
+				verticalMode: AUTOSIZE_TO_TEXT
+				allCaps: true
+			}
+		}
+
+		panel Line
+		{
+			size: <144, 4> //154
+			anchor: BOTTOM
+
+			behavior Image
+			{
+				color: <0.25,0.25,0.25,1>
+				assetPath: $"ui_image/white.rpak"
+			}
+		}
+	}
+}

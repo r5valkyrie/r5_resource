@@ -1,0 +1,51 @@
+panel CrossProgressionMigrating
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	panel Content
+	{
+		anchor: CENTER_STRETCH_WIDTH
+		offsetsLR: <98, 98>
+		positionY: 56
+
+		behavior VerticalContainer
+		{
+			padding: <98, 98, 0, 0>
+			alignment: CENTER
+			fitContentHeight: true
+			fitContentWidth: true
+			spacing: 30
+		}
+
+		instance $"ui_rtk/common/components/spinner.rpak" Spinner
+		{
+			anchor: BOTTOM
+			pivot: <0.5, 1>
+			size: <120, 120>
+		}
+
+		panel BodyText
+		{
+			anchor: TOP
+			pivot: <0.5, 0>
+			size: <1000, 260>
+
+			behavior Label
+			{
+				face: "TitleRegularFont"
+				pixelHeight: 32
+				colorRGB: #ffffff
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				horizontalMode: WRAP
+				verticalMode: AUTOSIZE_TO_TEXT
+				text: "#CROSS_PROGRESSION_MIGRATING_DESC"
+				alpha: 0.5
+				leading: 5
+			}
+		}
+	}
+}

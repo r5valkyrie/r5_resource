@@ -68,23 +68,7 @@ resource/ui/menus/dialog_gamemode_rules.menu
             pin_to_sibling_corner	CENTER
         }
 
-        DialogContent
-        {
-            ControlName				RuiPanel
-            wide					%100
-            tall					850
-            labelText               ""
-            visible					1
-            rui                     "ui/generic_dialog_content.rpak"
-			ruiArgs
-            {
-                headerText          "#ABOUT_GAMEMODE"
-            }
 
-            pin_to_sibling			DialogFrameBG
-            pin_corner_to_sibling	TOP
-            pin_to_sibling_corner	TOP
-        }
 		TabsBackground
 	    {
 	        ControlName				RuiPanel

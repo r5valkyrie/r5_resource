@@ -1,0 +1,28 @@
+panel Tag
+{
+	bind @this/TagString.size -> @this.size
+
+	var backgroundColor     @this:Image.colorRGB
+	var backgroundAlpha     @this:Image.alpha
+	var textColor           @this/TagString:Label.colorRGB
+	var text                @this/TagString:Label.text
+	var textAlpha           @this/TagString:Label.alpha
+
+    behavior Image
+
+	panel TagString
+	{
+        anchor: CENTER
+		behavior Label
+		{
+			textAlignHorizontal: LEFT
+			verticalMode: AUTOSIZE_TO_TEXT
+			HorizontalMode: AUTOSIZE_TO_TEXT
+			allCaps: true
+			pixelHeight: 22
+			thicken: 0.2
+			face: "DefaultCompactFont"
+			margin: <5, 5, 1, 1>
+		}
+	}
+}

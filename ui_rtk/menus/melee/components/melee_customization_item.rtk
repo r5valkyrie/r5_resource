@@ -1,0 +1,441 @@
+panel MeleeCustomizationItem
+{
+	bind root
+
+	// base
+	var icon @this/Icon:Image.assetPath
+
+	// visibility
+	var isVisible @this.visible
+	var isChecked @this/Checked.visible
+	var isLocked @this/Locked.visible
+
+	// colors
+	var outlineColor @this/Outline:Image.colorRGB
+	var mainColor @this/ColorTag1:Image.colorRGB
+	var secondaryColor @this/ColorTag2:Image.colorRGB
+	var lockColor @this/Locked:Image.colorRGB
+	var dotsColor @this/Dots:Image.colorRGB
+
+	// state
+	var state @this:AnimatorStates.state
+
+	anchor: CENTER
+	size: <80, 80>
+
+	behavior Animator
+	{
+		tweenAnimations: [
+		{
+			name: "onLocked"
+			tweens: [
+			{
+				property: @owner.panel/Outline:Image.colorRGB
+				startValue: #COLOR_GREY_4
+				endValue: #COLOR_GREY_4
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Background:Image.alpha
+				startValue: 0.4
+				endValue: 0.4
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Icon:Image.alpha
+				startValue: 0.3
+				endValue: 0.3
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Icon:ColorExtensions.lightness
+				startValue: -0.75
+				endValue: -0.75
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Locked.visible
+				startValue: true
+				endValue: true
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Checked.visible
+				startValue: false
+				endValue: false
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Arrow:Image.colorRGB
+				startValue: #COLOR_GREY_4
+				endValue: #COLOR_GREY_4
+				duration: 0.0
+			}
+			]
+		},
+		{
+			name: "onAvailable"
+			tweens: [
+			{
+				property: @owner.panel/Outline:Image.colorRGB
+				startValue: #666666
+				endValue: #666666
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Background:Image.alpha
+				startValue: 0.7
+				endValue: 0.7
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Icon:Image.alpha
+				startValue: 0.6
+				endValue: 0.6
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Icon:ColorExtensions.lightness
+				startValue: 0.0
+				endValue: 0.0
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Locked.visible
+				startValue: false
+				endValue: false
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Checked.visible
+				startValue: false
+				endValue: false
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Arrow:Image.colorRGB
+				startValue: #666666
+				endValue: #666666
+				duration: 0.0
+			}
+			]
+		},
+		{
+			name: "onSelected"
+			tweens: [
+			{
+				property: @owner.panel/Outline:Image.colorRGB
+				startValue: #COLOR_WHITE_1
+				endValue: #COLOR_WHITE_1
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Background:Image.alpha
+				startValue: 0.7
+				endValue: 0.7
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Icon:Image.alpha
+				startValue: 0.6
+				endValue: 0.6
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Icon:ColorExtensions.lightness
+				startValue: 0.0
+				endValue: 0.0
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Locked.visible
+				startValue: false
+				endValue: false
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Checked.visible
+				startValue: false
+				endValue: false
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Arrow:Image.colorRGB
+				startValue: #COLOR_WHITE_1
+				endValue: #COLOR_WHITE_1
+				duration: 0.0
+			}
+			]
+		},
+		{
+			name: "onEquipped"
+			tweens: [
+			{
+				property: @owner.panel/Outline:Image.colorRGB
+				startValue: #666666
+				endValue: #666666
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Background:Image.alpha
+				startValue: 0.7
+				endValue: 0.7
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Icon:Image.alpha
+				startValue: 1.0
+				endValue: 1.0
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Icon:ColorExtensions.lightness
+				startValue: 0.0
+				endValue: 0.0
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Locked.visible
+				startValue: false
+				endValue: false
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Checked.visible
+				startValue: true
+				endValue: true
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Arrow:Image.colorRGB
+				startValue: #666666
+				endValue: #666666
+				duration: 0.0
+			}
+			]
+		},
+		{
+			name: "onSelectedAndEquipped"
+			tweens: [
+			{
+				property: @owner.panel/Outline:Image.colorRGB
+				startValue: #COLOR_WHITE_1
+				endValue: #COLOR_WHITE_1
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Background:Image.alpha
+				startValue: 0.7
+				endValue: 0.7
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Icon:Image.alpha
+				startValue: 1.0
+				endValue: 1.0
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Icon:ColorExtensions.lightness
+				startValue: 0.0
+				endValue: 0.0
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Locked.visible
+				startValue: false
+				endValue: false
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Checked.visible
+				startValue: true
+				endValue: true
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Arrow:Image.colorRGB
+				startValue: #COLOR_WHITE_1
+				endValue: #COLOR_WHITE_1
+				duration: 0.0
+			}
+			]
+		},
+		{
+			name: "onSelectedAndLocked"
+			tweens: [
+			{
+				property: @owner.panel/Outline:Image.colorRGB
+				startValue: #COLOR_WHITE_1
+				endValue: #COLOR_WHITE_1
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Background:Image.alpha
+				startValue: 0.4
+				endValue: 0.4
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Icon:Image.alpha
+				startValue: 0.3
+				endValue: 0.3
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Icon:ColorExtensions.lightness
+				startValue: -0.75
+				endValue: -0.75
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Locked.visible
+				startValue: true
+				endValue: true
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Checked.visible
+				startValue: false
+				endValue: false
+				duration: 0.0
+			},
+			{
+				property: @owner.panel/Arrow:Image.colorRGB
+				startValue: #COLOR_WHITE_1
+				endValue: #COLOR_WHITE_1
+				duration: 0.0
+			}
+			]
+		}
+		]
+	}
+
+	behavior AnimatorStates
+	{
+		state: 0
+		animations: [
+			"onLocked",
+			"onAvailable",
+			"onSelected",
+			"onEquipped",
+			"onSelectedAndEquipped",
+			"onSelectedAndLocked",
+		]
+	}
+
+	panel Background
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/melee_customization/melee_customization_grid_mask.rpak"
+			colorRGB: #COLOR_BLACK
+			alpha: 0.7
+		}
+	}
+
+	panel Dots
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/melee_customization/melee_customization_grid_dots.rpak"
+			colorRGB: #COLOR_GREY_1
+			alpha: 0.3
+		}
+	}
+
+	panel Icon
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+
+		behavior ColorExtensions
+		{
+			lightness: 0
+		}
+	}
+
+	panel Arrow
+	{
+		anchor: RIGHT
+		pivot: <0, 0.5>
+		size: <10, 20>
+		positionX: -1
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/melee_customization/melee_customization_grid_arrow.rpak"
+		}
+	}
+
+	panel Outline
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/melee_customization/melee_customization_grid_outline.rpak"
+		}
+	}
+
+	panel ColorTag1
+	{
+		anchor: BOTTOM_RIGHT
+		pivot: <1, 1>
+		size: <18, 18>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/melee_customization/melee_customization_grid_color_tag_1.rpak"
+		}
+	}
+
+	panel ColorTag2
+	{
+		anchor: BOTTOM_RIGHT
+		pivot: <1, 1>
+		size: <18, 18>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/melee_customization/melee_customization_grid_color_tag_2.rpak"
+		}
+	}
+
+	panel Checked
+	{
+		anchor: TOP_RIGHT
+		pivot: <1, 0>
+		size: <20, 20>
+		position: <-7, 6>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/buttons/checked.rpak"
+			colorRGB: #COLOR_ORANGE_2
+		}
+	}
+
+	panel Locked
+	{
+		anchor: TOP_RIGHT
+		pivot: <1, 0>
+		size: <20, 20>
+		position: <-7, 7>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/buttons/lock.rpak"
+			colorRGB: #COLOR_GREY_1
+		}
+	}
+}

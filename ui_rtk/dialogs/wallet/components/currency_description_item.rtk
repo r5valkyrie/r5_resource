@@ -1,0 +1,123 @@
+panel CurrencyDescription
+{
+	bind root
+
+	var image               @this/ImageContainer:Image.assetPath
+	var total               @this/BalanceGroup/Balance:Label.text
+	var description         @this/Description:FormatLabel.format
+	var expirationInfo      @this/CoinsExpirationInfo:FormatLabel.format
+	var balanceColor        @this/BalanceGroup/Balance:Label.colorRGB
+
+	width: 270
+
+	behavior VerticalContainer
+	{
+		alignment: CENTER
+		fitContentHeight: true
+		fitContentWidth: true
+		spacing: 28
+	}
+
+	panel ImageContainer
+	{
+		offsets: <0, 0, 0, 0>
+		width: 60
+		height: 60
+
+		behavior Image
+		{
+			bind *.image -> @this.assetPath
+		}
+	}
+
+	panel BalanceGroup
+	{
+		width: 200
+		height: 43
+
+		behavior Image
+		{
+			color: <0, 0, 0, 1>
+			assetPath: $"ui_image/rui/hud/ko_shield_hud/ko_shield_bg_0.rpak"
+		}
+
+		panel Balance
+		{
+			anchor: CENTER
+			width: 140
+			height: 30
+			behavior Label
+			{
+				bind *.total -> IntToFloat -> FormatAndLocalizeNumber( "1", true ) -> @this.text
+				bind *.total -> IsNegative -> PickVectorFromTwo( <1, 1, 1>, <1, 0, 0> ) -> @this.colorRGB
+				face: "TitleBoldFont"
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				horizontalMode: SQUISH_TO_CONTAINER
+				pixelHeight: 32
+				color: <1, 1, 1, 1>
+			}
+		}
+	}
+
+	panel Description
+	{
+		width: 270
+
+		behavior FormatLabel
+		{
+			bind *.description -> @this.format
+			face: "DefaultRegularFont"
+			textAlignHorizontal: LEFT
+			useLocaleDirection: true
+			horizontalMode: WRAP
+			verticalMode: AUTOSIZE_TO_TEXT
+			pixelHeight: 32
+			color: <0.57, 0.57, 0.57, 1>
+			margin: <0, 0, -7, 0>
+		}
+
+		behavior LabelAltStyle
+		{
+			color: <1, 1, 1, 1>
+		}
+
+		behavior LabelAltStyle
+		{
+			color: <1, 1, 1, 1>
+		}
+	}
+
+	panel CoinsExpirationInfo
+	{
+		width: 270
+
+		behavior FormatLabel
+		{
+			bind *.expirationInfo -> @this.format
+			face: "DefaultRegularFont"
+			textAlignHorizontal: LEFT
+			horizontalMode: WRAP
+			verticalMode: AUTOSIZE_TO_TEXT
+			pixelHeight: 25
+			leading: 1.0
+			color: <0.98, 0.86, 0.11, 1>
+			margin: <0, 0, 0, 0>
+		}
+
+		behavior LabelAltStyle
+		{
+			color: <0.98, 0.86, 0.11, 1>
+		}
+
+		behavior LabelAltStyle
+		{
+			color: <0.98, 0.86, 0.11, 1>
+		}
+
+		behavior LabelAltStyle
+		{
+			color: <0.98, 0.86, 0.11, 1>
+		}
+	}
+}

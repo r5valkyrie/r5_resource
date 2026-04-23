@@ -1,0 +1,167 @@
+instance $"ui_rtk/menus/store/components/store_grid_offer_button.rpak" GridMythicButton
+{
+	override bind root "*"
+
+	bind *.crossfaderImages -> HasAny -> PickVectorFromTwo(<70, 12, 0>, <12, 12, 0>) -> @var(descNameOffsetsLR)
+	bind *.crossfaderImages -> HasAny -> PickIntFromTwo(0, 1) -> @var(descNameAlignment) // 1 CENTER, 0 LEFT
+
+	override @var(descHeight) 142
+	override @var(descBGAlpha) 0.0
+	override @var(descRarityPos) 86
+
+	override @var(price).anchor BOTTOM
+	override @var(price).position <0, -28>
+	override @var(price).pivot <0.5, 0.5>
+	override @var(priceAlign) CENTER
+
+	context @var(backgroundPanel)
+	{
+		bind *.rarity -> QualityColor( false ) -> [
+			@this/FinishIcon:Image.colorRGB,
+			@this/FinishIcon/Icon:Image.colorRGB,
+			@this/TrailIcon:Image.colorRGB,
+			@this/TrailIcon/Icon:Image.colorRGB
+		]
+
+		instance $"ui_rtk/common/components/image_crossfader.rpak" ImageFader
+		{
+			override bind root "*"
+
+			bind *.crossfaderImages -> HasAny -> [ @this.visible, @this.active ]
+		}
+
+		instance $"ui_rtk/common/components/auto_crossfader.rpak" AutoFader
+		{
+			override bind root "*.crossfaderImages"
+
+			override @var(imageFader) @parent/ImageFader:ImageCrossfader
+
+			anchor: BOTTOM_RIGHT
+			position: <-66, -170>
+		}
+
+		panel LegendIcon
+		{
+			bind *.crossfaderImages -> HasAny -> [ @this.visible, @this.active ]
+			bind *.legendIcon -> @this:Image.assetPath
+
+			anchor: BOTTOM_RIGHT
+			position: <-66, -216>
+			size: <66, 66>
+
+			behavior Image
+		}
+
+		panel FinishIcon
+		{
+			bind *.finishIcon -> IsEmpty -> NOT -> @this.visible
+			bind *.finishIcon -> @this/Icon:Image.assetPath
+
+			anchor: TOP_RIGHT
+			pivot: <1, 0>
+			position: <-16, 16>
+			size: <100, 100>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/heirloom_crafting/finisher_frame.rpak"
+			}
+
+			panel Icon
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <10, 10, 10, 10>
+
+				behavior Image
+			}
+		}
+
+		panel TrailIcon
+		{
+			bind *.trailIcon -> IsEmpty -> NOT -> @this.visible
+			bind *.trailIcon -> @this/Icon:Image.assetPath
+
+			anchor: TOP_RIGHT
+			pivot: <1, 0>
+			position: <-16, 132>
+			size: <100, 100>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/heirloom_crafting/finisher_frame.rpak"
+			}
+
+			panel Icon
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <10, 10, 10, 10>
+
+				behavior Image
+			}
+		}
+	}
+
+	context @var(descriptionPanel)
+	{
+		panel LegendIcon
+		{
+			bind *.crossfaderImages -> HasAny -> NOT -> [ @this.visible, @this.active ]
+			bind *.legendIcon -> @this:Image.assetPath
+
+			anchor: TOP_LEFT
+			pivot: <0, 0.5>
+			position: <4, 36>
+			size: <56, 56>
+			useLocaleDirection: true
+
+			behavior Image
+		}
+	}
+
+	context @var(textBGPanel)
+	{
+		bind *.rarity -> QualityColor( false ) -> [
+			@this/DotsBottomLeft:Image.colorRGB,
+			@this/DotsBottomRight:Image.colorRGB
+		]
+
+		bind *.crossfaderImages -> HasAny -> PickVectorFromTwo(<1.5, 0.3>, <3.1125, 0.3>) -> [
+			@this/DotsBottomLeft:Image.uv1Scale,
+			@this/DotsBottomRight:Image.uv1Scale
+		]
+
+		bind *.crossfaderImages -> HasAny -> PickVectorFromTwo(<0.25, -0.3>, <1.05625, -0.3>) -> [
+			@this/DotsBottomLeft:Image.uv1Translate,
+			@this/DotsBottomRight:Image.uv1Translate
+		]
+
+		panel DotsBottomLeft
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+			pivot: <0.0, 1.0>
+
+			behavior Image
+			{
+				alpha: 0.4
+				assetMaskPath: $"ui_image/rui/menu/lobby/jclb_dots.rpak"
+				flipVertical: true
+			}
+		}
+
+		panel DotsBottomRight
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+			pivot: <1.0, 1.0>
+
+			behavior Image
+			{
+				alpha: 0.4
+				assetMaskPath: $"ui_image/rui/menu/lobby/jclb_dots.rpak"
+				flipVertical: true
+				flipHorizontal: true
+			}
+		}
+	}
+}

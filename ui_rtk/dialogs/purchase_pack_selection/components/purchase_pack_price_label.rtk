@@ -1,0 +1,180 @@
+panel PriceLabel
+{
+	bind root
+	offsets: <0, 0, 0, 0>
+	anchor: CENTER_STRETCH_WIDTH
+	height: 152
+
+	behavior Image
+	{
+		color: #191919
+	}
+
+	panel Text
+	{
+		bind @root.width -> Subtract( 5 ) -> @this:Label.lineBreakWidth
+		bind @this:Label.pixelHeight -> @this.height
+		offsets: <0, 0, 0, 0>
+		pivot: <0.5, 0>
+		positionY: 15
+		anchor: TOP
+
+		behavior Label
+		{
+			bind *.title -> @this.text
+
+			face: "DefaultRegularFont"
+			text: "TEMP"
+			pixelHeight: 22
+			colorRGB: <0.7, 0.7, 0.7>
+			textAlignHorizontal: CENTER
+			textAlignVertical: TOP
+			horizontalMode: AUTOSIZE_TO_TEXT
+			allCaps: true
+		}
+	}
+
+	panel PriceText
+	{
+		anchor: CENTER
+		offsets: <0, 0, 0, 0>
+		pivot: <0.5, 0.5>
+		positionY: 3
+
+		behavior VerticalContainer
+		{
+			alignment: CENTER
+			fitContentWidth: true
+			fitContentHeight: true
+			spacing: 2
+		}
+
+		panel ACPriceText
+		{
+			behavior HorizontalContainer
+			{
+				alignment: CENTER
+				fitContentWidth: true
+				fitContentHeight: true
+				spacing: 5
+			}
+
+			panel OriginalPrice
+			{
+				panel BreakthroughLine
+				{
+					anchor: CENTER_STRETCH_WIDTH
+					height: 4
+					behavior Image
+					{
+						alpha: 0.5
+					}
+				}
+
+				behavior Label
+				{
+					bind *.originalPrice -> @this.text
+					face: "DefaultRegularFont"
+					text: "8,888"
+					textAlignHorizontal: LEFT
+					horizontalMode: AUTOSIZE_TO_TEXT
+					verticalMode: AUTOSIZE_TO_TEXT
+					pixelHeight: 26
+					color: <1, 1, 1, 0.5>
+				}
+			}
+
+			panel NormalPrice
+			{
+				behavior Label
+				{
+					bind *.price -> @this.text
+					face: "DefaultRegularFont"
+					text: "8,888"
+					textAlignHorizontal: LEFT
+					horizontalMode: AUTOSIZE_TO_TEXT
+					verticalMode: AUTOSIZE_TO_TEXT
+					pixelHeight: 26
+					color: <1, 1, 1, 1>
+				}
+			}
+		}
+
+		panel CraftingPriceText
+		{
+			behavior Label
+			{
+				bind *.craftingPrice -> @this.text
+				face: "DefaultRegularFont"
+				text: "8,888"
+				textAlignHorizontal: LEFT
+				horizontalMode: AUTOSIZE_TO_TEXT
+				verticalMode: AUTOSIZE_TO_TEXT
+				pixelHeight: 26
+				color: <1, 1, 1, 1>
+			}
+		}
+	}
+
+
+	panel BackgroundDiscountLabel
+	{
+		anchor: BOTTOM_STRETCH_WIDTH
+		pivot: <0.5, 1>
+		offsets: <0, 0, 0, 0>
+		positionY: -2
+		height: 28
+
+		behavior Image
+		{
+			colorRGB: #7c7970
+		}
+
+		behavior ContainerElement
+		{
+			ignoreLayout: true
+		}
+	}
+
+	panel BackgroundFrontLabel
+	{
+		anchor: BOTTOM_STRETCH_WIDTH
+		pivot: <0.5, 1>
+		offsets: <0, 0, 0, 0>
+		positionY: -2
+		height: 28
+
+
+		behavior Image
+		{
+			bind *.discountBGAlpha -> @this.alpha
+			colorRGB: #ffcd3c
+		}
+
+		behavior ContainerElement
+		{
+			ignoreLayout: true
+		}
+
+		panel DiscountText
+		{
+			anchor: BOTTOM
+			offsets: <0, 0, 0, 0>
+			pivot: <0.5, 1>
+			positionY: -2
+
+			behavior Label
+			{
+				bind *.discount -> @this.text
+				face: "TitleBoldFont"
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				horizontalMode: AUTOSIZE_TO_TEXT
+				verticalMode: AUTOSIZE_TO_TEXT
+				pixelHeight: 24
+				color: <0, 0, 0, 1>
+				allCaps: true
+			}
+		}
+	}
+}

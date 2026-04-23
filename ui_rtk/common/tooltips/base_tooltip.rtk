@@ -1,0 +1,252 @@
+panel BaseTooltip
+{
+	// width is currently not available and is set to 480, for now.
+	// There is a dependency of FitToContent and VerticalContainer not being updated in the correct order and not working properly.
+	//var width @this/Content/TooltipContent.width
+
+	// texts
+	var titleText @this/Content/TooltipContent/Title:Label.text
+	var subtitleText @this/Content/TooltipContent/Subtitle:Label.text
+	var bodyText @this/Content/TooltipContent/Body:Label.text
+	var additionalText @this/Content/TooltipContent/Additional:Label.text
+	var actionText @this/Content/TooltipContent/Action:Label.text
+
+	// icon
+	var icon @this/Content/Icon:Image.assetPath
+
+	// colors
+	var titleColor @this/Content/TooltipContent/Title:Label.colorRGB
+	var subtitleColor @this/Content/TooltipContent/Subtitle:Label.colorRGB
+	var bodyColor @this/Content/TooltipContent/Body:Label.colorRGB
+	var bodyTextAltColor @this/Content/TooltipContent/Body:LabelAltStyle.colorRGB
+	var additionalTextAltColor @this/Content/TooltipContent/Additional:LabelAltStyle.colorRGB
+	var iconColor @this/Content/Icon:Image.colorRGB
+	var bgColor @this/Content/Background:Image.color
+
+	// visibility
+	// we currently can't bind to visibility internally because the update coming from the varOverrides will come after the bind,
+	// so we need to use the isVisible vars to hide elements we won't use.
+	var isTitleVisible @this/Content/TooltipContent/Title.visible
+	var isSubtitleVisible @this/Content/TooltipContent/Subtitle.visible
+	var isBodyVisible @this/Content/TooltipContent/Body.visible
+	var isAdditionalTextVisible @this/Content/TooltipContent/Additional.visible
+	var isActionTextVisible @this/Content/TooltipContent/Action.visible
+	var isIconVisible @this/Content/Icon.visible
+
+	anchor: CENTER
+	pivot: <0, 0>
+	offsets: <0, 0, 0, 0>
+
+	behavior Animator
+	{
+		tweenAnimations: [
+			{
+				name: "FadeIn"
+				tweens: [
+					{
+						property: @owner.panel/Content:RenderGroup.alpha
+						startValue: 0.0
+						endValue: 1.0
+						duration: 0.2
+					}
+				]
+			}
+		]
+	}
+
+	behavior FitToContent
+
+	panel Content
+	{
+		anchor: TOP_LEFT
+		pivot: <0, 0>
+		offsets: <0, 0, 0, 0>
+
+		behavior FitToContent
+
+		behavior RenderGroup
+		{
+			alpha: 0.0
+		}
+
+		instance $"ui_rtk/controls/blur.rpak" Blur
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+		}
+
+		panel Background
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				color: #000000
+				alpha: 0.8
+			}
+		}
+
+		panel TooltipContent
+		{
+			anchor: TOP_LEFT
+			pivot: <0, 0>
+			offsets: <0, 0, 0, 0>
+			width: 480
+
+			behavior VerticalContainer
+			{
+				alignment: TOP_LEFT
+				fitContentHeight: true
+				useLocaleDirection: true
+				spacing: 10
+				padding: <0, 0, 20, 20>
+			}
+
+			panel Title
+			{
+				anchor: TOP_STRETCH_WIDTH
+				pivot: <0, 0>
+				offsets: <0, 0, 0, 0>
+
+				behavior Label
+				{
+					margin: <20, 50, 0, 0>
+					face: "TitleBoldFont"
+					text: ""
+					pixelHeight: 23
+					colorRGB: #ffffff
+					textAlignHorizontal: LEFT
+					verticalMode: AUTOSIZE_TO_TEXT
+					useLocaleDirection: true
+					allCaps: true
+				}
+			}
+
+			panel Subtitle
+			{
+				anchor: TOP_STRETCH_WIDTH
+				pivot: <0, 0>
+				offsets: <0, 0, 0, 0>
+
+				behavior Label
+				{
+					margin: <20, 20, 0, 0>
+					face: "DefaultRegularFont"
+					text: ""
+					pixelHeight: 20
+					colorRGB: #9C9C9C
+					textAlignHorizontal: LEFT
+					verticalMode: AUTOSIZE_TO_TEXT
+					useLocaleDirection: true
+					allCaps: true
+				}
+			}
+
+			panel Body
+			{
+				anchor: TOP_STRETCH_WIDTH
+				pivot: <0, 0>
+				offsets: <0, 0, 0, 0>
+
+				behavior Label
+				{
+					margin: <20, 20, 0, 0>
+					face: "DefaultBoldFont"
+					pixelHeight: 22
+					colorRGB: #BEBCBD
+					text: ""
+					textAlignHorizontal: LEFT
+					verticalMode: AUTOSIZE_TO_TEXT
+					useLocaleDirection: true
+					horizontalMode: WRAP
+				}
+
+				behavior LabelAltStyle
+				{
+					pixelHeight: 22
+					colorRGB: #BEBCBD
+				}
+			}
+
+			panel Additional
+			{
+				anchor: TOP_STRETCH_WIDTH
+				pivot: <0, 0>
+				offsets: <0, 0, 0, 0>
+
+				behavior Label
+				{
+					margin: <20, 20, 0, 0>
+					face: "DefaultRegularFont"
+					pixelHeight: 20
+					colorRGB: #BEBCBD
+					text: ""
+					textAlignHorizontal: LEFT
+					useLocaleDirection: true
+					verticalMode: AUTOSIZE_TO_TEXT
+				}
+
+				behavior LabelAltStyle
+				{
+					pixelHeight: 20
+					colorRGB: #F5DC6A
+					face: "DefaultBoldFont"
+				}
+			}
+
+			panel Action
+			{
+				anchor: TOP_STRETCH_WIDTH
+				pivot: <0, 0>
+				offsets: <0, 0, 0, 0>
+
+				behavior Label
+				{
+					margin: <20, 20, 0, 0>
+					face: "DefaultRegularFont"
+					pixelHeight: 24
+					colorRGB: #ffffff
+					text: ""
+					textAlignHorizontal: LEFT
+					verticalMode: AUTOSIZE_TO_TEXT
+					useLocaleDirection: true
+				}
+
+				behavior LabelAltStyle
+				{
+					pixelHeight: 24
+					face: "DefaultRegularFont"
+					colorRGB: #ffffff
+				}
+			}
+		}
+
+		panel Outline
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				colorRGB: #ffffff
+				alpha: 0.4
+				assetPath: $"ui_image/rui/borders/border_outline_2px.rpak"
+			}
+		}
+
+		panel Icon
+		{
+			anchor: TOP_RIGHT
+			pivot: <1, 0>
+			size: <24, 24>
+			position: <-20, 20>
+			useLocaleDirection: true
+
+			behavior Image
+			{
+				assetPath: $""
+			}
+		}
+	}
+}

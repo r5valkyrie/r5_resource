@@ -1,0 +1,144 @@
+panel PipButton
+{
+	bind root
+
+	var size @this.size
+
+	anchor: TOP_LEFT
+	pivot: <0, 0>
+	size: <150, 40>
+	inputListener: true
+
+	behavior Button
+	{
+		bind *.isActive -> PickVectorFromTwo( <1, 1, 1>, <1.0, 0.3, 0.1> ) -> @this.transitions[2].value
+
+		soundHighlighted: "ui_menu_focus"
+		soundPressedEnabled: "ui_menu_accept"
+		transitions: [
+			{
+				fromState: HIGHLIGHTED
+				toState: IDLE
+				type: TRANSITION_TWEEN
+				animName: "onHighlightedToIdle"
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Container/Text:Label.alpha
+				value: 1
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Container/HighlightBorder:Image.colorRGB
+				value: <1, 1, 1>
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Container/HighlightBorder:Image.alpha
+				value: 1
+			}
+		]
+	}
+
+	behavior Animator
+	{
+		bind *.isActive -> PickFloatFromTwo( 0.35, 1.0 ) -> [
+			@this.tweenAnimations[0].tweens[0].endValue,
+			@this.tweenAnimations[0].tweens[1].endValue
+		]
+
+		tweenAnimations: [
+			{
+				name: "onHighlightedToIdle"
+				tweens: [
+					{
+						property: @owner.panel/Container/Text:Label.alpha
+						startValue: 1
+						endValue: 0.35
+						duration: 0.2
+					},
+					{
+						property: @owner.panel/Container/HighlightBorder:Image.alpha
+						startValue: 1
+						endValue: 0.35
+						duration: 0.2
+					}
+				]
+			}
+		]
+	}
+
+	panel Container
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		panel InActive
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				bind *.isActive -> PickFloatFromTwo( 0.5, 0.0 ) -> @this.alpha
+
+				color: <0.15, 0.15, 0.15, 0.5>
+			}
+		}
+
+		panel HighlightBorder
+		{
+			anchor: BOTTOM_STRETCH_WIDTH
+			height: 3
+			pivot: <0.7, 1.0>
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				bind *.isActive -> PickVectorFromTwo( <1, 1, 1>, <1.0, 0.3, 0.1> ) -> @this.colorRGB
+				bind *.isActive -> PickFloatFromTwo( 0.5, 1 ) -> @this.alpha
+
+				colorRGB: <1.0, 1.0, 0.1>
+				alpha: 1.0
+			}
+		}
+
+		panel Active
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				bind *.isActive -> PickFloatFromTwo( 0.0, 0.5 ) -> @this.alpha
+
+				color: <1.0, 0.3, 0.1, 0.5>
+			}
+		}
+
+		panel Text
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <3, 3, 0, 0>
+
+			behavior Label
+			{
+				bind *.isActive -> PickFloatFromTwo( 0.5, 1.0 ) -> @this.alpha
+				bind *.name -> @this.text
+
+				face: "TitleBoldFont"
+				pixelHeight: 20
+				horizontalMode: SQUISH_TO_CONTAINER
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				allCaps: true
+			}
+		}
+	}
+}

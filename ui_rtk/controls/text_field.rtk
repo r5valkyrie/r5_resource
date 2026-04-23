@@ -1,0 +1,51 @@
+panel AlphaNumericEntry
+{
+	var pixelHeight @this:TextField.pixelHeight
+	var type @this:TextField.type
+	var cursorColor @this:TextField.cursorColor
+	var cursorWidth @this:TextField.cursorWidth
+	var cursorBlinkRate @this:TextField.cursorBlinkRate
+	var blinkCursor @this:TextField.blinkCursor
+	var highlightColor @this:TextField.highlightColor
+	var colorBg @this:TextField.backgroundColor
+	var colorFocusedBg @this:TextField.backgroundColorFocused
+	var hiddenInput @this:TextField.hiddenInput
+	var maxChars @this:TextField.maxChars
+	var allowNegative @this:TextField.allowNegative
+	var allowDecimal @this:TextField.allowDecimal
+	var decimalPlaces @this:TextField.decimalPlaces
+	var numericRange @this:TextField.numericRange
+	var allowSpecialChars @this:TextField.allowSpecialCharacters
+	var allowExtraSpecialChars @this:TextField.allowExtraSpecialCharacters
+	var allowSpace @this:TextField.allowSpaces
+	var allowUnnecessarySpace @this:TextField.allowUnnecessarySpaces
+	var catchTabKey @this:TextField.catchTabKey
+	var catchEnterKey @this:TextField.catchEnterKey
+	var tabSpaces @this:TextField.tabSpaces
+	var charDisallowedList @this:TextField.characterDisallowedList
+	var charAllowedList @this:TextField.characterAllowedList
+	var placeholderText @this:TextField.text
+
+	inputListener: true
+	anchor: CENTER
+	size: <500, 40>
+
+	behavior TextField
+	{
+		pixelHeight: 36
+		cursorColor: <0.5, 0.5, 0.5, 1.0>
+		highlightColor: <0.2, 0.2, 0.2, 0.5>
+		textAlignVertical: CENTER
+		type: ALPHANUMERIC
+		horizontalMode: CLIP
+	}
+
+	behavior InputBlocker
+
+	behavior InputRepeater
+	{
+		outputBehavior: @panel:TextField
+		minRepeatDelay: 0.01
+		delayDecreaseFactor: 0.1
+	}
+}

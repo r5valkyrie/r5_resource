@@ -1,0 +1,431 @@
+panel LegendUpgradesPanel
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 84>
+
+	instance $"ui_rtk/common/components/vertical_paginated_panel.rpak" VerticalPagination
+	{
+		offsets: <0, 0, 7, 114>
+
+		override @var(showNonInteractiveNavButtons) false
+		override @var(navBarBackgroundAlpha) 0.0
+
+		behavior RenderGroup
+
+		context @var(upButtonPanel)
+		{
+			context @var(labelBehavior)
+			{
+	            text:  "#UPGRADES"
+			}
+		}
+
+		context @var(downButtonPanel)
+		{
+			context @var(labelBehavior)
+			{
+	            text: "#UPGRADES_ABOUT"
+			}
+		}
+
+		context @var(contentPanel)
+		{
+			panel TreeContainer
+			{
+				anchor: CENTER
+				pivot: <0.5, 0.5>
+				bind @this.parent.parent.size -> @this.size
+				scale: <1.2, 1.2>
+
+				instance $"ui_rtk/menus/legend_upgrades/components/legend_upgrades_tree.rpak" UpgradeTree
+				{
+					anchor: CENTER
+					pivot: <0.5, 0.5>
+				}
+			}
+
+			panel InfoSection
+			{
+				anchor: CENTER
+				pivot: <0.5, 0.5>
+				bind @this.parent.parent.size -> @this.size
+
+				panel InfoLeft
+				{
+					anchor: TOP
+					position: <-185, 80>
+					pivot: <1.0, 0.0>
+					useLocaleDirection: true
+
+					behavior VerticalContainer
+					{
+						paddingTop: 10
+						fitContentWidth: true
+						fitContentHeight: true
+						alignment: TOP_LEFT
+						spacing: 30
+						useLocaleDirection: true
+					}
+					panel Header
+					{
+						size: <487, 130>
+						anchor: TOP
+
+						panel HeaderImage
+						{
+							size: <422, 92>
+							pivot: <0.5, 0.5>
+							anchor: CENTER
+
+							behavior Image
+							{
+								assetPath: $"ui_image/rui/rui_screens/lgnd_upgrades/lgnd_upgrades_about_perks.rpak"
+							}
+						}
+					}
+
+					panel Title
+					{
+						behavior Label
+						{
+							text: "#UPGRADES_TITLE"
+							face: "TitleBoldFont"
+							color: <0.8, 0.8, 0.8, 1.0>
+							pixelHeight: 45
+				            textAlignHorizontal: LEFT
+							useLocaleDirection: true
+				            lineBreakWidth: 500
+							verticalMode: AUTOSIZE_TO_TEXT
+							horizontalMode: AUTOSIZE_TO_TEXT
+							allCaps: true
+						}
+					}
+
+					panel Desc_1
+					{
+						behavior Label
+						{
+							text: "#UPGRADES_DESC_1"
+							face: "DefaultRegularFont"
+							color: <0.8, 0.8, 0.8, 1.0>
+							pixelHeight: 28
+				            textAlignHorizontal: LEFT
+							useLocaleDirection: true
+				            lineBreakWidth: 500
+							verticalMode: AUTOSIZE_TO_TEXT
+							horizontalMode: AUTOSIZE_TO_TEXT
+						}
+					}
+
+					panel Desc_2
+					{
+						behavior VerticalContainer
+						{
+							fitContentWidth: true
+							fitContentHeight: true
+							alignment: TOP_LEFT
+							useLocaleDirection: true
+						}
+
+						panel Desc_2_main
+						{
+							behavior Label
+							{
+								text: "#UPGRADES_DESC_2"
+								face: "DefaultRegularFont"
+								color: <0.8, 0.8, 0.8, 1.0>
+								pixelHeight: 28
+					            textAlignHorizontal: LEFT
+								useLocaleDirection: true
+					            lineBreakWidth: 500
+								verticalMode: AUTOSIZE_TO_TEXT
+								horizontalMode: AUTOSIZE_TO_TEXT
+							}
+						}
+						panel Desc_2_extra
+						{
+							behavior Label
+							{
+								text: "#UPGRADES_DESC_2_EXTRA"
+								face: "DefaultBoldFont"
+								color: <0.8, 0.8, 0.8, 1.0>
+								pixelHeight: 28
+					            textAlignHorizontal: LEFT
+								useLocaleDirection: true
+					            lineBreakWidth: 500
+								verticalMode: AUTOSIZE_TO_TEXT
+								horizontalMode: AUTOSIZE_TO_TEXT
+							}
+
+							behavior LabelAltStyle
+							{
+								colorRGB: #1c87f3
+							}
+
+							behavior LabelAltStyle
+							{
+								colorRGB: #9929f5
+							}
+
+							behavior LabelAltStyle
+							{
+								colorRGB: #f30202
+							}
+						}
+					}
+
+					panel Desc_3
+					{
+						behavior Label
+						{
+							text: "#UPGRADES_DESC_3"
+							face: "DefaultRegularFont"
+							color: <0.8, 0.8, 0.8, 1.0>
+							pixelHeight: 28
+				            textAlignHorizontal: LEFT
+							useLocaleDirection: true
+				            lineBreakWidth: 500
+							verticalMode: AUTOSIZE_TO_TEXT
+							horizontalMode: AUTOSIZE_TO_TEXT
+						}
+					}
+				}
+
+				panel LineContainer
+				{
+					anchor: TOP
+					position: <0, 200>
+					pivot: <0.5, 0.0>
+					size: <1, 450>
+
+					behavior Image
+					{
+						alpha: 0.3
+					}
+				}
+
+				panel InfoRight
+				{
+					anchor: TOP
+					position: <185, 80>
+					pivot: <0.0, 0.0>
+					useLocaleDirection: true
+
+					behavior VerticalContainer
+					{
+						paddingTop: 10
+						fitContentWidth: true
+						fitContentHeight: true
+						alignment: TOP_LEFT
+						spacing: 30
+						useLocaleDirection: true
+					}
+
+					panel Header
+					{
+						anchor: TOP
+						size: <487, 130>
+						panel HeaderImage
+						{
+							anchor: CENTER
+							size: <362, 130>
+							pivot: <0.5, 0.5>
+
+							behavior Image
+							{
+								assetPath: $"ui_image/rui/rui_screens/lgnd_upgrades/lgnd_upgrades_about_armor.rpak"
+							}
+						}
+					}
+
+					panel Title
+					{
+						behavior Label
+						{
+							text: "#EARN_EVO_TITLE"
+							face: "TitleBoldFont"
+							color: <0.8, 0.8, 0.8, 1.0>
+							pixelHeight: 45
+				            textAlignHorizontal: LEFT
+							useLocaleDirection: true
+				            lineBreakWidth: 500
+							verticalMode: AUTOSIZE_TO_TEXT
+							horizontalMode: AUTOSIZE_TO_TEXT
+							allCaps: true
+						}
+					}
+
+					panel Item_1
+					{
+						behavior VerticalContainer
+						{
+							fitContentHeight: true
+							alignment: TOP_LEFT
+							useLocaleDirection: true
+						}
+
+						panel Header
+						{
+							behavior Label
+							{
+								text: "#EARN_EVO_HEADER_1"
+								face: "TitleBoldFont"
+								color: <0.8, 0.8, 0.8, 1.0>
+								pixelHeight: 30
+					            textAlignHorizontal: LEFT
+								useLocaleDirection: true
+					            lineBreakWidth: 500
+								verticalMode: AUTOSIZE_TO_TEXT
+								horizontalMode: AUTOSIZE_TO_TEXT
+							}
+						}
+
+						panel Body
+						{
+							behavior Label
+							{
+								text: "#EARN_EVO_BODY_1"
+								face: "DefaultRegularFont"
+								color: <0.8, 0.8, 0.8, 1.0>
+								pixelHeight: 28
+					            textAlignHorizontal: LEFT
+								useLocaleDirection: true
+					            lineBreakWidth: 500
+								verticalMode: AUTOSIZE_TO_TEXT
+								horizontalMode: AUTOSIZE_TO_TEXT
+							}
+						}
+					}
+
+					panel Item_2
+					{
+						behavior VerticalContainer
+						{
+							fitContentHeight: true
+							alignment: TOP_LEFT
+							useLocaleDirection: true
+						}
+
+						panel Header
+						{
+							behavior Label
+							{
+								text: "#EARN_EVO_HEADER_2"
+								face: "TitleBoldFont"
+								color: <0.8, 0.8, 0.8, 1.0>
+								pixelHeight: 30
+					            textAlignHorizontal: LEFT
+								useLocaleDirection: true
+					            lineBreakWidth: 500
+								verticalMode: AUTOSIZE_TO_TEXT
+								horizontalMode: AUTOSIZE_TO_TEXT
+							}
+						}
+
+						panel Body
+						{
+							behavior Label
+							{
+								text: "#EARN_EVO_BODY_2"
+								face: "DefaultRegularFont"
+								color: <0.8, 0.8, 0.8, 1.0>
+								pixelHeight: 28
+					            textAlignHorizontal: LEFT
+								useLocaleDirection: true
+					            lineBreakWidth: 500
+								verticalMode: AUTOSIZE_TO_TEXT
+								horizontalMode: AUTOSIZE_TO_TEXT
+							}
+						}
+					}
+
+					panel Item_3
+					{
+						behavior VerticalContainer
+						{
+							fitContentHeight: true
+							alignment: TOP_LEFT
+							useLocaleDirection: true
+						}
+
+						panel Header
+						{
+							behavior Label
+							{
+								text: "#EARN_EVO_HEADER_3"
+								face: "TitleBoldFont"
+								color: <0.8, 0.8, 0.8, 1.0>
+								pixelHeight: 30
+					            textAlignHorizontal: LEFT
+								useLocaleDirection: true
+					            lineBreakWidth: 500
+								verticalMode: AUTOSIZE_TO_TEXT
+								horizontalMode: AUTOSIZE_TO_TEXT
+							}
+						}
+
+						panel Body
+						{
+							behavior Label
+							{
+								text: "#EARN_EVO_BODY_3"
+								face: "DefaultRegularFont"
+								color: <0.8, 0.8, 0.8, 1.0>
+								pixelHeight: 28
+					            textAlignHorizontal: LEFT
+								useLocaleDirection: true
+					            lineBreakWidth: 500
+								verticalMode: AUTOSIZE_TO_TEXT
+								horizontalMode: AUTOSIZE_TO_TEXT
+							}
+						}
+					}
+
+					panel Item_4
+					{
+						behavior VerticalContainer
+						{
+							fitContentHeight: true
+							alignment: TOP_LEFT
+							useLocaleDirection: true
+						}
+
+						panel Header
+						{
+							behavior Label
+							{
+								text: "#EARN_EVO_HEADER_4"
+								face: "TitleBoldFont"
+								color: <0.8, 0.8, 0.8, 1.0>
+								pixelHeight: 30
+					            textAlignHorizontal: LEFT
+								useLocaleDirection: true
+					            lineBreakWidth: 500
+								verticalMode: AUTOSIZE_TO_TEXT
+								horizontalMode: AUTOSIZE_TO_TEXT
+							}
+						}
+
+						panel Body
+						{
+							behavior Label
+							{
+								text: "#EARN_EVO_BODY_4"
+								face: "DefaultRegularFont"
+								color: <0.8, 0.8, 0.8, 1.0>
+								pixelHeight: 28
+					            textAlignHorizontal: LEFT
+								useLocaleDirection: true
+					            lineBreakWidth: 500
+								verticalMode: AUTOSIZE_TO_TEXT
+								horizontalMode: AUTOSIZE_TO_TEXT
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

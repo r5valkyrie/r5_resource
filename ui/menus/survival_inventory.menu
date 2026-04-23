@@ -145,6 +145,27 @@ resource/ui/menus/survival_inventory.menu
             ycounterscroll			0.075
         }
 
+		                 
+		RTKSquadPanel
+        {
+            ControlName				RTKVGUIPanel
+            classname				"TabPanelClass"
+			tall			        %100
+            wide			        %100
+			xpos                    0
+			ypos                    0
+            zpos                    1
+            prefab                  "ui_rtk/menus/squad/squad_panel.rtk"
+
+            xcounterscroll			0.075
+            ycounterscroll			0.075
+
+
+			pin_to_sibling			Cover
+	        pin_corner_to_sibling	TOP
+	        pin_to_sibling_corner	TOP
+        }
+        
 		SquadPanel
         {
             ControlName				CNestedPanel

@@ -1,0 +1,93 @@
+panel FreeToGiftPanel
+{
+	bind root
+
+	bind *.rarity -> QualityColor( false ) -> [
+		@this/Background:Image.colorRGB,
+		@this/TrapezoidFillHighlight:Image.colorRGB,
+		@this/LeftHighlight:Image.colorRGB,
+		@this/RightHighlight:Image.colorRGB
+	]
+
+	anchor: BOTTOM_STRETCH_WIDTH
+	pivot: <0.5, 1.0>
+//	offsetsLR: <1.5, 1.5>
+//	positionY: -2
+	height: 56
+
+	panel PreBackground
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		behavior Image
+	}
+
+	panel Background
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		behavior Image
+		{
+			alpha: 0.55
+		}
+	}
+
+	panel TrapezoidFillHighlight
+	{
+		anchor: TOP
+		scale: <0.3, 1>
+		position: <0, -0.5>
+		size: <325, 8>
+		pivot: <0.5, 0.0>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/common/white_trapezoid_fill.rpak"
+		}
+	}
+
+	panel LeftHighlight
+	{
+		anchor: TOP_LEFT
+		pivot: <0.0, 0.0>
+		position: <1.5, 0.5>
+		size: <148, 52>
+
+		behavior Image
+		{
+			alpha: 1.5
+			assetPath: $"ui_image/rui/menu/store/Common/store_offer_gift_button_highlight.rpak"
+		}
+	}
+
+	panel RightHighlight
+	{
+		anchor: TOP_RIGHT
+		pivot: <1.0, 0.0>
+		position: <-1.5, 0.5>
+		size: <148, 52>
+
+		behavior Image
+		{
+			alpha: 1.5
+			flipHorizontal: true
+			assetPath: $"ui_image/rui/menu/store/Common/store_offer_gift_button_highlight.rpak"
+		}
+	}
+
+	panel GiftableText
+	{
+		anchor: BOTTOM
+		position: <0, -28>
+		pivot: <0.5, 0.5>
+
+		behavior Label
+		{
+			text: "#STORE_V2_FREE_TO_GIFT"
+			face: "TitleBoldFont"
+			textAlignHorizontal: CENTER
+			textAlignVertical: CENTER
+			horizontalMode: AUTOSIZE_TO_TEXT
+			pixelHeight: 28
+			colorRGB: <0, 0, 0>
+		}
+	}
+}

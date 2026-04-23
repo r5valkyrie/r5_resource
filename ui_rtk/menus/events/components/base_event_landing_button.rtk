@@ -1,0 +1,114 @@
+panel LandingButton
+{
+	bind root
+	anchor: TOP_LEFT
+	inputListener: true
+	offsets: <0, 0, 0, 0>
+	size: <330, 400>
+
+	behavior Button
+	{
+		soundHighlighted: "ui_menu_focus"
+		soundPressedEnabled: "ui_menu_accept"
+		transitions: [
+			//Frame Transitions
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Frame:Image.colorRGB
+				value: <1, 1, 1>
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Frame:Image.colorRGB
+				value: #FF4E1D
+			},
+			//Highlight Transitions
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Highlight:Image.alpha
+				value: 0
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/Highlight:Image.alpha
+				value: 0.04
+			}
+		]
+	}
+
+	panel BackgroundFill
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <5, 0, 2, 2>
+
+		behavior Image
+		{
+			bind *.backgroundImage -> @this.assetPath
+		}
+	}
+
+	panel Text
+	{
+		anchor: BOTTOM
+		pivot: <0.5, 0.5>
+		width: 285
+		height: 38
+		positionY: -60
+		behavior Label
+		{
+			bind *.name -> @this.text
+			face: "TitleBoldFont"
+			text: "Label"
+			textAlignHorizontal: CENTER
+			verticalMode: CLIP
+			horizontalMode: SQUISH_TO_CONTAINER
+			pixelHeight: 36
+			color: <1, 1, 1, 1>
+			allCaps: true
+			squishShrinkRatio: 0
+		}
+	}
+
+	panel Highlight
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/events/event_shop/intro_page_panel_bg_mask.rpak"
+			colorRGB: #FF4E1D
+		}
+	}
+
+	panel Frame
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/events/event_shop/intro_page_panel_bg_frame.rpak"
+		}
+	}
+
+	panel ButtonImage
+	{
+		bind @root.width -> @this.width
+		bind @root.height -> Add( 50 ) -> @this.height //We add 50px for overflow items.
+		anchor: BOTTOM
+		pivot: <0.5, 1>
+		behavior Image
+		{
+			bind *.image -> @this.assetPath
+		}
+	}
+}

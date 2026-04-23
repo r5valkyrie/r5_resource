@@ -1,0 +1,79 @@
+panel PaginationNavigation
+{
+    var buttonSpacing @this:HorizontalContainer.spacing
+
+    var pipsPrefab @this/PaginationPips:ListBinder.prefab
+    var pipsContainerSize @this/PaginationPips.size
+    var pipsSpacing @this/PaginationPips:HorizontalContainer.spacing
+    var pipsExpanded @this/PaginationPips:HorizontalContainer.expandToFillEvenly
+    var pipsFitContentWidth @this/PaginationPips:HorizontalContainer.fitContentWidth
+    var pipsFitContentHeight @this/PaginationPips:HorizontalContainer.fitContentHeight
+    var pipsExpandChildHeight @this/PaginationPips:HorizontalContainer.expandChildHeight
+    var pipsExpandToFillEvenly @this/PaginationPips:HorizontalContainer.expandToFillEvenly
+
+    anchor: BOTTOM_STRETCH_WIDTH
+    height: 64
+    offsetsLR: <0, 0>
+    pivot: <0.5, 0>
+
+	behavior HorizontalContainer
+	{
+		fitContentWidth: true
+		alignment: CENTER
+		spacing: 10
+	}
+
+    panel LeftButton
+    {
+        size: <35, 35>
+        pivot: <1, 0.5>
+
+		behavior ShowByInputMode
+		{
+			showIfController: true
+		}
+
+        behavior Label
+        {
+            text: "%L_SHOULDER%"
+            pixelHeight: 35
+            textAlignHorizontal: RIGHT
+            textAlignVertical: CENTER
+        }
+    }
+
+	panel PaginationPips
+	{
+		behavior HorizontalContainer
+		{
+			fitContentWidth: true
+			fitContentHeight: true
+			alignment: CENTER
+		}
+
+		behavior ListBinder
+		{
+			bindingPath: ""
+			prefab: $"ui_rtk/common/buttons/pip_button_named.rpak"
+		}
+	}
+
+    panel RightButton
+    {
+        size: <35, 35>
+        pivot: <0, 0.5>
+
+		behavior ShowByInputMode
+		{
+			showIfController: true
+		}
+
+        behavior Label
+        {
+            text: "%R_SHOULDER%"
+            pixelHeight: 35
+            textAlignHorizontal: LEFT
+            textAlignVertical: CENTER
+        }
+    }
+}

@@ -1,0 +1,223 @@
+panel PostGameBreakdownStatsElement
+{
+	bind root
+
+	bind *.isInfo -> PickIntFromTwo( 40, 80 ) -> @this.height
+
+	var isHeader @this/SubheaderBG.visible
+
+	anchor: TOP
+	offsets: <0, 0, 0, 0>
+	pivot: <0.5, 0.0>
+	size: <540, 40>
+	inputListener: true
+
+	behavior ToolTip StatsTooltip
+	{
+		bind *.tooltipTitle -> @this.varOverrides.titleText
+		bind *.tooltipBody -> @this.varOverrides.bodyText
+
+		prefab: $"ui_rtk/common/tooltips/base_tooltip.rpak"
+		offset: <32, -68>
+		delay: 0
+
+		varOverrides: {
+			titleText: ""
+			titleColor: #Yellow
+			isSubtitleVisible: false
+			bodyText: ""
+			bodyTextAltColor: #Yellow
+			additionalText: ""
+			additionalTextAltColor: #Yellow
+			actionText: ""
+			icon: $""
+			iconColor: #Yellow
+		}
+	}
+
+	behavior Animator statsElement
+	{
+		tweenAnimations: [
+		{
+			name: "AnimateIn"
+			tweens: [
+			{
+				property: @panel/BG:Image.alpha
+				startValue: 0
+				endValue: 0.3
+				duration: 0.1
+				curve: EASE_LINEAR
+			},
+			{
+				property: @panel/SubheaderBG:Image.alpha
+				startValue: 0
+				endValue: 0.15
+				duration: 0.1
+				curve: EASE_LINEAR
+			},
+			{
+				property: @panel/HeaderText:Label.alpha
+				startValue: 0
+				endValue: 1
+				duration: 0.9
+				curve: EASE_LINEAR
+			},
+			{
+				property: @panel/BonusStat:Label.alpha
+				startValue: 0
+				endValue: 1
+				duration: 0.9
+				curve: EASE_LINEAR
+			},
+			{
+				property: @panel/BonusValue:Label.alpha
+				startValue: 0
+				endValue: 1
+				duration: 0.9
+				curve: EASE_LINEAR
+			},
+			{
+				property: @panel/HeaderText:Label.outlineColorOuter
+				startValue: <0, 0, 0, 0>
+				endValue: <0, 0, 0, 0.6>
+				duration: 0.9
+				curve: EASE_LINEAR
+			},
+			{
+				property: @panel/BonusStat:Label.outlineColorOuter
+				startValue: <0, 0, 0, 0>
+				endValue: <0, 0, 0, 0.6>
+				duration: 0.9
+				curve: EASE_LINEAR
+			},
+			{
+				property: @panel/BonusValue:Label.outlineColorOuter
+				startValue: <0, 0, 0, 0>
+				endValue: <0, 0, 0, 0.6>
+				duration: 0.9
+				curve: EASE_LINEAR
+			}
+			]
+		}
+		]
+	}
+
+	panel BG
+	{
+		bind @root/SubheaderBG.visible -> NOT -> @this.visible
+
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		visible: true
+
+		behavior Image
+		{
+			bind * -> IndexOfElementInArray -> Modulo(2) -> PickVectorFromTwo(<0.45, 0.45, 0.45>, <0, 0, 0>) -> @this.colorRGB
+
+			colorRGB: <0.45, 0.45, 0.45>
+			alpha: 0.3
+		}
+	}
+
+	panel SubheaderBG
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		visible: false
+
+		behavior Image
+		{
+			colorRGB: #FFDA47
+			alpha: 0.15
+		}
+	}
+
+	panel HeaderText
+	{
+		bind *.isInfo -> PickIntFromTwo( 10, 30 ) -> @this.positionX
+
+		anchor: LEFT_STRETCH_HEIGHT
+		pivot: <0, 0>
+		offsetsTB: <0, 0>
+		positionX: 10
+		width: 300
+		useLocaleDirection: true
+
+		behavior Label
+		{
+			bind *.bonusName -> @this.text
+			bind *.isInfo -> PickIntFromTwo( 0, 5 ) -> @this.leading
+			bind *.isInfo -> PickVectorFromTwo( <1, 1, 1>, #C3F3F4 ) -> @this.colorRGB
+			bind @root/SubheaderBG.visible -> PickStringFromTwo( "DefaultFont", "DefaultBoldFont" ) -> @this.face
+
+			text: ""
+			face: "DefaultFont"
+			pixelHeight: 28
+			horizontalMode: SQUISH_TO_CONTAINER
+			colorRGB: <1, 1, 1>
+			outlineColorInner: <0, 0, 0, 0>
+			outlineColorOuter: <0, 0, 0, 0.6>
+			outlineWidth: 1
+			textAlignHorizontal: LEFT
+			textAlignVertical: CENTER
+			useLocaleDirection: true
+		}
+	}
+
+	panel BonusStat
+	{
+		bind *.isInfo -> PickIntFromTwo( 100, 80 ) -> @this.width
+
+		anchor: RIGHT_STRETCH_HEIGHT
+		pivot: <1.0, 0>
+		offsetsTB: <0, 0>
+		positionX: -120
+		width: 100
+		useLocaleDirection: true
+
+		behavior Label
+		{
+			bind *.bonusStat -> @this.text
+			bind *.isInfo -> PickIntFromTwo( 0, 5 ) -> @this.leading
+			bind *.isInfo -> PickVectorFromTwo( <1, 1, 1>, #C3F3F4 ) -> @this.colorRGB
+
+			text: "0"
+			face: "DefaultFont"
+			pixelHeight: 28
+			horizontalMode: SQUISH_TO_CONTAINER
+			colorRGB: <1, 1, 1>
+			outlineColorInner: <0, 0, 0, 0>
+			outlineColorOuter: <0, 0, 0, 0.6>
+			outlineWidth: 1
+			textAlignHorizontal: RIGHT
+			textAlignVertical: CENTER
+		}
+	}
+
+	panel BonusValue
+	{
+		bind *.isInfo -> NOT -> @this.visible
+
+		anchor: RIGHT_STRETCH_HEIGHT
+		pivot: <1.0, 0>
+		offsetsTB: <0, 0>
+		positionX: -10
+		width: 100
+
+		behavior FormatLabel
+		{
+			bind *.bonusValue -> @this.arg1
+			bind @root/SubheaderBG.visible -> PickStringFromTwo( "DefaultFont", "DefaultBoldFont" ) -> @this.face
+
+			format: "#RANKED_LP_DISPLAY"
+			face: "DefaultFont"
+			pixelHeight: 28
+			horizontalMode: SQUISH_TO_CONTAINER
+			colorRGB: <1, 1, 1>
+			outlineColorInner: <0, 0, 0, 0>
+			outlineColorOuter: <0, 0, 0, 0.6>
+			outlineWidth: 1
+			textAlignHorizontal: RIGHT
+			textAlignVertical: CENTER
+			arg1: "0"
+		}
+	}
+}

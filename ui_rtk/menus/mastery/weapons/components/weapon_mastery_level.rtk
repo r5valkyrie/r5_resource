@@ -1,0 +1,10 @@
+instance $"ui_rtk/menus/mastery/components/mastery_level.rpak" WeaponMasteryOverallLevel
+{
+	override @var(title) "#MASTERY_OVERALL_WEAPONS_TITLE"
+
+	offsets: <0, 0, 0, 0>
+    anchor: CENTER
+	position: <0, 0>
+
+	behavior WeaponMasteryLevel
+}

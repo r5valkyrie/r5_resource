@@ -1,0 +1,73 @@
+panel Events
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, -65, 0>
+
+	behavior EventsPanel
+	{
+		//Content panel to instantiate panels.
+		verticalContainerContext: @panel/VerticalPagination/Padding/ContentContainer/Content
+		paginationBehavior: @panel/VerticalPagination:Pagination
+	}
+
+	panel BackgroundDarken
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+		behavior Image
+		{
+			bind &menus.baseEvent.calEventBase -> GetCalEventGlobalSettingFloat("backgroundDarkeningOpacity") -> @this.alpha
+
+			colorRGB: <0, 0, 0>
+		}
+	}
+
+	instance $"ui_rtk/common/components/vertical_paginated_panel.rpak" VerticalPagination
+	{
+		override bind root "&menus.baseEvent"
+		override @var(cursorZone1Offsets) <0, 0, 0, 0>
+		override @var(containerAnchor) TOP_STRETCH_WIDTH
+		override @var(containerHeight) 1080
+		override @var(containerPosition) <0, 0>
+		override @var(contentOffsetsLR) <0, 0>
+		override @var(contentSpacing) 0
+
+		override @var(showNonInteractiveNavButtons) false
+
+		context @var(upButtonPanel)
+		{
+			position: <0, 112>
+			context @var(labelBehavior)
+			{
+				bind *.prevSection -> @this.text
+			}
+
+			behavior NxOverrides
+			{
+				overrides: [
+					{
+						propertyRef: @panel.positionY
+						nxValue: 130
+					}
+				]
+			}
+		}
+
+		context @var(downButtonPanel)
+		{
+			position: <0 , -80>
+			context @var(labelBehavior)
+			{
+				bind *.nextSection -> @this.text
+			}
+
+			override @this/ButtonPanel.position <0, 10>
+            override @this:Animator.tweenAnimations[0].tweens[0].startValue 10
+            override @this:Animator.tweenAnimations[1].tweens[0].endValue 10
+            override @this:Button.transitions[10].value 10
+		}
+	}
+}
+

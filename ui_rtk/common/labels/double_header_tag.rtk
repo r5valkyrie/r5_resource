@@ -1,0 +1,87 @@
+panel DoubleHeaderTag
+{
+	bind root
+
+	anchor: TOP_STRETCH_WIDTH
+	offsets: <0, 0, 0, 0>
+	height: 50
+	pivot: <0.5, 0>
+
+	var panelColor @this:Image.colorRGB
+	var decorationColor @this/LeftCorner/Tag/Rect:Image.colorRGB
+	var nameColor @this/TitlePanel:Label.colorRGB
+
+
+    behavior Image
+
+    panel TitlePanel
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <5, 5, 5, 5>
+		positionY: -4.0
+
+		behavior Label
+		{
+			face: "TitleRegularFont"
+			pixelHeight: 26
+			textAlignHorizontal: LEFT
+			textAlignVertical: TOP
+			horizontalMode: AUTOSIZE_TO_TEXT
+			verticalMode: AUTOSIZE_TO_TEXT
+			colorRGB: <0.96, 0.65, 0.14>
+		}
+	}
+
+	panel LeftCorner
+	{
+		anchor: BOTTOM_LEFT
+		size: <100, 20>
+		pivot: <0, 0>
+
+		instance $"ui_rtk/common/labels/header_tag.rpak" Tag
+		{
+			override @var(alpha) 1
+			override @var(titleText) ""
+			override @var(bgColor) <0.96, 0.65, 0.14>
+			override @var(triangleAnchor) RIGHT
+
+			anchor: TOP_LEFT
+			height: 10
+			pivot: <0, 0>
+		}
+	}
+
+	panel RightCorner
+	{
+		anchor: BOTTOM_RIGHT
+		size: <100, 20>
+		pivot: <1, 0>
+
+		instance $"ui_rtk/common/labels/header_tag.rpak" Tag
+		{
+			bind @root/LeftCorner/Tag/Rect:Image.colorRGB -> @this/Rect:Image.colorRGB
+
+			override @var(alpha) 1
+			override @var(titleText) ""
+			override @var(bgColor) <0.96, 0.65, 0.14>
+			override @var(triangleAnchor) LEFT
+
+			anchor: TOP_RIGHT
+			height: 10
+			pivot: <1, 0>
+		}
+	}
+
+	panel CenterLine
+	{
+		anchor: BOTTOM_STRETCH_WIDTH
+		offsets: <0, 0, 0, 0>
+		height: 4
+		pivot: <0.5, 1.0>
+
+		behavior Image
+		{
+			bind @root/LeftCorner/Tag/Rect:Image.colorRGB -> @this.colorRGB
+		}
+	}
+}

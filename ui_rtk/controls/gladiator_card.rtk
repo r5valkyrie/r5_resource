@@ -1,0 +1,13 @@
+panel GladiatorCardPanel
+{
+	bind root
+
+	var presentation @this:GladiatorCard.presentation
+	var situation @this:GladiatorCard.situation
+	var playerUID @this:GladiatorCard.playerUID
+
+	// This is the default expected size of the gladiator card container, changing it will squash the gcard visuals
+	size: <900, 900>
+
+	behavior GladiatorCard
+}

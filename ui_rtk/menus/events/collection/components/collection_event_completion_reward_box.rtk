@@ -1,0 +1,261 @@
+panel ChaseItemProgress
+{
+	var visible @this.visible
+	var anchor @this.anchor
+	var size @this.size
+	var backgroundBlur @this/BackgroundBlur.visible
+	var backgroundBlurDarken @this/BackgroundBlurDarken:Image.alpha
+	var backgroundAssetPath @this/Background:Image.assetPath
+	var titleFormat @this/VerticalContainer/Title:FormatLabel.format
+	var titleArg0 @this/VerticalContainer/Title:FormatLabel.arg1
+	var titleArg1 @this/VerticalContainer/Title:FormatLabel.arg2
+	var tooltipTitle @this:ToolTip.varOverrides.titleText
+	var tooltipSubTitle @this:ToolTip.varOverrides.subtitleText
+	var progressBarColor @this/VerticalContainer/Bar/ProgressBar/Bar:Image.colorRGB
+	var progressBarBGColor @this/VerticalContainer/Bar/ProgressBar/Background:Image.colorRGB
+	var progressBarValue @this/VerticalContainer/Bar/ProgressBar:ProgressBar.value
+	var progressBarMaxValue @this/VerticalContainer/Bar/ProgressBar:ProgressBar.max
+	var progressBarBorderColor @this/VerticalContainer/Bar/Border:Image.colorRGB
+	var subtitleText @this/VerticalContainer/SubTitle:Label.text
+	var descriptionText @this/VerticalContainer/Description:Label.text
+	var rewardFrameAssetPath @this/RewardContainer/RewardFrame:Image.assetPath
+	var rewardImageAssetPath @this/RewardContainer/RewardImage:Image.assetPath
+	var rewardCheckmarkVisible @this/RewardContainer/Checkmark.visible
+
+	anchor: TOP_LEFT
+	size: <535, 222>
+	inputListener: true
+
+	behavior Button
+	{
+		soundHighlighted: "ui_menu_focus"
+		soundPressedEnabled: "ui_menu_accept"
+		transitions: [
+		{
+			fromState: ANY
+			toState: IDLE
+			type: TRANSITION_PROPERTY_SET
+			property: @owner.panel/RewardContainer/RewardFrame:ColorExtensions.saturation
+			value: 0.0
+		},
+		{
+			fromState: ANY
+			toState: HIGHLIGHTED
+			type: TRANSITION_PROPERTY_SET
+			property: @owner.panel/RewardContainer/RewardFrame:ColorExtensions.saturation
+			value: 1.0
+		}
+		]
+	}
+
+	behavior ToolTip
+	{
+		prefab: $"ui_rtk/common/tooltips/base_tooltip.rpak"
+		offset: <32, -68>
+		delay: 0
+
+		varOverrides: {
+			// defaults
+			titleText: ""
+			subtitleText: ""
+			bodyText: ""
+			additionalText: ""
+			icon: $""
+			isIconVisible: false
+			isAdditionalTextVisible: false
+			titleColor: #ffffff
+			subtitleColor: #ffffff
+			additionalTextAltColor: #ffffff
+			iconColor: #ffffff
+
+			// overrides
+			actionText: "#A_BUTTON_INSPECT"
+			isSubtitleVisible: true
+		}
+	}
+
+	panel BackgroundBlur
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+		behavior Image
+		{
+			imageBlur: ASSET
+		}
+	}
+
+	panel BackgroundBlurDarken
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+		behavior Image
+		{
+			colorRGB: <0, 0, 0>
+		}
+	}
+
+	panel Background
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <-2, -2, -2, -2>
+
+		behavior Image
+	}
+
+	panel VerticalContainer
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+		behavior VerticalContainer
+		{
+			fitContentHeight: false
+			fitContentWidth: false
+			alignment: LEFT
+			spacing: 5
+			paddingLeft: 30
+			paddingTop: 0
+			useLocaleDirection: true
+		}
+
+		panel Title
+		{
+			width: 260
+
+			behavior FormatLabel
+			{
+				face: "TitleBoldFont"
+				color: <1, 1, 1, 1>
+				pixelHeight: 30
+				textAlignHorizontal: LEFT
+				textAlignVertical: CENTER
+				horizontalMode: SQUISH_TO_CONTAINER
+				verticalMode: AUTOSIZE_TO_TEXT
+				useLocaleDirection: true
+				format: "#VAL_SLASH_VAL_TWO_STYLE"
+				arg1: "?"
+				arg2: "?"
+				allCaps: true
+			}
+
+			behavior LabelAltStyle
+			{
+				face: "TitleBoldFont"
+				colorRGB: <0.67, 0.67, 0.67>
+			}
+		}
+
+		panel Bar
+		{
+			size: <292, 22>
+
+			instance $"ui_rtk/controls/progress_bar.rpak" ProgressBar
+			{
+				override @var(min) 0
+				override @var(bgAlpha) 1
+				override @var(bgAssetPath) $"ui_image/rui/events/collection_events/thin_square_mask.rpak"
+				override @var(barAssetPath) $"ui_image/rui/events/collection_events/thin_square_mask.rpak"
+
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <0, 0, 0, 0>
+			}
+
+			panel Border
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+				behavior Image
+				{
+					alpha: 1
+					colorRGB: <1.0, 0.258, 0>
+					assetPath: $"ui_image/rui/events/collection_events/thin_square_outline.rpak"
+				}
+			}
+		}
+
+		panel SubTitle
+		{
+			width: 260
+			behavior Label
+			{
+				text: ""
+				face: "TitleBoldFont"
+				textAlignHorizontal: LEFT
+				textAlignVertical: CENTER
+				horizontalMode: SQUISH_TO_CONTAINER
+				verticalMode: AUTOSIZE_TO_TEXT
+				useLocaleDirection: true
+				pixelHeight: 22
+				color: <1, 1, 1, 1>
+				allCaps: true
+			}
+		}
+
+		panel Description
+		{
+			width: 260
+			behavior Label
+			{
+				text: ""
+				face: "TitleFont"
+				textAlignHorizontal: LEFT
+				textAlignVertical: CENTER
+				horizontalMode: WRAP
+				verticalMode: AUTOSIZE_TO_TEXT
+				useLocaleDirection: true
+				pixelHeight: 24
+				color: <0.8, 0.8, 0.8, 1>
+			}
+		}
+	}
+
+	panel RewardContainer
+	{
+		pivot: <1, 0.5>
+		anchor: RIGHT
+		size: <184, 184>
+		positionX: -8
+		useLocaleDirection: true
+
+		panel RewardFrame
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+			pivot: <0, 0>
+
+			behavior Image
+			{
+				colorRGB: <1, 1, 1>
+				assetPath: $"ui_image/rui/events/collection_events/heirloom_frame.rpak"
+			}
+
+			behavior ColorExtensions
+			{
+				saturation: 0.0
+			}
+		}
+
+		panel RewardImage
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+			pivot: <0, 0>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/events/s20ce02/heirloom.rpak"
+			}
+		}
+
+		panel Checkmark
+		{
+			anchor: TOP_RIGHT
+			size: <50, 50>
+			position: <-50, 48>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/hud/check_selected.rpak"
+			}
+		}
+	}
+}

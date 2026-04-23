@@ -1,0 +1,121 @@
+panel MeleeCustomizationSet
+{
+	bind root
+
+	bind &menus.legend.meleeCustomization.selectedTab -> ShowOnlyArtifactSet( *.setTheme ) -> @this.visible
+
+	behavior VerticalContainer
+	{
+		spacing: 4
+		fitContentHeight: true
+		fitContentWidth: true
+		alignment: LEFT
+	}
+
+	panel Title
+	{
+		anchor: TOP_LEFT
+		pivot: <0, 0>
+		size: <456, 20>
+		positionY: 0
+
+		behavior Label
+		{
+			bind *.title -> @this.text
+			bind *.setTheme -> IntEqual( 0 ) -> PickVectorFromTwo( #COLOR_GREY_2, #COLOR_MENU_LOOT_TIER_3 ) -> @this.colorRGB
+
+			face: "TitleBoldFont"
+			pixelHeight: 20
+			textAlignHorizontal: LEFT
+			textAlignVertical: CENTER
+			horizontalMode: SQUISH_TO_CONTAINER
+			colorRGB: #COLOR_GREY_2
+			allCaps: true
+		}
+	}
+
+	panel Set
+	{
+		anchor: TOP_RIGHT
+		pivot: <0, 0>
+		size: <456, 80>
+
+		instance $"ui_rtk/menus/melee/components/artifact_customization_item_single.rpak" Blade
+		{
+			bind &menus.legend.meleeCustomization.selectedTab -> ShowCustomizationItem( 1, *.isVisible ) -> @this.visible
+			bind &menus.legend.meleeCustomization.selectedTab -> ShowCustomizationItem( 1, *.isVisible ) -> @this.active
+
+			override bind root "*.blade"
+
+			positionX: 0
+		}
+
+		instance $"ui_rtk/menus/melee/components/artifact_customization_item_single.rpak" Theme
+		{
+			bind &menus.legend.meleeCustomization.selectedTab -> ShowCustomizationItem( 2, *.isVisible ) -> @this.visible
+			bind &menus.legend.meleeCustomization.selectedTab -> ShowCustomizationItem( 2, *.isVisible ) -> @this.active
+
+			// the sets tab will have a different position X, but all other are 0
+			bind &menus.legend.meleeCustomization.selectedTab -> PickIntFrom( [ 94, 0, 0, 0, 0 ] ) -> @this.positionX
+
+			override bind root "*.theme"
+		}
+
+		instance $"ui_rtk/menus/melee/components/artifact_customization_item_single.rpak" PowerSource
+		{
+			bind &menus.legend.meleeCustomization.selectedTab -> ShowCustomizationItem( 3, *.isVisible ) -> @this.visible
+			bind &menus.legend.meleeCustomization.selectedTab -> ShowCustomizationItem( 3, *.isVisible ) -> @this.active
+
+			// the sets tab will have a different position X, but all other are 0
+			bind &menus.legend.meleeCustomization.selectedTab -> PickIntFrom( [ 188, 0, 0, 0, 0 ] ) -> @this.positionX
+
+			override bind root "*.powerSource"
+
+			override @var(isArrowVisible) false
+		}
+
+		instance $"ui_rtk/menus/melee/components/artifact_customization_item_single.rpak" ActivationEmote
+		{
+			bind &menus.legend.meleeCustomization.selectedTab -> ShowCustomizationItem( 3, *.isVisible ) -> HideEmptyActivationEmote( *.isEmpty, *.type ) -> @this.visible
+			bind &menus.legend.meleeCustomization.selectedTab -> ShowCustomizationItem( 3, *.isVisible ) -> HideEmptyActivationEmote( *.isEmpty, *.type ) -> @this.active
+
+			// the sets tab will have a different position X, but all other are 0
+			bind &menus.legend.meleeCustomization.selectedTab -> PickIntFrom( [ 282, 0, 0, 94, 0 ] ) -> @this.positionX
+
+			override bind root "*.activationEmote"
+		}
+
+		instance $"ui_rtk/menus/melee/components/artifact_customization_item_single.rpak" Deathbox
+		{
+			bind &menus.legend.meleeCustomization.selectedTab -> ShowCustomizationItem( 4, *.isVisible ) -> @this.visible
+			bind &menus.legend.meleeCustomization.selectedTab -> ShowCustomizationItem( 4, *.isVisible ) -> @this.active
+
+			// the sets tab will have a different position X, but all other are 0
+			bind &menus.legend.meleeCustomization.selectedTab -> PickIntFrom( [ 376, 0, 0, 0, 0 ] ) -> @this.positionX
+
+			override bind root "*.deathbox"
+
+			override @var(isArrowVisible) false
+		}
+	}
+
+	panel Link
+	{
+		bind @root/Set/PowerSource.visible -> And( @root/Set/ActivationEmote.visible ) -> @this.visible
+		bind &menus.legend.meleeCustomization.selectedTab -> IntEqual( 3 ) -> PickIntFromTwo( 275, 87 ) -> @this.positionX
+
+		anchor: LEFT
+		size: <40, 26>
+		position: <275, 12>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/melee_customization/melee_customization_grid_link.rpak"
+		}
+
+		behavior ContainerElement
+		{
+			ignoreLayout: true
+		}
+	}
+}

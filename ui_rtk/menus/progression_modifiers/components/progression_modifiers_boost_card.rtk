@@ -1,0 +1,188 @@
+panel ProgressionMoifiersBoostCard
+{
+	bind root
+
+	size: <390,310>
+	offsets: <0, 0, 0, 0>
+
+	panel Background
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/xp_boost/panel_boosted_02.rpak"
+		}
+
+		panel TopLine
+		{
+			anchor: TOP_STRETCH_WIDTH
+			size: <1, 8>
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				bind *.color -> @this.colorRGB
+			}
+		}
+	}
+
+	panel Title
+	{
+		anchor: TOP_LEFT
+		size: <360,34>
+		pivot: <0, 0>
+		position: <15, 10>
+
+		behavior Label
+	    {
+		    bind *.title -> @this.text
+		    text: "TITLE TEXT"
+	        face: "DefaultCompactFont"
+	        pixelHeight: 38
+	        colorRGB: #c8c8c8
+	        outlineColorInner: <0, 0, 0, 0>
+	        outlineColorOuter: <0, 0, 0, 0>
+	        textAlignHorizontal: LEFT
+	        textAlignVertical: TOP
+		    allCaps: true
+
+		    horizontalMode: SQUISH_TO_CONTAINER
+	        verticalMode: CLIP
+		    thicken: 0.3
+		    kerning: 0.02
+			useLocaleDirection: true
+
+
+		    shadowAlpha: 0.6
+			shadowBlur: 6.0
+			shadowOffset: <0, 0>
+		}
+	}
+
+	panel Explanation
+	{
+		anchor: LEFT
+		size: <360, 175>
+		pivot: <0, 0>
+		position: <15, -100>
+
+		behavior VerticalContainer
+		{
+		    spacing: 5
+		}
+
+		panel Description
+		{
+			anchor: TOP_LEFT
+			size: <360,100>
+			pivot: <0, 0>
+
+			behavior Label
+		    {
+			    bind *.desc -> @this.text
+			    text: "Description Text"
+		        face: "DefaultBoldFont"
+		        pixelHeight: 28
+			    colorRGB: #808080
+		        outlineColorInner: <0, 0, 0, 0>
+		        outlineColorOuter: <0, 0, 0, 0>
+		        textAlignHorizontal: LEFT
+	            horizontalMode: WRAP
+	            verticalMode: AUTOSIZE_TO_TEXT
+				useLocaleDirection: true
+
+				shadowAlpha: 0.6
+				shadowBlur: 6.0
+				shadowOffset: <0, 0>
+			}
+		}
+
+		panel Disclaimer
+		{
+			anchor: TOP_LEFT
+			size: <360,100>
+			pivot: <0, 0>
+			position: <0, 0>
+
+			behavior FormatLabel
+		    {
+			    bind *.requisiteDesc -> @this.text
+		        text: "Disclaimer Text"
+		        face: "DefaultBoldFont"
+		        pixelHeight: 28
+		        colorRGB: <1, 1, 1>
+		        outlineColorInner: <0, 0, 0, 0>
+		        outlineColorOuter: <0, 0, 0, 0>
+		        textAlignHorizontal: LEFT
+		        horizontalMode: WRAP
+		        verticalMode: CLIP
+				allCaps: true
+				useLocaleDirection: true
+
+				shadowAlpha: 0.6
+				shadowBlur: 6.0
+				shadowOffset: <0, 0>
+			}
+
+			behavior LabelAltStyle
+			{
+				color: #f5d244
+			}
+		}
+	}
+
+	panel BoostImage
+	{
+		anchor: BOTTOM_LEFT
+		size: <75,75>
+		pivot: <0, 1>
+		position: <0, 0>
+
+		behavior Image
+		{
+			bind *.color -> @this.colorRGB
+			bind *.icon -> @this.assetPath
+			alpha: 0.4
+		}
+	}
+
+	instance $"ui_rtk/common/components/timer_component.rpak" Timer
+	{
+		bind *.endtime -> IsNegative -> NOT -> @this.visible
+		bind *.endtime -> @this:Timer.endTime
+		override @var(iconColor)  #818282
+		override @var(fontColor)  #818282
+		override @var(iconPath)   "%$rui/menu/store/feature_timer%"
+
+		anchor: BOTTOM_LEFT
+		pivot: <0, 1>
+		position: <70, -5>
+	}
+
+	panel MaxDisclaimer
+	{
+		anchor: BOTTOM_RIGHT
+		size: <95,25>
+		pivot: <0.5, 0.5>
+		position: <-55, -15>
+
+		behavior Label
+		{
+			bind *.modifierQuantity -> @this.text
+			text: "Default"
+			face: "DefaultBoldFont"
+			pixelHeight: 28
+			colorRGB: #808080
+			textAlignHorizontal: RIGHT
+			textAlignVertical: CENTER
+			horizontalMode: SQUISH_TO_CONTAINER
+			verticalMode: CLIP
+			allCaps: true
+			shadowAlpha: 0.6
+			shadowBlur: 6.0
+			shadowOffset: <0, 0>
+		}
+	}
+}

@@ -1,0 +1,95 @@
+// use this prefab as your base for any new tooltip prefabs needed, or don't specify one, and this one will be used
+panel DefaultToolTip
+{
+	behavior FitToContent
+
+	behavior Animator
+	{
+		tweenAnimations: [
+			{
+				name: "FadeIn"
+				tweens: [
+					{
+						property: @owner.panel/Content:RenderGroup.alpha
+						startValue: 0.0
+						endValue: 1.0
+						duration: 0.2
+					}
+				]
+			}//,
+			// No fade out animation is currently associated with the tooltip to keep parity with the live game, to add it, uncomment this.
+			/*{
+				name:  "FadeOut"
+				tweens: [
+					{
+						property: @owner.panel/Content.alpha
+						startValue: 1.0
+						endValue: 0.0
+						duration: 0.2
+					}
+				]
+			}*/
+		]
+	}
+
+	panel Content
+	{
+		anchor: CENTER
+		offsets: <0, 0, 0, 0>
+
+		behavior FitToContent
+
+		behavior RenderGroup
+		{
+			alpha: 0.0
+		}
+
+		panel Background
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+			offsetsTB: <0, 0>
+			offsetsLR: <0, 0>
+
+			behavior Image
+			{
+				color: <0.0, 0.0, 0.0, 0.6>
+				imageBlur: NONE
+			}
+		}
+
+		// your prefab HAS to have a label like this one here to attach the text to
+		// you can add whatever else you'd like to customize this, but you need at least one label
+		panel TipDescription
+		{
+			anchor: CENTER
+			offsets: <0, 0, 0, 0>
+			offsetsTB: <0, 0>
+			offsetsLR: <0, 0>
+
+			behavior Label
+			{
+				margin: <18, 18, 18, 18>
+				text: "ToolTip Description"
+				pixelHeight: 28
+				horizontalMode: AUTOSIZE_TO_TEXT
+				verticalMode: AUTOSIZE_TO_TEXT
+			}
+		}
+		panel Outline
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+			offsetsTB: <0, 0>
+			offsetsLR: <0, 0>
+
+			behavior Image
+			{
+				color: <1.0, 1.0, 1.0, 0.4>
+				assetPath: $"ui_image/rui/borders/border_outline_2px.rpak"
+				imageBlur: NONE
+			}
+		}
+	}
+
+}

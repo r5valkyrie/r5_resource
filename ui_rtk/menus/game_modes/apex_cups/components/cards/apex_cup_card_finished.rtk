@@ -1,0 +1,62 @@
+instance $"ui_rtk/menus/game_modes/apex_cups/components/cards/apex_cup_card_base.rpak"
+{
+	context @var( Background )
+	{
+		panel Fade
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/borders/border_playlist_card_mask.rpak"
+				assetMaskPath: $"ui_image/white.rpak"
+				colorRGB: #000000
+				alpha: 0.75
+			}
+		}
+	}
+
+	append @root:Animator.tweenAnimations
+	{
+		name: "onIdle"
+		tweens: [
+			{
+				property: @panel/Body/Background/Fade:Image.alpha
+				startValue: 0.45
+				endValue: 0.75
+				duration: 0.167
+				curve: EASE_IN_CUBIC
+			}
+		]
+	}
+
+	append @root:Animator.tweenAnimations
+	{
+		name: "onHighlight"
+		tweens: [
+			{
+				property: @panel/Body/Background/Fade:Image.alpha
+				startValue: 0.75
+				endValue: 0.45
+				duration: 0.337
+				curve: EASE_OUT_CUBIC
+			}
+		]
+	}
+
+	append @root:Button.transitions
+	{
+		fromState: HIGHLIGHTED
+		toState: IDLE
+		type: TRANSITION_TWEEN
+		animName: "onIdle"
+    }
+
+	append @root:Button.transitions
+	{
+		fromState: ANY
+		toState: HIGHLIGHTED
+		type: TRANSITION_TWEEN
+		animName: "onHighlight"
+    }
+}

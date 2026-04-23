@@ -1,0 +1,105 @@
+panel Timer
+{
+	var format @this/TimerText:FormatLabel.format
+	var customIconAssetPath @this/CustomIconContainer:Image.assetPath
+	var timerContainerColorRGB @this/TimerIconContainer:Image.colorRGB
+	var timerFullIconColorRGB @this/TimerIconContainer/TimerFullIcon:Image.colorRGB
+	var timerContainerColorRGB @this/TimerIconContainer/TimerEllipse:ColorExtensions.tintRGB
+
+	anchor: RIGHT
+	position: <20, 0>
+	size: <320, 40>
+	pivot: <0.0, 0.5>
+
+	behavior Image
+	{
+		assetPath: $"ui_image/rui/menu/store/common/store_timer_backing.rpak"
+		useLocaleDirection: true
+	}
+
+	behavior Timer
+	{
+		bind @this.remainingTime -> Divide( 86400 ) -> @panel/TimerIconContainer/TimerEllipse:Ellipse.arcMax
+		bind @this.remainingTime -> GreaterThan( 86400 ) -> @panel/TimerIconContainer/TimerFullIcon.visible
+		bind @this.remainingTime -> GreaterThan( 86400 ) -> NOT -> @panel/TimerIconContainer/TimerEllipse.visible
+		bind @this.remainingTime -> FormatTimeProperty -> @panel/TimerText:FormatLabel.arg1
+	}
+
+	behavior HorizontalContainer
+	{
+		alignment: LEFT
+		spacing: 5
+		paddingLeft: -4
+		paddingRight: 20
+		fitContentWidth: true
+	}
+
+	panel CustomIconContainer
+	{
+		bind @this:Image.assetPath -> IsEmpty -> NOT -> @this.visible
+		size: <40, 40>
+		useLocaleDirection: true
+
+		behavior Image
+		{
+			assetPath: $""
+		}
+	}
+
+	panel TimerIconContainer
+	{
+		bind @root/CustomIconContainer:Image.assetPath -> IsEmpty -> @this.visible
+		size: <40, 40>
+		useLocaleDirection: true
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/store/common/feature_timer_container.rpak"
+		}
+
+		panel TimerFullIcon
+		{
+			anchor: CENTER
+			position: <0.1, 0.2>
+			size: <24, 24>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/store/common/store_timer.rpak"
+				colorRGB: <0.8, 0.64, 0.2>
+			}
+		}
+
+		panel TimerEllipse
+		{
+			anchor: CENTER
+			position: <0.1, 0.2>
+			size: <22, 22>
+
+			behavior Ellipse
+
+			behavior ColorExtensions
+			{
+				tintRGB: <1.0, 0.4, 0.0>
+			}
+		}
+	}
+
+	panel TimerText
+	{
+		height: 40
+		useLocaleDirection: true
+
+		behavior FormatLabel
+        {
+            format: "#STORE_V2_TIME_REMAINING"
+            face: "TitleRegularFont"
+	        horizontalMode: AUTOSIZE_TO_TEXT
+            textAlignHorizontal: LEFT
+			useLocaleDirection: true
+            textAlignVertical: CENTER
+            pixelHeight: 26
+            colorRGB: <0.67, 0.67, 0.67>
+        }
+	}
+}

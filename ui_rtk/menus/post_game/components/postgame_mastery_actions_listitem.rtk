@@ -1,0 +1,172 @@
+panel PostGameMasteryActionsListitem
+{
+	bind root
+
+	offsets: <0, 0, 0, 0>
+	size: <575, 40>
+
+	behavior Image
+	{
+		bind *.index -> Modulo(2)-> PickVectorFromTwo(<0, 0, 0>, <1, 1, 1>) -> @this.colorRGB
+		bind *.index -> Modulo(2)-> PickFloatFromTwo(0.25, 0.05) -> @this.alpha
+	}
+
+	behavior VerticalContainer
+	{
+		fitContentHeight: true
+		spacing: 5
+	}
+
+	panel Line1
+	{
+		offsets: <0, 0, 0, 0>
+		size: <575, 40>
+		behavior HorizontalContainer
+		{
+			paddingLeft: 15
+			paddingRight: 15
+			alignment: LEFT
+			spaceEvenly: true
+			useLocaleDirection: true
+		}
+
+		panel name
+		{
+			anchor: LEFT_STRETCH_HEIGHT
+			width: 375
+			offsets: <0, 0, 0, 0>
+			offsetsTB: <0, 0>
+
+			behavior Label
+			{
+				bind *.action -> @this.text
+
+				text: ""
+				face: "DefaultBoldFont"
+				pixelHeight: 28
+				colorRGB: <1, 1, 1>
+				outlineColorInner: <0, 0, 0, 0>
+				outlineColorOuter: <0, 0, 0, 0>
+				textAlignHorizontal: LEFT
+				textAlignVertical: CENTER
+				horizontalMode: SQUISH_TO_CONTAINER
+				useLocaleDirection: true
+
+				shadowAlpha: 0.6
+				shadowBlur: 6.0
+				shadowOffset: <0, 0>
+			}
+		}
+
+		panel boostImage
+		{
+			bind *.actionDescription -> isEmpty -> NOT -> @this.visible
+			offsets: <0, 0, 0, 0>
+			size: <37, 37>
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/xp_boost/BoostMastery_sm.rpak"
+				color: #db292b
+			}
+		}
+
+		panel xpChange
+		{
+			bind *.actionDescription -> isEmpty -> @this.visible
+			anchor: RIGHT_STRETCH_HEIGHT
+			width: 125
+			offsets: <0, 0, 0, 0>
+
+			behavior FormatLabel
+			{
+				bind *.xp -> @this.arg1
+
+				format: "#MASTERY_GUN_XP_INCREASE"
+				face: "DefaultBoldFont"
+				pixelHeight: 28
+				colorRGB: <1, 1, 1>
+				outlineColorInner: <0, 0, 0, 0>
+				outlineColorOuter: <0, 0, 0, 0>
+				textAlignHorizontal: RIGHT
+				horizontalMode: SQUISH_TO_CONTAINER
+				verticalMode: AUTOSIZE_TO_TEXT
+				shadowAlpha: 0.6
+				shadowBlur: 6.0
+				shadowOffset: <0, 0>
+				arg1: ""
+				useLocaleDirection: true
+			}
+		}
+	}
+
+	panel Line2
+	{
+		bind *.actionDescription -> isEmpty -> NOT -> @this.visible
+		offsets: <0, 0, 0, 0>
+		size: <575, 40>
+		behavior HorizontalContainer
+		{
+			paddingLeft: 15
+			paddingRight: 15
+			alignment: LEFT
+			spaceEvenly: true
+			useLocaleDirection: true
+		}
+
+		panel description
+		{
+			anchor: LEFT_STRETCH_HEIGHT
+			width: 375
+			offsets: <0, 0, 0, 0>
+			offsetsTB: <0, 0>
+
+			behavior Label
+			{
+				bind *.actionDescription -> @this.text
+
+				text: ""
+				face: "DefaultBoldFont"
+				pixelHeight: 28
+				colorRGB: #bcbcbc
+				outlineColorInner: <0, 0, 0, 0>
+				outlineColorOuter: <0, 0, 0, 0>
+				textAlignHorizontal: LEFT
+				textAlignVertical: CENTER
+				horizontalMode: SQUISH_TO_CONTAINER
+
+				shadowAlpha: 0.6
+				shadowBlur: 6.0
+				shadowOffset: <0, 0>
+				useLocaleDirection: true
+			}
+		}
+
+		panel xpChange
+		{
+			anchor: RIGHT_STRETCH_HEIGHT
+			width: 125
+			offsets: <0, 0, 0, 0>
+
+			behavior FormatLabel
+			{
+				bind *.xp -> @this.arg1
+
+				format: "#MASTERY_GUN_XP_INCREASE"
+				face: "DefaultBoldFont"
+				pixelHeight: 28
+				colorRGB: <1, 1, 1>
+				outlineColorInner: <0, 0, 0, 0>
+				outlineColorOuter: <0, 0, 0, 0>
+				textAlignHorizontal: RIGHT
+				horizontalMode: SQUISH_TO_CONTAINER
+				verticalMode: AUTOSIZE_TO_TEXT
+				shadowAlpha: 0.6
+				shadowBlur: 6.0
+				shadowOffset: <0, 0>
+				arg1: ""
+				useLocaleDirection: true
+			}
+		}
+	}
+
+}

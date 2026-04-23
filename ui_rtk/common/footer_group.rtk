@@ -1,0 +1,19 @@
+panel HorizontalContainer
+{
+	offsets: <0, 0, 0, 0>
+
+	behavior HorizontalContainer
+	{
+		fitContentWidth: true
+		fitContentHeight: true
+		spacing: 44
+	}
+
+	behavior ListBinder
+	{
+		var bindingPath @this.bindingPath
+
+		bindingPath: ""
+		prefab: $"ui_rtk/common/buttons/footer_button.rpak"
+	}
+}

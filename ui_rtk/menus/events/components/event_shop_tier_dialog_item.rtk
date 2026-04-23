@@ -1,0 +1,78 @@
+panel EventShopTierDialogItem
+{
+	bind root
+	anchor: CENTER
+	size: <520, 350>
+
+	panel Reward
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		panel Separator
+		{
+			bind * -> IndexOfElementInArray -> Equal( 0 ) -> NOT -> @this.visible
+
+			anchor: LEFT_STRETCH_HEIGHT
+			offsets: <0, 0, 0, 0>
+			width: 2
+
+			behavior Image
+			{
+				color: <0.7, 0.7, 0.7, 0.1>
+			}
+		}
+
+		panel Icon
+		{
+			bind *.isCustomSize -> NOT -> @this.visible
+
+			anchor: TOP
+			pivot: <0.5, 0>
+			size: <260, 260>
+
+			behavior Image
+			{
+				bind *.icon -> @this.assetPath
+			}
+		}
+
+		panel CustomIcon
+		{
+			bind *.isCustomSize -> @this.visible
+
+			anchor: TOP
+			pivot: <0.5, 0>
+			size: <366, 206>
+			positionY: 30
+
+			behavior Image
+			{
+				bind *.icon -> @this.assetPath
+
+				alpha: 0.8
+			}
+		}
+
+		panel Text
+		{
+			anchor: BOTTOM_STRETCH_WIDTH
+			offsets: <10, 10, 0, 0>
+			pivot: <0.5, 1>
+			height: 50
+
+			behavior Label
+			{
+				bind *.text -> @this.text
+
+				face: "TitleBoldFont"
+				pixelHeight: 30
+				colorRGB: <1, 1, 1>
+				textAlignHorizontal: CENTER
+				textAlignVertical: BOTTOM
+				allCaps: true
+				horizontalMode: WRAP
+			}
+		}
+	}
+}

@@ -1,0 +1,235 @@
+panel PersonalizedStoreButton
+{
+	anchor: CENTER
+	size:   <320, 600>
+
+	bind root
+
+	instance $"ui_rtk/common/buttons/offer_button.rpak" OfferButton
+	{
+		override bind root "*"
+
+		bind *.miscBool -> Not -> [ @this/Decoration/Border.visible, @this/Decoration/RarityBorder.visible ]
+		bind *.offerIndex -> @this:OfferButton.offerIndex
+
+		behavior OfferButton
+		{
+			bind *.slotIndex -> @this.slotIndex
+
+			buttonBehavior: @panel:Button
+			purchaseLimitParent: @panel/Description/TopLines
+		}
+
+		append @this:Button.transitions {
+            fromState: ANY
+            toState: IDLE
+            type: TRANSITION_PROPERTY_SET
+            property: @panel/Cover/CoverImage:Image.assetPath
+            value: $"ui_image/rui/menu/store/store_button_yourshop_hidden.rpak"
+        }
+
+        append @this:Button.transitions {
+            fromState: ANY
+            toState: HIGHLIGHTED
+            type: TRANSITION_PROPERTY_SET
+            property: @panel/Cover/CoverImage:Image.assetPath
+            value: $"ui_image/rui/menu/store/store_button_yourshop_focus.rpak"
+        }
+
+		panel Cover
+        {
+        	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+        	offsets: <0, 0, 0, 0>
+
+	        behavior RenderGroup
+
+	        panel BlankImage
+	        {
+		        anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		        offsets: <-400, -400, -400, -400>
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/glow_lg.rpak"
+					colorRGB: <0,0,0>
+					alpha: 2
+				}
+			}
+
+	        panel Anim01
+	        {
+		        anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		        offsets: <0, 0, 0, 0>
+
+		        behavior Image
+		        {
+			        assetPath: $"ui_image/rui/menu/store/store_button_yourshop_anim_01.rpak"
+			        alpha: 1
+		        }
+	        }
+
+	        panel Anim02
+	        {
+		        anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		        offsets: <96, 96, 365, 0>
+
+		        behavior Image
+		        {
+			        assetPath: $"ui_image/rui/menu/store/store_button_yourshop_anim_02.rpak"
+			        alpha: 1
+		        }
+
+		        panel Anim03
+		        {
+			        anchor: TOP
+			        positionY: -62
+			        size: <255, 255>
+
+			        behavior Image
+			        {
+				        assetPath: $"ui_image/rui/menu/store/store_button_yourshop_anim_03.rpak"
+				        alpha: 1
+			        }
+		        }
+	        }
+
+	        panel Anim04
+	        {
+		        anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		        offsets: <40, 40, 0, 204>
+
+		        behavior Image
+		        {
+			        assetPath: $"ui_image/rui/menu/store/store_button_yourshop_anim_04.rpak"
+			        alpha: 1
+		        }
+	        }
+
+	        panel Anim05
+	        {
+		        anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		        offsets: <0, 0, 0, 0>
+
+		        behavior Image
+		        {
+			        assetPath: $"ui_image/rui/menu/store/store_button_yourshop_anim_05.rpak"
+			        alpha: 0
+		        }
+	        }
+
+	        behavior Animator
+	        {
+		        tweenAnimations: [
+		        {
+			        name: "Open"
+			        tweens: [
+					{   // makes the triangles appear slightly
+						property: @panel/Anim05:Image.alpha
+						startValue: 0.0
+						endValue: 0.5
+						duration: 0.4
+						delay: 0
+						curve: EASE_OUT_CIRC
+					},
+			        {   // moves banner up
+				        property: @panel/Anim04.positionY
+				        duration: 0.4
+				        startValue: -102
+				        endValue: -400
+				        curve: EASE_IN_OUT_SINE
+			        },
+			        {   // fades top banner
+				        property: @panel/Anim04:Image.alpha
+				        duration: 0.4
+				        startValue: 1
+				        endValue: 0
+			        },
+			        {   // Moves bottom banner
+				        property: @panel/Anim02.positionY
+				        duration: 0.4
+				        startValue: 182
+				        endValue: 400
+				        curve: EASE_IN_OUT_SINE
+			        },
+			        {   // fades bottom banner
+				        property: @panel/Anim02:Image.alpha
+				        duration: 0.4
+				        startValue: 1
+				        endValue: 0
+			        },
+					{   // fades bottom banner
+						property: @panel/Anim02/Anim03:Image.alpha
+						startValue: 1.0
+						endValue: 0.0
+						duration: 0.4
+						curve: EASE_OUT_CUBIC
+					},
+			        { // fades initial background
+				        property: @panel/Anim01:Image.alpha
+				        startValue: 1.0
+				        endValue: 0.0
+				        duration: 0.4
+				        curve: EASE_OUT_CUBIC
+			        },
+					{   // shrinks the gradient to make the fade more effective
+						property: @panel/BlankImage.scale
+						startValue: <1, 1>
+						endValue: <0,0>
+						duration: 0.8
+						delay: 0.4
+						curve: EASE_OUT_SINE
+					},
+			        {   // fades gradient
+				        property: @panel/BlankImage:Image.alpha
+				        startValue: 2.0
+				        endValue: 0.0
+				        duration: 0.8
+				        delay: 0.35
+				        curve: EASE_OUT_CUBIC
+			        },
+			        {   // fades the triangles
+				        property: @panel/Anim05:Image.alpha
+				        startValue: 10.0
+				        endValue: 0.0
+				        duration: 0.7
+				        delay: 0.4
+				        curve: EASE_OUT_CIRC
+			        },
+			        {
+				        property: @panel/CoverImage:Image.alpha
+				        startValue: 1.0
+				        endValue: 0.0
+				        duration: 0.15
+				        curve: EASE_IN_CUBIC
+			        }
+			        ]
+		        },
+		        {
+			        name: "FadeIn"
+			        tweens: [
+			        { // fade to hide the initial low LOD image
+				        property: @panel/CoverImage:Image.alpha
+				        startValue: 0.0
+				        endValue: 1.0
+				        duration: 2.5
+				        curve: EASE_IN_CUBIC
+			        }
+			        ]
+		        }
+		        ]
+	        }
+
+	        panel CoverImage
+	        {
+		        anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		        offsets: <0, 0, 0, 0>
+
+		        behavior Image
+		        {
+			        assetPath: $"ui_image/rui/menu/store/store_button_yourshop_hidden.rpak"
+			        alpha: 1
+		        }
+	        }
+        }
+	}
+}

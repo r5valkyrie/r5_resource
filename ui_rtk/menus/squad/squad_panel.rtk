@@ -1,0 +1,84 @@
+panel SquadPanel
+{
+	bind root
+
+	behavior SquadGladCards
+	{
+		gladCardList: @panel/HorizontalPagination/Padding/ContentContainer/Content
+	}
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	instance $"ui_rtk/common/components/horizontal_paginated_panel.rpak" HorizontalPagination
+	{
+		override bind root "*"
+		override @this/CursorZone2:CursorInteract.absorbOnKeyCodePressed false
+		override @this/CursorZone2:CursorInteract.allowKeyCodeInputModeBypass true
+
+		context @this:Pagination
+		{
+			showNavButtonsOnController: false
+		}
+
+		context @var( containerPanel )
+		{
+			bind *.gladcards -> GetCount -> LessThanOrEqual( 3 ) -> PickFloatFromTwo( 0, 40 ) -> @this.offsetTop
+
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			position: <0, 0>
+			offsetsLR: <105, 105>
+
+			behavior HorizontalContainer
+			{
+				//When less then 3 or equal to 3 cards, center
+				//When more then 3 left align for pagination
+				bind *.gladcards -> GetCount -> LessThanOrEqual( 3 ) -> @this.active
+
+				alignment: CENTER
+				active: false
+			}
+		}
+
+
+		context @var( contentPanel )
+		{
+			bind *.gladcards -> GetCount -> LessThanOrEqual( 3 ) -> PickIntFromTwo( 3, 4 ) -> @this.anchor
+
+			anchor: LEFT
+			pivot: <0.0, 0.5>
+
+			behavior HorizontalContainer
+			{
+				alignment: LEFT
+				useLocaleDirection: true
+				fitContentWidth: true
+				fitContentHeight: true
+				spacing: 86
+			}
+
+			behavior ListBinder
+			{
+				bindingPath: "*.gladcards"
+				prefab: $"ui_rtk/menus/squad/components/squad_gladcard.rpak"
+			}
+		}
+
+		context @var(navContainerPanel)
+		{
+		  anchor: BOTTOM
+		  position: <-43, -100>
+		  pivot: <0.5, 0.5>
+		  useLocaleDirection: true
+		  sizeDelta: <0, 60>
+
+		  behavior HorizontalContainer
+		  {
+		     alignment: LEFT
+		     fitContentWidth: true
+		     spacing: 20
+		     useLocaleDirection: true
+		  }
+		}
+	}
+}

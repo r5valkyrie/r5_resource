@@ -1,0 +1,151 @@
+panel VerticalPaginatedPanel
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	var autoPagesByContent          @this:Pagination.autoPagesByContainerContent
+	var useContentSizeAsTotalSize   @this:Pagination.useContentSizeAsTotalSize
+	var pageCount                   @this:Pagination.pages
+	var containerSizeOffset         @this:Pagination.containerSizeOffset
+
+	var cursorZone1Offsets          @this/CursorZone1.offsets // Override this to adjust cursor interaction zone
+	var cursorZone2Offsets          @this/CursorZone2.offsets // Override this to adjust cursor interaction zone
+	var cursorZone1Mouse            @this/CursorZone1:CursorInteract.mouseEnabled
+	var cursorZone1Controller       @this/CursorZone1:CursorInteract.controllerEnabled
+	var cursorZone2Mouse            @this/CursorZone2:CursorInteract.mouseEnabled
+	var cursorZone2Controller       @this/CursorZone2:CursorInteract.controllerEnabled
+
+	var paddingPanel                @this/Padding // Your "viewport". Put RenderGroup or overlays here if needed
+
+	var containerPanel              @this/Padding/ContentContainer
+	var containerAnchor             @this/Padding/ContentContainer.anchor
+	var containerHeight             @this/Padding/ContentContainer.height // This determines page size
+	var containerPosition           @this/Padding/ContentContainer.position
+	var contentPanel                @this/Padding/ContentContainer/Content // Put content children panels, ListBinders, etc in here
+	var contentOffsetsLR            @this/Padding/ContentContainer/Content.offsetsLR
+	var contentSpacing              @this/Padding/ContentContainer/Content:VerticalContainer.spacing
+
+	var navContainerPanel           @this/NavContainer
+	var navContainerAnchor          @this/NavContainer.anchor
+	var navContainerPivot           @this/NavContainer.pivot
+	var navContainerPosition        @this/NavContainer.position
+	var navBarBackgroundAlpha       @this/NavContainer:Image.alpha
+
+	var showNonInteractiveNavButtons    @this:Pagination.showNonInteractiveNavButtons
+	var upButtonPanel                   @this/UpButton
+	var downButtonPanel                 @this/DownButton
+	var customNavUpButton               @this:Pagination.prevButtonAlt
+	var customNavDownButton             @this:Pagination.nextButtonAlt
+	var canWrap                         @this:Pagination.canWrap
+
+	var animationDuration               @this:Animator.tweenAnimations[0].tweens[0].duration // Set this to 0 to disable animation
+
+	behavior Pagination
+	{
+		container:              @panel/Padding/ContentContainer
+		content:                @panel/Padding/ContentContainer/Content
+        animator:               @panel:Animator
+		cursorInteract1Area:    @panel/CursorZone1:CursorInteract
+		cursorInteract2Area:    @panel/CursorZone2:CursorInteract
+
+        prevButton:             @panel/UpButton:Button
+        nextButton:             @panel/DownButton:Button
+        paginationButtons:      @panel/NavContainer/PaginationPips
+        hintAnimator:           @panel/NavContainer/Hint:Animator
+
+		vertical: true
+		autoPagesByContainerContent: true
+	}
+
+	behavior Animator
+    {
+        tweenAnimations: [
+            {
+                name: "NextPage"
+                tweens: [
+                    {
+                        property: @panel/Padding/ContentContainer/Content.positionY
+                        duration: 0.35
+                        startValue: 0
+                        endValue: 1
+                        curve: EASE_OUT_CUBIC
+                    }
+                ]
+            }
+        ]
+    }
+
+	panel CursorZone1
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		inputListener: true
+
+		behavior CursorInteract
+		{
+			mouseEnabled: true
+			controllerEnabled: true
+		}
+	}
+
+	panel CursorZone2
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		inputListener: true
+
+		behavior CursorInteract
+		{
+			mouseEnabled: false
+			controllerEnabled: false
+		}
+	}
+
+	panel Padding
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		panel ContentContainer
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+			pivot: <0.5, 0.0>
+
+			panel Content
+			{
+				anchor: TOP_STRETCH_WIDTH
+				offsetsLR: <0, 0>
+
+				behavior VerticalContainer
+				{
+					bind @this.spacing -> @this.paddingTop
+					bind @this.spacing -> @this.paddingBottom
+
+					alignment: TOP
+					fitContentHeight: true
+				}
+			}
+		}
+	}
+
+	instance $"ui_rtk/common/pagination_nav_vertical.rpak" NavContainer
+
+	instance $"ui_rtk/common/buttons/nav_button_down.rpak" UpButton
+	{
+		anchor: TOP
+		rotation: 180
+
+		context @var( labelPanel )
+		{
+		    rotation: 180
+		}
+	}
+
+	instance $"ui_rtk/common/buttons/nav_button_down.rpak" DownButton
+	{
+		anchor: BOTTOM
+	}
+}

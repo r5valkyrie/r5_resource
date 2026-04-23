@@ -1,0 +1,16 @@
+instance $"ui_rtk/menus/store/personalized_store/components/personalized_store_button.rpak" GridPersonalizedStoreButton
+{
+	override bind root "*"
+	inputListener: true
+
+	context @this/OfferButton
+	{
+		behavior PersonalizedOfferButton
+		{
+			bind *.miscBool -> @this.isOfferHidden
+			bind *.miscBool -> @panel/Cover.visible
+
+			animatorBehavior: @panel/Cover:Animator
+		}
+	}
+}

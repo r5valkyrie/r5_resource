@@ -1,0 +1,996 @@
+panel WeaponTrialCelebrationsScreen
+{
+	bind root
+
+	anchor: CENTER
+	size: <1920, 1080>
+
+	behavior PostGameWeaponTrialCelebrations
+	{
+		animator: @panel:Animator
+		trialsList: @panel/TrialsList
+		trialsTweenStagger: @panel/TrialsList:TweenStagger
+		trialIconList: @panel/TrialIconList
+		trialsCompleteHeader: @panel/TrialsCompleteHeader
+		celebrationWeaponIcons: @panel/TrialsCompleteHeader/WeaponIcons
+		ultimateTrialsList: @panel/UltimateTrial
+	}
+
+	behavior Animator
+	{
+		keyframeAnimations: [
+			{
+				name: "EnterScene"
+				animAsset: $"ui_rtk/menus/post_game/weapons/animations/animation_trial_update_present.rpak"
+			},
+			{
+				name: "ChevronBlurWoosh"
+				animAsset: $"ui_rtk/menus/post_game/weapons/animations/animation_chevron_blur_woosh.rpak"
+			}
+		]
+
+		tweenAnimations: [
+			{
+				name: "CenterTrial"
+				tweens: [
+					{
+						property: @panel/TrialsList.positionX
+						startValue: 0
+						endValue: 500
+						duration: 0.3337
+						curve: EASE_OUT_CUBIC
+					}
+				]
+			},
+			{
+				name: "PrepForUltimateTrial" // clear the screen to prep for celebration animation
+				tweens: [
+					{
+						property: @panel/TrialsList.positionY
+						startValue: -119
+						endValue: 961
+						duration: 1
+						curve: EASE_OUT_CUBIC
+					},
+					{
+						property: @panel/CelebrationRui.positionY
+						startValue: 0
+						endValue: -1080
+						duration: 1
+						curve: EASE_OUT_CUBIC
+					},
+					{
+						property: @panel/Title.positionY
+						startValue: -473
+						endValue: -1553
+						duration: 1
+						curve: EASE_OUT_CUBIC
+					}
+				]
+			}
+		]
+	}
+
+	panel LeftBGWeapons
+	{
+		anchor: CENTER
+		pivot: <1.0, 0.5>
+		position: <0, 0>
+		size: <960, 1080>
+
+		behavior RenderGroup
+		{
+			assetMask: $"ui_image/rui/menu/mastery/weaponmastery_background_mask.rpak"
+			alpha: 1.0
+		}
+
+		panel Rotation
+		{
+			anchor: CENTER
+			pivot: <0.5, 0.5>
+			position: <-21, -123>
+			rotation: 45.0
+			size: <960, 1080>
+
+			panel Row1
+			{
+				anchor: BOTTOM_RIGHT
+				pivot: <1.0, 1.0>
+				position: <0, 0>
+				size: <960, 160>
+
+				panel Devotion
+				{
+					anchor: BOTTOM_RIGHT
+					pivot: <1.0, 1.0>
+					position: <-443, 11>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_devotion.rpak"
+						alpha: 1.0
+					}
+				}
+
+				panel CAR
+				{
+					anchor: BOTTOM_RIGHT
+					pivot: <1.0, 1.0>
+					position: <-182, 16>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_car.rpak"
+						alpha: 1.0
+					}
+				}
+
+				panel RE45
+				{
+					anchor: BOTTOM_RIGHT
+					pivot: <1.0, 1.0>
+					position: <0, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_r45.rpak"
+						alpha: 1.0
+					}
+				}
+			}
+
+			panel Row2
+			{
+				anchor: BOTTOM_RIGHT
+				pivot: <1.0, 1.0>
+				position: <51, -118>
+				size: <1280, 160>
+
+				panel EVA8
+				{
+					anchor: BOTTOM_RIGHT
+					pivot: <1.0, 1.0>
+					position: <-695, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_eva8.rpak"
+						alpha: 1.0
+					}
+				}
+
+				panel EnergyAR
+				{
+					anchor: BOTTOM_RIGHT
+					pivot: <1.0, 1.0>
+					position: <-414, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_energy_ar.rpak"
+						alpha: 1.0
+					}
+				}
+
+				panel P2020
+				{
+					anchor: BOTTOM_RIGHT
+					pivot: <1.0, 1.0>
+					position: <-219, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_p2020.rpak"
+						alpha: 1.0
+					}
+				}
+
+				panel G7
+				{
+					anchor: BOTTOM_RIGHT
+					pivot: <1.0, 1.0>
+					position: <0, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_g7.rpak"
+						alpha: 1.0
+					}
+				}
+			}
+
+			panel Row3
+			{
+				anchor: BOTTOM_RIGHT
+				pivot: <1.0, 1.0>
+				position: <121, -238>
+				size: <1280, 160>
+
+				panel LStar
+				{
+					anchor: BOTTOM_RIGHT
+					pivot: <1.0, 1.0>
+					position: <-947, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_lstar.rpak"
+						alpha: 1.0
+					}
+				}
+
+				panel Longbow
+				{
+					anchor: BOTTOM_RIGHT
+					pivot: <1.0, 1.0>
+					position: <-637, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_longbow.rpak"
+						alpha: 1.0
+					}
+				}
+
+				panel Hemlock
+				{
+					anchor: BOTTOM_RIGHT
+					pivot: <1.0, 1.0>
+					position: <-323, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_hemlock.rpak"
+						alpha: 1.0
+					}
+				}
+
+				panel Mastiff
+				{
+					anchor: BOTTOM_RIGHT
+					pivot: <1.0, 1.0>
+					position: <0, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_mastiff.rpak"
+						alpha: 1.0
+					}
+				}
+			}
+
+			panel Row4
+			{
+				anchor: BOTTOM_RIGHT
+				pivot: <1.0, 1.0>
+				position: <93, -361>
+				size: <1280, 160>
+
+				panel Mozambique
+				{
+					anchor: BOTTOM_RIGHT
+					pivot: <1.0, 1.0>
+					position: <-829, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_mozambique.rpak"
+						alpha: 1.0
+					}
+				}
+
+				panel Nemesis
+				{
+					anchor: BOTTOM_RIGHT
+					pivot: <1.0, 1.0>
+					position: <-568, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_nemesis.rpak"
+						alpha: 1.0
+					}
+				}
+
+				panel Peacekeeper
+				{
+					anchor: BOTTOM_RIGHT
+					pivot: <1.0, 1.0>
+					position: <-267, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_peacekeeper.rpak"
+						alpha: 1.0
+					}
+				}
+
+				panel R97
+				{
+					anchor: BOTTOM_RIGHT
+					pivot: <1.0, 1.0>
+					position: <0, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_r97.rpak"
+						alpha: 1.0
+					}
+				}
+			}
+
+			panel Row5
+			{
+				anchor: BOTTOM_RIGHT
+				pivot: <1.0, 1.0>
+				position: <47, -487>
+				size: <960, 160>
+
+				panel TripleTake
+				{
+					anchor: BOTTOM_RIGHT
+					pivot: <1.0, 1.0>
+					position: <-581, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_triple_take.rpak"
+						alpha: 1.0
+					}
+				}
+
+				panel Volt
+				{
+					anchor: BOTTOM_RIGHT
+					pivot: <1.0, 1.0>
+					position: <-299, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_volt.rpak"
+						alpha: 1.0
+					}
+				}
+
+				panel Sentinel
+				{
+					anchor: BOTTOM_RIGHT
+					pivot: <1.0, 1.0>
+					position: <0, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_sentinel.rpak"
+						alpha: 1.0
+					}
+				}
+			}
+
+			panel Row6
+			{
+				anchor: BOTTOM_RIGHT
+				pivot: <1.0, 1.0>
+				position: <209, -588>
+				size: <1280, 160>
+
+				panel Wingman
+				{
+					anchor: BOTTOM_RIGHT
+					pivot: <1.0, 1.0>
+					position: <-866, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_wingman.rpak"
+						alpha: 1.0
+					}
+				}
+
+				panel Repeater
+				{
+					anchor: BOTTOM_RIGHT
+					pivot: <1.0, 1.0>
+					position: <-605, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_3030repeater.rpak"
+						alpha: 1.0
+					}
+				}
+
+				panel Bow
+				{
+					anchor: BOTTOM_RIGHT
+					pivot: <1.0, 1.0>
+					position: <-276, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_bow.rpak"
+						alpha: 1.0
+					}
+				}
+
+				panel R301
+				{
+					anchor: BOTTOM_RIGHT
+					pivot: <1.0, 1.0>
+					position: <0, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_r301.rpak"
+						alpha: 1.0
+					}
+				}
+			}
+		}
+	}
+
+	panel RightBGWeapons
+	{
+		anchor: CENTER
+		pivot: <0.0, 0.5>
+		position: <0, 0>
+		size: <960, 1080>
+
+		behavior RenderGroup
+		{
+			assetMask: $"ui_image/rui/menu/mastery/weaponmastery_background_mask.rpak"
+			alpha: 1.0
+		}
+
+		panel Rotation
+		{
+			anchor: CENTER
+			pivot: <0.5, 0.5>
+			position: <21, -123>
+			rotation: -45.0
+			size: <960, 1080>
+
+			panel Row1
+			{
+				anchor: BOTTOM_LEFT
+				pivot: <0.0, 1.0>
+				position: <0, 0>
+				size: <960, 160>
+
+				panel Devotion
+				{
+					anchor: BOTTOM_LEFT
+					pivot: <0.0, 1.0>
+					position: <443, 11>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_devotion.rpak"
+						alpha: 1.0
+						flipHorizontal: true
+					}
+				}
+
+				panel CAR
+				{
+					anchor: BOTTOM_LEFT
+					pivot: <0.0, 1.0>
+					position: <182, 16>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_car.rpak"
+						alpha: 1.0
+						flipHorizontal: true
+					}
+				}
+
+				panel RE45
+				{
+					anchor: BOTTOM_LEFT
+					pivot: <0.0, 1.0>
+					position: <0, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_r45.rpak"
+						alpha: 1.0
+						flipHorizontal: true
+					}
+				}
+			}
+
+			panel Row2
+			{
+				anchor: BOTTOM_LEFT
+				pivot: <0.0, 1.0>
+				position: <-51, -118>
+				size: <1280, 160>
+
+				panel EVA8
+				{
+					anchor: BOTTOM_LEFT
+					pivot: <0.0, 1.0>
+					position: <695, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_eva8.rpak"
+						alpha: 1.0
+						flipHorizontal: true
+					}
+				}
+
+				panel EnergyAR
+				{
+					anchor: BOTTOM_LEFT
+					pivot: <0.0, 1.0>
+					position: <414, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_energy_ar.rpak"
+						alpha: 1.0
+						flipHorizontal: true
+					}
+				}
+
+				panel P2020
+				{
+					anchor: BOTTOM_LEFT
+					pivot: <0.0, 1.0>
+					position: <219, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_p2020.rpak"
+						alpha: 1.0
+						flipHorizontal: true
+					}
+				}
+
+				panel G7
+				{
+					anchor: BOTTOM_LEFT
+					pivot: <0.0, 1.0>
+					position: <0, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_g7.rpak"
+						alpha: 1.0
+						flipHorizontal: true
+					}
+				}
+			}
+
+			panel Row3
+			{
+				anchor: BOTTOM_LEFT
+				pivot: <0.0, 1.0>
+				position: <-121, -238>
+				size: <1280, 160>
+
+				panel LStar
+				{
+					anchor: BOTTOM_LEFT
+					pivot: <0.0, 1.0>
+					position: <947, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_lstar.rpak"
+						alpha: 1.0
+						flipHorizontal: true
+					}
+				}
+
+				panel Longbow
+				{
+					anchor: BOTTOM_LEFT
+					pivot: <0.0, 1.0>
+					position: <637, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_longbow.rpak"
+						alpha: 1.0
+						flipHorizontal: true
+					}
+				}
+
+				panel Hemlock
+				{
+					anchor: BOTTOM_LEFT
+					pivot: <0.0, 1.0>
+					position: <323, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_hemlock.rpak"
+						alpha: 1.0
+						flipHorizontal: true
+					}
+				}
+
+				panel Mastiff
+				{
+					anchor: BOTTOM_LEFT
+					pivot: <0.0, 1.0>
+					position: <0, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_mastiff.rpak"
+						alpha: 1.0
+						flipHorizontal: true
+					}
+				}
+			}
+
+			panel Row4
+			{
+				anchor: BOTTOM_LEFT
+				pivot: <0.0, 1.0>
+				position: <-93, -361>
+				size: <1280, 160>
+
+				panel Mozambique
+				{
+					anchor: BOTTOM_LEFT
+					pivot: <0.0, 1.0>
+					position: <829, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_mozambique.rpak"
+						alpha: 1.0
+						flipHorizontal: true
+					}
+				}
+
+				panel Nemesis
+				{
+					anchor: BOTTOM_LEFT
+					pivot: <0.0, 1.0>
+					position: <568, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_nemesis.rpak"
+						alpha: 1.0
+						flipHorizontal: true
+					}
+				}
+
+				panel Peacekeeper
+				{
+					anchor: BOTTOM_LEFT
+					pivot: <0.0, 1.0>
+					position: <267, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_peacekeeper.rpak"
+						alpha: 1.0
+						flipHorizontal: true
+					}
+				}
+
+				panel R97
+				{
+					anchor: BOTTOM_LEFT
+					pivot: <0.0, 1.0>
+					position: <0, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_r97.rpak"
+						alpha: 1.0
+						flipHorizontal: true
+					}
+				}
+			}
+
+			panel Row5
+			{
+				anchor: BOTTOM_LEFT
+				pivot: <0.0, 1.0>
+				position: <-47, -487>
+				size: <960, 160>
+
+				panel TripleTake
+				{
+					anchor: BOTTOM_LEFT
+					pivot: <0.0, 1.0>
+					position: <581, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_triple_take.rpak"
+						alpha: 1.0
+						flipHorizontal: true
+					}
+				}
+
+				panel Volt
+				{
+					anchor: BOTTOM_LEFT
+					pivot: <0.0, 1.0>
+					position: <299, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_volt.rpak"
+						alpha: 1.0
+						flipHorizontal: true
+					}
+				}
+
+				panel Sentinel
+				{
+					anchor: BOTTOM_LEFT
+					pivot: <0.0, 1.0>
+					position: <0, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_sentinel.rpak"
+						alpha: 1.0
+						flipHorizontal: true
+					}
+				}
+			}
+
+			panel Row6
+			{
+				anchor: BOTTOM_LEFT
+				pivot: <0.0, 1.0>
+				position: <-209, -588>
+				size: <1280, 160>
+
+				panel Wingman
+				{
+					anchor: BOTTOM_LEFT
+					pivot: <0.0, 1.0>
+					position: <866, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_wingman.rpak"
+						alpha: 1.0
+						flipHorizontal: true
+					}
+				}
+
+				panel Repeater
+				{
+					anchor: BOTTOM_LEFT
+					pivot: <0.0, 1.0>
+					position: <605, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_3030repeater.rpak"
+						alpha: 1.0
+						flipHorizontal: true
+					}
+				}
+
+				panel Bow
+				{
+					anchor: BOTTOM_LEFT
+					pivot: <0.0, 1.0>
+					position: <276, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_bow.rpak"
+						alpha: 1.0
+						flipHorizontal: true
+					}
+				}
+
+				panel R301
+				{
+					anchor: BOTTOM_LEFT
+					pivot: <0.0, 1.0>
+					position: <0, 0>
+					size: <320, 160>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/weapon_icons/r5/weapon_r301.rpak"
+						alpha: 1.0
+						flipHorizontal: true
+					}
+				}
+			}
+		}
+	}
+
+	panel TrialsList
+	{
+		anchor: CENTER
+		pivot: <0.0, 0.0>
+		position: <-230, -129>
+
+		behavior HorizontalContainer
+		{
+			fitContentWidth: true
+			fitContentHeight: true
+			spacing: 40
+		}
+
+		behavior ListBinder
+		{
+			bindingPath: "*.trials"
+			prefab: $"ui_rtk/menus/post_game/weapons/components/postgame_animated_weapon_mastery_trial_card.rpak"
+		}
+
+		behavior TweenStagger
+		{
+			active: false
+			startDelay: 1.35
+			delay: -0.2
+			animationName: "EnterScene"
+			initTweensOnEnable: true
+			useMaxTweenTime: true
+		}
+	}
+
+	panel TrialIconList
+	{
+		anchor: CENTER
+		pivot: <0.5, 0.5>
+		position: <0, 100>
+
+		behavior HorizontalContainer
+		{
+			fitContentWidth: true
+			fitContentHeight: true
+			spacing: 62
+		}
+
+		behavior ListBinder
+		{
+			bindingPath: "*.trials"
+			prefab: $"ui_rtk/menus/mastery/components/mastery_trial_icon_invisible.rpak"
+			rangeStart: 0
+			rangeEnd : 4
+		}
+
+		behavior TweenStagger
+		{
+			active: false
+			delay: -0.12
+			animationName: "FadeIn"
+			initTweensOnEnable: true
+			useMaxTweenTime: true
+		}
+	}
+
+	panel ChevronWoosh
+	{
+		anchor: CENTER
+		pivot: <0.5, 0.5>
+		position: <0, 100>
+		size: <240, 210>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/mastery/weaponmastery_completion_chevron_blur.rpak"
+			flipHorizontal: true
+			color: <1.0, 1.0, 1.0, 0.0>
+		}
+	}
+
+	panel CelebrationRui
+	{
+		anchor: CENTER
+		pivot: <0.5, 0.5>
+		size: <1920, 1080>
+
+		behavior Rui
+		{
+			//bind *.weapon.ruiArgs -> @this.args // TODO: Make a jira to get this functionality added.
+			bind *.weapon.ruiArgs.weaponIcon -> @this.args.weaponIcon
+			bind *.weapon.ruiArgs.weaponName -> @this.args.weaponName
+			bind *.weapon.ruiArgs.weaponLevel -> @this.args.weaponLevel
+			bind *.weapon.ruiArgs.startTime -> @this.args.startTime
+
+			ruiAsset: $"ui/mastery_weapon_celebration.rpak"
+			args: {
+				weaponIcon: $""
+				weaponName: ""
+				weaponLevel: ""
+				startTime: 0.0
+			}
+		}
+	}
+
+	panel Title
+	{
+		anchor: CENTER
+        pivot: <0.5, 0.5>
+        position: <0, -473>
+
+		behavior Label
+		{
+			text: "#MASTERY_WEAPON_TRIALS_TITLE"
+			face: "TitleBoldFont"
+			pixelHeight: 70
+			textAlignHorizontal: CENTER
+			textAlignVertical: CENTER
+			horizontalMode: AUTOSIZE_TO_TEXT
+			verticalMode: AUTOSIZE_TO_TEXT
+			allCaps: true
+			colorRGB: <1, 1, 1> // TODO: Bug #White resulting in 0.67, 0.70, 0.75
+		}
+    }
+
+    instance $"ui_rtk/menus/post_game/weapons/components/postgame_weapons_trials_complete_header.rpak" TrialsCompleteHeader
+	{
+		anchor: CENTER
+		position: <0, 0>
+
+		override bind root "*"
+	}
+
+	panel UltimateTrial
+	{
+		anchor: CENTER
+		pivot: <0.5, 0.5>
+		position: <0, 150>
+
+		behavior ListBinder
+		{
+			bindingPath: "*.allWeaponsTrials"
+			prefab: $"ui_rtk/menus/post_game/weapons/components/postgame_animated_weapon_mastery_all_trial_card.rpak"
+		}
+	}
+
+    instance $"ui_rtk/controls/footer.rpak"
+}

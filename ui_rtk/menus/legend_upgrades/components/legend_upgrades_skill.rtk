@@ -1,0 +1,274 @@
+panel LegendUpgradesSkill
+{
+	bind root
+
+	bind *.state -> AlphaFromUpgradeState( 0.08, 1.0 ) -> [
+		@this/SkillDirectional/Outline:Image.alpha,
+		@this/SkillDirectional/ConnectorLine:Image.alpha,
+		@this/SkillDirectional/Icon:Image.alpha
+	]
+
+	var isInverted @this:HorizontalContainer.reverseOrder
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+	inputListener: true
+
+	behavior ToolTip Info
+	{
+		bind *.quality -> UpgradesToolTipIsActive -> @this.active
+		bind *.title -> @this.varOverrides.titleText
+		bind *.desc -> @this.varOverrides.bodyText
+		bind *.quality -> HUDQualityColor( false ) -> @this.varOverrides.titleColor
+		bind *.quality -> HUDQualityColor( false ) -> @this.varOverrides.bodyTextAltColor
+		bind *.isLocked -> PickStringFromTwo( "#CORE_UPGRADE_HOLD_TO_SELECT_TOOLTIP", "#CORE_UPGRADE_REQUEST_TOOLTIP" ) -> @this.varOverrides.actionText
+		bind *.state -> ToolTipActionTextVisible -> @this.varOverrides.isActionTextVisible
+
+		prefab: $"ui_rtk/common/tooltips/base_tooltip.rpak"
+		offset: <32, -68>
+		delay: 0
+		varOverrides: {
+			//defaults:
+			titleText: ""
+			bodyText: ""
+			actionText: ""
+			titleColor: #FFFFFF
+			bodyTextAltColor: #FFFFFF
+
+			// overrides
+			isIconVisible: false
+			isSubtitleVisible: false
+			isAdditionalTextVisible: false
+			isActionTextVisible: true
+		}
+	}
+
+	behavior ToolTip Hold
+	{
+		active: false
+		prefab: $"ui_rtk/common/tooltips/hold_tooltip.rpak"
+		offset: <0, 0>
+		delay: 0
+		varOverrides: {
+			calloutText: "#CORE_UPGRADE_HOLD_TO_SELECT"
+		}
+	}
+
+	behavior HorizontalContainer
+	{
+		fitContentWidth: true
+		fitContentHeight: true
+		alignment: CENTER
+		spacing: 20
+	}
+
+	behavior Button
+	{
+		bind *.quality -> HUDQualityColor( *.isLocked ) -> @this.transitions[0].value
+
+		soundHighlighted: "ui_menu_focus"
+		soundPressedEnabled: "ui_menu_accept"
+		explicitInputButtons: [ BUTTON_A, BUTTON_SHOULDER_RIGHT ]
+		middleMouseEnabled: true
+
+		transitions: [
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/SkillDirectional/Outline:Image.colorRGB
+				value: #FFFFFF
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/SkillDirectional/Outline:Image.colorRGB
+				value: #FFFFFF
+			}
+		]
+	}
+
+	panel SkillInfo
+	{
+		bind @root/SkillInfo/Title.visible -> Or(@root/SkillInfo/Description.visible) -> @this.visible
+
+		behavior VerticalContainer
+		{
+			fitContentWidth: true
+			fitContentHeight: true
+			alignment: CENTER
+			spacing: 0
+		}
+
+		panel Title
+		{
+			bind @root:HorizontalContainer.reverseOrder -> PickIntFromTwo( 2, 0 ) -> @this:Label.textAlignHorizontal // 0 LEFT - 2 RIGHT
+
+			anchor: TOP_LEFT
+			pivot: <0, 0>
+			width: 200
+
+			behavior HorizontalContainer
+			{
+				fitContentHeight: true
+			}
+
+			behavior Label
+			{
+				bind *.title -> @this.text
+
+				face: "TitleBoldFont"
+				colorRGB: #FFFFFF
+				pixelHeight: 24
+				lineBreakWidth: 200
+				verticalMode: AUTOSIZE_TO_TEXT
+			}
+		}
+
+		panel Description
+		{
+			bind @root:HorizontalContainer.reverseOrder -> PickIntFromTwo( 2, 0 ) -> @this:Label.textAlignHorizontal // 0 TOP_LEFT - 2 TOP_RIGHT
+
+			anchor: TOP_LEFT
+			pivot: <0, 0>
+			width: 200
+
+			behavior HorizontalContainer
+			{
+				fitContentHeight: true
+			}
+
+			behavior Label
+			{
+				bind *.shortDesc -> @this.text
+
+				face: "DefaultRegularFont"
+				colorRGB: #FFFFFF
+				alpha: 0.8
+				pixelHeight: 24
+				lineBreakWidth: 200
+				verticalMode: AUTOSIZE_TO_TEXT
+			}
+		}
+	}
+
+	panel SkillDirectional
+	{
+		anchor: TOP_LEFT
+		pivot: <0, 0>
+		size: <160, 90>
+
+		panel Background
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				bind *.state -> AlphaFromUpgradeState( 0.4, 0.7 ) -> @this.alpha
+				bind @root:HorizontalContainer.reverseOrder -> @this.flipHorizontal
+
+				assetPath: $"ui_image/rui/hud/upgrades/legend_upgrades_tree_upgrade_bg.rpak"
+				color: #000000
+				alpha: 0.7
+			}
+		}
+
+		panel Gradient
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				bind @root:HorizontalContainer.reverseOrder -> @this.flipHorizontal
+				bind *.quality -> HUDQualityColor( false ) -> @this.colorRGB
+
+				assetPath: $"ui_image/rui/gradient_ud_compressed.rpak"
+				assetMaskPath: $"ui_image/rui/hud/upgrades/legend_upgrades_tree_upgrade_bg.rpak"
+				alpha: 0.05
+			}
+		}
+
+		panel ConnectorLine
+		{
+			bind *.state -> HideIfNotSelected -> @this.visible
+
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				bind *.quality -> HUDQualityColor( *.isLocked ) -> @this.colorRGB
+				bind *.state -> AlphaFromUpgradeState( 0.05, 1.0 ) -> @this.alpha
+				bind @root:HorizontalContainer.reverseOrder -> @this.flipHorizontal
+
+				assetPath: $"ui_image/rui/hud/upgrades/legend_upgrades_tree_upgrade_line.rpak"
+				colorRGB: #FFFFFF
+			}
+		}
+
+		panel Icon
+		{
+			anchor: CENTER
+			offsets: <0, 0, 0, 0>
+			size: <70, 70>
+
+			behavior Image
+			{
+				bind *.icon -> @this.assetPath
+
+				colorRGB: #FFFFFF
+			}
+		}
+
+		panel Outline
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				bind @root:HorizontalContainer.reverseOrder -> @this.flipHorizontal
+
+				assetPath: $"ui_image/rui/gradient_ud_compressed.rpak"
+				assetMaskPath: $"ui_image/rui/hud/upgrades/legend_upgrades_tree_upgrade_outline.rpak"
+				colorRGB: #FFFFFF
+				alpha: 0.05
+			}
+		}
+
+		panel OutlineGradient
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				bind @root:HorizontalContainer.reverseOrder -> @this.flipHorizontal
+				bind *.quality -> HUDQualityColor( *.isLocked ) -> @this.colorRGB
+
+				assetPath: $"ui_image/rui/hud/upgrades/legend_upgrades_tree_upgrade_outline.rpak"
+				colorRGB: #FFFFFF
+				alpha: 0.05
+			}
+		}
+
+		panel Lock
+		{
+			bind *.isLocked -> @this.visible
+			bind @root:HorizontalContainer.reverseOrder -> PickIntFromTwo( 0, 2 ) -> @this.anchor // 0 LEFT - 2 RIGHT
+			bind @root:HorizontalContainer.reverseOrder -> PickIntFromTwo( 20, -20 ) -> @this.positionX
+
+			positionY: 16
+			size: <20, 20>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/buttons/lock.rpak"
+				colorRGB: #FFFFFF
+			}
+		}
+	}
+}

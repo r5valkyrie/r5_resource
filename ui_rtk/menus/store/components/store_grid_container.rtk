@@ -1,0 +1,28 @@
+panel Grid
+{
+	bind root
+
+	size: <1920, 600>
+	position: <0, 0>
+	pivot: <0, 0>
+
+	behavior GridContainer
+	{
+		defaultSlotSize: <320, 288>
+		slotSpacing: <24, 24>
+		wrapAfterSlot: 2
+		startCorner: TOP_LEFT
+		useLocaleDirection: true
+		fillDirection: COLUMN_FIRST
+		gridSlotAnchor: CENTER
+		fitToContentWidth: true
+		isStrictGrid: true
+		fillGaps: true
+	}
+
+	behavior ListBinder
+	{
+		bindingPath: "*.itemsArray"
+		prefab: $"ui_rtk/menus/store/components/store_grid_item.rpak"
+	}
+}

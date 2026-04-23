@@ -1,0 +1,450 @@
+panel Info
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	behavior HorizontalContainer
+	{
+		spaceEvenly: true
+		fitContentWidth: true
+		fitContentHeight: true
+		alignment: CENTER
+	}
+
+	panel InfoLeft
+	{
+		anchor: LEFT
+		pivot: <0, 0.5>
+		width: 610
+
+		behavior VerticalContainer
+		{
+			alignment: LEFT
+			fitContentWidth: true
+			fitContentHeight: true
+			spacing: 12
+		}
+
+		panel Top
+		{
+			anchor: TOP_LEFT
+			pivot: <0, 0>
+			size: <574, 30>
+
+			panel Header
+			{
+				anchor: TOP_STRETCH_WIDTH
+				offsetsLR: <0, 0>
+				height: 30
+				pivot: <0.5, 0>
+
+				behavior Label
+				{
+					textAlignHorizontal: CENTER
+					textAlignVertical: CENTER
+					pixelHeight: 19
+					allCaps: true
+					face: "DefaultRegularFont"
+					text: "#CROSS_PROGRESSION_ACCOUNTS_MERGED"
+				}
+			}
+		}
+
+		instance $"ui_rtk/common/default_scroll_view.rpak" ScrollView
+		{
+			override @this/View:ScrollView.autoScroll TOP
+
+			anchor: TOP_STRETCH_WIDTH
+			pivot: <0.5, 0>
+			offsetsLR: <0, 0>
+			height: 310
+			constrainInput: false
+
+			context @this/View/Content
+			{
+				panel Vertical
+				{
+					anchor: TOP_LEFT
+					pivot: <0, 0>
+
+					behavior VerticalContainer
+					{
+						fitContentHeight: true
+						fitContentWidth: true
+						spacing: 10
+					}
+
+					behavior ListBinder Profiles
+					{
+						bindingPath: "*.migration.profiles"
+						prefab: $"ui_rtk/menus/cross_progression/components/cross_progression_profile_item.rpak"
+					}
+				}
+			}
+
+			context @this/ScrollBar
+			{
+				positionX: -18
+				pivot: <0.5, 1.0>
+				height: 18
+				width: 320
+				rotation: 90
+			}
+		}
+
+		panel Bottom
+		{
+			anchor: BOTTOM_LEFT
+			pivot: <0.5, 1>
+			offsetsLR: <0, 0>
+			size: <574, 64>
+
+			instance $"ui_rtk/common/buttons/base_button.rpak" FAQ
+			{
+				override @var(labelText) "#CROSS_PROGRESSION_FAQ"
+				override @var(size) <380, 64>
+				override @var(labelPixelHeight) 24
+				override @var(backgroundColor) #242526
+				override @var(outlineColor) #b4b4b5
+				override @var(gradientColor) #78797a
+				override @var(lineAlpha) 0
+			}
+		}
+	}
+
+	panel MergeArrow
+	{
+		anchor: CENTER
+		size: <156, 88>
+
+		behavior Image
+		{
+			colorRGB: #ff4e1d
+			assetPath: $"ui_image/rui/menu/common/cross_progression_merge_arrow.rpak"
+		}
+	}
+
+	panel InfoRight
+	{
+		anchor: RIGHT
+		pivot: <1, 0.5>
+		size: <950, 596>
+
+		instance $"ui_rtk/common/shells/default_cornered_tile.rpak" CorneredTile
+		{
+			override bind root "*"
+
+			context @this/Content
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <0, 0, 0, 0>
+
+				panel BadgeArea
+				{
+					anchor: LEFT_STRETCH_HEIGHT
+					offsetsTB: <0, 0>
+					pivot: <0, 0.5>
+					width: 450
+
+					panel VerticalLineDivider
+					{
+						anchor: RIGHT_STRETCH_HEIGHT
+						offsetsTB: <1, 1>
+						width: 2
+
+						behavior Image
+						{
+							alpha: 0.6
+							assetPath: $"ui_image/white.rpak"
+						}
+					}
+
+					panel Badge
+					{
+						anchor: CENTER
+						positionY: -64
+						size: <256, 256>
+
+						behavior Badge
+						{
+							bind *.migration.level -> BadgeRuiAsset -> @this.badgeRuiAsset
+							bind *.migration.level -> @this.tier
+						}
+					}
+
+					panel Gamertag
+					{
+						anchor: CENTER_STRETCH_WIDTH
+						positionY: 100
+						offsetsLR: <20, 20>
+
+						behavior Label
+						{
+							bind *.migration.nickname -> @this.text
+
+							textAlignHorizontal: CENTER
+							textAlignVertical: CENTER
+							pixelHeight: 42
+							face: "TitleBoldFont"
+						}
+					}
+
+					panel StatsDisclaimer
+					{
+						anchor: BOTTOM_STRETCH_WIDTH
+						pivot: <0.5, 1>
+						height: 116
+						offsetsLR: <20, 20>
+
+						behavior Label
+						{
+							text: "#CROSS_PROGRESSION_HIGHEST_SCORE_DESC"
+							textAlignHorizontal: CENTER
+							textAlignVertical: CENTER
+							pixelHeight: 22
+							face: "DefaultRegularFont"
+						}
+					}
+				}
+
+				panel StatsArea
+				{
+					anchor: RIGHT_STRETCH_HEIGHT
+					offsetsTB: <0, 0>
+					pivot: <1, 0.5>
+					width: 500
+
+					panel HorizontalLineDivider
+					{
+						anchor: TOP_STRETCH_WIDTH
+						positionY: 258
+						offsetsLR: <1, 1>
+						height: 2
+
+						behavior Image
+						{
+							alpha: 0.6
+							assetPath: $"ui_image/white.rpak"
+						}
+					}
+
+					panel CosmeticsArea
+					{
+						anchor: TOP_RIGHT
+						pivot: <1, 0>
+						size: <500, 258>
+
+						panel CosmeticsTitle
+						{
+							anchor: TOP_STRETCH_WIDTH
+							pivot: <0, 0>
+							positionY: 20
+							height: 30
+							offsetsLR: <20, 30>
+
+							behavior Label
+							{
+								text: "#CROSS_PROGRESSION_COSMETICS_TITLE"
+								textAlignHorizontal: LEFT
+								textAlignVertical: CENTER
+								pixelHeight: 32
+								face: "DefaultRegularFont"
+								allCaps: true
+							}
+						}
+
+						panel CosmeticsSubTitle
+						{
+							anchor: TOP_STRETCH_WIDTH
+							pivot: <0, 0>
+							positionY: 50
+							height: 22
+							offsetsLR: <20, 30>
+
+							behavior Label
+							{
+								text: "#CROSS_PROGRESSION_STATS_MERGED"
+								textAlignHorizontal: LEFT
+								textAlignVertical: CENTER
+								pixelHeight: 22
+								face: "DefaultRegularFont"
+								alpha: 0.5
+							}
+						}
+
+						panel CosmeticsStats
+						{
+							anchor: BOTTOM_STRETCH_WIDTH
+							offsetsLR: <20, 30>
+							pivot: <0.5, 1>
+							height: 168
+
+							behavior VerticalContainer
+							{
+								spacing: 5
+								alignment: TOP_LEFT
+							}
+
+							instance $"ui_rtk/menus/cross_progression/components/cross_progression_stats_item.rpak" Heirlooms
+							{
+								override @var(statName) "#CROSS_PROGRESSION_COSMETICS_HEIRLOOMS"
+								bind *.migration.heirloom -> IntToFloat -> FormatAndLocalizeNumber( "1", true ) -> @this/StatValue:Label.text
+							}
+
+							instance $"ui_rtk/menus/cross_progression/components/cross_progression_stats_item.rpak" HeirloomShards
+							{
+								override @var(statName) "#CROSS_PROGRESSION_COSMETICS_SHARDS"
+								bind *.migration.heirloomShards -> IntToFloat -> FormatAndLocalizeNumber( "1", true ) -> @this/StatValue:Label.text
+							}
+
+							instance $"ui_rtk/menus/cross_progression/components/cross_progression_stats_item.rpak" ApexPacks
+							{
+								override @var(statName) "#CROSS_PROGRESSION_COSMETICS_PACKS"
+								bind *.migration.apexPacks -> IntToFloat -> FormatAndLocalizeNumber( "1", true ) -> @this/StatValue:Label.text
+							}
+						}
+					}
+
+					panel CurrencyArea
+					{
+						anchor: TOP_RIGHT
+						pivot: <1, 0>
+						positionY: 258
+						size: <500, 340>
+
+						panel CurrencyTitle
+						{
+							anchor: TOP_STRETCH_WIDTH
+							pivot: <0, 0>
+							positionY: 20
+							height: 30
+							offsetsLR: <20, 30>
+
+							behavior Label
+							{
+								text: "#CROSS_PROGRESSION_CURRENCY_TITLE"
+								textAlignHorizontal: LEFT
+								textAlignVertical: CENTER
+								pixelHeight: 32
+								face: "DefaultRegularFont"
+								allCaps: true
+							}
+						}
+
+						panel CurrencySubTitle
+						{
+							anchor: TOP_STRETCH_WIDTH
+							pivot: <0, 0>
+							positionY: 50
+							height: 22
+							offsetsLR: <20, 30>
+
+							behavior Label
+							{
+								bind *.migration.profiles -> HasNxProfile -> PickStringFromTwo( "#CROSS_PROGRESSION_STATS_MERGED", "#CROSS_PROGRESSION_STATS_MERGED_NX_PROFILE" ) -> @this.text
+
+								text: "#CROSS_PROGRESSION_STATS_MERGED"
+								textAlignHorizontal: LEFT
+								textAlignVertical: CENTER
+								pixelHeight: 22
+								face: "DefaultRegularFont"
+								alpha: 0.5
+							}
+						}
+
+						panel CurrencyStats
+						{
+							anchor: BOTTOM_STRETCH_WIDTH
+							offsetsLR: <20, 30>
+							pivot: <0.5, 1>
+							height: 244
+
+							behavior VerticalContainer
+							{
+								spacing: 5
+								alignment: TOP_LEFT
+							}
+
+							instance $"ui_rtk/menus/cross_progression/components/cross_progression_stats_item.rpak" LegendTokens
+							{
+								override @var(statName) "#CROSS_PROGRESSION_CURRENCY_LEGEND_TOKENS"
+								bind *.migration.credits -> IntToFloat -> FormatAndLocalizeNumber( "1", true ) -> @this/StatValue:Label.text
+							}
+
+							instance $"ui_rtk/menus/cross_progression/components/cross_progression_stats_item.rpak" CraftingMetals
+							{
+								override @var(statName) "#CROSS_PROGRESSION_CURRENCY_CRAFTING_METALS"
+								bind *.migration.crafting -> IntToFloat -> FormatAndLocalizeNumber( "1", true ) -> @this/StatValue:Label.text
+							}
+
+							instance $"ui_rtk/menus/cross_progression/components/cross_progression_stats_item.rpak" AC
+							{
+								override @var(statName) "#CROSS_PROGRESSION_CURRENCY_COINS"
+								bind *.migration.premium -> IntToFloat -> FormatAndLocalizeNumber( "1", true ) -> @this/StatValue:Label.text
+
+								behavior NxOverrides
+								{
+									overrides: [
+										{
+											propertyRef: @panel.visible
+											nxValue: false
+										}
+									]
+								}
+							}
+
+							instance $"ui_rtk/menus/cross_progression/components/cross_progression_stats_item.rpak" NintendoAC
+							{
+								override @var(statName) "#CROSS_PROGRESSION_CURRENCY_COINS"
+								bind *.migration.premiumNx -> IntToFloat -> FormatAndLocalizeNumber( "1", true ) -> @this/StatValue:Label.text
+
+								visible: false
+
+								behavior NxOverrides
+								{
+									overrides: [
+										{
+											propertyRef: @panel.visible
+											nxValue: true
+										}
+									]
+								}
+							}
+
+							panel CoinsDisclaimer
+							{
+								anchor: CENTER_STRETCH_WIDTH
+								offsetsLR: <0, 0>
+								height: 78
+
+								behavior Label
+								{
+									text: "#CROSS_PROGRESSION_CURRENCY_COINS_DISCLAIMER"
+									textAlignHorizontal: LEFT
+									textAlignVertical: CENTER
+									pixelHeight: 26
+									face: "DefaultRegularFont"
+									colorRGB: #ff3939
+									verticalMode: AUTOSIZE_TO_TEXT
+									margin: <0, 0, 0, 0>
+								}
+
+								behavior NxOverrides
+								{
+									overrides: [
+										{
+											propertyRef: @panel:Label.text
+											nxValue: "#CROSS_PROGRESSION_CURRENCY_NX_COINS_DISCLAIMER"
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

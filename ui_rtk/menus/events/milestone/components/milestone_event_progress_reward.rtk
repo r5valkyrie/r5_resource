@@ -1,0 +1,77 @@
+instance $"ui_rtk/menus/events/milestone/components/milestone_event_collection_item.rpak" RewardButton
+{
+	override @this/BackgroundDots:Image.assetPath $"ui_image/rui/menu/events/event_shop/shop_small_square_item.rpak"
+	override @this/BackgroundOutline:Image.assetPath $"ui_image/rui/menu/events/event_shop/shop_small_square_frame.rpak"
+	override @this/HighlightOutline:Image.assetPath $"ui_image/rui/menu/events/event_shop/shop_small_square_frame.rpak"
+	override @this/BackgroundGradient.visible false
+	override @this/BackgroundFill.visible false
+	override @this/InnerGlow.visible false
+
+	override @this/BackgroundDots.height 70
+	override @this/BackgroundDots.width 70
+	override @this/BackgroundDots.position <0, 0>
+	override @this/OwnedFlag.position <0.3, -0.7>
+
+	context @this:Button
+	{
+		transitions: [
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/BackgroundOutline:Image.alpha
+				value: 1.0
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/BackgroundOutline:Image.alpha
+				value: 0.0
+			},
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/HighlightOutline:Image.alpha
+				value: 0.0
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/HighlightOutline:Image.alpha
+				value: 1.0
+			},
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/BackgroundDots:Image.alpha
+				value: 0.75
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @owner.panel/BackgroundDots:Image.alpha
+				value: 1.0
+			}
+		]
+	}
+
+	context @this/BackgroundOutline
+	{
+		offsets: <-0.3, -0.3, -0.3, -0.3>
+	}
+
+	context @this/OwnedFlag
+	{
+		position: <0.8, -0.6>
+	}
+
+	anchor: BOTTOM_LEFT
+	pivot: <1, 1>
+	size: <70, 70>
+	useLocaleDirection: true
+}

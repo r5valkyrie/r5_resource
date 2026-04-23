@@ -1,0 +1,278 @@
+panel PostGameWeaponsPanel
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	behavior PostGameWeaponsPanel
+
+	panel Screen
+	{
+		size: <1920, 1080>
+		anchor: CENTER_STRETCH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		panel Container
+		{
+			anchor: TOP_LEFT
+			pivot: <0, 0>
+			positionX: 64
+			positionY: 164
+			constrainInput: false
+			useLocaleDirection: true
+
+			behavior HorizontalContainer
+			{
+	            spacing: 50
+				useLocaleDirection: true
+			}
+
+			panel XpChangesContainer
+			{
+				size: <445, 495>
+				pivot: <0, 0>
+
+				behavior VerticalContainer
+				{
+					fitContentHeight: true
+		            spacing: 20
+					useLocaleDirection: true
+				}
+
+				panel XPTitle
+				{
+					offsets: <0, 0, 0, 0>
+					width: 445
+					height: 44
+
+				    behavior Label
+				    {
+				        text: "#MASTERY_XP_BREAKDOWN"
+				        face: "TitleBoldFont"
+				        pixelHeight: 40
+				        colorRGB: <1, 1, 1>
+				        outlineColorInner: <0, 0, 0, 0>
+				        outlineColorOuter: <0, 0, 0, 0>
+				        textAlignHorizontal: LEFT
+						useLocaleDirection: true
+				    }
+				}
+
+				panel XpChanges
+				{
+					anchor: TOP_LEFT
+					size: <445, 495>
+					constrainInput: false
+
+					behavior Image
+					{
+						bind  *.overview.hasXpChanges -> PickFloatFromTwo(0.4, 0.0) -> @this.alpha
+
+						colorRGB: <0, 0, 0>
+					}
+
+					panel Error
+					{
+						anchor: CENTER_STRETCH_WIDTH_HEIGHT
+						offsets: <0, 0, 0, 0>
+
+						behavior Label
+					    {
+							bind  *.overview.hasXpChanges -> PickFloatFromTwo(1.0, 0.0) -> @this.alpha
+
+						    text: "#MASTERY_NO_XP_EARNED"
+					        face: "DefaultFont"
+					        pixelHeight: 40
+					        colorRGB: <1, 1, 1>
+					        alpha: 0.6
+					        outlineColorInner: <0, 0, 0, 0>
+					        outlineColorOuter: <0, 0, 0, 0>
+					        textAlignHorizontal: CENTER
+					        textAlignVertical: CENTER
+					    }
+				    }
+
+					instance $"ui_rtk/controls/scroll_view.rpak" View
+					{
+						override @this:ScrollView.direction VERTICAL
+						override @this:ScrollView.content @this/Content
+						override @this:ScrollView.verticalScrollBar @parent/ScrollBar:ScrollBar
+
+						bind  *.overview.hasXpChanges -> @this.visible
+
+						anchor: LEFT_STRETCH_HEIGHT
+						size: <445, 495>
+						pivot: <0, 0>
+						offsets: <0, 0, 0, 0>
+						constrainInput: false
+
+						panel Content
+						{
+							anchor: TOP_LEFT
+							size: <445, 20>
+							pivot: <0, 0>
+							offsets: <0, 0, 0, 0>
+
+							behavior VerticalContainer
+							{
+								fitContentHeight: true
+							}
+
+							behavior ListBinder
+							{
+								bindingPath: "*.xpChanges"
+								prefab: $"ui_rtk/menus/post_game/components/postgame_mastery_xp_breakdown_listitem.rpak"
+							}
+
+							behavior TweenStagger
+							{
+								isRecursive: true
+								startDelay: 0.2
+								delay: 0.15
+								animationName: "AnimateIn"
+							}
+						}
+					}
+
+					instance $"ui_rtk/controls/scroll_bar.rpak" ScrollBar
+					{
+						override @this:ScrollBar.step 20.0
+						override @this:ScrollBar.dynamicHandleSize true
+
+						anchor: RIGHT_STRETCH_HEIGHT
+						offsets: <0, 0, 0, 0>
+						pivot: <0.5, 1.0>
+						size: <495, 15>
+						rotation: 90
+						positionX: 23
+					}
+				}
+			}
+
+			panel TrialChanges
+			{
+				anchor: TOP_LEFT
+				size: <1220, 495>
+
+				behavior VerticalContainer
+				{
+					fitContentHeight: true
+		            spacing: 20
+					useLocaleDirection: true
+				}
+
+				panel TrialTitle
+				{
+					anchor: CENTER_STRETCH_WIDTH
+					offsets: <0, 0, 0, 0>
+					width: 975
+					height: 44
+
+					behavior Label
+				    {
+				        text: "#MASTERY_WEAPON_TRIALS_TITLE"
+				        face: "TitleBoldFont"
+				        pixelHeight: 40
+				        colorRGB: <1, 1, 1>
+				        outlineColorInner: <0, 0, 0, 0>
+				        outlineColorOuter: <0, 0, 0, 0>
+				        textAlignHorizontal: LEFT
+						useLocaleDirection: true
+				    }
+				}
+
+				panel TrialChanges
+				{
+					anchor: TOP_LEFT
+					size: <1220, 495>
+					constrainInput: false
+
+					behavior Image
+					{
+						bind  *.overview.hasTrialChanges -> PickFloatFromTwo(0.4, 0.0) -> @this.alpha
+
+						color: <0, 0, 0, 0.4>
+					}
+
+					panel Error
+					{
+						anchor: CENTER_STRETCH_WIDTH_HEIGHT
+						offsets: <0, 0, 0, 0>
+
+						behavior Label
+					    {
+							bind  *.overview.hasTrialChanges -> PickFloatFromTwo(1.0, 0.0) -> @this.alpha
+
+						    text: "#MASTERY_NO_TRIALS_EARNED"
+					        face: "DefaultFont"
+					        pixelHeight: 40
+					        colorRGB: <1, 1, 1>
+					        alpha: 0.6
+					        outlineColorInner: <0, 0, 0, 0>
+					        outlineColorOuter: <0, 0, 0, 0>
+					        textAlignHorizontal: CENTER
+					        textAlignVertical: CENTER
+					    }
+				    }
+
+				    instance $"ui_rtk/controls/scroll_view.rpak" View
+					{
+						override @this:ScrollView.direction VERTICAL
+						override @this:ScrollView.content @this/Content
+						override @this:ScrollView.verticalScrollBar @parent/ScrollBar:ScrollBar
+
+						bind  *.overview.hasTrialChanges -> @this.visible
+
+						anchor: LEFT_STRETCH_HEIGHT
+						size: <1220, 495>
+						pivot: <0, 0>
+						offsets: <0, 0, 0, 0>
+						constrainInput: false
+
+						panel Content
+						{
+							anchor: TOP_LEFT
+							pivot: <0, 0>
+							offsets: <0, 0, 0, 0>
+							constrainInput: false
+							useLocaleDirection: true
+
+							behavior GridContainer
+							{
+								defaultSlotSize: <590, 228>
+								wrapAfterSlot: 2
+								gridSlotAnchor: TOP_LEFT
+								gridSlotAutosize: CONTENT_HEIGHT
+								slotSpacing: <25, 22>
+								autosizeSlotContents: true
+								useLocaleDirection: true
+
+								fitToContentHeight : true
+							}
+
+							behavior ListBinder
+							{
+								bindingPath: "*.trials"
+								prefab: $"ui_rtk/menus/post_game/weapons/components/postgame_mastery_trial_breakdown_listitem.rpak"
+							}
+						}
+					}
+
+					instance $"ui_rtk/controls/scroll_bar.rpak" ScrollBar
+					{
+						override @this:ScrollBar.step 20.0
+						override @this:ScrollBar.dynamicHandleSize true
+
+						anchor: RIGHT_STRETCH_HEIGHT
+						offsets: <0, 0, 0, 0>
+						pivot: <0.5, 1.0>
+						size: <495, 15>
+						rotation: 90
+						positionX: 20
+					}
+				}
+			}
+		}
+	}
+}

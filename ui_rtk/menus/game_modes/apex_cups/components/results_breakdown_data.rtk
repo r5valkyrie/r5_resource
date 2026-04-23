@@ -1,0 +1,379 @@
+panel ResultsBreakdown
+{
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+	pivot: <0.5, 0.5>
+
+	var showNextTierPts      @this/TierStat.visible
+	var showMatchesPlayed    @this/MatchCounter.visible
+    var spacingHorizontal    @this:HorizontalContainer.spacing
+    var spacingVertical      @this:HorizontalContainer.paddingTop
+
+	behavior HorizontalContainer
+	{
+		spacing: 112
+		alignment: CENTER
+		useLocaleDirection: true
+	}
+
+	panel Position
+	{
+		anchor: TOP_STRETCH_WIDTH
+		Height: 78
+		behavior VerticalContainer
+		{
+			alignment: CENTER
+			fitContentWidth: true
+			fitContentHeight: false
+		}
+
+		panel PositionString
+		{
+			anchor: TOP_LEFT
+
+			behavior Label
+			{
+				face: "DefaultRegularFont"
+				pixelHeight: 34
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				horizontalMode: AUTOSIZE_TO_TEXT
+				verticalMode: AUTOSIZE_TO_TEXT
+				colorRGB: <0.56, 0.56, 0.56>
+				text: "#CUPS_POSTGAME_POSITION"
+				allCaps: true
+			}
+		}
+
+		panel NumericalData
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior FormatLabel
+			{
+				bind &menus.apexCups.tierInfo.positionPercentage -> IntEqual(-1) -> PickStringFromTwo( "#CUPS_LEADERBOARD_TOPPOS_VAL" , "#CUPS_LEADERBOARD_EMPTY_DATA" ) -> IfTrueSwapString( &menus.apexCups.tierInfo.isTop100, "#CUPS_LEADERBOARD_PLACEMENT_VAL" ) -> @this.format
+
+				bind &menus.apexCups.tierInfo.positionPercentage  -> @this.arg1
+
+				face: "TitleBoldFont"
+				pixelHeight: 54
+				textAlignHorizontal: CENTER
+				textAlignVertical: TOP
+				horizontalMode: AUTOSIZE_TO_TEXT
+				verticalMode: AUTOSIZE_TO_TEXT
+				colorRGB: <1.0, 1.0, 1.0>
+				format: "#CUPS_LEADERBOARD_TOPPOS_VAL"
+				arg1: "-1"
+				allCaps: true
+			}
+		}
+	}
+
+    panel Divider1
+    {
+        anchor: CENTER
+		pivot: <0.5, 0.5>
+		size: <2, 60>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/events/s16ce03/line.rpak"
+			alpha: 0.2
+		}
+    }
+
+    panel ScoreTotal
+	{
+		anchor: TOP_STRETCH_WIDTH
+		offsets: <0, 0, 0, 0>
+		Height: 78
+
+		behavior VerticalContainer
+		{
+			alignment: CENTER
+			fitContentWidth: true
+			fitContentHeight: false
+		}
+
+		panel TotalPtsString
+		{
+			anchor: TOP
+
+			behavior Label
+			{
+				face: "DefaultRegularFont"
+				pixelHeight: 34
+				colorRGB: <0.56, 0.56, 0.56>
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				horizontalMode: AUTOSIZE_TO_TEXT
+				verticalMode: AUTOSIZE_TO_TEXT
+				text: "#CUPS_POSTGAME_TOTAL_PTS_HEADER"
+				allCaps: true
+			}
+		}
+
+		panel NumericalData
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior FormatLabel
+			{
+				bind &menus.apexCups.tierInfo.positionPercentage -> IntEqual(-1) -> PickStringFromTwo( "#CUPS_POSTGAME_TOTAL_PTS" , "#CUPS_LEADERBOARD_EMPTY_DATA" ) -> @this.format
+				bind &menus.apexCups.totalPoints -> IntToFloat -> FormatAndLocalizeNumber( "1", true ) -> @this.arg1
+
+				face: "TitleBoldFont"
+				pixelHeight: 54
+				colorRGB: <1.0, 1.0, 1.0>
+				textAlignHorizontal: CENTER
+				textAlignVertical: TOP
+				horizontalMode: AUTOSIZE_TO_TEXT
+				verticalMode: AUTOSIZE_TO_TEXT
+				format: "#CUPS_POSTGAME_TOTAL_PTS"
+				arg1: "-1"
+			}
+		}
+    }
+
+    panel Divider2
+    {
+	    bind @root/MatchCounter.visible -> @this.visible
+
+        anchor: CENTER
+		pivot: <0.5, 0.5>
+		size: <2, 60>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/events/s16ce03/line.rpak"
+			alpha: 0.2
+		}
+    }
+
+	panel MatchCounter
+	{
+		anchor: TOP_STRETCH_WIDTH
+		offsets: <0, 0, 0, 0>
+		Height: 78
+
+		behavior VerticalContainer
+		{
+			alignment: CENTER
+			fitContentWidth: true
+			fitContentHeight: false
+		}
+
+		panel MatchesString
+		{
+			anchor: TOP
+
+			behavior Label
+			{
+				face: "DefaultRegularFont"
+				pixelHeight: 34
+				colorRGB: <0.56, 0.56, 0.56>
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				horizontalMode: AUTOSIZE_TO_TEXT
+				verticalMode: AUTOSIZE_TO_TEXT
+				text: "#SUMMARY_BREAKDOWN_MATCHES_PLAYED"
+				allCaps: true
+			}
+		}
+
+		panel NumericalData
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior FormatLabel
+			{
+				bind &menus.apexCups.tierInfo.positionPercentage -> IntEqual(-1) -> PickStringFromTwo( "#CUPS_POSTGAME_MATCHES_PLAYED_DATA" , "#CUPS_LEADERBOARD_EMPTY_DATA" ) -> @this.format
+
+				bind &menus.apexCups.matchesCompleted -> @this.arg1
+				bind &menus.apexCups.totalMatches -> @this.arg2
+
+				face: "TitleBoldFont"
+				pixelHeight: 54
+				colorRGB: <0.56, 0.56, 0.56>
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				horizontalMode: AUTOSIZE_TO_TEXT
+				verticalMode: AUTOSIZE_TO_TEXT
+				format: "#CUPS_POSTGAME_MATCHES_PLAYED_DATA"
+				arg1: "-1"
+				arg2: "-1"
+			}
+
+			behavior LabelAltStyle
+			{
+				face: "TitleBoldFont"
+				pixelHeight: 54
+				colorRGB: <1.0, 1.0, 1.0>
+				alpha: 1.0
+			}
+		}
+    }
+
+	panel Divider3
+	{
+		bind @root/TierStat.visible -> @this.visible
+
+		anchor: CENTER
+		pivot: <0.5, 0.5>
+		size: <2, 60>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/events/s16ce03/line.rpak"
+			alpha: 0.2
+		}
+	}
+
+	panel TierStat
+	{
+		behavior FitToContent
+
+		panel TierPoints
+		{
+			bind &menus.apexCups.tierInfo.currentPoints -> IntEqual(-1) -> NOT -> @this.visible
+			anchor: CENTER
+			offsets: <0, 0, 0, 0>
+			Height: 78
+
+			behavior HorizontalContainer
+			{
+				alignment: CENTER
+				spacing: 20
+				fitContentWidth: true
+				fitContentHeight: false
+			}
+
+			instance $"ui_rtk/menus/game_modes/apex_cups/components/apex_cup_tier_emblem.rpak" TierEmblem
+			{
+				size: <114, 114>
+
+				bind &menus.apexCups.apexCup -> ApexCupCurrentTierIcon -> @var( emblemIcon )
+				bind &menus.apexCups.apexCup -> ApexCupCurrentTierText -> @var( emblemText )
+
+				anchor: LEFT
+				pivot: <1.0 , 0.5>
+				useLocaleDirection: true
+			}
+
+			panel text
+			{
+				anchor: CENTER
+				offsets: <0, 0, 0, 0>
+				Height: 78
+
+				behavior VerticalContainer
+				{
+					alignment: CENTER
+					fitContentWidth: true
+					fitContentHeight: false
+					useLocaleDirection: true
+				}
+
+				panel TierString
+				{
+					anchor: TOP
+
+					behavior Label
+					{
+						face: "DefaultRegularFont"
+						pixelHeight: 34
+						colorRGB: <0.56, 0.56, 0.56>
+						textAlignHorizontal: LEFT
+						textAlignVertical: CENTER
+						horizontalMode: OVERFLOW
+						verticalMode: AUTOSIZE_TO_TEXT
+						useLocaleDirection: true
+						text: "#CUPS_POSTGAME_NEXT_TIER"
+						allCaps: true
+					}
+				}
+
+				panel NumericalData
+				{
+					anchor: CENTER_STRETCH_WIDTH_HEIGHT
+					offsets: <0, 0, 0, 0>
+
+					behavior FormatLabel
+					{
+						bind &menus.apexCups.tierInfo.targetPoints -> Subtract(&menus.apexCups.tierInfo.currentPoints) -> FloatToInt -> FormatAndLocalizeNumber( "1", true ) -> @this.arg1
+
+						face: "TitleBoldFont"
+						pixelHeight: 54
+						colorRGB: <1.0, 1.0, 1.0>
+						textAlignHorizontal: LEFT
+						textAlignVertical: CENTER
+						horizontalMode: OVERFLOW
+						verticalMode: AUTOSIZE_TO_TEXT
+						useLocaleDirection: true
+						format: "#CUPS_POSTGAME_TOTAL_PTS"
+						arg1: "-1"
+					}
+				}
+			}
+		}
+		panel TierPointsEmpty
+		{
+			bind &menus.apexCups.tierInfo.currentPoints -> IntEqual(-1) -> @this.visible
+
+			anchor: CENTER
+			offsets: <0, 0, 0, 0>
+			Height: 78
+
+			behavior VerticalContainer
+			{
+				alignment: CENTER
+				fitContentWidth: true
+				fitContentHeight: false
+				useLocaleDirection: true
+			}
+
+			panel TierString
+			{
+				anchor: TOP
+
+				behavior Label
+				{
+					face: "DefaultRegularFont"
+					pixelHeight: 34
+					colorRGB: <0.56, 0.56, 0.56>
+					textAlignHorizontal: LEFT
+					textAlignVertical: CENTER
+					horizontalMode: AUTOSIZE_TO_TEXT
+					verticalMode: AUTOSIZE_TO_TEXT
+					useLocaleDirection: true
+					text: "#CUPS_POSTGAME_NEXT_TIER"
+					allCaps: true
+				}
+			}
+
+			panel EmptyData
+			{
+				bind &menus.apexCups.tierInfo.currentPoints -> IntEqual(-1) -> @this.visible
+
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <0, 0, 0, 0>
+
+				behavior Label
+				{
+					face: "TitleBoldFont"
+					pixelHeight: 54
+					colorRGB: <1.0, 1.0, 1.0>
+					textAlignHorizontal: CENTER
+					textAlignVertical: CENTER
+					horizontalMode: AUTOSIZE_TO_TEXT
+					verticalMode: AUTOSIZE_TO_TEXT
+					useLocaleDirection: true
+					text: "#CUPS_LEADERBOARD_EMPTY_DATA"
+				}
+			}
+		}
+	}
+}

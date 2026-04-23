@@ -1,0 +1,475 @@
+panel
+{
+	bind root
+
+	var backgroundPanel @this/Background
+	var descriptionPanel @this/Description
+	var textBGPanel @this/Description/TextBackground
+	var offerPanel @this/Background/Offer
+
+	var descHeight @this/Description.height
+	var descBGAlpha @this/Description:Image.alpha
+	var descBlurVisible @this/Description/Blur.visible
+	var descRarityPos @this/Description/TopLines.positionY
+	var descRarityVisible @this/Description/TopLines.visible
+	var descNameOffsetsLR @this/Description/Name.offsetsLR
+	var descNameAlignment @this/Description/Name:Label.textAlignHorizontal
+	var textBackgroundVisible @this/Description/TextBackground.visible
+
+	var price @this/Description/Price
+	var priceAlign @this/Description/Price:Label.textAlignHorizontal
+
+	bind *.mainImage    -> @this/Background/Offer:Image.assetPath
+	bind *.mainText     -> @this/Description/Name:Label.text
+	bind *.subText      -> @this/Description/Name/Type:Label.text
+	bind *.miscText1    -> @this/Description/Price:Label.text
+	bind *.miscText2    -> @this/Description/Price/NewPrice:Label.text
+
+	bind *.newPriceShow -> [
+		@this/Description/Price/Strikethrough.visible,
+		@this/Description/Price/NewPrice.visible,
+		@this/Background/DiscountTag.visible
+	]
+
+	bind *.rarity -> QualityColor( false ) -> [
+		@this/Background/Gradient:Image.colorRGB,
+		@this/Description:Image.colorRGB,
+		@this/Description/TopLines:Image.colorRGB,
+		@this/Decoration/RarityBorder/Border:Image.colorRGB,
+		@this/Background/HoverBackground:Image.colorRGB
+	]
+
+	bind *.rarity -> Add( -1 ) -> QualityTextColor -> [
+		@this/Description/Name:Label.colorRGB
+	]
+
+	bind *.discount       -> @this/Background/DiscountTag/DiscountText:Label.text
+	bind *.priceColor     -> [ @this/Description/Price:Label.colorRGB, @this/Description/Price/Strikethrough:Image.colorRGB ]
+	bind *.newPriceColor  -> @this/Description/Price/NewPrice:Label.colorRGB
+
+	anchor: CENTER
+	size:   <320, 600>
+	inputListener: true
+
+	behavior Button
+    {
+	    soundHighlighted: "ui_menu_focus"
+	    soundPressedEnabled: "ui_menu_accept"
+
+    	transitions: [
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @panel/Decoration/Border:Image.alpha
+				value: 1
+			},
+	        {
+			    fromState: ANY
+			    toState: IDLE
+			    type: TRANSITION_PROPERTY_SET
+			    property: @panel/Decoration/HighlightBorder.visible
+			    value: false
+	        },
+	        {
+			    fromState: ANY
+			    toState: IDLE
+			    type: TRANSITION_PROPERTY_SET
+			    property: @panel/Decoration/HighlightBorder:AnimatorAutoPlay.active
+			    value: false
+	        },
+	        {
+			    fromState: ANY
+			    toState: IDLE
+			    type: TRANSITION_PROPERTY_SET
+			    property: @panel/Decoration/RarityBorder/Border:Image.alpha
+			    value: 0
+	        },
+			{
+				fromState: ANY
+				toState: IDLE
+				type: TRANSITION_PROPERTY_SET
+				property: @panel/Background/HoverBackground:Image.alpha
+				value: 0
+			},
+	        {
+			    fromState: ANY
+			    toState: HIGHLIGHTED
+			    type: TRANSITION_PROPERTY_SET
+			    property: @panel/Decoration/Border:Image.alpha
+			    value: 0
+	        },
+	        {
+			    fromState: ANY
+			    toState: HIGHLIGHTED
+			    type: TRANSITION_PROPERTY_SET
+			    property: @panel/Decoration/HighlightBorder.visible
+			    value: true
+	        },
+	        {
+			    fromState: ANY
+			    toState: HIGHLIGHTED
+			    type: TRANSITION_PROPERTY_SET
+			    property: @panel/Decoration/HighlightBorder:AnimatorAutoPlay.active
+			    value: true
+	        },
+	        {
+			    fromState: ANY
+			    toState: HIGHLIGHTED
+			    type: TRANSITION_TWEEN
+			    animName: "onAnyToHighlighted"
+	        },
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @panel/Decoration/RarityBorder/Border:Image.alpha
+				value: 1
+			},
+			{
+				fromState: ANY
+				toState: HIGHLIGHTED
+				type: TRANSITION_PROPERTY_SET
+				property: @panel/Background/HoverBackground:Image.alpha
+				value: 0.80
+	        }
+        ]
+    }
+
+	behavior Animator
+	{
+		tweenAnimations: [
+			{
+				name: "onAnyToHighlighted"
+				tweens: [
+					{
+						property: @panel/Decoration/HighlightBorder.offsets
+						startValue: <-4, -4, -4, -4>
+						endValue: <-8, -8, -8, -8>
+						duration: 0.15
+					}
+				]
+			}
+		]
+	}
+
+	panel Background
+	{
+        anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			alpha: 0.90
+			colorRGB: <0.13, 0.13, 0.13>
+		}
+
+		panel HoverBackground
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				alpha: 0
+			}
+
+			behavior ColorExtensions
+			{
+				tintRGB: <0.6, 0.48, 0.54>
+			}
+		}
+
+		panel Gradient
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/store/common/store_offer_gradient_tall.rpak"
+				color: <0, 0, 0, 0.1>
+			}
+		}
+
+        panel Offer
+        {
+        	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	        offsets: <0, 0, 0, 0>
+
+        	behavior Image
+        	{
+        		assetPath: $"ui_image/rui/menu/image_download/image_load_failed_store_vertical.rpak"
+        		color: <1, 1, 1, 1>
+        	}
+
+	        behavior ExternalImage
+	        {
+		        bind *.imageRef -> @this.imageRef
+		        fallbackImage: $"ui_image/rui/menu/image_download/image_load_failed_store_vertical.rpak"
+		        pakType: 8
+	        }
+        }
+
+		panel DiscountTag
+		{
+			anchor: TOP_LEFT
+			position: <2, 2>
+			pivot: <0.0, 0.0>
+			size: <100, 60>
+			visible: false
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/store/promo_discount_tag.rpak"
+			}
+
+			panel DiscountText
+			{
+				anchor: CENTER
+				position: <-14, -12>
+
+				behavior Label
+				{
+					face: "TitleBoldFont"
+					textAlignHorizontal: CENTER
+					textAlignVertical: CENTER
+					horizontalMode: AUTOSIZE_TO_TEXT
+					verticalMode: AUTOSIZE_TO_TEXT
+					color: <0.0, 0.0, 0.0, 1.0>
+					pixelHeight: 28
+					thicken: 0.2
+				}
+			}
+		}
+	}
+
+	panel Description
+	{
+    	anchor: BOTTOM_STRETCH_WIDTH
+    	pivot: <0.5, 1.0>
+    	height: 130
+		offsetsLR: <0, 0>
+
+    	behavior Image
+    	{
+    		color: <0.1, 0.1, 0.1, 1>
+    	}
+
+		panel Blur
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				color: <0.1, 0.1, 0.1, 0.95>
+				imageBlur: ASSET
+			}
+
+		}
+
+		panel TopLines
+		{
+			anchor: TOP_STRETCH_WIDTH
+			pivot: <0.5, 1.0>
+			offsetsLR: <0, 0>
+			height: 16
+
+			behavior Image
+			{
+                assetPath: $"ui_image/rui/menu/store/common/store_offer_rarity_bar.rpak"
+			}
+		}
+
+		panel Name
+        {
+        	anchor: TOP_STRETCH_WIDTH
+        	offsetsLR: <12, 12>
+        	position: <0, 24>
+			useLocaleDirection: true
+
+        	behavior Label
+        	{
+        		text: ""
+        		face: "TitleBoldFont"
+        		textAlignHorizontal: CENTER
+        		textAlignVertical: CENTER
+        		horizontalMode: SQUISH_TO_CONTAINER
+        		verticalMode: AUTOSIZE_TO_TEXT
+				useLocaleDirection: true
+        		pixelHeight: 28
+        		color: <1, 1, 1, 1>
+        		allCaps: true
+        	}
+
+	        panel Type
+	        {
+		        bind @parent:Label.textAlignHorizontal -> @this:Label.textAlignHorizontal
+
+		        anchor: BOTTOM_STRETCH_WIDTH
+		        position: <0, 15>
+		        offsetsLR: <0, 0>
+
+		        behavior Label
+		        {
+			        text: ""
+			        face: "TitleBoldFont"
+			        textAlignVertical: CENTER
+			        horizontalMode: SQUISH_TO_CONTAINER
+			        verticalMode: AUTOSIZE_TO_TEXT
+					useLocaleDirection: true
+			        pixelHeight: 22
+			        color: <1, 1, 1, 1>
+			        allCaps: true
+		        }
+			}
+        }
+
+		panel TextBackground
+		{
+			anchor: BOTTOM_STRETCH_WIDTH
+			pivot: <0.5, 1.0>
+			offsetsLR: <0, 0>
+			height: 56
+
+			behavior Image
+			{
+				color: <0.06, 0.06, 0.06, 1>
+			}
+		}
+
+        panel Price
+        {
+        	anchor: BOTTOM_LEFT
+        	position: <25, -28>
+        	pivot: <0.0, 0.5>
+
+        	behavior Label
+        	{
+        		face: "TitleBoldFont"
+        		textAlignHorizontal: LEFT
+                textAlignVertical: CENTER
+        		horizontalMode: AUTOSIZE_TO_TEXT
+        		pixelHeight: 28
+        	}
+
+	        behavior LabelAltStyle
+	        {
+		        pixelHeight: 26
+		        color: <1, 1, 1, 1>
+	        }
+
+        	panel Strikethrough
+            {
+                Anchor: CENTER_STRETCH_WIDTH
+                height: 2
+                offsets: <-4, -4, 0, 0>
+            	visible: false
+
+                behavior Image
+            }
+
+	        panel NewPrice
+	        {
+		        anchor: RIGHT
+		        position: <65, 0>
+		        visible: false
+
+		        behavior Label
+		        {
+			        face: "TitleBoldFont"
+			        textAlignHorizontal: CENTER
+			        textAlignVertical: CENTER
+			        horizontalMode: AUTOSIZE_TO_TEXT
+			        pixelHeight: 28
+		        }
+	        }
+        }
+
+        instance $"ui_rtk/menus/store/components/store_armory_icon.rpak" SourceIcon
+        {
+	        override bind root "*"
+
+            anchor: BOTTOM_RIGHT
+            position: <-28, -28>
+			useLocaleDirection: true
+
+            bind *.sourceIcon -> @this:Image.assetPath
+        }
+	}
+
+    panel Decoration
+    {
+    	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+    	offsets: <0, 0, 0, 0>
+
+        panel Border
+        {
+        	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+        	offsets: <-1, -1, -1, -1>
+
+        	behavior Image
+        	{
+        		assetPath: $"ui_image/rui/borders/border_outline_2px.rpak"
+        		colorRGB: #383838
+        	}
+        }
+
+		panel RarityBorder
+		{
+            anchor: CENTER_STRETCH_WIDTH_HEIGHT
+            offsets: <0, 0, 0, 0>
+			rotation: -180
+
+			panel Border
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <-1, -1, -1, -1>
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/borders/border_outline_2px.rpak"
+					assetMaskPath: $"ui_image/rui/gradient_ud.rpak"
+				}
+			}
+		}
+
+	    panel HighlightBorder
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <-8, -8, -8, -8>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/borders/border_outline_4px.rpak"
+
+				colorRGB: <1.0, 0.4, 0.0>
+			}
+
+			behavior Animator
+			{
+				tweenAnimations: [
+					{
+						name: "pulse"
+						loop: PINGPONG
+						tweens: [
+							{
+								property: @panel:Image.alpha
+								startValue: 1.0
+								endValue: 0.25
+								duration: 1.2
+//								curve: EASE_IN_CUBIC  // Temporarily disabling this for 21.0 to prevent an issue with Exotic Shop hover bink videos
+							}
+						]
+					}
+				]
+			}
+
+			behavior AnimatorAutoPlay
+			{
+				animation: "pulse"
+			}
+		}
+    }
+}

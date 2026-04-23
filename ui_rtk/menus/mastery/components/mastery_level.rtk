@@ -1,0 +1,68 @@
+panel MasteryLevel
+{
+	bind root
+
+	var title @this:ToolTip.textContent
+
+	anchor: TOP_RIGHT
+	size: <94, 110>
+	inputListener: true
+
+    behavior ToolTip
+	{
+		textContent: ""
+		offset: <0, 0>
+		delay: 0
+	}
+
+	behavior VerticalContainer
+    {
+        spacing: 2
+        alignment: CENTER
+        fitContentWidth: true
+    }
+
+	panel Icon
+	{
+		anchor: RIGHT
+		offsets: <0, 0, 0, 0>
+		size: <100, 80>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/mastery/weaponmastery_trial_master_icon_small.rpak"
+		}
+	}
+
+	panel NumberContainer
+	{
+		offsets: <0, 0, 0, 0>
+		pivot: <0.5, 0.0>
+		offsetsTB: <0, 0>
+
+		behavior FitToContent
+
+		panel Number
+		{
+			anchor: TOP
+			pivot: <0.5, 0.0>
+			offsets: <0, 0, 0, 0>
+			height: 30
+
+			behavior Label
+			{
+				bind *.level -> @this.text
+
+				text: ""
+				face: "TitleBoldFont"
+				textAlignHorizontal: CENTER
+				horizontalMode: AUTOSIZE_TO_TEXT
+				pixelHeight: 30
+				color: <0.7215, 0.7372, 0.7254, 1>
+				outlineColorInner: <0, 0, 0, 0.0>
+				outlineColorOuter: <0, 0, 0, 0.9>
+				outlineWidth: 1.5
+			}
+		}
+	}
+}

@@ -1,0 +1,479 @@
+panel WeaponMasteryPanel
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+	offsetsTB: <0, 0>
+
+	behavior WeaponMasteryScreen
+	{
+		trialButton: @panel/Screen/BottomContent/RewardContainer:Button
+	}
+
+	panel Screen
+	{
+		width: 1920
+		offsetsTB: <0, 0>
+		anchor: CENTER_STRETCH_HEIGHT
+
+		panel TopLeftContent
+		{
+			anchor: TOP_LEFT
+	        pivot: <0.0, 0.0>
+	        position: <70, 186>
+
+	        behavior VerticalContainer
+	        {
+	            paddingBottom: 0
+	            spacing: 14
+	            alignment: TOP_LEFT
+	            fitContentWidth: true
+	        }
+
+			panel Level
+			{
+				size: <500, 36>
+				offsets: <0, 0, 0, 0>
+				height: 50
+
+				behavior FormatLabel
+				{
+					bind *.overall.level -> @this.arg1
+
+					format: "#HUD_LEVEL_N"
+					face: "TitleBoldFont"
+					pixelHeight: 60
+					colorRGB: <1, 1, 1>
+					outlineColorInner: <0, 0, 0, 0.8>
+					outlineColorOuter: <0, 0, 0, 0>
+					textAlignHorizontal: LEFT
+					horizontalMode: SQUISH_TO_CONTAINER
+					textAlignVertical: TOP
+					allCaps: true
+				}
+			}
+
+			panel IconsHorizontalContainer
+			{
+				anchor: TOP
+				offsets: <0, 0, 0, 0>
+
+				behavior HorizontalContainer
+		        {
+		            spacing: 14
+		            alignment: LEFT
+		            fitContentHeight: true
+	            }
+
+				behavior ListBinder
+				{
+					bindingPath: "*.trials"
+					prefab: $"ui_rtk/menus/mastery/components/mastery_trial_icon_listitem_small.rpak"
+				}
+			}
+
+			panel Line
+			{
+				size: <300, 2>
+
+				behavior Image
+				{
+					colorRGB: <0.6, 0.6, 0.6>
+				}
+			}
+
+			instance $"ui_rtk/menus/mastery/components/mastery_stat_lineitem.rpak" Damage
+			{
+				override @var(title) "#MASTERY_KILLS"
+				bind *.stats.kills -> FormatNumberInt( 6, 0 ) -> @this/Stat/StatValue:Label.text
+			}
+
+			instance $"ui_rtk/menus/mastery/components/mastery_stat_lineitem.rpak" Damage
+			{
+				override @var(title) "#DEATH_SCREEN_SUMMARY_KNOCKDOWNS"
+				bind *.stats.knocks -> FormatNumberInt( 6, 0 ) -> @this/Stat/StatValue:Label.text
+			}
+
+			instance $"ui_rtk/menus/mastery/components/mastery_stat_lineitem.rpak" Damage
+			{
+				override @var(title) "#MASTERY_HEADSHOTS_HEADER"
+				bind *.stats.headshots -> FormatNumberInt( 6, 0 ) -> @this/Stat/StatValue:Label.text
+			}
+
+			instance $"ui_rtk/menus/mastery/components/mastery_stat_lineitem.rpak" Damage
+			{
+				override @var(title) "#SCORE_EVENT_DAMAGE_GENERIC"
+				bind *.stats.damageDone -> FormatNumberInt( 6, 0 ) -> @this/Stat/StatValue:Label.text
+			}
+
+			panel Line
+			{
+				bind *.overall.completedAllTrials -> @this.visible
+
+				size: <300, 2>
+
+				behavior Image
+				{
+					colorRGB: <0.6, 0.6, 0.6>
+				}
+			}
+
+			panel WeaponMastered
+			{
+				bind *.overall.completedAllTrials -> @this.visible
+
+				size: <500, 36>
+				offsets: <0, 0, 0, 0>
+				height: 26
+
+				behavior FormatLabel
+				{
+					bind *.overall.level -> @this.arg1
+
+					format: "#MASTERY_WEAPON_MASTERED"
+					face: "TitleBoldFont"
+					pixelHeight: 26
+					colorRGB: <0.9294, 0.7764, 0.2862>
+					outlineColorInner: <0, 0, 0, 0.8>
+					outlineColorOuter: <0, 0, 0, 0>
+					textAlignHorizontal: LEFT
+					horizontalMode: SQUISH_TO_CONTAINER
+					textAlignVertical: TOP
+					allCaps: true
+					margin: <0, 0, -5, 0>
+				}
+			}
+		}
+
+		panel BottomContent
+		{
+			bind *.overall.level -> LessThan( 120 ) -> @this.visible
+
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			panel PipContainer
+			{
+				anchor: BOTTOM
+		        pivot: <0.5, 1.0>
+		        position: <-89, -160>
+				useLocaleDirection: true
+
+				behavior HorizontalContainer
+		        {
+		            spacing: -5
+		            alignment: CENTER
+		            fitContentWidth: true
+		            fitContentHeight: true
+					useLocaleDirection: true
+		        }
+
+				behavior ListBinder
+				{
+					bindingPath: "&menus.weapon.mastery.levelRanges"
+					prefab: $"ui_rtk/menus/mastery/components/mastery_level_range_pip.rpak"
+				}
+			}
+
+			panel RewardContainer
+			{
+		        bind *.overall.unlockedAllTrials -> Not -> @this.visible
+		        bind *.overall.unlockedAllTrials -> Not -> @this.inputListener
+
+				anchor: BOTTOM_RIGHT
+		        pivot: <1.0, 1.0>
+		        size: <280, 220>
+		        position: <-78, -132>
+				inputListener: true
+				useLocaleDirection: true
+
+				behavior Button
+				{
+					soundHighlighted: "ui_menu_focus"
+					soundPressedEnabled: "ui_menu_accept"
+
+					transitions: [
+						{
+							fromState: HIGHLIGHTED
+							toState: IDLE
+							type: TRANSITION_TWEEN
+							animName: "onHighlightedToIdle"
+						},
+						{
+							fromState: ANY
+							toState: HIGHLIGHTED
+							type: TRANSITION_TWEEN
+							animName: "onHighlighted"
+						}
+					]
+				}
+
+				behavior Animator
+				{
+					tweenAnimations: [
+						{
+							name: "onHighlighted"
+							tweens: [
+								{
+									property: @owner.panel/Hightlight:Image.alpha
+									startValue: 0.0
+									endValue: 0.4
+									duration: 0.15
+								},
+								{
+									property: @owner.panel/Outline:Image.colorRGB
+									startValue: <0.52, 0.52, 0.52>
+									endValue: <1.0, 0.4, 0.0>
+									duration: 0.15
+								},
+								{
+									property: @owner.panel/BG:ColorExtensions.tint
+									startValue: <1.0, 1.0, 1.0, 1.0>
+									endValue: <1.0, 0.4, 0.0, 1.0>
+									duration: 0.15
+								}
+							]
+						},
+						{
+							name: "onHighlightedToIdle"
+							tweens: [
+								{
+									property: @owner.panel/Hightlight:Image.alpha
+									startValue: 0.4
+									endValue: 0.0
+									duration: 0.15
+								},
+								{
+									property: @owner.panel/Outline:Image.colorRGB
+									startValue: <1.0, 0.4, 0.0>
+									endValue: <0.52, 0.52, 0.52>
+									duration: 0.15
+								},
+								{
+									property: @owner.panel/BG:ColorExtensions.tint
+									startValue: <1.0, 0.4, 0.0, 1.0>
+									endValue: <1.0, 1.0, 1.0, 1.0>
+									duration: 0.15
+								}
+							]
+						}
+					]
+				}
+
+				panel BG
+				{
+					anchor: CENTER_STRETCH_WIDTH_HEIGHT
+					offsets: <0, 0, 0, 0>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/menu/mastery/mastery_overview_trial_locked.rpak"
+						useLocaleDirection: true
+					}
+
+					behavior ColorExtensions
+				}
+
+				panel Hightlight
+				{
+					anchor: CENTER_STRETCH_WIDTH_HEIGHT
+					offsets: <0, 0, 0, 0>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/menu/mastery/mastery_overview_trial_highlight.rpak"
+						colorRGB: <1.0, 0.4, 0.0>
+						alpha: 0.0
+						useLocaleDirection: true
+					}
+				}
+
+				panel Outline
+				{
+					anchor: CENTER_STRETCH_WIDTH_HEIGHT
+					offsets: <0, 0, 0, 0>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/menu/mastery/mastery_overview_trial_outline.rpak"
+						colorRGB: <0.52, 0.52, 0.52>
+						useLocaleDirection: true
+					}
+				}
+
+				panel TopLabel
+				{
+					anchor: TOP_LEFT
+			        pivot: <0.0, 0.0>
+					offsets: <0, 0, 0, 0>
+					size: <172, 40>
+					useLocaleDirection: true
+
+					behavior HorizontalContainer
+			        {
+			            alignment: LEFT
+						useLocaleDirection: true
+			        }
+
+					panel Lock
+					{
+		                anchor: CENTER
+						offsets: <0, 0, 0, 0>
+						size: <40, 40>
+						position: <0, 0>
+
+						behavior Image
+						{
+							assetPath: $"ui_image/rui/menu/buttons/lock.rpak"
+							alpha: 1.0
+							colorRGB: <0.56, 0.56, 0.56>
+						}
+					}
+
+					panel Text
+					{
+						anchor: LEFT
+						offsets: <0, 0, 0, 0>
+						height: 25
+
+						behavior Label
+						{
+							text: "#LOCKED"
+							pixelHeight: 25
+							textAlignHorizontal: LEFT
+							allCaps: true
+							horizontalMode: SQUISH_TO_CONTAINER
+							colorRGB: <0.5529, 0.5529, 0.5529>
+							useLocaleDirection: true
+
+						}
+				    }
+				}
+
+				panel Content
+				{
+					anchor: BOTTOM_STRETCH_WIDTH
+			        pivot: <0.5, 1.0>
+			        positionY: -45
+					offsets: <0, 0, 0, 0>
+					offsetsLR: <25, 25>
+
+					behavior VerticalContainer
+					{
+						expandChildWidth: true
+						alignment: CENTER
+						spacing: 12
+					}
+
+					panel IconContainer
+					{
+						size: <62, 54>
+						offsets: <0, 0, 0, 0>
+
+					    panel Icon
+						{
+							anchor: CENTER
+							size: <62, 54>
+
+							behavior Image
+							{
+								assetPath: $"ui_image/rui/menu/mastery/weaponmastery_trial_icon.rpak"
+								alpha: 0.06
+							}
+					    }
+					}
+
+				    panel TrialNumber
+					{
+						anchor: LEFT
+						offsets: <0, 0, 0, 0>
+						height: 25
+
+						behavior FormatLabel
+						{
+							bind *.overall.trialsUnlocked -> Add( 1 ) -> FloatToInt -> @this.arg1
+							format: "#MASTERY_TRIAL_N"
+							face: "TitleBoldFont"
+							pixelHeight: 30
+							textAlignHorizontal: CENTER
+							allCaps: true
+							horizontalMode: SQUISH_TO_CONTAINER
+							colorRGB: <0.5529, 0.5529, 0.5529>
+							arg1: ""
+						}
+				    }
+
+				    panel UnlocksAt
+					{
+						anchor: LEFT
+						offsets: <0, 0, 0, 0>
+						height: 25
+
+						behavior FormatLabel
+						{
+							bind *.overall.nextTrialUnlockedAt -> @this.arg1
+
+							format: "#MASTERY_UNLOCKS_AT"
+							pixelHeight: 30
+							textAlignHorizontal: CENTER
+							horizontalMode: SQUISH_TO_CONTAINER
+							colorRGB: <0.5529, 0.5529, 0.5529>
+							arg1: ""
+						}
+				    }
+				}
+			}
+
+			panel KeepLeveling
+			{
+				bind *.overall.unlockedAllTrials -> @this.visible
+
+				anchor: BOTTOM_RIGHT
+		        pivot: <1.0, 1.0>
+		        size: <244, 220>
+		        position: <-112, -160>
+
+		        behavior VerticalContainer
+				{
+					expandChildWidth: true
+					alignment: BOTTOM
+					spacing: 12
+				}
+
+				panel
+				{
+					anchor: LEFT
+					offsets: <0, 0, 0, 0>
+					height: 25
+
+					behavior Label
+					{
+						text: "#MASTERY_KEEP_LEVELING"
+						pixelHeight: 34
+						textAlignHorizontal: CENTER
+						textAlignVertical: BOTTOM
+						colorRGB: <0.52, 0.52, 0.52>
+						shadowAlpha: 0.8
+						shadowBlur: 6.0
+						shadowOffset: <0, 0>
+					}
+			    }
+
+				panel xpBarToInfinite
+				{
+					offsets: <0, 0, 0, 0>
+					size: <244, 12>
+
+					behavior Image
+					{
+						assetPath: $"ui_image/rui/menu/mastery/mastery_overview_progressbar_dashed_extension.rpak"
+					}
+				}
+		    }
+		}
+	}
+
+	//Bring back when the whole menu uses RTK
+	//instance $"ui_rtk/controls/footer.rpak"
+}

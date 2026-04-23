@@ -1,0 +1,56 @@
+instance $"ui_rtk/menus/game_modes/apex_cups/components/cards/apex_cup_card_base.rpak"
+{
+	size: <330, 600>
+
+	append @root:Animator.tweenAnimations
+	{
+		name: "onIdle"
+		tweens: [
+			{
+				property: @panel.width
+				startValue: 460
+				endValue: 330
+				duration: 0.167
+				curve: EASE_IN_CUBIC
+			},
+			// Prevent jittering when rapidly moving between buttons.
+			{
+				property: @panel.inputListener
+				startValue: false
+				endValue: true
+				duration: 0.167
+				curve: FLOOR
+			}
+		]
+	}
+
+	append @root:Animator.tweenAnimations
+	{
+		name: "onHighlight"
+		tweens: [
+			{
+				property: @panel.width
+				startValue: 330
+				endValue: 460
+				duration: 0.337
+				curve: EASE_OUT_CUBIC
+			}
+		]
+	}
+
+	append @root:Button.transitions
+	{
+		fromState: HIGHLIGHTED
+		toState: IDLE
+		type: TRANSITION_TWEEN
+		animName: "onIdle"
+    }
+
+	append @root:Button.transitions
+	{
+		fromState: ANY
+		toState: HIGHLIGHTED
+		type: TRANSITION_TWEEN
+		animName: "onHighlight"
+    }
+}

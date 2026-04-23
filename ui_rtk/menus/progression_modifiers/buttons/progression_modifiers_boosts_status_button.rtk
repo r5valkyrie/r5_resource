@@ -1,0 +1,94 @@
+panel BoostStatusButton
+{
+	bind root
+	inputListener: true
+
+	behavior BoostStatusButton
+	{
+		button: @panel/Button:Button
+	}
+
+	instance $"ui_rtk/common/shells/basic_button.rpak" Button
+	{
+		bind @this/ContentPanel.width -> Add( 4 ) -> @root.width
+		bind @this/ContentPanel.height -> Add( 1 ) -> @root.height
+
+		override @var(backgroundColor) #242526
+		override @var(outlineColor) #b4b4b5
+		override @var(gradientColor) #78797a
+		override @var(lineColor) #b4b4b5
+		override @var(lineHeight) 6
+
+		context @var(contentPanel)
+		{
+			behavior HorizontalContainer
+			{
+				fitContentHeight: true
+				fitContentWidth: true
+				spacing: 10
+				alignment: CENTER
+			}
+
+			panel Text
+			{
+				behavior Label
+				{
+					text: "#PROGRESSION_MODIFIERS_AVAILABLE_BOOSTS"
+					face: "TitleBoldFont"
+					allCaps: true
+					pixelHeight: 34
+					textAlignVertical: CENTER
+					textAlignHorizontal: CENTER
+					horizontalMode: AUTOSIZE_TO_TEXT
+					verticalMode: AUTOSIZE_TO_TEXT
+				}
+			}
+
+			panel BoostIcons
+			{
+				behavior HorizontalContainer
+				{
+					alignment: CENTER
+					fitContentHeight: true
+					fitContentWidth: true
+					spacing: -5
+				}
+
+				panel MasteryIcon
+				{
+					size: <55, 55>
+					behavior Image
+					{
+						bind *.isMasteryAvailable -> PickFloatFromTwo(0.3 , 1) -> @this.alpha
+						assetPath: $"ui_image/rui/menu/xp_boost/BoostMastery_sm.rpak"
+						color: #FF8889
+					}
+
+				}
+
+				panel XPIcon
+				{
+					size: <55, 55>
+					behavior Image
+					{
+						bind *.isAcountXPAvailable -> PickFloatFromTwo(0.3 , 1) -> @this.alpha
+						assetPath: $"ui_image/rui/menu/xp_boost/BoostXP_sm.rpak"
+						color: #F7CB87
+					}
+				}
+
+				panel BattlepassIcon
+				{
+					size: <55, 55>
+					behavior Image
+					{
+						bind *.isBPStarsAvailable -> PickFloatFromTwo(0.3 , 1) -> @this.alpha
+						assetPath: $"ui_image/rui/menu/xp_boost/BoostBP_sm.rpak"
+						color: #A8E6ED
+					}
+				}
+			}
+		}
+	}
+
+}

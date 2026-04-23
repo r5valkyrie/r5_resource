@@ -1,0 +1,23 @@
+panel PriceRowLabels
+{
+	bind root
+	anchor: LEFT
+	offsets: <0, 0, 0, 0>
+	pivot: <0, 0.5>
+	width: 780
+
+	behavior HorizontalContainer
+	{
+		expandToFillEvenly: true
+		fitContentHeight: true
+		alignment: LEFT
+		spacing: 10
+		useLocaleDirection: true
+	}
+
+	behavior ListBinder
+	{
+		bindingPath: "*.prices"
+		prefab: $"ui_rtk/dialogs/purchase_pack_selection/components/purchase_pack_price_label.rpak"
+	}
+}

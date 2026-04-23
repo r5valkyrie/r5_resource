@@ -1,0 +1,186 @@
+panel timelineMatchButton
+{
+	bind root
+	bind *.completed -> @this.active
+	bind *.completed -> PickFloatFromTwo( 0.2, 1.0 ) -> [
+		@root/diamondOuter:Image.alpha,
+		@root/numberText:Label.alpha,
+		@root/points/pointsText:FormatLabel.alpha
+	]
+
+    offsets: <0, 0, 0, 0>
+	inputListener: true
+	size: <130, 130>
+
+	behavior Button
+    {
+        soundHighlighted: "ui_menu_focus"
+		soundPressedEnabled: "ui_menu_accept"
+
+        transitions: [
+            {//0
+				fromState: ANY
+				toState: IDLE
+                type: TRANSITION_PROPERTY_SET
+                property: @root/diamondInner:Image.colorRGB
+                value: #COLOR_GREY_6
+            },
+            {//1
+				fromState: ANY
+				toState: HIGHLIGHTED
+                type: TRANSITION_PROPERTY_SET
+                property: @root/diamondInner:Image.colorRGB
+                value: #COLOR_GREY_4
+            }
+        ]
+    }
+
+////////////////////////////////////////////////////////////////////////////////////////////
+	panel diamondInner
+	{
+		anchor: CENTER
+		pivot: <0.5, 0.5>
+		position: <0, 0>
+		offsets: <0, 0, 0, 0>
+		size: <130, 130>
+
+		behavior Image
+		{
+			colorRGB: #COLOR_GREY_6
+			alpha: 0.4
+		}
+	}
+
+	panel check
+	{
+		bind *.completed -> @this.visible
+
+		anchor: TOP_LEFT
+		pivot: <0, 0>
+		position: <2, 2>
+		size: <50, 50>
+
+		behavior Image
+		{
+			bind *.matchNumber -> Subtract( 1 ) -> Equal( &menus.apexCups.selectedIdx ) -> PickVectorFromTwo( #COLOR_WHITE_1, #COLOR_ORANGE_1 ) -> @this.colorRGB
+
+			assetPath: $"ui_image/rui/triangle_tr.rpak"
+			flipHorizontal: true
+		}
+
+		panel icon
+		{
+			anchor: TOP_LEFT
+			pivot: <0, 0>
+			position: <5, 3>
+			size: <25, 25>
+
+			behavior Image
+			{
+				bind *.matchNumber -> Subtract( 1 ) -> Equal( &menus.apexCups.selectedIdx ) -> PickVectorFromTwo( #BLACK, #COLOR_WHITE_1 ) -> @this.colorRGB
+
+				assetPath: $"ui_image/rui/menu/buttons/checked.rpak"
+				alpha: 1.0
+			}
+		}
+	}
+
+	panel numberText
+	{
+		bind *.matchNumber -> @this:Label.text
+
+
+		anchor: CENTER
+		pivot: <0.5, 0.5>
+		position: <0, -10>
+		offsets: <0, 0, 0, 0>
+		size: <28, 28>
+
+		behavior Label
+		{
+			text: "0"
+			textAlignHorizontal: CENTER
+			textAlignVertical: CENTER
+			horizontalMode: AUTOSIZE_TO_TEXT
+			verticalMode: OVERFLOW
+			pixelHeight: 50
+			margin: <0, 0, 0, 0>
+			color: #COLOR_WHITE_1
+			face: #FONT_TITLE_BOLD
+		}
+	}
+
+	panel points
+	{
+		anchor: BOTTOM
+		pivot: <0.5, 1.0>
+
+		behavior Image
+		{
+			colorRGB: #COLOR_BLACK
+			alpha: 0.5
+		}
+
+		behavior HorizontalContainer
+		{
+			fitContentWidth: true
+			fitContentHeight: true
+			padding : <12, 12, 0, 0>
+		}
+
+		panel pointsText
+		{
+			height: 36
+
+			behavior FormatLabel
+			{
+				bind *.completed -> PickStringFromTwo( "--", "#CUPS_TOTAL_CUP_POINTS_VALUE" ) -> @this.format
+				bind *.score -> @this.arg1
+
+				format: ""
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				horizontalMode: SQUISH_TO_CONTAINER
+				verticalMode: OVERFLOW
+				pixelHeight: 32
+				margin: <0, 0, 0, 0>
+				colorRGB: #COLOR_GREY_3
+				face: "DefaultBoldFont"
+				arg1: ""
+			}
+		}
+	}
+
+	panel diamondOuter
+	{
+		anchor: CENTER
+		//pivot: <0.5, 0.5>
+		position: <0, 0>
+		offsets: <0, 0, 0, 0>
+		size: <130, 130>
+
+		behavior Image
+		{
+			bind *.matchNumber -> Subtract( 1 ) -> Equal( &menus.apexCups.selectedIdx ) -> PickVectorFromTwo( #COLOR_GREY_3, #COLOR_ORANGE_1 ) -> @this.colorRGB
+
+			colorRGB: #COLOR_GREY_3
+			assetPath: $"ui_image/rui/borders/border_outline_2px.rpak"
+		}
+	}
+
+	panel selectedArrow
+	{
+		bind *.matchNumber -> Subtract( 1 ) -> Equal( &menus.apexCups.selectedIdx ) -> @this.visible
+
+		anchor: BOTTOM
+		size: <28, 56>
+		position: <0, 20>
+		rotation: 90
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/store/common/arrow_button_large.rpak"
+			colorRGB: #COLOR_ORANGE_1
+		}
+	}
+}

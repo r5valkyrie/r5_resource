@@ -1,0 +1,614 @@
+panel RevArmyCharacterSelect
+{
+	bind root
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+	behavior RevArmyCharSelect
+	{
+		modeInfoAnim: @panel:Animator
+	}
+
+	behavior Animator
+	{
+		tweenAnimations: [
+			{
+				name: "IntroBannerAnimIn"
+				tweens: [
+					{
+						property: @panel/IntroIcon/RevHeadEyes:Image.alpha
+						startValue: 0
+						endValue: 0.8
+						duration: 0.5
+						delay: 2.75
+			            curve: EASE_IN_QUART
+					},
+					{
+						property: @panel/IntroIcon/RevHeadHood:Image.alpha
+						startValue: 0
+						endValue: 0.05
+						duration: 0.5
+						delay: 3.25
+			            curve: EASE_IN_QUART
+					},
+					{
+						property: @panel/IntroIcon/RevHeadFace:Image.alpha
+						startValue: 0
+						endValue: 0.025
+						duration: 0.5
+						delay: 3.35
+			            curve: EASE_IN_QUART
+					},{
+						property: @panel/IntroIcon/RevHeadEyes.scale
+						startValue: <0.975, 0.975>
+						endValue: <1.0, 1.0>
+						duration: 0.5
+						delay: 2.75
+			            curve: EASE_IN_QUART
+					},
+					{
+						property: @panel/IntroIcon/RevHeadHood.scale
+						startValue: <0.975, 0.975>
+						endValue: <1.0, 1.0>
+						duration: 0.5
+						delay: 3.25
+			            curve: EASE_IN_QUART
+					},
+					{
+						property: @panel/IntroIcon/RevHeadFace.scale
+						startValue: <0.975, 0.975>
+						endValue: <1.0, 1.0>
+						duration: 0.5
+						delay: 3.35
+			            curve: EASE_IN_QUART
+					},
+					{
+						property: @panel/IntroIcon/Label:Label.alpha
+						startValue: 0
+						endValue: 0.65
+						duration: 1
+						delay: 2.25
+			            curve: EASE_IN_QUART
+					},
+					{
+						property: @panel/IntroIcon/Label:Label.outlineColorInner
+						startValue: <0, 0, 0, 0>
+						endValue: <0, 0, 0, 1>
+						duration: 1
+						delay: 2.25
+			            curve: EASE_IN_QUART
+					},
+					{
+						property: @panel/IntroIcon/Label:Label.outlineColorOuter
+						startValue: <0, 0, 0, 0>
+						endValue: <0, 0, 0, 1>
+						duration: 1
+						delay: 2.25
+			            curve: EASE_IN_QUART
+					}
+				]
+			},
+			{
+				name: "IntroBannerAnimOut"
+				tweens: [
+					{
+						property: @panel/IntroIcon/RevHeadEyes:Image.alpha
+						startValue: 0.8
+						endValue: 0
+						duration: 0.5
+						delay: 3.75
+			            curve: EASE_OUT_QUART
+					},
+					{
+						property: @panel/IntroIcon/RevHeadHood:Image.alpha
+						startValue: 0.05
+						endValue: 0
+						duration: 0.5
+						delay: 2.25
+			            curve: EASE_OUT_QUART
+					},
+					{
+						property: @panel/IntroIcon/RevHeadFace:Image.alpha
+						startValue: 0.025
+						endValue: 0
+						duration: 0.5
+						delay: 2.25
+			            curve: EASE_OUT_QUART
+					},
+					{
+						property: @panel/IntroIcon/RevHeadHood.scale
+						startValue: <1.0, 1.0>
+						endValue: <0.975, 0.975>
+						duration: 0.5
+						delay: 2.25
+			            curve: EASE_OUT_QUART
+					},
+					{
+						property: @panel/IntroIcon/RevHeadFace.scale
+						startValue: <1.0, 1.0>
+						endValue: <0.975, 0.975>
+						duration: 0.5
+						delay: 2.25
+			            curve: EASE_OUT_QUART
+					},
+					{
+						property: @panel/IntroIcon/Label:Label.alpha
+						startValue: 0.65
+						endValue: 0
+						duration: 0.5
+						delay: 3.75
+			            curve: EASE_OUT_QUART
+					},
+					{
+						property: @panel/IntroIcon/Label:Label.outlineColorInner
+						startValue: <0, 0, 0, 1>
+						endValue: <0, 0, 0, 0>
+						duration: 0.5
+						delay: 3.75
+			            curve: EASE_OUT_QUART
+					},
+					{
+						property: @panel/IntroIcon/Label:Label.outlineColorOuter
+						startValue: <0, 0, 0, 1>
+						endValue: <0, 0, 0, 0>
+						duration: 0.5
+						delay: 3.75
+			            curve: EASE_OUT_QUART
+					}
+				]
+			},
+			{
+				name: "InfoAnimation"
+				tweens: [
+					{
+						property: @panel/InfoFrameElement/BgBlur:Image.alpha
+						startValue: 0
+						endValue: 1.0
+						duration: 0.5
+						delay: 4
+			            curve: EASE_IN_SINE
+					},
+					{
+						property: @panel/InfoFrameElement/Bg:Image.alpha
+						startValue: 0
+						endValue: 0.65
+						duration: 0.5
+						delay: 4
+			            curve: EASE_IN_SINE
+					},
+					{
+						property: @panel/InfoFrameElement/TopFrame:Image.alpha
+						startValue: 0
+						endValue: 1
+						duration: 0.5
+						delay: 4
+			            curve: EASE_IN_SINE
+					},
+					{
+						property: @panel/InfoFrameElement/TopTrapezoid:Image.alpha
+						startValue: 0
+						endValue: 1
+						duration: 0.5
+						delay: 4
+			            curve: EASE_IN_SINE
+					},
+					{
+						property: @panel/InfoFrameElement/BotFrame:Image.alpha
+						startValue: 0
+						endValue: 1
+						duration: 0.5
+						delay: 4
+			            curve: EASE_IN_SINE
+					},
+					{
+						property: @panel/RedRevInfo/RedRevLabel:FormatLabel.color
+						startValue: <0,0,0,0>
+						endValue: <1,1,1,1>
+						duration: 0.75
+						delay: 5
+			            curve: EASE_LINEAR
+					},
+					{
+						property: @panel/RedRevInfo/RedRevLabel:FormatLabel.outlineColorInner
+						startValue: <0, 0, 0, 0>
+						endValue: <0, 0, 0, 1>
+						duration: 0.75
+						delay: 5
+			            curve: EASE_LINEAR
+					},
+					{
+						property: @panel/RedRevInfo/RedRevLabel:FormatLabel.outlineColorOuter
+						startValue: <0, 0, 0, 0>
+						endValue: <0, 0, 0, 1>
+						duration: 0.75
+						delay: 5
+			            curve: EASE_LINEAR
+					},
+					{
+						property: @panel/RedRevInfo/RedRevLabel:LabelAltStyle.colorRGB
+						startValue: <0, 0, 0>
+						endValue: <1, 0, 0>
+						duration: 0.75
+						delay: 5
+			            curve: EASE_LINEAR
+					},
+					{
+						property: @panel/RedRevInfo/RedRevLabel:LabelAltStyle.outlineColorInner
+						startValue: <0, 0, 0, 0>
+						endValue: <0, 0, 0, 1>
+						duration: 0.75
+						delay: 5
+			            curve: EASE_LINEAR
+					},
+					{
+						property: @panel/RedRevInfo/RedRevLabel:LabelAltStyle.outlineColorOuter
+						startValue: <0, 0, 0, 0>
+						endValue: <0, 0, 0, 1>
+						duration: 0.75
+						delay: 5
+			            curve: EASE_LINEAR
+					},
+					{
+						property: @panel/RedRevInfo/RevHeadContainer/RevHeadIcon:Image.color
+						startValue: <1,1,1,0>
+						endValue: <1,1,1,1>
+						duration: 0.75
+						delay: 5
+			            curve: EASE_IN_SINE
+					},
+					{
+						property: @panel/RedRevInfo/RevHeadContainer/RevEyesIcon:Image.color
+						startValue: <1,0,0,0>
+						endValue: <1,0,0,1>
+						duration: 0.75
+						delay: 5
+			            curve: EASE_IN_SINE
+					},
+					{
+						property: @panel/RedRevInfo.position
+						startValue: <0, -250>
+						endValue: <-350, -250>
+						duration: 0.75
+						delay: 7
+			            curve: EASE_OUT_SINE
+					},
+					{
+						property: @panel/ArmyRevInfo.position
+						startValue: <0, -250>
+						endValue: <350, -250>
+						duration: 0.75
+						delay: 7
+			            curve: EASE_OUT_SINE
+					},
+					{
+						property: @panel/ArmyRevInfo/ArmyRevLabel:FormatLabel.alpha
+						startValue: 0
+						endValue: 1
+						duration: 0.75
+						delay: 7
+			            curve: EASE_LINEAR
+					},
+					{
+						property: @panel/ArmyRevInfo/ArmyRevLabel:FormatLabel.outlineColorInner
+						startValue: <0, 0, 0, 0>
+						endValue: <0, 0, 0, 1>
+						duration: 0.75
+						delay: 7
+			            curve: EASE_LINEAR
+					},
+					{
+						property: @panel/ArmyRevInfo/ArmyRevLabel:FormatLabel.outlineColorOuter
+						startValue: <0, 0, 0, 0>
+						endValue: <0, 0, 0, 1>
+						duration: 0.75
+						delay: 7
+			            curve: EASE_LINEAR
+					},
+					{
+						property: @panel/ArmyRevInfo/ArmyRevLabel:LabelAltStyle.colorRGB
+						startValue: <0, 0, 0>
+						endValue: <1, 0.9, 0>
+						duration: 0.75
+						delay: 7
+			            curve: EASE_LINEAR
+					},
+					{
+						property: @panel/ArmyRevInfo/ArmyRevLabel:LabelAltStyle.outlineColorInner
+						startValue: <0, 0, 0, 0>
+						endValue: <0, 0, 0, 1>
+						duration: 0.75
+						delay: 7
+			            curve: EASE_LINEAR
+					},
+					{
+						property: @panel/ArmyRevInfo/ArmyRevLabel:LabelAltStyle.outlineColorOuter
+						startValue: <0, 0, 0, 0>
+						endValue: <0, 0, 0, 1>
+						duration: 0.75
+						delay: 7
+			            curve: EASE_LINEAR
+					},
+					{
+						property: @panel/ArmyRevInfo/ArmyRevIcon:Image.alpha
+						startValue: 0
+						endValue: 1
+						duration: 0.75
+						delay: 7
+			            curve: EASE_LINEAR
+					}
+				]
+			}
+		]
+	}
+
+	panel IntroIcon
+	{
+		anchor: CENTER
+		offsets: <0, 0, 0, 0>
+
+		panel RevHeadEyes
+		{
+			anchor: CENTER
+			offsets: <0, 0, 0, 0>
+			size: <700, 850>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/gamemodes/rev_army/revenant_head_eyes_large_icon.rpak"
+				colorRGB: <1.0, 0.0, 0.0>
+			    alpha: 0
+			}
+		}
+
+		panel RevHeadFace
+		{
+			anchor: CENTER
+			offsets: <0, 0, 0, 0>
+			size: <700, 850>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/gamemodes/rev_army/revenant_head_face_large_icon.rpak"
+			    alpha: 0
+			}
+		}
+
+		panel RevHeadHood
+		{
+			anchor: CENTER
+			offsets: <0, 0, 0, 0>
+			size: <700, 850>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/gamemodes/rev_army/revenant_head_hood_large_icon.rpak"
+			    alpha: 0
+			}
+		}
+
+
+		panel Label
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <10, 10, 10, 10>
+
+			behavior Label
+			{
+				text: "#SHADOW_ARMY_REV_LEGEND_REV_ARMY_BANNER_01"
+				face: "TitleBoldFont"
+				horizontalMode: AUTOSIZE_TO_TEXT
+				verticalMode: AUTOSIZE_TO_TEXT
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				pixelHeight: 106
+				color: <1, 1, 1, 1>
+				outlineColorInner: <0, 0, 0, 0>
+				outlineColorOuter: <0, 0, 0, 0>
+				outlineWidth: 1.5
+				alpha: 0
+			}
+		}
+	}
+
+	panel InfoFrameElement
+	{
+		anchor: BOTTOM_STRETCH_WIDTH
+		size: <1, 250>
+		offsets: <0, 0, 0, 0>
+		position: <0, -250>
+
+		panel BgBlur
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			size: <1, 1>
+			scale: <1.5, 1>
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/gradient_lr_rl.rpak"
+				colorRGB: <1, 1, 1>
+				alpha: 0
+				imageBlur: ASSETMASK
+			}
+		}
+		
+		panel Bg
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			size: <1, 1>
+			scale: <1, 1>
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/gradient_lr_rl.rpak"
+				colorRGB: <0.1, 0.1, 0.1>
+				alpha: 0
+			}
+		}
+
+		panel TopTrapezoid
+		{
+			anchor: TOP
+			position: <0, 5>
+			size: <500, 10>
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/menu/common/white_trapezoid_fill.rpak"
+				alpha: 0
+			}
+		}
+
+		panel TopFrame
+		{
+			anchor: TOP_STRETCH_WIDTH
+			size: <1, 2>
+			scale: <1.25, 1>
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/gradient_lr_rl.rpak"
+				alpha: 0
+			}
+		}
+
+		panel BotFrame
+		{
+			anchor: BOTTOM_STRETCH_WIDTH
+			size: <1, 2>
+			scale: <1.25, 1>
+			offsets: <0, 0, 0, 0>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/gradient_lr_rl.rpak"
+				alpha: 0
+			}
+		}
+	}
+
+	panel RedRevInfo
+	{
+		anchor: BOTTOM
+		position: <0, -250>
+
+		behavior VerticalContainer
+		{
+			alignment: CENTER
+			spacing: 10
+		}
+
+		panel RevHeadContainer
+		{
+			anchor: CENTER
+			size: <116, 141>
+
+			panel RevHeadIcon
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/gamemodes/rev_army/revenant_head_icon.rpak"
+					color:<1,1,1,0>
+		        }
+			}
+
+			panel RevEyesIcon
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+				behavior Image
+				{
+					assetPath: $"ui_image/rui/gamemodes/rev_army/revenant_eyes_icon.rpak"
+					color:<1,0,0,0>
+		        }
+			}
+		}
+
+		panel RedRevLabel
+		{
+			size: <400, 128>
+
+		    behavior FormatLabel
+		    {
+		        format: "#SHADOW_ARMY_REV_CHAR_SELECT_BANNER_01"
+		        face: "TitleBoldFont"
+		        pixelHeight: 28
+		        horizontalMode: WRAP
+	            verticalMode: AUTOSIZE_TO_TEXT
+	            color: <1, 1, 1, 0>
+		        textAlignHorizontal: CENTER
+		        textAlignVertical: CENTER
+		        outlineWidth: 1.5
+	            outlineColorInner: <0, 0, 0, 0>
+	            outlineColorOuter: <0, 0, 0, 0>
+		    }
+
+		    behavior LabelAltStyle
+			{
+				colorRGB: <0, 0, 0>
+				outlineWidth: 1.5
+	            outlineColorInner: <0, 0, 0, 0>
+	            outlineColorOuter: <0, 0, 0, 0>
+		    }
+		}
+	}
+
+	panel ArmyRevInfo
+	{
+		anchor: BOTTOM
+		position: <0, -250>
+
+		behavior VerticalContainer
+		{
+			alignment: CENTER
+			spacing: 10
+		}
+
+		panel ArmyRevIcon
+		{
+			anchor: CENTER
+			size: <258, 141>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/gamemodes/rev_army/simulacrum_soldiers_icon.rpak"
+				alpha: 0
+	        }
+		}
+
+		panel ArmyRevLabel
+		{
+			size: <400, 128>
+
+		    behavior FormatLabel
+		    {
+		        format: "#SHADOW_ARMY_REV_CHAR_SELECT_BANNER_02"
+		        face: "TitleBoldFont"
+		        pixelHeight: 28
+		        horizontalMode: WRAP
+	            verticalMode: AUTOSIZE_TO_TEXT
+		        colorRGB: <1, 1, 1>
+		        textAlignHorizontal: CENTER
+		        textAlignVertical: CENTER
+		        outlineWidth: 1.5
+	            outlineColorInner: <0, 0, 0, 0>
+	            outlineColorOuter: <0, 0, 0, 0>
+		        alpha: 0
+		    }
+
+			behavior LabelAltStyle
+			{
+		    	colorRGB: <0, 0, 0>
+				outlineWidth: 1.5
+	            outlineColorInner: <0, 0, 0, 0>
+	            outlineColorOuter: <0, 0, 0, 0>
+		    }
+		}
+	}
+}

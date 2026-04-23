@@ -1,0 +1,388 @@
+panel PurchasePackSelectionPanel
+{
+	bind root
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+	pivot: <0.5, 0.5>
+
+	behavior PurchasePackSelectionPanel
+	{
+		cancelButton: @panel/FooterButtons/CancelButton:Button
+		purchaseButton: @panel/FooterButtons/PurchaseButton:Button
+		packButtonsList: @panel/Buttons
+	}
+
+	behavior TabController
+	{
+		tabs: [
+		{
+			tabButton: @TabButtons/Buttons/ProbabilitiesTabButton:TabButton
+			tabContent: @root/ProbabilitesTab
+		},
+		{
+			tabButton: @TabButtons/Buttons/PricesTabButton:TabButton
+			tabContent: @root/PricesTab
+		}
+		]
+	}
+
+	panel Title
+	{
+		anchor: TOP
+		offsets: <0, 0, 0, 0>
+		pivot: <0.5, 0>
+		positionY: 30
+
+		behavior Label
+		{
+			bind *.isGift -> PickStringFromTwo( "#PURCHASE", "#BUY_GIFT" ) -> @this.text
+			face: "TitleFont"
+			pixelHeight: 38
+			colorRGB: <1, 1, 1>
+			textAlignHorizontal: CENTER
+			textAlignVertical: CENTER
+			horizontalMode: AUTOSIZE_TO_TEXT
+			verticalMode: AUTOSIZE_TO_TEXT
+			allCaps: true
+		}
+	}
+
+	panel Subtitle
+	{
+		anchor: TOP
+		offsets: <0, 0, 0, 0>
+		pivot: <0.5, 0>
+		positionY: 70
+
+		behavior Label
+		{
+			bind *.title -> @this.text
+			face: "TitleBoldFont"
+			pixelHeight: 44
+			colorRGB: <1, 1, 1>
+			textAlignHorizontal: CENTER
+			textAlignVertical: CENTER
+			horizontalMode: AUTOSIZE_TO_TEXT
+			verticalMode: AUTOSIZE_TO_TEXT
+			allCaps: true
+		}
+	}
+
+	panel @TabButtons
+	{
+		pivot: <0.5, 0>
+		positionY: 125
+		anchor: TOP
+
+		behavior HorizontalContainer
+		{
+			fitContentWidth: true
+			fitContentHeight: true
+		}
+
+		panel LeftTriangle
+		{
+			size: <28,48>
+			behavior Image
+			{
+				color: <1, 1, 1, 0.04>
+				flipVertical: true
+				assetPath: $"ui_image/rui/triangle_tr.rpak"
+			}
+		}
+
+		panel Buttons
+		{
+			inputListener: true
+
+			behavior HorizontalContainer
+			{
+				fitContentWidth: true
+				fitContentHeight: true
+				paddingLeft: 15
+				paddingRight: 15
+			}
+
+			behavior Image
+			{
+				color: <1, 1, 1, 0.04>
+			}
+
+			instance $"ui_rtk/common/buttons/tab_button.rpak" ProbabilitiesTabButton
+			{
+				override @var(text) "#MILESTONE_PACK_PROBABILITY_TAB_TITLE"
+			}
+			instance $"ui_rtk/common/buttons/tab_button.rpak" PricesTabButton
+			{
+				override @var(text)  "#MILESTONE_PACK_PRICING_TAB_TITLE"
+			}
+		}
+
+		panel RightTriangle
+		{
+			size: <28,48>
+			behavior Image
+			{
+				color: <1, 1, 1, 0.04>
+				flipVertical: true
+				flipHorizontal: true
+				assetPath: $"ui_image/rui/triangle_tr.rpak"
+			}
+		}
+	}
+
+
+	panel ProbabilitesTab
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		panel PackRates
+		{
+			anchor: TOP
+			offsets: <0, 0, 0, 0>
+			pivot: <0.5, 0>
+			position: <0, 220>
+			useLocaleDirection: true
+
+			behavior HorizontalContainer
+			{
+				alignment: CENTER
+				fitContentHeight: true
+				fitContentWidth: true
+				spacing: 130
+			}
+
+			panel PackRatesInformation
+			{
+				behavior VerticalContainer
+				{
+					fitContentWidth: true
+					fitContentHeight: true
+					useLocaleDirection: true
+				}
+				instance $"ui_rtk/dialogs/purchase_pack_selection/components/purchase_pack_probablility_row.rpak"
+				{
+					override bind root "*.eventItemsSection"
+					override @var(elementPrefabPath) $"ui_rtk/dialogs/purchase_pack_selection/components/purchase_pack_probablility_row_labels.rpak"
+				}
+				instance $"ui_rtk/dialogs/purchase_pack_selection/components/purchase_pack_probablility_row.rpak"
+				{
+					override bind root "*.standardItemsSection"
+					override @var(elementPrefabPath) $"ui_rtk/dialogs/purchase_pack_selection/components/purchase_pack_probablility_row_labels.rpak"
+				}
+			}
+
+			panel MultiPackRatesInformation
+			{
+				bind *.multiItemsSection.rows -> GetArrayCount -> GreaterThan( 0 ) -> @this.visible
+
+				behavior VerticalContainer
+				{
+					fitContentWidth: true
+					fitContentHeight: true
+				}
+				instance $"ui_rtk/dialogs/purchase_pack_selection/components/purchase_pack_probablility_row.rpak"
+				{
+					override bind root "*.multiItemsSection"
+					override @var(elementPrefabPath) $"ui_rtk/dialogs/purchase_pack_selection/components/purchase_pack_probablility_row_labels.rpak"
+				}
+			}
+		}
+	}
+
+	panel PricesTab
+	{
+		active: false
+		visible: false
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		panel PricePackInformation
+		{
+			anchor: TOP
+			offsets: <0, 0, 0, 0>
+			pivot: <0.5, 0>
+			positionY: 200
+			behavior VerticalContainer
+			{
+				fitContentWidth: true
+				fitContentHeight: true
+			}
+			instance $"ui_rtk/dialogs/purchase_pack_selection/components/purchase_pack_probablility_row.rpak"
+			{
+				width: 970
+				override bind root "*.priceSection"
+				override @var(elementPrefabPath) $"ui_rtk/dialogs/purchase_pack_selection/components/purchase_pack_price_row_labels.rpak"
+			}
+		}
+	}
+
+	panel LegalInfo
+	{
+		anchor: CENTER_STRETCH_WIDTH
+		offsets: <0, 0, 0, 0>
+		positionY: -85
+
+		behavior HorizontalContainer
+		{
+			alignment: CENTER
+			fitContentHeight: true
+			spacing: 160
+			useLocaleDirection: true
+		}
+
+		panel LeftInfo
+		{
+			anchor: LEFT
+			offsets: <0, 0, 0, 0>
+			pivot: <0, 0.5>
+			behavior VerticalContainer
+			{
+				fitContentWidth: true
+				fitContentHeight: true
+				alignment: LEFT
+				spacing: 5
+			}
+			behavior ListBinder
+			{
+				bindingPath: "*.infoLines[0].text"
+				prefab: $"ui_rtk/common/labels/side_decorated_label.rpak"
+				varOverrides: {
+					width: 600
+				}
+			}
+		}
+
+		panel RightInfo
+		{
+			anchor: RIGHT
+			offsets: <0, 0, 0, 0>
+			pivot: <1, 0.5>
+			bind *.infoLines[1].text -> IsArrayEmpty -> NOT -> @this.visible
+
+			behavior VerticalContainer
+			{
+				fitContentWidth: true
+				fitContentHeight: true
+				alignment: LEFT
+				spacing: 5
+			}
+			behavior ListBinder
+			{
+				bindingPath: "*.infoLines[1].text"
+				prefab: $"ui_rtk/common/labels/side_decorated_label.rpak"
+				varOverrides: {
+					width: 600
+				}
+			}
+		}
+	}
+
+	panel GuaranteedInfo
+	{
+		anchor: CENTER
+		offsets: <0, 0, 0, 0>
+		positionY: 15
+		behavior FormatLabel
+		{
+			bind *.guaranteedInfo -> @this.format
+			bind *.isGift -> PickStringFromTwo( "#PURCHASE", "#BUY_GIFT" ) -> LocalizeString -> @this.arg1
+
+			text: ""
+			face: "DefaultBoldFont"
+			pixelHeight: 28
+			colorRGB: <1, 1, 1>
+			textAlignHorizontal: CENTER
+			textAlignVertical: CENTER
+			horizontalMode: AUTOSIZE_TO_TEXT
+			verticalMode: AUTOSIZE_TO_TEXT
+			arg1: ""
+		}
+
+		behavior LabelAltStyle
+		{
+			color: #ffcd3c //Legendary
+		}
+
+		behavior LabelAltStyle
+		{
+			color: #00f9c7 //Iconic
+		}
+	}
+
+	panel WhiteLinesBackground
+	{
+		anchor: CENTER_STRETCH_WIDTH
+		offsets: <0, 0, 0, 0>
+		positionY: 202
+		height: 324
+		behavior Image
+		{
+			colorRGB: <0.45, 0.45, 0.45>
+		}
+	}
+
+	panel DarkBackground
+	{
+		anchor: CENTER_STRETCH_WIDTH
+		offsets: <0, 0, 0, 0>
+		positionY: 202
+		height: 320
+		behavior Image
+		{
+			colorRGB: <0, 0, 0>
+		}
+	}
+
+	panel Buttons
+	{
+		anchor: CENTER_STRETCH_WIDTH
+		pivot: <0.5, 0.5>
+		positionY: 200
+		behavior HorizontalContainer
+		{
+			alignment: CENTER
+			fitContentHeight: true
+			fitContentWidth: true
+			spacing: 10
+			useLocaleDirection: true
+		}
+
+		behavior ListBinder
+		{
+			bindingPath: "*.buttonData"
+			prefab: $"ui_rtk/dialogs/purchase_pack_selection/components/purchase_pack_selection_button.rpak"
+		}
+
+		behavior SelectableButtonContainer
+	}
+
+	panel FooterButtons
+	{
+		position: <0, -95>
+		anchor: BOTTOM
+		behavior HorizontalContainer
+		{
+			alignment: CENTER
+			fitContentHeight: true
+			fitContentWidth: true
+			spacing: 20
+		}
+		instance $"ui_rtk/common/buttons/base_button.rpak" CancelButton
+		{
+			override @var(labelText) "#B_BUTTON_CLOSE"
+			override @var(backgroundColor) #242526
+			override @var(outlineColor) #b4b4b5
+			override @var(lineColor) #b4b4b5
+			override @var(lineAlpha) 0.0
+			override @var(gradientColor) #78797a
+
+		}
+		instance $"ui_rtk/common/buttons/base_button.rpak" PurchaseButton
+		{
+			bind *.purchaseButtonState -> GetPurchaseDialogButtonTitle( *.isGift ) -> @var( labelText )
+			bind *.purchaseButtonState -> IsPurchaseButtonInteractable -> @this:Button.interactive
+			override @var(labelText) "TEMP PURCAHSE"
+		}
+	}
+}

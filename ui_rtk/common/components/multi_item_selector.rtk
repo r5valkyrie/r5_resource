@@ -1,0 +1,52 @@
+panel MultiItemSelector
+{
+	bind root
+
+	// middle panel controls
+	var itemText @this/Content/ItemInfo/Text:Label.text
+
+	// subtraction controls
+	var subtractionText @this/Content/Subtraction/Text:Label.text
+	var subtractionTextAlpha @this/Content/Subtraction/Text:Label.alpha
+	var subtractionBackgroundAlpha @this/Content/Subtraction/Background:Image.alpha
+	var subtractionOutlineAlpha @this/Content/Subtraction/Outline:Image.alpha
+	var subtractionOutlineHoverColor @this/Content/Subtraction:Button.transitions[1].value
+
+	// addition controls
+	var additionText @this/Content/Addition/Text:Label.text
+	var additionTextAlpha @this/Content/Addition/Text:Label.alpha
+	var additionBackgroundAlpha @this/Content/Addition/Background:Image.alpha
+	var additionOutlineAlpha @this/Content/Addition/Outline:Image.alpha
+	var additionOutlineHoverColor @this/Content/Addition:Button.transitions[1].value
+
+	behavior MultiItemSelector
+	{
+		subtractionButton: @panel/Content/Subtraction:Button
+		additionButton: @panel/Content/Addition:Button
+	}
+
+	behavior FitToContent
+
+	panel Content
+	{
+		anchor: CENTER
+
+		behavior HorizontalContainer
+		{
+			alignment: CENTER
+			fitContentHeight: true
+			fitContentWidth: true
+			spacing: 10
+		}
+
+		instance $"ui_rtk/common/buttons/angled_button.rpak" Subtraction
+		{
+			override @var(flipHorizontal) true
+		}
+
+		instance $"ui_rtk/common/buttons/trapezoid_button.rpak" ItemInfo
+
+		instance $"ui_rtk/common/buttons/angled_button.rpak" Addition
+	}
+
+}

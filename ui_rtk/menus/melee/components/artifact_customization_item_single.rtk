@@ -1,0 +1,111 @@
+panel MeleeCustomizationItemSingle
+{
+	bind root
+
+	var isArrowVisible @this/CustomizationItem/Arrow.visible
+	var isTooltipVisible @this:ToolTip.active
+
+	size: <80, 80>
+	pivot: <0, 0>
+	inputListener: true
+
+	behavior ToolTip
+	{
+		bind *.description -> @this.varOverrides.bodyText
+		bind *.description -> isEmpty -> NOT -> @this.active
+		bind *.description -> isEmpty -> NOT -> @this.varOverrides.isBodyVisible
+
+		prefab: $"ui_rtk/common/tooltips/base_tooltip.rpak"
+		offset: <32, -68>
+		delay: 0
+
+		varOverrides: {
+			// defaults
+			titleText: ""
+			subtitleText: ""
+			bodyText: ""
+			additionalText: ""
+			actionText: ""
+
+			// overrides
+			isTitleVisible: false
+			isIconVisible: false
+			isSubtitleVisible: false
+			isAdditionalTextVisible: false
+			isBodyVisible: false
+			isActionTextVisible: false
+		}
+	}
+
+	behavior Button
+	{
+		// eMeleeCustomizationItemState
+		bind *.state -> PickFloat3From( [
+			#COLOR_GREY_4, #666666, #COLOR_WHITE_1, #666666, #COLOR_WHITE_1, #COLOR_WHITE_1
+		] ) -> [ @this.transitions[0].value, @this.transitions[3].value ]
+
+		soundHighlighted: "UI_Menu_Focus_Small"
+		rightMouseEnabled: true
+		doubleClickEnabled: true
+		middleMouseEnabled: true
+		explicitInputButtons: [ BUTTON_A, BUTTON_X ]
+		transitions: [
+		// outline
+		{
+			fromState: ANY
+			toState: IDLE
+			type: TRANSITION_PROPERTY_SET
+			property: @owner.panel/CustomizationItem/Outline:Image.colorRGB
+			value: #666666
+		},
+		{
+			fromState: ANY
+			toState: HIGHLIGHTED
+			type: TRANSITION_PROPERTY_SET
+			property: @owner.panel/CustomizationItem/Outline:Image.colorRGB
+			value: #COLOR_ORANGE_1
+		},
+		{
+			fromState: ANY
+			toState: PRESSED
+			type: TRANSITION_PROPERTY_SET
+			property: @owner.panel/CustomizationItem/Outline:Image.colorRGB
+			value: #COLOR_ORANGE_1
+		},
+		// arrow
+		{
+			fromState: ANY
+			toState: IDLE
+			type: TRANSITION_PROPERTY_SET
+			property: @owner.panel/CustomizationItem/Arrow:Image.colorRGB
+			value: #666666
+		},
+		{
+			fromState: ANY
+			toState: HIGHLIGHTED
+			type: TRANSITION_PROPERTY_SET
+			property: @owner.panel/CustomizationItem/Arrow:Image.colorRGB
+			value: #COLOR_ORANGE_1
+		},
+		{
+			fromState: ANY
+			toState: PRESSED
+			type: TRANSITION_PROPERTY_SET
+			property: @owner.panel/CustomizationItem/Arrow:Image.colorRGB
+			value: #COLOR_ORANGE_1
+		}
+		]
+	}
+
+	instance $"ui_rtk/menus/melee/components/melee_customization_item.rpak" CustomizationItem
+	{
+		override bind root "*"
+
+		bind *.icon -> @var(icon)
+		bind *.state -> @var(state)
+		bind *.mainColor -> @var(mainColor)
+		bind *.secondaryColor -> @var(secondaryColor)
+		bind *.setTheme -> IntEqual( 0 ) -> PickVectorFromTwo( #COLOR_GREY_1, #COLOR_MENU_LOOT_TIER_3 ) -> @var(lockColor)
+		bind *.setTheme -> IntEqual( 0 ) -> PickVectorFromTwo( #COLOR_GREY_1, #COLOR_MENU_LOOT_TIER_3 ) -> @var(dotsColor)
+	}
+}

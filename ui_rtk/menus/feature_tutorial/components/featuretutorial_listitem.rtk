@@ -1,0 +1,118 @@
+panel FeatureTutorialPanel
+{
+	bind root
+
+	anchor: TOP
+	offsets: <0, 0, 0, 0>
+	offsetsTB: <0, 0>
+	width: 400
+
+	behavior VerticalContainer
+	{
+		fitContentHeight: true
+        spacing: 15
+		alignment: TOP
+	}
+
+	panel ImageContainer
+	{
+		bind *.hasImage -> @this.visible
+
+		anchor: TOP_STRETCH_WIDTH
+		offsets: <0, 0, 0, 0>
+		height: 192
+
+		behavior Image
+		{
+			bind *.image -> @this.assetPath
+		}
+	}
+
+	panel Title
+	{
+		offsets: <0, 0, 0, 0>
+		width: 400
+		height: 30
+
+		behavior Label
+		{
+			bind *.title -> @this.text
+
+			text: ""
+			face: "DefaultRegularFont"
+			textAlignHorizontal: CENTER
+			textAlignVertical: CENTER
+			horizontalMode: SQUISH_TO_CONTAINER
+			margin: <10, 10, 0, 0>
+			pixelHeight: 30
+			color: <1, 1, 1, 1>
+			allCaps: true
+		}
+	}
+
+	panel Description
+	{
+		offsets: <0, 0, 0, 0>
+		width: 400
+
+		behavior FormatLabel
+		{
+			bind *.description -> @this.format
+			bind *.descArgs[0] -> @this.arg1
+			bind *.descArgs[1] -> @this.arg2
+			bind *.descArgs[2] -> @this.arg3
+			bind *.descArgs[3] -> @this.arg4
+			bind *.descArgs[4] -> @this.arg5
+			bind *.descArgs[5] -> @this.arg6
+
+			format: ""
+			face: "DefaultRegularFont"
+			textAlignHorizontal: CENTER
+			horizontalMode: WRAP
+			verticalMode: AUTOSIZE_TO_TEXT
+			pixelHeight: 28
+			color: <0.55, 0.55, 0.55, 1>
+			margin: <10, 10, 0, 0>
+			arg1: ""
+			arg2: ""
+			arg3: ""
+			arg4: ""
+			arg5: ""
+			arg6: ""
+		}
+
+		behavior LabelAltStyle
+		{
+			color: #Red
+		}
+
+		behavior LabelAltStyle
+		{
+			color: #Green
+		}
+
+		behavior LabelAltStyle
+		{
+			color: #Yellow
+		}
+	}
+
+	panel Table
+	{
+		offsets: <0, 0, 0, 0>
+		width: 350
+
+		behavior VerticalContainer
+		{
+			fitContentHeight: true
+			spacing: 0
+			padding: <0, 0, -10, 0>
+		}
+
+		behavior ListBinder
+		{
+			bindingPath: "*.tableData"
+			prefab: $"ui_rtk/menus/feature_tutorial/components/featuretutorial_table_lineitem.rpak"
+		}
+	}
+}

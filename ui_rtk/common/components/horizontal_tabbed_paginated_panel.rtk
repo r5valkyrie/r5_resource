@@ -1,0 +1,128 @@
+panel HorizontalPaginatedTabs
+{
+	var paginationBehavior      @this:Pagination
+	var paddingPanel            @this/Padding
+	var contentContainerPanel   @this/Padding/ContentContainer
+	var contentPanel            @this/Padding/ContentContainer/Content
+	var navContainerPanel       @this/NavContainer
+
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	offsets: <0, 0, 0, 0>
+
+	behavior Pagination
+	{
+		container:              @panel/Padding/ContentContainer
+		content:                @panel/Padding/ContentContainer/Content
+        animator:               @panel:Animator
+		cursorInteract1Area:    @panel/CursorZone1:CursorInteract
+
+        paginationButtons:      @panel/NavContainer/PaginationNav/PaginationPips
+        hintAnimator:           @panel/NavContainer/Hint:Animator
+
+		pageNames: [    // Override this
+			"Page 1",
+			"Page 2"
+		]
+
+		autoPagesByContainerContent: true
+		supportShoulderButtonNav: true
+		canWrap: true
+	}
+
+	behavior Animator
+    {
+        tweenAnimations: [
+            {
+                name: "NextPage"
+                tweens: [
+                    {
+                        property: @panel/Padding/ContentContainer/Content.positionX
+                        duration: 0.35
+                        startValue: 0
+                        endValue: 1
+                        curve: EASE_OUT_QUINT
+                    }
+                ]
+            }
+        ]
+    }
+
+    panel CursorZone1
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+		inputListener: true
+
+		behavior CursorInteract
+		{
+			mouseEnabled: true
+			controllerEnabled: true
+		}
+	}
+
+	panel Padding
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 64, 0>
+
+		behavior RenderGroup
+
+		panel ContentContainer
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <0, 0, 0, 0>
+
+			panel Content
+			{
+				anchor: CENTER_STRETCH_WIDTH_HEIGHT
+				offsets: <0, 0, 0, 0>
+
+				behavior HorizontalContainer
+					{
+						fitContentWidth: true
+						fitContentHeight: true
+					}
+			}
+		}
+	}
+
+	panel NavContainer
+	{
+		bind @this.pivot -> @this/Hint.pivot
+		bind @this.pivot -> @this/PaginationNav.pivot
+
+		anchor: TOP
+		pivot: <0.5, 0.0>
+
+		behavior HorizontalContainer
+		{
+			alignment: CENTER
+			fitContentWidth: true
+            fitContentHeight: true
+		}
+
+		instance $"ui_rtk/common/pagination_nav_tabbed.rpak" PaginationNav
+		{
+			anchor: BOTTOM
+			position: <0, -5>
+			pivot: <0.5, 1.0>
+		}
+
+        instance $"ui_rtk/common/pagination_hint.rpak" Hint
+	    {
+	        anchor: RIGHT
+	        position: <22, -15>
+	        size: <30, 30>
+
+	        behavior ContainerElement
+	        {
+	            ignoreLayout: true
+	        }
+
+			behavior ShowByInputMode
+			{
+				showIfMKB: true
+			}
+	    }
+	}
+}

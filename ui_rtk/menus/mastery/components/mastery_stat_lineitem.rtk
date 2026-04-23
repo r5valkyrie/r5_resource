@@ -1,0 +1,71 @@
+panel
+{
+	var title @this/Stat/Title:Label.text
+	var value @this/Stat/StatValue:Label.text
+
+	offsets: <0, 0, 0, 0>
+	width: 300
+
+	behavior HorizontalContainer
+    {
+        spacing: 0
+        alignment: LEFT
+        fitContentHeight: true
+        expandToFillEvenly: true
+		useLocaleDirection: true
+    }
+
+	panel Stat
+	{
+		offsets: <0, 0, 0, 0>
+		height: 20
+
+		panel Title
+		{
+            anchor: CENTER_STRETCH_WIDTH_HEIGHT
+            pivot: <0.0, 0.5>
+			offsets: <0, 0, 0, 0>
+			offsetsLR: <0, 90>
+			useLocaleDirection: true
+
+			behavior Label
+			{
+				text: ""
+				face: "DefaultFont"
+				pixelHeight: 30
+				colorRGB: <0.6, 0.6, 0.6>
+				textAlignHorizontal: LEFT
+				horizontalMode: SQUISH_TO_CONTAINER
+				textAlignVertical: CENTER
+				shadowAlpha: 0.6
+				shadowBlur: 6.0
+				shadowOffset: <0, 0>
+				allCaps: true
+				useLocaleDirection: true
+			}
+		}
+
+		panel StatValue
+		{
+            anchor: RIGHT_STRETCH_HEIGHT
+            pivot: <1.0, 0.5>
+			offsets: <0, 0, 0, 0>
+			useLocaleDirection: true
+
+			behavior Label
+			{
+				text: ""
+				face: "DefaultFont"
+				pixelHeight: 30
+				colorRGB: <0.6, 0.6, 0.6>
+				textAlignHorizontal: RIGHT
+				horizontalMode: SQUISH_TO_CONTAINER
+				textAlignVertical: CENTER
+				shadowAlpha: 0.6
+				shadowBlur: 6.0
+				shadowOffset: <0, 0>
+				useLocaleDirection: true
+			}
+		}
+	}
+}

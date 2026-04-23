@@ -1,0 +1,337 @@
+panel CurrencyPurchaseButton
+{
+	bind root
+
+	pivot: <0, 0>
+	anchor: CENTER_STRETCH_WIDTH_HEIGHT
+	inputListener: true
+
+	behavior Button
+	{
+		soundHighlighted: "ui_menu_focus"
+		soundPressedEnabled: "ui_menu_accept"
+
+		transitions: [
+		{
+			fromState: ANY
+			toState: IDLE
+			type: TRANSITION_PROPERTY_SET
+			property: @panel/Decoration/Border:Image.alpha
+			value: 1
+		},
+		{
+			fromState: ANY
+			toState: IDLE
+			type: TRANSITION_PROPERTY_SET
+			property: @panel/Decoration/HighlightBorder.visible
+			value: false
+		},
+		{
+			fromState: ANY
+			toState: IDLE
+			type: TRANSITION_PROPERTY_SET
+			property: @panel/Decoration/HighlightBorder:AnimatorAutoPlay.active
+			value: false
+		},
+		{
+			fromState: ANY
+			toState: HIGHLIGHTED
+			type: TRANSITION_PROPERTY_SET
+			property: @panel/Decoration/Border:Image.alpha
+			value: 0
+		},
+		{
+			fromState: ANY
+			toState: HIGHLIGHTED
+			type: TRANSITION_PROPERTY_SET
+			property: @panel/Decoration/HighlightBorder.visible
+			value: true
+		},
+		{
+			fromState: ANY
+			toState: HIGHLIGHTED
+			type: TRANSITION_PROPERTY_SET
+			property: @panel/Decoration/HighlightBorder:AnimatorAutoPlay.active
+			value: true
+		},
+		{
+			fromState: ANY
+			toState: HIGHLIGHTED
+			type: TRANSITION_TWEEN
+			animName: "onAnyToHighlighted"
+		}
+		]
+	}
+
+	behavior Animator
+	{
+		tweenAnimations: [
+		{
+			name: "onAnyToHighlighted"
+			tweens: [
+			{
+				property: @panel/Decoration/HighlightBorder.offsets
+				startValue: <-2, -2, -2, -2>
+				endValue: <-4, -4, -4, -4>
+				duration: 0.15
+			}
+			]
+		}
+		]
+	}
+
+	panel Background
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+		behavior Image
+		{
+			color: <1, 1, 1, 1>
+		}
+	}
+
+	panel VCImage
+	{
+
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+
+		behavior Image
+		{
+			bind *.image -> @this.assetPath
+		}
+	}
+
+	panel BaseAndBonusGroup
+	{
+		bind *.currencyType -> Equal (5) -> PickFloatFromTwo (81 , 121) -> @this.positionY
+
+		anchor: CENTER
+		positionY: 81
+		width: 140
+		height: 30
+
+		panel BaseValueText
+		{
+			bind *.isCondensed -> NOT -> @this.visible
+			anchor: CENTER
+			width: 140
+			height: 30
+			behavior Label
+			{
+				bind *.baseValueDesc -> @this.text
+				face: "TitleRegularFont"
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				horizontalMode: SQUISH_TO_CONTAINER
+				horizontalMode: AUTOSIZE_TO_TEXT
+				pixelHeight: 21
+				color: <1, 1, 1, 1>
+			}
+
+			behavior LabelAltStyle
+			{
+				color: <1, 1, 1, 1>
+			}
+		}
+
+		panel BonusText
+		{
+			bind *.isCondensed -> NOT -> @this.visible
+			anchor: CENTER
+			positionY: 21
+			width: 140
+			height: 30
+			behavior Label
+			{
+				bind *.bonusDesc -> @this.text
+				face: "TitleRegularFont"
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				horizontalMode: SQUISH_TO_CONTAINER
+				pixelHeight: 21
+				color: <1, 0.87, 0, 1>
+				outlineColorOuter: <0, 0, 0, 0>
+				outlineWidth: 1.0
+			}
+
+			behavior LabelAltStyle
+			{
+				color: <1, 1, 0, 1>
+			}
+
+			behavior Animator
+			{
+				tweenAnimations: [
+				{
+					name: "pulse"
+					loop: PINGPONG
+					tweens: [
+					{
+						property: @panel:Label.outlineColorInner
+						startValue: <0, 0, 0, 1>
+						//endValue: <1, 0.94, 0.51, 1>
+						endValue: <1, 0.98, 0.83, 1>
+						duration: 2
+						curve: EASE_IN_CUBIC
+					}
+					]
+				}
+				]
+			}
+
+			behavior AnimatorAutoPlay
+			{
+				animation: "pulse"
+			}
+		}
+	}
+
+	panel TotalValueText
+	{
+		bind *.isCondensed -> PickIntFromTwo( 1, 5 ) -> @this.anchor // 1 TOP, 5 RIGHT
+		bind *.isCondensed -> PickVectorFromTwo( < 0.5, 0.5, 0 > , < 1, 0.5, 0 > ) -> @this.pivot
+		bind *.isCondensed -> PickVectorFromTwo( < 0, 68, 0 > , < -5, -22, 0 > ) -> @this.position
+
+		width: 120
+		height: 30
+
+		behavior Label
+		{
+			bind *.isCondensed -> PickIntFromTwo( 1, 0 ) -> @this.textAlignHorizontal // 1 CENTER 0 LEFT
+			bind *.totalValueDesc -> @this.text
+			face: "TitleBoldFont"
+			textAlignVertical: CENTER
+			horizontalMode: SQUISH_TO_CONTAINER
+			pixelHeight: 27
+			color: <1, 1, 1, 1>
+		}
+
+		behavior LabelAltStyle
+		{
+			color: <1, 1, 1, 1>
+		}
+	}
+
+	panel PriceAndOriginalPriceGroup
+	{
+		anchor: BOTTOM
+		positionY: -60
+		pivot: < 0.5, 1 >
+
+		panel PriceText
+		{
+			bind *.makeRoomForOriginalPrice ->  PickFloatFromTwo( -15, 0 ) -> @this.positionY
+			anchor: BOTTOM
+
+			width: 140
+			height: 30
+			behavior Label
+			{
+				bind *.priceDesc -> @this.text
+				face: "TitleRegularFont"
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				horizontalMode: SQUISH_TO_CONTAINER
+				pixelHeight: 27
+				color: <0.94, 0.94, 0.94, 1>
+			}
+
+			behavior LabelAltStyle
+			{
+				color: <0.94, 0.94, 0.94, 1>
+			}
+		}
+
+		panel OriginalPriceText
+		{
+			bind *.originalPriceDesc -> IsEmpty -> NOT -> @this.visible
+			bind *.makeRoomForOriginalPrice -> PickFloatFromTwo ( -40 , -25 ) -> @this.positionY
+
+			anchor: BOTTOM
+			height: 30
+
+			behavior Label
+			{
+				bind *.originalPriceDesc -> @this.text
+				face: "TitleRegularFont"
+				textAlignHorizontal: CENTER
+				textAlignVertical: CENTER
+				horizontalMode: AUTOSIZE_TO_TEXT
+				pixelHeight: 20
+				color: <0.55, 0.55, 0.55, 1>
+			}
+
+			behavior LabelAltStyle
+			{
+				color: <0.55, 0.55, 0.55, 1>
+			}
+
+			panel StrikeThrough
+			{
+				Anchor: CENTER_STRETCH_WIDTH
+				height: 2
+				offsets: <-4, -4, 0, 0>
+
+				behavior Image
+				{
+					color: <0.55, 0.55, 0.55, 1>
+				}
+			}
+		}
+	}
+
+	panel Decoration
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		panel Border
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <-1, -1, -1, -1>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/borders/border_outline_4px.rpak"
+				color: #Gray
+			}
+		}
+
+		panel HighlightBorder
+		{
+			anchor: CENTER_STRETCH_WIDTH_HEIGHT
+			offsets: <-4, -4, -4, -4>
+
+			behavior Image
+			{
+				assetPath: $"ui_image/rui/borders/border_outline_4px.rpak"
+
+				colorRGB: <1.0, 0.4, 0.0>
+			}
+
+			behavior Animator
+			{
+				tweenAnimations: [
+				{
+					name: "pulse"
+					loop: PINGPONG
+					tweens: [
+					{
+						property: @panel:Image.alpha
+						startValue: 1.0
+						endValue: 0.25
+						duration: 1.2
+						curve: EASE_IN_CUBIC
+					}
+					]
+				}
+				]
+			}
+
+			behavior AnimatorAutoPlay
+			{
+				animation: "pulse"
+			}
+		}
+	}
+}

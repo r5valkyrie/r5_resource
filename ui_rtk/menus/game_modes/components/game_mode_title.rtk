@@ -1,0 +1,38 @@
+panel
+{
+	var Label @root/Text:Label
+
+	anchor: CENTER_STRETCH_WIDTH
+	behavior Label
+	{
+		face: "TitleBoldFont"
+		margin: <6.0, 0.0, 0.0, 6.0>
+		pixelHeight: 72
+		allCaps: true
+		textAlignHorizontal: CENTER
+		textAlignVertical: CENTER
+		horizontalMode: CLIP
+		color: #FFFFFF09
+	}
+
+	panel Text
+	{
+		anchor: CENTER_STRETCH_WIDTH
+		behavior Label
+		{
+			text: "GAMEMODE"
+			face: "TitleBoldFont"
+			margin: <34.0, 20.0, 0.0, 0.0>
+			pixelHeight: 32
+			allCaps: true
+			textAlignHorizontal: CENTER
+			textAlignVertical: CENTER
+			horizontalMode: WRAP
+			verticalMode: AUTOSIZE_TO_TEXT
+		}
+	}
+
+	bind @this/Text.height -> @this.height
+	bind @this/Text:Label.text -> @this:Label.text
+	bind @this/Text:Label.textAlignHorizontal -> @this:Label.textAlignHorizontal
+}

@@ -1,0 +1,42 @@
+panel PurchaseLimit
+{
+	bind root
+
+	bind *.rarity -> QualityColor( false ) -> @this/Backing:Image.colorRGB
+	bind *.miscText3 -> @this/PurchaseLimitText:Label.text
+	bind @this/PurchaseLimitText.size -> @this.size
+
+	anchor: BOTTOM_LEFT
+	position: <6, -2>
+	pivot: <0, 1>
+
+	panel Backing
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <-6, -36, -2, -2>
+
+		behavior Image
+		{
+			assetPath: $"ui_image/rui/menu/store/common/store_offer_limit_backing.rpak"
+		}
+	}
+
+	panel PurchaseLimitText
+	{
+		anchor: BOTTOM_LEFT
+		pivot: <0, 1>
+
+		behavior Label
+		{
+			text: ""
+			face: "TitleBoldFont"
+			textAlignHorizontal: LEFT
+			textAlignVertical: CENTER
+			horizontalMode: AUTOSIZE_TO_TEXT
+			verticalMode: AUTOSIZE_TO_TEXT
+			pixelHeight: 20
+			color: <0, 0, 0, 1>
+			allCaps: true
+		}
+	}
+}

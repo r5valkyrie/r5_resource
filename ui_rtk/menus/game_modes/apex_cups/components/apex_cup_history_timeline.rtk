@@ -1,0 +1,43 @@
+panel ApexCupsHistory
+{
+	bind root
+    offsets: <0, 0, 0, 0>
+
+    behavior VerticalContainer
+	{
+		fitContentHeight: true
+		fitContentWidth: true
+		alignment: CENTER
+	}
+
+	panel Border
+	{
+		anchor: CENTER
+		pivot: <0.5, 0>
+		size: <1320, 26>
+		offsets: <0, 0, 0, 0>
+	}
+
+	panel MatchButtons
+	{
+		bind &menus.apexCups.playerDataList -> HasAny -> @this.visible
+
+		behavior HorizontalContainer
+		{
+			bind @root/Border.width -> ApexCupTimelineSpacing( 130, &menus.apexCups.totalMatches ) -> @this.spacing
+
+			fitContentWidth: true
+			fitContentHeight: true
+			spacing: 68
+			paddingTop: 17
+			useLocaleDirection: true
+		}
+
+		behavior ListBinder List
+		{
+			bindingPath: "&menus.apexCups.infoList"
+			prefab: $"ui_rtk/menus/game_modes/apex_cups/components/timeline_match_button.rpak"
+		}
+	}
+
+}

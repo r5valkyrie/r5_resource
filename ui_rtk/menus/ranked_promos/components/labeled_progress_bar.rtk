@@ -1,0 +1,135 @@
+panel LabeledProgressBar
+{
+	bind root
+
+	var descriptionPixelHeight @this/ContentPanel/Description:Label.pixelHeight
+	var progressPixelHeight @this/ContentPanel/ProgressLabel:Label.pixelHeight
+	var progressLabelAnchor @this/ContentPanel/ProgressLabel.anchor
+	var progressLabelPivot @this/ContentPanel/ProgressLabel.pivot
+	var descriptionColor @this/ContentPanel/Description:Label.colorRGB
+	var progressLabelColor @this/ContentPanel/ProgressLabel:Label.colorRGB
+	var progressBarHeight @this/ContentPanel/BarContainer.height
+	var progressBarAngle @this/ContentPanel/BarContainer:AngledProgressBar.angle
+	var backgroundColor @this/Background:Image.colorRGB
+	var backgroundAlpha @this/Background:Image.alpha
+	var contentPadding @this/ContentPanel.offsets
+	var progressBarPadding @this/ContentPanel/BarContainer.offsets
+
+	anchor: TOP_STRETCH_WIDTH
+	offsets: <0, 0, 0, 0>
+	pivot: <0.5, 0.5>
+	height: 30
+
+	behavior Animator
+	{
+		tweenAnimations: [
+		{
+			name: "AnimateIn"
+			tweens: [
+			{
+				property: @panel:Sound.play
+				startValue: false
+				endValue: true
+				duration: 0.9
+				curve: CEIL
+			}]
+		}]
+	}
+
+	behavior Sound
+	{
+		sound: "UI_Menu_MatchSummary_Ranked_XPBreakdown"
+	}
+
+	panel Background
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		behavior Image
+		{
+			colorRGB: <0, 0, 0>
+			alpha: 0.5
+		}
+	}
+
+	panel ContentPanel
+	{
+		anchor: CENTER_STRETCH_WIDTH_HEIGHT
+		offsets: <0, 0, 0, 0>
+
+		panel Description
+		{
+			anchor: TOP_LEFT
+			offsets: <0, 0, 0, 0>
+			pivot: <0, 0>
+			size: <300, 30>
+
+			behavior Label
+			{
+				text: ""
+				face: "DefaultRegularFont"
+				pixelHeight: 22
+				colorRGB: <0.7, 0.7, 0.7>
+				outlineColorInner: <0, 0, 0, 0>
+				outlineColorOuter: <0, 0, 0, 0>
+				textAlignHorizontal: LEFT
+				textAlignVertical: TOP
+				horizontalMode: SQUISH_TO_CONTAINER
+
+				bind *.description -> @this.text
+			}
+		}
+
+		panel ProgressLabel
+		{
+			anchor: TOP_RIGHT
+			offsets: <0, 0, 0, 0>
+			pivot: <1, 0>
+			size: <50, 30>
+
+			behavior FormatLabel
+			{
+				bind *.statCurrent -> @this.arg1
+				bind *.statGoal -> @this.arg2
+
+				face: "DefaultRegularFont"
+				pixelHeight: 22
+				colorRGB: <0.7, 0.7, 0.7>
+				outlineColorInner: <0, 0, 0, 0>
+				outlineColorOuter: <0, 0, 0, 0>
+				textAlignHorizontal: RIGHT
+				textAlignVertical: TOP
+				format: "#X/Y_STYLED"
+			}
+
+			behavior LabelAltStyle
+			{
+				face: "DefaultBoldFont"
+				colorRGB: <1, 1, 1>
+			}
+		}
+
+		panel BarContainer
+		{
+			anchor: BOTTOM_STRETCH_WIDTH
+			pivot: <0.5, 1.0>
+			size: <1, 6>
+			offsets: <0, 0, 0, 0>
+
+			behavior AngledProgressBar
+			{
+				bind *.statCurrent -> @this.current
+				bind *.statGoal -> @this.max
+				bind *.progressBarColor -> @this.progressBarColor
+
+				progressBarColor: <0.9215, 0.7843, 0.298>
+				progressBarAlpha: 1.0
+				progressBgColor: <0.0, 0.0, 0.0>
+				progressBgAlpha: 0.6
+				max: 1.0
+				angle: 30
+			}
+		}
+	}
+}
